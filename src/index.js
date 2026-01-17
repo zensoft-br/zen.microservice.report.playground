@@ -6,24 +6,24 @@ import open from "open";
 import path from "path";
 import { fileURLToPath } from "url";
 
+const REPORT_API = process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
+
 const ENGINE_EXTENSIONS = {
+  jsx: [".jsx"],
   liquid: [".liquid"],
   nunjucks: [".nunjucks"],
-  jsx: [".jsx"],
 };
 
-const ALL_SOURCE_EXTS = Object.values(ENGINE_EXTENSIONS).flat();
+const EXTENSIONS = Object.values(ENGINE_EXTENSIONS).flat();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const playgroundDir = path.resolve(__dirname, "../playground");
 
-const REPORT_API = process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
-
 async function fileExists(p) {
   try {
-    await fs.access(p);
+    await fs.stat(p);
     return true;
   } catch {
     return false;
@@ -39,7 +39,7 @@ function getSourceCandidates(base, engine) {
   return exts.map(ext => path.join(playgroundDir, `${base}${ext}`));
 }
 
-async function readJsonIfExists(p, fallback) {
+async function readJson(p, fallback) {
   if (!(await fileExists(p))) {
     return fallback;
   }
@@ -86,71 +86,89 @@ async function compile(base) {
   try {
     if (!(await fileExists(templateFile))) return;
 
-    const templateConfig = await readJsonIfExists(templateFile, null);
-    if (!templateConfig?.engine) {
+    const templateConfig = await readJson(templateFile, null);
+    if (!templateConfig || typeof templateConfig !== "object") {
+      throw new Error("template.json inválido (esperado objeto)");
+    }
+
+    if (!templateConfig.engine) {
       throw new Error("template.engine é obrigatório");
     }
 
     // resolve source
     const sourceCandidates = getSourceCandidates(base, templateConfig.engine);
-    const sourceFile = await (async () => {
-      for (const p of sourceCandidates) {
-        if (await fileExists(p)) return p;
+
+    let sourceFile;
+    for (const p of sourceCandidates) {
+      if (await fileExists(p)) {
+        sourceFile = p;
+        break;
       }
-      return null;
-    })();
+    }
 
     if (!sourceFile) {
-      throw new Error("Template source não encontrado");
+      throw new Error(
+        `Template source não encontrado. Esperado: ${sourceCandidates
+          .map(p => path.basename(p))
+          .join(" ou ")}`,
+      );
     }
 
     const source = await fs.readFile(sourceFile, "utf8");
-    const data = await readJsonIfExists(dataFile, {});
+    const data = await fileExists(dataFile) ? await fs.readFile(dataFile, "utf8") : undefined;
 
-    /* =========================
-     * STEP 1 — PREPARE
-     * ========================= */
+    // render request
+    const renderRequest = {
+      engine: templateConfig.engine,
+      template: {
+        source,
+      },
+      data: undefined,
+      assets: templateConfig.assets,
+    };
 
-    const prepareRes = await fetchWithTimeout(`${REPORT_API}/report/prepare`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: "{}",
-    });
+    if (data) {
+      if (data.length <= 3096) {
+        renderRequest.data = JSON.parse(data);
+      } else {
+        // prepare data upload
+        const preparedData = await fetchWithTimeout(`${REPORT_API}/report/prepare`, {
+          method: "POST",
+          // headers: { "Content-Type": "application/json" },
+          // body: "{}",
+        });
 
-    if (!prepareRes.ok) {
-      throw new Error("Falha no /report/prepare");
+        if (!preparedData.ok) {
+          throw new Error("Falha no /report/prepare");
+        }
+
+        const { key, uploadUrl } = await preparedData.json();
+
+        // upload data 
+        const response = await fetchWithTimeout(uploadUrl, {
+          method: "PUT",
+          // headers: { "Content-Type": "text/plain" },
+          body: data,
+        });
+        if (!response.ok) {
+          throw new Error("Falha ao enviar template para storage");
+        }
+
+        renderRequest.data = "@url:" + key;
+      }
     }
 
-    const { key, uploadUrl } = await prepareRes.json();
+    if (renderRequest.assets?.styles?.startsWith("@file:")) {
+      const cssFile = renderRequest.assets.styles.slice(6);
+      const cssPath = path.join(playgroundDir, cssFile);
 
-    /* =========================
-     * STEP 2 — UPLOAD TEMPLATE
-     * ========================= */
-
-    const response = await fetchWithTimeout(uploadUrl, {
-      method: "PUT",
-      body: source,
-      headers: { "Content-Type": "text/plain" },
-    });
-    if (!response.ok) {
-      throw new Error("Falha ao enviar template para storage");
+      renderRequest.assets.styles = await fs.readFile(cssPath, "utf8");
     }
-
-    /* =========================
-     * STEP 3 — GENERATE
-     * ========================= */
 
     const generateRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        engine: templateConfig.engine,
-        template: {
-          source: "@url:" + key,
-        },
-        data,
-        assets: templateConfig.assets,
-      }),
+      body: JSON.stringify(renderRequest),
     });
 
     if (!generateRes.ok) {
@@ -160,10 +178,7 @@ async function compile(base) {
 
     const { url } = await generateRes.json();
 
-    /* =========================
-     * STEP 4 — DOWNLOAD HTML
-     * ========================= */
-
+    // download HTML
     const htmlRes = await fetchWithTimeout(url);
     const html = await htmlRes.text();
 
@@ -171,12 +186,14 @@ async function compile(base) {
     console.log(`${base}.html updated`);
     triggerReload();
   } catch (err) {
-    console.error(`${base}:`, err.message);
+    console.error(`${base}:`, err?.message ?? err);
 
     try {
       await fs.writeFile(outFile, errorToHtml(base, err), "utf8");
       triggerReload();
-    } catch { }
+    } catch {
+      // ignore
+    }
   }
 }
 
@@ -319,7 +336,7 @@ async function onChange(file) {
   // ext aqui é só a última extensão; para ".template.json" precisa tratar separado
   const isTemplateJson = file.endsWith(".template.json");
   const isDataJson = file.endsWith(".data.json");
-  const isSource = ALL_SOURCE_EXTS.includes(ext);
+  const isSource = EXTENSIONS.includes(ext);
 
   if (isTemplateJson || isDataJson || isSource) {
     const base = extractBase(file);
@@ -333,7 +350,7 @@ async function onDelete(file) {
 
   const isTemplateJson = file.endsWith(".template.json");
   const isDataJson = file.endsWith(".data.json");
-  const isSource = ALL_SOURCE_EXTS.includes(ext);
+  const isSource = EXTENSIONS.includes(ext);
 
   const base = extractBase(file);
   if (!base) {

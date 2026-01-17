@@ -1,3 +1,4 @@
 {
-  "value": "Liquid"
+  "name": "Liquid",
+  "items": [1, 2, 3]
 }

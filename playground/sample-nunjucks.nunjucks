@@ -1,1 +1,6 @@
-<h1>Hello, {{ value }}!</h1>
+<h1>Hello, {{ name | text }}!</h1>
+<ul>
+  {% for item in items %}
+    <li>Item {{ loop.index }}, valor {{ item | number }}</li>
+  {% endfor %}
+</ul>

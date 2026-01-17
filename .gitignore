@@ -2,6 +2,6 @@
 .env
 
 /playground/*
-/playground/sample*.html
 
 !/playground/sample*
+/playground/sample*.html
