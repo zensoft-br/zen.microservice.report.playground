@@ -1,5 +1,7 @@
 /node_modules
+.env
 
 /playground/*
+/playground/sample*.html
 
 !/playground/sample*
