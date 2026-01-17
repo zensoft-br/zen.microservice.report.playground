@@ -9,6 +9,8 @@ import { fileURLToPath } from "url";
 const REPORT_API = process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
 
 const ENGINE_EXTENSIONS = {
+  eta: [".eta"],
+  handlebars: [".handlebars"],
   jsx: [".jsx"],
   liquid: [".liquid"],
   nunjucks: [".nunjucks"],
@@ -273,7 +275,7 @@ function startServer(port) {
 
   <p>Arquivos esperados por report:</p>
   <ul>
-    <li><code>name.liquid</code>, <code>name.nunjucks</code>, <code>name.jsx</code></li>
+    <li><code>name.eta</code>, <code>name.handlebars</code>, <code>name.jsx</code>, <code>name.liquid</code>, <code>name.nunjucks</code></li>
     <li><code>name.template.json</code></li>
     <li><code>name.data.json</code> (opcional)</li>
   </ul>
