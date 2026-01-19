@@ -1,5 +1,4 @@
 <h1>Hello, <%~ it.text(it.name) %>!</h1>
-
 <ul>
   <% it.items.forEach((item, index) => { %>
     <li>Item <%= index %>, valor <%= it.number(item) %></li>

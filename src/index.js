@@ -275,7 +275,13 @@ function startServer(port) {
 
   <p>Arquivos esperados por report:</p>
   <ul>
-    <li><code>name.eta</code>, <code>name.handlebars</code>, <code>name.jsx</code>, <code>name.liquid</code>, <code>name.nunjucks</code></li>
+    <li>
+      <code>name.<a href="https://eta.js.org/">eta</a></code>, 
+      <code>name.<a href="https://handlebarsjs.com/">handlebars</a></code>, 
+      <code>name.<a href="https://www.w3schools.com/react/react_jsx.asp">jsx</a></code>, 
+      <code>name.<a href="https://shopify.github.io/liquid/">liquid</a></code>, 
+      <code>name.<a href="https://mozilla.github.io/nunjucks/">nunjucks</a></code>
+    </li>
     <li><code>name.template.json</code></li>
     <li><code>name.data.json</code> (opcional)</li>
   </ul>
@@ -304,9 +310,9 @@ function startServer(port) {
         html = html.replace(
           "</body>",
           `<script>
-            const es = new EventSource('/__reload');
-            es.onmessage = () => location.reload();
-          </script></body>`,
+  const es = new EventSource('/__reload');
+  es.onmessage = () => location.reload();
+</script>\n</body>`,
         );
       }
 
