@@ -134,14 +134,14 @@ async function compile(base) {
         renderRequest.data = JSON.parse(data);
       } else {
         // prepare data upload
-        const preparedData = await fetchWithTimeout(`${REPORT_API}/report/prepare`, {
+        const preparedData = await fetchWithTimeout(`${REPORT_API}/report/prepare-upload`, {
           method: "POST",
           // headers: { "Content-Type": "application/json" },
           // body: "{}",
         });
 
         if (!preparedData.ok) {
-          throw new Error("Falha no /report/prepare");
+          throw new Error("Falha no /report/prepare-upload");
         }
 
         const { key, uploadUrl } = await preparedData.json();
@@ -156,7 +156,7 @@ async function compile(base) {
           throw new Error("Falha ao enviar template para storage");
         }
 
-        renderRequest.data = "@url:" + key;
+        renderRequest.data = key;
       }
     }
 
