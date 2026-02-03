@@ -1,0 +1,78 @@
+<div class="flex v">
+  {% for productionOrder in data %}
+    <div class="flex h full gap padding panel">
+      <div>
+        <strong>Ordem de produção</strong><br>
+        {{ productionOrder.id }}
+      </div>
+      <div>
+        <strong>Cliente</strong><br>
+        {{ productionOrder.person.name }}
+      </div>
+      <div>
+        <strong>Data pedido</strong><br>
+        {{ productionOrder.date }}
+      </div>
+      <div>
+        <strong>Data entrega</strong><br>
+        {{ productionOrder.availabilityDate }}
+      </div>
+      <div>
+        <strong>Data cliente</strong><br>
+        {{ productionOrder.availabilityDate }}
+      </div>
+      <div>
+        <strong>Pedidos</strong><br>
+        {{ productionOrder.code }}
+      </div>
+    </div>
+    {% for productionStep in productionOrder.productionStepList %}
+      <div class="flex h">
+        <div class="flex v gap padding center">
+          <div class="xxl">{{ productionOrder.code }}</div>
+          <div>{{ productionStep.productPacking.code }}</div>
+        </div>
+
+        <div class="flex v gap padding flex-1">
+          <div class="flex h">
+            <div>
+              Produto:<br>
+              {{ productionStep.productPacking.code }}
+            </div>
+            <div>
+              Variante:<br>
+              {{ productionStep.productPacking.variant.description }}
+            </div>
+            <div>
+              Quantidade:<br>
+              {{ productionStep.quantity }}
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Código do Produto</th>
+                <th>Descrição do Produto</th>
+                <th>Variante</th>
+                <th class="number">Quantidade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for consumption in productionStep.productionStepConsumptionList %}
+                <tr>
+                  <td>{{ consumption.productPacking.code }}</td>
+                  <td>{{ consumption.productPacking.product.description }}</td>
+                  <td>{{ consumption.productPacking.variant.description }}</td>
+                  <td class="number">
+                    {{ consumption.quantity }}&nbsp;{{ consumption.productPacking.product.unit.code }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>

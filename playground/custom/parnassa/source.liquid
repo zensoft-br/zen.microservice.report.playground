@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Descrição</th>
+      <th>{{ data[0].items[0].descricao }}</th>
+      <th>{{ data[0].items[1].descricao }}</th>
+      <th>{{ data[0].items[2].descricao }}</th>
+      <th>{{ data[0].items[3].descricao }}</th>
+      <th>{{ data[0].items[4].descricao }}</th>
+      <th>{{ data[0].items[5].descricao }}</th>
+      <th>{{ data[0].items[6].descricao }}</th>
+      <th>{{ data[0].items[7].descricao }}</th>
+      <th>{{ data[0].items[8].descricao }}</th>
+      <th>{{ data[0].items[9].descricao }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in data %}
+      <tr>
+        <td>{{ item.product.code }}</td>
+        <td>{{ item.product.description }}</td>
+        {% for item1 in item.items %}
+          <td>{{ item1.valor | number }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

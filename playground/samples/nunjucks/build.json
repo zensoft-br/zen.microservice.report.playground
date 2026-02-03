@@ -1,0 +1,12 @@
+{
+  "engine": "nunjucks",
+  "template": {
+    "source": "<h1>Hello, {{ name | text }}!</h1>\r\n<ul>\r\n  {% for item in items %}\r\n    <li>Item {{ loop.index }}, valor {{ item | number }}</li>\r\n  {% endfor %}\r\n</ul>\r\n"
+  },
+  "assets": {
+    "scripts": {
+      "number": "return (value) => new Intl.NumberFormat(\"pt-BR\", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value)",
+      "text": "return (value) => `<strong>${value?.toUpperCase()}</strong>`"
+    }
+  }
+}

@@ -1,0 +1,982 @@
+{
+  "data": [
+    {
+      "category": "Tecidos",
+      "product": {
+        "id": 1002,
+        "productProfile": {
+          "id": 1001,
+          "code": "TECIDO",
+          "description": "TECIDOS E AVIAMENTOS",
+          "tags": "@default,fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "21",
+        "description": "BEMBER",
+        "keywords": "21",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1025,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "54076100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:27:25.877641698-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "54076100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.0663,
+        "grossWeightKg": 0.0681,
+        "category1": {
+          "id": 1127,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "Classes",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "30.12.002",
+          "description": "30.12.002-BEMBER",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:22:37.791934592-03:00[America/Sao_Paulo]",
+            "personal.id": "76",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1013,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "Grupo de preços",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1013",
+          "description": "Tecidos",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-06-28T13:32:25.746409634-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category3": {
+          "id": 1302,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "Bloco K",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:24.380662442-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1295,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "Marcas",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1295",
+          "description": "IMPORTAÇÃO DIRETA (Padrão)",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:20.229044868-03:00[America/Sao_Paulo]",
+            "personal.id": "C25CB6DD-734D-FE64-B57E-3FEFFE5F5CD5"
+          }
+        },
+        "tags": "personalsoft",
+        "properties": {
+          "comments": "LARGURA TOTAL (METRO) NORMA ABNT NBR 10589:2006 -  TOLERANCIA ± 2%\r\n\r\nGRAMATURA (G/M²) NORMA ABNT NBR 10591:2008 - TOLERANCIA ± 5%",
+          "personal_id": "21",
+          "textileWidth": "1.47",
+          "textileYield": "14.68",
+          "fiscal_br_NCM": "54076100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-089.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-001.png",
+          "textileCare05": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileGramWeight": "46",
+          "textileComposition": "100% POLIESTER",
+          "textileAverageQuantity": "100"
+        }
+      },
+      "valorFob": 0.154,
+      "nacionalizacao": 1.526,
+      "dolar": 5.3,
+      "paymentMethods": 28,
+      "pis_cofins": 9.25,
+      "icms": 1.4,
+      "frete": 3,
+      "ipi": 0,
+      "items": [
+        {
+          "id": 1,
+          "descricao": "Preço 01",
+          "comissao": 1,
+          "valorDolar": 0.3277,
+          "valor": 1.7368,
+          "lucro": 9,
+          "ir": 4.636359
+        },
+        {
+          "id": 2,
+          "descricao": "Preço 02",
+          "comissao": 1.5,
+          "valorDolar": 0.3335,
+          "valor": 1.7676,
+          "lucro": 9.5,
+          "ir": 4.893935
+        },
+        {
+          "id": 3,
+          "descricao": "Preço 03",
+          "comissao": 2,
+          "valorDolar": 0.3396,
+          "valor": 1.7999,
+          "lucro": 10,
+          "ir": 5.15151
+        },
+        {
+          "id": 4,
+          "descricao": "Preço 04",
+          "comissao": 2.5,
+          "valorDolar": 0.3459,
+          "valor": 1.8333,
+          "lucro": 10.5,
+          "ir": 5.409086
+        },
+        {
+          "id": 5,
+          "descricao": "Preço 05",
+          "comissao": 3,
+          "valorDolar": 0.3524,
+          "valor": 1.8677,
+          "lucro": 11,
+          "ir": 5.666661
+        },
+        {
+          "id": 6,
+          "descricao": "Preço 06",
+          "comissao": 3.5,
+          "valorDolar": 0.3634,
+          "valor": 1.926,
+          "lucro": 12,
+          "ir": 6.181812
+        },
+        {
+          "id": 7,
+          "descricao": "Preço 07",
+          "comissao": 4,
+          "valorDolar": 0.3706,
+          "valor": 1.9642,
+          "lucro": 12.5,
+          "ir": 6.439388
+        },
+        {
+          "id": 8,
+          "descricao": "Preço 08",
+          "comissao": 4.5,
+          "valorDolar": 0.3781,
+          "valor": 2.0039,
+          "lucro": 13,
+          "ir": 6.696963
+        },
+        {
+          "id": 9,
+          "descricao": "Preço 09",
+          "comissao": 5,
+          "valorDolar": 0.3908,
+          "valor": 2.0712,
+          "lucro": 14,
+          "ir": 7.212114
+        },
+        {
+          "id": 10,
+          "descricao": "Preço 10",
+          "comissao": 6,
+          "valorDolar": 0.4079,
+          "valor": 2.1619,
+          "lucro": 15,
+          "ir": 7.727265
+        }
+      ]
+    },
+    {
+      "category": "Aviamentos",
+      "product": {
+        "id": 1117,
+        "productProfile": {
+          "id": 1001,
+          "code": "TECIDO",
+          "description": "TECIDOS E AVIAMENTOS",
+          "tags": "@default,fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "1094",
+        "description": "70D RESINADO",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1025,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "54076100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:27:25.877641698-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "54076100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.072,
+        "grossWeightKg": 0.074,
+        "category1": {
+          "id": 1089,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "Classes",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "10.15.006",
+          "description": "10.15.006-70D RESINADO",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:22:32.67865333-03:00[America/Sao_Paulo]",
+            "personal.id": "209",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1014,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "Grupo de preços",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1014",
+          "description": "Aviamentos",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-06-28T13:32:34.978934438-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category3": {
+          "id": 1302,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "Bloco K",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:24.380662442-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1295,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "Marcas",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1295",
+          "description": "IMPORTAÇÃO DIRETA (Padrão)",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:20.229044868-03:00[America/Sao_Paulo]",
+            "personal.id": "C25CB6DD-734D-FE64-B57E-3FEFFE5F5CD5"
+          }
+        },
+        "tags": "personalsoft,stock.lot,stock.serial,stock.serial.auto,textile",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2024-09-05T16:34:11.328492544-03:00[America/Sao_Paulo]",
+          "comments": "LARGURA TOTAL (METRO) NORMA ABNT NBR 10589:2006 -  TOLERANCIA ± 2%\r\n\r\nGRAMATURA (G/M²) NORMA ABNT NBR 10591:2008 - TOLERANCIA ± 5%",
+          "personal_id": "11261",
+          "textileWidth": "1.47",
+          "textileYield": "13.33",
+          "fiscal_br_NCM": "54076100",
+          "textileCare01": "textile-care-083.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-004.png",
+          "textileCare05": "textile-care-060.png",
+          "textileCountry": "China",
+          "textileGramWeight": "48",
+          "textileComposition": "100% POLIESTER",
+          "textileAverageQuantity": "100"
+        }
+      },
+      "valorFob": 1.25,
+      "nacionalizacao": 0,
+      "dolar": 5.3,
+      "paymentMethods": 28,
+      "pis_cofins": 9.25,
+      "icms": 1.4,
+      "frete": 3,
+      "ipi": 0,
+      "items": [
+        {
+          "id": 1,
+          "descricao": "Preço 01",
+          "comissao": 1,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 15,
+          "ir": 7.727265
+        },
+        {
+          "id": 2,
+          "descricao": "Preço 02",
+          "comissao": 1.5,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 15.5,
+          "ir": 7.984841
+        },
+        {
+          "id": 3,
+          "descricao": "Preço 03",
+          "comissao": 2,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 16,
+          "ir": 8.242416
+        },
+        {
+          "id": 4,
+          "descricao": "Preço 04",
+          "comissao": 2.5,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 16.5,
+          "ir": 8.499992
+        },
+        {
+          "id": 5,
+          "descricao": "Preço 05",
+          "comissao": 3,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 17,
+          "ir": 8.757567
+        },
+        {
+          "id": 6,
+          "descricao": "Preço 06",
+          "comissao": 3.5,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 18,
+          "ir": 9.272718
+        },
+        {
+          "id": 7,
+          "descricao": "Preço 07",
+          "comissao": 4,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 18.5,
+          "ir": 9.530294
+        },
+        {
+          "id": 8,
+          "descricao": "Preço 08",
+          "comissao": 4.5,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 19,
+          "ir": 9.787869
+        },
+        {
+          "id": 9,
+          "descricao": "Preço 09",
+          "comissao": 5,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 20,
+          "ir": 10.30302
+        },
+        {
+          "id": 10,
+          "descricao": "Preço 10",
+          "comissao": 6,
+          "valorDolar": 0,
+          "valor": 0,
+          "lucro": 21,
+          "ir": 10.818171
+        }
+      ]
+    },
+    {
+      "category": "Aviamentos",
+      "product": {
+        "id": 1033,
+        "productProfile": {
+          "id": 1001,
+          "code": "TECIDO",
+          "description": "TECIDOS E AVIAMENTOS",
+          "tags": "@default,fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "731",
+        "description": "MESCLA PVC",
+        "keywords": "731",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1028,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "59031000.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:27:26.152451954-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "59031000",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.5941,
+        "grossWeightKg": 0.6041,
+        "category1": {
+          "id": 1084,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "Classes",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "10.15.001",
+          "description": "10.15.001-MESCLA PVC",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:22:31.967937787-03:00[America/Sao_Paulo]",
+            "personal.id": "37",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1014,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "Grupo de preços",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1014",
+          "description": "Aviamentos",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-06-28T13:32:34.978934438-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category3": {
+          "id": 1302,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "Bloco K",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:24.380662442-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1295,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "Marcas",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1295",
+          "description": "IMPORTAÇÃO DIRETA (Padrão)",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:20.229044868-03:00[America/Sao_Paulo]",
+            "personal.id": "C25CB6DD-734D-FE64-B57E-3FEFFE5F5CD5"
+          }
+        },
+        "tags": "personalsoft",
+        "properties": {
+          "comments": "LARGURA TOTAL (METRO) NORMA ABNT NBR 10589:2006 -  TOLERANCIA ± 2%\r\n\r\nGRAMATURA (G/M²) NORMA ABNT NBR 10591:2008 - TOLERANCIA ± 5%",
+          "personal_id": "731",
+          "textileWidth": "1.5",
+          "textileYield": "1.66",
+          "fiscal_br_NCM": "59031000",
+          "textileCare01": "textile-care-083.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-004.png",
+          "textileCare05": "textile-care-060.png",
+          "textileCountry": "China",
+          "textileGramWeight": "420",
+          "textileComposition": "100% POLIESTER",
+          "textileAverageQuantity": "50"
+        }
+      },
+      "valorFob": 1.25,
+      "nacionalizacao": 1.5035,
+      "dolar": 5.3,
+      "paymentMethods": 28,
+      "pis_cofins": 9.25,
+      "icms": 1.4,
+      "frete": 3,
+      "ipi": 5,
+      "items": [
+        {
+          "id": 1,
+          "descricao": "Preço 01",
+          "comissao": 1,
+          "valorDolar": 3.6864,
+          "valor": 19.5379,
+          "lucro": 21,
+          "ir": 10.818171
+        },
+        {
+          "id": 2,
+          "descricao": "Preço 02",
+          "comissao": 1.5,
+          "valorDolar": 3.7753,
+          "valor": 20.0091,
+          "lucro": 21.5,
+          "ir": 11.075747
+        },
+        {
+          "id": 3,
+          "descricao": "Preço 03",
+          "comissao": 2,
+          "valorDolar": 3.8678,
+          "valor": 20.4993,
+          "lucro": 22,
+          "ir": 11.333322
+        },
+        {
+          "id": 4,
+          "descricao": "Preço 04",
+          "comissao": 2.5,
+          "valorDolar": 3.9658,
+          "valor": 21.0187,
+          "lucro": 22.5,
+          "ir": 11.590898
+        },
+        {
+          "id": 5,
+          "descricao": "Preço 05",
+          "comissao": 3,
+          "valorDolar": 4.0688,
+          "valor": 21.5646,
+          "lucro": 23,
+          "ir": 11.848473
+        },
+        {
+          "id": 6,
+          "descricao": "Preço 06",
+          "comissao": 3.5,
+          "valorDolar": 4.2446,
+          "valor": 22.4964,
+          "lucro": 24,
+          "ir": 12.363624
+        },
+        {
+          "id": 7,
+          "descricao": "Preço 07",
+          "comissao": 4,
+          "valorDolar": 4.3629,
+          "valor": 23.1234,
+          "lucro": 24.5,
+          "ir": 12.6212
+        },
+        {
+          "id": 8,
+          "descricao": "Preço 08",
+          "comissao": 4.5,
+          "valorDolar": 4.4879,
+          "valor": 23.7859,
+          "lucro": 25,
+          "ir": 12.878775
+        },
+        {
+          "id": 9,
+          "descricao": "Preço 09",
+          "comissao": 5,
+          "valorDolar": 4.7029,
+          "valor": 24.9254,
+          "lucro": 26,
+          "ir": 13.393926
+        },
+        {
+          "id": 10,
+          "descricao": "Preço 10",
+          "comissao": 6,
+          "valorDolar": 5.0034,
+          "valor": 26.518,
+          "lucro": 27,
+          "ir": 13.909077
+        }
+      ]
+    },
+    {
+      "category": "Tecidos",
+      "product": {
+        "id": 1001,
+        "productProfile": {
+          "id": 1001,
+          "code": "TECIDO",
+          "description": "TECIDOS E AVIAMENTOS",
+          "tags": "@default,fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "826",
+        "description": "BARBIE TINTO",
+        "keywords": "826",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1024,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "54075210.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:27:25.788592901-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "54075210",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.2653,
+        "grossWeightKg": 0.2704,
+        "category1": {
+          "id": 1126,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "Classes",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "30.12.001",
+          "description": "30.12.001-BARBIE",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:22:37.667669836-03:00[America/Sao_Paulo]",
+            "personal.id": "75",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1013,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "Grupo de preços",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1013",
+          "description": "Tecidos",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-06-28T13:32:25.746409634-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category3": {
+          "id": 1302,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "Bloco K",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:24.380662442-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1295,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "Marcas",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "1295",
+          "description": "IMPORTAÇÃO DIRETA (Padrão)",
+          "tags": "personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-09-05T15:25:20.229044868-03:00[America/Sao_Paulo]",
+            "personal.id": "C25CB6DD-734D-FE64-B57E-3FEFFE5F5CD5"
+          }
+        },
+        "tags": "personalsoft",
+        "properties": {
+          "comments": "LARGURA TOTAL (METRO) NORMA ABNT NBR 10589:2006 -  TOLERANCIA ± 2%\r\n\r\nGRAMATURA (G/M²) NORMA ABNT NBR 10591:2008 - TOLERANCIA ± 5%",
+          "personal_id": "826",
+          "textileWidth": "1.5",
+          "textileYield": "3.63",
+          "fiscal_br_NCM": "54075210",
+          "textileCare01": "textile-care-071.png",
+          "textileCare02": "textile-care-089.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-001.png",
+          "textileCare05": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileGramWeight": "180",
+          "textileComposition": "95% POLIESTER 5% ELASTANO",
+          "textileAverageQuantity": "60"
+        }
+      },
+      "valorFob": 0.58,
+      "nacionalizacao": 1.4182,
+      "dolar": 5.3,
+      "paymentMethods": 28,
+      "pis_cofins": 9.25,
+      "icms": 1.4,
+      "frete": 3,
+      "ipi": 0,
+      "items": [
+        {
+          "id": 1,
+          "descricao": "Preço 01",
+          "comissao": 1,
+          "valorDolar": 1.851,
+          "valor": 9.8103,
+          "lucro": 27,
+          "ir": 13.909077
+        },
+        {
+          "id": 2,
+          "descricao": "Preço 02",
+          "comissao": 1.5,
+          "valorDolar": 1.905,
+          "valor": 10.0965,
+          "lucro": 27.5,
+          "ir": 14.166653
+        },
+        {
+          "id": 3,
+          "descricao": "Preço 03",
+          "comissao": 2,
+          "valorDolar": 1.9617,
+          "valor": 10.397,
+          "lucro": 28,
+          "ir": 14.424228
+        },
+        {
+          "id": 4,
+          "descricao": "Preço 04",
+          "comissao": 2.5,
+          "valorDolar": 2.0225,
+          "valor": 10.7192,
+          "lucro": 28.5,
+          "ir": 14.681804
+        },
+        {
+          "id": 5,
+          "descricao": "Preço 05",
+          "comissao": 3,
+          "valorDolar": 2.0872,
+          "valor": 11.0622,
+          "lucro": 29,
+          "ir": 14.939379
+        },
+        {
+          "id": 6,
+          "descricao": "Preço 06",
+          "comissao": 3.5,
+          "valorDolar": 2.1994,
+          "valor": 11.6568,
+          "lucro": 30,
+          "ir": 15.45453
+        },
+        {
+          "id": 7,
+          "descricao": "Preço 07",
+          "comissao": 4,
+          "valorDolar": 2.276,
+          "valor": 12.0628,
+          "lucro": 30.5,
+          "ir": 15.712106
+        },
+        {
+          "id": 8,
+          "descricao": "Preço 08",
+          "comissao": 4.5,
+          "valorDolar": 2.3582,
+          "valor": 12.4985,
+          "lucro": 31,
+          "ir": 15.969681
+        },
+        {
+          "id": 9,
+          "descricao": "Preço 09",
+          "comissao": 5,
+          "valorDolar": 2.5025,
+          "valor": 13.2633,
+          "lucro": 32,
+          "ir": 16.484832
+        },
+        {
+          "id": 10,
+          "descricao": "Preço 10",
+          "comissao": 6,
+          "valorDolar": 2.7102,
+          "valor": 14.3641,
+          "lucro": 33,
+          "ir": 16.999983
+        }
+      ]
+    }
+  ]
+}

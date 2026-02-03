@@ -6,7 +6,12 @@ import open from "open";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const REPORT_API = process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
+/*
+ * Configuration
+ */
+
+const REPORT_API =
+  process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
 
 const ENGINE_EXTENSIONS = {
   eta: [".eta"],
@@ -20,386 +25,283 @@ const EXTENSIONS = Object.values(ENGINE_EXTENSIONS).flat();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const playgroundDir = path.resolve(__dirname, "../playground");
 
-async function fileExists(p) {
-  try {
-    await fs.stat(p);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function getSourceCandidates(base, engine) {
-  const exts = ENGINE_EXTENSIONS[engine];
-  if (!exts) {
-    throw new Error(`Unknown engine: ${engine}`);
-  }
-
-  return exts.map(ext => path.join(playgroundDir, `${base}${ext}`));
-}
+// --- Utilities ---
+const fileExists = (p) =>
+  fs
+    .stat(p)
+    .then(() => true)
+    .catch(() => false);
 
 async function readJson(p, fallback) {
-  if (!(await fileExists(p))) {
-    return fallback;
+  if (!(await fileExists(p))) return fallback;
+  try {
+    return JSON.parse(await fs.readFile(p, "utf8"));
+  } catch (e) {
+    throw new Error(`Invalid JSON in ${path.basename(p)}: ${e.message}`);
   }
-  const text = await fs.readFile(p, "utf8");
-  return JSON.parse(text);
 }
 
-function escapeHtml(s) {
-  return String(s)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll("\"", "&quot;")
-    .replaceAll("'", "&#039;");
+const escapeHtml = (s) =>
+  String(s).replace(
+    /[&<>"']/g,
+    (m) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[m],
+  );
+
+async function fetchWithTimeout(url, options = {}, ms = 15000) {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  return fetch(url, { ...options, signal: ctrl.signal }).finally(() =>
+    clearTimeout(id),
+  );
 }
 
-function errorToHtml(base, err) {
-  const message = escapeHtml(err?.message ?? String(err));
-  const stack = escapeHtml(err?.stack ?? "");
-  return `<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <title>${escapeHtml(base)} - erro</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 24px; }
-    pre { white-space: pre-wrap; background: #111; color: #eee; padding: 16px; border-radius: 8px; }
-    h1 { margin-top: 0; }
-  </style>
-</head>
-<body>
-  <h1>Erro ao compilar: ${escapeHtml(base)}</h1>
-  <p><strong>${message}</strong></p>
-  ${stack ? `<pre>${stack}</pre>` : ""}
-</body>
-</html>`;
+/** Recursively find all folders containing a template.json */
+async function findReportFolders(dir) {
+  let results = [];
+  try {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (await fileExists(path.join(fullPath, "template.json"))) {
+          results.push(fullPath);
+        }
+        results = results.concat(await findReportFolders(fullPath));
+      }
+    }
+  } catch (_) {
+    // Ignore errors
+  }
+  return results;
 }
 
-async function compile(base) {
-  const templateFile = path.join(playgroundDir, `${base}.template.json`);
-  const dataFile = path.join(playgroundDir, `${base}.data.json`);
-  const outFile = path.join(playgroundDir, `${base}.html`);
+// --- Core Logic ---
+
+async function compile(reportFolder) {
+  const relativeBase = path.relative(playgroundDir, reportFolder);
+  const templateFile = path.join(reportFolder, "template.json");
+  const dataFile = path.join(reportFolder, "data.json");
+  const outFile = path.join(reportFolder, "report.html");
+  const buildFile = path.join(reportFolder, "build.json");
 
   try {
-    if (!(await fileExists(templateFile))) return;
+    const config = await readJson(templateFile, null);
+    if (!config?.engine) throw new Error("template.engine is required");
 
-    const templateConfig = await readJson(templateFile, null);
-    if (!templateConfig || typeof templateConfig !== "object") {
-      throw new Error("template.json inválido (esperado objeto)");
-    }
-
-    if (!templateConfig.engine) {
-      throw new Error("template.engine é obrigatório");
-    }
-
-    // resolve source
-    const sourceCandidates = getSourceCandidates(base, templateConfig.engine);
-
-    let sourceFile;
-    for (const p of sourceCandidates) {
+    // Find source file
+    const exts = ENGINE_EXTENSIONS[config.engine] || [];
+    let sourceContent;
+    for (const ext of exts) {
+      const p = path.join(reportFolder, `source${ext}`);
       if (await fileExists(p)) {
-        sourceFile = p;
+        sourceContent = await fs.readFile(p, "utf8");
         break;
       }
     }
+    if (!sourceContent)
+      throw new Error(`Source file missing in ${relativeBase}`);
 
-    if (!sourceFile) {
-      throw new Error(
-        `Template source não encontrado. Esperado: ${sourceCandidates
-          .map(p => path.basename(p))
-          .join(" ou ")}`,
-      );
-    }
+    const dataText = (await fileExists(dataFile))
+      ? await fs.readFile(dataFile, "utf8")
+      : null;
 
-    const source = await fs.readFile(sourceFile, "utf8");
-    const data = await fileExists(dataFile) ? await fs.readFile(dataFile, "utf8") : undefined;
-
-    // render request
     const renderRequest = {
-      engine: templateConfig.engine,
-      template: {
-        source,
-      },
+      engine: config.engine,
+      template: { source: sourceContent },
+      assets: JSON.parse(JSON.stringify(config.assets || {})),
       data: undefined,
-      assets: templateConfig.assets,
     };
 
-    if (data) {
-      if (data.length <= 3096) {
-        renderRequest.data = JSON.parse(data);
+    // Handle Data (Upload if large)
+    if (dataText) {
+      if (dataText.length <= 3096) {
+        renderRequest.data = JSON.parse(dataText);
       } else {
-        // prepare data upload
-        const preparedData = await fetchWithTimeout(`${REPORT_API}/report/prepare-upload`, {
-          method: "POST",
-          // headers: { "Content-Type": "application/json" },
-          // body: "{}",
-        });
-
-        if (!preparedData.ok) {
-          throw new Error("Falha no /report/prepare-upload");
-        }
-
-        const { key, uploadUrl } = await preparedData.json();
-
-        // upload data 
-        const response = await fetchWithTimeout(uploadUrl, {
-          method: "PUT",
-          // headers: { "Content-Type": "text/plain" },
-          body: data,
-        });
-        if (!response.ok) {
-          throw new Error("Falha ao enviar template para storage");
-        }
-
+        const prep = await fetchWithTimeout(
+          `${REPORT_API}/report/prepare-upload`,
+          { method: "POST" },
+        );
+        const { key, uploadUrl } = await prep.json();
+        await fetchWithTimeout(uploadUrl, { method: "PUT", body: dataText });
         renderRequest.data = key;
       }
     }
 
-    if (renderRequest.assets?.styles?.startsWith("@file:")) {
-      const cssFile = renderRequest.assets.styles.slice(6);
-      const cssPath = path.join(playgroundDir, cssFile);
+    // Process Styles (@file: logic)
+    if (renderRequest.assets?.styles) {
+      const styles = renderRequest.assets.styles;
+      const isArray = Array.isArray(styles);
+      const styleEntries = isArray ? styles : [styles];
 
-      renderRequest.assets.styles = await fs.readFile(cssPath, "utf8");
+      const processed = await Promise.all(
+        styleEntries.map(async (s) => {
+          if (typeof s === "string" && s.startsWith("@file:")) {
+            const relativeCssPath = s.slice(6);
+            const cssPath = path.resolve(reportFolder, relativeCssPath);
+            try {
+              return await fs.readFile(cssPath, "utf8");
+            } catch (err) {
+              console.warn(
+                `\x1b[33m[WARN]\x1b[0m CSS missing: ${relativeCssPath} in ${relativeBase}`,
+              );
+              return null;
+            }
+          }
+          return s;
+        }),
+      );
+      renderRequest.assets.styles = isArray ? processed : processed[0];
     }
 
-    const generateRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
+    // Remote Generate
+    const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(renderRequest),
     });
 
-    if (!generateRes.ok) {
-      const err = await generateRes.text();
-      throw new Error(err);
-    }
+    if (!genRes.ok) throw new Error(await genRes.text());
+    const { url } = await genRes.json();
+    const html = await (await fetchWithTimeout(url)).text();
 
-    const { url } = await generateRes.json();
+    // Save outputs
+    // eslint-disable-next-line no-unused-vars
+    const { data, ...buildInfo } = renderRequest;
+    await fs.writeFile(buildFile, JSON.stringify(buildInfo, null, 2));
+    await fs.writeFile(outFile, html);
 
-    // download HTML
-    const htmlRes = await fetchWithTimeout(url);
-    const html = await htmlRes.text();
-
-    await fs.writeFile(outFile, html, "utf8");
-    console.log(`${base}.html updated`);
+    console.log(`\x1b[32m[OK]\x1b[0m ${relativeBase}`);
     triggerReload();
   } catch (err) {
-    console.error(`${base}:`, err?.message ?? err);
-
-    try {
-      await fs.writeFile(outFile, errorToHtml(base, err), "utf8");
-      triggerReload();
-    } catch {
-      // ignore
-    }
+    console.error(`\x1b[31m[ERROR]\x1b[0m ${relativeBase}:`, err.message);
+    const errorHtml = `<!doctype html><html><body style="font-family:sans-serif;padding:24px;"><h1>Error: ${relativeBase}</h1><pre style="background:#111;color:#eee;padding:16px;white-space:pre-wrap;">${escapeHtml(err.stack)}</pre></body></html>`;
+    await fs.writeFile(outFile, errorHtml).catch(() => {});
+    triggerReload();
   }
 }
 
-async function compileAll() {
-  const files = await fs.readdir(playgroundDir);
-  const bases = new Set(
-    files
-      .filter(f => f.endsWith(".template.json"))
-      .map(f => f.replace(/\.template\.json$/, "")),
-  );
-  for (const b of bases) {
-    await compile(b);
-  }
-}
-
-async function listHtmlFiles() {
-  const files = await fs.readdir(playgroundDir);
-  return files.filter(f => f.endsWith(".html"));
-}
+/*
+ * Server & Watcher ---
+ */
 
 let clients = [];
 
-function triggerReload() {
-  for (const res of clients) {
-    res.write("data: reload\n\n");
-  }
-}
+const triggerReload = () =>
+  clients.forEach((res) => res.write("data: reload\n\n"));
 
-function findPort(start) {
-  return new Promise(resolve => {
-    function tryPort(p) {
-      const server = net.createServer();
-      server.once("error", () => tryPort(p + 1));
-      server.once("listening", () => {
-        server.close(() => resolve(p));
-      });
-      server.listen(p, "0.0.0.0");
-    }
-    tryPort(start);
-  });
-}
+const RELOAD_SCRIPT = `<script>new EventSource('/__reload').onmessage=()=>location.reload()</script>`;
 
-function startServer(port) {
-  const server = http.createServer(async (req, res) => {
-    if (req.url === "/__reload") {
-      res.writeHead(200, {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-      });
-      res.write("\n");
-      clients.push(res);
-      req.on("close", () => {
-        clients = clients.filter(c => c !== res);
-      });
-      return;
-    }
+async function startServer(port) {
+  http
+    .createServer(async (req, res) => {
+      const url = decodeURIComponent(req.url || "");
 
-    if (req.url === "/") {
-      const files = await listHtmlFiles();
-      const links = files
-        .map(f => `<li><a href="/${encodeURIComponent(f)}">${escapeHtml(f)}</a></li>`)
-        .join("");
+      if (url === "/__reload") {
+        res.writeHead(200, {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          Connection: "keep-alive",
+        });
+        res.write("\n");
+        return clients.push(res);
+      }
 
-      const html = `<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <title>Playground</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 24px; }
-    li { margin: 6px 0; }
-  </style>
-</head>
-<body>
-  <h1>Playground reports</h1>
+      if (url === "/") {
+        const folders = await findReportFolders(playgroundDir);
+        const links = folders
+          .map((f) => {
+            const rel = path.relative(playgroundDir, f);
+            // Encode path for URL, but keep it readable for the label
+            return `<li><a href="/${rel.split(path.sep).map(encodeURIComponent).join("/")}/report.html">${escapeHtml(rel)}</a></li>`;
+          })
+          .join("");
 
-  <p>Arquivos esperados por report:</p>
-  <ul>
-    <li>
-      <code>name.<a href="https://eta.js.org/">eta</a></code>, 
-      <code>name.<a href="https://handlebarsjs.com/">handlebars</a></code>, 
-      <code>name.<a href="https://www.w3schools.com/react/react_jsx.asp">jsx</a></code>, 
-      <code>name.<a href="https://shopify.github.io/liquid/">liquid</a></code>, 
-      <code>name.<a href="https://mozilla.github.io/nunjucks/">nunjucks</a></code>
-    </li>
-    <li><code>name.template.json</code></li>
-    <li><code>name.data.json</code> (opcional)</li>
-  </ul>
-
-  <h2>Gerados:</h2>
-  <ul>${links || "<li><em>No reports yet</em></li>"}</ul>
-
-  <script>
-    const es = new EventSource('/__reload');
-    es.onmessage = () => location.reload();
-  </script>
-</body>
-</html>`;
-
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(html);
-      return;
-    }
-
-    const filePath = path.join(playgroundDir, decodeURIComponent(req.url ?? ""));
-
-    try {
-      let html = await fs.readFile(filePath, "utf8");
-
-      if (filePath.endsWith(".html")) {
-        html = html.replace(
-          "</body>",
-          `<script>
-  const es = new EventSource('/__reload');
-  es.onmessage = () => location.reload();
-</script>\n</body>`,
+        res.writeHead(200, { "Content-Type": "text/html" });
+        return res.end(
+          `<html><body style="font-family:sans-serif;padding:24px;"><h1>Reports Playground</h1><ul>${links || "<li>No reports found.</li>"}</ul>${RELOAD_SCRIPT}</body></html>`,
         );
       }
 
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(html);
-    } catch {
-      res.writeHead(404);
-      res.end("Not found");
-    }
-  });
-
-  server.listen(port, () => {
-    const url = `http://localhost:${port}/`;
-    console.log(`Playground server: ${url}`);
-    open(url);
-  });
+      const filePath = path.join(playgroundDir, url);
+      try {
+        let content = await fs.readFile(filePath, "utf8");
+        if (filePath.endsWith(".html")) {
+          content = content.replace("</body>", `${RELOAD_SCRIPT}</body>`);
+        }
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(content);
+      } catch {
+        res.writeHead(404);
+        res.end("Not found");
+      }
+    })
+    .listen(port, () => {
+      console.log(`Server: http://localhost:${port}/`);
+      open(`http://localhost:${port}/`);
+    });
 }
 
-function extractBase(file) {
-  const name = file.replace(/^.*[\\/]/, "");
-  if (name.endsWith(".template.json")) return name.replace(/\.template\.json$/, "");
-  if (name.endsWith(".data.json")) return name.replace(/\.data\.json$/, "");
-  return path.parse(name).name;
-}
+async function onChange(filePath) {
+  const fullPath = path.resolve(filePath);
+  const name = path.basename(fullPath);
+  const ext = path.extname(fullPath);
 
-async function onChange(file) {
-  const { name, ext } = path.parse(file);
-
-  // ext aqui é só a última extensão; para ".template.json" precisa tratar separado
-  const isTemplateJson = file.endsWith(".template.json");
-  const isDataJson = file.endsWith(".data.json");
-  const isSource = EXTENSIONS.includes(ext);
-
-  if (isTemplateJson || isDataJson || isSource) {
-    const base = extractBase(file);
-
-    await compile(base);
-  }
-}
-
-async function onDelete(file) {
-  const { name, ext } = path.parse(file);
-
-  const isTemplateJson = file.endsWith(".template.json");
-  const isDataJson = file.endsWith(".data.json");
-  const isSource = EXTENSIONS.includes(ext);
-
-  const base = extractBase(file);
-  if (!base) {
+  if (
+    name === "template.json" ||
+    name === "data.json" ||
+    (name.startsWith("source.") && EXTENSIONS.includes(ext))
+  ) {
+    await compile(path.dirname(fullPath));
     return;
   }
 
-  // Se apagou template/source, apaga html
-  if (isTemplateJson || isSource) {
-    try {
-      await fs.unlink(path.join(playgroundDir, `${base}.html`));
-      triggerReload();
-    } catch {
-      // ignore
-    }
-    return;
-  }
-
-  // Se apagou data, recompila com {}
-  if (isDataJson) {
-    if (await fileExists(path.join(playgroundDir, `${base}.template.json`))) {
-      await compile(base);
+  if (ext === ".css") {
+    const folders = await findReportFolders(playgroundDir);
+    for (const folder of folders) {
+      const config = await readJson(path.join(folder, "template.json"), {});
+      const styles = [].concat(config.assets?.styles || []);
+      const isLinked = styles.some(
+        (s) =>
+          typeof s === "string" &&
+          s.startsWith("@file:") &&
+          path.resolve(folder, s.slice(6)) === fullPath,
+      );
+      if (isLinked) await compile(folder);
     }
   }
 }
 
-async function fetchWithTimeout(url, options = {}, ms = 15000) {
-  const ctrl = new AbortController();
-  const id = setTimeout(() => ctrl.abort(), ms);
-  return fetch(url, { ...options, signal: ctrl.signal })
-    .finally(() => clearTimeout(id));
-}
+const port = await new Promise((resolve) => {
+  const tryPort = (p) => {
+    const s = net
+      .createServer()
+      .once("error", () => tryPort(p + 1))
+      .once("listening", () => s.close(() => resolve(p)))
+      .listen(p);
+  };
+  tryPort(8090);
+});
 
-console.log("Playground watching...");
+console.log("Starting watcher...");
 
-await compileAll();
+const folders = await findReportFolders(playgroundDir);
 
-const watcher = watch(playgroundDir, { depth: 0, ignoreInitial: true });
+await Promise.all(folders.map(compile));
 
-watcher.on("add", f => onChange(f));
-watcher.on("change", f => onChange(f));
-watcher.on("unlink", f => onDelete(f));
+watch(playgroundDir, { depth: 10, ignoreInitial: true })
+  .on("add", onChange)
+  .on("change", onChange)
+  .on("unlink", triggerReload)
+  .on("addDir", triggerReload)
+  .on("unlinkDir", triggerReload);
 
-const port = await findPort(8090);
 startServer(port);

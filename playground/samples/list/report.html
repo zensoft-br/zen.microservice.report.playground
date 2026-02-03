@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+.report-container {
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.report-container .status-stamp {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 60pt;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.1);
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+.report-container > header {
+  border-bottom: 3px solid #000;
+  margin-bottom: 2rem;
+}
+.report-container > header .brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.report-container > header h1 {
+  margin: 0;
+  font-size: 20pt;
+}
+.report-container > header dl {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.report-container > header dl div dt {
+  font-size: 8pt;
+  color: #6c757d;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.report-container > header dl div dd {
+  margin: 0;
+  font-size: 10pt;
+}
+.report-container > main .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.report-container > main .kpi-grid dl {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  background: #fdfdfd;
+  display: flex;
+  justify-content: space-between;
+}
+.report-container > main .kpi-grid dl dt {
+  font-size: 9pt;
+  color: #6c757d;
+}
+.report-container > main .kpi-grid dl dd {
+  margin: 0;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.report-container > main .kpi-grid dl .kpi-trend {
+  font-size: 8pt;
+  align-self: flex-end;
+}
+.report-container > main section {
+  margin-top: 1.5rem;
+}
+.report-container > main section section {
+  margin-left: 20px;
+  border-left: 1px solid #eee;
+  padding-left: 15px;
+}
+.report-container > main section > header {
+  font-weight: bold;
+  font-size: 12pt;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 0.5rem;
+}
+.report-container > main section .group-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.5rem;
+}
+.report-container > main section .group-content table th {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 8px;
+  font-size: 9pt;
+}
+.report-container > main section .group-content table td {
+  padding: 8px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.report-container > main section .group-content table tfoot td {
+  font-weight: bold;
+  border-top: 2px solid #333;
+}
+.report-container > main section > footer {
+  font-size: 9pt;
+  font-style: italic;
+  color: #6c757d;
+  padding-top: 5px;
+}
+.report-container > footer {
+  margin-top: 4rem;
+  border-top: 2px solid #000;
+  padding-top: 1rem;
+}
+.report-container > footer .signature-block {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+.flex.h {
+  flex-direction: row;
+}
+.flex.v {
+  flex-direction: column;
+}
+.flex.center {
+  align-items: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+/*# sourceMappingURL=report.css.map */
+
+</style>
+</head>
+<body>
+<link rel="preload" as="image" href="logo.png"/><div class="report-container"><span class="status-stamp">DRAFT</span><header><div class="brand"><img src="logo.png" alt="Company Logo"/><p>Nexus Solutions Group<br/>123 Enterprise Dr, Austin TX</p></div><h1>Quarterly Performance Report</h1><dl><div><dt>Period</dt><dd>Q4 2025</dd></div><div><dt>Author</dt><dd>Financial Dept.</dd></div><div><dt>Currency</dt><dd>USD</dd></div></dl></header><div class="page-header">Confidential - Nexus Solutions Group</div><main><div class="kpi-grid"><dl><div><dt>Total Revenue</dt><dd>$1.2M</dd></div><span class="kpi-trend text-success">↑ 12%</span></dl><dl><div><dt>Active Clients</dt><dd>458</dd></div><span class="kpi-trend text-danger">↓ 2%</span></dl></div><section><header>Region: North America</header><div class="group-content"><section><header>Territory: Northeast</header><div class="group-content"><table><thead><tr><th>Account</th><th class="text-right">Volume</th><th class="text-right">Revenue</th></tr></thead><tbody><tr><td>Acme Corp</td><td class="text-right">500</td><td class="text-right">$50,000</td></tr><tr><td>Global Ind.</td><td class="text-right">250</td><td class="text-right">$25,000</td></tr></tbody><tfoot><tr><td colspan="2">Subtotal</td><td class="text-right">$75,000</td></tr></tfoot></table></div><footer>Territory status: Exceeding Quota</footer></section></div><footer>Regional Manager: Sarah Jenkins</footer></section></main><div class="page-footer">Page <span class="page-num"></span> of <span class="page-total"></span></div><footer><p>This report is generated automatically. Final audit pending for Q4 close.</p><div class="signature-block"><span>Approved by: ________________________</span><span>Date: ________________</span></div></footer></div></body>
+</html>

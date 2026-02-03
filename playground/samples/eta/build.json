@@ -1,0 +1,12 @@
+{
+  "engine": "eta",
+  "template": {
+    "source": "<h1>Hello, <%~ it.text(it.name) %>!</h1>\r\n<ul>\r\n  <% it.items.forEach((item, index) => { %>\r\n    <li>Item <%= index %>, valor <%= it.number(item) %></li>\r\n  <% }) %>\r\n</ul>\r\n"
+  },
+  "assets": {
+    "scripts": {
+      "number": "return (value) => new Intl.NumberFormat(\"pt-BR\", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value)",
+      "text": "return (value) => `<strong>${value?.toUpperCase()}</strong>`"
+    }
+  }
+}

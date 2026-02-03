@@ -1,0 +1,12 @@
+{
+  "engine": "liquid",
+  "template": {
+    "source": "<table>\r\n  <thead>\r\n    <tr>\r\n      <th>Código</th>\r\n      <th>Descrição</th>\r\n      <th>{{ data[0].items[0].descricao }}</th>\r\n      <th>{{ data[0].items[1].descricao }}</th>\r\n      <th>{{ data[0].items[2].descricao }}</th>\r\n      <th>{{ data[0].items[3].descricao }}</th>\r\n      <th>{{ data[0].items[4].descricao }}</th>\r\n      <th>{{ data[0].items[5].descricao }}</th>\r\n      <th>{{ data[0].items[6].descricao }}</th>\r\n      <th>{{ data[0].items[7].descricao }}</th>\r\n      <th>{{ data[0].items[8].descricao }}</th>\r\n      <th>{{ data[0].items[9].descricao }}</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    {% for item in data %}\r\n      <tr>\r\n        <td>{{ item.product.code }}</td>\r\n        <td>{{ item.product.description }}</td>\r\n        {% for item1 in item.items %}\r\n          <td>{{ item1.valor | number }}</td>\r\n        {% endfor %}\r\n      </tr>\r\n    {% endfor %}\r\n  </tbody>\r\n</table>\r\n"
+  },
+  "assets": {
+    "scripts": {
+      "number": "return (value) => new Intl.NumberFormat(\"pt-BR\", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value)",
+      "text": "return (value) => `<strong>${value?.toUpperCase()}</strong>`"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+body {
+  font-family: 'Anek Latin', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.h {
+  flex-direction: row;
+}
+
+.v {
+  flex-direction: column;
+}
+
+.gap {
+  gap: 0.5rem;
+}
+
+.padding {
+  padding: 0.5rem;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-1 {
+  flex: 1 1 auto;
+}
+
+.flex.h>* {
+  flex: 1 1 auto;
+}
+
+.flex.h.full {
+  width: 100%;
+}
+
+.panel {
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+
+  background-color: lightgray;
+  border: 1px solid gray;
+}
+
+.xxl {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.xx {
+  background-color: red;
+}
+
+th {
+  text-align: left;
+}
+
+.number {
+  text-align: right;
+}
