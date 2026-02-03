@@ -221,7 +221,7 @@ async function startServer(port) {
           .map((f) => {
             const rel = path.relative(playgroundDir, f);
             // Encode path for URL, but keep it readable for the label
-            return `<li><a href="/${rel.split(path.sep).map(encodeURIComponent).join("/")}/report.html">${escapeHtml(rel)}</a></li>`;
+            return `<li><a href="/${rel.split(path.sep).map(encodeURIComponent).join("/")}/report.html" target="_blank">${escapeHtml(rel)}</a></li>`;
           })
           .join("");
 
@@ -293,9 +293,8 @@ const port = await new Promise((resolve) => {
 
 console.log("Starting watcher...");
 
-const folders = await findReportFolders(playgroundDir);
-
-await Promise.all(folders.map(compile));
+// const folders = await findReportFolders(playgroundDir);
+// await Promise.all(folders.map(compile));
 
 watch(playgroundDir, { depth: 10, ignoreInitial: true })
   .on("add", onChange)
