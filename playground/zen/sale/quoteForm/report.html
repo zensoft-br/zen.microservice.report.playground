@@ -2,7 +2,174 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<style>
+.report-container {
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+}
+.report-container .status-stamp {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 60pt;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.1);
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+.report-container > header {
+  border-bottom: 3px solid #000;
+  margin-bottom: 2rem;
+}
+.report-container > header .brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.report-container > header h1 {
+  margin: 0;
+  font-size: 20pt;
+}
+.report-container > header dl {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.report-container > header dl div dt {
+  font-size: 8pt;
+  color: #6c757d;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.report-container > header dl div dd {
+  margin: 0;
+}
+.report-container > main .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.report-container > main .kpi-grid dl {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  background: #fdfdfd;
+  display: flex;
+  justify-content: space-between;
+}
+.report-container > main .kpi-grid dl dt {
+  font-size: 9pt;
+  color: #6c757d;
+}
+.report-container > main .kpi-grid dl dd {
+  margin: 0;
+  font-size: 16pt;
+  font-weight: bold;
+}
+.report-container > main .kpi-grid dl .kpi-trend {
+  font-size: 8pt;
+  align-self: flex-end;
+}
+.report-container > main section {
+  margin-top: 1.5rem;
+}
+.report-container > main section section {
+  margin-left: 20px;
+  border-left: 1px solid #eee;
+  padding-left: 15px;
+}
+.report-container > main section > header {
+  font-weight: bold;
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 0.5rem;
+}
+.report-container > main section .group-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.5rem;
+}
+.report-container > main section .group-content table th {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 8px;
+  font-size: 9pt;
+}
+.report-container > main section .group-content table td {
+  padding: 8px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.report-container > main section .group-content table tfoot td {
+  font-weight: bold;
+  border-top: 2px solid #333;
+}
+.report-container > main section > footer {
+  font-size: 9pt;
+  font-style: italic;
+  color: #6c757d;
+  padding-top: 5px;
+}
+.report-container > footer {
+  margin-top: 4rem;
+  border-top: 2px solid #000;
+  padding-top: 1rem;
+}
+.report-container > footer .signature-block {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+.flex.h {
+  flex-direction: row;
+}
+.flex.v {
+  flex-direction: column;
+}
+.flex.align-center {
+  align-items: center;
+}
+.flex.gap {
+  gap: 0.5rem;
+}
+
+.text-right,
+.number {
+  text-align: right !important;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+</style>
 </head>
 <body>
-<h1>Hello, <strong>JSX</strong>!</h1><ul><li>Item 1, valor 1,00</li><li>Item 2, valor 2,00</li><li>Item 3, valor 3,00</li></ul></body>
+<link rel="preload" as="image" href="https://zenerp.s3.amazonaws.com/tenants/squib/images/af48b8b2-8682-4bd5-a44c-3a0fb8b2c6aa.bmp"/><link rel="preload" as="image" href="https://barcode.zensoft.com.br?bcid=qrcode&amp;text=1736"/><div class="report-container"><header><div class="brand"><img src="https://zenerp.s3.amazonaws.com/tenants/squib/images/af48b8b2-8682-4bd5-a44c-3a0fb8b2c6aa.bmp" style="width:3cm"/></div><h1 class="flex h gap align-center" style="justify-content:space-between">Orçamento 1736<img src="https://barcode.zensoft.com.br?bcid=qrcode&amp;text=1736" style="width:1.5cm"/></h1><dl><div><dt>Empresa</dt><dd>SQUIB TECNOLOGIA ELETRÔNICA IMP E EXP LTDA</dd></div><div><dt>CNPJ</dt><dd>68.442.508/0001-83</dd></div><div><dt>Telefone</dt><dd>(11) 2691-1629</dd></div></dl><dl><div><dt>Cliente</dt><dd>KX KTRON INDUSTRIA E COMERCIO LTDA </dd></div><div><dt>CNPJ</dt><dd>03.743.517/0001-69</dd></div><div><dt>Telefone</dt><dd>41991385718</dd></div></dl><dl><div><dt>Data</dt><dd>2026-01-30</dd></div><div><dt>Vendedor</dt><dd>BRUNO HENRIQUE GSELMANN VIEIRA</dd></div><div><dt>Telefone</dt><dd>1127373310</dd></div></dl><dl><div><dt>Observações</dt><pre>**O prazo estimado para entrega é de 4 a 6 semanas, sujeito a eventuais ajustes decorrentes de imprevistos no processo de importação.**
+
+CONDIÇÕES COMERCIAIS - GRUPO SQUIB
+
+A) Condição de pagamento. a combinar
+B) Preço já com os impostos inclusos.
+C) Frete interno por conta do cliente.
+D) Base de preços: Os preços expressos em dólar serão convertidos para real de acordo com o fechamento do dólar comercial de venda-PTAX do dia útil ao dia do faturamento, conforme expresso no site do Banco Central do Brasil (https://www.bcb.gov.br);
+E) Prazo de entrega: O prazo mencionado na cotação será confirmado após o recebimento do seu pedido de compra;&amp;nbsp;
+F) Disponibilidade: Material sujeito ao estoque do dia;
+G) Pedido Mínimo: USD 950,00 por pedido de importação;         
+H) Cancelamento/Reprogramação/Devolução: Nenhum pedido poderá ser cancelado, reprogramado ou devolvido sem autorização prévia por escrito pelo Grupo SQUIB.
+</pre></div></dl></header><main><section><div class="group-content"><table><thead><tr><th>Item</th><th>Código</th><th>Descrição</th><th>Proposta</th><th class="number">Quantidade</th><th>Moeda</th><th class="number">Valor unitário</th><th class="number">Valor unitário BRL</th><th class="number">Valor total</th><th>Disponibilidade</th></tr></thead><tbody><tr><td>1</td><td>13527.2415</td><td>C.I ULN2003A (DIP)</td><td>1</td><td class="number">1.000</td><td>USD</td><td class="number">0,27000000</td><td class="number">1,40281200</td><td class="number">270,00</td><td>30/01/2026</td></tr><tr style="font-style:italic;opacity:0.5"><td></td><td></td><td></td><td>2</td><td class="number">1.000</td><td>USD</td><td class="number">0,17170000</td><td class="number">0,89208452</td><td class="number">171,70</td><td>30/01/2026</td></tr><tr><td>2</td><td>13196</td><td>GENÉRICO.COMP.1</td><td>1</td><td class="number">1.500</td><td>USD</td><td class="number">0,92900000</td><td class="number">4,82671240</td><td class="number">1.393,50</td><td>30/01/2026</td></tr><tr style="font-style:italic;opacity:0.5"><td></td><td></td><td></td><td>2</td><td class="number">1.500</td><td>USD</td><td class="number">0,37060000</td><td class="number">1,92548936</td><td class="number">555,90</td><td>30/01/2026</td></tr><tr><td>3</td><td>13471.2408*</td><td>TR. BC337-25 (TO92) &#x27;&#x27;FITADO&#x27;&#x27;</td><td>1</td><td class="number">6.000</td><td>USD</td><td class="number">0,10190000</td><td class="number">0,52943164</td><td class="number">611,40</td><td>30/01/2026</td></tr><tr style="font-style:italic;opacity:0.5"><td></td><td></td><td></td><td>2</td><td class="number">6.000</td><td>USD</td><td class="number">0,03690000</td><td class="number">0,19171764</td><td class="number">221,40</td><td>30/01/2026</td></tr><tr style="font-style:italic;opacity:0.5"><td></td><td></td><td></td><td>3</td><td class="number">6.000</td><td>USD</td><td class="number">0,02660000</td><td class="number">0,13820296</td><td class="number">159,60</td><td>30/01/2026</td></tr><tr><td>4</td><td>13576.N49KAE</td><td>TR. IRF540PBF</td><td>1</td><td class="number">2.500</td><td>USD</td><td class="number">0,78300000</td><td class="number">4,06815480</td><td class="number">1.957,50</td><td>30/01/2026</td></tr><tr><td>5</td><td>600393...2529</td><td>TR. IRFZ44NPBF</td><td>1</td><td class="number">2.500</td><td>USD</td><td class="number">0,29760000</td><td class="number">1,54621056</td><td class="number">744,00</td><td>30/01/2026</td></tr><tr><td>6</td><td>13747.2511</td><td>LED 2835 6500K 0,2W/3V CRI180 5ST (GW JTLMS1.EM)</td><td>1</td><td class="number">10.000</td><td>USD</td><td class="number">0,02940000</td><td class="number">0,15275064</td><td class="number">294,00</td><td>30/01/2026</td></tr></tbody><tfoot><tr><th colSpan="5" class="number">23.500,00</th><th colSpan="4" class="number">5.270,40</th><th></th></tr></tfoot></table></div></section></main></div></body>
 </html>
