@@ -11,7 +11,8 @@
 │   ├── .brand (logo/company info)
 │   ├── h1 (report title)
 │   └── dl (parameters)
-│       └── div { dt, dd }
+│       ├── div { dt, dd } (parameter 1)
+│       └── div { dt, dd } (parameter 2)
 │
 ├── .page-header
 ├── .page-footer
