@@ -1,8 +1,12 @@
+# styles.scss
+
 ## Basic report structure
 
 ```
 .report-container
+│
 ├── .status-stamp (absolute)
+│
 ├── header (main report header)
 │   ├── .brand (logo/company info)
 │   ├── h1 (report title)
@@ -18,15 +22,15 @@
 │   │       ├── div { dt, dd }
 │   │       └── .kpi-trend (trend span)
 │   │
-│   └── section (recursive groups)
-│       ├── header (group label)
+│   └── section (group)
+│       ├── header (group header)
 │       ├── .group-content
 │       │   ├── table
 │       │   │   ├── thead > tr > th
 │       │   │   ├── tbody > tr > td
-│       │   │   └── tfoot > tr > td (columnar totals)
-│       │   └── section (nested level)
-│       └── footer (group summaries/sign-off)
+│       │   │   └── tfoot > tr > td
+│       │   └── section (nested group)
+│       └── footer (group footer)
 │
 └── footer (final document footer: terms, legal, signatures)
 ```
