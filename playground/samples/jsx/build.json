@@ -1,7 +1,7 @@
 {
   "engine": "jsx",
   "template": {
-    "source": "export default ({data}) => {\r\n  const number = (value) =>\r\n    new Intl.NumberFormat(\"pt-BR\", {\r\n      minimumFractionDigits: 2,\r\n      maximumFractionDigits: 2,\r\n    }).format(value);\r\n\r\n  const text = (value) => (\r\n    <strong>{value?.toUpperCase()}</strong>\r\n  );\r\n\r\n  return (\r\n    <>\r\n      <h1>Hello, {text(data.name)}!</h1>\r\n      <ul>\r\n        {data.items?.map((item, index) => (\r\n          <li key={index}>\r\n            Item {index + 1}, valor {number(item)}\r\n          </li>\r\n        ))}\r\n      </ul>\r\n    </>\r\n  );\r\n};\r\n"
+    "source": "export default ({ data = [] }) => {\r\n  return (\r\n    <div className=\"report-wrapper\">\r\n      {data.map((obj) => (\r\n        <div className=\"report-container\">\r\n          <h1>Hello, {text(obj.name)}!</h1>\r\n          <ul>\r\n            {obj.items?.map((item, index) => (\r\n              <li key={index}>\r\n                Item {index + 1}, valor {number(item)}\r\n              </li>\r\n            ))}\r\n          </ul>\r\n        </div>\r\n      ))}\r\n    </div>\r\n  );\r\n};\r\n\r\nfunction number(value) {\r\n  return new Intl.NumberFormat(\"pt-BR\", {\r\n    minimumFractionDigits: 2,\r\n    maximumFractionDigits: 2,\r\n  }).format(value);\r\n}\r\n\r\nfunction text(value) {\r\n  return <strong>{value?.toUpperCase()}</strong>;\r\n}"
   },
   "assets": {
     "styles": null

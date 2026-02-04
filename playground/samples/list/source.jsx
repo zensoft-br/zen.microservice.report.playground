@@ -2,7 +2,7 @@ export default function SampleReportList() {
   return (
     <>
       <div class="report-container">
-        <span class="status-stamp">DRAFT</span>
+        <span class="stamp">DRAFT</span>
 
         <header>
           <div class="brand">
@@ -33,11 +33,11 @@ export default function SampleReportList() {
 
           <section>
             <header>Region: North America</header>
-            <div class="group-content">
+            <div class="content">
 
               <section>
                 <header>Territory: Northeast</header>
-                <div class="group-content">
+                <div class="content">
                   <table>
                     <thead>
                       <tr>

@@ -2,158 +2,174 @@
 $border: 1px solid #dee2e6;
 $grey: #6c757d;
 
-.report-container {
-  position: relative;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12pt;
+@font-face {
+  font-family: 'AnekLatin';
+  src: url('https://s3.sa-east-1.amazonaws.com/zenerp.app.br/assets/fonts/AnekLatin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  // 1. Status Stamp
-  .status-stamp {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    font-size: 60pt;
-    font-weight: bold;
-    color: rgba(255, 0, 0, 0.1);
-    transform: rotate(-20deg);
-    pointer-events: none;
-  }
+.report-wrapper {
 
-  // 2. Main Header
-  >header {
-    border-bottom: 3px solid #000;
-    margin-bottom: 2rem;
+  .report-container {
+    position: relative;
 
-    .brand {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+    page-break-after: always;
+    break-after: page;
+
+    font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+
+    // 1. Status Stamp
+    .stamp {
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+
+      font-size: 800%;
+      opacity: 0.1;
+      color: red;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 20pt;
-    }
-
-    dl {
-      display: flex;
-      gap: 2rem;
-      margin-top: 1rem;
-
-      div {
-        dt {
-          font-size: 8pt;
-          color: $grey;
-          text-transform: uppercase;
-          font-weight: bold;
-        }
-
-        dd {
-          margin: 0;
-          // font-size: 10pt;
-        }
-      }
-    }
-  }
-
-  // 3. Main Body
-  >main {
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+    // 2. Main Header
+    >header {
+      border-bottom: 3px solid #000;
       margin-bottom: 2rem;
 
-      dl {
-        border: $border;
-        padding: 1rem;
-        background: #fdfdfd;
+      .brand {
         display: flex;
         justify-content: space-between;
-
-        dt {
-          font-size: 9pt;
-          color: $grey;
-        }
-
-        dd {
-          margin: 0;
-          font-size: 16pt;
-          font-weight: bold;
-        }
-
-        .kpi-trend {
-          font-size: 8pt;
-          align-self: flex-end;
-        }
-      }
-    }
-
-    // Recursive Section Logic
-    section {
-      margin-top: 1.5rem;
-
-      // Auto-indent nested sections
-      section {
-        margin-left: 20px;
-        border-left: 1px solid #eee;
-        padding-left: 15px;
+        align-items: center;
+        margin-bottom: 1rem;
       }
 
-      >header {
-        font-weight: bold;
-        // font-size: 12pt;
-        border-bottom: $border;
-        margin-bottom: 0.5rem;
+      h1 {
+        margin: 0;
+        font-size: 20pt;
       }
 
-      .group-content {
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-bottom: 0.5rem;
+      dl {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
 
-          th {
-            text-align: left;
-            background: #f8f9fa;
-            padding: 8px;
-            font-size: 9pt;
-          }
-
-          td {
-            padding: 8px;
-            border-bottom: 1px solid #f1f1f1;
-          }
-
-          tfoot td {
+        div {
+          dt {
+            font-size: 8pt;
+            color: $grey;
+            text-transform: uppercase;
             font-weight: bold;
-            border-top: 2px solid #333;
+          }
+
+          dd {
+            margin: 0;
+            // font-size: 10pt;
+          }
+        }
+      }
+    }
+
+    // 3. Main Body
+    >main {
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        dl {
+          border: $border;
+          padding: 1rem;
+          background: #fdfdfd;
+          display: flex;
+          justify-content: space-between;
+
+          dt {
+            font-size: 9pt;
+            color: $grey;
+          }
+
+          dd {
+            margin: 0;
+            font-size: 16pt;
+            font-weight: bold;
+          }
+
+          .kpi-trend {
+            font-size: 8pt;
+            align-self: flex-end;
           }
         }
       }
 
-      >footer {
-        font-size: 9pt;
-        font-style: italic;
-        color: $grey;
-        padding-top: 5px;
+      // Recursive Section Logic
+      section {
+        margin-top: 1.5rem;
+
+        // Auto-indent nested sections
+        section {
+          margin-left: 20px;
+          border-left: 1px solid #eee;
+          padding-left: 15px;
+        }
+
+        >header {
+          font-weight: bold;
+          // font-size: 12pt;
+          border-bottom: $border;
+          margin-bottom: 0.5rem;
+        }
+
+        .content {
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0.5rem;
+
+            th {
+              text-align: left;
+              background: #f8f9fa;
+              padding: 8px;
+              font-size: 9pt;
+            }
+
+            td {
+              padding: 8px;
+              border-bottom: 1px solid #f1f1f1;
+            }
+
+            tfoot td {
+              font-weight: bold;
+              border-top: 2px solid #333;
+            }
+          }
+        }
+
+        >footer {
+          font-size: 9pt;
+          font-style: italic;
+          color: $grey;
+          padding-top: 5px;
+        }
+      }
+    }
+
+    // 4. Final Document Footer
+    >footer {
+      margin-top: 4rem;
+      border-top: 2px solid #000;
+      padding-top: 1rem;
+
+      .signature-block {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
       }
     }
   }
 
-  // 4. Final Document Footer
-  >footer {
-    margin-top: 4rem;
-    border-top: 2px solid #000;
-    padding-top: 1rem;
-
-    .signature-block {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 2rem;
-    }
-  }
 }
 
 // Global Helpers
@@ -184,6 +200,10 @@ $grey: #6c757d;
   text-align: right !important;
 }
 
+.number {
+  font-variant-numeric: tabular-nums;
+}
+
 .text-success {
   color: green;
 }
@@ -193,6 +213,7 @@ $grey: #6c757d;
 }
 
 pre {
+  font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;

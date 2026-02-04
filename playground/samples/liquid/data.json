@@ -1,4 +1,12 @@
 {
-  "name": "Liquid",
-  "items": [1, 2, 3]
+  "data": [
+    {
+      "name": "Liquid",
+      "items": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
 }

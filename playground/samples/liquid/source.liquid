@@ -1,6 +1,12 @@
-<h1>Hello, {{ name | text }}!</h1>
-<ul>
-  {% for item in items %}
-    <li>Item {{ forloop.index }}, valor {{ item | number }}</li>
+<div class="report-wrapper">
+  {% for obj in data %}
+    <div class="report-container">
+      <h1>Hello, {{ obj.name | text }}!</h1>
+      <ul>
+        {% for item in obj.items %}
+          <li>Item {{ forloop.index }}, valor {{ item | number }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endfor %}
-</ul>
+</div>

@@ -1,7 +1,5 @@
 {
   "engine": "jsx",
-  "template": {
-  },
   "assets": {
     "styles": "@file:../../../styles.css"
   }

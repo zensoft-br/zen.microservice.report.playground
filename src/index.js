@@ -163,6 +163,8 @@ async function compile(reportFolder) {
     }
 
     // Remote Generate
+  renderRequest.template.source = await localizeContent(renderRequest.template.source);
+
     const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -187,6 +189,25 @@ async function compile(reportFolder) {
     await fs.writeFile(outFile, errorHtml).catch(() => {});
     triggerReload();
   }
+}
+
+/**
+ * Fetches localization resources and replaces placeholders in a template string.
+ * @param {string} template - The string containing @@:key placeholders.
+ * @returns {Promise<string>} - The processed string with values injected.
+ */
+async function localizeContent(template) {
+  const url = 'https://zenerp.app.br/resources.pt-BR.json';
+
+    const response = await fetch(url);
+    if (!response.ok) 
+      throw new Error(`Failed to load resources: ${response.statusText}`);
+    
+    const resources = await response.json();
+
+    return template.replace(/@@:([/@\w.-]+)/g, (match, key) => {
+      return resources[key] !== undefined ? resources[key] : "xx";
+    });
 }
 
 /*

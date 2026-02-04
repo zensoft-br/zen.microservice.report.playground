@@ -3,17 +3,16 @@ export default ({ data = [] }) => {
     <div className="report-wrapper">
       {data.map((quote) => (
         <div className="report-container">
-          <div className="stamp">@@:/sale/quote</div>
           <header>
             <div className="brand">
               <img src={quote.company?.image.url} style={{ width: "3cm" }}></img>
             </div>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>@@:/sale/quote {quote.id}
+            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>Orçamento {quote.id}
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
             </h1>
             <dl>
               <div>
-                <dt>@@:/catalog/company/company</dt>
+                <dt>Empresa</dt>
                 <dd>{quote.company?.person.name}</dd>
               </div>
               <div>
@@ -21,13 +20,13 @@ export default ({ data = [] }) => {
                 <dd>{quote.company?.person.documentNumber}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>Telefone</dt>
                 <dd>{quote.company?.person.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/catalog/person/person</dt>
+                <dt>Cliente</dt>
                 <dd>{quote.person?.name}</dd>
               </div>
               <div>
@@ -35,13 +34,13 @@ export default ({ data = [] }) => {
                 <dd>{quote.person?.documentNumber}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>Telefone</dt>
                 <dd>{quote.person?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/@word/date</dt>
+                <dt>Data</dt>
                 <dd>{quote.date}</dd>
               </div>
               <div>
@@ -49,13 +48,13 @@ export default ({ data = [] }) => {
                 <dd>{quote.personSalesperson?.name}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>Telefone</dt>
                 <dd>{quote.personSalesperson?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/@word/comments</dt>
+                <dt>Observações</dt>
                 <pre>{quote.saleProfile?.properties?.quote_comments}</pre>
               </div>
             </dl>
@@ -67,15 +66,15 @@ export default ({ data = [] }) => {
                   <thead>
                     <tr>
                       <th>Item</th>
-                      <th>@@:/@word/code</th>
-                      <th>@@:/@word/description</th>
+                      <th>Código</th>
+                      <th>Descrição</th>
                       <th className="number">Proposta</th>
-                      <th className="number">@@:/@word/quantity</th>
-                      <th>@@:/financial/currency</th>
-                      <th className="number">@@:/@word/unitValue</th>
-                      <th className="number">@@:/@word/unitValue BRL</th>
-                      <th className="number">@@:/@word/totalValue</th>
-                      <th>@@:/@word/availabilityDate</th>
+                      <th className="number">Quantidade</th>
+                      <th>Moeda</th>
+                      <th className="number">Valor unitário</th>
+                      <th className="number">Valor unitário BRL</th>
+                      <th className="number">Valor total</th>
+                      <th>Disponibilidade</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -85,7 +84,7 @@ export default ({ data = [] }) => {
                           <tr key={item.id} style={{ fontStyle: index2 > 0 ? "italic" : undefined, opacity: index2 > 0 ? "0.5" : undefined }}>
                             <td>{index2 === 0 ? index1 + 1 : undefined}</td>
                             <td>{index2 === 0 ? item.productPacking?.code : undefined}</td>
-                            <td>{index2 === 0 ? (item.productPacking?.product.description) : undefined}</td>
+                            <td>{index2 === 0 ? (item.referenceCode ?? item.productPacking?.product.description) : undefined}</td>
                             <td className="number">{index2 + 1}</td>
                             <td className="number">{formatNumber(item.quantity, { digits: 0 })}</td>
                             <td>{proposal.currency?.code}</td>

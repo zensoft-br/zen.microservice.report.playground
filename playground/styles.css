@@ -1,116 +1,123 @@
-.report-container {
+@font-face {
+  font-family: "AnekLatin";
+  src: url("https://s3.sa-east-1.amazonaws.com/zenerp.app.br/assets/fonts/AnekLatin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.report-wrapper .report-container {
   position: relative;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12pt;
+  page-break-after: always;
+  break-after: page;
+  font-family: "AnekLatin", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11pt;
 }
-.report-container .status-stamp {
+.report-wrapper .report-container .stamp {
   position: absolute;
-  top: 50px;
-  right: 50px;
-  font-size: 60pt;
-  font-weight: bold;
-  color: rgba(255, 0, 0, 0.1);
-  transform: rotate(-20deg);
-  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 800%;
+  opacity: 0.1;
+  color: red;
 }
-.report-container > header {
+.report-wrapper .report-container > header {
   border-bottom: 3px solid #000;
   margin-bottom: 2rem;
 }
-.report-container > header .brand {
+.report-wrapper .report-container > header .brand {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
-.report-container > header h1 {
+.report-wrapper .report-container > header h1 {
   margin: 0;
   font-size: 20pt;
 }
-.report-container > header dl {
+.report-wrapper .report-container > header dl {
   display: flex;
   gap: 2rem;
   margin-top: 1rem;
 }
-.report-container > header dl div dt {
+.report-wrapper .report-container > header dl div dt {
   font-size: 8pt;
   color: #6c757d;
   text-transform: uppercase;
   font-weight: bold;
 }
-.report-container > header dl div dd {
+.report-wrapper .report-container > header dl div dd {
   margin: 0;
 }
-.report-container > main .kpi-grid {
+.report-wrapper .report-container > main .kpi-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
 }
-.report-container > main .kpi-grid dl {
+.report-wrapper .report-container > main .kpi-grid dl {
   border: 1px solid #dee2e6;
   padding: 1rem;
   background: #fdfdfd;
   display: flex;
   justify-content: space-between;
 }
-.report-container > main .kpi-grid dl dt {
+.report-wrapper .report-container > main .kpi-grid dl dt {
   font-size: 9pt;
   color: #6c757d;
 }
-.report-container > main .kpi-grid dl dd {
+.report-wrapper .report-container > main .kpi-grid dl dd {
   margin: 0;
   font-size: 16pt;
   font-weight: bold;
 }
-.report-container > main .kpi-grid dl .kpi-trend {
+.report-wrapper .report-container > main .kpi-grid dl .kpi-trend {
   font-size: 8pt;
   align-self: flex-end;
 }
-.report-container > main section {
+.report-wrapper .report-container > main section {
   margin-top: 1.5rem;
 }
-.report-container > main section section {
+.report-wrapper .report-container > main section section {
   margin-left: 20px;
   border-left: 1px solid #eee;
   padding-left: 15px;
 }
-.report-container > main section > header {
+.report-wrapper .report-container > main section > header {
   font-weight: bold;
   border-bottom: 1px solid #dee2e6;
   margin-bottom: 0.5rem;
 }
-.report-container > main section .group-content table {
+.report-wrapper .report-container > main section .content table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 0.5rem;
 }
-.report-container > main section .group-content table th {
+.report-wrapper .report-container > main section .content table th {
   text-align: left;
   background: #f8f9fa;
   padding: 8px;
   font-size: 9pt;
 }
-.report-container > main section .group-content table td {
+.report-wrapper .report-container > main section .content table td {
   padding: 8px;
   border-bottom: 1px solid #f1f1f1;
 }
-.report-container > main section .group-content table tfoot td {
+.report-wrapper .report-container > main section .content table tfoot td {
   font-weight: bold;
   border-top: 2px solid #333;
 }
-.report-container > main section > footer {
+.report-wrapper .report-container > main section > footer {
   font-size: 9pt;
   font-style: italic;
   color: #6c757d;
   padding-top: 5px;
 }
-.report-container > footer {
+.report-wrapper .report-container > footer {
   margin-top: 4rem;
   border-top: 2px solid #000;
   padding-top: 1rem;
 }
-.report-container > footer .signature-block {
+.report-wrapper .report-container > footer .signature-block {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
@@ -137,6 +144,10 @@
   text-align: right !important;
 }
 
+.number {
+  font-variant-numeric: tabular-nums;
+}
+
 .text-success {
   color: green;
 }
@@ -146,6 +157,7 @@
 }
 
 pre {
+  font-family: "AnekLatin", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
