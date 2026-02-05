@@ -51,7 +51,7 @@ const escapeHtml = (s) =>
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
-        '"': "&quot;",
+        "\"": "&quot;",
         "'": "&#039;",
       })[m],
   );
@@ -118,6 +118,7 @@ async function compile(reportFolder) {
       engine: config.engine,
       template: { source: sourceContent },
       assets: JSON.parse(JSON.stringify(config.assets || {})),
+      i18n: config.i18n,
       data: undefined,
     };
 
@@ -162,9 +163,6 @@ async function compile(reportFolder) {
       renderRequest.assets.styles = isArray ? processed : processed[0];
     }
 
-    // Remote Generate
-  renderRequest.template.source = await localizeContent(renderRequest.template.source);
-
     const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -191,25 +189,6 @@ async function compile(reportFolder) {
   }
 }
 
-/**
- * Fetches localization resources and replaces placeholders in a template string.
- * @param {string} template - The string containing @@:key placeholders.
- * @returns {Promise<string>} - The processed string with values injected.
- */
-async function localizeContent(template) {
-  const url = 'https://zenerp.app.br/resources.pt-BR.json';
-
-    const response = await fetch(url);
-    if (!response.ok) 
-      throw new Error(`Failed to load resources: ${response.statusText}`);
-    
-    const resources = await response.json();
-
-    return template.replace(/@@:([/@\w.-]+)/g, (match, key) => {
-      return resources[key] !== undefined ? resources[key] : "xx";
-    });
-}
-
 /*
  * Server & Watcher ---
  */
@@ -219,7 +198,7 @@ let clients = [];
 const triggerReload = () =>
   clients.forEach((res) => res.write("data: reload\n\n"));
 
-const RELOAD_SCRIPT = `<script>new EventSource('/__reload').onmessage=()=>location.reload()</script>`;
+const RELOAD_SCRIPT = "<script>new EventSource('/__reload').onmessage=()=>location.reload()</script>";
 
 async function startServer(port) {
   http

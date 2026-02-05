@@ -1,12 +1,23 @@
-// Variables
-$border: 1px solid #dee2e6;
-$grey: #6c757d;
-
 @font-face {
   font-family: 'AnekLatin';
   src: url('https://s3.sa-east-1.amazonaws.com/zenerp.app.br/assets/fonts/AnekLatin.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+// Variables
+$border: 1px solid #dee2e6;
+$grey: #6c757d;
+
+$color-shadow: rgba(0, 0, 0, 0.1);
+
+:root {
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  --border-radius: 0.2em;
+
+  --padding: 0.35rem;
 }
 
 .report-wrapper {
@@ -52,10 +63,17 @@ $grey: #6c757d;
 
       dl {
         display: flex;
-        gap: 2rem;
+        gap: var(--padding);
         margin-top: 1rem;
+        // width: 100%;
 
         div {
+          flex: 1;
+
+          border: 1px solid var(--color-border);
+          border-radius: var(--border-radius);
+          padding: var(--padding);
+
           dt {
             font-size: 8pt;
             color: $grey;
@@ -190,6 +208,10 @@ $grey: #6c757d;
     align-items: center;
   }
 
+  &.justify-center {
+    justify-content: space-between;
+  }
+
   &.gap {
     gap: 0.5rem;
   }
@@ -214,7 +236,10 @@ $grey: #6c757d;
 
 pre {
   font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
+
+  margin: 0;
 }

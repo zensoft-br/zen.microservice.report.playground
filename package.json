@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@stylistic/eslint-plugin": "^5.7.1",
     "chokidar": "^5.0.0",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
