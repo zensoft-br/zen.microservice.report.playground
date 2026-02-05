@@ -6,10 +6,7 @@ import open from "open";
 import path from "path";
 import { fileURLToPath } from "url";
 
-/*
- * Configuration
- */
-
+// Configuration
 const REPORT_API =
   process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
 
@@ -27,7 +24,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const playgroundDir = path.resolve(__dirname, "../playground");
 
-// --- Utilities ---
+// Utilities
 const fileExists = (p) =>
   fs
     .stat(p)
@@ -64,7 +61,7 @@ async function fetchWithTimeout(url, options = {}, ms = 15000) {
   );
 }
 
-/** Recursively find all folders containing a template.json */
+// Recursively find all folders containing a template.json
 async function findReportFolders(dir) {
   let results = [];
   try {
@@ -84,7 +81,7 @@ async function findReportFolders(dir) {
   return results;
 }
 
-// --- Core Logic ---
+// Core logic
 
 async function compile(reportFolder) {
   const relativeBase = path.relative(playgroundDir, reportFolder);
@@ -194,10 +191,7 @@ export async function compileAll() {
   await Promise.all(folders.map(compile));
 }
 
-/*
- * Server & Watcher ---
- */
-
+// Server & Watcher ---
 let clients = [];
 
 const triggerReload = () =>

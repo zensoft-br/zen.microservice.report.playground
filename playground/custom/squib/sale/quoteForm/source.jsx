@@ -41,7 +41,7 @@ export default ({ data = [] }) => {
             <dl>
               <div>
                 <dt>Data</dt>
-                <dd>{quote.date}</dd>
+                <dd>{formatDate(quote.date)}</dd>
               </div>
               <div>
                 <dt>Vendedor</dt>

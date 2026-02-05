@@ -1,6 +1,6 @@
 {
   "engine": "jsx",
   "assets": {
-    "styles": "@file:../../report.css"
+    "styles": "@file:../../styles.css"
   }
 }

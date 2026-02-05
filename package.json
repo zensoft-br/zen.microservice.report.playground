@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "compile": "node --import dotenv/config src/compile.js",
     "playground": "node --import dotenv/config src/playground.js",
     "sass": "sass playground:playground --no-source-map",
     "saas:watch": "sass --watch playground:playground --no-source-map",
