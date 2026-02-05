@@ -1,5 +1,6 @@
-.xxx {
+.write-spot {
   border: 1px solid gray;
   border-radius: 0.25rem;
   padding: 0.3rem;
+  background-color: var(--color-shadow);
 }

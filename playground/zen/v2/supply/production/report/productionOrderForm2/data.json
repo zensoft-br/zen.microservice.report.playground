@@ -207,6 +207,19 @@
             "#created": "2024-10-23T10:00:00.880616227-03:00[America/Sao_Paulo]"
           }
         },
+        "image": {
+          "id": 1009,
+          "contentType": "image/bmp",
+          "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/af48b8b2-8682-4bd5-a44c-3a0fb8b2c6aa.bmp",
+          "size": 1635994,
+          "width": 1046,
+          "height": 521,
+          "properties": {
+            "#user": "bia@squib.com.br",
+            "#userId": "1003",
+            "#created": "2023-09-12T16:20:44.376359026-03:00[America/Sao_Paulo]"
+          }
+        },
         "properties": {
           "#user": "admin",
           "#userId": 1001,

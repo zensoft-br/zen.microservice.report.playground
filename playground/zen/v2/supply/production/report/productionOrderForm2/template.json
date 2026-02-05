@@ -3,7 +3,7 @@
   "assets": {
     "styles": [
       "@file:styles.css",
-      "@file:../../../../../styles.css"
+      "@file:../../../../../../styles.css"
     ]
   },
   "i18n": {
@@ -13,7 +13,10 @@
       "pt-BR": "https://zenerp.app.br/resources.pt-BR.json",
       "fallback": {
         "/@word/quantity/consumed": "Quantidade consumida",
-        "/@word/quantity/produced": "Quantidade produzida"
+        "/@word/quantity/produced": "Quantidade produzida",
+        "/@word/signature/plural": "Assinaturas",
+        "/@word/function/operator": "Operador",
+        "/@word/function/responsible": "Responsável"
       }
     }
   }

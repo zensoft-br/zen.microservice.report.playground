@@ -189,6 +189,11 @@ async function compile(reportFolder) {
   }
 }
 
+export async function compileAll() {
+  const folders = await findReportFolders(playgroundDir);
+  await Promise.all(folders.map(compile));
+}
+
 /*
  * Server & Watcher ---
  */
@@ -200,7 +205,59 @@ const triggerReload = () =>
 
 const RELOAD_SCRIPT = "<script>new EventSource('/__reload').onmessage=()=>location.reload()</script>";
 
-async function startServer(port) {
+async function onChange(filePath) {
+  const fullPath = path.resolve(filePath);
+  const name = path.basename(fullPath);
+  const ext = path.extname(fullPath);
+
+  if (
+    name === "template.json" ||
+    name === "data.json" ||
+    (name.startsWith("source.") && EXTENSIONS.includes(ext))
+  ) {
+    await compile(path.dirname(fullPath));
+    return;
+  }
+
+  if (ext === ".css") {
+    const folders = await findReportFolders(playgroundDir);
+    for (const folder of folders) {
+      const config = await readJson(path.join(folder, "template.json"), {});
+      const styles = [].concat(config.assets?.styles || []);
+      const isLinked = styles.some(
+        (s) =>
+          typeof s === "string" &&
+          s.startsWith("@file:") &&
+          path.resolve(folder, s.slice(6)) === fullPath,
+      );
+      if (isLinked) await compile(folder);
+    }
+  }
+}
+
+export async function startWatcher() {
+  console.log("Starting watcher...");
+
+  watch(playgroundDir, { depth: 10, ignoreInitial: true })
+    .on("add", onChange)
+    .on("change", onChange)
+    .on("unlink", triggerReload)
+    .on("addDir", triggerReload)
+    .on("unlinkDir", triggerReload);
+}
+
+export async function startServer() {
+  const port = await new Promise((resolve) => {
+    const tryPort = (p) => {
+      const s = net
+        .createServer()
+        .once("error", () => tryPort(p + 1))
+        .once("listening", () => s.close(() => resolve(p)))
+        .listen(p);
+    };
+    tryPort(8090);
+  });
+
   http
     .createServer(async (req, res) => {
       const url = decodeURIComponent(req.url || "");
@@ -249,58 +306,3 @@ async function startServer(port) {
       open(`http://localhost:${port}/`);
     });
 }
-
-async function onChange(filePath) {
-  const fullPath = path.resolve(filePath);
-  const name = path.basename(fullPath);
-  const ext = path.extname(fullPath);
-
-  if (
-    name === "template.json" ||
-    name === "data.json" ||
-    (name.startsWith("source.") && EXTENSIONS.includes(ext))
-  ) {
-    await compile(path.dirname(fullPath));
-    return;
-  }
-
-  if (ext === ".css") {
-    const folders = await findReportFolders(playgroundDir);
-    for (const folder of folders) {
-      const config = await readJson(path.join(folder, "template.json"), {});
-      const styles = [].concat(config.assets?.styles || []);
-      const isLinked = styles.some(
-        (s) =>
-          typeof s === "string" &&
-          s.startsWith("@file:") &&
-          path.resolve(folder, s.slice(6)) === fullPath,
-      );
-      if (isLinked) await compile(folder);
-    }
-  }
-}
-
-const port = await new Promise((resolve) => {
-  const tryPort = (p) => {
-    const s = net
-      .createServer()
-      .once("error", () => tryPort(p + 1))
-      .once("listening", () => s.close(() => resolve(p)))
-      .listen(p);
-  };
-  tryPort(8090);
-});
-
-console.log("Starting watcher...");
-
-// const folders = await findReportFolders(playgroundDir);
-// await Promise.all(folders.map(compile));
-
-watch(playgroundDir, { depth: 10, ignoreInitial: true })
-  .on("add", onChange)
-  .on("change", onChange)
-  .on("unlink", triggerReload)
-  .on("addDir", triggerReload)
-  .on("unlinkDir", triggerReload);
-
-startServer(port);

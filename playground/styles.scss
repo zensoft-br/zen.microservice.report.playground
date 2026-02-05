@@ -65,7 +65,6 @@ $color-shadow: rgba(0, 0, 0, 0.1);
         display: flex;
         gap: var(--padding);
         margin-top: 1rem;
-        // width: 100%;
 
         div {
           flex: 1;
@@ -128,9 +127,9 @@ $color-shadow: rgba(0, 0, 0, 0.1);
 
         // Auto-indent nested sections
         section {
-          margin-left: 20px;
-          border-left: 1px solid #eee;
-          padding-left: 15px;
+          // margin-left: 10px;
+          // border-left: 1px solid #eee;
+          padding-left: 1rem;
         }
 
         >header {
@@ -184,6 +183,32 @@ $color-shadow: rgba(0, 0, 0, 0.1);
         display: flex;
         justify-content: space-between;
         margin-top: 2rem;
+      }
+
+      dl {
+        display: flex;
+        gap: var(--padding);
+        margin-top: 1rem;
+
+        div {
+          flex: 1;
+
+          border: 1px solid var(--color-border);
+          border-radius: var(--border-radius);
+          padding: var(--padding);
+
+          dt {
+            font-size: 8pt;
+            color: $grey;
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+
+          dd {
+            margin: 0;
+            // font-size: 10pt;
+          }
+        }
       }
     }
   }
