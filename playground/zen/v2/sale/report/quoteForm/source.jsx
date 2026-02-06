@@ -1,61 +1,60 @@
-export default ({ data = [] }) => {
+export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((quote) => (
         <div className="report-container">
-          <div className="stamp">@@:/sale/quote</div>
           <header>
             <div className="brand">
               <img src={quote.company?.image.url} style={{ width: "3cm" }}></img>
             </div>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>@@:/sale/quote {quote.id}
+            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>{t("/sale/quote")} {quote.id}
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
             </h1>
             <dl>
               <div>
-                <dt>@@:/catalog/company/company</dt>
+                <dt>{t("/catalog/company/company")}</dt>
                 <dd>{quote.company?.person.name}</dd>
               </div>
               <div>
-                <dt>CNPJ</dt>
+                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.company?.person.documentType}`)}</dt>
                 <dd>{quote.company?.person.documentNumber}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.company?.person.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/catalog/person/person</dt>
+                <dt>{t("/catalog/person/person")}</dt>
                 <dd>{quote.person?.name}</dd>
               </div>
               <div>
-                <dt>CNPJ</dt>
+                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}</dt>
                 <dd>{quote.person?.documentNumber}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.person?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/@word/date</dt>
-                <dd>{quote.date}</dd>
+                <dt>{t("/@word/date")}</dt>
+                <dd>{formatDate(quote.date)}</dd>
               </div>
               <div>
-                <dt>Vendedor</dt>
+                <dt>{t("/@word/personSalesperson")}</dt>
                 <dd>{quote.personSalesperson?.name}</dd>
               </div>
               <div>
-                <dt>@@:/@word/phone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.personSalesperson?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>@@:/@word/comments</dt>
+                <dt>{t("/@word/comments")}</dt>
                 <pre>{quote.saleProfile?.properties?.quote_comments}</pre>
               </div>
             </dl>
@@ -66,16 +65,15 @@ export default ({ data = [] }) => {
                 <table>
                   <thead>
                     <tr>
-                      <th>Item</th>
-                      <th>@@:/@word/code</th>
-                      <th>@@:/@word/description</th>
-                      <th className="number">Proposta</th>
-                      <th className="number">@@:/@word/quantity</th>
-                      <th>@@:/financial/currency</th>
-                      <th className="number">@@:/@word/unitValue</th>
-                      <th className="number">@@:/@word/unitValue BRL</th>
-                      <th className="number">@@:/@word/totalValue</th>
-                      <th>@@:/@word/availabilityDate</th>
+                      <th>{t("/@word/item")}</th>
+                      <th>{t("/@word/code")}</th>
+                      <th>{t("/@word/description")}</th>
+                      <th className="number">{t("/sale/quoteItemProposal")}</th>
+                      <th className="number">{t("/@word/quantity")}</th>
+                      <th>{t("/financial/currency")}</th>
+                      <th className="number">{t("/@word/unitValue")}</th>
+                      <th className="number">{t("/@word/totalValue")}</th>
+                      <th>{t("/@word/availabilityDate")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,7 +88,6 @@ export default ({ data = [] }) => {
                             <td className="number">{formatNumber(item.quantity, { digits: 0 })}</td>
                             <td>{proposal.currency?.code}</td>
                             <td className="number">{formatNumber(proposal.unitValue, { digits: 8 })}</td>
-                            <td className="number">{formatNumber(proposal.unitValueLocal, { digits: 8 })}</td>
                             <td className="number">{formatNumber(proposal.totalValue)}</td>
                             <td>{formatDate(quote.availabilityDate)}</td>
                           </tr>

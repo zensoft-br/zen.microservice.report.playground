@@ -81,6 +81,33 @@ async function findReportFolders(dir) {
   return results;
 }
 
+// Deep merges two objects. 
+function deepMerge(source, patch) {
+  // If patch isn't an object, it's a primitive; return it as the new value
+  if (patch === null || typeof patch !== "object" || Array.isArray(patch)) {
+    return patch;
+  }
+
+  // Create a copy of the source to keep the function pure
+  const result = { ...source };
+
+  Object.keys(patch).forEach(key => {
+    const sourceValue = result[key];
+    const patchValue = patch[key];
+
+    if (sourceValue && typeof sourceValue === "object" && !Array.isArray(sourceValue) &&
+            patchValue && typeof patchValue === "object" && !Array.isArray(patchValue)) {
+      // Both are objects, recurse
+      result[key] = deepMerge(sourceValue, patchValue);
+    } else {
+      // Otherwise, patch value wins
+      result[key] = patchValue;
+    }
+  });
+
+  return result;
+}
+
 // Core logic
 
 async function compile(reportFolder) {
@@ -160,10 +187,29 @@ async function compile(reportFolder) {
       renderRequest.assets.styles = isArray ? processed : processed[0];
     }
 
+    // Inject i18n defaults and merge with template config
+    const i18n = {
+      locale: "pt-BR",
+      fallbackLocale: "pt-BR",
+      resources: {  
+        "en-US": "https://zenerp.app.br/resources.en-US.json",
+        "es-ES": "https://zenerp.app.br/resources.es-ES.json",
+        "pt-BR": "https://zenerp.app.br/resources.pt-BR.json",
+        "zh-CN": "https://zenerp.app.br/resources.zh-CN.json",
+      },
+    };
+
+    const mergedRequest = {
+      ...renderRequest,
+      i18n: {
+        ...deepMerge(i18n, renderRequest.i18n || {}),
+      },
+    };
+
     const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(renderRequest),
+      body: JSON.stringify(mergedRequest),
     });
 
     if (!genRes.ok) throw new Error(await genRes.text());

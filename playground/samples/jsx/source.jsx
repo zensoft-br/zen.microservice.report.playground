@@ -1,4 +1,4 @@
-export default ({ data = [] }) => {
+export default function ({ data = [] }) {
   return (
     <div className="report-wrapper">
       {data.map((obj) => (

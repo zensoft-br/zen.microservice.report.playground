@@ -1,4 +1,4 @@
-export default ({ data = [] }) => {
+export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((quote) => (
@@ -7,54 +7,54 @@ export default ({ data = [] }) => {
             <div className="brand">
               <img src={quote.company?.image.url} style={{ width: "3cm" }}></img>
             </div>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>Orçamento {quote.id}
+            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>{t("/sale/quote")} {quote.id}
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
             </h1>
             <dl>
               <div>
-                <dt>Empresa</dt>
+                <dt>{t("/catalog/company/company")}</dt>
                 <dd>{quote.company?.person.name}</dd>
               </div>
               <div>
-                <dt>CNPJ</dt>
+                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.company?.person.documentType}`)}</dt>
                 <dd>{quote.company?.person.documentNumber}</dd>
               </div>
               <div>
-                <dt>Telefone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.company?.person.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>Cliente</dt>
+                <dt>{t("/catalog/person/person")}</dt>
                 <dd>{quote.person?.name}</dd>
               </div>
               <div>
-                <dt>CNPJ</dt>
+                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}</dt>
                 <dd>{quote.person?.documentNumber}</dd>
               </div>
               <div>
-                <dt>Telefone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.person?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>Data</dt>
+                <dt>{t("/@word/date")}</dt>
                 <dd>{formatDate(quote.date)}</dd>
               </div>
               <div>
-                <dt>Vendedor</dt>
+                <dt>{t("/@word/personSalesperson")}</dt>
                 <dd>{quote.personSalesperson?.name}</dd>
               </div>
               <div>
-                <dt>Telefone</dt>
+                <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.personSalesperson?.phone}</dd>
               </div>
             </dl>
             <dl>
               <div>
-                <dt>Observações</dt>
+                <dt>{t("/@word/comments")}</dt>
                 <pre>{quote.saleProfile?.properties?.quote_comments}</pre>
               </div>
             </dl>
@@ -65,16 +65,16 @@ export default ({ data = [] }) => {
                 <table>
                   <thead>
                     <tr>
-                      <th>Item</th>
-                      <th>Código</th>
-                      <th>Descrição</th>
-                      <th className="number">Proposta</th>
-                      <th className="number">Quantidade</th>
-                      <th>Moeda</th>
-                      <th className="number">Valor unitário</th>
-                      <th className="number">Valor unitário BRL</th>
-                      <th className="number">Valor total</th>
-                      <th>Disponibilidade</th>
+                      <th>{t("/@word/item")}</th>
+                      <th>{t("/@word/code")}</th>
+                      <th>{t("/@word/description")}</th>
+                      <th className="number">{t("/sale/quoteItemProposal")}</th>
+                      <th className="number">{t("/@word/quantity")}</th>
+                      <th>{t("/financial/currency")}</th>
+                      <th className="number">{t("/@word/unitValue")}</th>
+                      <th className="number">{t("/@word/unitValue")} BRL</th>
+                      <th className="number">{t("/@word/totalValue")}</th>
+                      <th>{t("/@word/availabilityDate")}</th>
                     </tr>
                   </thead>
                   <tbody>
