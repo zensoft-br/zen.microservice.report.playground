@@ -6,7 +6,7 @@ To ensure scalability and consistency across the Zen ecosystem, all reporting en
 
 ## Configuration schema
 
-The `i18n` object must be defined within the report template metadata.
+The `i18n` object can be defined within the report template metadata.
 
 ```json
 {

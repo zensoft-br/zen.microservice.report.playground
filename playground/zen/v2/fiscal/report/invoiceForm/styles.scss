@@ -1,0 +1,140 @@
+html {
+  font-size: 0.3cm;
+}
+
+@media screen {
+  html {
+    width: 21cm;
+  }
+
+  body {
+    border: 1px dotted black;
+
+  }
+}
+
+.report-container {
+  font-size: 9pt !important;
+
+  @media screen {
+    width: 21cm;
+    // height: 29.7cm;
+  }
+}
+
+@media print {
+  html {
+    width: 100%;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0.3cm;
+}
+
+.page {
+  width: 100%;
+}
+
+.frame {
+  //- border: 1px solid black;  
+  //- border-radius: 0.35rem;
+  //- overflow: hidden;
+
+  //- margin-top: -1px;
+  //- margin-left: -1px;
+
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.band.h {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+
+  flex-direction: row;
+}
+
+.band.v {
+  display: flex;
+  flex-direction: column;
+}
+
+.slot {
+  flex: 1;
+
+  //- border: 0.5px solid black;
+  padding: 0.1rem 0.2rem;
+
+  min-height: 2rem;
+
+  //- outline: 1px solid; /* use instead of border */
+  //- margin-top: 1px;
+  //- margin-left: 1px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.slot>div {
+  //- text-transform: uppercase;
+}
+
+hr {
+  border: 0;
+}
+
+hr.dashed {
+  border: 0;
+  border-top: 1px dashed black;
+}
+
+label {
+  display: block;
+}
+
+label.header {
+  margin-top: 0.4rem;
+  margin-bottom: 0.1rem;
+}
+
+th {
+  text-align: unset;
+}
+
+label,
+th {
+  font-size: 60%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.center {
+  text-align: center;
+}
+
+.number {
+  text-align: right;
+}
+
+img {
+  padding: 0 5%;
+  width: 90%;
+  height: 100%;
+  object-fit: contain;
+}
+
+h1 {
+  font-size: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 0.1rem 0.2rem;
+}

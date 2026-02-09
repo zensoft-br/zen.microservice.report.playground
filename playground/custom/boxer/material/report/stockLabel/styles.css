@@ -1,0 +1,57 @@
+.report-container {
+  box-sizing: border-box;
+  font-size: 11pt;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+@media screen {
+  .report-container {
+    width: 10cm;
+    height: 8cm;
+    margin-bottom: 1rem;
+  }
+}
+@media print {
+  .report-container {
+    height: 100vh;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  grid-template-areas: "A B B" "A B B" "A B B" "A C C" "A C C" "A D D" "A D D" "A D D";
+}
+.content .cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  padding: 0.1rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  min-height: 0;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-transform: uppercase;
+}
+.content .cell dt {
+  font-size: 0.6em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.content .cell dd {
+  margin: 0;
+}
+.content img {
+  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 100%;
+  object-fit: contain;
+}

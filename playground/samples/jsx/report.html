@@ -9,27 +9,40 @@
   font-weight: normal;
   font-style: normal;
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .report-wrapper {
   --border-radius: 0.2em;
   --color-border: rgba(0, 0, 0, 0.1);
   --color-shadow: rgba(0, 0, 0, 0.1);
   --gap: 0.5rem;
   --padding: 0.35rem;
+  font-family: "AnekLatin", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11pt;
+  background-color: var(--color-shadow);
+}
+@media screen {
+  .report-wrapper {
+    padding: 1rem;
+  }
 }
 .report-wrapper .report-container {
   position: relative;
   page-break-after: always;
   break-after: page;
-  font-family: "AnekLatin", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 11pt;
+  background-color: white;
 }
 .report-wrapper .report-container .stamp {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
-  font-size: 800%;
-  opacity: 0.1;
+  font-size: 300%;
+  opacity: 0.3;
   color: red;
 }
 .report-wrapper .report-container > header {
@@ -179,6 +192,9 @@
 }
 .report-wrapper .flex.gap {
   gap: 0.5rem;
+}
+.report-wrapper .flex .flex-1 {
+  flex: 1;
 }
 .report-wrapper .text-right,
 .report-wrapper .number {
