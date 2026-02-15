@@ -15,6 +15,9 @@
     │   └── dl (Parameters)
     │       ├── div { dt, dd } (Parameter 1)
     │       └── div { dt, dd } (Parameter 2)
+    │   └── section.parameters (Parameters) (revisar)
+    │       ├── dl { dt, dd } (Parameter 1)
+    │       └── dl { dt, dd } (Parameter 2)
     │
     ├── .page-header (Page header)
     ├── .page-footer (Page footer)

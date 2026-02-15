@@ -1,36 +1,16 @@
-html {
-  font-size: 0.3cm;
-}
-
-@media screen {
-  html {
-    width: 21cm;
-  }
-  body {
-    border: 1px dotted black;
-  }
-}
 .report-container {
-  font-size: 9pt !important;
+  font-size: 9pt;
 }
 @media screen {
   .report-container {
-    width: 21cm;
+    max-width: 21cm;
   }
 }
 
-@media print {
-  html {
-    width: 100%;
-  }
-}
-body {
-  margin: 0;
-  padding: 0.3cm;
-}
-
-.page {
-  width: 100%;
+.section {
+  border: 1px solid black;
+  border-radius: 0.35rem;
+  overflow: hidden;
 }
 
 .frame {
@@ -67,7 +47,7 @@ hr.dashed {
   border-top: 1px dashed black;
 }
 
-label {
+label, dt {
   display: block;
 }
 

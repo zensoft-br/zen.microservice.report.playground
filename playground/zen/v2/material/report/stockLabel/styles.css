@@ -17,18 +17,18 @@
 }
 
 .content {
-  font-size: 10pt;
+  font-size: 9pt;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(7, minmax(0, 1fr));
   grid-template-areas: "A B B C" "A D D C" "E E E E" "E E E E" "H I J K" "H L M K" "N N N N";
 }
-.content .cell {
+.content dl {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   flex: 1 1 auto;
-  padding: 0.1rem;
+  padding: 0.2rem;
   overflow: hidden;
   box-sizing: border-box;
   border-top: 1px solid black;
@@ -38,13 +38,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.content .cell dt {
+.content dl dt {
   font-size: 0.6em;
   font-weight: 600;
   text-transform: uppercase;
 }
-.content .cell dd {
+.content dl dd {
   margin: 0;
+  min-height: 0;
 }
 .content img {
   box-sizing: border-box;

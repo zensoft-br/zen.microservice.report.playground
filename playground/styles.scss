@@ -48,7 +48,12 @@ body {
   font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11pt;
 
-  background-color: var(--color-shadow);
+  // Reset
+  dl {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
 
   @media screen {
     padding: 1rem;
@@ -95,6 +100,11 @@ body {
       h1 {
         margin: 0;
         font-size: 20pt;
+      }
+
+      section.parameters {
+        display: flex;
+        gap: var(--gap);
       }
 
       dl {

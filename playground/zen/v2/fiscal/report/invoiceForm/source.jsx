@@ -1,16 +1,22 @@
+import React from "react";
+
 export default function ({ data = [], t }) {
+  data.forEach(item => {
+    item.billingTitles = item.billingTitles.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  });
+
   return (
     <div className="report-wrapper">
       {data.map((item, index) => (
-        <div className="report-container page">
+        <div className="report-container">
 
           {/* COMPROVANTE */}
-          <div className="band h frame" style={{ gridTemplateColumns: '80% 20%' }}>
+          <div className="band h frame" style={{ gridTemplateColumns: '4fr 1fr' }}>
             <div className="band v">
               <div className="slot" style={{ fontSize: '90%' }}>
-                Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {item.number}, emissão: {item.date}, valor total {item.totalValue}, destinatário {item.person.name}, endereço {item.person.address}.
+                Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number, 0)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
               </div>
-              <div className="band h">
+              <div className="band h" style={{ minHeight: "1cm" }}>
                 <div className="slot">
                   <label>Data do recebimento</label>
                   <div>&nbsp;</div>
@@ -25,7 +31,7 @@ export default function ({ data = [], t }) {
               <div className="band v center">
                 <div><b>NF-e</b></div>
                 <div>&nbsp;</div>
-                <div>Nº 1234 Série 1</div>
+                <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
               </div>
             </div>
           </div>
@@ -34,196 +40,389 @@ export default function ({ data = [], t }) {
           <hr className="dashed" />
 
           {/* HEADER */}
-          <div className="band v frame">
-            <div className="band h" style={{ gridTemplateColumns: '15% 35% 15% 35%' }}>
-              <div className="slot">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" alt="Logo" />
-              </div>
-              <div className="band v">
+          <header>
+            <div className="band v frame">
+              <div className="band h" style={{ gridTemplateColumns: "2fr 5fr 2fr 7fr" }}>
                 <div className="slot">
+                  <img src={item.company.image.url} />
+                </div>
+                <div className="slot band v center" style={{ justifyContent: "space-around" }}>
                   <label>Identificação do emitente</label>
-                  <div>SQUIB TECNOLOGIA ELETRÔNICA IMP E E</div>
+                  <strong>{item.company.person.name}</strong>
+                  <div>{address(item.company.person)}</div>
+                  <div>{[item.company.person.district, item.company.person.city.name, item.company.person.city.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(', ')}</div>
+                  {item.company.person.phone && <div>{t("/@word/phone")} {item.company.person.phone}</div>}
+                  {item.company.person.email && <div>{t("/@word/email")} {item.company.person.email}</div>}
                 </div>
-                <div className="slot">
-                  <div>CONFERÊNCIA</div>
-                </div>
-              </div>
-              <div className="slot">
-                <div className="band v center">
-                  <div><b>DANFE</b></div>
-                  <div>&nbsp;</div>
+                <div className="slot band v center" style={{ justifyContent: "space-around" }}>
+                  <strong>DANFE</strong>
                   <div>Documento auxiliar de nota fiscal eletrônica</div>
-                  <div>&nbsp;</div>
                   <div>1 - Saída</div>
-                  <div>Nº 1234 Série 1</div>
+                  <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
                 </div>
-              </div>
-              <div className="band v">
-                <div className="slot">
-                  <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.dfe.chNFe}`} />
-                </div>
-                <div className="slot">
-                  <label>Chave de acesso</label>
-                  <div style={{ fontSize: '90%', textAlign: 'center' }}>
-                    {item.dfe.chNFe}
+                <div className="band v">
+                  <div className="slot">
+                    <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.dfe.chNFe}`} style={{ objectFit: "cover" }} />
+                  </div>
+                  <div className="slot">
+                    <label>Chave de acesso</label>
+                    <div style={{ textAlign: 'center' }}>
+                      {item.dfe.chNFe}
+                    </div>
+                  </div>
+                  <div className="slot">
+                    <div style={{ textAlign: 'center' }}>
+                      Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div className="band h">
                 <div className="slot">
-                  <div style={{ fontSize: '85%', textAlign: 'center' }}>
-                    Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora
-                  </div>
+                  <label>Natureza da operação</label>
+                  <div>{item.items[0]?.taxationOperation.description}</div>
+                </div>
+                <div className="slot">
+                  <label>Protocolo de autorização de uso</label>
+                  <div>{item.dfe.nProt}, {date(item.dfe.dateTime.substring(0, 10))}, {item.dfe.dateTime.substring(11, 19)}</div>
+                </div>
+              </div>
+              <div className="band h">
+                <div className="slot">
+                  <label>Inscrição estadual</label>
+                  <div>{item.company.person.document2Number}</div>
+                </div>
+                <div className="slot">
+                  <label>Inscrição estadual do subst. tribut.</label>
+                  <div></div>
+                </div>
+                <div className="slot">
+                  <label>CNPJ</label>
+                  <div>{item.company.person.documentNumber}</div>
                 </div>
               </div>
             </div>
-            <div className="band h">
-              <div className="slot">
-                <label>Natureza da operação</label>
-                <div>Venda de mercadoria adquirida ou recebida de terceiros</div>
-              </div>
-              <div className="slot">
-                <label>Protocolo de autorização de uso</label>
-                <div>135230856296403 02/06/2023 13:29:22</div>
-              </div>
-            </div>
-            <div className="band h">
-              <div className="slot">
-                <label>Inscrição estadual</label>
-                <div>{item.company.person.document2Number}</div>
-              </div>
-              <div className="slot">
-                <label>Inscrição estadual do subst. tribut.</label>
-                <div></div>
-              </div>
-              <div className="slot">
-                <label>CNPJ</label>
-                <div>68.442.508/0001-83</div>
-              </div>
-            </div>
-          </div>
+          </header>
 
-          {/* DESTINATARIO */}
-          <label className="header">Destinatário / Remetente</label>
-          <div className="band v frame">
-            <div className="band h" style={{ gridTemplateColumns: '50% 25% 25%' }}>
-              <div className="slot">
-                <label>{t("/@word/name")}</label>
-                <div>{item.person.name}</div>
+          <main>
+            <div className="content">
+              {/* DESTINATARIO */}
+              <label className="header">Destinatário / Remetente</label>
+              <div className="section">
+                <div className="band v frame">
+                  <div className="band h" style={{ gridTemplateColumns: '50% 25% 25%' }}>
+                    <div className="slot">
+                      <label>{t("/@word/name")}</label>
+                      <div>{item.person.name}</div>
+                    </div>
+                    <div className="slot">
+                      <label>CNPJ</label>
+                      <div>{item.person.documentNumber}</div>
+                    </div>
+                    <div className="slot">
+                      <label>{t("/@word/issueDate")}</label>
+                      <div>{date(item.date)}</div>
+                    </div>
+                  </div>
+                  <div className="band h" style={{ gridTemplateColumns: '50% 17% 17% 16%' }}>
+                    <div className="slot">
+                      <label>Endereço</label>
+                      <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(', ')}</div>
+                    </div>
+                    <div className="slot">
+                      <label>{t("/@word/district")}</label>
+                      <div>{item.person.district}</div>
+                    </div>
+                    <div className="slot">
+                      <label>{t("/@word/zipcode")}</label>
+                      <div>{item.person.zipcode}</div>
+                    </div>
+                    <div className="slot">
+                      <label>Data saída</label>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
+                    <div className="slot">
+                      <label>{t("/catalog/location/city")}</label>
+                      <div>{item.person.city.name}</div>
+                    </div>
+                    <div className="slot">
+                      <label>{t("/catalog/location/state")}</label>
+                      <div>{item.person.city.state.code}</div>
+                    </div>
+                    <div className="slot">
+                      <label>{t("/@word/phone")}</label>
+                      <div>{item.person.phone}</div>
+                    </div>
+                    <div className="slot">
+                      <label>Inscrição estadual</label>
+                      <div>{item.person.document2Number}</div>
+                    </div>
+                    <div className="slot">
+                      <label>Hora saída</label>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="slot">
-                <label>CNPJ</label>
-                <div>{item.person.documentNumber}</div>
-              </div>
-              <div className="slot">
-                <label>{t("/@word/issueDate")}</label>
-                <div>{item.date}</div>
-              </div>
-            </div>
-            <div className="band h" style={{ gridTemplateColumns: '50% 17% 16% 17%' }}>
-              <div className="slot">
-                <label>{t("/@word/address")}</label>
-                <div>RUA MANOEL RODRIGUES DA ROCHA, 98</div>
-              </div>
-              <div className="slot">
-                <label>{t("/@word/district")}</label>
-                <div>PARQUE SANTA RITA</div>
-              </div>
-              <div className="slot">
-                <label>{t("/@word/zipcode")}</label>
-                <div>08150060</div>
-              </div>
-              <div className="slot">
-                <label>{t("/@word/exitDate")}</label>
-                <div></div>
-              </div>
-            </div>
-          </div>
 
-          <label className="header">Fatura / Duplicatas</label>
-          <div className="flex h gap slot">
-            {item.billingTitles?.map((billingTitle) => (
-              <div key={billingTitle.id}>
-                <div>{billingTitle.dueDate}</div>
-                <div>{billingTitle.value}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* IMPOSTO (Summary example) */}
-          <label className="header">Cálculo do imposto</label>
-          <div className="band v frame">
-            <div className="band h">
-              <div className="slot">
-                <label>Base cálc. ICMS</label>
-                <div className="number">{item.taxationSummary.ICMS?.baseValue}</div>
-              </div>
-              <div className="slot">
-                <label>Valor ICMS</label>
-                <div className="number">{item.taxationSummary.ICMS?.taxValue}</div>
-              </div>
-              <div className="slot">
-                <label>Total da nota</label>
-                <div className="number">1.186,92</div>
-              </div>
-            </div>
-          </div>
-
-          {/* PRODUTOS TABLE */}
-          <label className="header">Dados dos produtos / serviços</label>
-          <div className="band v">
-            <table>
-              <thead>
-                <tr>
-                  <th>Descrição do produto / serviço</th>
-                  <th>NCM</th>
-                  <th>CST</th>
-                  <th>CFOP</th>
-                  <th>UN</th>
-                  <th className="number">Quant</th>
-                  <th className="number">Valor unit</th>
-                  <th className="number">Valor total</th>
-                  <th className="number">B. cálc. ICMS</th>
-                  <th className="number">Valor ICMS</th>
-                  <th className="number">ICMS %</th>
-                  <th className="number">IPI %</th>
-                </tr>
-              </thead>
-              <tbody>
-                {item.items.map((_, index) => (
-                  <tr key={index}>
-                    <td>90012.FORDATA/1508, DISPLAY 16X2 S/BACK (FECC1602E-RNNGBW-66LE), FORDATA</td>
-                    <td>85241100</td>
-                    <td>102</td>
-                    <td>5.102</td>
-                    <td>un</td>
-                    <td className="number">6.000</td>
-                    <td className="number">16,90</td>
-                    <td className="number">1.550,00</td>
-                    <td className="number">1.593,00</td>
-                    <td className="number">0,00</td>
-                    <td className="number">0</td>
-                    <td className="number">0</td>
+              {/* BILLING */}
+              <label className="header">Fatura / Duplicatas</label>
+              <table style={{ width: "100%" }}>
+                <thead>
+                  <tr>
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <React.Fragment key={i}>
+                        <th>{t("/@word/number")}</th>
+                        <th>{t("/@word/dueDate")}</th>
+                        <th className="number">{t("/@word/value")}</th>
+                      </React.Fragment>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {Array.from({ length: Math.ceil(item.billingTitles.length / 3) }).map((_, i1) => (
+                    <tr>
+                      {Array.from({ length: 3 }).map((_, i2) => {
+                        const billingTitle = item.billingTitles[i1 * 3 + i2];
+                        return (
+                          <React.Fragment key={i2}>
+                            <td>{billingTitle?.code}</td>
+                            <td>{date(billingTitle?.dueDate)}</td>
+                            <td className="number">{currency(billingTitle?.value)}</td>
+                          </React.Fragment>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* IMPOSTO (Summary example) */}
+              <label className="header">Cálculo do imposto</label>
+              <div className="frame" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gridTemplateRows: "1fr 1fr" }}>
+                <div className="slot">
+                  <label>Base cálc. ICMS</label>
+                  <div className="number">{currency(item.taxationSummary.ICMS?.baseValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor ICMS</label>
+                  <div className="number">{currency(item.taxationSummary.ICMS?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Base cálc. ICMS ST</label>
+                  <div className="number">{currency(item.taxationSummary.ICMS_ST?.baseValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor ICMS ST</label>
+                  <div className="number">{currency(item.taxationSummary.ICMS_ST?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor IPI</label>
+                  <div className="number">{currency(item.taxationSummary.IPI?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor II</label>
+                  <div className="number">{currency(item.taxationSummary.II?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor dos produtos</label>
+                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.productValue ?? 0), 0))}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor Frete</label>
+                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.freightValue ?? 0), 0))}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor seguro</label>
+                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.insuranceValue ?? 0), 0))}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor desconto</label>
+                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.discountValue ?? 0), 0))}</div>
+                </div>
+                <div className="slot">
+                  <label>Outras despesas</label>
+                  <div className="number">{currency(0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor PIS</label>
+                  <div className="number">{currency(item.taxationSummary.PIS?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Valor COFINS</label>
+                  <div className="number">{currency(item.taxationSummary.COFINS?.taxValue ?? 0)}</div>
+                </div>
+                <div className="slot">
+                  <label>Total da nota</label>
+                  <div className="number">{currency(item.totalValue ?? 0)}</div>
+                </div>
+              </div>
+
+              {/* TRANSPORTE */}
+              <label className="header">Transportador / Volumes transportados</label>
+              <div className="band v frame">
+                <div className="band h" style={{ gridTemplateColumns: '3fr 1fr 1fr 1fr 0.5fr 1.5fr' }}>
+                  <div className="slot">
+                    <label>Nome / Razão social</label>
+                    <div>{item.personShipping?.name}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Frete por conta</label>
+                    <div>{item.freightType === "RECIPIENT" ? "1 - Destinatário" : "0 - Emitente"}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Código ANTT</label>
+                    <div>{item.personShipping?.properties?.brAnttCode}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Placa do veículo</label>
+                    <div>{item.shipment?.properties?.licensePlate}</div>
+                  </div>
+                  <div className="slot">
+                    <label>UF</label>
+                    <div>{item.shipment?.properties?.licensePlateState}</div>
+                  </div>
+                  <div className="slot">
+                    <label>CNPJ</label>
+                    <div>{item.personShipping?.documentNumber}</div>
+                  </div>
+                </div>
+                <div className="band h" style={{ gridTemplateColumns: '4.5fr 2fr 0.5fr 2fr' }}>
+                  <div className="slot">
+                    <label>Endereço</label>
+                    <div>{[item.personShipping?.street, item.personShipping?.number, item.personShipping?.complement].filter(Boolean).join(', ')}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/catalog/location/city")}</label>
+                    <div>{item.personShipping?.city?.name}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/catalog/location/state")}</label>
+                    <div>{item.personShipping?.city?.state?.code}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Inscrição estadual</label>
+                    <div>{item.personShipping?.document2Number}</div>
+                  </div>
+                </div>
+                <div className="band h" style={{ gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
+                  <div className="slot">
+                    <label>{t("/@word/quantity")}</label>
+                    <div>{number(item.properties?.volumes)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Espécie</label>
+                    <div>Volumes</div>
+                  </div>
+                  <div className="slot">
+                    <label>Marca</label>
+                    <div>&nbsp;</div>
+                  </div>
+                  <div className="slot">
+                    <label>Numeração</label>
+                    <div>&nbsp;</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/@word/grossWeightKg")}</label>
+                    <div>{number(item.grossWeightKg)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/@word/netWeightKg")}</label>
+                    <div>{number(item.netWeightKg)}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* PRODUTOS TABLE */}
+              <label className="header">Dados dos produtos / serviços</label>
+              <div className="band v">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descrição do produto / serviço</th>
+                      <th>NCM</th>
+                      <th>CST</th>
+                      <th>CFOP</th>
+                      <th>UN</th>
+                      <th className="number">Quant</th>
+                      <th className="number">Valor unit</th>
+                      <th className="number">Valor total</th>
+                      <th className="number">B. cálc. ICMS</th>
+                      <th className="number">Valor ICMS</th>
+                      <th className="number">ICMS %</th>
+                      <th className="number">IPI %</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {item.items.map((item1, index) => (
+                      <tr key={index}>
+                        <td>{[
+                          item1.productPacking.code,
+                          item1.productPacking.product.description,
+                          item1.productPacking.complement,
+                          item1.productPacking.variant.description].filter(Boolean).join(', ')}</td>
+                        <td>{item1.productPacking.product.properties?.fiscal_br_NCM}</td>
+                        <td>102</td>
+                        <td>{item1.taxationOperation.code}</td>
+                        <td>{item1.productPacking.product.unit.code}</td>
+                        <td className="number">{number(item1.quantity)}</td>
+                        <td className="number">{currency(item1.unitValue)}</td>
+                        <td className="number">{currency(item1.productValue)}</td>
+                        <td className="number">{currency(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.baseValue ?? 0)}</td>
+                        <td className="number">{currency(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.taxValue ?? 0)}</td>
+                        <td className="number">{number(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.taxRate ?? 0)}</td>
+                        <td className="number">{number(item1.taxations.filter(e => e.tax.code === "IPI")[0]?.taxRate ?? 0)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
 
           {/* DADOS ADICIONAIS */}
-          <label className="header">Dados adicionais</label>
-          <div className="band v frame">
-            <div className="band h" style={{ minHeight: '3cm', maxHeight: '3cm' }}>
-              <div className="slot">
-                <label>Informações complementares</label>
-                <div>y</div>
-              </div>
-              <div className="slot">
-                <label>Reservado ao fisco</label>
-                <div>y</div>
+          <footer>
+            <label className="header">Dados adicionais</label>
+            <div className="band v frame">
+              <div className="band h" style={{ minHeight: '3cm', maxHeight: '3cm' }}>
+                <div className="slot">
+                  <label>Informações complementares</label>
+                  <div>{[
+                    item.properties?.["#comments"],
+                    item.properties?.["comments"],
+                  ].filter(Boolean).join('\n')}</div>
+                </div>
+                <div className="slot">
+                  <label>Reservado ao fisco</label>
+                  <div>&nbsp;</div>
+                </div>
               </div>
             </div>
-          </div>
+          </footer>
         </div>
       ))}
     </div>
   );
 };
+
+function date(s) {
+  if (s == null) return null;
+  const date = new Date(s);
+  return date.toLocaleDateString("pt-BR");
+}
+
+function number(v, digits = 0) {
+  if (v == null) return null;
+  return v.toLocaleString("pt-BR", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function currency(v, { currency = "BRL", digits = 2 } = {}) {
+  if (v == null) return null;
+  return v.toLocaleString("pt-BR", { style: 'currency', currency, minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function address({ street, number, complement }) {
+  return [street, number, complement].filter(Boolean).join(', ');
+}

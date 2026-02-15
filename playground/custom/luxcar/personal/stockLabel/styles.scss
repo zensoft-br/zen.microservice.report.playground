@@ -19,19 +19,19 @@
 }
 
 .content {
-  font-size: 9pt;
+  font-size: 11pt;
 
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(7, minmax(0, 1fr));
   grid-template-areas:
-    "A B B C"
-    "A D D C"
-    "E E E E"
-    "E E E E"
-    "H I J K"
-    "H L M K"
-    "N N N N";
+    "A B"
+    "A B"
+    "C D"
+    "E E"
+    "E E"
+    "F F"
+    "G H";
 
   dl {
     display: flex;
@@ -67,7 +67,7 @@
 
   img {
     box-sizing: border-box;
-    padding: 0.15rem;
+    padding: 0.2rem;
 
     width: 100%;
     height: 100%;

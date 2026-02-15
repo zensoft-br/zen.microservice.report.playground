@@ -206,6 +206,10 @@ async function compile(reportFolder) {
       },
     };
 
+    if (config.metadata) {
+      renderRequest.metadata = config.metadata;
+    }
+
     const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -216,6 +220,8 @@ async function compile(reportFolder) {
     const { url } = await genRes.json();
     const html = await (await fetchWithTimeout(url)).text();
 
+    // console.log(url);
+    
     // Save outputs
     // eslint-disable-next-line no-unused-vars
     const { data, ...buildInfo } = renderRequest;
@@ -295,7 +301,7 @@ export async function startServer() {
         .once("listening", () => s.close(() => resolve(p)))
         .listen(p);
     };
-    tryPort(8090);
+    tryPort(8100);
   });
 
   http
