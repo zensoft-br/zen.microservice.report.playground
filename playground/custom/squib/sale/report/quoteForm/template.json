@@ -1,6 +1,6 @@
 {
   "engine": "jsx",
   "assets": {
-    "styles": "@file:../../../../../styles.css"
+    "styles": "@file:/styles.css"
   }
 }

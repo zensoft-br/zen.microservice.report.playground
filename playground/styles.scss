@@ -229,11 +229,18 @@ body {
     }
 
     &.align-center {
-      // justify-content: space-between;
       align-items: center;
     }
 
     &.justify-center {
+      justify-content: center;
+    }
+
+    &.justify-space-around {
+      justify-content: space-around;
+    }
+
+    &.justify-space-between {
       justify-content: space-between;
     }
 
@@ -246,9 +253,17 @@ body {
     }
   }
 
+  .text-center {
+    text-align: center;
+  }
+
   .text-right,
   .number {
     text-align: right !important;
+  }
+
+  .date {
+    font-variant-numeric: tabular-nums;
   }
 
   .number {

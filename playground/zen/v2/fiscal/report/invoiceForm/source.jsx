@@ -10,43 +10,42 @@ export default function ({ data = [], t }) {
       {data.map((item, index) => (
         <div className="report-container">
 
-          {/* COMPROVANTE */}
-          <div className="band h frame" style={{ gridTemplateColumns: '4fr 1fr' }}>
-            <div className="band v">
-              <div className="slot" style={{ fontSize: '90%' }}>
-                Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number, 0)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
-              </div>
-              <div className="band h" style={{ minHeight: "1cm" }}>
-                <div className="slot">
-                  <label>Data do recebimento</label>
-                  <div>&nbsp;</div>
+          <main>
+            {/* COMPROVANTE */}
+            <div className="frame">
+              <div className="grid band h" style={{ gridTemplateColumns: '4fr 1fr' }}>
+                <div className="band v">
+                  <div className="slot" style={{ fontSize: '90%' }}>
+                    Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number, 0)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
+                  </div>
+                  <div className="band h" style={{ minHeight: "1cm" }}>
+                    <div className="slot">
+                      <label>Data do recebimento</label>
+                      <div>&nbsp;</div>
+                    </div>
+                    <div className="slot">
+                      <label>Identificação e assinatura do recebedor</label>
+                      <div>&nbsp;</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="slot">
-                  <label>Identificação e assinatura do recebedor</label>
-                  <div>&nbsp;</div>
+                <div className="slot flex v align-center justify-space-around text-center">
+                  <div><b>NF-e</b></div>
+                  <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
                 </div>
               </div>
             </div>
-            <div className="slot">
-              <div className="band v center">
-                <div><b>NF-e</b></div>
-                <div>&nbsp;</div>
-                <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
-              </div>
-            </div>
-          </div>
 
-          {/* HR */}
-          <hr className="dashed" />
+            {/* HR */}
+            <hr className="dashed" />
 
-          {/* HEADER */}
-          <header>
-            <div className="band v frame">
+            {/* HEADER */}
+            <div className="frame">
               <div className="band h" style={{ gridTemplateColumns: "2fr 5fr 2fr 7fr" }}>
                 <div className="slot">
                   <img src={item.company.image.url} />
                 </div>
-                <div className="slot band v center" style={{ justifyContent: "space-around" }}>
+                <div className="slot flex v align-center justify-space-around text-center">
                   <label>Identificação do emitente</label>
                   <strong>{item.company.person.name}</strong>
                   <div>{address(item.company.person)}</div>
@@ -54,7 +53,7 @@ export default function ({ data = [], t }) {
                   {item.company.person.phone && <div>{t("/@word/phone")} {item.company.person.phone}</div>}
                   {item.company.person.email && <div>{t("/@word/email")} {item.company.person.email}</div>}
                 </div>
-                <div className="slot band v center" style={{ justifyContent: "space-around" }}>
+                <div className="slot flex v align-center justify-space-around text-center" style={{ justifyContent: "space-around" }}>
                   <strong>DANFE</strong>
                   <div>Documento auxiliar de nota fiscal eletrônica</div>
                   <div>1 - Saída</div>
@@ -67,7 +66,7 @@ export default function ({ data = [], t }) {
                   <div className="slot">
                     <label>Chave de acesso</label>
                     <div style={{ textAlign: 'center' }}>
-                      {item.dfe.chNFe}
+                      {splitInBlocks(item.dfe.chNFe)}
                     </div>
                   </div>
                   <div className="slot">
@@ -102,167 +101,167 @@ export default function ({ data = [], t }) {
                 </div>
               </div>
             </div>
-          </header>
 
-          <main>
             <div className="content">
               {/* DESTINATARIO */}
               <label className="header">Destinatário / Remetente</label>
-              <div className="section">
-                <div className="band v frame">
-                  <div className="band h" style={{ gridTemplateColumns: '50% 25% 25%' }}>
-                    <div className="slot">
-                      <label>{t("/@word/name")}</label>
-                      <div>{item.person.name}</div>
-                    </div>
-                    <div className="slot">
-                      <label>CNPJ</label>
-                      <div>{item.person.documentNumber}</div>
-                    </div>
-                    <div className="slot">
-                      <label>{t("/@word/issueDate")}</label>
-                      <div>{date(item.date)}</div>
-                    </div>
+              <div className="frame">
+                <div className="band h" style={{ gridTemplateColumns: '50% 25% 25%' }}>
+                  <div className="slot">
+                    <label>{t("/@word/name")}</label>
+                    <div>{item.person.name}</div>
                   </div>
-                  <div className="band h" style={{ gridTemplateColumns: '50% 17% 17% 16%' }}>
-                    <div className="slot">
-                      <label>Endereço</label>
-                      <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(', ')}</div>
-                    </div>
-                    <div className="slot">
-                      <label>{t("/@word/district")}</label>
-                      <div>{item.person.district}</div>
-                    </div>
-                    <div className="slot">
-                      <label>{t("/@word/zipcode")}</label>
-                      <div>{item.person.zipcode}</div>
-                    </div>
-                    <div className="slot">
-                      <label>Data saída</label>
-                      <div></div>
-                    </div>
+                  <div className="slot">
+                    <label>CNPJ</label>
+                    <div>{item.person.documentNumber}</div>
                   </div>
-                  <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
-                    <div className="slot">
-                      <label>{t("/catalog/location/city")}</label>
-                      <div>{item.person.city.name}</div>
-                    </div>
-                    <div className="slot">
-                      <label>{t("/catalog/location/state")}</label>
-                      <div>{item.person.city.state.code}</div>
-                    </div>
-                    <div className="slot">
-                      <label>{t("/@word/phone")}</label>
-                      <div>{item.person.phone}</div>
-                    </div>
-                    <div className="slot">
-                      <label>Inscrição estadual</label>
-                      <div>{item.person.document2Number}</div>
-                    </div>
-                    <div className="slot">
-                      <label>Hora saída</label>
-                      <div></div>
-                    </div>
+                  <div className="slot">
+                    <label>{t("/@word/issueDate")}</label>
+                    <div>{date(item.date)}</div>
+                  </div>
+                </div>
+                <div className="band h" style={{ gridTemplateColumns: '50% 17% 17% 16%' }}>
+                  <div className="slot">
+                    <label>Endereço</label>
+                    <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(', ')}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/@word/district")}</label>
+                    <div>{item.person.district}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/@word/zipcode")}</label>
+                    <div>{item.person.zipcode}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Data saída</label>
+                    <div></div>
+                  </div>
+                </div>
+                <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
+                  <div className="slot">
+                    <label>{t("/catalog/location/city")}</label>
+                    <div>{item.person.city.name}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/catalog/location/state")}</label>
+                    <div>{item.person.city.state.code}</div>
+                  </div>
+                  <div className="slot">
+                    <label>{t("/@word/phone")}</label>
+                    <div>{item.person.phone}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Inscrição estadual</label>
+                    <div>{item.person.document2Number}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Hora saída</label>
+                    <div></div>
                   </div>
                 </div>
               </div>
 
               {/* BILLING */}
               <label className="header">Fatura / Duplicatas</label>
-              <table style={{ width: "100%" }}>
-                <thead>
-                  <tr>
-                    {Array.from({ length: 3 }).map((_, i) => (
-                      <React.Fragment key={i}>
-                        <th>{t("/@word/number")}</th>
-                        <th>{t("/@word/dueDate")}</th>
-                        <th className="number">{t("/@word/value")}</th>
-                      </React.Fragment>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {Array.from({ length: Math.ceil(item.billingTitles.length / 3) }).map((_, i1) => (
-                    <tr>
-                      {Array.from({ length: 3 }).map((_, i2) => {
-                        const billingTitle = item.billingTitles[i1 * 3 + i2];
-                        return (
-                          <React.Fragment key={i2}>
-                            <td>{billingTitle?.code}</td>
-                            <td>{date(billingTitle?.dueDate)}</td>
-                            <td className="number">{currency(billingTitle?.value)}</td>
-                          </React.Fragment>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className="grid" style={{ gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--gap)' }}>
+                {[0, 1, 2].map((colIndex) => (
+                  <div key={colIndex} className="frame">
+                    <table style={{ width: "100%", borderCollapse: 'collapse' }}>
+                      <thead>
+                        <tr>
+                          <th>{t("/@word/number")}</th>
+                          <th>{t("/@word/dueDate")}</th>
+                          <th className="number">{t("/@word/value")}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Array.from({ length: Math.ceil(item.billingTitles.length / 3) }).map((_, rowIndex) => {
+                          const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles.length / 3));
+                          const billingTitle = item.billingTitles[titleIndex];
 
-              {/* IMPOSTO (Summary example) */}
+                          return (
+                            <tr key={rowIndex}>
+                              <td>{billingTitle?.code || <>&nbsp;</>}</td>
+                              <td className="date">{billingTitle?.dueDate ? date(billingTitle.dueDate) : <>&nbsp;</>}</td>
+                              <td className="number">{billingTitle?.value ? currency(billingTitle.value) : <>&nbsp;</>}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+
+              {/* IMPOSTO */}
               <label className="header">Cálculo do imposto</label>
-              <div className="frame" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gridTemplateRows: "1fr 1fr" }}>
-                <div className="slot">
-                  <label>Base cálc. ICMS</label>
-                  <div className="number">{currency(item.taxationSummary.ICMS?.baseValue ?? 0)}</div>
+              <div className="frame" >
+                <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+                  <div className="slot">
+                    <label>Base cálc. ICMS</label>
+                    <div className="number">{currency(item.taxationSummary.ICMS?.baseValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor ICMS</label>
+                    <div className="number">{currency(item.taxationSummary.ICMS?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Base cálc. ICMS ST</label>
+                    <div className="number">{currency(item.taxationSummary.ICMS_ST?.baseValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor ICMS ST</label>
+                    <div className="number">{currency(item.taxationSummary.ICMS_ST?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor IPI</label>
+                    <div className="number">{currency(item.taxationSummary.IPI?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor II</label>
+                    <div className="number">{currency(item.taxationSummary.II?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor dos produtos</label>
+                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.productValue ?? 0), 0))}</div>
+                  </div>
                 </div>
-                <div className="slot">
-                  <label>Valor ICMS</label>
-                  <div className="number">{currency(item.taxationSummary.ICMS?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Base cálc. ICMS ST</label>
-                  <div className="number">{currency(item.taxationSummary.ICMS_ST?.baseValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor ICMS ST</label>
-                  <div className="number">{currency(item.taxationSummary.ICMS_ST?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor IPI</label>
-                  <div className="number">{currency(item.taxationSummary.IPI?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor II</label>
-                  <div className="number">{currency(item.taxationSummary.II?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor dos produtos</label>
-                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.productValue ?? 0), 0))}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor Frete</label>
-                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.freightValue ?? 0), 0))}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor seguro</label>
-                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.insuranceValue ?? 0), 0))}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor desconto</label>
-                  <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.discountValue ?? 0), 0))}</div>
-                </div>
-                <div className="slot">
-                  <label>Outras despesas</label>
-                  <div className="number">{currency(0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor PIS</label>
-                  <div className="number">{currency(item.taxationSummary.PIS?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Valor COFINS</label>
-                  <div className="number">{currency(item.taxationSummary.COFINS?.taxValue ?? 0)}</div>
-                </div>
-                <div className="slot">
-                  <label>Total da nota</label>
-                  <div className="number">{currency(item.totalValue ?? 0)}</div>
+                <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+                  <div className="slot">
+                    <label>Valor Frete</label>
+                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.freightValue ?? 0), 0))}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor seguro</label>
+                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.insuranceValue ?? 0), 0))}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor desconto</label>
+                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.discountValue ?? 0), 0))}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Outras despesas</label>
+                    <div className="number">{currency(0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor PIS</label>
+                    <div className="number">{currency(item.taxationSummary.PIS?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Valor COFINS</label>
+                    <div className="number">{currency(item.taxationSummary.COFINS?.taxValue ?? 0)}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Total da nota</label>
+                    <div className="number">{currency(item.totalValue ?? 0)}</div>
+                  </div>
                 </div>
               </div>
 
               {/* TRANSPORTE */}
               <label className="header">Transportador / Volumes transportados</label>
-              <div className="band v frame">
+              <div className="frame">
                 <div className="band h" style={{ gridTemplateColumns: '3fr 1fr 1fr 1fr 0.5fr 1.5fr' }}>
                   <div className="slot">
                     <label>Nome / Razão social</label>
@@ -310,7 +309,7 @@ export default function ({ data = [], t }) {
                 <div className="band h" style={{ gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
                   <div className="slot">
                     <label>{t("/@word/quantity")}</label>
-                    <div>{number(item.properties?.volumes)}</div>
+                    <div className="number">{number(item.properties?.volumes)}</div>
                   </div>
                   <div className="slot">
                     <label>Espécie</label>
@@ -326,18 +325,18 @@ export default function ({ data = [], t }) {
                   </div>
                   <div className="slot">
                     <label>{t("/@word/grossWeightKg")}</label>
-                    <div>{number(item.grossWeightKg)}</div>
+                    <div className="number">{number(item.grossWeightKg)}</div>
                   </div>
                   <div className="slot">
                     <label>{t("/@word/netWeightKg")}</label>
-                    <div>{number(item.netWeightKg)}</div>
+                    <div className="number">{number(item.netWeightKg)}</div>
                   </div>
                 </div>
               </div>
 
               {/* PRODUTOS TABLE */}
               <label className="header">Dados dos produtos / serviços</label>
-              <div className="band v">
+              <div className="frame">
                 <table>
                   <thead>
                     <tr>
@@ -379,28 +378,26 @@ export default function ({ data = [], t }) {
                   </tbody>
                 </table>
               </div>
-            </div>
-          </main>
 
-          {/* DADOS ADICIONAIS */}
-          <footer>
-            <label className="header">Dados adicionais</label>
-            <div className="band v frame">
-              <div className="band h" style={{ minHeight: '3cm', maxHeight: '3cm' }}>
-                <div className="slot">
-                  <label>Informações complementares</label>
-                  <div>{[
-                    item.properties?.["#comments"],
-                    item.properties?.["comments"],
-                  ].filter(Boolean).join('\n')}</div>
-                </div>
-                <div className="slot">
-                  <label>Reservado ao fisco</label>
-                  <div>&nbsp;</div>
+              {/* DADOS ADICIONAIS */}
+              <label className="header">Dados adicionais</label>
+              <div className="frame">
+                <div className="band h" style={{ minHeight: '3cm', maxHeight: '3cm' }}>
+                  <div className="slot">
+                    <label>Informações complementares</label>
+                    <div>{[
+                      item.properties?.["#comments"],
+                      item.properties?.["comments"],
+                    ].filter(Boolean).join('\n')}</div>
+                  </div>
+                  <div className="slot">
+                    <label>Reservado ao fisco</label>
+                    <div style={{ fontSize: "0.5rem", position: "absolute", bottom: "0.2rem", right: "0.2rem" }} >https://zenerp.com.br</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </footer>
+          </main>
         </div>
       ))}
     </div>
@@ -426,3 +423,9 @@ function currency(v, { currency = "BRL", digits = 2 } = {}) {
 function address({ street, number, complement }) {
   return [street, number, complement].filter(Boolean).join(', ');
 }
+
+const splitInBlocks = (str, size = 4) => {
+  if (str == null) return null;
+  const regex = new RegExp(`.{1,${size}}`, 'g');
+  return str.match(regex).join(' ');
+};

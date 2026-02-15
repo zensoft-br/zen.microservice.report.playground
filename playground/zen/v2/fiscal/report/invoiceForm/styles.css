@@ -7,22 +7,31 @@
   }
 }
 
-.section {
+.frame {
+  display: block;
+  flex-direction: column;
   border: 1px solid black;
-  border-radius: 0.35rem;
+  border-radius: var(--border-radius);
   overflow: hidden;
 }
+.frame > *:not(:first-child) {
+  border-top: 1px solid black;
+}
+.frame .band.h > *:not(:first-child) {
+  border-left: 1px solid black;
+}
+.frame .band.v > *:not(:first-child) {
+  border-top: 1px solid black;
+}
 
-.frame {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+.grid {
+  display: grid;
 }
 
 .band.h {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  flex-direction: row;
 }
 
 .band.v {
@@ -32,10 +41,8 @@
 
 .slot {
   flex: 1;
+  box-sizing: border-box;
   padding: 0.1rem 0.2rem;
-  min-height: 2rem;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
 }
 
 hr {
@@ -47,7 +54,8 @@ hr.dashed {
   border-top: 1px dashed black;
 }
 
-label, dt {
+label,
+dt {
   display: block;
 }
 
@@ -67,10 +75,6 @@ th {
   text-transform: uppercase;
 }
 
-.center {
-  text-align: center;
-}
-
 .number {
   text-align: right;
 }
@@ -87,11 +91,39 @@ h1 {
 }
 
 table {
+  border: none;
   border-collapse: collapse;
+  width: 100%;
 }
-
-th,
-td {
+table th,
+table td {
   border: 1px solid black;
   padding: 0.1rem 0.2rem;
+}
+table {
+  /* Remove Top borders from the first row */
+}
+table tr:first-child th,
+table tr:first-child td {
+  border-top: none;
+}
+table {
+  /* Remove Bottom borders from the last row */
+}
+table tr:last-child td {
+  border-bottom: none;
+}
+table {
+  /* Remove Left borders from the first column */
+}
+table td:first-child,
+table th:first-child {
+  border-left: none;
+}
+table {
+  /* Remove Right borders from the last column */
+}
+table td:last-child,
+table th:last-child {
+  border-right: none;
 }

@@ -6,30 +6,36 @@
   }
 }
 
-.section {
+.frame {
+  display: block;
+  flex-direction: column;
+
   border: 1px solid black;
-  border-radius: 0.35rem;
+  border-radius: var(--border-radius);
+
   overflow: hidden;
+
+  &>*:not(:first-child) {
+    border-top: 1px solid black;
+  }
+
+  .band.h>*:not(:first-child) {
+    border-left: 1px solid black;
+  }
+
+  .band.v>*:not(:first-child) {
+    border-top: 1px solid black;
+  }
 }
 
-.frame {
-  //- border: 1px solid black;  
-  //- border-radius: 0.35rem;
-  //- overflow: hidden;
-
-  //- margin-top: -1px;
-  //- margin-left: -1px;
-
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+.grid {
+  display: grid;
 }
 
 .band.h {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-
-  flex-direction: row;
 }
 
 .band.v {
@@ -40,16 +46,8 @@
 .slot {
   flex: 1;
 
-  //- border: 0.5px solid black;
+  box-sizing: border-box;
   padding: 0.1rem 0.2rem;
-
-  min-height: 2rem;
-
-  //- outline: 1px solid; /* use instead of border */
-  //- margin-top: 1px;
-  //- margin-left: 1px;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
 }
 
 hr {
@@ -61,7 +59,8 @@ hr.dashed {
   border-top: 1px dashed black;
 }
 
-label, dt {
+label,
+dt {
   display: block;
 }
 
@@ -81,10 +80,6 @@ th {
   text-transform: uppercase;
 }
 
-.center {
-  text-align: center;
-}
-
 .number {
   text-align: right;
 }
@@ -100,12 +95,39 @@ h1 {
   font-size: 100%;
 }
 
+// Remove outer borders from the table, but keep inner borders intact
 table {
+  border: none;
   border-collapse: collapse;
-}
 
-th,
-td {
-  border: 1px solid black;
-  padding: 0.1rem 0.2rem;
+  width: 100%;
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 0.1rem 0.2rem;
+  }
+
+  /* Remove Top borders from the first row */
+  tr:first-child th,
+  tr:first-child td {
+    border-top: none;
+  }
+
+  /* Remove Bottom borders from the last row */
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Remove Left borders from the first column */
+  td:first-child,
+  th:first-child {
+    border-left: none;
+  }
+
+  /* Remove Right borders from the last column */
+  td:last-child,
+  th:last-child {
+    border-right: none;
+  }
 }

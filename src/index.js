@@ -170,13 +170,20 @@ async function compile(reportFolder) {
       const processed = await Promise.all(
         styleEntries.map(async (s) => {
           if (typeof s === "string" && s.startsWith("@file:")) {
-            const relativeCssPath = s.slice(6);
-            const cssPath = path.resolve(reportFolder, relativeCssPath);
+            const filePath = s.slice(6);
+      
+            let cssPath;
+            if (filePath.startsWith("/")) {
+              cssPath = path.join(process.cwd(), "playground", filePath);
+            } else {
+              cssPath = path.resolve(reportFolder, filePath);
+            }
+
             try {
               return await fs.readFile(cssPath, "utf8");
             } catch (err) {
               console.warn(
-                `\x1b[33m[WARN]\x1b[0m CSS missing: ${relativeCssPath} in ${relativeBase}`,
+                `\x1b[33m[WARN]\x1b[0m CSS missing: ${filePath}\n Resolved as: ${cssPath}`,
               );
               return null;
             }
@@ -184,6 +191,7 @@ async function compile(reportFolder) {
           return s;
         }),
       );
+
       renderRequest.assets.styles = isArray ? processed : processed[0];
     }
 
