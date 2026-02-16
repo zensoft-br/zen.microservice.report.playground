@@ -1,14 +1,14 @@
-import React from "react";
-
 export default function ({ data = [], t }) {
   data.forEach(item => {
-    item.billingTitles = item.billingTitles.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    item.billingTitles = item.billingTitles?.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   });
 
   return (
     <div className="report-wrapper">
       {data.map((item, index) => (
         <div className="report-container">
+
+          {!item.nfeOut ? <div className="stamp">SEM VALIDADE FISCAL</div> : null}
 
           <main>
             {/* COMPROVANTE */}
@@ -61,12 +61,12 @@ export default function ({ data = [], t }) {
                 </div>
                 <div className="band v">
                   <div className="slot">
-                    <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.dfe.chNFe}`} style={{ objectFit: "cover" }} />
+                    {item.nfeOut && <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.nfeOut?.chNFe}`} style={{ objectFit: "cover" }} />}
                   </div>
                   <div className="slot">
                     <label>Chave de acesso</label>
                     <div style={{ textAlign: 'center' }}>
-                      {splitInBlocks(item.dfe.chNFe)}
+                      {splitInBlocks(item.nfeOut?.chNFe)}
                     </div>
                   </div>
                   <div className="slot">
@@ -83,7 +83,7 @@ export default function ({ data = [], t }) {
                 </div>
                 <div className="slot">
                   <label>Protocolo de autorização de uso</label>
-                  <div>{item.dfe.nProt}, {date(item.dfe.dateTime.substring(0, 10))}, {item.dfe.dateTime.substring(11, 19)}</div>
+                  <div>{item.nfeOut ? `${item.nfeOut.nProt}, ${date(item.nfeOut.dateTime.substring(0, 10))}, ${item.nfeOut.dateTime.substring(11, 19)}` : ''}</div>
                 </div>
               </div>
               <div className="band h">
@@ -200,11 +200,11 @@ export default function ({ data = [], t }) {
                 <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
                   <div className="slot">
                     <label>Base cálc. ICMS</label>
-                    <div className="number">{currency(item.taxationSummary.ICMS?.baseValue ?? 0)}</div>
+                    <div className="number">{currency((item.taxationSummary.ICMS?.baseValue ?? 0) + (item.taxationSummary.ICMS_SN?.baseValue ?? 0))}</div>
                   </div>
                   <div className="slot">
                     <label>Valor ICMS</label>
-                    <div className="number">{currency(item.taxationSummary.ICMS?.taxValue ?? 0)}</div>
+                    <div className="number">{currency((item.taxationSummary.ICMS?.taxValue ?? 0) + (item.taxationSummary.ICMS_SN?.taxValue ?? 0))}</div>
                   </div>
                   <div className="slot">
                     <label>Base cálc. ICMS ST</label>
