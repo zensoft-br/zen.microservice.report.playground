@@ -224,25 +224,25 @@ export default function ({ data = [], t }) {
                   </div>
                   <div className="slot">
                     <label>Valor dos produtos</label>
-                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.productValue ?? 0), 0))}</div>
+                    <div className="number">{currency(item.summary.grossProductValue ?? 0)}</div>
                   </div>
                 </div>
                 <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
                   <div className="slot">
                     <label>Valor Frete</label>
-                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.freightValue ?? 0), 0))}</div>
+                    <div className="number">{currency(item.summary.freightValue ?? 0)}</div>
                   </div>
                   <div className="slot">
                     <label>Valor seguro</label>
-                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.otherValues.insuranceValue ?? 0), 0))}</div>
+                    <div className="number">{currency(item.summary.insuranceValue ?? 0)}</div>
                   </div>
                   <div className="slot">
                     <label>Valor desconto</label>
-                    <div className="number">{currency(item.items.reduce((acc, item) => acc + (item.discountValue ?? 0), 0))}</div>
+                    <div className="number">{currency(item.summary.discountValue ?? 0)}</div>
                   </div>
                   <div className="slot">
                     <label>Outras despesas</label>
-                    <div className="number">{currency(0)}</div>
+                    <div className="number">{currency(item.summary.otherValue ?? 0)}</div>
                   </div>
                   <div className="slot">
                     <label>Valor PIS</label>
