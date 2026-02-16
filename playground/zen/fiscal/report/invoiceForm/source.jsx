@@ -31,7 +31,7 @@ export default function ({ data = [], t }) {
                 </div>
                 <div className="slot flex v align-center justify-space-around text-center">
                   <div><b>NF-e</b></div>
-                  <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
+                  <div>Nº {number(item.number)} Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
                 </div>
               </div>
             </div>
@@ -57,11 +57,11 @@ export default function ({ data = [], t }) {
                   <strong>DANFE</strong>
                   <div>Documento auxiliar de nota fiscal eletrônica</div>
                   <div>1 - Saída</div>
-                  <div>Nº {number(item.number)} Série {item.invoiceSeries.properties?.fiscal_br_serie}</div>
+                  <div>Nº {number(item.number)} Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
                 </div>
                 <div className="band v">
                   <div className="slot">
-                    {item.nfeOut && <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.nfeOut?.chNFe}`} style={{ objectFit: "cover" }} />}
+                    {item.nfeOut && <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.nfeOut?.chNFe}`} />}
                   </div>
                   <div className="slot">
                     <label>Chave de acesso</label>
@@ -141,11 +141,11 @@ export default function ({ data = [], t }) {
                 <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
                   <div className="slot">
                     <label>{t("/catalog/location/city")}</label>
-                    <div>{item.person.city.name}</div>
+                    <div>{item.person.city?.name}</div>
                   </div>
                   <div className="slot">
                     <label>{t("/catalog/location/state")}</label>
-                    <div>{item.person.city.state.code}</div>
+                    <div>{item.person.city?.state?.code}</div>
                   </div>
                   <div className="slot">
                     <label>{t("/@word/phone")}</label>
@@ -176,9 +176,9 @@ export default function ({ data = [], t }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {Array.from({ length: Math.ceil(item.billingTitles.length / 3) }).map((_, rowIndex) => {
-                          const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles.length / 3));
-                          const billingTitle = item.billingTitles[titleIndex];
+                        {Array.from({ length: Math.ceil(item.billingTitles?.length / 3) }).map((_, rowIndex) => {
+                          const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles?.length / 3));
+                          const billingTitle = item.billingTitles?.[titleIndex];
 
                           return (
                             <tr key={rowIndex}>
@@ -381,8 +381,8 @@ export default function ({ data = [], t }) {
 
               {/* DADOS ADICIONAIS */}
               <label className="header">Dados adicionais</label>
-              <div className="frame">
-                <div className="band h" style={{ minHeight: '3cm', maxHeight: '3cm' }}>
+              <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "var(--gap)", minHeight: '3cm' }}>
+                <div className="frame">
                   <div className="slot">
                     <label>Informações complementares</label>
                     <div>{[
@@ -390,12 +390,16 @@ export default function ({ data = [], t }) {
                       item.properties?.["comments"],
                     ].filter(Boolean).join('\n')}</div>
                   </div>
+                </div>
+                <div className="frame">
                   <div className="slot">
                     <label>Reservado ao fisco</label>
-                    <div style={{ fontSize: "0.5rem", position: "absolute", bottom: "0.2rem", right: "0.2rem" }} >https://zenerp.com.br</div>
                   </div>
                 </div>
               </div>
+
+              {/* BRAND */}
+              <div style={{ fontSize: "0.5rem", textAlign: "right" }}>https://zenerp.com.br</div>
             </div>
           </main>
         </div>
