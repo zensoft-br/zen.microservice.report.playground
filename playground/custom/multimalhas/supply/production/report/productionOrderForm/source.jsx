@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ({ data = [] }) {
 
   const totalsByProduct = data.reduce((acc, obj) => {
@@ -124,24 +126,18 @@ export default function ({ data = [] }) {
         <header>
           <h1>Consumo de materiais por lote de produção</h1>
           <section className="parameters">
-            <div>
-              <dl>
-                <dt>Cliente</dt>
-                <dd>{data[0].person?.name}</dd>
-              </dl>
-            </div>
-            <div>
-              <dl>
-                <dt>Previsão de entrega</dt>
-                <dd>{date(data[0].availabilityDate)}</dd>
-              </dl>
-            </div>
-            <div>
-              <dl>
-                <dt>Pedido</dt>
-                <dd>{data[0].properties?.sale_id}</dd>
-              </dl>
-            </div>
+            <dl>
+              <dt>Cliente</dt>
+              <dd>{data[0].person?.name}</dd>
+            </dl>
+            <dl>
+              <dt>Previsão de entrega</dt>
+              <dd>{date(data[0].availabilityDate)}</dd>
+            </dl>
+            <dl>
+              <dt>Pedido</dt>
+              <dd>{data[0].properties?.sale_id}</dd>
+            </dl>
           </section>
         </header>
         <main>

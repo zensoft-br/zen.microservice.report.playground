@@ -10,11 +10,20 @@ export default function SampleReportList() {
             <p>Nexus Solutions Group<br />123 Enterprise Dr, Austin TX</p>
           </div>
           <h1>Quarterly Performance Report</h1>
-          <dl>
-            <div><dt>Period</dt><dd>Q4 2025</dd></div>
-            <div><dt>Author</dt><dd>Financial Dept.</dd></div>
-            <div><dt>Currency</dt><dd>USD</dd></div>
-          </dl>
+          <section class="parameters">
+            <dl>
+              <dt>Period</dt>
+              <dd>Q4 2025</dd>
+            </dl>
+            <dl>
+              <dt>Author</dt>
+              <dd>Financial Dept.</dd>
+            </dl>
+            <dl>
+              <dt>Currency</dt>
+              <dd>USD</dd>
+            </dl>
+          </section>
         </header>
 
         <div class="page-header">Confidential - Nexus Solutions Group</div>

@@ -1,18 +1,26 @@
 export default function ({ report, data = [] }) {
   data.sort((a, b) => {
-    const result = a.category.localeCompare(b.category);
-    if (result !== 0) return result;
-    return a.product.description.localeCompare(b.product.description);
+    return Number(a.product.code) - Number(b.product.code);
   });
 
   return (
     <div className="report-wrapper">
       <div className="report-container">
+        <header>
+          <h1>Lista de Preços</h1>
+          <section className="parameters">
+            <dl>
+              <dt>Categoria</dt>
+              <dd>{report.parameters?.category_id}</dd>
+            </dl>
+          </section>
+        </header>
         <main>
           <div className="content">
             <table>
               <thead>
                 <tr>
+                  <th>Código</th>
                   <th style={{ width: "40%" }}>Produto</th>
                   <th className="number">{data[0]?.items[0]?.descricao}</th>
                   <th className="number">{data[0]?.items[1]?.descricao}</th>
@@ -29,9 +37,8 @@ export default function ({ report, data = [] }) {
               <tbody>
                 {data.map((obj) => (
                   <tr>
-                    <td>
-                      {obj.category} - {obj.product.description}
-                    </td>
+                    <td>{obj.product.code}</td>
+                    <td>{obj.product.description}</td>
                     {obj.items?.map((item, index) => (
                       <td key={index} className="number">
                         {number(item.valor, {

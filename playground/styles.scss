@@ -8,13 +8,18 @@
 // Variables
 $border: 1px solid var(--color-border);
 
-@mixin dl-infobox {
+@mixin parameter-box {
   display: flex;
   gap: var(--gap);
+
   margin: 0;
 
-  div {
+  div, dl {
+    display: flex;
+    flex-direction: column;
+
     flex: 1;
+
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     padding: var(--padding);
@@ -102,13 +107,8 @@ body {
         font-size: 20pt;
       }
 
-      section.parameters {
-        display: flex;
-        gap: var(--gap);
-      }
-
-      dl {
-        @include dl-infobox;
+      &>dl, section.parameters {
+        @include parameter-box;
       }
     }
 
@@ -210,7 +210,7 @@ body {
       }
 
       dl {
-        @include dl-infobox;
+        @include parameter-box;
       }
     }
   }

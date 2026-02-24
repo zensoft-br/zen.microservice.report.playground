@@ -62,28 +62,26 @@ body {
   margin: 0;
   font-size: 20pt;
 }
-.report-wrapper .report-container > header section.parameters {
-  display: flex;
-  gap: var(--gap);
-}
-.report-wrapper .report-container > header dl {
+.report-wrapper .report-container > header > dl, .report-wrapper .report-container > header section.parameters {
   display: flex;
   gap: var(--gap);
   margin: 0;
 }
-.report-wrapper .report-container > header dl div {
+.report-wrapper .report-container > header > dl div, .report-wrapper .report-container > header > dl dl, .report-wrapper .report-container > header section.parameters div, .report-wrapper .report-container > header section.parameters dl {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
-.report-wrapper .report-container > header dl div dt {
+.report-wrapper .report-container > header > dl div dt, .report-wrapper .report-container > header > dl dl dt, .report-wrapper .report-container > header section.parameters div dt, .report-wrapper .report-container > header section.parameters dl dt {
   font-size: 8pt;
   color: gray;
   text-transform: uppercase;
   font-weight: bold;
 }
-.report-wrapper .report-container > header dl div dd {
+.report-wrapper .report-container > header > dl div dd, .report-wrapper .report-container > header > dl dl dd, .report-wrapper .report-container > header section.parameters div dd, .report-wrapper .report-container > header section.parameters dl dd {
   margin: 0;
 }
 .report-wrapper .report-container > main .kpi-grid {
@@ -151,19 +149,21 @@ body {
   gap: var(--gap);
   margin: 0;
 }
-.report-wrapper .report-container > footer dl div {
+.report-wrapper .report-container > footer dl div, .report-wrapper .report-container > footer dl dl {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
-.report-wrapper .report-container > footer dl div dt {
+.report-wrapper .report-container > footer dl div dt, .report-wrapper .report-container > footer dl dl dt {
   font-size: 8pt;
   color: gray;
   text-transform: uppercase;
   font-weight: bold;
 }
-.report-wrapper .report-container > footer dl div dd {
+.report-wrapper .report-container > footer dl div dd, .report-wrapper .report-container > footer dl dl dd {
   margin: 0;
 }
 .report-wrapper .flex {

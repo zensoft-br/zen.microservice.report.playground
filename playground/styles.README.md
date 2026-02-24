@@ -12,12 +12,13 @@
     ├── header (Report header)
     │   ├── .brand (Logo / Company info)
     │   ├── h1 (Report title)
-    │   └── dl (Parameters)
-    │       ├── div { dt, dd } (Parameter 1)
-    │       └── div { dt, dd } (Parameter 2)
     │   └── section.parameters (Parameters) (revisar)
-    │       ├── dl { dt, dd } (Parameter 1)
-    │       └── dl { dt, dd } (Parameter 2)
+    │       ├── dl (Parameter 1)
+    │       |   ├── dt (Label)
+    │       │   └── dd (Value)
+    │       └── dl (Parameter <n>)
+    │           ├── dt
+    │           └── dd
     │
     ├── .page-header (Page header)
     ├── .page-footer (Page footer)

@@ -10,54 +10,54 @@ export default function ({ data = [], t }) {
             <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>{t("/sale/quote")} {quote.id}
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
             </h1>
-            <dl>
-              <div>
+            <section className="parameters">
+              <dl>
                 <dt>{t("/catalog/company/company")}</dt>
                 <dd>{quote.company?.person.name}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t(`/catalog/person/personDocumentType/enum/${quote.company?.person.documentType}`)}</dt>
                 <dd>{quote.company?.person.documentNumber}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.company?.person.phone}</dd>
-              </div>
-            </dl>
-            <dl>
-              <div>
+              </dl>
+            </section>
+            <section className="parameters">
+              <dl>
                 <dt>{t("/catalog/person/person")}</dt>
                 <dd>{quote.person?.name}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}</dt>
                 <dd>{quote.person?.documentNumber}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.person?.phone}</dd>
-              </div>
-            </dl>
-            <dl>
-              <div>
+              </dl>
+            </section>
+            <section className="parameters">
+              <dl>
                 <dt>{t("/@word/date")}</dt>
                 <dd>{formatDate(quote.date)}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/personSalesperson")}</dt>
                 <dd>{quote.personSalesperson?.name}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/phone")}</dt>
                 <dd>{quote.personSalesperson?.phone}</dd>
-              </div>
-            </dl>
-            <dl>
-              <div>
+              </dl>
+            </section>
+            <section className="parameters">
+              <dl>
                 <dt>{t("/@word/comments")}</dt>
-                <pre>{quote.saleProfile?.properties?.quote_comments}</pre>
-              </div>
-            </dl>
+                <dd><pre>{quote.saleProfile?.properties?.quote_comments}</pre></dd>
+              </dl>
+            </section>
           </header>
           <main>
             <section>

@@ -10,50 +10,50 @@ export default function ({ data = [], t }) {
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.id}`} style={{ width: "2cm" }} />
             </h1>
             {!obj.company?.image && (
-              <dl>
-                <div>
+              <section className="parameters">
+                <dl>
                   <dt>{t("/catalog/company/company")}</dt>
                   <dd>{obj.company.person.name}</dd>
-                </div>
-                <div>
+                </dl>
+                <dl>
                   <dt>{t("/catalog/person/personDocumentType/enum/BR_CNPJ")}</dt>
                   <dd>{obj.company.person.documentNumber}</dd>
-                </div>
-              </dl>
+                </dl>
+              </section>
             )}
             {obj.person && (
-              <dl>
-                <div>
+              <section className="parameters">
+                <dl>
                   <dt>{t("/catalog/person/person")}</dt>
                   <dd>{obj.person?.name}</dd>
-                </div>
-                <div>
+                </dl>
+                <dl>
                   <dt>{t("/catalog/person/personDocumentType/enum/BR_CNPJ")}</dt>
                   <dd>{obj.person?.documentNumber}</dd>
-                </div>
-              </dl>
+                </dl>
+              </section>
             )}
-            <dl>
-              <div>
+            <section className="parameters">
+              <dl>
                 <dt>{t("/@word/date")}</dt>
                 <dd>{obj.date}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/status")}</dt>
                 <dd>{t(`/supply/production/productionOrderStatus/enum/${obj.status}`)}</dd>
-              </div>
-              <div>
+              </dl>
+              <dl>
                 <dt>{t("/@word/tags")}</dt>
                 <dd>{obj.tags}</dd>
-              </div>
-            </dl>
-            {obj.properties.comments && (
-              <dl>
-                <div>
-                  <dt>{t("/@word/comments")}</dt>
-                  <pre>{obj.properties.comments}</pre>
-                </div>
               </dl>
+            </section>
+            {obj.properties.comments && (
+              <section className="parameters">
+                <dl>
+                  <dt>{t("/@word/comments")}</dt>
+                  <dd><pre>{obj.properties.comments}</pre></dd>
+                </dl>
+              </section>
             )}
           </header>
           <main>
