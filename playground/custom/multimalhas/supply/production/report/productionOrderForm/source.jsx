@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ({ data = [] }) {
 
   const totalsByProduct = data.reduce((acc, obj) => {
@@ -14,7 +12,7 @@ export default function ({ data = [] }) {
             description: [
               consumption.productPacking.product.description,
               consumption.productPacking.complement,
-              consumption.productPacking.variant?.description
+              consumption.productPacking.variant?.description,
             ].filter(Boolean).join(", "),
             unit: consumption.productPacking.product.unit,
             quantity: 0,
@@ -88,7 +86,7 @@ export default function ({ data = [] }) {
                                 <td>{[
                                   consumption.productPacking.product.description,
                                   consumption.productPacking.complement,
-                                  consumption.productPacking.variant?.description
+                                  consumption.productPacking.variant?.description,
                                 ].filter(Boolean).join(", ")}</td>
                                 <td className="number">
                                   {number(consumption.quantity)}&nbsp;{consumption.productPacking.product.unit.code}
@@ -208,8 +206,4 @@ function number(value) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);
-}
-
-function text(value) {
-  return <strong>{value?.toUpperCase()}</strong>;
 }

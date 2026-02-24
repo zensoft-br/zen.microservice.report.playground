@@ -4,29 +4,33 @@ import stylistic from "@stylistic/eslint-plugin";
 
 export default [
   {
-    files: ["**/*.{js,mjs,cjs}"],
-    // 1. Register the plugin
+    files: ["**/*.{cjs,js,jsx,mjs}"],
     plugins: {
       "@stylistic": stylistic,
     },
     languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       globals: {
         ...globals.browser,
         ...globals.node,
       },
     },
-    // 2. Add your rules
     rules: {
       ...js.configs.recommended.rules,
-      // Logic rules
-      "no-unused-vars": [
-        "warn",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-        },
-      ],
+      // "no-unused-vars": [
+      //   "warn",
+      //   {
+      //     argsIgnorePattern: "^_",
+      //     varsIgnorePattern: "^_",
+      //     caughtErrorsIgnorePattern: "^_",
+      //   },
+      // ],
       // Formatting (Stylistic) rules
       "@stylistic/indent": ["error", 2],
       "@stylistic/quotes": ["error", "double"],

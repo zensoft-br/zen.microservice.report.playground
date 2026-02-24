@@ -1,6 +1,4 @@
-import React from "react";
-
-export default async function ({ data = [], t }) {
+export default async function ({ data = [] }) {
   // const response = await fetch(invoice.dfeNfeProcOut.file.url);
   // if (!response.ok) {
   //   throw new Error("Failed to fetch NFC-e XML");
@@ -18,7 +16,7 @@ export default async function ({ data = [], t }) {
 
   return (
     <div className="report-wrapper">
-      {data.map((item, index) => (
+      {data.map((item) => (
         <div key={item.id} className="report-container">
           <div className="container">
             <div>
@@ -37,11 +35,11 @@ export default async function ({ data = [], t }) {
               <p className="text-center">Inscrição estadual: {item.company.person.document2Number}</p>
               <p className="text-center">
                 {[item.company.person?.street,
-                item.company.person?.number,
-                item.company.person?.district,
-                item.company.person?.city?.name,
-                item.company.person?.city?.state?.code,
-                item.company.person?.zipcode]
+                  item.company.person?.number,
+                  item.company.person?.district,
+                  item.company.person?.city?.name,
+                  item.company.person?.city?.state?.code,
+                  item.company.person?.zipcode]
                   .filter(Boolean).join(", ")}
               </p>
               <p className="text-center">
@@ -146,11 +144,11 @@ export default async function ({ data = [], t }) {
   );
 };
 
-function date(s) {
-  if (s == null) return null;
-  const date = new Date(s);
-  return date.toLocaleDateString("pt-BR");
-}
+// function date(s) {
+//   if (s == null) return null;
+//   const date = new Date(s);
+//   return date.toLocaleDateString("pt-BR");
+// }
 
 function datetime(s) {
   if (s == null) return null;
@@ -158,22 +156,22 @@ function datetime(s) {
   return date.toLocaleDateString("pt-BR");
 }
 
-function number(v, args) {
-  if (v == null) return null;
-  return v.toLocaleString("pt-BR", args);
-}
+// function number(v, args) {
+//   if (v == null) return null;
+//   return v.toLocaleString("pt-BR", args);
+// }
 
-function currency(v, { currency = "BRL", digits = 2 } = {}) {
-  if (v == null) return null;
-  return v.toLocaleString("pt-BR", { style: 'currency', currency, minimumFractionDigits: digits, maximumFractionDigits: digits });
-}
+// function currency(v, { currency = "BRL", digits = 2 } = {}) {
+//   if (v == null) return null;
+//   return v.toLocaleString("pt-BR", { style: "currency", currency, minimumFractionDigits: digits, maximumFractionDigits: digits });
+// }
 
-function address({ street, number, complement }) {
-  return [street, number, complement].filter(Boolean).join(', ');
-}
+// function address({ street, number, complement }) {
+//   return [street, number, complement].filter(Boolean).join(", ");
+// }
 
-const splitInBlocks = (str, size = 4) => {
-  if (str == null) return null;
-  const regex = new RegExp(`.{1,${size}}`, 'g');
-  return str.match(regex).join(' ');
-};
+// const splitInBlocks = (str, size = 4) => {
+//   if (str == null) return null;
+//   const regex = new RegExp(`.{1,${size}}`, "g");
+//   return str.match(regex).join(" ");
+// };

@@ -3,7 +3,7 @@ export default function (x) {
 
   return (
     <div className="report-wrapper">
-      {data.map((obj, index) => (
+      {data.map((obj) => (
         <div className="report-container flex">
           <main className="flex flex-1">
             <div className="content flex-1">

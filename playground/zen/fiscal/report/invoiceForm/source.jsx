@@ -5,7 +5,7 @@ export default function ({ data = [], t }) {
 
   return (
     <div className="report-wrapper">
-      {data.map((item, index) => (
+      {data.map((item) => (
         <div key={item.id} className="report-container">
 
           {!item.nfeOut ? <div className="stamp">SEM VALIDADE FISCAL</div> : null}
@@ -13,9 +13,9 @@ export default function ({ data = [], t }) {
           <main>
             {/* COMPROVANTE */}
             <div className="frame">
-              <div className="grid band h" style={{ gridTemplateColumns: '4fr 1fr' }}>
+              <div className="grid band h" style={{ gridTemplateColumns: "4fr 1fr" }}>
                 <div className="band v">
-                  <div className="slot" style={{ fontSize: '90%' }}>
+                  <div className="slot" style={{ fontSize: "90%" }}>
                     Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
                   </div>
                   <div className="band h" style={{ minHeight: "1cm" }}>
@@ -49,7 +49,7 @@ export default function ({ data = [], t }) {
                   <label>Identificação do emitente</label>
                   <strong>{item.company.person.name}</strong>
                   <div>{address(item.company.person)}</div>
-                  <div>{[item.company.person.district, item.company.person.city?.name, item.company.person.city?.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(', ')}</div>
+                  <div>{[item.company.person.district, item.company.person.city?.name, item.company.person.city?.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(", ")}</div>
                   {item.company.person.phone && <div>{t("/@word/phone")} {item.company.person.phone}</div>}
                   {item.company.person.email && <div>{t("/@word/email")} {item.company.person.email}</div>}
                 </div>
@@ -65,12 +65,12 @@ export default function ({ data = [], t }) {
                   </div>
                   <div className="slot">
                     <label>Chave de acesso</label>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ textAlign: "center" }}>
                       {splitInBlocks(item.nfeOut?.chNFe)}
                     </div>
                   </div>
                   <div className="slot">
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ textAlign: "center" }}>
                       Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora
                     </div>
                   </div>
@@ -83,7 +83,7 @@ export default function ({ data = [], t }) {
                 </div>
                 <div className="slot">
                   <label>Protocolo de autorização de uso</label>
-                  <div>{item.nfeOut ? `${item.nfeOut.nProt}, ${date(item.nfeOut.dateTime.substring(0, 10))}, ${item.nfeOut.dateTime.substring(11, 19)}` : ''}</div>
+                  <div>{item.nfeOut ? `${item.nfeOut.nProt}, ${date(item.nfeOut.dateTime.substring(0, 10))}, ${item.nfeOut.dateTime.substring(11, 19)}` : ""}</div>
                 </div>
               </div>
               <div className="band h">
@@ -106,7 +106,7 @@ export default function ({ data = [], t }) {
               {/* DESTINATARIO */}
               <label className="header">Destinatário / Remetente</label>
               <div className="frame">
-                <div className="band h" style={{ gridTemplateColumns: '50% 25% 25%' }}>
+                <div className="band h" style={{ gridTemplateColumns: "50% 25% 25%" }}>
                   <div className="slot">
                     <label>{t("/@word/name")}</label>
                     <div>{item.person.name}</div>
@@ -120,10 +120,10 @@ export default function ({ data = [], t }) {
                     <div>{date(item.date)}</div>
                   </div>
                 </div>
-                <div className="band h" style={{ gridTemplateColumns: '50% 17% 17% 16%' }}>
+                <div className="band h" style={{ gridTemplateColumns: "50% 17% 17% 16%" }}>
                   <div className="slot">
                     <label>Endereço</label>
-                    <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(', ')}</div>
+                    <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(", ")}</div>
                   </div>
                   <div className="slot">
                     <label>{t("/@word/district")}</label>
@@ -138,7 +138,7 @@ export default function ({ data = [], t }) {
                     <div>{date(item.shippingDateTime)}</div>
                   </div>
                 </div>
-                <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
+                <div className="band h" style={{ gridTemplateColumns: "45% 5% 17% 17% 16%" }}>
                   <div className="slot">
                     <label>{t("/catalog/location/city")}</label>
                     <div>{item.person.city?.name}</div>
@@ -166,10 +166,10 @@ export default function ({ data = [], t }) {
               {item.billingTitles?.length > 0 && (
                 <>
                   <label className="header">Fatura / Duplicatas</label>
-                  <div className="grid" style={{ gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--gap)' }}>
+                  <div className="grid" style={{ gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--gap)" }}>
                     {[0, 1, 2].map((colIndex) => (
                       <div key={colIndex} className="frame">
-                        <table style={{ width: "100%", borderCollapse: 'collapse' }}>
+                        <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
                             <tr>
                               <th>{t("/@word/number")}</th>
@@ -266,7 +266,7 @@ export default function ({ data = [], t }) {
               {/* TRANSPORTE */}
               <label className="header">Transportador / Volumes transportados</label>
               <div className="frame">
-                <div className="band h" style={{ gridTemplateColumns: '3fr 1fr 1fr 1fr 0.5fr 1.5fr' }}>
+                <div className="band h" style={{ gridTemplateColumns: "3fr 1fr 1fr 1fr 0.5fr 1.5fr" }}>
                   <div className="slot">
                     <label>Nome / Razão social</label>
                     <div>{item.personShipping?.name}</div>
@@ -292,10 +292,10 @@ export default function ({ data = [], t }) {
                     <div>{item.personShipping?.documentNumber}</div>
                   </div>
                 </div>
-                <div className="band h" style={{ gridTemplateColumns: '4.5fr 2fr 0.5fr 2fr' }}>
+                <div className="band h" style={{ gridTemplateColumns: "4.5fr 2fr 0.5fr 2fr" }}>
                   <div className="slot">
                     <label>Endereço</label>
-                    <div>{[item.personShipping?.street, item.personShipping?.number, item.personShipping?.complement].filter(Boolean).join(', ')}</div>
+                    <div>{[item.personShipping?.street, item.personShipping?.number, item.personShipping?.complement].filter(Boolean).join(", ")}</div>
                   </div>
                   <div className="slot">
                     <label>{t("/catalog/location/city")}</label>
@@ -310,7 +310,7 @@ export default function ({ data = [], t }) {
                     <div>{item.personShipping?.document2Number}</div>
                   </div>
                 </div>
-                <div className="band h" style={{ gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' }}>
+                <div className="band h" style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }}>
                   <div className="slot">
                     <label>{t("/@word/quantity")}</label>
                     <div className="number">{number(item.properties?.volumes)}</div>
@@ -364,8 +364,8 @@ export default function ({ data = [], t }) {
                         <td>{[
                           item1.productPacking.code,
                           item1.properties?.description ?? item1.properties?.descriptionCalc,
-                          item1.properties?.complement ?? item1.properties?.complementCalc
-                        ].filter(Boolean).join(', ')}</td>
+                          item1.properties?.complement ?? item1.properties?.complementCalc,
+                        ].filter(Boolean).join(", ")}</td>
                         <td>{item1.productPacking.product.properties?.fiscal_br_NCM}</td>
                         <td>{(item1.assetTag?.fiscalProfileProduct?.properties?.fiscal_br_orig ?? item1.productPacking.product.fiscalProfileProduct?.properties?.fiscal_br_orig ?? "0") +
                           (item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.properties?.fiscal_br_CST ?? "00")}</td>
@@ -392,14 +392,14 @@ export default function ({ data = [], t }) {
 
               {/* DADOS ADICIONAIS */}
               <label className="header">Dados adicionais</label>
-              <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "var(--gap)", minHeight: '3cm' }}>
+              <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "var(--gap)", minHeight: "3cm" }}>
                 <div className="frame">
                   <div className="slot">
                     <label>Informações complementares</label>
                     <pre>{[
                       item.properties?.["#comments"],
                       item.properties?.["comments"],
-                    ].filter(Boolean).join('\n')}</pre>
+                    ].filter(Boolean).join("\n")}</pre>
                   </div>
                 </div>
                 <div className="frame">
@@ -438,15 +438,15 @@ function number(v, args) {
 
 function currency(v, { currency = "BRL", digits = 2 } = {}) {
   if (v == null) return null;
-  return v.toLocaleString("pt-BR", { style: 'currency', currency, minimumFractionDigits: digits, maximumFractionDigits: digits });
+  return v.toLocaleString("pt-BR", { style: "currency", currency, minimumFractionDigits: digits, maximumFractionDigits: digits });
 }
 
 function address({ street, number, complement }) {
-  return [street, number, complement].filter(Boolean).join(', ');
+  return [street, number, complement].filter(Boolean).join(", ");
 }
 
 const splitInBlocks = (str, size = 4) => {
   if (str == null) return null;
-  const regex = new RegExp(`.{1,${size}}`, 'g');
-  return str.match(regex).join(' ');
+  const regex = new RegExp(`.{1,${size}}`, "g");
+  return str.match(regex).join(" ");
 };

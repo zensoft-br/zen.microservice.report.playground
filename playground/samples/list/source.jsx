@@ -7,7 +7,7 @@ export default function SampleReportList() {
         <header>
           <div class="brand">
             <img src="logo.png" alt="Company Logo" />
-              <p>Nexus Solutions Group<br />123 Enterprise Dr, Austin TX</p>
+            <p>Nexus Solutions Group<br />123 Enterprise Dr, Austin TX</p>
           </div>
           <h1>Quarterly Performance Report</h1>
           <dl>

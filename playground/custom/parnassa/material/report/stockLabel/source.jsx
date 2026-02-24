@@ -1,4 +1,4 @@
-export default function ({ properties = {}, data = [], t }) {
+export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((obj, index) => (
@@ -12,7 +12,7 @@ export default function ({ properties = {}, data = [], t }) {
                 </div>
                 <div className="cell">
                   <dt>{t("/@word/description")}</dt>
-                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ''}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ''}`}</dd>
+                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ""}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ""}`}</dd>
                 </div>
               </div>
               <div className="flex h" style={{ gridArea: "C" }}>
@@ -43,7 +43,7 @@ export default function ({ properties = {}, data = [], t }) {
               </div>
               <div className="cell" style={{ gridArea: "H" }}>
                 <dt>Data</dt>
-                <dd>{new Date().toISOString().split('T')[0]}</dd>
+                <dd>{new Date().toISOString().split("T")[0]}</dd>
               </div>
               <div className="cell" style={{ gridArea: "I" }}>
                 <dt></dt>
@@ -62,8 +62,4 @@ export default function ({ properties = {}, data = [], t }) {
 
 function number(value, options = {}) {
   return new Intl.NumberFormat("pt-BR", options).format(value);
-}
-
-function text(value) {
-  return <strong>{value?.toUpperCase()}</strong>;
 }

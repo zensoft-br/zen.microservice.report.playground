@@ -1,4 +1,4 @@
-export default function ({ properties = {}, data = [], t }) {
+export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((obj, index) => (
@@ -24,7 +24,7 @@ export default function ({ properties = {}, data = [], t }) {
               <div className="flex v" style={{ gridArea: "E" }}>
                 <dl style={{ flex: "1 1 auto" }} >
                   <dt>{t("/@word/description")}</dt>
-                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ''}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ''}`}</dd>
+                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ""}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ""}`}</dd>
                 </dl>
                 <dl style={{ flex: "1 1 auto" }} >
                   <dt>{t("/custom/zen/textile/catalog/product/fabricComposition")}</dt>

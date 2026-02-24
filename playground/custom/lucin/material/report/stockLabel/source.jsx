@@ -26,7 +26,7 @@ export default function ({ properties = {}, data = [], t }) {
               <div className="flex v" style={{ gridArea: "E" }}>
                 <div className="cell" style={{ flex: "1 1 auto" }} >
                   <dt>{t("/@word/description")}</dt>
-                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ''}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ''}`}</dd>
+                  <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ""}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ""}`}</dd>
                 </div>
                 <div className="cell" style={{ flex: "1 1 auto" }} >
                   <dt>{t("/custom/zen/textile/catalog/product/fabricComposition")}</dt>
@@ -47,7 +47,7 @@ export default function ({ properties = {}, data = [], t }) {
                 </div>
                 <div className="cell">
                   <dt>{t("/material/lot")}</dt>
-                  <dd>{`${obj.lot_code} / ${obj.serial_properties?.extra1 ?? '-'} / ${obj.serial_properties?.extra2 ?? '-'}`}</dd>
+                  <dd>{`${obj.lot_code} / ${obj.serial_properties?.extra1 ?? "-"} / ${obj.serial_properties?.extra2 ?? "-"}`}</dd>
                 </div>
               </div>
               {/* Row 5 */}
@@ -94,8 +94,4 @@ export default function ({ properties = {}, data = [], t }) {
 
 function number(value, options = {}) {
   return new Intl.NumberFormat("pt-BR", options).format(value);
-}
-
-function text(value) {
-  return <strong>{value?.toUpperCase()}</strong>;
 }
