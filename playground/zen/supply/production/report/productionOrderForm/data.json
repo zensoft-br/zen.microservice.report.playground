@@ -1,0 +1,2038 @@
+{
+  "data": [
+    {
+      "id": 2978,
+      "company": {
+        "id": 1001,
+        "code": "FS",
+        "person": {
+          "id": 1001,
+          "type": "CORPORATION",
+          "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+          "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+          "nationality": {
+            "id": 1030,
+            "name": "Brasil",
+            "codeA2": "BR",
+            "codeA3": "BRA",
+            "codeN": "076",
+            "tags": "#system,southAmerica",
+            "properties": {
+              "#user": "system@personalsoft.com.br",
+              "#userId": "0",
+              "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+              "fiscal_br_cPais": "1058"
+            }
+          },
+          "documentType": "BR_CNPJ",
+          "documentNumber": "20.902.434/0001-94",
+          "document2Type": "BR_INSCRICAO_ESTADUAL",
+          "document2Number": "536065890119",
+          "zipcode": "13632-626",
+          "street": "RUA GENTIL JOSUÉ DE CARLI",
+          "number": "230",
+          "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+          "city": {
+            "id": 6153,
+            "name": "Pirassununga",
+            "state": {
+              "id": 1026,
+              "code": "SP",
+              "name": "São Paulo",
+              "country": {
+                "id": 1030,
+                "name": "Brasil",
+                "codeA2": "BR",
+                "codeA3": "BRA",
+                "codeN": "076",
+                "tags": "#system,southAmerica",
+                "properties": {
+                  "#user": "system@personalsoft.com.br",
+                  "#userId": "0",
+                  "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                  "fiscal_br_cPais": "1058"
+                }
+              },
+              "tags": "#system,sudeste",
+              "properties": {
+                "#user": "system@personalsoft.com.br",
+                "#userId": "0",
+                "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                "fiscal_br_cUF": "35"
+              }
+            },
+            "tags": "#system",
+            "properties": {
+              "fiscal_br_cMun": "3539301"
+            }
+          },
+          "phone": "(19) 9804-5973",
+          "codeConversionList": {
+            "id": 3007,
+            "code": "3007",
+            "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#userId": 1,
+              "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+            }
+          },
+          "fiscalProfilePerson": {
+            "id": 1168,
+            "fiscalRegion": {
+              "id": 1001,
+              "code": "BR",
+              "tags": "#system"
+            },
+            "description": "Regime Normal SP Spoljaric",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#userId": 1,
+              "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+            }
+          },
+          "personGroup": {
+            "id": 1011,
+            "code": "1011",
+            "description": "REVENDA",
+            "properties": {
+              "#user": "ads.alessandrac@hotmail.com",
+              "#userId": 1176,
+              "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+            }
+          },
+          "personShipping": {
+            "id": 1001,
+            "type": "CORPORATION",
+            "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+            "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+            "nationality": {
+              "id": 1030,
+              "name": "Brasil",
+              "codeA2": "BR",
+              "codeA3": "BRA",
+              "codeN": "076",
+              "tags": "#system,southAmerica",
+              "properties": {
+                "#user": "system@personalsoft.com.br",
+                "#userId": "0",
+                "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                "fiscal_br_cPais": "1058"
+              }
+            },
+            "documentType": "BR_CNPJ",
+            "documentNumber": "20.902.434/0001-94",
+            "document2Type": "BR_INSCRICAO_ESTADUAL",
+            "document2Number": "536065890119",
+            "zipcode": "13632-626",
+            "street": "RUA GENTIL JOSUÉ DE CARLI",
+            "number": "230",
+            "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+            "city": {
+              "id": 6153,
+              "name": "Pirassununga",
+              "state": {
+                "id": 1026,
+                "code": "SP",
+                "name": "São Paulo",
+                "country": {
+                  "id": 1030,
+                  "name": "Brasil",
+                  "codeA2": "BR",
+                  "codeA3": "BRA",
+                  "codeN": "076",
+                  "tags": "#system,southAmerica",
+                  "properties": {
+                    "#user": "system@personalsoft.com.br",
+                    "#userId": "0",
+                    "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                    "fiscal_br_cPais": "1058"
+                  }
+                },
+                "tags": "#system,sudeste",
+                "properties": {
+                  "#user": "system@personalsoft.com.br",
+                  "#userId": "0",
+                  "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                  "fiscal_br_cUF": "35"
+                }
+              },
+              "tags": "#system",
+              "properties": {
+                "fiscal_br_cMun": "3539301"
+              }
+            },
+            "phone": "(19) 9804-5973",
+            "codeConversionList": {
+              "id": 3007,
+              "code": "3007",
+              "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+              }
+            },
+            "fiscalProfilePerson": {
+              "id": 1168,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "Regime Normal SP Spoljaric",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+              }
+            },
+            "personGroup": {
+              "id": 1011,
+              "code": "1011",
+              "description": "REVENDA",
+              "properties": {
+                "#user": "ads.alessandrac@hotmail.com",
+                "#userId": 1176,
+                "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+              }
+            },
+            "personShipping": null,
+            "tags": "#company,customer,shipping,supplier",
+            "properties": {
+              "freightType": "ISSUER"
+            }
+          },
+          "tags": "#company,customer,shipping,supplier",
+          "properties": {
+            "freightType": "ISSUER"
+          }
+        },
+        "locale": "pt_BR",
+        "timeZone": "America/Sao_Paulo",
+        "society": {
+          "id": 1001,
+          "code": "FSPOL",
+          "description": "Frigospol",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": "1",
+            "#created": "2024-05-16T09:27:11.640524091-03:00[America/Sao_Paulo]"
+          }
+        },
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "fiscalProfileCompany": {
+          "id": 1168,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "Regime Normal SP Spoljaric",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+          }
+        },
+        "currency": {
+          "id": 1001,
+          "code": "BRL",
+          "symbol": "R$",
+          "tags": "#system"
+        },
+        "stockCluster": {
+          "id": 1001,
+          "code": "SPOL",
+          "description": "SPOL",
+          "assetValuationMethod": "WAC",
+          "priceListCost": {
+            "id": 1001,
+            "type": "PURCHASE",
+            "code": "spol_custo",
+            "description": "Lista padrão de custo Frigospol",
+            "currency": {
+              "id": 1001,
+              "code": "BRL",
+              "symbol": "R$",
+              "tags": "#system"
+            },
+            "tags": "asset",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#userId": "1",
+              "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+            }
+          },
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": "1",
+            "#created": "2024-05-16T09:43:02.383076297-03:00[America/Sao_Paulo]"
+          }
+        },
+        "warehouse": {
+          "id": 1001,
+          "code": "SPOL",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": "1",
+            "#created": "2024-05-16T09:43:53.641295672-03:00[America/Sao_Paulo]"
+          }
+        },
+        "priceList": {
+          "id": 1001,
+          "type": "PURCHASE",
+          "code": "spol_custo",
+          "description": "Lista padrão de custo Frigospol",
+          "currency": {
+            "id": 1001,
+            "code": "BRL",
+            "symbol": "R$",
+            "tags": "#system"
+          },
+          "tags": "asset",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": "1",
+            "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+          }
+        },
+        "image": {
+          "id": 1003,
+          "code": "LOGO",
+          "contentType": "image/png",
+          "url": "https://zenerp.s3.amazonaws.com/tenants/frigospol/images/21126a5f-f9cb-4feb-afb8-ed52ba36d501.png",
+          "size": 42401,
+          "width": 358,
+          "height": 120,
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2026-02-05T14:31:27.04857441-03:00[America/Sao_Paulo]"
+          }
+        },
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": "1",
+          "#created": "2024-05-16T09:44:11.501615229-03:00[America/Sao_Paulo]",
+          "fiscal_br_CRT": "3",
+          "fiscal_br_tpAmb": "1",
+          "fiscal_br_keyStore": 1011,
+          "fiscal_br_sped_indAtiv": "0",
+          "fiscal_br_sped_indPerfil": "B",
+          "mailerConfig_financial_receivable": 1001,
+          "mailerConfig_fiscal_outgoingInvoice": 1001
+        }
+      },
+      "status": "FINISHED",
+      "productionProfile": {
+        "id": 1001,
+        "code": "DEFAULT",
+        "tags": "acceptUnrequestedConsumption,acceptUnrequestedProduction,productionStepConsumptionAuto",
+        "properties": {}
+      },
+      "code": "2978",
+      "date": "2026-02-20",
+      "availabilityDate": "2026-02-20",
+      "tags": "#singleStep",
+      "properties": {
+        "comments": "RASTREABILIDADE: 200226.4127\nPACOTE DE 2KG.."
+      },
+      "steps": [
+        {
+          "id": 2983,
+          "status": "FINISHED",
+          "productionOrder": {
+            "id": 2978,
+            "company": {
+              "id": 1001,
+              "code": "FS",
+              "person": {
+                "id": 1001,
+                "type": "CORPORATION",
+                "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                "nationality": {
+                  "id": 1030,
+                  "name": "Brasil",
+                  "codeA2": "BR",
+                  "codeA3": "BRA",
+                  "codeN": "076",
+                  "tags": "#system,southAmerica",
+                  "properties": {
+                    "#user": "system@personalsoft.com.br",
+                    "#userId": "0",
+                    "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                    "fiscal_br_cPais": "1058"
+                  }
+                },
+                "documentType": "BR_CNPJ",
+                "documentNumber": "20.902.434/0001-94",
+                "document2Type": "BR_INSCRICAO_ESTADUAL",
+                "document2Number": "536065890119",
+                "zipcode": "13632-626",
+                "street": "RUA GENTIL JOSUÉ DE CARLI",
+                "number": "230",
+                "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                "city": {
+                  "id": 6153,
+                  "name": "Pirassununga",
+                  "state": {
+                    "id": 1026,
+                    "code": "SP",
+                    "name": "São Paulo",
+                    "country": {
+                      "id": 1030,
+                      "name": "Brasil",
+                      "codeA2": "BR",
+                      "codeA3": "BRA",
+                      "codeN": "076",
+                      "tags": "#system,southAmerica",
+                      "properties": {
+                        "#user": "system@personalsoft.com.br",
+                        "#userId": "0",
+                        "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                        "fiscal_br_cPais": "1058"
+                      }
+                    },
+                    "tags": "#system,sudeste",
+                    "properties": {
+                      "#user": "system@personalsoft.com.br",
+                      "#userId": "0",
+                      "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                      "fiscal_br_cUF": "35"
+                    }
+                  },
+                  "tags": "#system",
+                  "properties": {
+                    "fiscal_br_cMun": "3539301"
+                  }
+                },
+                "phone": "(19) 9804-5973",
+                "codeConversionList": {
+                  "id": 3007,
+                  "code": "3007",
+                  "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                  }
+                },
+                "fiscalProfilePerson": {
+                  "id": 1168,
+                  "fiscalRegion": {
+                    "id": 1001,
+                    "code": "BR",
+                    "tags": "#system"
+                  },
+                  "description": "Regime Normal SP Spoljaric",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                  }
+                },
+                "personGroup": {
+                  "id": 1011,
+                  "code": "1011",
+                  "description": "REVENDA",
+                  "properties": {
+                    "#user": "ads.alessandrac@hotmail.com",
+                    "#userId": 1176,
+                    "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                  }
+                },
+                "personShipping": {
+                  "id": 1001,
+                  "type": "CORPORATION",
+                  "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                  "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                  "nationality": {
+                    "id": 1030,
+                    "name": "Brasil",
+                    "codeA2": "BR",
+                    "codeA3": "BRA",
+                    "codeN": "076",
+                    "tags": "#system,southAmerica",
+                    "properties": {
+                      "#user": "system@personalsoft.com.br",
+                      "#userId": "0",
+                      "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                      "fiscal_br_cPais": "1058"
+                    }
+                  },
+                  "documentType": "BR_CNPJ",
+                  "documentNumber": "20.902.434/0001-94",
+                  "document2Type": "BR_INSCRICAO_ESTADUAL",
+                  "document2Number": "536065890119",
+                  "zipcode": "13632-626",
+                  "street": "RUA GENTIL JOSUÉ DE CARLI",
+                  "number": "230",
+                  "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                  "city": {
+                    "id": 6153,
+                    "name": "Pirassununga",
+                    "state": {
+                      "id": 1026,
+                      "code": "SP",
+                      "name": "São Paulo",
+                      "country": {
+                        "id": 1030,
+                        "name": "Brasil",
+                        "codeA2": "BR",
+                        "codeA3": "BRA",
+                        "codeN": "076",
+                        "tags": "#system,southAmerica",
+                        "properties": {
+                          "#user": "system@personalsoft.com.br",
+                          "#userId": "0",
+                          "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                          "fiscal_br_cPais": "1058"
+                        }
+                      },
+                      "tags": "#system,sudeste",
+                      "properties": {
+                        "#user": "system@personalsoft.com.br",
+                        "#userId": "0",
+                        "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                        "fiscal_br_cUF": "35"
+                      }
+                    },
+                    "tags": "#system",
+                    "properties": {
+                      "fiscal_br_cMun": "3539301"
+                    }
+                  },
+                  "phone": "(19) 9804-5973",
+                  "codeConversionList": {
+                    "id": 3007,
+                    "code": "3007",
+                    "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "fiscalProfilePerson": {
+                    "id": 1168,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "Regime Normal SP Spoljaric",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "personGroup": {
+                    "id": 1011,
+                    "code": "1011",
+                    "description": "REVENDA",
+                    "properties": {
+                      "#user": "ads.alessandrac@hotmail.com",
+                      "#userId": 1176,
+                      "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "personShipping": null,
+                  "tags": "#company,customer,shipping,supplier",
+                  "properties": {
+                    "freightType": "ISSUER"
+                  }
+                },
+                "tags": "#company,customer,shipping,supplier",
+                "properties": {
+                  "freightType": "ISSUER"
+                }
+              },
+              "locale": "pt_BR",
+              "timeZone": "America/Sao_Paulo",
+              "society": {
+                "id": 1001,
+                "code": "FSPOL",
+                "description": "Frigospol",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": "1",
+                  "#created": "2024-05-16T09:27:11.640524091-03:00[America/Sao_Paulo]"
+                }
+              },
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "fiscalProfileCompany": {
+                "id": 1168,
+                "fiscalRegion": {
+                  "id": 1001,
+                  "code": "BR",
+                  "tags": "#system"
+                },
+                "description": "Regime Normal SP Spoljaric",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                }
+              },
+              "currency": {
+                "id": 1001,
+                "code": "BRL",
+                "symbol": "R$",
+                "tags": "#system"
+              },
+              "stockCluster": {
+                "id": 1001,
+                "code": "SPOL",
+                "description": "SPOL",
+                "assetValuationMethod": "WAC",
+                "priceListCost": {
+                  "id": 1001,
+                  "type": "PURCHASE",
+                  "code": "spol_custo",
+                  "description": "Lista padrão de custo Frigospol",
+                  "currency": {
+                    "id": 1001,
+                    "code": "BRL",
+                    "symbol": "R$",
+                    "tags": "#system"
+                  },
+                  "tags": "asset",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": "1",
+                    "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                  }
+                },
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": "1",
+                  "#created": "2024-05-16T09:43:02.383076297-03:00[America/Sao_Paulo]"
+                }
+              },
+              "warehouse": {
+                "id": 1001,
+                "code": "SPOL",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": "1",
+                  "#created": "2024-05-16T09:43:53.641295672-03:00[America/Sao_Paulo]"
+                }
+              },
+              "priceList": {
+                "id": 1001,
+                "type": "PURCHASE",
+                "code": "spol_custo",
+                "description": "Lista padrão de custo Frigospol",
+                "currency": {
+                  "id": 1001,
+                  "code": "BRL",
+                  "symbol": "R$",
+                  "tags": "#system"
+                },
+                "tags": "asset",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": "1",
+                  "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                }
+              },
+              "image": {
+                "id": 1003,
+                "code": "LOGO",
+                "contentType": "image/png",
+                "url": "https://zenerp.s3.amazonaws.com/tenants/frigospol/images/21126a5f-f9cb-4feb-afb8-ed52ba36d501.png",
+                "size": 42401,
+                "width": 358,
+                "height": 120,
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2026-02-05T14:31:27.04857441-03:00[America/Sao_Paulo]"
+                }
+              },
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2024-05-16T09:44:11.501615229-03:00[America/Sao_Paulo]",
+                "fiscal_br_CRT": "3",
+                "fiscal_br_tpAmb": "1",
+                "fiscal_br_keyStore": 1011,
+                "fiscal_br_sped_indAtiv": "0",
+                "fiscal_br_sped_indPerfil": "B",
+                "mailerConfig_financial_receivable": 1001,
+                "mailerConfig_fiscal_outgoingInvoice": 1001
+              }
+            },
+            "status": "FINISHED",
+            "productionProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "tags": "acceptUnrequestedConsumption,acceptUnrequestedProduction,productionStepConsumptionAuto",
+              "properties": {}
+            },
+            "code": "2978",
+            "date": "2026-02-20",
+            "availabilityDate": "2026-02-20",
+            "tags": "#singleStep",
+            "properties": {
+              "comments": "RASTREABILIDADE: 200226.4127\nPACOTE DE 2KG.."
+            }
+          },
+          "productPacking": {
+            "id": 1031,
+            "product": {
+              "id": 1031,
+              "productProfile": {
+                "id": 1003,
+                "code": "INDUSTRIA",
+                "description": "INDUSTRIA",
+                "tags": "fiscalInfoRequired,productPackingCreate,stock.askQuantity,stock.expirationDate,stock.handlingUnit,stock.lot",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2025-06-03T12:00:01.859134023-03:00[America/Sao_Paulo]"
+                }
+              },
+              "type": "PRODUCT",
+              "code": "779",
+              "description": "Paleta Bov Cubos IQF",
+              "unit": {
+                "id": 1008,
+                "dimension": {
+                  "id": 1003,
+                  "code": "mass",
+                  "description": "@@:/catalog/unit/dimension/code/mass",
+                  "standardUnit": "kg",
+                  "tags": "#system"
+                },
+                "code": "kg",
+                "description": "kg",
+                "conversionFactor": 1,
+                "tags": "#system"
+              },
+              "fiscalProfileProduct": {
+                "id": 1127,
+                "fiscalRegion": {
+                  "id": 1001,
+                  "code": "BR",
+                  "tags": "#system"
+                },
+                "description": "02023000.0.PRODUZIDO",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2024-11-11T15:59:50.40079999-03:00[America/Sao_Paulo]",
+                  "fiscal_br_orig": "0"
+                }
+              },
+              "lengthCm": 0,
+              "widthCm": 0,
+              "heightCm": 0,
+              "volumeM3": 0,
+              "netWeightKg": 1,
+              "grossWeightKg": 1,
+              "category1": {
+                "id": 1016,
+                "category": {
+                  "id": 1001,
+                  "code": "PRODUCT1",
+                  "description": "CLASSIFICAÇÃO",
+                  "tags": "#system",
+                  "properties": {}
+                },
+                "code": "BOVINO_MANIPULADO",
+                "description": "BOVINO MANIPULADO",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2024-08-07T13:58:45.455107366-03:00[America/Sao_Paulo]"
+                }
+              },
+              "category2": {
+                "id": 1015,
+                "category": {
+                  "id": 1002,
+                  "code": "PRODUCT2",
+                  "description": "PRODUCT2",
+                  "tags": "#system",
+                  "properties": {}
+                },
+                "code": "BOVINOS",
+                "description": "BOVINOS",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2024-08-07T13:58:45.189373563-03:00[America/Sao_Paulo]"
+                }
+              },
+              "category3": {
+                "id": 1088,
+                "category": {
+                  "id": 1003,
+                  "code": "PRODUCT3",
+                  "description": "Bloco K",
+                  "tags": "#system,sped",
+                  "properties": {}
+                },
+                "code": "04",
+                "description": "Produto acabado",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2025-01-28T15:33:37.334121596-03:00[America/Sao_Paulo]"
+                }
+              },
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2024-08-07T13:48:35.735882652-03:00[America/Sao_Paulo]",
+                "fiscal_br_NCM": "0202.30.00",
+                "fiscal_br_CEST": null,
+                "fiscal_br_NCM ": "0202.30.00",
+                " fiscal_br_NCM ": "0202.30.00"
+              }
+            },
+            "code": "779",
+            "units": 1,
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 1,
+            "grossWeightKg": 1,
+            "tags": "#default",
+            "properties": {}
+          },
+          "quantity": 92,
+          "servedQuantity": 92,
+          "properties": {},
+          "productions": [
+            {
+              "id": 2982,
+              "productionStep": {
+                "id": 2983,
+                "status": "FINISHED",
+                "productionOrder": {
+                  "id": 2978,
+                  "company": {
+                    "id": 1001,
+                    "code": "FS",
+                    "person": {
+                      "id": 1001,
+                      "type": "CORPORATION",
+                      "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                      "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                      "nationality": {
+                        "id": 1030,
+                        "name": "Brasil",
+                        "codeA2": "BR",
+                        "codeA3": "BRA",
+                        "codeN": "076",
+                        "tags": "#system,southAmerica",
+                        "properties": {
+                          "#user": "system@personalsoft.com.br",
+                          "#userId": "0",
+                          "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                          "fiscal_br_cPais": "1058"
+                        }
+                      },
+                      "documentType": "BR_CNPJ",
+                      "documentNumber": "20.902.434/0001-94",
+                      "document2Type": "BR_INSCRICAO_ESTADUAL",
+                      "document2Number": "536065890119",
+                      "zipcode": "13632-626",
+                      "street": "RUA GENTIL JOSUÉ DE CARLI",
+                      "number": "230",
+                      "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                      "city": {
+                        "id": 6153,
+                        "name": "Pirassununga",
+                        "state": {
+                          "id": 1026,
+                          "code": "SP",
+                          "name": "São Paulo",
+                          "country": {
+                            "id": 1030,
+                            "name": "Brasil",
+                            "codeA2": "BR",
+                            "codeA3": "BRA",
+                            "codeN": "076",
+                            "tags": "#system,southAmerica",
+                            "properties": {
+                              "#user": "system@personalsoft.com.br",
+                              "#userId": "0",
+                              "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                              "fiscal_br_cPais": "1058"
+                            }
+                          },
+                          "tags": "#system,sudeste",
+                          "properties": {
+                            "#user": "system@personalsoft.com.br",
+                            "#userId": "0",
+                            "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                            "fiscal_br_cUF": "35"
+                          }
+                        },
+                        "tags": "#system",
+                        "properties": {
+                          "fiscal_br_cMun": "3539301"
+                        }
+                      },
+                      "phone": "(19) 9804-5973",
+                      "codeConversionList": {
+                        "id": 3007,
+                        "code": "3007",
+                        "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": 1,
+                          "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "fiscalProfilePerson": {
+                        "id": 1168,
+                        "fiscalRegion": {
+                          "id": 1001,
+                          "code": "BR",
+                          "tags": "#system"
+                        },
+                        "description": "Regime Normal SP Spoljaric",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": 1,
+                          "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "personGroup": {
+                        "id": 1011,
+                        "code": "1011",
+                        "description": "REVENDA",
+                        "properties": {
+                          "#user": "ads.alessandrac@hotmail.com",
+                          "#userId": 1176,
+                          "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "personShipping": {
+                        "id": 1001,
+                        "type": "CORPORATION",
+                        "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                        "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                        "nationality": {
+                          "id": 1030,
+                          "name": "Brasil",
+                          "codeA2": "BR",
+                          "codeA3": "BRA",
+                          "codeN": "076",
+                          "tags": "#system,southAmerica",
+                          "properties": {
+                            "#user": "system@personalsoft.com.br",
+                            "#userId": "0",
+                            "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                            "fiscal_br_cPais": "1058"
+                          }
+                        },
+                        "documentType": "BR_CNPJ",
+                        "documentNumber": "20.902.434/0001-94",
+                        "document2Type": "BR_INSCRICAO_ESTADUAL",
+                        "document2Number": "536065890119",
+                        "zipcode": "13632-626",
+                        "street": "RUA GENTIL JOSUÉ DE CARLI",
+                        "number": "230",
+                        "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                        "city": {
+                          "id": 6153,
+                          "name": "Pirassununga",
+                          "state": {
+                            "id": 1026,
+                            "code": "SP",
+                            "name": "São Paulo",
+                            "country": {
+                              "id": 1030,
+                              "name": "Brasil",
+                              "codeA2": "BR",
+                              "codeA3": "BRA",
+                              "codeN": "076",
+                              "tags": "#system,southAmerica",
+                              "properties": {
+                                "#user": "system@personalsoft.com.br",
+                                "#userId": "0",
+                                "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                                "fiscal_br_cPais": "1058"
+                              }
+                            },
+                            "tags": "#system,sudeste",
+                            "properties": {
+                              "#user": "system@personalsoft.com.br",
+                              "#userId": "0",
+                              "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                              "fiscal_br_cUF": "35"
+                            }
+                          },
+                          "tags": "#system",
+                          "properties": {
+                            "fiscal_br_cMun": "3539301"
+                          }
+                        },
+                        "phone": "(19) 9804-5973",
+                        "codeConversionList": {
+                          "id": 3007,
+                          "code": "3007",
+                          "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                          "properties": {
+                            "#user": "support@personalsoft.com.br",
+                            "#userId": 1,
+                            "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "fiscalProfilePerson": {
+                          "id": 1168,
+                          "fiscalRegion": {
+                            "id": 1001,
+                            "code": "BR",
+                            "tags": "#system"
+                          },
+                          "description": "Regime Normal SP Spoljaric",
+                          "properties": {
+                            "#user": "support@personalsoft.com.br",
+                            "#userId": 1,
+                            "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "personGroup": {
+                          "id": 1011,
+                          "code": "1011",
+                          "description": "REVENDA",
+                          "properties": {
+                            "#user": "ads.alessandrac@hotmail.com",
+                            "#userId": 1176,
+                            "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "personShipping": null,
+                        "tags": "#company,customer,shipping,supplier",
+                        "properties": {
+                          "freightType": "ISSUER"
+                        }
+                      },
+                      "tags": "#company,customer,shipping,supplier",
+                      "properties": {
+                        "freightType": "ISSUER"
+                      }
+                    },
+                    "locale": "pt_BR",
+                    "timeZone": "America/Sao_Paulo",
+                    "society": {
+                      "id": 1001,
+                      "code": "FSPOL",
+                      "description": "Frigospol",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:27:11.640524091-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "fiscalProfileCompany": {
+                      "id": 1168,
+                      "fiscalRegion": {
+                        "id": 1001,
+                        "code": "BR",
+                        "tags": "#system"
+                      },
+                      "description": "Regime Normal SP Spoljaric",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "currency": {
+                      "id": 1001,
+                      "code": "BRL",
+                      "symbol": "R$",
+                      "tags": "#system"
+                    },
+                    "stockCluster": {
+                      "id": 1001,
+                      "code": "SPOL",
+                      "description": "SPOL",
+                      "assetValuationMethod": "WAC",
+                      "priceListCost": {
+                        "id": 1001,
+                        "type": "PURCHASE",
+                        "code": "spol_custo",
+                        "description": "Lista padrão de custo Frigospol",
+                        "currency": {
+                          "id": 1001,
+                          "code": "BRL",
+                          "symbol": "R$",
+                          "tags": "#system"
+                        },
+                        "tags": "asset",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": "1",
+                          "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:43:02.383076297-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "warehouse": {
+                      "id": 1001,
+                      "code": "SPOL",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:43:53.641295672-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "priceList": {
+                      "id": 1001,
+                      "type": "PURCHASE",
+                      "code": "spol_custo",
+                      "description": "Lista padrão de custo Frigospol",
+                      "currency": {
+                        "id": 1001,
+                        "code": "BRL",
+                        "symbol": "R$",
+                        "tags": "#system"
+                      },
+                      "tags": "asset",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "image": {
+                      "id": 1003,
+                      "code": "LOGO",
+                      "contentType": "image/png",
+                      "url": "https://zenerp.s3.amazonaws.com/tenants/frigospol/images/21126a5f-f9cb-4feb-afb8-ed52ba36d501.png",
+                      "size": 42401,
+                      "width": 358,
+                      "height": 120,
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2026-02-05T14:31:27.04857441-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": "1",
+                      "#created": "2024-05-16T09:44:11.501615229-03:00[America/Sao_Paulo]",
+                      "fiscal_br_CRT": "3",
+                      "fiscal_br_tpAmb": "1",
+                      "fiscal_br_keyStore": 1011,
+                      "fiscal_br_sped_indAtiv": "0",
+                      "fiscal_br_sped_indPerfil": "B",
+                      "mailerConfig_financial_receivable": 1001,
+                      "mailerConfig_fiscal_outgoingInvoice": 1001
+                    }
+                  },
+                  "status": "FINISHED",
+                  "productionProfile": {
+                    "id": 1001,
+                    "code": "DEFAULT",
+                    "tags": "acceptUnrequestedConsumption,acceptUnrequestedProduction,productionStepConsumptionAuto",
+                    "properties": {}
+                  },
+                  "code": "2978",
+                  "date": "2026-02-20",
+                  "availabilityDate": "2026-02-20",
+                  "tags": "#singleStep",
+                  "properties": {
+                    "comments": "RASTREABILIDADE: 200226.4127\nPACOTE DE 2KG.."
+                  }
+                },
+                "productPacking": {
+                  "id": 1031,
+                  "product": {
+                    "id": 1031,
+                    "productProfile": {
+                      "id": 1003,
+                      "code": "INDUSTRIA",
+                      "description": "INDUSTRIA",
+                      "tags": "fiscalInfoRequired,productPackingCreate,stock.askQuantity,stock.expirationDate,stock.handlingUnit,stock.lot",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2025-06-03T12:00:01.859134023-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "type": "PRODUCT",
+                    "code": "779",
+                    "description": "Paleta Bov Cubos IQF",
+                    "unit": {
+                      "id": 1008,
+                      "dimension": {
+                        "id": 1003,
+                        "code": "mass",
+                        "description": "@@:/catalog/unit/dimension/code/mass",
+                        "standardUnit": "kg",
+                        "tags": "#system"
+                      },
+                      "code": "kg",
+                      "description": "kg",
+                      "conversionFactor": 1,
+                      "tags": "#system"
+                    },
+                    "fiscalProfileProduct": {
+                      "id": 1127,
+                      "fiscalRegion": {
+                        "id": 1001,
+                        "code": "BR",
+                        "tags": "#system"
+                      },
+                      "description": "02023000.0.PRODUZIDO",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-11-11T15:59:50.40079999-03:00[America/Sao_Paulo]",
+                        "fiscal_br_orig": "0"
+                      }
+                    },
+                    "lengthCm": 0,
+                    "widthCm": 0,
+                    "heightCm": 0,
+                    "volumeM3": 0,
+                    "netWeightKg": 1,
+                    "grossWeightKg": 1,
+                    "category1": {
+                      "id": 1016,
+                      "category": {
+                        "id": 1001,
+                        "code": "PRODUCT1",
+                        "description": "CLASSIFICAÇÃO",
+                        "tags": "#system",
+                        "properties": {}
+                      },
+                      "code": "BOVINO_MANIPULADO",
+                      "description": "BOVINO MANIPULADO",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-08-07T13:58:45.455107366-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "category2": {
+                      "id": 1015,
+                      "category": {
+                        "id": 1002,
+                        "code": "PRODUCT2",
+                        "description": "PRODUCT2",
+                        "tags": "#system",
+                        "properties": {}
+                      },
+                      "code": "BOVINOS",
+                      "description": "BOVINOS",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-08-07T13:58:45.189373563-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "category3": {
+                      "id": 1088,
+                      "category": {
+                        "id": 1003,
+                        "code": "PRODUCT3",
+                        "description": "Bloco K",
+                        "tags": "#system,sped",
+                        "properties": {}
+                      },
+                      "code": "04",
+                      "description": "Produto acabado",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2025-01-28T15:33:37.334121596-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:48:35.735882652-03:00[America/Sao_Paulo]",
+                      "fiscal_br_NCM": "0202.30.00",
+                      "fiscal_br_CEST": null,
+                      "fiscal_br_NCM ": "0202.30.00",
+                      " fiscal_br_NCM ": "0202.30.00"
+                    }
+                  },
+                  "code": "779",
+                  "units": 1,
+                  "lengthCm": 0,
+                  "widthCm": 0,
+                  "heightCm": 0,
+                  "volumeM3": 0,
+                  "netWeightKg": 1,
+                  "grossWeightKg": 1,
+                  "tags": "#default",
+                  "properties": {}
+                },
+                "quantity": 92,
+                "servedQuantity": 92,
+                "properties": {}
+              },
+              "productPacking": {
+                "id": 1031,
+                "product": {
+                  "id": 1031,
+                  "productProfile": {
+                    "id": 1003,
+                    "code": "INDUSTRIA",
+                    "description": "INDUSTRIA",
+                    "tags": "fiscalInfoRequired,productPackingCreate,stock.askQuantity,stock.expirationDate,stock.handlingUnit,stock.lot",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-06-03T12:00:01.859134023-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "type": "PRODUCT",
+                  "code": "779",
+                  "description": "Paleta Bov Cubos IQF",
+                  "unit": {
+                    "id": 1008,
+                    "dimension": {
+                      "id": 1003,
+                      "code": "mass",
+                      "description": "@@:/catalog/unit/dimension/code/mass",
+                      "standardUnit": "kg",
+                      "tags": "#system"
+                    },
+                    "code": "kg",
+                    "description": "kg",
+                    "conversionFactor": 1,
+                    "tags": "#system"
+                  },
+                  "fiscalProfileProduct": {
+                    "id": 1127,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "02023000.0.PRODUZIDO",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-11-11T15:59:50.40079999-03:00[America/Sao_Paulo]",
+                      "fiscal_br_orig": "0"
+                    }
+                  },
+                  "lengthCm": 0,
+                  "widthCm": 0,
+                  "heightCm": 0,
+                  "volumeM3": 0,
+                  "netWeightKg": 1,
+                  "grossWeightKg": 1,
+                  "category1": {
+                    "id": 1016,
+                    "category": {
+                      "id": 1001,
+                      "code": "PRODUCT1",
+                      "description": "CLASSIFICAÇÃO",
+                      "tags": "#system",
+                      "properties": {}
+                    },
+                    "code": "BOVINO_MANIPULADO",
+                    "description": "BOVINO MANIPULADO",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:58:45.455107366-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "category2": {
+                    "id": 1015,
+                    "category": {
+                      "id": 1002,
+                      "code": "PRODUCT2",
+                      "description": "PRODUCT2",
+                      "tags": "#system",
+                      "properties": {}
+                    },
+                    "code": "BOVINOS",
+                    "description": "BOVINOS",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:58:45.189373563-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "category3": {
+                    "id": 1088,
+                    "category": {
+                      "id": 1003,
+                      "code": "PRODUCT3",
+                      "description": "Bloco K",
+                      "tags": "#system,sped",
+                      "properties": {}
+                    },
+                    "code": "04",
+                    "description": "Produto acabado",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-01-28T15:33:37.334121596-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2024-08-07T13:48:35.735882652-03:00[America/Sao_Paulo]",
+                    "fiscal_br_NCM": "0202.30.00",
+                    "fiscal_br_CEST": null,
+                    "fiscal_br_NCM ": "0202.30.00",
+                    " fiscal_br_NCM ": "0202.30.00"
+                  }
+                },
+                "code": "779",
+                "units": 1,
+                "lengthCm": 0,
+                "widthCm": 0,
+                "heightCm": 0,
+                "volumeM3": 0,
+                "netWeightKg": 1,
+                "grossWeightKg": 1,
+                "tags": "#default",
+                "properties": {}
+              },
+              "quantity": 92,
+              "weight": 1,
+              "servedQuantity": 92,
+              "properties": {}
+            }
+          ],
+          "consumptions": [
+            {
+              "id": 2706,
+              "productionStep": {
+                "id": 2983,
+                "status": "FINISHED",
+                "productionOrder": {
+                  "id": 2978,
+                  "company": {
+                    "id": 1001,
+                    "code": "FS",
+                    "person": {
+                      "id": 1001,
+                      "type": "CORPORATION",
+                      "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                      "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                      "nationality": {
+                        "id": 1030,
+                        "name": "Brasil",
+                        "codeA2": "BR",
+                        "codeA3": "BRA",
+                        "codeN": "076",
+                        "tags": "#system,southAmerica",
+                        "properties": {
+                          "#user": "system@personalsoft.com.br",
+                          "#userId": "0",
+                          "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                          "fiscal_br_cPais": "1058"
+                        }
+                      },
+                      "documentType": "BR_CNPJ",
+                      "documentNumber": "20.902.434/0001-94",
+                      "document2Type": "BR_INSCRICAO_ESTADUAL",
+                      "document2Number": "536065890119",
+                      "zipcode": "13632-626",
+                      "street": "RUA GENTIL JOSUÉ DE CARLI",
+                      "number": "230",
+                      "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                      "city": {
+                        "id": 6153,
+                        "name": "Pirassununga",
+                        "state": {
+                          "id": 1026,
+                          "code": "SP",
+                          "name": "São Paulo",
+                          "country": {
+                            "id": 1030,
+                            "name": "Brasil",
+                            "codeA2": "BR",
+                            "codeA3": "BRA",
+                            "codeN": "076",
+                            "tags": "#system,southAmerica",
+                            "properties": {
+                              "#user": "system@personalsoft.com.br",
+                              "#userId": "0",
+                              "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                              "fiscal_br_cPais": "1058"
+                            }
+                          },
+                          "tags": "#system,sudeste",
+                          "properties": {
+                            "#user": "system@personalsoft.com.br",
+                            "#userId": "0",
+                            "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                            "fiscal_br_cUF": "35"
+                          }
+                        },
+                        "tags": "#system",
+                        "properties": {
+                          "fiscal_br_cMun": "3539301"
+                        }
+                      },
+                      "phone": "(19) 9804-5973",
+                      "codeConversionList": {
+                        "id": 3007,
+                        "code": "3007",
+                        "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": 1,
+                          "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "fiscalProfilePerson": {
+                        "id": 1168,
+                        "fiscalRegion": {
+                          "id": 1001,
+                          "code": "BR",
+                          "tags": "#system"
+                        },
+                        "description": "Regime Normal SP Spoljaric",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": 1,
+                          "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "personGroup": {
+                        "id": 1011,
+                        "code": "1011",
+                        "description": "REVENDA",
+                        "properties": {
+                          "#user": "ads.alessandrac@hotmail.com",
+                          "#userId": 1176,
+                          "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "personShipping": {
+                        "id": 1001,
+                        "type": "CORPORATION",
+                        "name": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                        "fantasyName": "SPOLJARIC COMERCIAL DO BRASIL",
+                        "nationality": {
+                          "id": 1030,
+                          "name": "Brasil",
+                          "codeA2": "BR",
+                          "codeA3": "BRA",
+                          "codeN": "076",
+                          "tags": "#system,southAmerica",
+                          "properties": {
+                            "#user": "system@personalsoft.com.br",
+                            "#userId": "0",
+                            "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                            "fiscal_br_cPais": "1058"
+                          }
+                        },
+                        "documentType": "BR_CNPJ",
+                        "documentNumber": "20.902.434/0001-94",
+                        "document2Type": "BR_INSCRICAO_ESTADUAL",
+                        "document2Number": "536065890119",
+                        "zipcode": "13632-626",
+                        "street": "RUA GENTIL JOSUÉ DE CARLI",
+                        "number": "230",
+                        "district": "PÓLO INDUSTRIAL GUILHERME MÜLLER FILHO",
+                        "city": {
+                          "id": 6153,
+                          "name": "Pirassununga",
+                          "state": {
+                            "id": 1026,
+                            "code": "SP",
+                            "name": "São Paulo",
+                            "country": {
+                              "id": 1030,
+                              "name": "Brasil",
+                              "codeA2": "BR",
+                              "codeA3": "BRA",
+                              "codeN": "076",
+                              "tags": "#system,southAmerica",
+                              "properties": {
+                                "#user": "system@personalsoft.com.br",
+                                "#userId": "0",
+                                "#created": "2024-05-07T12:50:48.909360544-03:00[America/Sao_Paulo]",
+                                "fiscal_br_cPais": "1058"
+                              }
+                            },
+                            "tags": "#system,sudeste",
+                            "properties": {
+                              "#user": "system@personalsoft.com.br",
+                              "#userId": "0",
+                              "#created": "2024-05-07T12:50:51.708133509-03:00[America/Sao_Paulo]",
+                              "fiscal_br_cUF": "35"
+                            }
+                          },
+                          "tags": "#system",
+                          "properties": {
+                            "fiscal_br_cMun": "3539301"
+                          }
+                        },
+                        "phone": "(19) 9804-5973",
+                        "codeConversionList": {
+                          "id": 3007,
+                          "code": "3007",
+                          "description": "SPOLJARIC COMERCIAL DO BRASIL LTDA",
+                          "properties": {
+                            "#user": "support@personalsoft.com.br",
+                            "#userId": 1,
+                            "#created": "2025-01-21T14:25:10.095719369-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "fiscalProfilePerson": {
+                          "id": 1168,
+                          "fiscalRegion": {
+                            "id": 1001,
+                            "code": "BR",
+                            "tags": "#system"
+                          },
+                          "description": "Regime Normal SP Spoljaric",
+                          "properties": {
+                            "#user": "support@personalsoft.com.br",
+                            "#userId": 1,
+                            "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "personGroup": {
+                          "id": 1011,
+                          "code": "1011",
+                          "description": "REVENDA",
+                          "properties": {
+                            "#user": "ads.alessandrac@hotmail.com",
+                            "#userId": 1176,
+                            "#created": "2025-01-14T17:14:07.393491469-03:00[America/Sao_Paulo]"
+                          }
+                        },
+                        "personShipping": null,
+                        "tags": "#company,customer,shipping,supplier",
+                        "properties": {
+                          "freightType": "ISSUER"
+                        }
+                      },
+                      "tags": "#company,customer,shipping,supplier",
+                      "properties": {
+                        "freightType": "ISSUER"
+                      }
+                    },
+                    "locale": "pt_BR",
+                    "timeZone": "America/Sao_Paulo",
+                    "society": {
+                      "id": 1001,
+                      "code": "FSPOL",
+                      "description": "Frigospol",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:27:11.640524091-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "fiscalProfileCompany": {
+                      "id": 1168,
+                      "fiscalRegion": {
+                        "id": 1001,
+                        "code": "BR",
+                        "tags": "#system"
+                      },
+                      "description": "Regime Normal SP Spoljaric",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-10-29T14:04:12.857179753-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "currency": {
+                      "id": 1001,
+                      "code": "BRL",
+                      "symbol": "R$",
+                      "tags": "#system"
+                    },
+                    "stockCluster": {
+                      "id": 1001,
+                      "code": "SPOL",
+                      "description": "SPOL",
+                      "assetValuationMethod": "WAC",
+                      "priceListCost": {
+                        "id": 1001,
+                        "type": "PURCHASE",
+                        "code": "spol_custo",
+                        "description": "Lista padrão de custo Frigospol",
+                        "currency": {
+                          "id": 1001,
+                          "code": "BRL",
+                          "symbol": "R$",
+                          "tags": "#system"
+                        },
+                        "tags": "asset",
+                        "properties": {
+                          "#user": "support@personalsoft.com.br",
+                          "#userId": "1",
+                          "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                        }
+                      },
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:43:02.383076297-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "warehouse": {
+                      "id": 1001,
+                      "code": "SPOL",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:43:53.641295672-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "priceList": {
+                      "id": 1001,
+                      "type": "PURCHASE",
+                      "code": "spol_custo",
+                      "description": "Lista padrão de custo Frigospol",
+                      "currency": {
+                        "id": 1001,
+                        "code": "BRL",
+                        "symbol": "R$",
+                        "tags": "#system"
+                      },
+                      "tags": "asset",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": "1",
+                        "#created": "2024-05-16T09:36:08.644852161-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "image": {
+                      "id": 1003,
+                      "code": "LOGO",
+                      "contentType": "image/png",
+                      "url": "https://zenerp.s3.amazonaws.com/tenants/frigospol/images/21126a5f-f9cb-4feb-afb8-ed52ba36d501.png",
+                      "size": 42401,
+                      "width": 358,
+                      "height": 120,
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2026-02-05T14:31:27.04857441-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": "1",
+                      "#created": "2024-05-16T09:44:11.501615229-03:00[America/Sao_Paulo]",
+                      "fiscal_br_CRT": "3",
+                      "fiscal_br_tpAmb": "1",
+                      "fiscal_br_keyStore": 1011,
+                      "fiscal_br_sped_indAtiv": "0",
+                      "fiscal_br_sped_indPerfil": "B",
+                      "mailerConfig_financial_receivable": 1001,
+                      "mailerConfig_fiscal_outgoingInvoice": 1001
+                    }
+                  },
+                  "status": "FINISHED",
+                  "productionProfile": {
+                    "id": 1001,
+                    "code": "DEFAULT",
+                    "tags": "acceptUnrequestedConsumption,acceptUnrequestedProduction,productionStepConsumptionAuto",
+                    "properties": {}
+                  },
+                  "code": "2978",
+                  "date": "2026-02-20",
+                  "availabilityDate": "2026-02-20",
+                  "tags": "#singleStep",
+                  "properties": {
+                    "comments": "RASTREABILIDADE: 200226.4127\nPACOTE DE 2KG.."
+                  }
+                },
+                "productPacking": {
+                  "id": 1031,
+                  "product": {
+                    "id": 1031,
+                    "productProfile": {
+                      "id": 1003,
+                      "code": "INDUSTRIA",
+                      "description": "INDUSTRIA",
+                      "tags": "fiscalInfoRequired,productPackingCreate,stock.askQuantity,stock.expirationDate,stock.handlingUnit,stock.lot",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2025-06-03T12:00:01.859134023-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "type": "PRODUCT",
+                    "code": "779",
+                    "description": "Paleta Bov Cubos IQF",
+                    "unit": {
+                      "id": 1008,
+                      "dimension": {
+                        "id": 1003,
+                        "code": "mass",
+                        "description": "@@:/catalog/unit/dimension/code/mass",
+                        "standardUnit": "kg",
+                        "tags": "#system"
+                      },
+                      "code": "kg",
+                      "description": "kg",
+                      "conversionFactor": 1,
+                      "tags": "#system"
+                    },
+                    "fiscalProfileProduct": {
+                      "id": 1127,
+                      "fiscalRegion": {
+                        "id": 1001,
+                        "code": "BR",
+                        "tags": "#system"
+                      },
+                      "description": "02023000.0.PRODUZIDO",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-11-11T15:59:50.40079999-03:00[America/Sao_Paulo]",
+                        "fiscal_br_orig": "0"
+                      }
+                    },
+                    "lengthCm": 0,
+                    "widthCm": 0,
+                    "heightCm": 0,
+                    "volumeM3": 0,
+                    "netWeightKg": 1,
+                    "grossWeightKg": 1,
+                    "category1": {
+                      "id": 1016,
+                      "category": {
+                        "id": 1001,
+                        "code": "PRODUCT1",
+                        "description": "CLASSIFICAÇÃO",
+                        "tags": "#system",
+                        "properties": {}
+                      },
+                      "code": "BOVINO_MANIPULADO",
+                      "description": "BOVINO MANIPULADO",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-08-07T13:58:45.455107366-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "category2": {
+                      "id": 1015,
+                      "category": {
+                        "id": 1002,
+                        "code": "PRODUCT2",
+                        "description": "PRODUCT2",
+                        "tags": "#system",
+                        "properties": {}
+                      },
+                      "code": "BOVINOS",
+                      "description": "BOVINOS",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2024-08-07T13:58:45.189373563-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "category3": {
+                      "id": 1088,
+                      "category": {
+                        "id": 1003,
+                        "code": "PRODUCT3",
+                        "description": "Bloco K",
+                        "tags": "#system,sped",
+                        "properties": {}
+                      },
+                      "code": "04",
+                      "description": "Produto acabado",
+                      "properties": {
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2025-01-28T15:33:37.334121596-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:48:35.735882652-03:00[America/Sao_Paulo]",
+                      "fiscal_br_NCM": "0202.30.00",
+                      "fiscal_br_CEST": null,
+                      "fiscal_br_NCM ": "0202.30.00",
+                      " fiscal_br_NCM ": "0202.30.00"
+                    }
+                  },
+                  "code": "779",
+                  "units": 1,
+                  "lengthCm": 0,
+                  "widthCm": 0,
+                  "heightCm": 0,
+                  "volumeM3": 0,
+                  "netWeightKg": 1,
+                  "grossWeightKg": 1,
+                  "tags": "#default",
+                  "properties": {}
+                },
+                "quantity": 92,
+                "servedQuantity": 92,
+                "properties": {}
+              },
+              "productPacking": {
+                "id": 1029,
+                "product": {
+                  "id": 1029,
+                  "productProfile": {
+                    "id": 1001,
+                    "code": "DEFAULT",
+                    "description": "PADRAO",
+                    "tags": "@default,fiscalInfoRequired,productPackingCreate,stock.askQuantity,stock.handlingUnit,stock.lot",
+                    "properties": {}
+                  },
+                  "type": "PRODUCT",
+                  "code": "777",
+                  "description": "Paleta Bov s/ Músculo Cong.",
+                  "unit": {
+                    "id": 1008,
+                    "dimension": {
+                      "id": 1003,
+                      "code": "mass",
+                      "description": "@@:/catalog/unit/dimension/code/mass",
+                      "standardUnit": "kg",
+                      "tags": "#system"
+                    },
+                    "code": "kg",
+                    "description": "kg",
+                    "conversionFactor": 1,
+                    "tags": "#system"
+                  },
+                  "fiscalProfileProduct": {
+                    "id": 1001,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "02023000.0",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:56:29.964507605-03:00[America/Sao_Paulo]",
+                      "fiscal_br_orig": "0"
+                    }
+                  },
+                  "lengthCm": 0,
+                  "widthCm": 0,
+                  "heightCm": 0,
+                  "volumeM3": 0,
+                  "netWeightKg": 1,
+                  "grossWeightKg": 1,
+                  "category1": {
+                    "id": 1014,
+                    "category": {
+                      "id": 1001,
+                      "code": "PRODUCT1",
+                      "description": "CLASSIFICAÇÃO",
+                      "tags": "#system",
+                      "properties": {}
+                    },
+                    "code": "BOVINO_SEM_OSSO",
+                    "description": "BOVINO SEM OSSO",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:58:45.036998731-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "category2": {
+                    "id": 1015,
+                    "category": {
+                      "id": 1002,
+                      "code": "PRODUCT2",
+                      "description": "PRODUCT2",
+                      "tags": "#system",
+                      "properties": {}
+                    },
+                    "code": "BOVINOS",
+                    "description": "BOVINOS",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2024-08-07T13:58:45.189373563-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "category3": {
+                    "id": 1084,
+                    "category": {
+                      "id": 1003,
+                      "code": "PRODUCT3",
+                      "description": "Bloco K",
+                      "tags": "#system,sped",
+                      "properties": {}
+                    },
+                    "code": "00",
+                    "description": "Mercadoria para revenda",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-01-28T15:31:19.975723529-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2024-08-07T13:48:35.389005589-03:00[America/Sao_Paulo]",
+                    "fiscal_br_NCM": "0202.30.00",
+                    "fiscal_br_CEST": null,
+                    "fiscal_br_NCM ": "0202.30.00",
+                    " fiscal_br_NCM ": "0202.30.00"
+                  }
+                },
+                "code": "777",
+                "units": 1,
+                "lengthCm": 0,
+                "widthCm": 0,
+                "heightCm": 0,
+                "volumeM3": 0,
+                "netWeightKg": 1,
+                "grossWeightKg": 1,
+                "tags": "#default",
+                "properties": {}
+              },
+              "quantity": 92,
+              "servedQuantity": 0,
+              "tags": "#auto",
+              "properties": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

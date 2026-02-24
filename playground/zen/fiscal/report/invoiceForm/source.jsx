@@ -6,7 +6,7 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((item, index) => (
-        <div className="report-container">
+        <div key={item.id} className="report-container">
 
           {!item.nfeOut ? <div className="stamp">SEM VALIDADE FISCAL</div> : null}
 
@@ -16,7 +16,7 @@ export default function ({ data = [], t }) {
               <div className="grid band h" style={{ gridTemplateColumns: '4fr 1fr' }}>
                 <div className="band v">
                   <div className="slot" style={{ fontSize: '90%' }}>
-                    Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number, 0)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
+                    Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº {number(item.number)}, emissão: {date(item.date)}, valor total {currency(item.totalValue)}, destinatário {item.person.name}, endereço {address(item.person)}.
                   </div>
                   <div className="band h" style={{ minHeight: "1cm" }}>
                     <div className="slot">
@@ -31,7 +31,7 @@ export default function ({ data = [], t }) {
                 </div>
                 <div className="slot flex v align-center justify-space-around text-center">
                   <div><b>NF-e</b></div>
-                  <div>Nº {number(item.number)} Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
+                  <div>Nº {number(item.number)}<br />Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
                 </div>
               </div>
             </div>
@@ -43,21 +43,21 @@ export default function ({ data = [], t }) {
             <div className="frame">
               <div className="band h" style={{ gridTemplateColumns: "2fr 5fr 2fr 7fr" }}>
                 <div className="slot">
-                  <img src={item.company.image.url} />
+                  <img src={item.company.image?.url} />
                 </div>
                 <div className="slot flex v align-center justify-space-around text-center">
                   <label>Identificação do emitente</label>
                   <strong>{item.company.person.name}</strong>
                   <div>{address(item.company.person)}</div>
-                  <div>{[item.company.person.district, item.company.person.city.name, item.company.person.city.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(', ')}</div>
+                  <div>{[item.company.person.district, item.company.person.city?.name, item.company.person.city?.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(', ')}</div>
                   {item.company.person.phone && <div>{t("/@word/phone")} {item.company.person.phone}</div>}
                   {item.company.person.email && <div>{t("/@word/email")} {item.company.person.email}</div>}
                 </div>
                 <div className="slot flex v align-center justify-space-around text-center" style={{ justifyContent: "space-around" }}>
                   <strong>DANFE</strong>
                   <div>Documento auxiliar de nota fiscal eletrônica</div>
-                  <div>1 - Saída</div>
-                  <div>Nº {number(item.number)} Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
+                  <div>{item.flow === "IN" ? "0 - Entrada" : "1 - Saída"}</div>
+                  <div>Nº {number(item.number)}<br />Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
                 </div>
                 <div className="band v">
                   <div className="slot">
@@ -79,7 +79,7 @@ export default function ({ data = [], t }) {
               <div className="band h">
                 <div className="slot">
                   <label>Natureza da operação</label>
-                  <div>{item.items[0]?.taxationOperation.description}</div>
+                  <div>{item.items[0]?.taxationOperation?.description}</div>
                 </div>
                 <div className="slot">
                   <label>Protocolo de autorização de uso</label>
@@ -135,7 +135,7 @@ export default function ({ data = [], t }) {
                   </div>
                   <div className="slot">
                     <label>Data saída</label>
-                    <div></div>
+                    <div>{date(item.shippingDateTime)}</div>
                   </div>
                 </div>
                 <div className="band h" style={{ gridTemplateColumns: '45% 5% 17% 17% 16%' }}>
@@ -157,42 +157,46 @@ export default function ({ data = [], t }) {
                   </div>
                   <div className="slot">
                     <label>Hora saída</label>
-                    <div></div>
+                    <div>{time(item.shippingDateTime)}</div>
                   </div>
                 </div>
               </div>
 
               {/* BILLING */}
-              <label className="header">Fatura / Duplicatas</label>
-              <div className="grid" style={{ gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--gap)' }}>
-                {[0, 1, 2].map((colIndex) => (
-                  <div key={colIndex} className="frame">
-                    <table style={{ width: "100%", borderCollapse: 'collapse' }}>
-                      <thead>
-                        <tr>
-                          <th>{t("/@word/number")}</th>
-                          <th>{t("/@word/dueDate")}</th>
-                          <th className="number">{t("/@word/value")}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {Array.from({ length: Math.ceil(item.billingTitles?.length / 3) }).map((_, rowIndex) => {
-                          const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles?.length / 3));
-                          const billingTitle = item.billingTitles?.[titleIndex];
-
-                          return (
-                            <tr key={rowIndex}>
-                              <td>{billingTitle?.code || <>&nbsp;</>}</td>
-                              <td className="date">{billingTitle?.dueDate ? date(billingTitle.dueDate) : <>&nbsp;</>}</td>
-                              <td className="number">{billingTitle?.value ? currency(billingTitle.value) : <>&nbsp;</>}</td>
+              {item.billingTitles?.length > 0 && (
+                <>
+                  <label className="header">Fatura / Duplicatas</label>
+                  <div className="grid" style={{ gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--gap)' }}>
+                    {[0, 1, 2].map((colIndex) => (
+                      <div key={colIndex} className="frame">
+                        <table style={{ width: "100%", borderCollapse: 'collapse' }}>
+                          <thead>
+                            <tr>
+                              <th>{t("/@word/number")}</th>
+                              <th>{t("/@word/dueDate")}</th>
+                              <th className="number">{t("/@word/value")}</th>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                          </thead>
+                          <tbody>
+                            {Array.from({ length: Math.ceil(item.billingTitles?.length / 3) }).map((_, rowIndex) => {
+                              const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles?.length / 3));
+                              const billingTitle = item.billingTitles?.[titleIndex];
+
+                              return (
+                                <tr key={rowIndex}>
+                                  <td>{billingTitle?.code || <>&nbsp;</>}</td>
+                                  <td className="date">{billingTitle?.dueDate ? date(billingTitle.dueDate) : <>&nbsp;</>}</td>
+                                  <td className="number">{billingTitle?.value ? currency(billingTitle.value) : <>&nbsp;</>}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              )}
 
               {/* IMPOSTO */}
               <label className="header">Cálculo do imposto</label>
@@ -337,7 +341,7 @@ export default function ({ data = [], t }) {
               {/* PRODUTOS TABLE */}
               <label className="header">Dados dos produtos / serviços</label>
               <div className="frame">
-                <table>
+                <table className="custom">
                   <thead>
                     <tr>
                       <th>Descrição do produto / serviço</th>
@@ -359,14 +363,21 @@ export default function ({ data = [], t }) {
                       <tr key={index}>
                         <td>{[
                           item1.productPacking.code,
-                          item1.productPacking.product.description,
-                          item1.productPacking.complement,
-                          item1.productPacking.variant.description].filter(Boolean).join(', ')}</td>
+                          item1.properties?.description ?? item1.properties?.descriptionCalc,
+                          item1.properties?.complement ?? item1.properties?.complementCalc
+                        ].filter(Boolean).join(', ')}</td>
                         <td>{item1.productPacking.product.properties?.fiscal_br_NCM}</td>
-                        <td>102</td>
-                        <td>{item1.taxationOperation.code}</td>
-                        <td>{item1.productPacking.product.unit.code}</td>
-                        <td className="number">{number(item1.quantity)}</td>
+                        <td>{(item1.assetTag?.fiscalProfileProduct?.properties?.fiscal_br_orig ?? item1.productPacking.product.fiscalProfileProduct?.properties?.fiscal_br_orig ?? "0") +
+                          (item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.properties?.fiscal_br_CST ?? "00")}</td>
+                        <td>{item1.taxationOperation?.code}</td>
+                        <td>{item1.productPacking.product.unit?.code}</td>
+                        <td className="number">{number(item1.quantity, {
+                          minimumFractionDigits:
+                            item1.productPacking.properties?.decimalPlaces ??
+                            item1.productPacking.product.properties?.decimalPlaces ??
+                            item1.productPacking.product.productProfile?.properties?.decimalPlaces ??
+                            0,
+                        })}</td>
                         <td className="number">{currency(item1.unitValue)}</td>
                         <td className="number">{currency(item1.productValue)}</td>
                         <td className="number">{currency(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.baseValue ?? 0)}</td>
@@ -385,10 +396,10 @@ export default function ({ data = [], t }) {
                 <div className="frame">
                   <div className="slot">
                     <label>Informações complementares</label>
-                    <div>{[
+                    <pre>{[
                       item.properties?.["#comments"],
                       item.properties?.["comments"],
-                    ].filter(Boolean).join('\n')}</div>
+                    ].filter(Boolean).join('\n')}</pre>
                   </div>
                 </div>
                 <div className="frame">
@@ -414,9 +425,15 @@ function date(s) {
   return date.toLocaleDateString("pt-BR");
 }
 
-function number(v, digits = 0) {
+function time(s) {
+  if (s == null) return null;
+  const date = new Date(s);
+  return date.toLocaleTimeString("pt-BR");
+}
+
+function number(v, args) {
   if (v == null) return null;
-  return v.toLocaleString("pt-BR", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  return v.toLocaleString("pt-BR", args);
 }
 
 function currency(v, { currency = "BRL", digits = 2 } = {}) {

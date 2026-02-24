@@ -1,3 +1,77 @@
+## INSTALAÇÃO
+
+* Instalar o DBeaver https://dbeaver.io/download
+* Clicar em + para criar um nova conexão com banco de dados
+  * Banco de dados: PostgreSQL
+  * Host: 192.168.0.22
+  * Database: wms
+  * Username: luxcar
+  * Password: luxcar
+  * Clicar em `Finish`
+
+
+
+## EXPORTAÇÃO DOS DADOS
+
+* Conectar no banco de dados
+* Clicar em `SQL Editor` > `New SQL Script`
+* Colar o texto abaixo na janela de edição
+
+```sql
+SELECT
+  C1.CODIGO AS "carga_codigo",
+  C4.NOME AS "carga_transportadora",
+  S1.CODIGO AS "ordemSeparacao_codigo",
+  V1.CODIGO AS "volume_code",
+  N1.ID AS "invoice_id",
+  N1.NUMERO AS "invoice_number",
+  C2.NOME AS "person_name",
+  '' AS "person_address",
+  C3.NOME AS "person_city",
+  C3.ESTADO_SIGLA AS "person_state",
+  P1.CODIGO AS "product_code",
+  P1.DESCRICAO AS "product_description",
+  ROW_NUMBER() OVER(PARTITION BY N1.ID ORDER BY V1.CODIGO) AS "item_num",
+  COUNT(*) OVER(PARTITION BY N1.ID) AS "item_count"
+FROM
+  PS_WMS.CARGA C1
+  INNER JOIN PS_WMS.NOTA_FISCAL N1 ON N1.CARGA_ID = C1.ID
+  INNER JOIN PS_WMS.SEPARACAO_FRAGMENTO SF1 ON SF1.NOTA_FISCAL_ID = N1.ID
+  INNER JOIN PS_WMS.ORDEM_SEPARACAO S1 ON S1.ID = SF1.ORDEM_SEPARACAO_ID 
+  INNER JOIN PS_WMS.VOLUME_LISTA VL1 ON VL1.ID = SF1.VOLUME_LISTA_ID
+  INNER JOIN PS_WMS.VOLUME V1 ON V1.VOLUME_LISTA_ID = VL1.ID 
+  INNER JOIN PS_WMS.VOLUME_ITEM VI1 ON VI1.VOLUME_ID = V1.ID
+  INNER JOIN PS_WMS.ACONDICIONAMENTO A1 ON A1.ID  = VI1.ACONDICIONAMENTO_ID
+  INNER JOIN PS_WMS.PRODUTO P1 ON P1.ID = A1.PRODUTO_ID 
+  INNER JOIN PS_WMS.CONTA C2 ON C2.ID = N1.CONTA_ID
+  INNER JOIN PS_WMS.CIDADE C3 ON C3.ID = C2.CIDADE_ID
+  LEFT JOIN PS_WMS.CONTA C4 ON C4.ID = C1.CONTA_ID_TRANSPORTE
+WHERE
+  C1.CODIGO = :CODIGO_CARGA
+  OR S1.CODIGO = :CODIGO_ORDEM_SEPARACAO
+  OR N1.NUMERO = :NUMERO_NOTA_FISCAL
+ORDER BY
+  N1.NUMERO,
+  N1.ID,
+  V1.CODIGO
+```
+  
+* Clicar com o botão direito do mouse na janela de edição e selecionar `Execute` > `Export from Query`
+  * Informe o código da carga, o código da ordem de separação ou o número da nota fiscal
+  * Selecione o formato `JSON`
+  * Avance e selecione a opção `Copy to clipboard`
+  * Clique em `Proceed`
+  * Os dados serão copiados para a área de transferência
+
+
+
+### GERAÇÃO DAS ETIQUETAS
+
+* Acesse https://report.microservice.zensoft.com.br/public/playground.html
+* Cole os dados na seção `Data`
+* Cole o texto abaixo na seção `Config`
+
+```json
 {
   "engine": "jsx",
   "template": {
@@ -10,3 +84,6 @@
     ]
   }
 }
+```
+
+* Clique em `Generate Report`

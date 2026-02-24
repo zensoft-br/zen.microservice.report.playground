@@ -17,5 +17,8 @@
         "/@word/function/responsible": "Responsável"
       }
     }
+  },
+  "metadata": {
+    "dataSource": "/supply/production/data/productionOrderForm"
   }
 }

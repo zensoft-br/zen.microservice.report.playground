@@ -1,0 +1,51 @@
+.card {
+  border: 1px solid black;
+  border-radius: var(--border-radius);
+  padding: var(--gap);
+}
+
+.padding {
+  padding: 0.5rem;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-1 {
+  flex: 1 1 auto;
+}
+
+.flex.h>* {
+  flex: 1 1 auto;
+}
+
+.flex.h.full {
+  width: 100%;
+}
+
+.panel {
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+
+  background-color: lightgray;
+  border: 1px solid gray;
+}
+
+.xxl {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.xx {
+  background-color: red;
+}
+
+th {
+  text-align: left;
+}
+
+.number {
+  text-align: right;
+}

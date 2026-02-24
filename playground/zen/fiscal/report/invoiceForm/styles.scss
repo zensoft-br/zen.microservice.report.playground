@@ -48,6 +48,10 @@
 
   box-sizing: border-box;
   padding: 0.1rem 0.2rem;
+
+  &>div {
+    min-height: 1.2em;
+  }
 }
 
 hr {

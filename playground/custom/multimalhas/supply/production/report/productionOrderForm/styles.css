@@ -1,23 +1,7 @@
-body {
-  font-family: 'Anek Latin', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.flex {
-  display: flex;
-}
-
-.h {
-  flex-direction: row;
-}
-
-.v {
-  flex-direction: column;
-}
-
-.gap {
-  gap: 0.5rem;
+.card {
+  border: 1px solid black;
+  border-radius: var(--border-radius);
+  padding: var(--gap);
 }
 
 .padding {
@@ -33,7 +17,7 @@ body {
   flex: 1 1 auto;
 }
 
-.flex.h>* {
+.flex.h > * {
   flex: 1 1 auto;
 }
 
@@ -44,7 +28,6 @@ body {
 .panel {
   border-radius: 0.2rem;
   padding: 0.5rem;
-
   background-color: lightgray;
   border: 1px solid gray;
 }

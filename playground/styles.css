@@ -123,30 +123,18 @@ body {
   border-bottom: 1px solid var(--color-border);
   margin-bottom: 0.5rem;
 }
-.report-wrapper .report-container > main section .content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 0.5rem;
-}
-.report-wrapper .report-container > main section .content table th {
-  text-align: left;
-  background: #f8f9fa;
-  padding: 8px;
-  font-size: 9pt;
-}
-.report-wrapper .report-container > main section .content table td {
-  padding: 8px;
-  border-bottom: 1px solid #f1f1f1;
-}
-.report-wrapper .report-container > main section .content table tfoot td {
-  font-weight: bold;
-  border-top: 2px solid #333;
-}
 .report-wrapper .report-container > main section > footer {
   font-size: 9pt;
   font-style: italic;
   color: gray;
   padding-top: 5px;
+}
+.report-wrapper .report-container > main .content table:not(.custom) {
+  width: 100%;
+  border-collapse: collapse;
+}
+.report-wrapper .report-container > main .content table:not(.custom) th {
+  text-align: left;
 }
 .report-wrapper .report-container > footer {
   margin-top: 4rem;
@@ -204,6 +192,9 @@ body {
 }
 .report-wrapper .flex .flex-1 {
   flex: 1;
+}
+.report-wrapper .grid {
+  display: grid;
 }
 .report-wrapper .text-center {
   text-align: center;

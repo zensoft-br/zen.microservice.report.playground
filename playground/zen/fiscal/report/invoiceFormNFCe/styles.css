@@ -1,0 +1,65 @@
+.report-container {
+  font-family: monospace;
+  font-size: 9pt;
+}
+
+@media screen {
+  .report-container {
+    max-width: 8cm;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+}
+
+/* th.number,
+td.number {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+} */
+
+img {
+  display: block;
+  width: 3cm;
+  height: auto;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* #z-report-page {
+  background-color: var(--color-background);
+  padding: 1rem;
+}
+
+#z-report-page-content {
+  width: 8cm;
+  padding: 0.1cm;
+  box-sizing: border-box;
+  background: white;
+} */
+
+/* @media print {
+  #z-report-page {
+    background-color: transparent;
+    padding: 0;
+  }
+  #z-report-page-content {
+    width: unset;
+  }
+} */
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

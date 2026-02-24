@@ -1,4 +1,6 @@
-export default function ({ properties = {}, data = [], t }) {
+export default function (x) {
+  const data = Object.values(x);
+
   return (
     <div className="report-wrapper">
       {data.map((obj, index) => (
@@ -6,39 +8,43 @@ export default function ({ properties = {}, data = [], t }) {
           <main className="flex flex-1">
             <div className="content flex-1">
               <dl style={{ gridArea: "A" }}>
-                <dd className="flex align-center">
-                  <img src={obj.company_logo} />
+                <dd className="flex v align-center">
+                  <img src="https://s3.sa-east-1.amazonaws.com/zenerp.com.br/assets/tenants/luxcar/logo.png" />
+                  <strong>{obj.volume_code}</strong>
                 </dd>
               </dl>
-              <dl style={{ gridArea: "B" }}>
-                <dd className="flex align-center justify-center">
-                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.volume_code}`} />
-                </dd>
+              <dl className="flex v align-center flex-space-around" style={{ gridArea: "B" }}>
+                <dt>Nota fiscal</dt>
+                <dd><strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong></dd>
+                <dd>OS {number(obj.ordemSeparacao_codigo)}, Carga {number(obj.carga_codigo)}</dd>
               </dl>
               <dl style={{ gridArea: "C" }}>
-                <dt>CEP</dt>
-                <dd>{obj.person_zip}</dd>
+                <dt>Destinatário</dt>
+                <dd><strong>{obj.person_name}</strong></dd>
               </dl>
               <dl style={{ gridArea: "D" }}>
-                <dt>Nota fiscal de saída</dt>
-                <dd>{obj.invoice_number}</dd>
+                <dt>Cidade</dt>
+                <dd><strong>{`${obj.person_city}, ${obj.person_state}`}</strong></dd>
               </dl>
               <dl style={{ gridArea: "E" }}>
-                <dt>Destinatário</dt>
-                <dd>{obj.person_name}<br />{obj.person_address}</dd>
+                <dt>Transportadora</dt>
+                <dd>{obj.carga_transportadora}</dd>
               </dl>
               <dl style={{ gridArea: "F" }}>
                 <dt>Itens</dt>
-                <dd>1/1, {obj.product_code}, {obj.product_description}</dd>
+                <dd>{number(obj.item_num)}/{number(obj.item_count)}, {obj.product_code}, {obj.product_description}</dd>
               </dl>
-              <dl style={{ gridArea: "G" }}>
-                <dt>Volume</dt>
-                <dd>{obj.volume_code}</dd>
-              </dl>
-              <dl style={{ gridArea: "H" }}>
-                <dt>Volume</dt>
-                <dd>{obj.item_num}/{obj.item_count}</dd>
-              </dl>
+              <div className="grid" style={{ gridArea: "G", gridTemplateColumns: "repeat(4, 1fr)", gridTemplateRows: "1fr", gridTemplateAreas: "\"A B B B\"" }}>
+                <dl style={{ gridArea: "A" }}>
+                  <dt>Volume</dt>
+                  <dd><strong>{obj.item_num}/{obj.item_count}</strong></dd>
+                </dl>
+                <dl style={{ gridArea: "B" }}>
+                  <dd>
+                    <img style={{ objectFit: "contain" }} src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=5&scaleY=1&text=${obj.volume_code}`}></img>
+                  </dd>
+                </dl>
+              </div>
             </div>
           </main>
         </div>
