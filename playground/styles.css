@@ -16,6 +16,7 @@ body {
   --color-shadow: rgba(0, 0, 0, 0.1);
   --gap: 0.5rem;
   --padding: 0.35rem;
+  box-sizing: border-box;
   font-family: "AnekLatin", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11pt;
 }
@@ -26,14 +27,23 @@ body {
 }
 @media screen {
   .report-wrapper {
+    min-height: 100vh;
     padding: 1rem;
+    background-color: lightgray;
   }
 }
 .report-wrapper .report-container {
   position: relative;
+  box-sizing: border-box;
   page-break-after: always;
   break-after: page;
-  background-color: white;
+}
+@media screen {
+  .report-wrapper .report-container {
+    margin-bottom: 1rem;
+    padding: 2mm;
+    background-color: white;
+  }
 }
 .report-wrapper .report-container .stamp {
   position: absolute;
@@ -62,12 +72,16 @@ body {
   margin: 0;
   font-size: 20pt;
 }
-.report-wrapper .report-container > header > dl, .report-wrapper .report-container > header section.parameters {
+.report-wrapper .report-container > header > dl,
+.report-wrapper .report-container > header section.parameters {
   display: flex;
   gap: var(--gap);
   margin: 0;
 }
-.report-wrapper .report-container > header > dl div, .report-wrapper .report-container > header > dl dl, .report-wrapper .report-container > header section.parameters div, .report-wrapper .report-container > header section.parameters dl {
+.report-wrapper .report-container > header > dl div,
+.report-wrapper .report-container > header > dl dl,
+.report-wrapper .report-container > header section.parameters div,
+.report-wrapper .report-container > header section.parameters dl {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -75,13 +89,19 @@ body {
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
-.report-wrapper .report-container > header > dl div dt, .report-wrapper .report-container > header > dl dl dt, .report-wrapper .report-container > header section.parameters div dt, .report-wrapper .report-container > header section.parameters dl dt {
+.report-wrapper .report-container > header > dl div dt,
+.report-wrapper .report-container > header > dl dl dt,
+.report-wrapper .report-container > header section.parameters div dt,
+.report-wrapper .report-container > header section.parameters dl dt {
   font-size: 8pt;
   color: gray;
   text-transform: uppercase;
   font-weight: bold;
 }
-.report-wrapper .report-container > header > dl div dd, .report-wrapper .report-container > header > dl dl dd, .report-wrapper .report-container > header section.parameters div dd, .report-wrapper .report-container > header section.parameters dl dd {
+.report-wrapper .report-container > header > dl div dd,
+.report-wrapper .report-container > header > dl dl dd,
+.report-wrapper .report-container > header section.parameters div dd,
+.report-wrapper .report-container > header section.parameters dl dd {
   margin: 0;
 }
 .report-wrapper .report-container > main .kpi-grid {
@@ -149,7 +169,8 @@ body {
   gap: var(--gap);
   margin: 0;
 }
-.report-wrapper .report-container > footer dl div, .report-wrapper .report-container > footer dl dl {
+.report-wrapper .report-container > footer dl div,
+.report-wrapper .report-container > footer dl dl {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -157,13 +178,15 @@ body {
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
-.report-wrapper .report-container > footer dl div dt, .report-wrapper .report-container > footer dl dl dt {
+.report-wrapper .report-container > footer dl div dt,
+.report-wrapper .report-container > footer dl dl dt {
   font-size: 8pt;
   color: gray;
   text-transform: uppercase;
   font-weight: bold;
 }
-.report-wrapper .report-container > footer dl div dd, .report-wrapper .report-container > footer dl dl dd {
+.report-wrapper .report-container > footer dl div dd,
+.report-wrapper .report-container > footer dl dl dd {
   margin: 0;
 }
 .report-wrapper .flex {
@@ -221,4 +244,10 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   margin: 0;
+}
+.report-wrapper .no-break {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  display: block;
 }

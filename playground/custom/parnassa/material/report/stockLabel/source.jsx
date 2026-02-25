@@ -2,8 +2,8 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper">
       {data.map((obj, index) => (
-        <div className="report-container flex">
-          <main className="flex flex-1">
+        <div className="report-container">
+          <main className="flex v">
             <div className="content flex-1">
               <div className="flex v" style={{ gridArea: "A" }}>
                 <div className="cell">
@@ -52,6 +52,10 @@ export default function ({ data = [], t }) {
               <div className="cell" style={{ gridArea: "G" }}>
                 <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} alt="" style={{ maxWidth: "100%", maxHeight: "100%" }} />
               </div>
+            </div>
+            <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "space-around" }}>
+              <div>{index + 1} de {data.length}</div>
+              <div>zenerp.com.br</div>
             </div>
           </main>
         </div>

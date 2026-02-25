@@ -410,7 +410,7 @@ export default function ({ data = [], t }) {
               </div>
 
               {/* BRAND */}
-              <div style={{ fontSize: "0.5rem", textAlign: "right" }}>https://zenerp.com.br</div>
+              <div style={{ fontSize: "0.5rem", textAlign: "right" }}>zenerp.com.br</div>
             </div>
           </main>
         </div>

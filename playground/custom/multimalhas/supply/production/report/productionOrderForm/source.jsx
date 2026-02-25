@@ -5,12 +5,19 @@ export default function ({ data = [] }) {
   const totalsByProduct = data.reduce((acc, obj) => {
     obj.steps?.forEach((step) => {
       step.consumptions?.forEach((consumption) => {
-        const code = consumption.productPacking.code;
+        let variant;
+        if (consumption.productPacking.product.productProfile.code === "ESPUMA") {
+          variant = step.productions[0]?.productPacking.variant;
+        }
+
+        const key = consumption.productPacking.code + (variant ? `-${variant.id}` : "");
         const qty = consumption.quantity || 0;
 
         // 3. Accumulate sum grouped by code
-        if (!acc[code]) {
-          acc[code] = {
+        if (!acc[key]) {
+          acc[key] = {
+            code: consumption.productPacking.code,
+            variant,
             description: [
               consumption.productPacking.product.description,
               consumption.productPacking.complement,
@@ -20,7 +27,7 @@ export default function ({ data = [] }) {
             quantity: 0,
           };
         }
-        acc[code].quantity += qty;
+        acc[key].quantity += qty;
       });
     });
     return acc;
@@ -36,7 +43,7 @@ export default function ({ data = [] }) {
         <main>
           <div className="content">
             {data.map((obj) => (
-              <>
+              <div className="no-break">
                 <div class="flex h full gap padding panel">
                   <div>
                     <strong>Ordem de produção</strong><br />
@@ -99,23 +106,9 @@ export default function ({ data = [] }) {
                         </table>
                       </div>
                     </div>
-
-                    {/* <li key={index}>
-                    Etapa {step.id}
-                    <ul>
-                      {step.productions?.map((production, index) => (
-                        <li key={index}>Produção: {production.productPacking.code}, quantidade: {number(production.quantity)},
-                        </li>
-                      ))}
-                      {step.consumptions?.map((consumption, index) => (
-                        <li key={index}>Consumo: {consumption.productPacking.code}, quantidade: {number(consumption.quantity)},
-                        </li>
-                      ))}
-                    </ul>
-                  </li> */}
                   </React.Fragment>
                 ))}
-              </>
+              </div>
             ))}
           </div>
         </main>
@@ -146,6 +139,7 @@ export default function ({ data = [] }) {
               <thead>
                 <th>Código</th>
                 <th>Descrição</th>
+                <th>Variante</th>
                 <th className="number">Quantidade</th>
               </thead>
               <tbody>
@@ -154,8 +148,9 @@ export default function ({ data = [] }) {
                   .sort(([codeA], [codeB]) => codeA.localeCompare(codeB))
                   .map(([code, total]) => (
                     <tr key={code}>
-                      <td>{code}</td>
+                      <td>{total.code}</td>
                       <td>{total.description}</td>
+                      <td>{total.variant?.description}</td>
                       <td className="number">{`${number(total.quantity)} ${total.unit.code}`}</td>
                     </tr>
                   ))}

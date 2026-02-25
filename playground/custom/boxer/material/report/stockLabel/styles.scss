@@ -1,22 +1,20 @@
 .report-container {
   box-sizing: border-box;
+
   font-size: 11pt;
 
-  // Células terão borda top/left e o container terá borda bottom/right, evitando bordas duplas
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-
   @media screen {
-    // Tamanho padrão para exibição em tela, mas pode ser ajustado para impressão
     width: 10cm;
-    height: 8cm;
-
-    margin-bottom: 1rem;
+    height: 7cm;
   }
 
   @media print {
     height: 100vh;
   }
+}
+
+main {
+  height: 100%;
 }
 
 .content {
@@ -33,7 +31,14 @@
     "A D D"
     "A D D";
 
+  min-height: 0;
+
+  // Células terão borda top/left e o container terá borda bottom/right, evitando bordas duplas
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+
   .cell {
+
     display: flex;
     flex-direction: column;
     justify-content: center;

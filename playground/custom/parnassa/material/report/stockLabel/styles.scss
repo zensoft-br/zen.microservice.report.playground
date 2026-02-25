@@ -1,16 +1,11 @@
 .report-container {
   box-sizing: border-box;
 
-  // Células terão borda top/left e o container terá borda bottom/right, evitando bordas duplas
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  font-size: 9pt;
 
   @media screen {
-    // Tamanho padrão para exibição em tela, mas pode ser ajustado para impressão
     width: 10cm;
     height: 5cm;
-
-    margin-bottom: 1rem;
   }
 
   @media print {
@@ -18,9 +13,11 @@
   }
 }
 
-.content {
-  font-size: 11pt;
+main {
+  height: 100%;
+}
 
+.content {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
@@ -30,6 +27,12 @@
     "C C C C"
     "D E F G"
     "D H I G";
+
+  min-height: 0;
+
+  // Células terão borda top/left e o container terá borda bottom/right, evitando bordas duplas
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 
   .cell {
     display: flex;

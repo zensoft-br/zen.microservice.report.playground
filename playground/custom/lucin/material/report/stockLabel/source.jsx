@@ -1,9 +1,9 @@
 export default function ({ properties = {}, data = [], t }) {
   return (
     <div className="report-wrapper">
-      {data.map((obj) => (
-        <div className="report-container flex">
-          <main className="flex flex-1">
+      {data.map((obj, index) => (
+        <div className="report-container">
+          <main className="flex v">
             <div className="content flex-1">
               {/* Row 1 */}
               <div className="cell" style={{ gridArea: "A" }}>
@@ -84,6 +84,10 @@ export default function ({ properties = {}, data = [], t }) {
                     </div>
                   ))}
               </div>
+            </div>
+            <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "space-around" }}>
+              <div>{index + 1} de {data.length}</div>
+              <div>zenerp.com.br</div>
             </div>
           </main>
         </div>

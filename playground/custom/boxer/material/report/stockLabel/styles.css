@@ -1,14 +1,11 @@
 .report-container {
   box-sizing: border-box;
   font-size: 11pt;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
 }
 @media screen {
   .report-container {
     width: 10cm;
-    height: 8cm;
-    margin-bottom: 1rem;
+    height: 7cm;
   }
 }
 @media print {
@@ -17,11 +14,18 @@
   }
 }
 
+main {
+  height: 100%;
+}
+
 .content {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(8, minmax(0, 1fr));
   grid-template-areas: "A B B" "A B B" "A B B" "A C C" "A C C" "A D D" "A D D" "A D D";
+  min-height: 0;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 .content .cell {
   display: flex;

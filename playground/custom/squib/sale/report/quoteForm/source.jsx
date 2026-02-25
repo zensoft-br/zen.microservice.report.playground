@@ -68,12 +68,14 @@ export default function ({ data = [], t }) {
                       <th>{t("/@word/item")}</th>
                       <th>{t("/@word/code")}</th>
                       <th>{t("/@word/description")}</th>
-                      <th className="number">{t("/sale/quoteItemProposal")}</th>
+                      <th className="number">Proposta</th>
                       <th className="number">{t("/@word/quantity")}</th>
                       <th>{t("/financial/currency")}</th>
                       <th className="number">{t("/@word/unitValue")}</th>
                       <th className="number">{t("/@word/unitValue")} BRL</th>
                       <th className="number">{t("/@word/totalValue")}</th>
+                      <th>Proc.</th>
+                      <th>Marca</th>
                       <th>{t("/@word/availabilityDate")}</th>
                     </tr>
                   </thead>
@@ -91,6 +93,8 @@ export default function ({ data = [], t }) {
                             <td className="number">{formatNumber(proposal.unitValue, { digits: 8 })}</td>
                             <td className="number">{formatNumber(proposal.unitValueLocal, { digits: 8 })}</td>
                             <td className="number">{formatNumber(proposal.totalValue)}</td>
+                            <td>{proposal.properties?.origin}</td>
+                            <td>{proposal.properties?.brand}</td>
                             <td>{formatDate(quote.availabilityDate)}</td>
                           </tr>
                         ))

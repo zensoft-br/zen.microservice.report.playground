@@ -14,7 +14,8 @@ $border: 1px solid var(--color-border);
 
   margin: 0;
 
-  div, dl {
+  div,
+  dl {
     display: flex;
     flex-direction: column;
 
@@ -50,6 +51,8 @@ body {
   --gap: 0.5rem;
   --padding: 0.35rem;
 
+  box-sizing: border-box;
+
   font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11pt;
 
@@ -61,16 +64,28 @@ body {
   }
 
   @media screen {
+    min-height: 100vh;
+
     padding: 1rem;
+
+    background-color: lightgray;
   }
 
   .report-container {
     position: relative;
 
+    box-sizing: border-box;
+
     page-break-after: always;
     break-after: page;
 
-    background-color: white;
+    @media screen {
+      margin-bottom: 1rem;
+
+      padding: 2mm;
+
+      background-color: white;
+    }
 
     // 1. Status Stamp
     .stamp {
@@ -107,7 +122,8 @@ body {
         font-size: 20pt;
       }
 
-      &>dl, section.parameters {
+      &>dl,
+      section.parameters {
         @include parameter-box;
       }
     }
@@ -290,5 +306,13 @@ body {
     overflow-wrap: break-word;
 
     margin: 0;
+  }
+
+  .no-break {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+
+    display: block;
   }
 }
