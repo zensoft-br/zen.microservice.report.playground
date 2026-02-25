@@ -1,3 +1,5 @@
+import React from "react";
+
 export default async function ({ data = [] }) {
   // const response = await fetch(invoice.dfeNfeProcOut.file.url);
   // if (!response.ok) {
