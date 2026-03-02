@@ -1,6 +1,3 @@
 {
-  "engine": "jsx",
-  "assets": {
-    "styles": "@file:/styles.css"
-  }
+  "engine": "jsx"
 }

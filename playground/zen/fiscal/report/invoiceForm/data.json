@@ -296,7 +296,7 @@
             "outgoingInvoicePriority": "A"
           }
         },
-        "locale": "pt_BR",
+        "locale": "pt-BR",
         "timeZone": "America/Sao_Paulo",
         "society": {
           "id": 1001,
@@ -842,7 +842,7 @@
               "outgoingInvoicePriority": "A"
             }
           },
-          "locale": "pt_BR",
+          "locale": "pt-BR",
           "timeZone": "America/Sao_Paulo",
           "society": {
             "id": 1001,
@@ -1369,7 +1369,7 @@
               "outgoingInvoicePriority": "A"
             }
           },
-          "locale": "pt_BR",
+          "locale": "pt-BR",
           "timeZone": "America/Sao_Paulo",
           "society": {
             "id": 1001,
@@ -1651,7 +1651,7 @@
               "#created": "2024-07-16T14:35:51.944637499-03:00[America/Sao_Paulo]"
             }
           },
-          "locale": "pt_BR",
+          "locale": "pt-BR",
           "timeZone": "America/Sao_Paulo",
           "society": {
             "id": 1001,
@@ -35283,7 +35283,7 @@
               "outgoingInvoicePriority": "A"
             }
           },
-          "locale": "pt_BR",
+          "locale": "pt-BR",
           "timeZone": "America/Sao_Paulo",
           "society": {
             "id": 1001,
@@ -35715,7 +35715,7 @@
                 "outgoingInvoicePriority": "A"
               }
             },
-            "locale": "pt_BR",
+            "locale": "pt-BR",
             "timeZone": "America/Sao_Paulo",
             "society": {
               "id": 1001,
@@ -36261,7 +36261,7 @@
                   "outgoingInvoicePriority": "A"
                 }
               },
-              "locale": "pt_BR",
+              "locale": "pt-BR",
               "timeZone": "America/Sao_Paulo",
               "society": {
                 "id": 1001,
@@ -36787,7 +36787,7 @@
                   "outgoingInvoicePriority": "A"
                 }
               },
-              "locale": "pt_BR",
+              "locale": "pt-BR",
               "timeZone": "America/Sao_Paulo",
               "society": {
                 "id": 1001,
@@ -37069,7 +37069,7 @@
                   "#created": "2024-07-16T14:35:51.944637499-03:00[America/Sao_Paulo]"
                 }
               },
-              "locale": "pt_BR",
+              "locale": "pt-BR",
               "timeZone": "America/Sao_Paulo",
               "society": {
                 "id": 1001,

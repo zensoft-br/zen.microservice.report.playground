@@ -1,3 +1,9 @@
+.report-container {
+  @media screen {
+    width: 21cm;
+  }
+}
+
 .card {
   border: 1px solid black;
   border-radius: var(--border-radius);
@@ -38,7 +44,7 @@
 }
 
 .xxl {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 

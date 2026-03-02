@@ -222,15 +222,18 @@ body {
 .report-wrapper .text-center {
   text-align: center;
 }
-.report-wrapper .text-right,
-.report-wrapper .number {
+.report-wrapper .text-right {
   text-align: right !important;
 }
 .report-wrapper .date {
   font-variant-numeric: tabular-nums;
 }
+.report-wrapper .digits {
+  font-variant-numeric: tabular-nums;
+}
 .report-wrapper .number {
   font-variant-numeric: tabular-nums;
+  text-align: right !important;
 }
 .report-wrapper .text-success {
   color: green;

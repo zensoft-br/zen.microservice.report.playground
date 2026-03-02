@@ -1,6 +1,15 @@
 import React from "react";
 
 export default function ({ data = [] }) {
+  data.sort((a, b) => {
+    const p1 = a.steps[0]?.productions[0]?.productPacking;
+    const p2 = b.steps[0]?.productions[0]?.productPacking;
+
+    const k1 = p1?.product.code + ":" + (p1?.variant?.code ?? "") + ":" + p1?.code + ":" + a.id;
+    const k2 = p2?.product.code + ":" + (p2?.variant?.code ?? "") + ":" + p2?.code + ":" + b.id;
+
+    return k1.localeCompare(k2);
+  });
 
   const totalsByProduct = data.reduce((acc, obj) => {
     obj.steps?.forEach((step) => {
@@ -73,25 +82,25 @@ export default function ({ data = [] }) {
                 {obj.steps?.map((step, index) => (
                   <React.Fragment key={index}>
                     <div class="flex h">
-                      <div class="flex v gap padding center" style={{ flex: "1" }}>
-                        <div class="xxl">{obj.code}</div>
-                        <div>{step.productPacking.code}</div>
+                      <div class="flex v gap padding center" style={{ flex: "2" }}>
+                        <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
+                        <div class="xxl">{step.productPacking.code}</div>
                         <div><span className="xxl">{step.quantity}</span>&nbsp;{step.productPacking.product.unit.code}</div>
                       </div>
 
-                      <div class="flex v gap padding flex-1" style={{ flex: "2" }}>
+                      <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
                         <table>
                           <thead>
                             <tr>
-                              <th>Código do Produto</th>
-                              <th>Descrição do Produto</th>
+                              {/* <th>Código do Produto</th> */}
+                              <th>Previsão de consumo</th>
                               <th class="number">Quantidade</th>
                             </tr>
                           </thead>
                           <tbody>
                             {step.consumptions?.map((consumption, index) => (
                               <tr key={index}>
-                                <td>{consumption.productPacking.code}</td>
+                                {/* <td>{consumption.productPacking.code}</td> */}
                                 <td>{[
                                   consumption.productPacking.product.description,
                                   consumption.productPacking.complement,

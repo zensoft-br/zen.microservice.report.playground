@@ -161,7 +161,37 @@ async function compile(reportFolder) {
       }
     }
 
-    // Process Styles (@file: logic)
+    // Process scripts (@file: logic)
+    if (renderRequest.assets?.scripts) {
+      const processed = await Promise.all(
+        Object.entries(renderRequest.assets.scripts).map(async ([key, s]) => {
+          if (typeof s === "string" && s.startsWith("@file:")) {
+            const filePath = s.slice(6);
+      
+            let scriptPath;
+            if (filePath.startsWith("/")) {
+              scriptPath = path.join(process.cwd(), "playground", filePath);
+            } else {
+              scriptPath = path.resolve(reportFolder, filePath);
+            }
+
+            try {
+              return { [key]: await fs.readFile(scriptPath, "utf8") };
+            } catch (err) {
+              console.warn(
+                `\x1b[33m[WARN]\x1b[0m Script missing: ${filePath}\n Resolved as: ${scriptPath}`,
+              );
+              return null;
+            }
+          }
+          return { [key]: s };
+        }),
+      );
+
+      renderRequest.assets.scripts = processed.reduce((acc, val) => ({ ...acc, ...val }), {});
+    }
+
+    // Process styles (@file: logic)
     if (renderRequest.assets?.styles) {
       const styles = renderRequest.assets.styles;
       const isArray = Array.isArray(styles);
@@ -198,6 +228,7 @@ async function compile(reportFolder) {
     // Inject i18n defaults and merge with template config
     const i18n = {
       locale: "pt-BR",
+      timeZone: "America/Sao_Paulo",
       fallbackLocale: "pt-BR",
       resources: {  
         "en-US": "https://zenerp.app.br/resources.en-US.json",
