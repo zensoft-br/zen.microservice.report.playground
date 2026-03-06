@@ -149,7 +149,8 @@ body {
 }
 .report-wrapper .report-container > main .content table:not(.custom) {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0.5rem 0;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
   text-align: left;

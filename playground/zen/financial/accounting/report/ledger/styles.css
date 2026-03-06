@@ -1,0 +1,9 @@
+.report-container {
+  font-size: 10pt;
+  font-variant-numeric: tabular-nums;
+}
+@media screen {
+  .report-container {
+    width: 297mm;
+  }
+}

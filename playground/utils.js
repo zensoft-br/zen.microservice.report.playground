@@ -25,11 +25,11 @@ export function formatCurrency(value, options = {}) {
 
 export function formatDate(value, options = {}) {
   if (value == null) return null;
-  const date = validateDate(value);
   const { 
     locale = options.locale ?? config.locale, 
     timeZone = options.timeZone ?? config.timeZone, 
     ...rest } = options;
+  const date = validateDate(value, timeZone);
   try {
     return Intl.DateTimeFormat(locale, {
       timeZone,
@@ -42,7 +42,6 @@ export function formatDate(value, options = {}) {
 
 export function formatDateTime(value, options = {}) {
   if (value == null) return null;
-  const date = validateDate(value);
   const { 
     locale = options.locale ?? config.locale, 
     timeZone = options.timeZone ?? config.timeZone, 
@@ -54,6 +53,7 @@ export function formatDateTime(value, options = {}) {
     second = "2-digit",
     hour12 = false,
     ...rest } = options;
+  const date = validateDate(value, timeZone);
   try {
     return Intl.DateTimeFormat(locale, {  
       timeZone,
@@ -87,7 +87,6 @@ export function formatNumber(value, options = {}) {
 
 export function formatTime(value, options = {}) {
   if (value == null) return null;
-  const date = validateDate(value);
   const { 
     locale = options.locale ?? config.locale, 
     timeZone = options.timeZone ?? config.timeZone, 
@@ -95,8 +94,9 @@ export function formatTime(value, options = {}) {
     minute = "2-digit", 
     second = "2-digit", 
     hour12 = false,
-    ...rest 
-  } = options;  try {
+    ...rest } = options;  
+  const date = validateDate(value, timeZone);
+  try {
     return Intl.DateTimeFormat(locale, {
       timeZone,
       hour,
@@ -110,7 +110,28 @@ export function formatTime(value, options = {}) {
   }
 }
 
-function validateDate(value) {
-  const result = new Date(value);
-  return isNaN(result.getTime()) ? null : result;
+export function round(value, decimals = 2) {
+  if (value == null) return null;
+  const factor = 10 ** decimals;
+  return Math.round(value * factor) / factor;
+}
+
+function validateDate(value, timeZone = config.timeZone) {
+  if (value instanceof Date) return value;
+
+  const isDateOnly = typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+
+  if (isDateOnly) {
+    const [year, month, day] = value.split("-").map(Number);
+    const date = new Date(Date.UTC(year, month - 1, day));
+
+    const utcDate = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
+    const tzDate = new Date(date.toLocaleString("en-US", { timeZone }));
+    const offset = utcDate.getTime() - tzDate.getTime();
+
+    date.setTime(date.getTime() + offset);
+    return date;
+  }
+
+  return new Date(value);
 }

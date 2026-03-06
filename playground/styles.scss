@@ -190,7 +190,8 @@ body {
       .content {
         table:not(.custom) {
           width: 100%;
-          border-collapse: collapse;
+          border-collapse: separate;
+          border-spacing: 0.5rem 0;
           // margin-bottom: 0.5rem;
 
           th {

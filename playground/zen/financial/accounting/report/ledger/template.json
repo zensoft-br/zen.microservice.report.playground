@@ -9,12 +9,6 @@
       "@file:styles.css"
     ]
   },
-  "i18n": {
-    "fallbackLocale": "fallback",
-    "resources": {
-      "fallback": {}
-    }
-  },
   "metadata": {
     "dataSource": null
   }
