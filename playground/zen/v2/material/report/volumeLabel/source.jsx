@@ -22,17 +22,21 @@ export default function ({data = [], t}) {
                 </dl>
                 <dl className="flex v align-center flex-space-around" style={{ flex: "2 0 0" }}>
                   <dt>{t("/fiscal/invoice")}</dt>
-                  <dd><strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong></dd>
+                  <dd><strong style={{ fontSize: "1.3rem" }}>{number(obj.invoice_number)}</strong></dd>
                   <dd>{obj.code}</dd>
                 </dl>
                 <dl className="flex h align-center justify-center letter" style={{ flex: "1 0 0" }}>
                   {fn(obj.person_id)}
                 </dl>
               </div>
-              <dl style={{ flex: "2 0 0" }}>
+              <dl style={{ flex: "1.5 0 0" }}>
                 <dt>{t("/@word/recipient")}</dt>
                 <dd><strong>{obj.person_fantasyName ?? obj.person_name}</strong></dd>
                 <dd><strong>{`${obj.person_address_city}, ${obj.person_address_state_code}`}</strong></dd>
+              </dl>
+              <dl style={{ flex: "1 0 0" }}>
+                <dt>{t("/sale/sale")}</dt>
+                <dd>{obj.sale_code ?? obj.sale_id}</dd>
               </dl>
               <div className="flex h" style={{ flex: "1 0 0" }}>
                 <dl style={{ flex: "1 0 0" }}>
