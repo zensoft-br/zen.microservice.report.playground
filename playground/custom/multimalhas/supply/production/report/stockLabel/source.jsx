@@ -1,67 +1,99 @@
-export default function ({ data = [], t }) {
-  const totalQuantity = data
-    .flatMap((obj) => obj.steps)
-    .flatMap((step) => step.consumptions.filter((consumption) => consumption.productPacking.product.productProfile?.code === "CAIXA"))
-    .map((consumption) => consumption.quantity)
-    .reduce((acc, quantity) => acc + quantity, 0);
+import * as utils from "./utils.js";
 
+export default function ({data, t}) {
   return (
     <div className="report-wrapper">
-      {data.map((obj, index) => {
+      {data.map((obj) => {
+        const tags = [
+          ...(obj.priceListItem_tags ?? "").split(",").filter(tag => tag.startsWith("q:")),
+          ...(obj.product_tags ?? "").split(",").filter(tag => tag.startsWith("q:")),
+        ].map(tag => Number(tag.replace("q:", "")));
+
+        const boxes = boxesCalc(obj.quantity, tags[0]);
         return (
-          obj.steps[0].consumptions
-            .filter((consumption) => consumption.productPacking.product.productProfile?.code === "CAIXA")
-            .map((consumption) => (
-              new Array(consumption.quantity).fill(null).map((_, index) => (
-                <div className="report-container">
-                  <main className="flex v">
-                    <div className="content flex-1">
-                      <dl style={{ gridArea: "A" }}>
-                        <dd><img src={obj.company.image.url} /></dd>
-                      </dl>
-                      <dl style={{ gridArea: "B" }}>
-                        <dt>Pedido</dt>
-                        <dd>{obj.code}</dd>
-                      </dl>
-                      <dl className="flex align-center" style={{ gridArea: "C", justifyContent: "center" }}>
-                        <dt>{t("/@word/quantity")}</dt>
-                        <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>
-                          {number(obj.steps[0]?.productions[0]?.quantity / consumption.quantity, { maximumFractionDigits: 2 })}
-                        </dd>
-                        <dd>de</dd>
-                        <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>{number(obj.steps[0]?.productions[0]?.quantity, { maximumFractionDigits: 2 })}</dd>
-                      </dl>
-                      <dl style={{ gridArea: "D" }}>
-                        <dt>Cliente</dt>
-                        <dd>{obj.person?.name}</dd>
-                      </dl>
-                      <dl  style={{ gridArea: "E" }}>
-                        <dt>Produto</dt>
-                        <dd><strong>{obj.steps[0]?.productions[0]?.productPacking?.code}</strong></dd>
-                      </dl>
-                      <dl style={{ gridArea: "F" }}>
-                        <dt>Cor</dt>
-                        <dd>{obj.steps[0]?.productions[0]?.productPacking?.variant?.description}</dd>
-                      </dl>
-                      <dl style={{ gridArea: "G" }}>
-                        <dt>Tamanho</dt>
-                        <dd>{obj.steps[0]?.productions[0]?.productPacking?.code.split(".")[2]}</dd>
-                      </dl>
+          boxes.map((q, index) => (
+            <div key={index} className="report-container">
+              <main className="flex v">
+                <div className="content flex-1">
+                  <dl style={{ gridArea: "A" }}>
+                    <dd><img src={obj.company_logo} /></dd>
+                  </dl>
+                  <dl style={{ gridArea: "B" }}>
+                    <dt>{t("/sale/sale")}</dt>
+                    <dd>{obj.sale_id}</dd>
+                  </dl>
+                  <dl className="flex v align-center" style={{ gridArea: "C", justifyContent: "space-around" }}>
+                    <div className="flex v align-center">
+                      <dt>{t("/@word/quantity")}</dt>
+                      <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>
+                        {utils.formatNumber(q, { maximumFractionDigits: 2 })}
+                      </dd>
                     </div>
-                    <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "space-around" }}>
-                      <div>{index + 1} de {consumption.quantity} de {totalQuantity}</div>
-                      <div>zenerp.com.br</div>
+                    <div className="flex v align-center">
+                      <dd className="tag">{fn(obj.productPacking_code)}</dd>
+                      {boxes.length > 1 && (
+                        <dd>{index + 1} de {boxes.length}</dd>
+                      )}
                     </div>
-                  </main>
+                  </dl>
+                  <dl style={{ gridArea: "D" }}>
+                    <dt>{t("/@word/customer")}</dt>
+                    <dd>{obj.person_name}</dd>
+                  </dl>
+                  <dl  style={{ gridArea: "E" }}>
+                    <dt>{t("/catalog/product/productPacking")}</dt>
+                    <dd><strong>{obj.productPacking_code}</strong></dd>
+                  </dl>
+                  <dl style={{ gridArea: "F" }}>
+                    <dt>{t("/catalog/product/productVariant")}</dt>
+                    <dd>{obj.productVariant_description}</dd>
+                  </dl>
+                  <dl style={{ gridArea: "G" }}>
+                    <dt>Tamanho</dt>
+                    <dd>{obj.productPacking_code.split(".")[2]}</dd>
+                  </dl>
                 </div>
-              ))
-            ))
+                <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "end" }}>
+                  {/* <div>{index + 1} de {consumption.quantity} de {totalQuantity}</div> */}
+                  <div>zenerp.com.br</div>
+                </div>
+              </main>
+            </div>
+          ))
         );
       })}
     </div>
   );
 };
 
-function number(value, options = {}) {
-  return new Intl.NumberFormat("pt-BR", options).format(value);
+function boxesCalc(q, boxSize) {
+  boxSize = boxSize || q;
+  let balance = q;
+  const result = [];
+  while (balance > 0) {
+    const q = Math.min(balance, boxSize);
+    result.push(q);
+    balance -= q;
+  }
+  return result;
+}
+
+function numberToLetters(num) {
+  let letters = "";
+  while (num > 0) {
+    let remainder = (num - 1) % 26;
+    letters = String.fromCharCode(65 + remainder) + letters;
+    num = Math.floor((num - remainder - 1) / 26);
+  }
+  return letters;
+}
+
+const keyMap = new Map();
+let counter = 1;
+
+function fn(key) {
+  if (!keyMap.has(key)) {
+    keyMap.set(key, counter++);
+  }
+  return numberToLetters(keyMap.get(key));
 }

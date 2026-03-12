@@ -170,6 +170,57 @@ export default function ({ data = [], t }) {
                   </div>
                 </div>
 
+                {/* DESTINATARIO */}
+                {item.personAddressShipping && (
+                  <>
+                    <label className="header">Endereço de entrega</label>
+                    <div className="frame">
+                      <div className="band h" style={{ gridTemplateColumns: "50% 25% 25%" }}>
+                        <div className="slot">
+                          <label>{t("/@word/name")}</label>
+                          <div>{item.person.name}</div>
+                        </div>
+                        <div className="slot">
+                          <label>CNPJ</label>
+                          <div>{item.person.documentNumber}</div>
+                        </div>
+                      </div>
+                      <div className="band h" style={{ gridTemplateColumns: "50% 17% 17% 16%" }}>
+                        <div className="slot">
+                          <label>Endereço</label>
+                          <div>{[item.personAddressShipping.street, item.personAddressShipping.number, item.personAddressShipping.complement].filter(Boolean).join(", ")}</div>
+                        </div>
+                        <div className="slot">
+                          <label>{t("/@word/district")}</label>
+                          <div>{item.personAddressShipping.district}</div>
+                        </div>
+                        <div className="slot">
+                          <label>{t("/@word/zipcode")}</label>
+                          <div>{item.personAddressShipping.zipcode}</div>
+                        </div>
+                      </div>
+                      <div className="band h" style={{ gridTemplateColumns: "45% 5% 17% 17% 16%" }}>
+                        <div className="slot">
+                          <label>{t("/catalog/location/city")}</label>
+                          <div>{item.personAddressShipping.city?.name}</div>
+                        </div>
+                        <div className="slot">
+                          <label>{t("/catalog/location/state")}</label>
+                          <div>{item.personAddressShipping.city?.state?.code}</div>
+                        </div>
+                        <div className="slot">
+                          <label>{t("/@word/phone")}</label>
+                          <div>{<item className="person"></item>.phone}</div>
+                        </div>
+                        <div className="slot">
+                          <label>Inscrição estadual</label>
+                          <div>{item.person.document2Number}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
                 {/* BILLING */}
                 {item.billingTitles?.length > 0 && (
                   <>

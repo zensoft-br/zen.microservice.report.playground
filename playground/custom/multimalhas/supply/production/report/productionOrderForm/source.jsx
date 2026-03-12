@@ -54,10 +54,10 @@ export default function ({ data = [] }) {
             {data.map((obj) => (
               <div className="no-break">
                 <div class="flex h full gap padding panel">
-                  <div>
+                  {/* <div>
                     <strong>Ordem de produção</strong><br />
                     {obj.id}
-                  </div>
+                  </div> */}
                   <div>
                     <strong>Cliente</strong><br />
                     {obj.person.name}

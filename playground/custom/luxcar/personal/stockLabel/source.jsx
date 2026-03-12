@@ -1,6 +1,4 @@
-export default function (x) {
-  const data = Object.entries(x).filter(([key]) => !isNaN(Number(key))).map(([_, value]) => value);
-
+export default function ({data}) {
   return (
     <div className="report-wrapper">
       {data.map((obj) => (

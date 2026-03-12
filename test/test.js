@@ -1,5 +1,5 @@
 const response = await fetch(
-  "https://report.microservice.zensoft.com.br/report/generate",
+  "https://report.zensoft.com.br/report/generate",
   {
     method: "POST",
     headers: {

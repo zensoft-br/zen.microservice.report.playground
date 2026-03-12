@@ -1,0 +1,21 @@
+main {
+  section {
+    header {
+      padding: var(--gap);
+      
+      background-color: var(--color-border);
+    }
+  }
+}
+
+dd {
+  margin: 0;
+}
+
+table {
+  width: unset;
+}
+
+td.number {
+  width: 4rem;
+}

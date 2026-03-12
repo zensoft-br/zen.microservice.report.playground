@@ -76,3 +76,13 @@ main {
     object-fit: contain;
   }
 }
+
+dd.tag {
+  border-radius: calc(var(--gap) / 2);
+  padding: calc(var(--gap) / 2);
+
+  background-color: black;
+  color: white;
+
+  font-size: 1.5rem;
+}

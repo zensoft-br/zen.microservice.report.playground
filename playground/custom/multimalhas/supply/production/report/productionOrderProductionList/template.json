@@ -10,9 +10,12 @@
     ]
   },
   "i18n": {
-    "locale": "pt-BR",
+    "fallbackLocale": "fallback",
     "resources": {
-      "pt-BR": "https://zenerp.app.br/resources.pt-BR.json"
+      "fallback": {}
     }
+  },
+  "metadata": {
+    "dataSource": null
   }
 }

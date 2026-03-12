@@ -67,7 +67,7 @@ ORDER BY
 
 ### GERAÇÃO DAS ETIQUETAS
 
-* Acesse https://report.microservice.zensoft.com.br/public/playground.html
+* Acesse https://report.zensoft.com.br/public/playground.html
 * Cole os dados na seção `Data`
 * Cole o texto abaixo na seção `Config`
 

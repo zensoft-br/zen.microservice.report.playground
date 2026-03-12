@@ -8,11 +8,5 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
-  },
-  "i18n": {
-    "locale": "pt-BR",
-    "resources": {
-      "pt-BR": "https://zenerp.app.br/resources.pt-BR.json"
-    }
   }
 }

@@ -8,7 +8,6 @@ SELECT
   C2.ID AS "person_id",
   C2.NOME AS "person_name",
   C2.APELIDO AS "person_fantasyName",
-  '' AS "person_address",
   C3.NOME AS "person_city",
   C3.ESTADO_SIGLA AS "person_state",
   P1.CODIGO AS "product_code",

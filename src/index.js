@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 
 // Configuration
 const REPORT_API =
-  process.env.REPORT_API ?? "https://report.microservice.zensoft.com.br";
+  process.env.REPORT_API ?? "https://report.zensoft.com.br";
 
 const ENGINE_EXTENSIONS = {
   eta: [".eta"],
