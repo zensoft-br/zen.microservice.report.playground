@@ -6,7 +6,7 @@ export default function ({data = [], t}) {
   return (
     <div className="report-wrapper">
       {data.map((obj) => (
-        <div className="report-container flex">
+        <div className="report-container flex v">
           <main className="flex flex-1">
             <div className="content flex v flex-1">
               <div className="flex h" style={{ flex: "2 0 0" }}>
@@ -20,10 +20,9 @@ export default function ({data = [], t}) {
                     <img style={{ objectFit: "contain" }} src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.volume_code}`}></img>
                   </dd>
                 </dl>
-                <dl className="flex v align-center flex-space-around" style={{ flex: "2 0 0" }}>
+                <dl className="flex v" style={{ flex: "2 0 0", alignItems: "center", justifyContent: "center" }}>
                   <dt>{t("/fiscal/invoice")}</dt>
                   <dd><strong style={{ fontSize: "1.3rem" }}>{number(obj.invoice_number)}</strong></dd>
-                  <dd>{obj.code}</dd>
                 </dl>
                 <dl className="flex h align-center justify-center letter" style={{ flex: "1 0 0" }}>
                   {fn(obj.person_id)}
@@ -34,26 +33,29 @@ export default function ({data = [], t}) {
                 <dd><strong>{obj.person_fantasyName ?? obj.person_name}</strong></dd>
                 <dd><strong>{`${obj.person_address_city}, ${obj.person_address_state_code}`}</strong></dd>
               </dl>
-              <dl style={{ flex: "1 0 0" }}>
-                <dt>{t("/sale/sale")}</dt>
-                <dd>{obj.sale_code ?? obj.sale_id}</dd>
-              </dl>
               <div className="flex h" style={{ flex: "1 0 0" }}>
-                <dl style={{ flex: "1 0 0" }}>
+                <dl style={{ flex: "1" }}>
+                  <dt>{t("/sale/sale")}</dt>
+                  <dd>{obj.sale_code ?? obj.sale_id}</dd>
+                </dl>
+                <dl style={{ flex: "1" }}>
                   <dt>{t("/material/volume")}</dt>
-                  <dd>{obj.vol_x} de {obj.vol_y}</dd>
+                  <dd>{obj.code} ({obj.vol_x} de {obj.vol_y})</dd>
+                </dl>
+              </div>
+              <div className="flex h" style={{ flex: "1 0 0" }}>
+                <dl style={{ flex: "3 0 0" }}>
+                  <dt>{t("/@word/personShipping")}</dt>
+                  <dd>&nbsp;</dd>
                 </dl>
                 <dl style={{ flex: "1 0 0" }}>
                   <dt className="number">{t("/@word/grossWeightKg")}</dt>
                   <dd className="number">{utils.formatNumber(obj.grossWeightKg)}</dd>
                 </dl>
-                <dl style={{ flex: "4 0 0" }}>
-                  <dt>{t("/@word/personShipping")}</dt>
-                  <dd>&nbsp;</dd>
-                </dl>
               </div>
             </div>
           </main>
+          <div className="zen-ad" style={{ fontSize: "0.5em", textAlign: "right" }}>zenerp.com.br</div>
         </div>
       ))}
     </div>

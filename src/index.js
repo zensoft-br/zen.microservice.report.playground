@@ -1,5 +1,6 @@
 import { watch } from "chokidar";
 import fs from "fs/promises";
+import  * as sass from "sass";
 import http from "http";
 import net from "net";
 import open from "open";
@@ -7,6 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // Configuration
+
 const REPORT_API =
   process.env.REPORT_API ?? "https://report.zensoft.com.br";
 
@@ -25,11 +27,13 @@ const __dirname = path.dirname(__filename);
 const playgroundDir = path.resolve(__dirname, "../playground");
 
 // Utilities
-const fileExists = (p) =>
-  fs
+
+function fileExists(p) {
+  return fs
     .stat(p)
     .then(() => true)
     .catch(() => false);
+}
 
 async function readJson(p, fallback) {
   if (!(await fileExists(p))) return fallback;
@@ -40,8 +44,8 @@ async function readJson(p, fallback) {
   }
 }
 
-const escapeHtml = (s) =>
-  String(s).replace(
+function escapeHtml(s) {
+  return String(s).replace(
     /[&<>"']/g,
     (m) =>
       ({
@@ -52,6 +56,7 @@ const escapeHtml = (s) =>
         "'": "&#039;",
       })[m],
   );
+}
 
 async function fetchWithTimeout(url, options = {}, ms = 15000) {
   const ctrl = new AbortController();
@@ -282,41 +287,46 @@ export async function compileAll() {
   await Promise.all(folders.map(compile));
 }
 
-// Server & Watcher ---
-let clients = [];
+// Server & Watcher
 
-const triggerReload = () =>
-  clients.forEach((res) => res.write("data: reload\n\n"));
+let clients = [];
 
 const RELOAD_SCRIPT = "<script>new EventSource('/__reload').onmessage=()=>location.reload()</script>";
 
+function triggerReload() {
+  clients.forEach((res) => res.write("data: reload\n\n"));
+}
+
 async function onChange(filePath) {
   const fullPath = path.resolve(filePath);
+  const dirPath = path.dirname(fullPath);
   const name = path.basename(fullPath);
   const ext = path.extname(fullPath);
 
-  if (
-    name === "template.json" ||
-    name === "data.json" ||
-    (name.startsWith("source.") && EXTENSIONS.includes(ext))
-  ) {
-    await compile(path.dirname(fullPath));
+  if (ext === ".scss") {
+    try {
+      const result = await sass.compileAsync(fullPath);
+      await fs.writeFile(path.join(dirPath, path.parse(fullPath).name + ".css"), result.css);
+      console.log(`\x1b[32m[SCSS]\x1b[0m ${fullPath}`);
+    } catch (err) {
+      console.error(`\x1b[31m[SASS ERROR]\x1b[0m ${fullPath}:`, err);
+    }
+    return;
+  }
+    
+  // Only trigger if there is a template.json in the same folder
+  const template = path.join(path.dirname(fullPath), "template.json");
+  if (!(await fileExists(template))) {
     return;
   }
 
-  if (ext === ".css") {
-    const folders = await findReportFolders(playgroundDir);
-    for (const folder of folders) {
-      const config = await readJson(path.join(folder, "template.json"), {});
-      const styles = [].concat(config.assets?.styles || []);
-      const isLinked = styles.some(
-        (s) =>
-          typeof s === "string" &&
-          s.startsWith("@file:") &&
-          path.resolve(folder, s.slice(6)) === fullPath,
-      );
-      if (isLinked) await compile(folder);
-    }
+  if (!(
+    name === "build.json" ||
+    name === "report.html" ||
+    ext === ".scss" 
+  )) {
+    await compile(path.dirname(fullPath));
+    return;
   }
 }
 
