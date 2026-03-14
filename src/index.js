@@ -272,10 +272,10 @@ async function compile(reportFolder) {
     await fs.writeFile(buildFile, JSON.stringify(buildInfo, null, 2));
     await fs.writeFile(outFile, html);
 
-    console.log(`\x1b[32m[OK]\x1b[0m ${relativeBase}`);
+    console.log(`\x1b[32m[REPORT]\x1b[0m ${relativeBase}`);
     triggerReload();
   } catch (err) {
-    console.error(`\x1b[31m[ERROR]\x1b[0m ${relativeBase}:`, err.message);
+    console.error(`\x1b[31m[REPORT ERROR]\x1b[0m ${relativeBase}:`, err.message);
     const errorHtml = `<!doctype html><html><body style="font-family:sans-serif;padding:24px;"><h1>Error: ${relativeBase}</h1><pre style="background:#111;color:#eee;padding:16px;white-space:pre-wrap;">${escapeHtml(err.stack)}</pre></body></html>`;
     await fs.writeFile(outFile, errorHtml).catch(() => {});
     triggerReload();
@@ -306,7 +306,7 @@ async function onChange(filePath) {
   if (ext === ".scss") {
     try {
       const result = await sass.compileAsync(fullPath);
-      await fs.writeFile(path.join(dirPath, path.parse(fullPath).name + ".css"), result.css);
+      await fs.writeFile(path.join(dirPath, path.parse(fullPath).name + ".css"), result.css + "\n");
       console.log(`\x1b[32m[SCSS]\x1b[0m ${fullPath}`);
     } catch (err) {
       console.error(`\x1b[31m[SASS ERROR]\x1b[0m ${fullPath}:`, err);
