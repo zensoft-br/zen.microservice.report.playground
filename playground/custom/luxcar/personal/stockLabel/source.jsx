@@ -2,54 +2,54 @@ export default function ({data}) {
   return (
     <div className="report-wrapper">
       {data.map((obj) => (
-        <div className="report-container flex">
+        <div className="report-container flex v">
           <main className="flex flex-1">
-            <div className="content flex-1">
-              <dl className="flex h align-center" style={{ gridArea: "A" }}>
-                <div>
-                  <span className="letra">{fn(obj.person_id)}</span>
-                </div>
-                <dd className="flex v align-center">
-                  <img style={{ objectFit: "contain", width: "3cm" }} src="https://s3.sa-east-1.amazonaws.com/zenerp.com.br/assets/tenants/luxcar/logo.png" />
-                  <strong>{obj.volume_code}</strong>
-                </dd>
-              </dl>
-              <dl className="flex v align-center flex-space-around" style={{ gridArea: "B" }}>
-                <dt>Nota fiscal</dt>
-                <dd><strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong></dd>
-                <dd>OS {number(obj.ordemSeparacao_codigo)}, Carga {number(obj.carga_codigo)}</dd>
-              </dl>
-              <dl style={{ gridArea: "C" }}>
+            <div className="content flex v flex-1">
+              <div className="grid" style={{ flex: "2 0 0", gridTemplateColumns: "1fr 2fr 2fr" }}>
+                <dl className="flex v align-center letra">
+                  <dt>{fn(obj.person_id)}</dt>
+                </dl>
+                <dl className="flex v align-center">
+                  <img style={{ objectFit: "contain", flex: "2 0 0" }} src="https://s3.sa-east-1.amazonaws.com/zenerp.com.br/assets/tenants/luxcar/logo.png" />
+                  <strong style={{ flex: "1 0 0" }}>{obj.volume_code}</strong>
+                </dl>
+                {/* <dl>
+                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.volume_code}`}></img>
+                </dl> */}
+                <dl className="flex v align-center flex-space-around">
+                  <dt>Nota fiscal</dt>
+                  <dd><strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong></dd>
+                  <dd style={{ fontSize: "0.7em" }}>OS {number(obj.ordemSeparacao_codigo)}, Carga {number(obj.carga_codigo)}</dd>
+                </dl>
+              </div>
+              <dl style={{ flex: "1 0 0" }}>
                 <dt>Destinatário</dt>
                 <dd><strong>{obj.person_fantasyName ?? obj.person_name}</strong></dd>
               </dl>
-              <dl style={{ gridArea: "D" }}>
+              <dl style={{ flex: "1 0 0" }}>
                 <dt>Cidade</dt>
                 <dd><strong>{`${obj.person_city}, ${obj.person_state}`}</strong></dd>
               </dl>
-              <dl style={{ gridArea: "E" }}>
+              <dl style={{ flex: "1 0 0" }}>
                 <dt>Transportadora</dt>
                 <dd>{obj.carga_transportadora}</dd>
               </dl>
-              <dl style={{ gridArea: "F" }}>
+              <dl style={{ flex: "1 0 0" }}>
                 <dt>Itens</dt>
                 <dd>{number(obj.product_num)}/{number(obj.product_count)}, {obj.product_code}, {obj.product_description}, x{obj.productPacking_units}</dd>
               </dl>
-              <div className="grid" style={{ gridArea: "G" }}>
-                <div className="flex h" style={{ width: "100%" }}>
-                  <dl style={{ flex: "1" }}>
-                    <dt>Volume</dt>
-                    <dd><strong>{obj.item_num}/{obj.item_count}</strong></dd>
-                  </dl>
-                  <dl style={{ flex: "3" }}>
-                    <dd>
-                      <img style={{ objectFit: "contain" }} src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=5&scaleY=1&text=${obj.volume_code}`}></img>
-                    </dd>
-                  </dl>
-                </div>
+              <div className="grid" style={{ flex: "1 0 0", gridTemplateColumns: "1fr 3fr" }}>
+                <dl>
+                  <dt>Volume</dt>
+                  <dd>{obj.item_num}/{obj.item_count}</dd>
+                </dl>
+                <dl>
+                  <img style={{ objectFit: "contain" }} src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=5&scaleY=1&text=${obj.volume_code}`}></img>
+                </dl>
               </div>
             </div>
           </main>
+          <div style={{ fontSize: "0.8em", textAlign: "right" }}>zenerp.com.br</div>
         </div>
       ))}
     </div>

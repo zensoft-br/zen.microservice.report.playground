@@ -1,0 +1,16 @@
+.report-container {
+  overflow: hidden;
+}
+@media screen {
+  .report-container {
+    width: 21cm;
+    height: 14.85cm;
+    margin-bottom: 1rem;
+    padding: 0 !important;
+  }
+}
+@media print {
+  .report-container {
+    height: 100vh;
+  }
+}

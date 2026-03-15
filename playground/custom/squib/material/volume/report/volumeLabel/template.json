@@ -1,0 +1,12 @@
+{
+  "engine": "jsx",
+  "assets": {
+    "scripts": {
+      "utils.js": "@file:/utils.js"
+    },
+    "styles": [
+      "@file:/styles.css",
+      "@file:styles.css"
+    ]
+  }
+}

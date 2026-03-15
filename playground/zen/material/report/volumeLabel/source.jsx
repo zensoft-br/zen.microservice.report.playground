@@ -36,7 +36,7 @@ export default function ({data = [], t}) {
                 </dl>
                 <dl style={{ flex: "1 0 0" }}>
                   <dt>{t("/shipping/shipment")}</dt>
-                  <dd>{obj.shipment_id})</dd>
+                  <dd>{obj.shipment_id ?? "\u00A0"}</dd>
                 </dl>
                 <dl style={{ flex: "1 0 0" }}>
                   <dt>{t("/material/volume")}</dt>
@@ -50,11 +50,11 @@ export default function ({data = [], t}) {
               <div className="flex h" style={{ flex: "1 0 0", display: "grid", gridTemplateColumns: "3fr 1fr" }}>
                 <dl style={{ flex: "3 0 0" }}>
                   <dt>{t("/@word/personShipping")}</dt>
-                  <dd>&nbsp;</dd>
+                  <dd>{obj.personShipping_name}</dd>
                 </dl>
                 <dl style={{ flex: "1 0 0" }}>
                   <dt className="number">{t("/@word/grossWeightKg")}</dt>
-                  <dd className="number">{utils.formatNumber(obj.grossWeightKg)}</dd>
+                  <dd className="number">{obj.grossWeightKg ? utils.formatNumber(obj.grossWeightKg) : "\u00A0"}</dd>
                 </dl>
               </div>
             </div>

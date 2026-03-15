@@ -1,8 +1,9 @@
+@page {
+  size: 10cm 7cm;
+}
 .report-container {
   overflow: hidden;
   box-sizing: border-box;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
 }
 @media screen {
   .report-container {
@@ -18,23 +19,24 @@
   }
 }
 
-.flex {
+main {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.flex, .grid {
   min-height: 0;
 }
 
 .content {
   font-size: 11pt;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(7, minmax(0, 1fr));
-  grid-template-areas: "A B" "A B" "C C" "D D" "E E" "F F" "G G";
 }
 .content dl {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   flex: 1 1 auto;
-  padding: 0.2rem;
+  padding: 0.15rem;
   overflow: hidden;
   box-sizing: border-box;
   border-top: 1px solid black;
@@ -58,14 +60,13 @@
   padding: 0.2rem;
   width: 100%;
   height: 100%;
+  min-height: 0;
   object-fit: contain;
 }
-.content span.letra {
-  font-size: 2rem;
+.content dl.letra {
   padding: 0.5rem;
-  font-weight: bold;
-  color: white;
   background-color: black;
-  border: 2px solid black;
-  border-radius: var(--border-radius);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
 }

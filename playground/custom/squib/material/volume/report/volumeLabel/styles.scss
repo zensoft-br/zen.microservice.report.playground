@@ -1,0 +1,17 @@
+.report-container {
+  overflow: hidden;
+
+  @media screen {
+    // Tamanho padrão para exibição em tela, mas pode ser ajustado para impressão
+    width: 21cm;
+    height: 14.85cm;
+
+    margin-bottom: 1rem;
+    padding: 0 !important;
+  }
+
+  @media print {
+    height: 100vh;
+  }
+}
+
