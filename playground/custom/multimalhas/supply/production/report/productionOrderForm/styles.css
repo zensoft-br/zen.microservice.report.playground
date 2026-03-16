@@ -3,6 +3,10 @@
     width: 21cm;
   }
 }
+.report-container {
+  font-size: 12pt;
+  word-break: break-all;
+}
 
 .card {
   border: 1px solid black;

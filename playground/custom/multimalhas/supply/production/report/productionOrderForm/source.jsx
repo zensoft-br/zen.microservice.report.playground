@@ -63,19 +63,15 @@ export default function ({ data = [] }) {
                     {obj.person.name}
                   </div>
                   <div>
-                    <strong>Data pedido</strong><br />
+                    <strong>Data</strong><br />
                     {obj.date ? date(obj.date) : "-"}
                   </div>
                   <div>
-                    <strong>Data entrega</strong><br />
+                    <strong>Disponibilidade</strong><br />
                     {obj.availabilityDate ? date(obj.availabilityDate) : "-"}
                   </div>
                   <div>
-                    <strong>Data cliente</strong><br />
-                    {obj.availabilityDate ? date(obj.availabilityDate) : "-"}
-                  </div>
-                  <div>
-                    <strong>Pedidos</strong><br />
+                    <strong>Pedido</strong><br />
                     {obj.code}
                   </div>
                 </div>
@@ -107,7 +103,7 @@ export default function ({ data = [] }) {
                                   consumption.productPacking.variant?.description,
                                 ].filter(Boolean).join(", ")}</td>
                                 <td className="number">
-                                  {number(consumption.quantity)}&nbsp;{consumption.productPacking.product.unit.code}
+                                  <strong>{number(consumption.quantity)}</strong>&nbsp;{consumption.productPacking.product.unit.code}
                                 </td>
                               </tr>
                             ))}
@@ -157,10 +153,10 @@ export default function ({ data = [] }) {
                   .sort(([codeA], [codeB]) => codeA.localeCompare(codeB))
                   .map(([code, total]) => (
                     <tr key={code}>
-                      <td>{total.code}</td>
+                      <td><strong>{total.code}</strong></td>
                       <td>{total.description}</td>
                       <td>{total.variant?.description}</td>
-                      <td className="number">{`${number(total.quantity)} ${total.unit.code}`}</td>
+                      <td className="number"><strong>{`${number(total.quantity)}`}</strong>&nbsp;{total.unit.code}</td>
                     </tr>
                   ))}
               </tbody>
@@ -174,16 +170,16 @@ export default function ({ data = [] }) {
         <header>
           <h1>Itens a produzir</h1>
         </header>
-        <div className="grid" style={{ gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--gap)" }}>
+        <div className="grid" style={{ gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--gap)", fontSize: "1.25rem", fontWeight: "bold" }}>
           {data.map((obj) => (
-            <div key={obj.id} className="card flex v align-center justify-center">
+            <div key={obj.id} className="card flex v align-center justify-center" style={{ gap: "2rem" }}>
               {obj.steps?.map((step, index) => (
                 <React.Fragment key={index}>
                   {step.productions?.map((production, index) => (
                     <React.Fragment key={index}>
-                      <p>{obj.properties.sale_id}</p>
-                      <p key={index}>{production.productPacking.code}</p>
-                      <p key={index}>{production.productPacking.variant?.description}</p>
+                      <div>{obj.properties.sale_id}</div>
+                      <div>{production.productPacking.code}</div>
+                      <div>{production.productPacking.variant?.description}</div>
                     </React.Fragment>
                   ))}
                 </React.Fragment>

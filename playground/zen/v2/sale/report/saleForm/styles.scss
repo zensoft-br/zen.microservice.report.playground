@@ -1,0 +1,54 @@
+.report-container {
+  dl {
+    padding: 0.2rem;
+  }
+
+  @media screen {
+    width: 210mm;
+  }
+}
+
+img {
+  min-height: 0;
+  max-height: 1.5cm;
+
+  object-fit: contain;
+}
+
+.framed {
+  border: 1px solid black;
+  border-radius: var(--border-radius);
+
+  &.band.v,
+  .band.v,
+  &.flex.v,
+  .flex.v {
+    &>*:not(:last-child) {
+      border-bottom: 1px solid black;
+    }
+  }
+
+  &.band.h,
+  .band.h,
+  &.flex.h,
+  .flex.h {
+    &>*:not(:last-child) {
+      border-right: 1px solid black;
+    }
+  }
+}
+
+.flex.h {
+  dl {
+    flex: 1;
+
+    dt {
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+}

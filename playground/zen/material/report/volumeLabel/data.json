@@ -1,6 +1,9 @@
 {
-  "properties": {
-    "hideColumns": "quality"
+  "report": {
+    "properties": {
+      "fontSize": "9pt",
+      "hideColumns": "quality"
+    }
   },
   "data": [
     {
@@ -23,7 +26,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -70,7 +73,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -117,7 +120,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -164,7 +167,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -211,7 +214,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -258,7 +261,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -305,7 +308,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",
@@ -352,7 +355,7 @@
       "company_name": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
       "company_fantasyName": null,
       "company_nameCalc": "MULTIMALHAS INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-      "company_logo_url": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+      "company_logo_url": "https://s3.sa-east-1.amazonaws.com/personalsoft.com.br/downloads/zen/logo-sample.png",
       "company_logoBw_url": null,
       "company_document_number": "03.888.619/0001-72",
       "company_phone": "(19) 3469-5593",

@@ -1,7 +1,6 @@
 .report-container {
   overflow: hidden;
   box-sizing: border-box;
-  font-size: 9pt;
 }
 @media screen {
   .report-container {
@@ -34,13 +33,13 @@ main {
   flex-direction: column;
   justify-content: space-evenly;
   flex: 1 1 auto;
-  padding: 0.15rem;
+  padding: 0.2em;
   overflow: hidden;
   box-sizing: border-box;
   border-top: 1px solid black;
   border-left: 1px solid black;
   min-height: 0;
-  white-space: normal;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -48,10 +47,12 @@ main {
   font-size: 0.6em;
   font-weight: 600;
   text-transform: uppercase;
+  min-height: 0;
   white-space: nowrap;
 }
 .content dl dd {
   margin: 0;
+  min-height: 0;
 }
 .content img {
   box-sizing: border-box;
@@ -62,7 +63,7 @@ main {
   object-fit: contain;
 }
 .content .letter {
-  font-size: 2rem;
+  font-size: 2.5em;
   font-weight: bold;
   color: white;
   background-color: black;

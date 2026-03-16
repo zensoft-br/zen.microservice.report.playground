@@ -9,7 +9,13 @@
       "@file:styles.css"
     ]
   },
+  "i18n": {
+    "fallbackLocale": "fallback",
+    "resources": {
+      "fallback": {}
+    }
+  },
   "metadata": {
-    "dataSource": "/material/report/volume"
+    "dataSource": null
   }
 }
