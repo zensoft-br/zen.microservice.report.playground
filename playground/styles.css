@@ -75,6 +75,7 @@ body {
 .report-wrapper .report-container > header > dl,
 .report-wrapper .report-container > header section.parameters {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap);
   margin: 0;
 }
@@ -88,6 +89,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--padding);
+  min-width: 4cm;
 }
 .report-wrapper .report-container > header > dl div dt,
 .report-wrapper .report-container > header > dl dl dt,
@@ -150,7 +152,7 @@ body {
 .report-wrapper .report-container > main .content table:not(.custom) {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0.5rem 0;
+  border-spacing: var(--padding) 0;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
   text-align: left;
@@ -167,6 +169,7 @@ body {
 }
 .report-wrapper .report-container > footer dl {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap);
   margin: 0;
 }
@@ -178,6 +181,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--padding);
+  min-width: 4cm;
 }
 .report-wrapper .report-container > footer dl div dt,
 .report-wrapper .report-container > footer dl dl dt {
@@ -235,6 +239,14 @@ body {
 .report-wrapper .number {
   font-variant-numeric: tabular-nums;
   text-align: right !important;
+}
+.report-wrapper .number.positive,
+.report-wrapper .number .positive {
+  color: #4a89bd;
+}
+.report-wrapper .number.negative,
+.report-wrapper .number .negative {
+  color: #d66d67;
 }
 .report-wrapper .text-success {
   color: green;

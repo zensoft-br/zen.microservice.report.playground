@@ -10,6 +10,7 @@ $border: 1px solid var(--color-border);
 
 @mixin parameter-box {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap);
 
   margin: 0;
@@ -24,6 +25,8 @@ $border: 1px solid var(--color-border);
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     padding: var(--padding);
+
+    min-width: 4cm;
 
     dt {
       font-size: 8pt;
@@ -191,7 +194,7 @@ body {
         table:not(.custom) {
           width: 100%;
           border-collapse: separate;
-          border-spacing: 0.5rem 0;
+          border-spacing: var(--padding) 0;
           // margin-bottom: 0.5rem;
 
           th {
@@ -293,6 +296,16 @@ body {
   .number {
     font-variant-numeric: tabular-nums;
     text-align: right !important;
+
+    &.positive,
+    .positive {
+      color: #4a89bd;
+    }
+
+    &.negative,
+    .negative {
+      color: #d66d67;
+    }
   }
 
   .text-success {
