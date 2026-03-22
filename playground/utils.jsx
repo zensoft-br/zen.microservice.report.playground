@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import React from "react";
+
 export const config = {
   currency: "BRL",
   locale: "pt-BR",
@@ -135,3 +137,94 @@ function validateDate(value, timeZone = config.timeZone) {
 
   return new Date(value);
 }
+
+export const Column = () => null;
+
+export const Table = ({ data, visibleColumns, children }) => {
+  const columns = React.Children.toArray(children)
+    .filter((child) => {
+      if (!child) return false;
+      if (child.props.visible != null) return child.props.visible;
+      if (visibleColumns == null) return true;
+      if (child.props.ids && visibleColumns) {
+        return child.props.ids.some(id => visibleColumns.includes(id));
+      }
+      if (child.props.id && visibleColumns) {
+        return visibleColumns.includes(child.props.id);
+      }
+      return false;
+    })
+    .sort((a, b) => {
+      if (visibleColumns) {
+        const getMinIndex = (props) => {
+          const ids = props.ids || [props.id];
+          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
+          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
+        };
+        return getMinIndex(a.props) - getMinIndex(b.props);
+      }
+      return (a.props.order ?? 0) - (b.props.order ?? 0);
+    });
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          {columns.map((col, i) => (
+            <th key={i} className={col.props.headerClassName}>
+              {col.props.header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {columns.map((col, colIndex) => { 
+              let value = undefined;
+              if (typeof col.props.cellValue === "function") {
+                value = col.props.cellValue(row);
+              } else if (col.props.id) {
+                value = row[col.props.id];
+              }
+
+              const context = { row, value };
+
+              const className = typeof col.props.className === "function" 
+                ? col.props.className(context)
+                : col.props.className;
+    
+              return (
+                <td key={colIndex} className={className} style={col.props.style}>
+                  {col.props.cell 
+                    ? col.props.cell(context) 
+                    : (value ?? null)} 
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr>
+          {columns.map((col, i) => {
+            let value = undefined;
+            if (typeof col.props.footerValue === "function") {
+              value = col.props.footerValue({ data });
+            }
+
+            const className = typeof col.props.className === "function" 
+              ? col.props.className({ row: null, value })
+              : col.props.className;
+
+            return (
+              <td key={i} className={className}>
+                {col.props.footer ? col.props.footer({ data, value }) : null}
+              </td>
+            );
+          })}
+        </tr>
+      </tfoot>
+    </table>
+  );
+};

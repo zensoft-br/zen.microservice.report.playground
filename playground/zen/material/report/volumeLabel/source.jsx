@@ -1,4 +1,4 @@
-import * as utils from "./utils.js";
+import * as utils from "./utils.jsx";
 
 export default function ({data = [], report = {}, t}) {
   data = calculateVolumeMetrics(data);

@@ -1,5 +1,5 @@
 import React from "react";
-import * as utils from "./utils.js";
+import * as utils from "./utils.jsx";
 
 export default function ({ data = [], t }) {
   const taxList = ["ICMS", "IPI"];

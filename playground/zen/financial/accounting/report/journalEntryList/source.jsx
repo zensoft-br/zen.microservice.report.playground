@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import * as utils from "./utils.jsx";
+import { Column, Table } from "./utils.jsx";
 
 export default function ({ report = {}, data: rawData = [], t }) {
   const nature = "DR";
@@ -20,7 +21,7 @@ export default function ({ report = {}, data: rawData = [], t }) {
     
     const balance_sign = initialBalance === 0 ? undefined : initialBalance > 0 ? "DR" : "CR";
 
-    return [
+    const result = [
       {
         id: 0,
         date: report?.parameters?.DATE_START,
@@ -30,6 +31,18 @@ export default function ({ report = {}, data: rawData = [], t }) {
       },
       ...rawData,
     ];
+
+    let currentRunningBalance = 0;
+
+    result.forEach((row) => {
+      const amount = row.sign === "DR" ? (row.sum_value_dr || 0) : -(row.sum_value_cr || 0);
+      currentRunningBalance = utils.round(currentRunningBalance + amount, 2);
+
+      row.running_balance = currentRunningBalance;
+      row.balance_sign = currentRunningBalance === 0 ? undefined : currentRunningBalance > 0 ? "DR" : "CR";
+    });
+
+    return result;
   }, [rawData, t]);
 
   return (
@@ -97,7 +110,15 @@ export default function ({ report = {}, data: rawData = [], t }) {
         <main>
           <div className="content">
             <Table data={data}
-              visibleColumns={showColumns}>
+              visibleColumns1={showColumns}>
+              <Column
+                id="id"
+                header={t("/@word/id")}
+                headerClassName="number"
+                className="number"
+                cell={({ value }) => utils.formatNumber(value)}
+              />
+
               <Column
                 id="date"
                 header={t("/@word/date")}
@@ -105,11 +126,47 @@ export default function ({ report = {}, data: rawData = [], t }) {
               />
 
               <Column
-                id="journalEntry_id"
-                header={t("/financial/accounting/journalEntry")}
+                id="description"
+                header={t("/@word/description")}
+                style={{ maxWidth: "20em" }}
+              />
+
+              <Column
+                id="item_id"
+                header={t("/@word/id")}
                 headerClassName="number"
                 className="number"
-                cell={({ row }) => utils.formatNumber(row.journal_entry_id)}
+                cell={({ value }) => utils.formatNumber(value)}
+              />
+
+              <Column
+                id="sign"
+                header={t("/@word/sign")}
+                cell={({ value }) => value ? t(`/financial/accounting/sign/enum/${value}/sign`) : null}
+              />
+
+              <Column
+                id="society"
+                ids={["society_id", "society_code", "society_description"]}
+                header={t("/catalog/company/society")}
+                cell={({ row }) => [
+                  showColumn("society_id") ? row.society_id : null,
+                  showColumn("society_code") ? row.society_code : null,
+                  showColumn("society_description") ? row.society_description : null,
+                ].filter(Boolean).join(", ")}
+              />
+
+              <Column
+                id="company"
+                ids={["company_id", "company_code", "company_name", "company_fantasyName", "company_nameCalc"]}
+                header={t("/catalog/company/company")}
+                cell={({ row }) => [
+                  showColumn("company_id") ? row.company_id : null,
+                  showColumn("company_code") ? row.company_code : null,
+                  showColumn("company_name") ? row.company_name : null,
+                  showColumn("company_fantasyName") ? row.company_fantasyName : null,
+                  showColumn("company_nameCalc") ? row.company_nameCalc : null,
+                ].filter(Boolean).join(", ")}
               />
 
               <Column
@@ -129,54 +186,11 @@ export default function ({ report = {}, data: rawData = [], t }) {
                 ids={["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_full_description"]}
                 header={t("/financial/accounting/ledgerItem.accountCounterpart")}
                 cell={({ row }) => [
-                  showColumn("accountCounterpart_id") ? row.account_counterpart_id : null,
-                  showColumn("accountCounterpart_code") ? row.account_counterpart_code : null,
-                  showColumn("accountCounterpart_description") ? row.account_counterpart_description : null,
-                  showColumn("accountCounterpart_full_description") ? row.account_counterpart_full_description : null,
+                  showColumn("accountCounterpart_id") ? row.accountCounterpart_id : null,
+                  showColumn("accountCounterpart_code") ? row.accountCounterpart_code : null,
+                  showColumn("accountCounterpart_description") ? row.accountCounterpart_description : null,
+                  showColumn("accountCounterpart_full_description") ? row.accountCounterpart_fullDescription : null,
                 ].filter(Boolean).join(", ")}
-              />
-
-              <Column
-                id="description"
-                header={t("/@word/description")}
-                style={{ maxWidth: "20em" }}
-              />
-
-              <Column
-                id="debit"
-                header={t("/financial/accounting/sign/enum/DR")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "DR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "DR" ? utils.formatCurrency(value) : undefined}
-                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.debit : 0), 2), 0)}
-                footer={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="credit"
-                header={t("/financial/accounting/sign/enum/CR")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "CR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "CR" ? utils.formatCurrency(value) : undefined}
-                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.credit : 0), 2), 0)}
-                footer={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="balance"
-                header={t("/@word/balance")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${getColor(nature, row?.balance_sign, value)}`}
-                cell={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="balance_sign"
-                ids={["balance"]}
-                header=""
-                visible={showColumn("balance")}
-                className={({ row, value }) => `number ${getColor(nature, value, row?.balance)}`}
-                cell={({ row, value }) => row.balance === 0 ? " " : t(`/financial/accounting/sign/enum/${value}/sign`)}
               />
 
               <Column
@@ -193,20 +207,67 @@ export default function ({ report = {}, data: rawData = [], t }) {
 
               <Column
                 id="person"
-                ids={["person_id", "person_name", "person_fantasy_name", "person_name_calc"]}
+                ids={["person_id", "person_name", "person_fantasyName", "person_nameCalc"]}
                 header={t("/catalog/person/person")}
                 cell={({ row }) => [
                   showColumn("person_id") ? row.person_id : null,
                   showColumn("person_name") ? row.person_name : null,
-                  showColumn("person_fantasy_name") ? row.person_fantasy_name : null,
-                  showColumn("person_name_calc") ? row.person_name_calc : null,
+                  showColumn("person_fantasyName") ? row.person_fantasyName : null,
+                  showColumn("person_nameCalc") ? row.person_nameCalc : null,
                 ].filter(Boolean).join(", ")}
+              />
+
+              <Column
+                id="count_dr"
+                header={`${t("/@word/count")}, ${t("/financial/accounting/sign/enum/DR")}`}
+                headerClassName="number"
+                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "DR" ? "positive" : "negative")}`}
+                cell={({ row, value }) => row.sign === "DR" ? utils.formatNumber(value) : undefined}
+                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.count_dr : 0), 2), 0)}
+                footer={({ value }) => utils.formatNumber(value)}
+              />
+
+              <Column
+                id="count_cr"
+                header={`${t("/@word/count")}, ${t("/financial/accounting/sign/enum/CR")}`}
+                headerClassName="number"
+                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "CR" ? "positive" : "negative")}`}
+                cell={({ row, value }) => row.sign === "CR" ? utils.formatNumber(value) : undefined}
+                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.count_cr : 0), 2), 0)}
+                footer={({ value }) => utils.formatNumber(value)}
+              />
+
+              <Column
+                id="sum_value_dr"
+                header={t("/financial/accounting/sign/enum/DR")}
+                headerClassName="number"
+                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "DR" ? "positive" : "negative")}`}
+                cell={({ row, value }) => row.sign === "DR" ? utils.formatCurrency(value) : undefined}
+                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.sum_value_dr : 0), 2), 0)}
+                footer={({ value }) => utils.formatCurrency(value)}
+              />
+
+              <Column
+                id="sum_value_cr"
+                header={t("/financial/accounting/sign/enum/CR")}
+                headerClassName="number"
+                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "CR" ? "positive" : "negative")}`}
+                cell={({ row, value }) => row.sign === "CR" ? utils.formatCurrency(value) : undefined}
+                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.sum_value_cr : 0), 2), 0)}
+                footer={({ value }) => utils.formatCurrency(value)}
+              />
+
+              <Column
+                id="running_balance"
+                header={t("/@word/balance")}
+                headerClassName="number"
+                className={({ row, value }) => `number ${getColor(nature, row?.balance_sign, value)}`}
+                cell={({ row, value }) => value ? `${utils.formatCurrency(Math.abs(value))}\u00A0${t(`/financial/accounting/sign/enum/${row.balance_sign}/sign`)}` : undefined}
               />
 
               <Column
                 id="tags"
                 header={t("/@word/tags")}
-                cell={({ row }) => row.journal_entry_tags}
               />
             </Table>
           </div>
@@ -225,94 +286,3 @@ function getColor(nature, sign, value) {
     return sign === "CR" ? "positive" : "negative";
   }
 }
-
-const Column = () => null;
-
-const Table = ({ data, visibleColumns, children }) => {
-  const columns = React.Children.toArray(children)
-    .filter((child) => {
-      if (!child) return false;
-      if (child.props.visible != null) return child.props.visible;
-      if (visibleColumns == null) return true;
-      if (child.props.ids && visibleColumns) {
-        return child.props.ids.some(id => visibleColumns.includes(id));
-      }
-      if (child.props.id && visibleColumns) {
-        return visibleColumns.includes(child.props.id);
-      }
-      return false;
-    })
-    .sort((a, b) => {
-      if (visibleColumns) {
-        const getMinIndex = (props) => {
-          const ids = props.ids || [props.id];
-          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
-          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
-        };
-        return getMinIndex(a.props) - getMinIndex(b.props);
-      }
-      return (a.props.order ?? 0) - (b.props.order ?? 0);
-    });
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          {columns.map((col, i) => (
-            <th key={i} className={col.props.headerClassName}>
-              {col.props.header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {columns.map((col, colIndex) => { 
-              let value = undefined;
-              if (typeof col.props.cellValue === "function") {
-                value = col.props.cellValue(row);
-              } else if (col.props.id) {
-                value = row[col.props.id];
-              }
-
-              const context = { row, value };
-
-              const className = typeof col.props.className === "function" 
-                ? col.props.className(context)
-                : col.props.className;
-    
-              return (
-                <td key={colIndex} className={className} style={col.props.style}>
-                  {col.props.cell 
-                    ? col.props.cell(context) 
-                    : (value ?? null)} 
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-      <tfoot>
-        <tr>
-          {columns.map((col, i) => {
-            let value = undefined;
-            if (typeof col.props.footerValue === "function") {
-              value = col.props.footerValue({ data });
-            }
-
-            const className = typeof col.props.className === "function" 
-              ? col.props.className({ row: null, value })
-              : col.props.className;
-
-            return (
-              <td key={i} className={className}>
-                {col.props.footer ? col.props.footer({ data, value }) : null}
-              </td>
-            );
-          })}
-        </tr>
-      </tfoot>
-    </table>
-  );
-};

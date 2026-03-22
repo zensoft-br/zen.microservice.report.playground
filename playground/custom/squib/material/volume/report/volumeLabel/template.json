@@ -2,7 +2,7 @@
   "engine": "jsx",
   "assets": {
     "scripts": {
-      "utils.js": "@file:/utils.js"
+      "utils.jsx": "@file:/utils.jsx"
     },
     "styles": [
       "@file:/styles.css",

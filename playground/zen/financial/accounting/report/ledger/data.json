@@ -28,7 +28,7 @@
         "#loan"
       ],
       "hideColumns": null,
-      "showColumns": "date,description,debit,credit,balance,balance_sign"
+      "showColumns": "date,description,debit,credit,balance"
     },
     "properties": {}
   },
