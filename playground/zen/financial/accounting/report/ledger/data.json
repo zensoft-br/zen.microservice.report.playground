@@ -21,6 +21,10 @@
         1115
       ],
       "PERSON_IDS_DESC": "Marcelo Storti",
+      "PERSON_GROUP_IDS": [
+        1115
+      ],
+      "PERSON_GROUP_IDS_DESC": "Marcelo Storti",
       "DATE_START": "2026-01-01",
       "DATE_END": "2026-01-31",
       "TAGS": [

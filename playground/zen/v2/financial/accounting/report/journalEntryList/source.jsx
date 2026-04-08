@@ -26,7 +26,7 @@ export default function ({ report = {}, data: rawData = [], t }) {
         id: 0,
         date: report?.parameters?.DATE_START,
         description: t("/@word/balanceStart"),
-        balance: initialBalance,
+        runningBalance: 0,
         balance_sign,
       },
       ...rawData,
@@ -34,11 +34,18 @@ export default function ({ report = {}, data: rawData = [], t }) {
 
     let currentRunningBalance = 0;
 
+    result.sort((a, b) => {
+      var i = new Date(a.date) - new Date(b.date);
+      if (i === 0) {
+        i = a.id - b.id;
+      }
+    });
+
     result.forEach((row) => {
       const amount = row.sign === "DR" ? (row.sum_value_dr || 0) : -(row.sum_value_cr || 0);
       currentRunningBalance = utils.round(currentRunningBalance + amount, 2);
 
-      row.running_balance = currentRunningBalance;
+      row.runningBalance = currentRunningBalance;
       row.balance_sign = currentRunningBalance === 0 ? undefined : currentRunningBalance > 0 ? "DR" : "CR";
     });
 
@@ -49,7 +56,7 @@ export default function ({ report = {}, data: rawData = [], t }) {
     <div className="report-wrapper">
       <div className="report-container" style={{ "width": report?.properties?.width }}>
         <header>
-          <h1>{t("/financial/accounting/report/ledger")}</h1>
+          <h1>{t("/financial/accounting/report/journalEntryList")}</h1>
           <section className="parameters">
             {report?.parameters?.ACCOUNT_ID && (
               <dl>
@@ -110,7 +117,7 @@ export default function ({ report = {}, data: rawData = [], t }) {
         <main>
           <div className="content">
             <Table data={data}
-              visibleColumns1={showColumns}>
+              visibleColumns={showColumns}>
               <Column
                 id="id"
                 header={t("/@word/id")}
@@ -127,8 +134,8 @@ export default function ({ report = {}, data: rawData = [], t }) {
 
               <Column
                 id="description"
-                header={t("/@word/description")}
                 style={{ maxWidth: "20em" }}
+                header={t("/@word/description")}
               />
 
               <Column
@@ -172,6 +179,7 @@ export default function ({ report = {}, data: rawData = [], t }) {
               <Column
                 id="account"
                 ids={["account_id", "account_code", "account_description", "account_full_description"]}
+                style={{ maxWidth: "15em" }}
                 header={t("/financial/accounting/account")}
                 cell={({ row }) => [
                   showColumn("account_id") ? row.account_id : null,
@@ -184,7 +192,8 @@ export default function ({ report = {}, data: rawData = [], t }) {
               <Column
                 id="accountCounterpart"
                 ids={["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_full_description"]}
-                header={t("/financial/accounting/ledgerItem.accountCounterpart")}
+                style={{ maxWidth: "15em" }}
+                header={t("/financial/accounting/accountCounterpart")}
                 cell={({ row }) => [
                   showColumn("accountCounterpart_id") ? row.accountCounterpart_id : null,
                   showColumn("accountCounterpart_code") ? row.accountCounterpart_code : null,
@@ -221,8 +230,8 @@ export default function ({ report = {}, data: rawData = [], t }) {
                 id="count_dr"
                 header={`${t("/@word/count")}, ${t("/financial/accounting/sign/enum/DR")}`}
                 headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "DR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "DR" ? utils.formatNumber(value) : undefined}
+                className="number"
+                cell={({ value }) => utils.formatNumber(value)}
                 footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.count_dr : 0), 2), 0)}
                 footer={({ value }) => utils.formatNumber(value)}
               />
@@ -231,8 +240,8 @@ export default function ({ report = {}, data: rawData = [], t }) {
                 id="count_cr"
                 header={`${t("/@word/count")}, ${t("/financial/accounting/sign/enum/CR")}`}
                 headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "CR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "CR" ? utils.formatNumber(value) : undefined}
+                className="number"
+                cell={({ value }) => utils.formatNumber(value)}
                 footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.count_cr : 0), 2), 0)}
                 footer={({ value }) => utils.formatNumber(value)}
               />
@@ -258,11 +267,11 @@ export default function ({ report = {}, data: rawData = [], t }) {
               />
 
               <Column
-                id="running_balance"
-                header={t("/@word/balance")}
+                id="runningBalance"
+                header={t("/@word/runningBalance")}
                 headerClassName="number"
                 className={({ row, value }) => `number ${getColor(nature, row?.balance_sign, value)}`}
-                cell={({ row, value }) => value ? `${utils.formatCurrency(Math.abs(value))}\u00A0${t(`/financial/accounting/sign/enum/${row.balance_sign}/sign`)}` : undefined}
+                cell={({ row, value }) => `${utils.formatCurrency(Math.abs(value))}${row.balance_sign ? "\u00A0" + t(`/financial/accounting/sign/enum/${row.balance_sign}/sign`) : ""}`}
               />
 
               <Column

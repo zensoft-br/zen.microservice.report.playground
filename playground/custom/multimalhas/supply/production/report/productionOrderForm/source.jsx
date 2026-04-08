@@ -10,37 +10,40 @@ export default function ({ data = [] }) {
 
     return k1.localeCompare(k2);
   });
+  const totalsByProduct = data
+    .reduce((acc, obj) => {
+      obj.steps?.forEach((step) => {
+        (step.consumptions ?? [])
+          // Filtro solicitado pelo Leonardo, para não considerar CAIXA e FITA no consumo total
+          .filter((e) => !["CAIXA", "FITA"].includes(e.productPacking.product.productProfile.code))
+          .forEach((consumption) => {
+            let variant;
+            if (consumption.productPacking.product.productProfile.code === "ESPUMA") {
+              variant = step.productions[0]?.productPacking.variant;
+            }
 
-  const totalsByProduct = data.reduce((acc, obj) => {
-    obj.steps?.forEach((step) => {
-      step.consumptions?.forEach((consumption) => {
-        let variant;
-        if (consumption.productPacking.product.productProfile.code === "ESPUMA") {
-          variant = step.productions[0]?.productPacking.variant;
-        }
+            const key = consumption.productPacking.code + (variant ? `-${variant.id}` : "");
+            const qty = consumption.quantity || 0;
 
-        const key = consumption.productPacking.code + (variant ? `-${variant.id}` : "");
-        const qty = consumption.quantity || 0;
-
-        // 3. Accumulate sum grouped by code
-        if (!acc[key]) {
-          acc[key] = {
-            code: consumption.productPacking.code,
-            variant,
-            description: [
-              consumption.productPacking.product.description,
-              consumption.productPacking.complement,
-              consumption.productPacking.variant?.description,
-            ].filter(Boolean).join(", "),
-            unit: consumption.productPacking.product.unit,
-            quantity: 0,
-          };
-        }
-        acc[key].quantity += qty;
+            // 3. Accumulate sum grouped by code
+            if (!acc[key]) {
+              acc[key] = {
+                code: consumption.productPacking.code,
+                variant,
+                description: [
+                  consumption.productPacking.product.description,
+                  consumption.productPacking.complement,
+                  consumption.productPacking.variant?.description,
+                ].filter(Boolean).join(", "),
+                unit: consumption.productPacking.product.unit,
+                quantity: 0,
+              };
+            }
+            acc[key].quantity += qty;
+          });
       });
-    });
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 
   return (
     <div className="report-wrapper">
@@ -54,10 +57,6 @@ export default function ({ data = [] }) {
             {data.map((obj) => (
               <div className="no-break">
                 <div class="flex h full gap padding panel">
-                  {/* <div>
-                    <strong>Ordem de produção</strong><br />
-                    {obj.id}
-                  </div> */}
                   <div>
                     <strong>Cliente</strong><br />
                     {obj.person.name}
@@ -82,6 +81,7 @@ export default function ({ data = [] }) {
                         <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
                         <div class="xxl">{step.productPacking.code}</div>
                         <div><span className="xxl">{step.quantity}</span>&nbsp;{step.productPacking.product.unit.code}</div>
+                        {step.productions?.[0]?.productPacking.product.category5 && <div>Medida: {step.productions?.[0]?.productPacking.product.category5?.code}</div>}
                       </div>
 
                       <div class="flex v gap padding flex-1" style={{ flex: "3" }}>

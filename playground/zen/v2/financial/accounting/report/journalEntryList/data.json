@@ -28,7 +28,7 @@
         "#loan"
       ],
       "hideColumns": null,
-      "showColumns": "company_code,account_code,account_description,resultCenter_code,person_nameCalc,society_code,accountCounterpart_code"
+      "showColumns": "company_code,date,description,account_code,account_description,accountCounterpart_code,accountCounterpart_description,sum_value_dr,sum_value_cr,runningBalance"
     },
     "properties": {}
   },

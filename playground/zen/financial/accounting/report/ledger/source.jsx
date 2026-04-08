@@ -86,6 +86,12 @@ export default function ({ report = {}, data: rawData = [], t }) {
                 <dd>{report?.parameters?.PERSON_IDS_DESC ?? report?.parameters?.PERSON_IDS.join(", ")}</dd>
               </dl>
             )}
+            {report?.parameters?.PERSON_GROUP_IDS && (
+              <dl>
+                <dt>{t("/catalog/person/personGroup")}</dt>
+                <dd>{report?.parameters?.PERSON_GROUP_IDS_DESC ?? report?.parameters?.PERSON_GROUP_IDS.join(", ")}</dd>
+              </dl>
+            )}
             {report?.parameters?.TAGS && (
               <dl>
                 <dt>{t("/@word/tags")}</dt>
