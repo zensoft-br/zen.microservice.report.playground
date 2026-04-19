@@ -52,7 +52,3 @@ export default function ({ data = [], t }) {
     </div>
   );
 };
-
-function number(value, options = {}) {
-  return new Intl.NumberFormat("pt-BR", options).format(value);
-}

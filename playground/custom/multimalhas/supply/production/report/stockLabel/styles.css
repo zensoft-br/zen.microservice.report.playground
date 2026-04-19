@@ -1,6 +1,7 @@
 .report-container {
   box-sizing: border-box;
-  font-size: 9pt;
+  font-size: 11pt;
+  font-weight: bold;
 }
 @media screen {
   .report-container {
@@ -44,7 +45,7 @@ main {
   text-overflow: ellipsis;
 }
 .content dl dt {
-  font-size: 0.6em;
+  font-size: 0.5rem;
   font-weight: 600;
   text-transform: uppercase;
 }

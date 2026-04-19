@@ -5,8 +5,14 @@ export default function ({ data = [] }) {
     const p1 = a.steps[0]?.productions[0]?.productPacking;
     const p2 = b.steps[0]?.productions[0]?.productPacking;
 
-    const k1 = p1?.product.code + ":" + (p1?.variant?.code ?? "") + ":" + p1?.code + ":" + a.id;
-    const k2 = p2?.product.code + ":" + (p2?.variant?.code ?? "") + ":" + p2?.code + ":" + b.id;
+    const cor1 = p1?.variant?.code ?? "";
+    const cor2 = p2?.variant?.code ?? "";
+
+    const tamanho1 = Number(p1.code.split(".")[2] ?? "0");
+    const tamanho2 = Number(p2.code.split(".")[2] ?? "0");
+
+    const k1 = cor1 + ":" + tamanho1 + ":" + p1?.product.code + ":" + a.id;
+    const k2 = cor2 + ":" + tamanho2 + ":" + p2?.product.code + ":" + b.id;
 
     return k1.localeCompare(k2);
   });

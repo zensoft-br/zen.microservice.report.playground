@@ -171,7 +171,7 @@ export const Table = ({ data, visibleColumns, children }) => {
       <thead>
         <tr>
           {columns.map((col, i) => (
-            <th key={i} className={col.props.headerClassName}>
+            <th key={i} className={col.props.headerClassName || col.props.className}>
               {col.props.header}
             </th>
           ))}

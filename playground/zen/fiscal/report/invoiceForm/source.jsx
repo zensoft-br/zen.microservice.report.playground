@@ -1,4 +1,4 @@
-import * as utils from "utils.js";
+import * as utils from "./utils.jsx";
 
 export default function ({ data = [], t }) {
   data.forEach(item => {
@@ -421,7 +421,7 @@ export default function ({ data = [], t }) {
                       {item.items.map((item1, index) => (
                         <tr key={index}>
                           <td>{[
-                            item1.productPacking.code,
+                            item1.code ?? item1.productPacking.code,
                             item1.properties?.description ?? item1.properties?.descriptionCalc,
                             item1.properties?.complement ?? item1.properties?.complementCalc,
                           ].filter(Boolean).join(", ")}</td>

@@ -1,0 +1,1216 @@
+{
+  "properties": {
+    "hideColumns": "quality"
+  },
+  "data": [
+    {
+      "id": 8517,
+      "product": {
+        "id": 1027,
+        "productProfile": {
+          "id": 1006,
+          "code": "1006",
+          "description": "Ativo",
+          "properties": {
+            "#user": "fabiano.gomes@diagonaltextil.com.br",
+            "#userId": 1005,
+            "#created": "2025-09-03T09:13:59.755512538-03:00[America/Sao_Paulo]"
+          }
+        },
+        "type": "PRODUCT",
+        "code": "29",
+        "description": "TESOURA ELETRICA 8M (WTE8C15 200176801 - 2700 HR)",
+        "unit": {
+          "id": 1016,
+          "dimension": {
+            "id": 1005,
+            "code": "unit",
+            "description": "@@:/catalog/unit/dimension/code/unit",
+            "standardUnit": "un",
+            "tags": "#system"
+          },
+          "code": "un",
+          "description": "un",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1123,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "84271090.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:08.482773833-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "84271090",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 1730,
+        "grossWeightKg": 1730,
+        "category3": {
+          "id": 1136,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "08",
+          "description": "Ativo Imobilizado",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.709444037-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "personal",
+        "properties": {
+          "comments": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)",
+          "personal_id": "29",
+          "textileWidth": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)",
+          "textileYield": "TESOURA ELETRICA 8M(",
+          "fiscal_br_NCM": "84271090",
+          "textileCountry": "China",
+          "textileWidth_old": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)",
+          "textileGramWeight": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)",
+          "textileComposition": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)",
+          "personal_numcad1for": "12458",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileGramWeight_old": "TESOURA ELETRICA 8M(WTE8C15200176801 2700 HR)"
+        }
+      },
+      "code": "29-01",
+      "units": 1,
+      "properties": {
+        "#user": "fabiano.gomes@diagonaltextil.com.br",
+        "#userId": 1005,
+        "#created": "2026-04-07T15:42:46.577618943-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8516,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35958",
+      "complement": "AM03",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-10T10:35:46.332212474-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8509,
+      "product": {
+        "id": 3198,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "34078",
+        "description": "TORONTO TWILL ALFAIATARIA P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1080,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "54075210.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:04.407874595-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "54075210",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.383,
+        "grossWeightKg": 0.387,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1149,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.020",
+          "description": "Alfaiataria",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.725000837-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "DGN2507,DGN2532,LINHA,TTTX-1747,TTTX-1838",
+        "properties": {
+          "#user": "leticia.santos@diagonaltextil.com.br",
+          "#userId": 1006,
+          "#created": "2025-08-12T15:35:28.47467152-03:00[America/Sao_Paulo]",
+          "textileWidth": 1.52,
+          "fiscal_br_NCM": "54075210",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-007.png",
+          "textileCare04": "textile-care-001.png",
+          "textileCare05": "textile-care-033.png",
+          "textileCountry": "CHINA",
+          "textileGramWeight": 252,
+          "textileComposition": "97% POLIÉSTER, 3% ELASTANO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileAverageQuantity": "54 M"
+        }
+      },
+      "code": "34078-35951",
+      "complement": "AZ103",
+      "units": 1,
+      "tags": "TTTX-1838",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:10:08.227512475-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8513,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35955",
+      "complement": "AZ527",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:20:26.431197221-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8514,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35956",
+      "complement": "BG30",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:21:09.005255727-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8514,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35956",
+      "complement": "BG30",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:21:09.005255727-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8514,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35956",
+      "complement": "BG30",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:21:09.005255727-03:00[America/Sao_Paulo]"
+      }
+    },
+    {
+      "id": 8514,
+      "product": {
+        "id": 2658,
+        "productProfile": {
+          "id": 1001,
+          "code": "DEFAULT",
+          "description": "Tecido",
+          "tags": "fabric,fiscalInfoRequired,stock.lot,stock.serial,stock.serial.auto",
+          "properties": {}
+        },
+        "type": "PRODUCT",
+        "code": "29251",
+        "description": "COTTON VOILE 60'S P/D",
+        "unit": {
+          "id": 1004,
+          "dimension": {
+            "id": 1002,
+            "code": "length",
+            "description": "@@:/catalog/unit/dimension/code/length",
+            "standardUnit": "m",
+            "tags": "#system"
+          },
+          "code": "m",
+          "description": "m",
+          "conversionFactor": 1,
+          "tags": "#system"
+        },
+        "fiscalProfileProduct": {
+          "id": 1100,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "52083100.1",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T13:54:06.46025649-03:00[America/Sao_Paulo]",
+            "fiscal_br_NCM": "52083100",
+            "fiscal_br_CEST": "",
+            "fiscal_br_orig": "1"
+          }
+        },
+        "lengthCm": 0,
+        "widthCm": 0,
+        "heightCm": 0,
+        "volumeM3": 0,
+        "netWeightKg": 0.099,
+        "grossWeightKg": 0.103,
+        "category1": {
+          "id": 1014,
+          "category": {
+            "id": 1001,
+            "code": "PRODUCT1",
+            "description": "CLASSE 01",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01",
+          "description": "Tecido plano",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:51:44.855940454-03:00[America/Sao_Paulo]",
+            "personal.id": "1",
+            "zen.category.father.id": "1001"
+          }
+        },
+        "category2": {
+          "id": 1112,
+          "category": {
+            "id": 1002,
+            "code": "PRODUCT2",
+            "description": "CLASSE 02",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0",
+          "description": "Liso",
+          "tags": "diagonal,personalsoft",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:52:54.395103908-03:00[America/Sao_Paulo]",
+            "personal.id": "3ADEF4B8-C6B5-467E-3D2A-4724A0DAD4D9"
+          }
+        },
+        "category3": {
+          "id": 1128,
+          "category": {
+            "id": 1003,
+            "code": "PRODUCT3",
+            "description": "BLOCO K",
+            "tags": "#system,sped",
+            "properties": {}
+          },
+          "code": "00",
+          "description": "Mercadoria para revenda",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2024-07-25T08:53:20.316382898-03:00[America/Sao_Paulo]"
+          }
+        },
+        "category4": {
+          "id": 1150,
+          "category": {
+            "id": 1004,
+            "code": "PRODUCT4",
+            "description": "CLASSE 03",
+            "tags": "#system",
+            "properties": {}
+          },
+          "code": "01.0.030",
+          "description": "Básico",
+          "tags": "diagonal",
+          "properties": {
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2025-07-29T09:05:36.815597533-03:00[America/Sao_Paulo]"
+          }
+        },
+        "tags": "BP11717,BP12962,DGN2523,DGN2532,JU251031,LINHA,personal",
+        "properties": {
+          "comments": "Encolhimento: 5%",
+          "url_imagem": "http://187.32.195.74/qrcode/29251.pdf",
+          "personal_id": "29251",
+          "textileWidth": 1.42,
+          "textileYield": "N/A",
+          "fiscal_br_NCM": "52083100",
+          "textileCare01": "textile-care-065.png",
+          "textileCare02": "textile-care-088.png",
+          "textileCare03": "textile-care-011.png",
+          "textileCare04": "textile-care-095.png",
+          "textileCare05": "textile-care-001.png",
+          "textileCare06": "textile-care-033.png",
+          "textileCountry": "China",
+          "textileWidth_old": "1,42M",
+          "textileGramWeight": 70,
+          "textileComposition": "100% ALGODAO",
+          "technicalDescription": "###Armazenagem e descanso\n* Não armazenar as peças cruzadas ou em pé (rolos) e em locais que possua excesso de luz que possa atingir o material.\n* Estocar o tecido inadequadamente pode marcá-lo, criar quebraduras, desalinhar ourelas e alterar cores.\n* Os rolos devem ficar sobre paletes que os isolem de sujeira e umidade do chão; Não encostar em paredes.\n* Manipular os rolos com cuidado para evitar quebra do tubete no seu interior.\n* Enrolar os tecidos com o avesso para o lado externo.\n* Periodicamente recomenda-se vigilância contínua (dedetização) para evitar dejetos de pragas gerando manchas e furos.\n* Descansar o tecido no mínimo por 12 horas antes de enfesto.\n* Evitar empilhar mais que 3 peças durante o descanso para não causar o tensionamento do tecido.' as armazenagem,\n###Enfesto para corte\n* Colocar as folhas de tecido no mesmo sentido para evitar diferenças de tonalidade entre as partes após o corte.\n* Conferir se não há rebarbas na mesa de corte e evitar o contato do tecido com objetos que possam puxar os fios.\n* Cuidado para o tecido não sair do esquadro durante o enfesto.\n* Colocar folhas de papel para evitar deslizamento do tecido durante o enfesto.\n* Não tensionar o tecido durante o enfesto.\n* Fazer o risco na largura útil do tecido, descontando as ourelas.\n* Encaixar os moldes no mesmo sentido para evitar diferença de tonalidade entre as partes após o corte.\n* Após o corte fazer a separação e etiquetagem das partes de tonalidades diferentes.' as corte,\n###Costura\n* Regular a tensão das linhas superior e inferior.\n* Atenção para que o dente transportador não marque o tecido.\n* Ajustar a pressão do calcador para evitar o franzimento.\n* Escolher a agulha correta conforme a espessura e gramatura do tecido.\n* Utilizar sempre linhas com resistência, uniformidade na espessura, torção, bonderização, lubrificação e elasticidade.\n* Testar as máquinas com retalho do artigo antes de iniciar a produção.' as costura,\n###Informações adicionais\n* Por ser um produto importado, poderá haver variação de gramatura e largura de lote para lote.\n* As instruções de conservadoria referem-se ao tecido desta ficha. Para peças confeccionadas, as informações deverão ser ajustadas de acordo com o acabamento, aviamento e composição de outros itens que compõem a peça.\n* Havendo composê de cores, fazer testes prévios de lavagem antes da produção.\n* Ao lavar, não deixar resíduos de sabão, pois podem manchar ou amarelar a peça.\n* Cartelas de mostruário não são referência para avaliar toque e maciez. A produção com volume maior pode apresentar pequenas diferenças na qualidade.\n* Ao inspecionar as peças confeccionadas, não forçar a costura em demasia, pois pode esgarçar ou deslizar o fio.' as informacoes_adicionais,",
+          "textileShrinkagePerc": "5",
+          "textileWidthM_usable": null,
+          "textileGramWeight_old": "70GSM",
+          "textileAverageQuantity": "61 M"
+        }
+      },
+      "code": "29251-35956",
+      "complement": "BG30",
+      "units": 1,
+      "tags": "JU251031",
+      "properties": {
+        "#user": "aimara.coberio@diagonaltextil.com.br",
+        "#userId": 1284,
+        "#created": "2026-03-05T16:21:09.005255727-03:00[America/Sao_Paulo]"
+      }
+    }
+  ]
+}

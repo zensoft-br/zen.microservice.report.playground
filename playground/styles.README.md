@@ -12,7 +12,7 @@
     ├── header (Report header)
     │   ├── .brand (Logo / Company info)
     │   ├── h1 (Report title)
-    │   └── section.parameters (Parameters) (revisar)
+    │   └── section.parameters (Parameters)
     │       ├── dl (Parameter 1)
     │       |   ├── dt (Label)
     │       │   └── dd (Value)

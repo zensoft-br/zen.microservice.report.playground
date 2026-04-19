@@ -127,17 +127,16 @@ async function compile(reportFolder) {
     if (!config?.engine) throw new Error("template.engine is required");
 
     // Find source file
-    const exts = ENGINE_EXTENSIONS[config.engine] || [];
-    let sourceContent;
-    for (const ext of exts) {
-      const p = path.join(reportFolder, `source${ext}`);
-      if (await fileExists(p)) {
-        sourceContent = await fs.readFile(p, "utf8");
-        break;
+    if (!config.source) {
+      const exts = ENGINE_EXTENSIONS[config.engine] || [];
+      for (const ext of exts) {
+        const p = path.join(reportFolder, `source${ext}`);
+        if (await fileExists(p)) {
+          config.source = `@file:source${ext}`;
+          break;
+        }
       }
     }
-    if (!sourceContent)
-      throw new Error(`Source file missing in ${relativeBase}`);
 
     const dataText = (await fileExists(dataFile))
       ? await fs.readFile(dataFile, "utf8")
@@ -145,7 +144,9 @@ async function compile(reportFolder) {
 
     const renderRequest = {
       engine: config.engine,
-      template: { source: sourceContent },
+      template: { 
+        source: config.source,
+      },
       assets: JSON.parse(JSON.stringify(config.assets || {})),
       i18n: config.i18n,
       data: undefined,
@@ -166,6 +167,46 @@ async function compile(reportFolder) {
       }
     }
 
+    // Process source (can be a string or map)
+    {
+      if (typeof config.source === "string" && config.source.startsWith("@file:")) {
+        const filePath = config.source.slice(6);
+        let sourcePath;
+        if (filePath.startsWith("/")) {
+          sourcePath = path.join(process.cwd(), "playground", filePath);
+        } else {
+          sourcePath = path.resolve(reportFolder, filePath);
+        }
+        try {
+          renderRequest.template.source = await fs.readFile(sourcePath, "utf8");
+        } catch (err) {
+          throw new Error(
+            `Source file missing: ${filePath}\n Resolved as: ${sourcePath}`,
+          );
+        }
+      } else if (typeof config.source === "object") {
+        const entries = Object.entries(config.source);
+        for (const [key, value] of entries) {
+          if (typeof value === "string" && value.startsWith("@file:")) {
+            const filePath = value.slice(6);
+            let sourcePath;
+            if (filePath.startsWith("/")) {
+              sourcePath = path.join(process.cwd(), "playground", filePath);
+            } else {
+              sourcePath = path.resolve(reportFolder, filePath);
+            }
+            try {
+              renderRequest.template.source[key] = await fs.readFile(sourcePath, "utf8");
+            } catch (err) {
+              throw new Error(
+                `Source file missing: ${filePath}\n Resolved as: ${sourcePath}`,
+              );
+            }
+          }
+        }
+      }
+    }
+    
     // Process scripts (@file: logic)
     if (renderRequest.assets?.scripts) {
       const processed = await Promise.all(
