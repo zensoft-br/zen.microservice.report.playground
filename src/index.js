@@ -130,9 +130,9 @@ async function compile(reportFolder) {
     if (!config.source) {
       const exts = ENGINE_EXTENSIONS[config.engine] || [];
       for (const ext of exts) {
-        const p = path.join(reportFolder, `source${ext}`);
+        const p = path.join(reportFolder, `index${ext}`);
         if (await fileExists(p)) {
-          config.source = `@file:source${ext}`;
+          config.source = `@file:index${ext}`;
           break;
         }
       }
