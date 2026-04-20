@@ -9,13 +9,13 @@
       "@file:styles.css"
     ]
   },
-  "i18n": {
-    "fallbackLocale": "fallback",
-    "resources": {
-      "fallback": {}
+  "meta": {
+    "report": {
+      "title": "User Report",
+      "parameters": {
+        "dateStart": "2026-01-01",
+        "dateEnd": "2026-01-31"
+      }
     }
-  },
-  "metadata": {
-    "dataSource": null
   }
 }

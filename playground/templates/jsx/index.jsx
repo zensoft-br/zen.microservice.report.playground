@@ -1,48 +1,53 @@
 import * as utils from "./utils.jsx";
+import { Column, Table } from "./utils.jsx";
 
-export default function ({ data = [], t }) {
+export default function ({ data = [], meta, t }) {
+  const report = meta?.report || {};
+
+  // map by department
+  const groupedData = data.reduce((acc, item) => {
+    const dept = item.department || "Unknown";
+    if (!acc[dept]) {
+      acc[dept] = [];
+    }
+    acc[dept].push(item);
+    return acc;
+  }, {});
+
   return (
     <div className="report-wrapper">
-      {data.map((obj) => (
-        <div className="report-container">
-          <header>
-            <h1>Hello, {text(obj.name)}!</h1>
-          </header>
-          <main>
-            <section>
-              <header>{t("/@word/items")}</header>
+      <div className="report-container">
+        <header>
+          <h1>{report.title}</h1>
+          <section className="parameters">
+            <dl>
+              <dt>{t("/@word/dateStart")}</dt>
+              <dd>{utils.formatDate(report.parameters.dateStart)}</dd>
+            </dl>
+            <dl>
+              <dt>{t("/@word/dateEnd")}</dt>
+              <dd>{utils.formatDate(report.parameters.dateEnd)}</dd>
+            </dl>
+          </section>
+        </header>
+        <main>
+          {Object.entries(groupedData).map(([dept, items]) => (
+            <section key={dept}>
+              <header>{t("/@word/department")}: {dept}</header>
               <div className="content">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Campo</th>
-                      <th>{t("/@word/value")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {obj.items?.map((item, index) => (
-                      <tr key={index}>
-                        <td>Item {index + 1}</td>
-                        <td>{utils.formatNumber(item)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td>{t("/@word/total")}</td>
-                      <td>{utils.formatNumber(obj.items?.reduce((sum, item) => sum + item, 0))}</td>
-                    </tr>
-                  </tfoot>
-                </table>
+                <Table
+                  data={items}
+                  visibleColumns={["id", "name", "age"]}>
+                  <Column id="id" header={t("/@word/id")} cell={({ value }) => utils.formatNumber(value)} />
+                  <Column id="name" header={t("/@word/name")} />
+                  <Column id="age" header={t("/@word/age")} cell={({ value }) => utils.formatNumber(value)} />
+                  <Column id="department" header={t("/@word/department")} />
+                </Table>
               </div>
             </section>
-          </main>
-        </div>
-      ))}
+          ))}
+        </main>
+      </div>
     </div>
   );
-};
-
-function text(value) {
-  return <strong>{value?.toUpperCase()}</strong>;
 }

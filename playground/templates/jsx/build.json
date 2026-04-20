@@ -1,7 +1,7 @@
 {
   "engine": "jsx",
   "template": {
-    "source": "import * as utils from \"./utils.jsx\";\r\n\r\nexport default function ({ data = [], t }) {\r\n  return (\r\n    <div className=\"report-wrapper\">\r\n      {data.map((obj) => (\r\n        <div className=\"report-container\">\r\n          <header>\r\n            <h1>Hello, {text(obj.name)}!</h1>\r\n          </header>\r\n          <main>\r\n            <section>\r\n              <header>{t(\"/@word/items\")}</header>\r\n              <div className=\"content\">\r\n                <table>\r\n                  <thead>\r\n                    <tr>\r\n                      <th>Campo</th>\r\n                      <th>{t(\"/@word/value\")}</th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    {obj.items?.map((item, index) => (\r\n                      <tr key={index}>\r\n                        <td>Item {index + 1}</td>\r\n                        <td>{utils.formatNumber(item)}</td>\r\n                      </tr>\r\n                    ))}\r\n                  </tbody>\r\n                  <tfoot>\r\n                    <tr>\r\n                      <td>{t(\"/@word/total\")}</td>\r\n                      <td>{utils.formatNumber(obj.items?.reduce((sum, item) => sum + item, 0))}</td>\r\n                    </tr>\r\n                  </tfoot>\r\n                </table>\r\n              </div>\r\n            </section>\r\n          </main>\r\n        </div>\r\n      ))}\r\n    </div>\r\n  );\r\n};\r\n\r\nfunction text(value) {\r\n  return <strong>{value?.toUpperCase()}</strong>;\r\n}"
+    "source": "import * as utils from \"./utils.jsx\";\r\nimport { Column, Table } from \"./utils.jsx\";\r\n\r\nexport default function ({ data = [], meta, t }) {\r\n  const report = meta?.report || {};\r\n\r\n  // map by department\r\n  const groupedData = data.reduce((acc, item) => {\r\n    const dept = item.department || \"Unknown\";\r\n    if (!acc[dept]) {\r\n      acc[dept] = [];\r\n    }\r\n    acc[dept].push(item);\r\n    return acc;\r\n  }, {});\r\n\r\n  return (\r\n    <div className=\"report-wrapper\">\r\n      <div className=\"report-container\">\r\n        <header>\r\n          <h1>{report.title}</h1>\r\n          <section className=\"parameters\">\r\n            <dl>\r\n              <dt>{t(\"/@word/dateStart\")}</dt>\r\n              <dd>{utils.formatDate(report.parameters.dateStart)}</dd>\r\n            </dl>\r\n            <dl>\r\n              <dt>{t(\"/@word/dateEnd\")}</dt>\r\n              <dd>{utils.formatDate(report.parameters.dateEnd)}</dd>\r\n            </dl>\r\n          </section>\r\n        </header>\r\n        <main>\r\n          {Object.entries(groupedData).map(([dept, items]) => (\r\n            <section key={dept}>\r\n              <header>{t(\"/@word/department\")}: {dept}</header>\r\n              <div className=\"content\">\r\n                <Table\r\n                  data={items}\r\n                  visibleColumns={[\"id\", \"name\", \"age\"]}>\r\n                  <Column id=\"id\" header={t(\"/@word/id\")} cell={({ value }) => utils.formatNumber(value)} />\r\n                  <Column id=\"name\" header={t(\"/@word/name\")} />\r\n                  <Column id=\"age\" header={t(\"/@word/age\")} cell={({ value }) => utils.formatNumber(value)} />\r\n                  <Column id=\"department\" header={t(\"/@word/department\")} />\r\n                </Table>\r\n              </div>\r\n            </section>\r\n          ))}\r\n        </main>\r\n      </div>\r\n    </div>\r\n  );\r\n}"
   },
   "assets": {
     "scripts": {
@@ -12,13 +12,13 @@
       "\n"
     ]
   },
-  "i18n": {
-    "fallbackLocale": "fallback",
-    "resources": {
-      "fallback": {}
+  "meta": {
+    "report": {
+      "title": "User Report",
+      "parameters": {
+        "dateStart": "2026-01-01",
+        "dateEnd": "2026-01-31"
+      }
     }
-  },
-  "metadata": {
-    "dataSource": null
   }
 }

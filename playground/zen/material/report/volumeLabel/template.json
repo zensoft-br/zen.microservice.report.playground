@@ -9,6 +9,14 @@
       "@file:styles.css"
     ]
   },
+  "meta": {
+    "report": {
+      "properties": {
+        "fontSize": "9pt",
+        "hideColumns": "quality"
+      }
+    }
+  },
   "metadata": {
     "dataSource": "/material/report/volume"
   }

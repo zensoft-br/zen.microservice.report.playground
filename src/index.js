@@ -1,10 +1,10 @@
 import { watch } from "chokidar";
 import fs from "fs/promises";
-import  * as sass from "sass";
 import http from "http";
 import net from "net";
 import open from "open";
 import path from "path";
+import * as sass from "sass";
 import { fileURLToPath } from "url";
 
 // Configuration
@@ -284,16 +284,20 @@ async function compile(reportFolder) {
       },
     };
 
+    if (config.meta ) {
+      renderRequest.meta = config.meta;
+    }
+
+    if (config.metadata) {
+      renderRequest.metadata = config.metadata;
+    }
+
     const mergedRequest = {
       ...renderRequest,
       i18n: {
         ...deepMerge(i18n, renderRequest.i18n || {}),
       },
     };
-
-    if (config.metadata) {
-      renderRequest.metadata = config.metadata;
-    }
 
     const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",

@@ -1,19 +1,20 @@
-{
-  "report": {
-    "code": "jsx",
-    "parameters": {
-      "dateStart": "2026-01-01",
-      "dateEnd": "2026-01-31"
-    }
+[
+  {
+    "id": 1001,
+    "name": "John Anderson",
+    "age": 30,
+    "department": "Engineering"
   },
-  "data": [
-    {
-      "name": "Jsx",
-      "items": [
-        1,
-        2,
-        3
-      ]
-    }
-  ]
-}
+  {
+    "id": 1002,
+    "name": "Jane Smith",
+    "age": 25,
+    "department": "Marketing"
+  },
+  {
+    "id": 1003,
+    "name": "Alice Johnson",
+    "age": 28,
+    "department": "Engineering"
+  }
+]
