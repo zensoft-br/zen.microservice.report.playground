@@ -10,15 +10,20 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/id")),
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length, 
+      footer: ({ value }) => utils.formatNumber(value),
     },
     { id: "name",
-      header: utils.cellHeader(t("/@word/name")) },
+      header: utils.cellHeader(t("/@word/name")),
+    },
     { id: "age",
       header: utils.cellHeader(t("/@word/age")),
       className: "number",
-      cell: ({ value }) => utils.formatNumber(value) },
+      cell: ({ value }) => utils.formatNumber(value),
+    },
     { id: "department",
-      header: utils.cellHeader(t("/@word/department")) },
+      header: utils.cellHeader(t("/@word/department")), 
+    },
   ];
 
   data = utils.sort(data, report.properties?.settings?.sort || []);

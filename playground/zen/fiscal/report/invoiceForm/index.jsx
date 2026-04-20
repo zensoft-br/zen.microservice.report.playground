@@ -1,6 +1,8 @@
 import * as utils from "./utils.jsx";
 
-export default function ({ data = [], t }) {
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
+  
   data.forEach(item => {
     item.billingTitles = item.billingTitles?.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   });
