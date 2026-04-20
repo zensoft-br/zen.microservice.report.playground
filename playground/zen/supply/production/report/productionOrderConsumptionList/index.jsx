@@ -3,7 +3,7 @@ import * as utils from "./utils.jsx";
 import { Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
-  const report = meta.report || {};
+  const { report = {} } = meta;
 
   const columns = [
     { id: "id",
@@ -184,4 +184,4 @@ export default function ({ data = [], meta = {}, t }) {
       </div>
     </div>
   );
-};
+}

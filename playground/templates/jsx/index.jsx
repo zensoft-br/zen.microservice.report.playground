@@ -1,53 +1,64 @@
+import React from "react";
 import * as utils from "./utils.jsx";
-import { Column, Table } from "./utils.jsx";
+import { Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  // map by department
-  const groupedData = data.reduce((acc, item) => {
-    const dept = item.department || "Unknown";
-    if (!acc[dept]) {
-      acc[dept] = [];
-    }
-    acc[dept].push(item);
-    return acc;
-  }, {});
+  const columns = [
+    { id: "id",
+      header: utils.cellHeader(t("/@word/id")),
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+    },
+    { id: "name",
+      header: utils.cellHeader(t("/@word/name")) },
+    { id: "age",
+      header: utils.cellHeader(t("/@word/age")),
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "department",
+      header: utils.cellHeader(t("/@word/department")) },
+  ];
 
+  data = utils.sort(data, report.properties?.settings?.sort || []);
+  
+  data = utils.group(data, report.properties?.settings?.groups || [], columns);
+  
+  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+  
   return (
     <div className="report-wrapper">
       <div className="report-container">
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
-            <dl>
+            {report.parameters?.dateStart && <dl>
               <dt>{t("/@word/dateStart")}</dt>
               <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
-            </dl>
-            <dl>
+            </dl>}
+            {report.parameters?.dateEnd && <dl>
               <dt>{t("/@word/dateEnd")}</dt>
               <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
-            </dl>
+            </dl>}
           </section>
         </header>
         <main>
-          {Object.entries(groupedData).map(([dept, items]) => (
-            <section key={dept}>
-              <header>
-                <h2>{t("/@word/department")}: {dept}</h2>
-              </header>
+          <GroupSections 
+            columns={columns}
+            data={data} 
+            groups={report.properties?.settings?.groups || []}>
+            {(groupData) => (
               <div className="content">
-                <Table
-                  data={items}
-                  visibleColumns={["id", "name", "age"]}>
-                  <Column id="id" header={t("/@word/id")} className="number" cell={({ value }) => utils.formatNumber(value)} />
-                  <Column id="name" header={t("/@word/name")} />
-                  <Column id="age" header={t("/@word/age")} className="number" cell={({ value }) => utils.formatNumber(value)} />
-                  <Column id="department" header={t("/@word/department")} />
+                <Table data={groupData}
+                  visibleColumns={visibleColumns}>
+                  {columns.map((column, index) => (
+                    <Column key={index} {...column} />
+                  ))}
                 </Table>
               </div>
-            </section>
-          ))}
+            )}
+          </GroupSections>
         </main>
       </div>
     </div>

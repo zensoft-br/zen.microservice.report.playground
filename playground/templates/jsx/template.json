@@ -15,6 +15,15 @@
       "parameters": {
         "dateStart": "2026-01-01",
         "dateEnd": "2026-01-31"
+      },
+      "properties": {
+        "settings": {
+          "groups": [
+            {
+              "columnId": "department"
+            }
+          ]
+        }
       }
     }
   }
