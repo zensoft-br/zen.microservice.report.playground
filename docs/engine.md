@@ -22,6 +22,7 @@ de geração de relatórios. Cada relatório é composto por:
   utils.jsx - componentes React e funções compartilhados
   /<slug-do-relatorio>
     data.json
+    data.schema.json
     index.jsx
     styles.css
     template.json
@@ -224,6 +225,8 @@ Este exemplo demonstra o mínimo necessário: cabeçalho, parâmetros, agrupamen
 ```
 
 ### data.json
+
+`data.json` deve conter no máximo 10 registros representativos, cobrindo casos normais e de borda. Volume real, schema completo e casos de borda estão descritos em `data.schema.json`. Ao gerar ou modificar templates, consulte o schema — não assuma estrutura a partir do data.json.
 
 ```json
 [

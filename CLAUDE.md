@@ -28,6 +28,4 @@ uma tabela que não está documentada lá, me pergunte antes de assumir colunas.
 
 Quando em dúvida sobre estilo/estrutura, siga estes exemplos nesta ordem:
 
-1. `/relatorios/vendas-por-vendedor/` — agrupamento simples + totalizador.
-2. `/relatorios/inadimplencia-por-filial/` — múltiplos agrupamentos + faixas etárias.
-3. `/relatorios/fluxo-de-caixa-mensal/` — tabela com pivot de meses.
+1. `/playground/templates/jsx` — agrupamento simples + totalizador.
