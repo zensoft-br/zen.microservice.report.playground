@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import React from "react";
 
 export const config = {
@@ -7,6 +5,10 @@ export const config = {
   locale: "pt-BR",
   timeZone: "America/Sao_Paulo",
 };
+
+export function cellHeader(...args) {
+  return args.filter(arg => arg != null).map((arg, index) => index === 0 ? arg : String(arg).toLowerCase()).join(", ");
+}
 
 export function formatCurrency(value, options = {}) {
   if (value == null) return null;
@@ -113,11 +115,9 @@ export function formatTime(value, options = {}) {
 }
 
 export function group(data, groups = []) {
-  groups = groups.slice(0, 1);
-
   const root = new Map();
 
-  if (!groups.length) {
+  if (!groups || !groups.length) {
     root.set(null, data);
     return root;
   }
@@ -311,5 +311,56 @@ export const Table = ({ data, visibleColumns, children }) => {
         </tr>
       </tfoot>
     </table>
+  );
+};
+
+export const GroupSections = ({ data, children, groups = [], columns = [], level = 0 }) => {
+  if (Array.isArray(data)) {
+    return <>{children(data)}</>;
+  }
+
+  const entries = Array.from(data.entries());
+  
+  const currentGroup = groups[level];
+  const column = columns.find(c => c.id === currentGroup?.columnId);
+
+  return (
+    <>
+      {entries.map(([key, value], index) => {
+        let displayValue = key;
+        if (key !== null) {
+          if (column?.cellValue) {
+            displayValue = column.cellValue({ row: { key }, rowIndex: 0, data: [] });
+          }
+          if (column?.cell) {
+            displayValue = column.cell({ value: displayValue, data: [] });
+          }
+
+          if (column.header) {
+            displayValue = `${column.header}: ${displayValue}`;
+          }
+        }
+
+        return (
+          <section key={key ?? index} className={`group-level-${level + 1}`}>
+            {key !== null && (
+              <header className="group-header">
+                {React.createElement(`h${Math.min(level + 2, 6)}`, {}, displayValue)}
+              </header>
+            )}
+            
+            {/* Pass level + 1 to move to the next grouping column */}
+            <GroupSections
+              data={value} 
+              level={level + 1} 
+              groups={groups} 
+              columns={columns}
+            >
+              {children}
+            </GroupSections>
+          </section>
+        );
+      })}
+    </>
   );
 };

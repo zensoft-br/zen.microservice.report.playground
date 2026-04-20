@@ -1,17 +1,135 @@
+import React from "react";
 import * as utils from "./utils.jsx";
-import { Column, Table } from "./utils.jsx";
+import { Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const report = meta.report || {};
 
+  const columns = [
+    { id: "id",
+      header: utils.cellHeader(t("/@word/id")),
+      className: "number", 
+      cell: ({ value }) => utils.formatNumber(value), 
+      footerValue: ({data}) => data.length, 
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "status", 
+      header: utils.cellHeader(t("/@word/status")) },
+    { id: "code", 
+      header: utils.cellHeader(t("/@word/code")) },
+    { id: "date", 
+      header: utils.cellHeader(t("/@word/date")), 
+      cell: ({ value }) => utils.formatDate(value) },
+    { id: "availabilityDate", 
+      header: utils.cellHeader(t("/@word/availabilityDate")), 
+      cell: ({ value }) => utils.formatDate(value) },
+    { id: "company_id", 
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/id")), 
+      className: "number", 
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "company_code", 
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/code")) },
+    { id: "company_name", 
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")) },
+    { id: "company_fantasyName", 
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/fantasyName")) },
+    { id: "company_nameCalc", 
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/nameCalc")) },
+    { id: "person_id", 
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "person_name", 
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/name")) },
+    { id: "person_fantasyName", 
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/fantasyName")) },
+    { id: "person_nameCalc", 
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/nameCalc")) },
+    { id: "product_id", 
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "product_code", 
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")) },
+    { id: "product_description", 
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")) },
+    { id: "product_complement", 
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/complement")) },
+    { id: "productProfile_id", 
+      header: utils.cellHeader(t("/catalog/product/productProfile"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "productProfile_code", 
+      header: utils.cellHeader(t("/catalog/product/productProfile"), t("/@word/code")) },
+    { id: "productProfile_description", 
+      header: utils.cellHeader(t("/catalog/product/productProfile"), t("/@word/description")) },
+    { id: "unit_id", 
+      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "unit_code", 
+      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/code")) },
+    { id: "productPacking_id", 
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "productPacking_code", 
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")) },
+    { id: "productPacking_complement", 
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")) },
+    { id: "productPacking_units", 
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/units")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "productVariant_id", 
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/id")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value) },
+    { id: "productVariant_code", 
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/code")) },
+    { id: "productVariant_description", 
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")) },
+    { id: "sum_quantity", 
+      header: utils.cellHeader(t("/@word/quantity")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_quantity, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "sum_served", 
+      header: utils.cellHeader(t("/@word/served")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_served, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "sum_balance", 
+      header: utils.cellHeader(t("/@word/balance")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_balance, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "sum_excess", 
+      header: utils.cellHeader(t("/@word/excess")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_excess, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "sum_servedAdjusted", 
+      header: utils.cellHeader(t("/@word/servedAdjusted")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_servedAdjusted, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+    { id: "sum_balanceAdjusted", 
+      header: utils.cellHeader(t("/@word/balanceAdjusted")), 
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({data}) => data.reduce((red, item) => red + item.sum_balanceAdjusted, 0),
+      footer: ({value}) => utils.formatNumber(value) },
+  ];
+
   data = utils.sort(data, report.properties?.settings?.sort || []);
 
-  const grouped = utils.group(data, report.properties?.settings?.groups || []);
+  data = utils.group(data, report.properties?.settings?.groups || [], columns);
 
-  const sections = grouped instanceof Map 
-    ? Array.from(grouped.entries()) 
-    : [[null, grouped]];
-    
   const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
 
   return (
@@ -19,7 +137,6 @@ export default function ({ data = [], meta = {}, t }) {
       <div className="report-container">
         <header>
           <h1>{t("/supply/production/report/productionOrderConsumptionList")}</h1>
-          {/* <h1>{JSON.stringify(rest)}</h1> */}
           <section className="parameters">
             {report.parameters?.DATE_START && <dl>
               <dt>{t("/@word/dateStart")}</dt>
@@ -28,6 +145,14 @@ export default function ({ data = [], meta = {}, t }) {
             {report.parameters?.DATE_END && <dl>
               <dt>{t("/@word/dateEnd")}</dt>
               <dd>{utils.formatDate(report.parameters.DATE_END)}</dd>
+            </dl>}
+            {report.parameters?.AVAILABILITY_DATE_START && <dl>
+              <dt>{t("/@word/availabilityDateStart")}</dt>
+              <dd>{utils.formatDate(report.parameters.AVAILABILITY_DATE_START)}</dd>
+            </dl>}
+            {report.parameters?.AVAILABILITY_DATE_END && <dl>
+              <dt>{t("/@word/availabilityDateEnd")}</dt>
+              <dd>{utils.formatDate(report.parameters.AVAILABILITY_DATE_END)}</dd>
             </dl>}
             {report.parameters?.COMPANY_IDS_DESC && <dl>
               <dt>{t("/catalog/company/company/plural")}</dt>
@@ -40,70 +165,21 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          {sections.map(([groupKey, groupValue], idx) => (
-            <section key={idx}>
-              {groupKey !== null && <header className="group-header">
-                <h2>{groupKey}</h2>
-              </header>}
+          <GroupSections 
+            columns={columns}
+            data={data} 
+            groups={report.properties?.settings?.groups || []}>
+            {(groupData) => (
               <div className="content">
-                <Table data={groupValue}
+                <Table data={groupData}
                   visibleColumns={visibleColumns}>
-                  <Column id="id" header={t("/@word/id")}
-                    cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.length}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="status" header={t("/@word/status")}></Column>
-                  <Column id="company_id" header={`${t("/catalog/company/company")} ${t("/@word/id")}`}
-                    cell={({ value }) => utils.formatNumber(value)}></Column>
-                  <Column id="company_code" header={`${t("/catalog/company/company")} ${t("/@word/code")}`}></Column>
-                  <Column id="company_name" header={`${t("/catalog/company/company")} ${t("/@word/name")}`}></Column>
-                  <Column id="company_fantasyName" header={`${t("/catalog/company/company")} ${t("/@word/fantasyName")}`}></Column>
-                  <Column id="company_nameCalc" header={`${t("/catalog/company/company")} ${t("/@word/nameCalc")}`}></Column>
-                  <Column id="person_id" header={`${t("/catalog/person/person")} ${t("/@word/id")}`}
-                    cell={({ value }) => utils.formatNumber(value)} className="number"
-                  ></Column>
-                  <Column id="person_name" header={`${t("/catalog/person/person")} ${t("/@word/name")}`}></Column>
-                  <Column id="person_fantasyName" header={`${t("/catalog/person/person")} ${t("/@word/fantasyName")}`}></Column>
-                  <Column id="person_nameCalc" header={`${t("/catalog/person/person")} ${t("/@word/nameCalc")}`}></Column>
-                  <Column id="product_id" header={`${t("/catalog/product/product")} ${t("/@word/id")}`}
-                    cell={({ value }) => utils.formatNumber(value)} className="number"
-                  ></Column>
-                  <Column id="product_code" header={`${t("/catalog/product/product")} ${t("/@word/code")}`}></Column>
-                  <Column id="product_description" header={`${t("/catalog/product/product")} ${t("/@word/description")}`}></Column>
-                  <Column id="product_complement" header={`${t("/catalog/product/product")} ${t("/@word/complement")}`}></Column>
-                  <Column id="productPacking_id" header={`${t("/catalog/product/productPacking")} ${t("/@word/id")}`}
-                    cell={({ value }) => utils.formatNumber(value)} className="number"
-                  ></Column>
-                  <Column id="productPacking_code" header={`${t("/catalog/product/productPacking")} ${t("/@word/code")}`}></Column>
-                  <Column id="productPacking_complement" header={`${t("/catalog/product/productPacking")} ${t("/@word/complement")}`}></Column>
-                  <Column id="productPacking_units" header={`${t("/catalog/product/productPacking")} ${t("/@word/units")}`}></Column>
-                  <Column id="productVariant_id" header={`${t("/catalog/product/productVariant")} ${t("/@word/id")}`}
-                    cell={({ value }) => utils.formatNumber(value)} className="number"
-                  ></Column>
-                  <Column id="productVariant_code" header={`${t("/catalog/product/productVariant")} ${t("/@word/code")}`}></Column>
-                  <Column id="productVariant_description" header={`${t("/catalog/product/productVariant")} ${t("/@word/description")}`}></Column>
-                  <Column id="sum_quantity" header={t("/@word/quantity")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_quantity, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="sum_served" header={t("/@word/served")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_served, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="sum_balance" header={t("/@word/balance")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_balance, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="sum_excess" header={t("/@word/excess")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_excess, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="sum_servedAdjusted" header={t("/@word/servedAdjusted")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_servedAdjusted, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
-                  <Column id="sum_balanceAdjusted" header={t("/@word/balanceAdjusted")} cell={({ value }) => utils.formatNumber(value)} className="number"
-                    footerValue={({data}) => data.reduce((red, item) => red + item.sum_balanceAdjusted, 0)}
-                    footer={({value}) => utils.formatNumber(value)}></Column>
+                  {columns.map((column, index) => (
+                    <Column key={index} {...column} />
+                  ))}
                 </Table>
               </div>
-            </section>
-          ))}
+            )}
+          </GroupSections>
         </main>
       </div>
     </div>

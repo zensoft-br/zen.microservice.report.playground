@@ -24,19 +24,26 @@
       },
       "properties": {
         "settings": {
+          "columns": [
+            "productPacking_code",
+            "product_description",
+            "productPacking_complement",
+            "productVariant_description",
+            "sum_balance"
+          ],
           "sort": [
             {
-              "columnId": "person_nameCalc",
+              "columnId": "availabilityDate",
               "direction": "asc",
               "nulls": "last"
             }
           ],
           "groups": [
             {
-              "columnId": "person_nameCalc"
+              "columnId": "availabilityDate"
             },
             {
-              "columnId": "product_id"
+              "columnId": "product_code"
             }
           ]
         }
