@@ -1,94 +1,92 @@
-{
-  "data": [
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7016.OBS.42.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 150.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:100"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7016.OBS.44.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 250.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:100"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7016.OBS.46.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 250.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:100"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7016.OBS.48.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 250.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7016.OBS.50.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 150.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7032.OBS.42.CHOC",
-      "productVariant_description": "Chocolate",
-      "quantity": 50.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7032.OBS.42.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 100.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7032.OBS.44.CHOC",
-      "productVariant_description": "Chocolate",
-      "quantity": 100.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    },
-    {
-      "company_logo": "https:\/\/zenerp.s3.amazonaws.com\/tenants\/multimalhas\/images\/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
-      "person_name": "LUCITEX CONFECÇÕES LTDA",
-      "product_tags": "",
-      "productPacking_code": "7032.OBS.44.PTO",
-      "productVariant_description": "Preto",
-      "quantity": 100.00000000,
-      "sale_id": 1301,
-      "priceListItem_tags": "q:50"
-    }
-  ]
-}
+[
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7016.OBS.42.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 150,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:100"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7016.OBS.44.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 250,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:100"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7016.OBS.46.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 250,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:100"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7016.OBS.48.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 250,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7016.OBS.50.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 150,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7032.OBS.42.CHOC",
+    "productVariant_description": "Chocolate",
+    "quantity": 50,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7032.OBS.42.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 100,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7032.OBS.44.CHOC",
+    "productVariant_description": "Chocolate",
+    "quantity": 100,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  },
+  {
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/multimalhas/images/f5d5d2b8-3522-47e1-b36a-cacb62510254.png",
+    "person_name": "LUCITEX CONFECÇÕES LTDA",
+    "product_tags": "",
+    "productPacking_code": "7032.OBS.44.PTO",
+    "productVariant_description": "Preto",
+    "quantity": 100,
+    "sale_id": 1301,
+    "priceListItem_tags": "q:50"
+  }
+]

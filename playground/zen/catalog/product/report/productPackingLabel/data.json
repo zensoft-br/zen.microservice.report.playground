@@ -1,9 +1,136 @@
-{
-  "properties": {
-    "hideColumns": "quality"
+[
+  {
+    "id": 6898,
+    "product": {
+      "id": 7934,
+      "productProfile": {
+        "id": 1001,
+        "code": "DEFAULT",
+        "description": "PADRAO",
+        "tags": "@default,fiscalInfoRequired,interchangeable,productPackingCreate,stock.unit.convert",
+        "properties": {}
+      },
+      "type": "PRODUCT",
+      "code": "10315",
+      "description": "REFIL ODOR BOM AR **2X250ML** LAVANDA",
+      "unit": {
+        "id": 1016,
+        "dimension": {
+          "id": 1005,
+          "code": "unit",
+          "description": "@@:/catalog/unit/dimension/code/unit",
+          "standardUnit": "un",
+          "tags": "#system"
+        },
+        "code": "un",
+        "description": "un",
+        "conversionFactor": 1,
+        "tags": "#system"
+      },
+      "fiscalProfileProduct": {
+        "id": 1027,
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "description": "33074900.0",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T16:48:09.287696389-03:00[America/Sao_Paulo]"
+        }
+      },
+      "lengthCm": 0,
+      "widthCm": 0,
+      "heightCm": 0,
+      "volumeM3": 0,
+      "netWeightKg": 0,
+      "grossWeightKg": 0,
+      "barcode": "7891035025273",
+      "tags": "interchangeable",
+      "properties": {
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2026-01-16T15:56:01.919812836-03:00[America/Sao_Paulo]",
+        "fiscal_br_NCM": "33074900",
+        "fiscal_br_CEST": null
+      }
+    },
+    "code": "10315",
+    "barcode": "7891035025273",
+    "units": 1,
+    "lengthCm": 0,
+    "widthCm": 0,
+    "heightCm": 0,
+    "volumeM3": 0,
+    "netWeightKg": 0,
+    "grossWeightKg": 0,
+    "tags": "#default",
+    "properties": {}
   },
-  "data": [
-    {
+  {
+    "id": 6899,
+    "product": {
+      "id": 7934,
+      "productProfile": {
+        "id": 1001,
+        "code": "DEFAULT",
+        "description": "PADRAO",
+        "tags": "@default,fiscalInfoRequired,interchangeable,productPackingCreate,stock.unit.convert",
+        "properties": {}
+      },
+      "type": "PRODUCT",
+      "code": "10315",
+      "description": "REFIL ODOR BOM AR **2X250ML** LAVANDA",
+      "unit": {
+        "id": 1016,
+        "dimension": {
+          "id": 1005,
+          "code": "unit",
+          "description": "@@:/catalog/unit/dimension/code/unit",
+          "standardUnit": "un",
+          "tags": "#system"
+        },
+        "code": "un",
+        "description": "un",
+        "conversionFactor": 1,
+        "tags": "#system"
+      },
+      "fiscalProfileProduct": {
+        "id": 1027,
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "description": "33074900.0",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T16:48:09.287696389-03:00[America/Sao_Paulo]"
+        }
+      },
+      "lengthCm": 0,
+      "widthCm": 0,
+      "heightCm": 0,
+      "volumeM3": 0,
+      "netWeightKg": 0,
+      "grossWeightKg": 0,
+      "barcode": "7891035025273",
+      "tags": "interchangeable",
+      "properties": {
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2026-01-16T15:56:01.919812836-03:00[America/Sao_Paulo]",
+        "fiscal_br_NCM": "33074900",
+        "fiscal_br_CEST": null
+      }
+    },
+    "code": "10315x4",
+    "barcode": "17891035025270",
+    "units": 4,
+    "productPackingStock": {
       "id": 6898,
       "product": {
         "id": 7934,
@@ -73,142 +200,10 @@
       "tags": "#default",
       "properties": {}
     },
-    {
-      "id": 6899,
-      "product": {
-        "id": 7934,
-        "productProfile": {
-          "id": 1001,
-          "code": "DEFAULT",
-          "description": "PADRAO",
-          "tags": "@default,fiscalInfoRequired,interchangeable,productPackingCreate,stock.unit.convert",
-          "properties": {}
-        },
-        "type": "PRODUCT",
-        "code": "10315",
-        "description": "REFIL ODOR BOM AR **2X250ML** LAVANDA",
-        "unit": {
-          "id": 1016,
-          "dimension": {
-            "id": 1005,
-            "code": "unit",
-            "description": "@@:/catalog/unit/dimension/code/unit",
-            "standardUnit": "un",
-            "tags": "#system"
-          },
-          "code": "un",
-          "description": "un",
-          "conversionFactor": 1,
-          "tags": "#system"
-        },
-        "fiscalProfileProduct": {
-          "id": 1027,
-          "fiscalRegion": {
-            "id": 1001,
-            "code": "BR",
-            "tags": "#system"
-          },
-          "description": "33074900.0",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2025-02-01T16:48:09.287696389-03:00[America/Sao_Paulo]"
-          }
-        },
-        "lengthCm": 0,
-        "widthCm": 0,
-        "heightCm": 0,
-        "volumeM3": 0,
-        "netWeightKg": 0,
-        "grossWeightKg": 0,
-        "barcode": "7891035025273",
-        "tags": "interchangeable",
-        "properties": {
-          "#user": "support@personalsoft.com.br",
-          "#userId": 1,
-          "#created": "2026-01-16T15:56:01.919812836-03:00[America/Sao_Paulo]",
-          "fiscal_br_NCM": "33074900",
-          "fiscal_br_CEST": null
-        }
-      },
-      "code": "10315x4",
-      "barcode": "17891035025270",
-      "units": 4,
-      "productPackingStock": {
-        "id": 6898,
-        "product": {
-          "id": 7934,
-          "productProfile": {
-            "id": 1001,
-            "code": "DEFAULT",
-            "description": "PADRAO",
-            "tags": "@default,fiscalInfoRequired,interchangeable,productPackingCreate,stock.unit.convert",
-            "properties": {}
-          },
-          "type": "PRODUCT",
-          "code": "10315",
-          "description": "REFIL ODOR BOM AR **2X250ML** LAVANDA",
-          "unit": {
-            "id": 1016,
-            "dimension": {
-              "id": 1005,
-              "code": "unit",
-              "description": "@@:/catalog/unit/dimension/code/unit",
-              "standardUnit": "un",
-              "tags": "#system"
-            },
-            "code": "un",
-            "description": "un",
-            "conversionFactor": 1,
-            "tags": "#system"
-          },
-          "fiscalProfileProduct": {
-            "id": 1027,
-            "fiscalRegion": {
-              "id": 1001,
-              "code": "BR",
-              "tags": "#system"
-            },
-            "description": "33074900.0",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2025-02-01T16:48:09.287696389-03:00[America/Sao_Paulo]"
-            }
-          },
-          "lengthCm": 0,
-          "widthCm": 0,
-          "heightCm": 0,
-          "volumeM3": 0,
-          "netWeightKg": 0,
-          "grossWeightKg": 0,
-          "barcode": "7891035025273",
-          "tags": "interchangeable",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-01-16T15:56:01.919812836-03:00[America/Sao_Paulo]",
-            "fiscal_br_NCM": "33074900",
-            "fiscal_br_CEST": null
-          }
-        },
-        "code": "10315",
-        "barcode": "7891035025273",
-        "units": 1,
-        "lengthCm": 0,
-        "widthCm": 0,
-        "heightCm": 0,
-        "volumeM3": 0,
-        "netWeightKg": 0,
-        "grossWeightKg": 0,
-        "tags": "#default",
-        "properties": {}
-      },
-      "properties": {
-        "#user": "nicole",
-        "#userId": 1003,
-        "#created": "2026-04-07T10:21:13.625825131-03:00[America/Sao_Paulo]"
-      }
+    "properties": {
+      "#user": "nicole",
+      "#userId": 1003,
+      "#created": "2026-04-07T10:21:13.625825131-03:00[America/Sao_Paulo]"
     }
-  ]
-}
+  }
+]

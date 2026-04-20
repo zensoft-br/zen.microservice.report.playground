@@ -1,1455 +1,1446 @@
-{
-  "report": {
-    "code": "jsx",
-    "parameters": {
-      "dateStart": "2026-01-01",
-      "dateEnd": "2026-01-31"
-    }
-  },
-  "data": [
-    {
-      "id": 9217,
-      "status": "APPROVED",
-      "code": "V/ ANDRÉ TEAMS",
-      "date": "2026-03-13T16:31:33.216956-03:00",
-      "availabilityDate": "2026-03-13",
-      "freightType": "RECIPIENT",
-      "totalValue": 99.36,
-      "comments": "RETIRA COM NOTA",
-      "tags": "atencao,boleto,STOCK",
-      "company_id": 1004,
-      "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-      "company_fantasyName": "Filcrill",
-      "company_stockCluster": 1004,
-      "company_nameCalc": "Filcrill",
-      "company_documentType": "BR_CNPJ",
-      "company_documentNumber": "20.111.975/0001-02",
-      "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-      "company_document2Number": "143.447.080.115",
-      "company_address_zipcode": "03309-000",
-      "company_address_street": "Rua Serra do Japi",
-      "company_address_number": "440",
-      "company_address_complement": "3° Andar, Sala 03",
-      "company_address_district": "Vila Gomes Cardim",
-      "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-      "company_phone": "(11) 2691-1629",
-      "company_email": "nfe@squib.com.br",
-      "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-      "person_id": 1490,
-      "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-      "person_fantasyName": "AWT * *",
-      "person_nameCalc": "AWT * *",
-      "person_documentType": "BR_CNPJ",
-      "person_documentNumber": "19.557.731/0001-60",
-      "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-      "person_document2Number": "143.162.156.117",
-      "person_address_zipcode": "04174-000",
-      "person_address_street": "RUA VITOR EMANUEL",
-      "person_address_number": "95",
-      "person_address_district": "JARDIM VERGUEIRO",
-      "person_address_city_id": 6276,
-      "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-      "person_city_name": "São Paulo",
-      "person_state_id": 1026,
-      "person_state_code": "SP",
-      "person_state_name": "São Paulo",
-      "person_country_id": 1030,
-      "person_country_codeA2": "BR",
-      "person_country_name": "Brasil",
-      "person_phone": "1122641725",
-      "person_email": "nfe@awtcomponentes.com.br",
-      "salesperson_id": 6213,
-      "salesperson_name": "JOSÉ GOMES DA CRUZ",
-      "salesperson_fantasyName": "JOSÉ GOMES",
-      "salesperson_nameCalc": "JOSÉ GOMES",
-      "currency_id": 1004,
-      "currency_code": "USD",
-      "saleProfile_id": 1001,
-      "saleProfile_code": "VD",
-      "saleProfile_description": "Venda",
-      "fiscalProfile_id": 1060,
-      "fiscalProfile_code": "Venda",
-      "fiscalProfile_description": "Venda",
-      "items": [
-        {
-          "id": 9217,
-          "status": "APPROVED",
-          "code": "V/ ANDRÉ TEAMS",
-          "date": "2026-03-13T16:31:33.216956-03:00",
-          "availabilityDate": "2026-03-13",
-          "freightType": "RECIPIENT",
-          "totalValue": 99.36,
-          "comments": "RETIRA COM NOTA",
-          "tags": "atencao,boleto,STOCK",
-          "company_id": 1004,
-          "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-          "company_fantasyName": "Filcrill",
-          "company_stockCluster": 1004,
-          "company_nameCalc": "Filcrill",
-          "company_documentType": "BR_CNPJ",
-          "company_documentNumber": "20.111.975/0001-02",
-          "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "company_document2Number": "143.447.080.115",
-          "company_address_zipcode": "03309-000",
-          "company_address_street": "Rua Serra do Japi",
-          "company_address_number": "440",
-          "company_address_complement": "3° Andar, Sala 03",
-          "company_address_district": "Vila Gomes Cardim",
-          "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-          "company_phone": "(11) 2691-1629",
-          "company_email": "nfe@squib.com.br",
-          "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-          "person_id": 1490,
-          "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-          "person_fantasyName": "AWT * *",
-          "person_nameCalc": "AWT * *",
-          "person_documentType": "BR_CNPJ",
-          "person_documentNumber": "19.557.731/0001-60",
-          "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "person_document2Number": "143.162.156.117",
-          "person_address_zipcode": "04174-000",
-          "person_address_street": "RUA VITOR EMANUEL",
-          "person_address_number": "95",
-          "person_address_district": "JARDIM VERGUEIRO",
-          "person_address_city_id": 6276,
-          "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-          "person_city_name": "São Paulo",
-          "person_state_id": 1026,
-          "person_state_code": "SP",
-          "person_state_name": "São Paulo",
-          "person_country_id": 1030,
-          "person_country_codeA2": "BR",
-          "person_country_name": "Brasil",
-          "person_phone": "1122641725",
-          "person_email": "nfe@awtcomponentes.com.br",
-          "salesperson_id": 6213,
-          "salesperson_name": "JOSÉ GOMES DA CRUZ",
-          "salesperson_fantasyName": "JOSÉ GOMES",
-          "salesperson_nameCalc": "JOSÉ GOMES",
-          "currency_id": 1004,
-          "currency_code": "USD",
-          "saleProfile_id": 1001,
-          "saleProfile_code": "VD",
-          "saleProfile_description": "Venda",
-          "fiscalProfile_id": 1060,
-          "fiscalProfile_code": "Venda",
-          "fiscalProfile_description": "Venda",
-          "payments": [
-            {
-              "type": "BILLING_TITLE",
-              "term": 28
-            }
-          ],
-          "productPacking": {
-            "id": 19239,
-            "product": {
-              "id": 11349,
-              "productProfile": {
-                "id": 1001,
-                "code": "DEFAULT",
-                "description": "Eletrônico",
-                "tags": "@default,electronic,fiscalInfoRequired",
-                "properties": {}
-              },
-              "type": "PRODUCT",
-              "code": "2275*",
-              "description": "TR. TIP120",
-              "unit": {
-                "id": 1016,
-                "dimension": {
-                  "id": 1005,
-                  "code": "unit",
-                  "description": "@@:/catalog/unit/dimension/code/unit",
-                  "standardUnit": "un",
-                  "tags": "#system"
-                },
-                "code": "un",
-                "description": "un",
-                "conversionFactor": 1,
-                "tags": "#system"
-              },
-              "fiscalProfileProduct": {
-                "id": 1009,
-                "fiscalRegion": {
-                  "id": 1001,
-                  "code": "BR",
-                  "tags": "#system"
-                },
-                "description": "85412199.6.2806300",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
-                  "fiscal_br_orig": "6"
-                }
-              },
-              "lengthCm": 0,
-              "widthCm": 0,
-              "heightCm": 0,
-              "volumeM3": 0,
-              "netWeightKg": 0.00271,
-              "grossWeightKg": 0.00271,
-              "category1": {
-                "id": 3506,
-                "category": {
-                  "id": 2145,
-                  "code": "PRODUCT1",
-                  "description": "Grupo",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "TR/DIO",
-                "description": "TRANSISTOR/DIODO",
-                "tags": "estoque",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category2": {
-                "id": 3510,
-                "category": {
-                  "id": 2146,
-                  "code": "PRODUCT2",
-                  "description": "Bloco K",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "00",
-                "description": "Mercadoria para revenda",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category3": {
-                "id": 3522,
-                "category": {
-                  "id": 2147,
-                  "code": "PRODUCT3",
-                  "description": "Origem",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "CHINA",
-                "description": "China copy",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#userId": "1",
-                  "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
-                }
-              },
-              "image": {
-                "id": 1204,
-                "source": "/catalog/product/product:11349",
-                "code": "11349",
-                "description": "TR. TIP120 \"TO220\"",
-                "contentType": "image/png",
-                "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
-                "size": 233874,
-                "width": 1080,
-                "height": 1080,
-                "tags": "@cover",
-                "properties": {
-                  "#user": "paulo@squib.com.br",
-                  "#userId": 1462,
-                  "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
-                }
-              },
-              "variant": {
-                "id": 1708,
-                "code": "1708",
-                "description": "ST",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-                }
-              },
-              "tags": "imported",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "codprod": "2275",
-                "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
-                "fiscal_br_NCM": "85412199",
-                "fiscal_br_CEST": "2806300",
-                "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
-                "electronicsModel": "TIP120",
-                "electronicsUnitCount": "50",
-                "electronicsPartNumber": ""
-              }
-            },
-            "variant": {
-              "id": 1708,
-              "code": "1708",
-              "description": "ST",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-              }
-            },
-            "code": "2275.2512*",
-            "units": 1,
-            "tags": "5K,@97,IMPORTED,RP",
-            "properties": {
-              "#user": "paulo@squib.com.br",
-              "#userId": 1462,
-              "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
-              "addressId": 1395
-            }
-          },
-          "item_id": 15924,
-          "item_quantity": 600,
-          "item_unitValue": 0.1656,
-          "item_grossProductValue": 99.36,
-          "item_discountType": "NONE",
-          "item_discountValue": 0,
-          "item_stock": null,
-          "item_netWeightKg": 1.626,
-          "item_grossWeightKg": 1.626,
-          "item_volumeM3": 0,
-          "item_totalValue": 99.36,
-          "item_salesCommission": 2,
-          "item_n": 1,
-          "item_of": 1,
-          "unit_id": 1016,
-          "unit_code": "un",
-          "product_id": 11349,
-          "product_code": "2275*",
-          "product_description": "TR. TIP120",
-          "product_categoryCode_1": "TR/DIO",
-          "product_categoryDescription_1": "TRANSISTOR/DIODO",
-          "product_categoryCode_2": "00",
-          "product_categoryDescription_2": "Mercadoria para revenda",
-          "product_categoryCode_3": "CHINA",
-          "product_categoryDescription_3": "China copy",
-          "productPacking_id": 19239,
-          "productPacking_code": "2275.2512*",
-          "productPacking_units": 1,
-          "productVariant_id": 1708,
-          "productVariant_code": "1708",
-          "productVariant_description": "ST",
-          "taxationOperation_id": 1260,
-          "taxationOperation_code": "5.102",
-          "address_code": "ED",
-          "tax_PIS_baseValue": 0,
-          "tax_PIS_taxRate": 0,
-          "tax_PIS_taxValue": 0,
-          "tax_ICMS_SN_baseValue": 0,
-          "tax_ICMS_SN_taxRate": 0,
-          "tax_ICMS_SN_taxValue": 0,
-          "tax_IPI_baseValue": 0,
-          "tax_IPI_taxRate": 0,
-          "tax_IPI_taxValue": 0,
-          "tax_COFINS_baseValue": 0,
-          "tax_COFINS_taxRate": 0,
-          "tax_COFINS_taxValue": 0
-        },
-        {
-          "id": 9217,
-          "status": "APPROVED",
-          "code": "V/ ANDRÉ TEAMS",
-          "date": "2026-03-13T16:31:33.216956-03:00",
-          "availabilityDate": "2026-03-13",
-          "freightType": "RECIPIENT",
-          "totalValue": 99.36,
-          "comments": "RETIRA COM NOTA",
-          "tags": "atencao,boleto,STOCK",
-          "company_id": 1004,
-          "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-          "company_fantasyName": "Filcrill",
-          "company_stockCluster": 1004,
-          "company_nameCalc": "Filcrill",
-          "company_documentType": "BR_CNPJ",
-          "company_documentNumber": "20.111.975/0001-02",
-          "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "company_document2Number": "143.447.080.115",
-          "company_address_zipcode": "03309-000",
-          "company_address_street": "Rua Serra do Japi",
-          "company_address_number": "440",
-          "company_address_complement": "3° Andar, Sala 03",
-          "company_address_district": "Vila Gomes Cardim",
-          "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-          "company_phone": "(11) 2691-1629",
-          "company_email": "nfe@squib.com.br",
-          "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-          "person_id": 1490,
-          "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-          "person_fantasyName": "AWT * *",
-          "person_nameCalc": "AWT * *",
-          "person_documentType": "BR_CNPJ",
-          "person_documentNumber": "19.557.731/0001-60",
-          "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "person_document2Number": "143.162.156.117",
-          "person_address_zipcode": "04174-000",
-          "person_address_street": "RUA VITOR EMANUEL",
-          "person_address_number": "95",
-          "person_address_district": "JARDIM VERGUEIRO",
-          "person_address_city_id": 6276,
-          "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-          "person_city_name": "São Paulo",
-          "person_state_id": 1026,
-          "person_state_code": "SP",
-          "person_state_name": "São Paulo",
-          "person_country_id": 1030,
-          "person_country_codeA2": "BR",
-          "person_country_name": "Brasil",
-          "person_phone": "1122641725",
-          "person_email": "nfe@awtcomponentes.com.br",
-          "salesperson_id": 6213,
-          "salesperson_name": "JOSÉ GOMES DA CRUZ",
-          "salesperson_fantasyName": "JOSÉ GOMES",
-          "salesperson_nameCalc": "JOSÉ GOMES",
-          "currency_id": 1004,
-          "currency_code": "USD",
-          "saleProfile_id": 1001,
-          "saleProfile_code": "VD",
-          "saleProfile_description": "Venda",
-          "fiscalProfile_id": 1060,
-          "fiscalProfile_code": "Venda",
-          "fiscalProfile_description": "Venda",
-          "payments": [
-            {
-              "type": "BILLING_TITLE",
-              "term": 28
-            }
-          ],
-          "productPacking": {
-            "id": 19239,
-            "product": {
-              "id": 11349,
-              "productProfile": {
-                "id": 1001,
-                "code": "DEFAULT",
-                "description": "Eletrônico",
-                "tags": "@default,electronic,fiscalInfoRequired",
-                "properties": {}
-              },
-              "type": "PRODUCT",
-              "code": "2275*",
-              "description": "TR. TIP120",
-              "unit": {
-                "id": 1016,
-                "dimension": {
-                  "id": 1005,
-                  "code": "unit",
-                  "description": "@@:/catalog/unit/dimension/code/unit",
-                  "standardUnit": "un",
-                  "tags": "#system"
-                },
-                "code": "un",
-                "description": "un",
-                "conversionFactor": 1,
-                "tags": "#system"
-              },
-              "fiscalProfileProduct": {
-                "id": 1009,
-                "fiscalRegion": {
-                  "id": 1001,
-                  "code": "BR",
-                  "tags": "#system"
-                },
-                "description": "85412199.6.2806300",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
-                  "fiscal_br_orig": "6"
-                }
-              },
-              "lengthCm": 0,
-              "widthCm": 0,
-              "heightCm": 0,
-              "volumeM3": 0,
-              "netWeightKg": 0.00271,
-              "grossWeightKg": 0.00271,
-              "category1": {
-                "id": 3506,
-                "category": {
-                  "id": 2145,
-                  "code": "PRODUCT1",
-                  "description": "Grupo",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "TR/DIO",
-                "description": "TRANSISTOR/DIODO",
-                "tags": "estoque",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category2": {
-                "id": 3510,
-                "category": {
-                  "id": 2146,
-                  "code": "PRODUCT2",
-                  "description": "Bloco K",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "00",
-                "description": "Mercadoria para revenda",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category3": {
-                "id": 3522,
-                "category": {
-                  "id": 2147,
-                  "code": "PRODUCT3",
-                  "description": "Origem",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "CHINA",
-                "description": "China copy",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#userId": "1",
-                  "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
-                }
-              },
-              "image": {
-                "id": 1204,
-                "source": "/catalog/product/product:11349",
-                "code": "11349",
-                "description": "TR. TIP120 \"TO220\"",
-                "contentType": "image/png",
-                "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
-                "size": 233874,
-                "width": 1080,
-                "height": 1080,
-                "tags": "@cover",
-                "properties": {
-                  "#user": "paulo@squib.com.br",
-                  "#userId": 1462,
-                  "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
-                }
-              },
-              "variant": {
-                "id": 1708,
-                "code": "1708",
-                "description": "ST",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-                }
-              },
-              "tags": "imported",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "codprod": "2275",
-                "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
-                "fiscal_br_NCM": "85412199",
-                "fiscal_br_CEST": "2806300",
-                "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
-                "electronicsModel": "TIP120",
-                "electronicsUnitCount": "50",
-                "electronicsPartNumber": ""
-              }
-            },
-            "variant": {
-              "id": 1708,
-              "code": "1708",
-              "description": "ST",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-              }
-            },
-            "code": "2275.2512*",
-            "units": 1,
-            "tags": "5K,@97,IMPORTED,RP",
-            "properties": {
-              "#user": "paulo@squib.com.br",
-              "#userId": 1462,
-              "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
-              "addressId": 1395
-            }
-          },
-          "item_id": 15924,
-          "item_quantity": 600,
-          "item_unitValue": 0.1656,
-          "item_grossProductValue": 99.36,
-          "item_discountType": "NONE",
-          "item_discountValue": 0,
-          "item_stock": null,
-          "item_netWeightKg": 1.626,
-          "item_grossWeightKg": 1.626,
-          "item_volumeM3": 0,
-          "item_totalValue": 99.36,
-          "item_salesCommission": 2,
-          "item_n": 1,
-          "item_of": 1,
-          "unit_id": 1016,
-          "unit_code": "un",
-          "product_id": 11349,
-          "product_code": "2275*",
-          "product_description": "TR. TIP120",
-          "product_categoryCode_1": "TR/DIO",
-          "product_categoryDescription_1": "TRANSISTOR/DIODO",
-          "product_categoryCode_2": "00",
-          "product_categoryDescription_2": "Mercadoria para revenda",
-          "product_categoryCode_3": "CHINA",
-          "product_categoryDescription_3": "China copy",
-          "productPacking_id": 19239,
-          "productPacking_code": "2275.2512*",
-          "productPacking_units": 1,
-          "productVariant_id": 1708,
-          "productVariant_code": "1708",
-          "productVariant_description": "ST",
-          "taxationOperation_id": 1260,
-          "taxationOperation_code": "5.102",
-          "address_code": "ED",
-          "tax_PIS_baseValue": 0,
-          "tax_PIS_taxRate": 0,
-          "tax_PIS_taxValue": 0,
-          "tax_ICMS_SN_baseValue": 0,
-          "tax_ICMS_SN_taxRate": 0,
-          "tax_ICMS_SN_taxValue": 0,
-          "tax_IPI_baseValue": 0,
-          "tax_IPI_taxRate": 0,
-          "tax_IPI_taxValue": 0,
-          "tax_COFINS_baseValue": 0,
-          "tax_COFINS_taxRate": 0,
-          "tax_COFINS_taxValue": 0
-        },
-        {
-          "id": 9217,
-          "status": "APPROVED",
-          "code": "V/ ANDRÉ TEAMS",
-          "date": "2026-03-13T16:31:33.216956-03:00",
-          "availabilityDate": "2026-03-13",
-          "freightType": "RECIPIENT",
-          "totalValue": 99.36,
-          "comments": "RETIRA COM NOTA",
-          "tags": "atencao,boleto,STOCK",
-          "company_id": 1004,
-          "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-          "company_fantasyName": "Filcrill",
-          "company_stockCluster": 1004,
-          "company_nameCalc": "Filcrill",
-          "company_documentType": "BR_CNPJ",
-          "company_documentNumber": "20.111.975/0001-02",
-          "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "company_document2Number": "143.447.080.115",
-          "company_address_zipcode": "03309-000",
-          "company_address_street": "Rua Serra do Japi",
-          "company_address_number": "440",
-          "company_address_complement": "3° Andar, Sala 03",
-          "company_address_district": "Vila Gomes Cardim",
-          "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-          "company_phone": "(11) 2691-1629",
-          "company_email": "nfe@squib.com.br",
-          "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-          "person_id": 1490,
-          "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-          "person_fantasyName": "AWT * *",
-          "person_nameCalc": "AWT * *",
-          "person_documentType": "BR_CNPJ",
-          "person_documentNumber": "19.557.731/0001-60",
-          "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "person_document2Number": "143.162.156.117",
-          "person_address_zipcode": "04174-000",
-          "person_address_street": "RUA VITOR EMANUEL",
-          "person_address_number": "95",
-          "person_address_district": "JARDIM VERGUEIRO",
-          "person_address_city_id": 6276,
-          "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-          "person_city_name": "São Paulo",
-          "person_state_id": 1026,
-          "person_state_code": "SP",
-          "person_state_name": "São Paulo",
-          "person_country_id": 1030,
-          "person_country_codeA2": "BR",
-          "person_country_name": "Brasil",
-          "person_phone": "1122641725",
-          "person_email": "nfe@awtcomponentes.com.br",
-          "salesperson_id": 6213,
-          "salesperson_name": "JOSÉ GOMES DA CRUZ",
-          "salesperson_fantasyName": "JOSÉ GOMES",
-          "salesperson_nameCalc": "JOSÉ GOMES",
-          "currency_id": 1004,
-          "currency_code": "USD",
-          "saleProfile_id": 1001,
-          "saleProfile_code": "VD",
-          "saleProfile_description": "Venda",
-          "fiscalProfile_id": 1060,
-          "fiscalProfile_code": "Venda",
-          "fiscalProfile_description": "Venda",
-          "payments": [
-            {
-              "type": "BILLING_TITLE",
-              "term": 28
-            }
-          ],
-          "productPacking": {
-            "id": 19239,
-            "product": {
-              "id": 11349,
-              "productProfile": {
-                "id": 1001,
-                "code": "DEFAULT",
-                "description": "Eletrônico",
-                "tags": "@default,electronic,fiscalInfoRequired",
-                "properties": {}
-              },
-              "type": "PRODUCT",
-              "code": "2275*",
-              "description": "TR. TIP120",
-              "unit": {
-                "id": 1016,
-                "dimension": {
-                  "id": 1005,
-                  "code": "unit",
-                  "description": "@@:/catalog/unit/dimension/code/unit",
-                  "standardUnit": "un",
-                  "tags": "#system"
-                },
-                "code": "un",
-                "description": "un",
-                "conversionFactor": 1,
-                "tags": "#system"
-              },
-              "fiscalProfileProduct": {
-                "id": 1009,
-                "fiscalRegion": {
-                  "id": 1001,
-                  "code": "BR",
-                  "tags": "#system"
-                },
-                "description": "85412199.6.2806300",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
-                  "fiscal_br_orig": "6"
-                }
-              },
-              "lengthCm": 0,
-              "widthCm": 0,
-              "heightCm": 0,
-              "volumeM3": 0,
-              "netWeightKg": 0.00271,
-              "grossWeightKg": 0.00271,
-              "category1": {
-                "id": 3506,
-                "category": {
-                  "id": 2145,
-                  "code": "PRODUCT1",
-                  "description": "Grupo",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "TR/DIO",
-                "description": "TRANSISTOR/DIODO",
-                "tags": "estoque",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category2": {
-                "id": 3510,
-                "category": {
-                  "id": 2146,
-                  "code": "PRODUCT2",
-                  "description": "Bloco K",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "00",
-                "description": "Mercadoria para revenda",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category3": {
-                "id": 3522,
-                "category": {
-                  "id": 2147,
-                  "code": "PRODUCT3",
-                  "description": "Origem",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "CHINA",
-                "description": "China copy",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#userId": "1",
-                  "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
-                }
-              },
-              "image": {
-                "id": 1204,
-                "source": "/catalog/product/product:11349",
-                "code": "11349",
-                "description": "TR. TIP120 \"TO220\"",
-                "contentType": "image/png",
-                "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
-                "size": 233874,
-                "width": 1080,
-                "height": 1080,
-                "tags": "@cover",
-                "properties": {
-                  "#user": "paulo@squib.com.br",
-                  "#userId": 1462,
-                  "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
-                }
-              },
-              "variant": {
-                "id": 1708,
-                "code": "1708",
-                "description": "ST",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-                }
-              },
-              "tags": "imported",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "codprod": "2275",
-                "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
-                "fiscal_br_NCM": "85412199",
-                "fiscal_br_CEST": "2806300",
-                "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
-                "electronicsModel": "TIP120",
-                "electronicsUnitCount": "50",
-                "electronicsPartNumber": ""
-              }
-            },
-            "variant": {
-              "id": 1708,
-              "code": "1708",
-              "description": "ST",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-              }
-            },
-            "code": "2275.2512*",
-            "units": 1,
-            "tags": "5K,@97,IMPORTED,RP",
-            "properties": {
-              "#user": "paulo@squib.com.br",
-              "#userId": 1462,
-              "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
-              "addressId": 1395
-            }
-          },
-          "item_id": 15924,
-          "item_quantity": 600,
-          "item_unitValue": 0.1656,
-          "item_grossProductValue": 99.36,
-          "item_discountType": "NONE",
-          "item_discountValue": 0,
-          "item_stock": null,
-          "item_netWeightKg": 1.626,
-          "item_grossWeightKg": 1.626,
-          "item_volumeM3": 0,
-          "item_totalValue": 99.36,
-          "item_salesCommission": 2,
-          "item_n": 1,
-          "item_of": 1,
-          "unit_id": 1016,
-          "unit_code": "un",
-          "product_id": 11349,
-          "product_code": "2275*",
-          "product_description": "TR. TIP120",
-          "product_categoryCode_1": "TR/DIO",
-          "product_categoryDescription_1": "TRANSISTOR/DIODO",
-          "product_categoryCode_2": "00",
-          "product_categoryDescription_2": "Mercadoria para revenda",
-          "product_categoryCode_3": "CHINA",
-          "product_categoryDescription_3": "China copy",
-          "productPacking_id": 19239,
-          "productPacking_code": "2275.2512*",
-          "productPacking_units": 1,
-          "productVariant_id": 1708,
-          "productVariant_code": "1708",
-          "productVariant_description": "ST",
-          "taxationOperation_id": 1260,
-          "taxationOperation_code": "5.102",
-          "address_code": "ED",
-          "tax_PIS_baseValue": 0,
-          "tax_PIS_taxRate": 0,
-          "tax_PIS_taxValue": 0,
-          "tax_ICMS_SN_baseValue": 0,
-          "tax_ICMS_SN_taxRate": 0,
-          "tax_ICMS_SN_taxValue": 0,
-          "tax_IPI_baseValue": 0,
-          "tax_IPI_taxRate": 0,
-          "tax_IPI_taxValue": 0,
-          "tax_COFINS_baseValue": 0,
-          "tax_COFINS_taxRate": 0,
-          "tax_COFINS_taxValue": 0
-        },
-        {
-          "id": 9217,
-          "status": "APPROVED",
-          "code": "V/ ANDRÉ TEAMS",
-          "date": "2026-03-13T16:31:33.216956-03:00",
-          "availabilityDate": "2026-03-13",
-          "freightType": "RECIPIENT",
-          "totalValue": 99.36,
-          "comments": "RETIRA COM NOTA",
-          "tags": "atencao,boleto,STOCK",
-          "company_id": 1004,
-          "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-          "company_fantasyName": "Filcrill",
-          "company_stockCluster": 1004,
-          "company_nameCalc": "Filcrill",
-          "company_documentType": "BR_CNPJ",
-          "company_documentNumber": "20.111.975/0001-02",
-          "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "company_document2Number": "143.447.080.115",
-          "company_address_zipcode": "03309-000",
-          "company_address_street": "Rua Serra do Japi",
-          "company_address_number": "440",
-          "company_address_complement": "3° Andar, Sala 03",
-          "company_address_district": "Vila Gomes Cardim",
-          "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-          "company_phone": "(11) 2691-1629",
-          "company_email": "nfe@squib.com.br",
-          "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-          "person_id": 1490,
-          "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-          "person_fantasyName": "AWT * *",
-          "person_nameCalc": "AWT * *",
-          "person_documentType": "BR_CNPJ",
-          "person_documentNumber": "19.557.731/0001-60",
-          "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "person_document2Number": "143.162.156.117",
-          "person_address_zipcode": "04174-000",
-          "person_address_street": "RUA VITOR EMANUEL",
-          "person_address_number": "95",
-          "person_address_district": "JARDIM VERGUEIRO",
-          "person_address_city_id": 6276,
-          "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-          "person_city_name": "São Paulo",
-          "person_state_id": 1026,
-          "person_state_code": "SP",
-          "person_state_name": "São Paulo",
-          "person_country_id": 1030,
-          "person_country_codeA2": "BR",
-          "person_country_name": "Brasil",
-          "person_phone": "1122641725",
-          "person_email": "nfe@awtcomponentes.com.br",
-          "salesperson_id": 6213,
-          "salesperson_name": "JOSÉ GOMES DA CRUZ",
-          "salesperson_fantasyName": "JOSÉ GOMES",
-          "salesperson_nameCalc": "JOSÉ GOMES",
-          "currency_id": 1004,
-          "currency_code": "USD",
-          "saleProfile_id": 1001,
-          "saleProfile_code": "VD",
-          "saleProfile_description": "Venda",
-          "fiscalProfile_id": 1060,
-          "fiscalProfile_code": "Venda",
-          "fiscalProfile_description": "Venda",
-          "payments": [
-            {
-              "type": "BILLING_TITLE",
-              "term": 28
-            }
-          ],
-          "productPacking": {
-            "id": 19239,
-            "product": {
-              "id": 11349,
-              "productProfile": {
-                "id": 1001,
-                "code": "DEFAULT",
-                "description": "Eletrônico",
-                "tags": "@default,electronic,fiscalInfoRequired",
-                "properties": {}
-              },
-              "type": "PRODUCT",
-              "code": "2275*",
-              "description": "TR. TIP120",
-              "unit": {
-                "id": 1016,
-                "dimension": {
-                  "id": 1005,
-                  "code": "unit",
-                  "description": "@@:/catalog/unit/dimension/code/unit",
-                  "standardUnit": "un",
-                  "tags": "#system"
-                },
-                "code": "un",
-                "description": "un",
-                "conversionFactor": 1,
-                "tags": "#system"
-              },
-              "fiscalProfileProduct": {
-                "id": 1009,
-                "fiscalRegion": {
-                  "id": 1001,
-                  "code": "BR",
-                  "tags": "#system"
-                },
-                "description": "85412199.6.2806300",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
-                  "fiscal_br_orig": "6"
-                }
-              },
-              "lengthCm": 0,
-              "widthCm": 0,
-              "heightCm": 0,
-              "volumeM3": 0,
-              "netWeightKg": 0.00271,
-              "grossWeightKg": 0.00271,
-              "category1": {
-                "id": 3506,
-                "category": {
-                  "id": 2145,
-                  "code": "PRODUCT1",
-                  "description": "Grupo",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "TR/DIO",
-                "description": "TRANSISTOR/DIODO",
-                "tags": "estoque",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category2": {
-                "id": 3510,
-                "category": {
-                  "id": 2146,
-                  "code": "PRODUCT2",
-                  "description": "Bloco K",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "00",
-                "description": "Mercadoria para revenda",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category3": {
-                "id": 3522,
-                "category": {
-                  "id": 2147,
-                  "code": "PRODUCT3",
-                  "description": "Origem",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "CHINA",
-                "description": "China copy",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#userId": "1",
-                  "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
-                }
-              },
-              "image": {
-                "id": 1204,
-                "source": "/catalog/product/product:11349",
-                "code": "11349",
-                "description": "TR. TIP120 \"TO220\"",
-                "contentType": "image/png",
-                "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
-                "size": 233874,
-                "width": 1080,
-                "height": 1080,
-                "tags": "@cover",
-                "properties": {
-                  "#user": "paulo@squib.com.br",
-                  "#userId": 1462,
-                  "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
-                }
-              },
-              "variant": {
-                "id": 1708,
-                "code": "1708",
-                "description": "ST",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-                }
-              },
-              "tags": "imported",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "codprod": "2275",
-                "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
-                "fiscal_br_NCM": "85412199",
-                "fiscal_br_CEST": "2806300",
-                "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
-                "electronicsModel": "TIP120",
-                "electronicsUnitCount": "50",
-                "electronicsPartNumber": ""
-              }
-            },
-            "variant": {
-              "id": 1708,
-              "code": "1708",
-              "description": "ST",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-              }
-            },
-            "code": "2275.2512*",
-            "units": 1,
-            "tags": "5K,@97,IMPORTED,RP",
-            "properties": {
-              "#user": "paulo@squib.com.br",
-              "#userId": 1462,
-              "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
-              "addressId": 1395
-            }
-          },
-          "item_id": 15924,
-          "item_quantity": 600,
-          "item_unitValue": 0.1656,
-          "item_grossProductValue": 99.36,
-          "item_discountType": "NONE",
-          "item_discountValue": 0,
-          "item_stock": null,
-          "item_netWeightKg": 1.626,
-          "item_grossWeightKg": 1.626,
-          "item_volumeM3": 0,
-          "item_totalValue": 99.36,
-          "item_salesCommission": 2,
-          "item_n": 1,
-          "item_of": 1,
-          "unit_id": 1016,
-          "unit_code": "un",
-          "product_id": 11349,
-          "product_code": "2275*",
-          "product_description": "TR. TIP120",
-          "product_categoryCode_1": "TR/DIO",
-          "product_categoryDescription_1": "TRANSISTOR/DIODO",
-          "product_categoryCode_2": "00",
-          "product_categoryDescription_2": "Mercadoria para revenda",
-          "product_categoryCode_3": "CHINA",
-          "product_categoryDescription_3": "China copy",
-          "productPacking_id": 19239,
-          "productPacking_code": "2275.2512*",
-          "productPacking_units": 1,
-          "productVariant_id": 1708,
-          "productVariant_code": "1708",
-          "productVariant_description": "ST",
-          "taxationOperation_id": 1260,
-          "taxationOperation_code": "5.102",
-          "address_code": "ED",
-          "tax_PIS_baseValue": 0,
-          "tax_PIS_taxRate": 0,
-          "tax_PIS_taxValue": 0,
-          "tax_ICMS_SN_baseValue": 0,
-          "tax_ICMS_SN_taxRate": 0,
-          "tax_ICMS_SN_taxValue": 0,
-          "tax_IPI_baseValue": 0,
-          "tax_IPI_taxRate": 0,
-          "tax_IPI_taxValue": 0,
-          "tax_COFINS_baseValue": 0,
-          "tax_COFINS_taxRate": 0,
-          "tax_COFINS_taxValue": 0
-        },
-        {
-          "id": 9217,
-          "status": "APPROVED",
-          "code": "V/ ANDRÉ TEAMS",
-          "date": "2026-03-13T16:31:33.216956-03:00",
-          "availabilityDate": "2026-03-13",
-          "freightType": "RECIPIENT",
-          "totalValue": 99.36,
-          "comments": "RETIRA COM NOTA",
-          "tags": "atencao,boleto,STOCK",
-          "company_id": 1004,
-          "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
-          "company_fantasyName": "Filcrill",
-          "company_stockCluster": 1004,
-          "company_nameCalc": "Filcrill",
-          "company_documentType": "BR_CNPJ",
-          "company_documentNumber": "20.111.975/0001-02",
-          "company_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "company_document2Number": "143.447.080.115",
-          "company_address_zipcode": "03309-000",
-          "company_address_street": "Rua Serra do Japi",
-          "company_address_number": "440",
-          "company_address_complement": "3° Andar, Sala 03",
-          "company_address_district": "Vila Gomes Cardim",
-          "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
-          "company_phone": "(11) 2691-1629",
-          "company_email": "nfe@squib.com.br",
-          "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
-          "person_id": 1490,
-          "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
-          "person_fantasyName": "AWT * *",
-          "person_nameCalc": "AWT * *",
-          "person_documentType": "BR_CNPJ",
-          "person_documentNumber": "19.557.731/0001-60",
-          "person_document2Type": "BR_INSCRICAO_ESTADUAL",
-          "person_document2Number": "143.162.156.117",
-          "person_address_zipcode": "04174-000",
-          "person_address_street": "RUA VITOR EMANUEL",
-          "person_address_number": "95",
-          "person_address_district": "JARDIM VERGUEIRO",
-          "person_address_city_id": 6276,
-          "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
-          "person_city_name": "São Paulo",
-          "person_state_id": 1026,
-          "person_state_code": "SP",
-          "person_state_name": "São Paulo",
-          "person_country_id": 1030,
-          "person_country_codeA2": "BR",
-          "person_country_name": "Brasil",
-          "person_phone": "1122641725",
-          "person_email": "nfe@awtcomponentes.com.br",
-          "salesperson_id": 6213,
-          "salesperson_name": "JOSÉ GOMES DA CRUZ",
-          "salesperson_fantasyName": "JOSÉ GOMES",
-          "salesperson_nameCalc": "JOSÉ GOMES",
-          "currency_id": 1004,
-          "currency_code": "USD",
-          "saleProfile_id": 1001,
-          "saleProfile_code": "VD",
-          "saleProfile_description": "Venda",
-          "fiscalProfile_id": 1060,
-          "fiscalProfile_code": "Venda",
-          "fiscalProfile_description": "Venda",
-          "payments": [
-            {
-              "type": "BILLING_TITLE",
-              "term": 28
-            }
-          ],
-          "productPacking": {
-            "id": 19239,
-            "product": {
-              "id": 11349,
-              "productProfile": {
-                "id": 1001,
-                "code": "DEFAULT",
-                "description": "Eletrônico",
-                "tags": "@default,electronic,fiscalInfoRequired",
-                "properties": {}
-              },
-              "type": "PRODUCT",
-              "code": "2275*",
-              "description": "TR. TIP120",
-              "unit": {
-                "id": 1016,
-                "dimension": {
-                  "id": 1005,
-                  "code": "unit",
-                  "description": "@@:/catalog/unit/dimension/code/unit",
-                  "standardUnit": "un",
-                  "tags": "#system"
-                },
-                "code": "un",
-                "description": "un",
-                "conversionFactor": 1,
-                "tags": "#system"
-              },
-              "fiscalProfileProduct": {
-                "id": 1009,
-                "fiscalRegion": {
-                  "id": 1001,
-                  "code": "BR",
-                  "tags": "#system"
-                },
-                "description": "85412199.6.2806300",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
-                  "fiscal_br_orig": "6"
-                }
-              },
-              "lengthCm": 0,
-              "widthCm": 0,
-              "heightCm": 0,
-              "volumeM3": 0,
-              "netWeightKg": 0.00271,
-              "grossWeightKg": 0.00271,
-              "category1": {
-                "id": 3506,
-                "category": {
-                  "id": 2145,
-                  "code": "PRODUCT1",
-                  "description": "Grupo",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "TR/DIO",
-                "description": "TRANSISTOR/DIODO",
-                "tags": "estoque",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category2": {
-                "id": 3510,
-                "category": {
-                  "id": 2146,
-                  "code": "PRODUCT2",
-                  "description": "Bloco K",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "00",
-                "description": "Mercadoria para revenda",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
-                }
-              },
-              "category3": {
-                "id": 3522,
-                "category": {
-                  "id": 2147,
-                  "code": "PRODUCT3",
-                  "description": "Origem",
-                  "tags": "#system",
-                  "properties": {}
-                },
-                "code": "CHINA",
-                "description": "China copy",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#userId": "1",
-                  "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
-                }
-              },
-              "image": {
-                "id": 1204,
-                "source": "/catalog/product/product:11349",
-                "code": "11349",
-                "description": "TR. TIP120 \"TO220\"",
-                "contentType": "image/png",
-                "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
-                "size": 233874,
-                "width": 1080,
-                "height": 1080,
-                "tags": "@cover",
-                "properties": {
-                  "#user": "paulo@squib.com.br",
-                  "#userId": 1462,
-                  "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
-                }
-              },
-              "variant": {
-                "id": 1708,
-                "code": "1708",
-                "description": "ST",
-                "properties": {
-                  "#user": "support@personalsoft.com.br",
-                  "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-                }
-              },
-              "tags": "imported",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "codprod": "2275",
-                "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
-                "fiscal_br_NCM": "85412199",
-                "fiscal_br_CEST": "2806300",
-                "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
-                "electronicsModel": "TIP120",
-                "electronicsUnitCount": "50",
-                "electronicsPartNumber": ""
-              }
-            },
-            "variant": {
-              "id": 1708,
-              "code": "1708",
-              "description": "ST",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
-              }
-            },
-            "code": "2275.2512*",
-            "units": 1,
-            "tags": "5K,@97,IMPORTED,RP",
-            "properties": {
-              "#user": "paulo@squib.com.br",
-              "#userId": 1462,
-              "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
-              "addressId": 1395
-            }
-          },
-          "item_id": 15924,
-          "item_quantity": 600,
-          "item_unitValue": 0.1656,
-          "item_grossProductValue": 99.36,
-          "item_discountType": "NONE",
-          "item_discountValue": 0,
-          "item_stock": null,
-          "item_netWeightKg": 1.626,
-          "item_grossWeightKg": 1.626,
-          "item_volumeM3": 0,
-          "item_totalValue": 99.36,
-          "item_salesCommission": 2,
-          "item_n": 1,
-          "item_of": 1,
-          "unit_id": 1016,
-          "unit_code": "un",
-          "product_id": 11349,
-          "product_code": "2275*",
-          "product_description": "TR. TIP120",
-          "product_categoryCode_1": "TR/DIO",
-          "product_categoryDescription_1": "TRANSISTOR/DIODO",
-          "product_categoryCode_2": "00",
-          "product_categoryDescription_2": "Mercadoria para revenda",
-          "product_categoryCode_3": "CHINA",
-          "product_categoryDescription_3": "China copy",
-          "productPacking_id": 19239,
-          "productPacking_code": "2275.2512*",
-          "productPacking_units": 1,
-          "productVariant_id": 1708,
-          "productVariant_code": "1708",
-          "productVariant_description": "ST",
-          "taxationOperation_id": 1260,
-          "taxationOperation_code": "5.102",
-          "address_code": "ED",
-          "tax_PIS_baseValue": 0,
-          "tax_PIS_taxRate": 0,
-          "tax_PIS_taxValue": 0,
-          "tax_ICMS_SN_baseValue": 0,
-          "tax_ICMS_SN_taxRate": 0,
-          "tax_ICMS_SN_taxValue": 0,
-          "tax_IPI_baseValue": 0,
-          "tax_IPI_taxRate": 0,
-          "tax_IPI_taxValue": 0,
-          "tax_COFINS_baseValue": 0,
-          "tax_COFINS_taxRate": 0,
-          "tax_COFINS_taxValue": 0
-        }
-      ],
-      "payments": [
-        {
-          "type": "BILLING_TITLE",
-          "term": 28
-        }
-      ],
-      "salePaymentsCalc": "28",
-      "summary": {
-        "grossProductValue": 99.36,
+[
+  {
+    "id": 9217,
+    "status": "APPROVED",
+    "code": "V/ ANDRÉ TEAMS",
+    "date": "2026-03-13T16:31:33.216956-03:00",
+    "availabilityDate": "2026-03-13",
+    "freightType": "RECIPIENT",
+    "totalValue": 99.36,
+    "comments": "RETIRA COM NOTA",
+    "tags": "atencao,boleto,STOCK",
+    "company_id": 1004,
+    "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+    "company_fantasyName": "Filcrill",
+    "company_stockCluster": 1004,
+    "company_nameCalc": "Filcrill",
+    "company_documentType": "BR_CNPJ",
+    "company_documentNumber": "20.111.975/0001-02",
+    "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+    "company_document2Number": "143.447.080.115",
+    "company_address_zipcode": "03309-000",
+    "company_address_street": "Rua Serra do Japi",
+    "company_address_number": "440",
+    "company_address_complement": "3° Andar, Sala 03",
+    "company_address_district": "Vila Gomes Cardim",
+    "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+    "company_phone": "(11) 2691-1629",
+    "company_email": "nfe@squib.com.br",
+    "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+    "person_id": 1490,
+    "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+    "person_fantasyName": "AWT * *",
+    "person_nameCalc": "AWT * *",
+    "person_documentType": "BR_CNPJ",
+    "person_documentNumber": "19.557.731/0001-60",
+    "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+    "person_document2Number": "143.162.156.117",
+    "person_address_zipcode": "04174-000",
+    "person_address_street": "RUA VITOR EMANUEL",
+    "person_address_number": "95",
+    "person_address_district": "JARDIM VERGUEIRO",
+    "person_address_city_id": 6276,
+    "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+    "person_city_name": "São Paulo",
+    "person_state_id": 1026,
+    "person_state_code": "SP",
+    "person_state_name": "São Paulo",
+    "person_country_id": 1030,
+    "person_country_codeA2": "BR",
+    "person_country_name": "Brasil",
+    "person_phone": "1122641725",
+    "person_email": "nfe@awtcomponentes.com.br",
+    "salesperson_id": 6213,
+    "salesperson_name": "JOSÉ GOMES DA CRUZ",
+    "salesperson_fantasyName": "JOSÉ GOMES",
+    "salesperson_nameCalc": "JOSÉ GOMES",
+    "currency_id": 1004,
+    "currency_code": "USD",
+    "saleProfile_id": 1001,
+    "saleProfile_code": "VD",
+    "saleProfile_description": "Venda",
+    "fiscalProfile_id": 1060,
+    "fiscalProfile_code": "Venda",
+    "fiscalProfile_description": "Venda",
+    "items": [
+      {
+        "id": 9217,
+        "status": "APPROVED",
+        "code": "V/ ANDRÉ TEAMS",
+        "date": "2026-03-13T16:31:33.216956-03:00",
+        "availabilityDate": "2026-03-13",
+        "freightType": "RECIPIENT",
         "totalValue": 99.36,
-        "item_freightValue": 0,
-        "grossWeightKg": 1.63,
-        "quantity": 600,
-        "tax_ICMS_taxValue": null,
-        "tax_ICMS_ST_taxValue": 0,
+        "comments": "RETIRA COM NOTA",
+        "tags": "atencao,boleto,STOCK",
+        "company_id": 1004,
+        "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+        "company_fantasyName": "Filcrill",
+        "company_stockCluster": 1004,
+        "company_nameCalc": "Filcrill",
+        "company_documentType": "BR_CNPJ",
+        "company_documentNumber": "20.111.975/0001-02",
+        "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "company_document2Number": "143.447.080.115",
+        "company_address_zipcode": "03309-000",
+        "company_address_street": "Rua Serra do Japi",
+        "company_address_number": "440",
+        "company_address_complement": "3° Andar, Sala 03",
+        "company_address_district": "Vila Gomes Cardim",
+        "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+        "company_phone": "(11) 2691-1629",
+        "company_email": "nfe@squib.com.br",
+        "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+        "person_id": 1490,
+        "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+        "person_fantasyName": "AWT * *",
+        "person_nameCalc": "AWT * *",
+        "person_documentType": "BR_CNPJ",
+        "person_documentNumber": "19.557.731/0001-60",
+        "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "person_document2Number": "143.162.156.117",
+        "person_address_zipcode": "04174-000",
+        "person_address_street": "RUA VITOR EMANUEL",
+        "person_address_number": "95",
+        "person_address_district": "JARDIM VERGUEIRO",
+        "person_address_city_id": 6276,
+        "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+        "person_city_name": "São Paulo",
+        "person_state_id": 1026,
+        "person_state_code": "SP",
+        "person_state_name": "São Paulo",
+        "person_country_id": 1030,
+        "person_country_codeA2": "BR",
+        "person_country_name": "Brasil",
+        "person_phone": "1122641725",
+        "person_email": "nfe@awtcomponentes.com.br",
+        "salesperson_id": 6213,
+        "salesperson_name": "JOSÉ GOMES DA CRUZ",
+        "salesperson_fantasyName": "JOSÉ GOMES",
+        "salesperson_nameCalc": "JOSÉ GOMES",
+        "currency_id": 1004,
+        "currency_code": "USD",
+        "saleProfile_id": 1001,
+        "saleProfile_code": "VD",
+        "saleProfile_description": "Venda",
+        "fiscalProfile_id": 1060,
+        "fiscalProfile_code": "Venda",
+        "fiscalProfile_description": "Venda",
+        "payments": [
+          {
+            "type": "BILLING_TITLE",
+            "term": 28
+          }
+        ],
+        "productPacking": {
+          "id": 19239,
+          "product": {
+            "id": 11349,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Eletrônico",
+              "tags": "@default,electronic,fiscalInfoRequired",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "2275*",
+            "description": "TR. TIP120",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1009,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "85412199.6.2806300",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "6"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0.00271,
+            "grossWeightKg": 0.00271,
+            "category1": {
+              "id": 3506,
+              "category": {
+                "id": 2145,
+                "code": "PRODUCT1",
+                "description": "Grupo",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "TR/DIO",
+              "description": "TRANSISTOR/DIODO",
+              "tags": "estoque",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category2": {
+              "id": 3510,
+              "category": {
+                "id": 2146,
+                "code": "PRODUCT2",
+                "description": "Bloco K",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "00",
+              "description": "Mercadoria para revenda",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category3": {
+              "id": 3522,
+              "category": {
+                "id": 2147,
+                "code": "PRODUCT3",
+                "description": "Origem",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "CHINA",
+              "description": "China copy",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1204,
+              "source": "/catalog/product/product:11349",
+              "code": "11349",
+              "description": "TR. TIP120 \"TO220\"",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
+              "size": 233874,
+              "width": 1080,
+              "height": 1080,
+              "tags": "@cover",
+              "properties": {
+                "#user": "paulo@squib.com.br",
+                "#userId": 1462,
+                "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
+              }
+            },
+            "variant": {
+              "id": 1708,
+              "code": "1708",
+              "description": "ST",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+              }
+            },
+            "tags": "imported",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "codprod": "2275",
+              "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "85412199",
+              "fiscal_br_CEST": "2806300",
+              "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
+              "electronicsModel": "TIP120",
+              "electronicsUnitCount": "50",
+              "electronicsPartNumber": ""
+            }
+          },
+          "variant": {
+            "id": 1708,
+            "code": "1708",
+            "description": "ST",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "2275.2512*",
+          "units": 1,
+          "tags": "5K,@97,IMPORTED,RP",
+          "properties": {
+            "#user": "paulo@squib.com.br",
+            "#userId": 1462,
+            "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
+            "addressId": 1395
+          }
+        },
+        "item_id": 15924,
+        "item_quantity": 600,
+        "item_unitValue": 0.1656,
+        "item_grossProductValue": 99.36,
+        "item_discountType": "NONE",
+        "item_discountValue": 0,
+        "item_stock": null,
+        "item_netWeightKg": 1.626,
+        "item_grossWeightKg": 1.626,
+        "item_volumeM3": 0,
+        "item_totalValue": 99.36,
+        "item_salesCommission": 2,
+        "item_n": 1,
+        "item_of": 1,
+        "unit_id": 1016,
+        "unit_code": "un",
+        "product_id": 11349,
+        "product_code": "2275*",
+        "product_description": "TR. TIP120",
+        "product_categoryCode_1": "TR/DIO",
+        "product_categoryDescription_1": "TRANSISTOR/DIODO",
+        "product_categoryCode_2": "00",
+        "product_categoryDescription_2": "Mercadoria para revenda",
+        "product_categoryCode_3": "CHINA",
+        "product_categoryDescription_3": "China copy",
+        "productPacking_id": 19239,
+        "productPacking_code": "2275.2512*",
+        "productPacking_units": 1,
+        "productVariant_id": 1708,
+        "productVariant_code": "1708",
+        "productVariant_description": "ST",
+        "taxationOperation_id": 1260,
+        "taxationOperation_code": "5.102",
+        "address_code": "ED",
+        "tax_PIS_baseValue": 0,
+        "tax_PIS_taxRate": 0,
+        "tax_PIS_taxValue": 0,
+        "tax_ICMS_SN_baseValue": 0,
+        "tax_ICMS_SN_taxRate": 0,
+        "tax_ICMS_SN_taxValue": 0,
+        "tax_IPI_baseValue": 0,
+        "tax_IPI_taxRate": 0,
         "tax_IPI_taxValue": 0,
-        "count": 1
+        "tax_COFINS_baseValue": 0,
+        "tax_COFINS_taxRate": 0,
+        "tax_COFINS_taxValue": 0
+      },
+      {
+        "id": 9217,
+        "status": "APPROVED",
+        "code": "V/ ANDRÉ TEAMS",
+        "date": "2026-03-13T16:31:33.216956-03:00",
+        "availabilityDate": "2026-03-13",
+        "freightType": "RECIPIENT",
+        "totalValue": 99.36,
+        "comments": "RETIRA COM NOTA",
+        "tags": "atencao,boleto,STOCK",
+        "company_id": 1004,
+        "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+        "company_fantasyName": "Filcrill",
+        "company_stockCluster": 1004,
+        "company_nameCalc": "Filcrill",
+        "company_documentType": "BR_CNPJ",
+        "company_documentNumber": "20.111.975/0001-02",
+        "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "company_document2Number": "143.447.080.115",
+        "company_address_zipcode": "03309-000",
+        "company_address_street": "Rua Serra do Japi",
+        "company_address_number": "440",
+        "company_address_complement": "3° Andar, Sala 03",
+        "company_address_district": "Vila Gomes Cardim",
+        "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+        "company_phone": "(11) 2691-1629",
+        "company_email": "nfe@squib.com.br",
+        "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+        "person_id": 1490,
+        "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+        "person_fantasyName": "AWT * *",
+        "person_nameCalc": "AWT * *",
+        "person_documentType": "BR_CNPJ",
+        "person_documentNumber": "19.557.731/0001-60",
+        "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "person_document2Number": "143.162.156.117",
+        "person_address_zipcode": "04174-000",
+        "person_address_street": "RUA VITOR EMANUEL",
+        "person_address_number": "95",
+        "person_address_district": "JARDIM VERGUEIRO",
+        "person_address_city_id": 6276,
+        "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+        "person_city_name": "São Paulo",
+        "person_state_id": 1026,
+        "person_state_code": "SP",
+        "person_state_name": "São Paulo",
+        "person_country_id": 1030,
+        "person_country_codeA2": "BR",
+        "person_country_name": "Brasil",
+        "person_phone": "1122641725",
+        "person_email": "nfe@awtcomponentes.com.br",
+        "salesperson_id": 6213,
+        "salesperson_name": "JOSÉ GOMES DA CRUZ",
+        "salesperson_fantasyName": "JOSÉ GOMES",
+        "salesperson_nameCalc": "JOSÉ GOMES",
+        "currency_id": 1004,
+        "currency_code": "USD",
+        "saleProfile_id": 1001,
+        "saleProfile_code": "VD",
+        "saleProfile_description": "Venda",
+        "fiscalProfile_id": 1060,
+        "fiscalProfile_code": "Venda",
+        "fiscalProfile_description": "Venda",
+        "payments": [
+          {
+            "type": "BILLING_TITLE",
+            "term": 28
+          }
+        ],
+        "productPacking": {
+          "id": 19239,
+          "product": {
+            "id": 11349,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Eletrônico",
+              "tags": "@default,electronic,fiscalInfoRequired",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "2275*",
+            "description": "TR. TIP120",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1009,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "85412199.6.2806300",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "6"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0.00271,
+            "grossWeightKg": 0.00271,
+            "category1": {
+              "id": 3506,
+              "category": {
+                "id": 2145,
+                "code": "PRODUCT1",
+                "description": "Grupo",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "TR/DIO",
+              "description": "TRANSISTOR/DIODO",
+              "tags": "estoque",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category2": {
+              "id": 3510,
+              "category": {
+                "id": 2146,
+                "code": "PRODUCT2",
+                "description": "Bloco K",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "00",
+              "description": "Mercadoria para revenda",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category3": {
+              "id": 3522,
+              "category": {
+                "id": 2147,
+                "code": "PRODUCT3",
+                "description": "Origem",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "CHINA",
+              "description": "China copy",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1204,
+              "source": "/catalog/product/product:11349",
+              "code": "11349",
+              "description": "TR. TIP120 \"TO220\"",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
+              "size": 233874,
+              "width": 1080,
+              "height": 1080,
+              "tags": "@cover",
+              "properties": {
+                "#user": "paulo@squib.com.br",
+                "#userId": 1462,
+                "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
+              }
+            },
+            "variant": {
+              "id": 1708,
+              "code": "1708",
+              "description": "ST",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+              }
+            },
+            "tags": "imported",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "codprod": "2275",
+              "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "85412199",
+              "fiscal_br_CEST": "2806300",
+              "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
+              "electronicsModel": "TIP120",
+              "electronicsUnitCount": "50",
+              "electronicsPartNumber": ""
+            }
+          },
+          "variant": {
+            "id": 1708,
+            "code": "1708",
+            "description": "ST",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "2275.2512*",
+          "units": 1,
+          "tags": "5K,@97,IMPORTED,RP",
+          "properties": {
+            "#user": "paulo@squib.com.br",
+            "#userId": 1462,
+            "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
+            "addressId": 1395
+          }
+        },
+        "item_id": 15924,
+        "item_quantity": 600,
+        "item_unitValue": 0.1656,
+        "item_grossProductValue": 99.36,
+        "item_discountType": "NONE",
+        "item_discountValue": 0,
+        "item_stock": null,
+        "item_netWeightKg": 1.626,
+        "item_grossWeightKg": 1.626,
+        "item_volumeM3": 0,
+        "item_totalValue": 99.36,
+        "item_salesCommission": 2,
+        "item_n": 1,
+        "item_of": 1,
+        "unit_id": 1016,
+        "unit_code": "un",
+        "product_id": 11349,
+        "product_code": "2275*",
+        "product_description": "TR. TIP120",
+        "product_categoryCode_1": "TR/DIO",
+        "product_categoryDescription_1": "TRANSISTOR/DIODO",
+        "product_categoryCode_2": "00",
+        "product_categoryDescription_2": "Mercadoria para revenda",
+        "product_categoryCode_3": "CHINA",
+        "product_categoryDescription_3": "China copy",
+        "productPacking_id": 19239,
+        "productPacking_code": "2275.2512*",
+        "productPacking_units": 1,
+        "productVariant_id": 1708,
+        "productVariant_code": "1708",
+        "productVariant_description": "ST",
+        "taxationOperation_id": 1260,
+        "taxationOperation_code": "5.102",
+        "address_code": "ED",
+        "tax_PIS_baseValue": 0,
+        "tax_PIS_taxRate": 0,
+        "tax_PIS_taxValue": 0,
+        "tax_ICMS_SN_baseValue": 0,
+        "tax_ICMS_SN_taxRate": 0,
+        "tax_ICMS_SN_taxValue": 0,
+        "tax_IPI_baseValue": 0,
+        "tax_IPI_taxRate": 0,
+        "tax_IPI_taxValue": 0,
+        "tax_COFINS_baseValue": 0,
+        "tax_COFINS_taxRate": 0,
+        "tax_COFINS_taxValue": 0
+      },
+      {
+        "id": 9217,
+        "status": "APPROVED",
+        "code": "V/ ANDRÉ TEAMS",
+        "date": "2026-03-13T16:31:33.216956-03:00",
+        "availabilityDate": "2026-03-13",
+        "freightType": "RECIPIENT",
+        "totalValue": 99.36,
+        "comments": "RETIRA COM NOTA",
+        "tags": "atencao,boleto,STOCK",
+        "company_id": 1004,
+        "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+        "company_fantasyName": "Filcrill",
+        "company_stockCluster": 1004,
+        "company_nameCalc": "Filcrill",
+        "company_documentType": "BR_CNPJ",
+        "company_documentNumber": "20.111.975/0001-02",
+        "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "company_document2Number": "143.447.080.115",
+        "company_address_zipcode": "03309-000",
+        "company_address_street": "Rua Serra do Japi",
+        "company_address_number": "440",
+        "company_address_complement": "3° Andar, Sala 03",
+        "company_address_district": "Vila Gomes Cardim",
+        "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+        "company_phone": "(11) 2691-1629",
+        "company_email": "nfe@squib.com.br",
+        "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+        "person_id": 1490,
+        "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+        "person_fantasyName": "AWT * *",
+        "person_nameCalc": "AWT * *",
+        "person_documentType": "BR_CNPJ",
+        "person_documentNumber": "19.557.731/0001-60",
+        "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "person_document2Number": "143.162.156.117",
+        "person_address_zipcode": "04174-000",
+        "person_address_street": "RUA VITOR EMANUEL",
+        "person_address_number": "95",
+        "person_address_district": "JARDIM VERGUEIRO",
+        "person_address_city_id": 6276,
+        "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+        "person_city_name": "São Paulo",
+        "person_state_id": 1026,
+        "person_state_code": "SP",
+        "person_state_name": "São Paulo",
+        "person_country_id": 1030,
+        "person_country_codeA2": "BR",
+        "person_country_name": "Brasil",
+        "person_phone": "1122641725",
+        "person_email": "nfe@awtcomponentes.com.br",
+        "salesperson_id": 6213,
+        "salesperson_name": "JOSÉ GOMES DA CRUZ",
+        "salesperson_fantasyName": "JOSÉ GOMES",
+        "salesperson_nameCalc": "JOSÉ GOMES",
+        "currency_id": 1004,
+        "currency_code": "USD",
+        "saleProfile_id": 1001,
+        "saleProfile_code": "VD",
+        "saleProfile_description": "Venda",
+        "fiscalProfile_id": 1060,
+        "fiscalProfile_code": "Venda",
+        "fiscalProfile_description": "Venda",
+        "payments": [
+          {
+            "type": "BILLING_TITLE",
+            "term": 28
+          }
+        ],
+        "productPacking": {
+          "id": 19239,
+          "product": {
+            "id": 11349,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Eletrônico",
+              "tags": "@default,electronic,fiscalInfoRequired",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "2275*",
+            "description": "TR. TIP120",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1009,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "85412199.6.2806300",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "6"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0.00271,
+            "grossWeightKg": 0.00271,
+            "category1": {
+              "id": 3506,
+              "category": {
+                "id": 2145,
+                "code": "PRODUCT1",
+                "description": "Grupo",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "TR/DIO",
+              "description": "TRANSISTOR/DIODO",
+              "tags": "estoque",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category2": {
+              "id": 3510,
+              "category": {
+                "id": 2146,
+                "code": "PRODUCT2",
+                "description": "Bloco K",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "00",
+              "description": "Mercadoria para revenda",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category3": {
+              "id": 3522,
+              "category": {
+                "id": 2147,
+                "code": "PRODUCT3",
+                "description": "Origem",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "CHINA",
+              "description": "China copy",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1204,
+              "source": "/catalog/product/product:11349",
+              "code": "11349",
+              "description": "TR. TIP120 \"TO220\"",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
+              "size": 233874,
+              "width": 1080,
+              "height": 1080,
+              "tags": "@cover",
+              "properties": {
+                "#user": "paulo@squib.com.br",
+                "#userId": 1462,
+                "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
+              }
+            },
+            "variant": {
+              "id": 1708,
+              "code": "1708",
+              "description": "ST",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+              }
+            },
+            "tags": "imported",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "codprod": "2275",
+              "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "85412199",
+              "fiscal_br_CEST": "2806300",
+              "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
+              "electronicsModel": "TIP120",
+              "electronicsUnitCount": "50",
+              "electronicsPartNumber": ""
+            }
+          },
+          "variant": {
+            "id": 1708,
+            "code": "1708",
+            "description": "ST",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "2275.2512*",
+          "units": 1,
+          "tags": "5K,@97,IMPORTED,RP",
+          "properties": {
+            "#user": "paulo@squib.com.br",
+            "#userId": 1462,
+            "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
+            "addressId": 1395
+          }
+        },
+        "item_id": 15924,
+        "item_quantity": 600,
+        "item_unitValue": 0.1656,
+        "item_grossProductValue": 99.36,
+        "item_discountType": "NONE",
+        "item_discountValue": 0,
+        "item_stock": null,
+        "item_netWeightKg": 1.626,
+        "item_grossWeightKg": 1.626,
+        "item_volumeM3": 0,
+        "item_totalValue": 99.36,
+        "item_salesCommission": 2,
+        "item_n": 1,
+        "item_of": 1,
+        "unit_id": 1016,
+        "unit_code": "un",
+        "product_id": 11349,
+        "product_code": "2275*",
+        "product_description": "TR. TIP120",
+        "product_categoryCode_1": "TR/DIO",
+        "product_categoryDescription_1": "TRANSISTOR/DIODO",
+        "product_categoryCode_2": "00",
+        "product_categoryDescription_2": "Mercadoria para revenda",
+        "product_categoryCode_3": "CHINA",
+        "product_categoryDescription_3": "China copy",
+        "productPacking_id": 19239,
+        "productPacking_code": "2275.2512*",
+        "productPacking_units": 1,
+        "productVariant_id": 1708,
+        "productVariant_code": "1708",
+        "productVariant_description": "ST",
+        "taxationOperation_id": 1260,
+        "taxationOperation_code": "5.102",
+        "address_code": "ED",
+        "tax_PIS_baseValue": 0,
+        "tax_PIS_taxRate": 0,
+        "tax_PIS_taxValue": 0,
+        "tax_ICMS_SN_baseValue": 0,
+        "tax_ICMS_SN_taxRate": 0,
+        "tax_ICMS_SN_taxValue": 0,
+        "tax_IPI_baseValue": 0,
+        "tax_IPI_taxRate": 0,
+        "tax_IPI_taxValue": 0,
+        "tax_COFINS_baseValue": 0,
+        "tax_COFINS_taxRate": 0,
+        "tax_COFINS_taxValue": 0
+      },
+      {
+        "id": 9217,
+        "status": "APPROVED",
+        "code": "V/ ANDRÉ TEAMS",
+        "date": "2026-03-13T16:31:33.216956-03:00",
+        "availabilityDate": "2026-03-13",
+        "freightType": "RECIPIENT",
+        "totalValue": 99.36,
+        "comments": "RETIRA COM NOTA",
+        "tags": "atencao,boleto,STOCK",
+        "company_id": 1004,
+        "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+        "company_fantasyName": "Filcrill",
+        "company_stockCluster": 1004,
+        "company_nameCalc": "Filcrill",
+        "company_documentType": "BR_CNPJ",
+        "company_documentNumber": "20.111.975/0001-02",
+        "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "company_document2Number": "143.447.080.115",
+        "company_address_zipcode": "03309-000",
+        "company_address_street": "Rua Serra do Japi",
+        "company_address_number": "440",
+        "company_address_complement": "3° Andar, Sala 03",
+        "company_address_district": "Vila Gomes Cardim",
+        "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+        "company_phone": "(11) 2691-1629",
+        "company_email": "nfe@squib.com.br",
+        "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+        "person_id": 1490,
+        "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+        "person_fantasyName": "AWT * *",
+        "person_nameCalc": "AWT * *",
+        "person_documentType": "BR_CNPJ",
+        "person_documentNumber": "19.557.731/0001-60",
+        "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "person_document2Number": "143.162.156.117",
+        "person_address_zipcode": "04174-000",
+        "person_address_street": "RUA VITOR EMANUEL",
+        "person_address_number": "95",
+        "person_address_district": "JARDIM VERGUEIRO",
+        "person_address_city_id": 6276,
+        "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+        "person_city_name": "São Paulo",
+        "person_state_id": 1026,
+        "person_state_code": "SP",
+        "person_state_name": "São Paulo",
+        "person_country_id": 1030,
+        "person_country_codeA2": "BR",
+        "person_country_name": "Brasil",
+        "person_phone": "1122641725",
+        "person_email": "nfe@awtcomponentes.com.br",
+        "salesperson_id": 6213,
+        "salesperson_name": "JOSÉ GOMES DA CRUZ",
+        "salesperson_fantasyName": "JOSÉ GOMES",
+        "salesperson_nameCalc": "JOSÉ GOMES",
+        "currency_id": 1004,
+        "currency_code": "USD",
+        "saleProfile_id": 1001,
+        "saleProfile_code": "VD",
+        "saleProfile_description": "Venda",
+        "fiscalProfile_id": 1060,
+        "fiscalProfile_code": "Venda",
+        "fiscalProfile_description": "Venda",
+        "payments": [
+          {
+            "type": "BILLING_TITLE",
+            "term": 28
+          }
+        ],
+        "productPacking": {
+          "id": 19239,
+          "product": {
+            "id": 11349,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Eletrônico",
+              "tags": "@default,electronic,fiscalInfoRequired",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "2275*",
+            "description": "TR. TIP120",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1009,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "85412199.6.2806300",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "6"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0.00271,
+            "grossWeightKg": 0.00271,
+            "category1": {
+              "id": 3506,
+              "category": {
+                "id": 2145,
+                "code": "PRODUCT1",
+                "description": "Grupo",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "TR/DIO",
+              "description": "TRANSISTOR/DIODO",
+              "tags": "estoque",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category2": {
+              "id": 3510,
+              "category": {
+                "id": 2146,
+                "code": "PRODUCT2",
+                "description": "Bloco K",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "00",
+              "description": "Mercadoria para revenda",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category3": {
+              "id": 3522,
+              "category": {
+                "id": 2147,
+                "code": "PRODUCT3",
+                "description": "Origem",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "CHINA",
+              "description": "China copy",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1204,
+              "source": "/catalog/product/product:11349",
+              "code": "11349",
+              "description": "TR. TIP120 \"TO220\"",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
+              "size": 233874,
+              "width": 1080,
+              "height": 1080,
+              "tags": "@cover",
+              "properties": {
+                "#user": "paulo@squib.com.br",
+                "#userId": 1462,
+                "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
+              }
+            },
+            "variant": {
+              "id": 1708,
+              "code": "1708",
+              "description": "ST",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+              }
+            },
+            "tags": "imported",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "codprod": "2275",
+              "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "85412199",
+              "fiscal_br_CEST": "2806300",
+              "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
+              "electronicsModel": "TIP120",
+              "electronicsUnitCount": "50",
+              "electronicsPartNumber": ""
+            }
+          },
+          "variant": {
+            "id": 1708,
+            "code": "1708",
+            "description": "ST",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "2275.2512*",
+          "units": 1,
+          "tags": "5K,@97,IMPORTED,RP",
+          "properties": {
+            "#user": "paulo@squib.com.br",
+            "#userId": 1462,
+            "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
+            "addressId": 1395
+          }
+        },
+        "item_id": 15924,
+        "item_quantity": 600,
+        "item_unitValue": 0.1656,
+        "item_grossProductValue": 99.36,
+        "item_discountType": "NONE",
+        "item_discountValue": 0,
+        "item_stock": null,
+        "item_netWeightKg": 1.626,
+        "item_grossWeightKg": 1.626,
+        "item_volumeM3": 0,
+        "item_totalValue": 99.36,
+        "item_salesCommission": 2,
+        "item_n": 1,
+        "item_of": 1,
+        "unit_id": 1016,
+        "unit_code": "un",
+        "product_id": 11349,
+        "product_code": "2275*",
+        "product_description": "TR. TIP120",
+        "product_categoryCode_1": "TR/DIO",
+        "product_categoryDescription_1": "TRANSISTOR/DIODO",
+        "product_categoryCode_2": "00",
+        "product_categoryDescription_2": "Mercadoria para revenda",
+        "product_categoryCode_3": "CHINA",
+        "product_categoryDescription_3": "China copy",
+        "productPacking_id": 19239,
+        "productPacking_code": "2275.2512*",
+        "productPacking_units": 1,
+        "productVariant_id": 1708,
+        "productVariant_code": "1708",
+        "productVariant_description": "ST",
+        "taxationOperation_id": 1260,
+        "taxationOperation_code": "5.102",
+        "address_code": "ED",
+        "tax_PIS_baseValue": 0,
+        "tax_PIS_taxRate": 0,
+        "tax_PIS_taxValue": 0,
+        "tax_ICMS_SN_baseValue": 0,
+        "tax_ICMS_SN_taxRate": 0,
+        "tax_ICMS_SN_taxValue": 0,
+        "tax_IPI_baseValue": 0,
+        "tax_IPI_taxRate": 0,
+        "tax_IPI_taxValue": 0,
+        "tax_COFINS_baseValue": 0,
+        "tax_COFINS_taxRate": 0,
+        "tax_COFINS_taxValue": 0
+      },
+      {
+        "id": 9217,
+        "status": "APPROVED",
+        "code": "V/ ANDRÉ TEAMS",
+        "date": "2026-03-13T16:31:33.216956-03:00",
+        "availabilityDate": "2026-03-13",
+        "freightType": "RECIPIENT",
+        "totalValue": 99.36,
+        "comments": "RETIRA COM NOTA",
+        "tags": "atencao,boleto,STOCK",
+        "company_id": 1004,
+        "company_name": "FILCRILL COMPS ELETRS IMP E EXP EIRELI",
+        "company_fantasyName": "Filcrill",
+        "company_stockCluster": 1004,
+        "company_nameCalc": "Filcrill",
+        "company_documentType": "BR_CNPJ",
+        "company_documentNumber": "20.111.975/0001-02",
+        "company_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "company_document2Number": "143.447.080.115",
+        "company_address_zipcode": "03309-000",
+        "company_address_street": "Rua Serra do Japi",
+        "company_address_number": "440",
+        "company_address_complement": "3° Andar, Sala 03",
+        "company_address_district": "Vila Gomes Cardim",
+        "company_address_calc": "Rua Serra do Japi, 440, 3° Andar, Sala 03, Vila Gomes Cardim, São Paulo, SP, 03309-000",
+        "company_phone": "(11) 2691-1629",
+        "company_email": "nfe@squib.com.br",
+        "company_logo": "https://zenerp.s3.amazonaws.com/tenants/squib/images/9094afd2-cb42-4ab6-a904-f73d116336cc.bmp",
+        "person_id": 1490,
+        "person_name": "AWT COMPONENTES IMP E COMÉRCIO LTDA",
+        "person_fantasyName": "AWT * *",
+        "person_nameCalc": "AWT * *",
+        "person_documentType": "BR_CNPJ",
+        "person_documentNumber": "19.557.731/0001-60",
+        "person_document2Type": "BR_INSCRICAO_ESTADUAL",
+        "person_document2Number": "143.162.156.117",
+        "person_address_zipcode": "04174-000",
+        "person_address_street": "RUA VITOR EMANUEL",
+        "person_address_number": "95",
+        "person_address_district": "JARDIM VERGUEIRO",
+        "person_address_city_id": 6276,
+        "person_address_calc": "RUA VITOR EMANUEL, 95, JARDIM VERGUEIRO, São Paulo, SP, 04174-000",
+        "person_city_name": "São Paulo",
+        "person_state_id": 1026,
+        "person_state_code": "SP",
+        "person_state_name": "São Paulo",
+        "person_country_id": 1030,
+        "person_country_codeA2": "BR",
+        "person_country_name": "Brasil",
+        "person_phone": "1122641725",
+        "person_email": "nfe@awtcomponentes.com.br",
+        "salesperson_id": 6213,
+        "salesperson_name": "JOSÉ GOMES DA CRUZ",
+        "salesperson_fantasyName": "JOSÉ GOMES",
+        "salesperson_nameCalc": "JOSÉ GOMES",
+        "currency_id": 1004,
+        "currency_code": "USD",
+        "saleProfile_id": 1001,
+        "saleProfile_code": "VD",
+        "saleProfile_description": "Venda",
+        "fiscalProfile_id": 1060,
+        "fiscalProfile_code": "Venda",
+        "fiscalProfile_description": "Venda",
+        "payments": [
+          {
+            "type": "BILLING_TITLE",
+            "term": 28
+          }
+        ],
+        "productPacking": {
+          "id": 19239,
+          "product": {
+            "id": 11349,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Eletrônico",
+              "tags": "@default,electronic,fiscalInfoRequired",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "2275*",
+            "description": "TR. TIP120",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1009,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "85412199.6.2806300",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2022-06-10T12:03:18.134381311-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "6"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0.00271,
+            "grossWeightKg": 0.00271,
+            "category1": {
+              "id": 3506,
+              "category": {
+                "id": 2145,
+                "code": "PRODUCT1",
+                "description": "Grupo",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "TR/DIO",
+              "description": "TRANSISTOR/DIODO",
+              "tags": "estoque",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:28.112515609-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category2": {
+              "id": 3510,
+              "category": {
+                "id": 2146,
+                "code": "PRODUCT2",
+                "description": "Bloco K",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "00",
+              "description": "Mercadoria para revenda",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T14:41:29.041253462-03:00[America/Sao_Paulo]"
+              }
+            },
+            "category3": {
+              "id": 3522,
+              "category": {
+                "id": 2147,
+                "code": "PRODUCT3",
+                "description": "Origem",
+                "tags": "#system",
+                "properties": {}
+              },
+              "code": "CHINA",
+              "description": "China copy",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": "1",
+                "#created": "2023-04-20T15:26:14.458270593-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1204,
+              "source": "/catalog/product/product:11349",
+              "code": "11349",
+              "description": "TR. TIP120 \"TO220\"",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/squib/images/2e5de34b-fe3b-4ec9-b90e-a8303d051b94.png",
+              "size": 233874,
+              "width": 1080,
+              "height": 1080,
+              "tags": "@cover",
+              "properties": {
+                "#user": "paulo@squib.com.br",
+                "#userId": 1462,
+                "#created": "2024-10-11T11:42:11.758983888-03:00[America/Sao_Paulo]"
+              }
+            },
+            "variant": {
+              "id": 1708,
+              "code": "1708",
+              "description": "ST",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+              }
+            },
+            "tags": "imported",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "codprod": "2275",
+              "#created": "2023-02-20T17:30:23.320448795-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "85412199",
+              "fiscal_br_CEST": "2806300",
+              "fullDescription": "D.I Nº 25/2153223-0 (U$ 5,3498) ANRIYA 07/10/2025  FILCRILL = CUSTO U$ 0,060 = MARÍTIMO  CUSTO IMPORTAÇÃO: 20,47%                        EMBARQUE 97\n======================================================================================================================\nD.I Nº 24/0966280-2 (U$ 5,0887) SUNTOP 09/05/2024  DG = CUSTO U$ 0,068 = AÉREO  CUSTO IMPORTAÇÃO: 20,32%                                    EMBARQUE 32\n======================================================================================================================",
+              "electronicsModel": "TIP120",
+              "electronicsUnitCount": "50",
+              "electronicsPartNumber": ""
+            }
+          },
+          "variant": {
+            "id": 1708,
+            "code": "1708",
+            "description": "ST",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#created": "2023-02-20T21:59:03.045085992-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "2275.2512*",
+          "units": 1,
+          "tags": "5K,@97,IMPORTED,RP",
+          "properties": {
+            "#user": "paulo@squib.com.br",
+            "#userId": 1462,
+            "#created": "2025-07-30T10:43:36.646602823-03:00[America/Sao_Paulo]",
+            "addressId": 1395
+          }
+        },
+        "item_id": 15924,
+        "item_quantity": 600,
+        "item_unitValue": 0.1656,
+        "item_grossProductValue": 99.36,
+        "item_discountType": "NONE",
+        "item_discountValue": 0,
+        "item_stock": null,
+        "item_netWeightKg": 1.626,
+        "item_grossWeightKg": 1.626,
+        "item_volumeM3": 0,
+        "item_totalValue": 99.36,
+        "item_salesCommission": 2,
+        "item_n": 1,
+        "item_of": 1,
+        "unit_id": 1016,
+        "unit_code": "un",
+        "product_id": 11349,
+        "product_code": "2275*",
+        "product_description": "TR. TIP120",
+        "product_categoryCode_1": "TR/DIO",
+        "product_categoryDescription_1": "TRANSISTOR/DIODO",
+        "product_categoryCode_2": "00",
+        "product_categoryDescription_2": "Mercadoria para revenda",
+        "product_categoryCode_3": "CHINA",
+        "product_categoryDescription_3": "China copy",
+        "productPacking_id": 19239,
+        "productPacking_code": "2275.2512*",
+        "productPacking_units": 1,
+        "productVariant_id": 1708,
+        "productVariant_code": "1708",
+        "productVariant_description": "ST",
+        "taxationOperation_id": 1260,
+        "taxationOperation_code": "5.102",
+        "address_code": "ED",
+        "tax_PIS_baseValue": 0,
+        "tax_PIS_taxRate": 0,
+        "tax_PIS_taxValue": 0,
+        "tax_ICMS_SN_baseValue": 0,
+        "tax_ICMS_SN_taxRate": 0,
+        "tax_ICMS_SN_taxValue": 0,
+        "tax_IPI_baseValue": 0,
+        "tax_IPI_taxRate": 0,
+        "tax_IPI_taxValue": 0,
+        "tax_COFINS_baseValue": 0,
+        "tax_COFINS_taxRate": 0,
+        "tax_COFINS_taxValue": 0
       }
+    ],
+    "payments": [
+      {
+        "type": "BILLING_TITLE",
+        "term": 28
+      }
+    ],
+    "salePaymentsCalc": "28",
+    "summary": {
+      "grossProductValue": 99.36,
+      "totalValue": 99.36,
+      "item_freightValue": 0,
+      "grossWeightKg": 1.63,
+      "quantity": 600,
+      "tax_ICMS_taxValue": null,
+      "tax_ICMS_ST_taxValue": 0,
+      "tax_IPI_taxValue": 0,
+      "count": 1
     }
-  ]
-}
+  }
+]
