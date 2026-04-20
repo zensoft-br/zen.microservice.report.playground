@@ -1,25 +1,21 @@
 import * as utils from "./utils.jsx";
 import { Column, Table } from "./utils.jsx";
 
-// Column.className não passou para o header
-// Footer da coluna não está sendo exibido quando há um footerValue definido
-
 export default function ({ data = [], meta = {}, t }) {
   const report = meta.report || {};
 
-  const grouped = data.reduce((red, item) => {
-    const key = "";
-    if (!red[key]) red[key] = [];
-    red[key].push(item);
-    return red;
-  }, {});
+  data = utils.sort(data, report.properties?.settings?.sort || []);
 
+  const grouped = utils.group(data, report.properties?.settings?.groups || []);
+
+  const sections = grouped instanceof Map 
+    ? Array.from(grouped.entries()) 
+    : [[null, grouped]];
+    
   const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
 
   return (
     <div className="report-wrapper">
-      <pre>{JSON.stringify(meta, null, 2)}</pre>
-      <pre>{JSON.stringify(visibleColumns, null, 2)}</pre>
       <div className="report-container">
         <header>
           <h1>{t("/supply/production/report/productionOrderConsumptionList")}</h1>
@@ -44,11 +40,13 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          {Object.keys(grouped).map(key => (
-            <section key={key}>
-              <header>{key}</header>
+          {sections.map(([groupKey, groupValue], idx) => (
+            <section key={idx}>
+              {groupKey !== null && <header className="group-header">
+                <h2>{groupKey}</h2>
+              </header>}
               <div className="content">
-                <Table data={grouped[key]}
+                <Table data={groupValue}
                   visibleColumns={visibleColumns}>
                   <Column id="id" header={t("/@word/id")}
                     cell={({ value }) => utils.formatNumber(value)} className="number"

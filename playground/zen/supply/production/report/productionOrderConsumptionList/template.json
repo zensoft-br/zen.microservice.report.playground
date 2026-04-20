@@ -21,6 +21,25 @@
       "parameters": {
         "DATE_START": "2026-01-01",
         "DATE_END": "2026-01-31"
+      },
+      "properties": {
+        "settings": {
+          "sort": [
+            {
+              "columnId": "person_nameCalc",
+              "direction": "asc",
+              "nulls": "last"
+            }
+          ],
+          "groups": [
+            {
+              "columnId": "person_nameCalc"
+            },
+            {
+              "columnId": "product_id"
+            }
+          ]
+        }
       }
     }
   },

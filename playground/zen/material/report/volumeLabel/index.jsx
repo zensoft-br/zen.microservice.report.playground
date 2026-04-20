@@ -6,7 +6,7 @@ export default function ({ data = [], meta = {}, t }) {
   data = calculateVolumeMetrics(data);
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report?.properties?.["fontSize"] }}>
+    <div className="report-wrapper" style={{ fontSize: report?.properties?.fontSize || "9pt" }}>
       {data.map((obj) => (
         <div className="report-container flex v">
           <main className="flex v flex-1">

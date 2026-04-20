@@ -112,11 +112,82 @@ export function formatTime(value, options = {}) {
   }
 }
 
+export function group(data, groups = []) {
+  groups = groups.slice(0, 1);
+
+  const root = new Map();
+
+  if (!groups.length) {
+    root.set(null, data);
+    return root;
+  }
+
+  return data.reduce((acc, item) => {
+    let currentLevel = acc;
+
+    groups.forEach(({ columnId }, index) => {
+      const key = item[columnId] ?? "";
+      const isLastGroup = index === groups.length - 1;
+
+      if (isLastGroup) {
+        if (!currentLevel.has(key)) currentLevel.set(key, []);
+        currentLevel.get(key).push(item);
+      } else {
+        if (!currentLevel.has(key)) currentLevel.set(key, new Map());
+        currentLevel = currentLevel.get(key);
+      }
+    });
+
+    return acc;
+  }, new Map());
+};
+
 export function round(value, decimals = 2) {
   if (value == null) return null;
   const factor = 10 ** decimals;
   return Math.round(value * factor) / factor;
 }
+
+export function sort(data, criteria) {
+  const collator = new Intl.Collator(undefined, { 
+    numeric: true, 
+    sensitivity: "base", 
+  });
+
+  return data.sort((a, b) => {
+    for (const { columnId, direction = "asc", nulls = "last" } of criteria) {
+      const valA = a[columnId];
+      const valB = b[columnId];
+
+      const isANull = valA == null || valA === "";
+      const isBNull = valB == null || valB === "";
+
+      if (isANull || isBNull) {
+        if (isANull && isBNull) continue;
+        const result = isANull ? -1 : 1;
+        return (nulls === "first" ? result : -result);
+      }
+
+      let comparison = 0;
+      
+      if (valA === valB) continue;
+
+      const numA = Number(valA);
+      const numB = Number(valB);
+
+      if (!isNaN(numA) && !isNaN(numB)) {
+        comparison = numA - numB;
+      } else {
+        comparison = collator.compare(String(valA), String(valB));
+      }
+
+      if (comparison !== 0) {
+        return direction === "desc" ? -comparison : comparison;
+      }
+    }
+    return 0;
+  });
+};
 
 function validateDate(value, timeZone = config.timeZone) {
   if (value instanceof Date) return value;
