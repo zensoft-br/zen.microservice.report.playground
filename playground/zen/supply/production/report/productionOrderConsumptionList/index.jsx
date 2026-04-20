@@ -4,8 +4,8 @@ import { Column, Table } from "./utils.jsx";
 // Column.className não passou para o header
 // Footer da coluna não está sendo exibido quando há um footerValue definido
 
-export default function ({ data = [], t, ...rest }) {
-  const report = rest.report || {};
+export default function ({ data = [], meta = {}, t }) {
+  const report = meta.report || {};
 
   const grouped = data.reduce((red, item) => {
     const key = "";
@@ -14,10 +14,12 @@ export default function ({ data = [], t, ...rest }) {
     return red;
   }, {});
 
-  const visibleColumns = report?.properties?.showColumns ? report.properties.showColumns.split(",") : undefined;
+  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
 
   return (
     <div className="report-wrapper">
+      <pre>{JSON.stringify(meta, null, 2)}</pre>
+      <pre>{JSON.stringify(visibleColumns, null, 2)}</pre>
       <div className="report-container">
         <header>
           <h1>{t("/supply/production/report/productionOrderConsumptionList")}</h1>

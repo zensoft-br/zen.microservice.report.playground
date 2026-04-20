@@ -170,11 +170,21 @@ export const Table = ({ data, visibleColumns, children }) => {
     <table>
       <thead>
         <tr>
-          {columns.map((col, i) => (
-            <th key={i} className={col.props.headerClassName || col.props.className}>
-              {col.props.header}
-            </th>
-          ))}
+          {columns.map((col, i) => {
+            const context = { row: null, data };
+
+            const baseClassName = col.props.headerClassName || col.props.className;
+      
+            const className = typeof baseClassName === "function"
+              ? baseClassName(context)
+              : baseClassName;
+
+            return (
+              <th key={i} className={className}>
+                {col.props.header}
+              </th>
+            );
+          })}
         </tr>
       </thead>
       <tbody>
@@ -182,13 +192,14 @@ export const Table = ({ data, visibleColumns, children }) => {
           <tr key={rowIndex}>
             {columns.map((col, colIndex) => { 
               let value = undefined;
+
               if (typeof col.props.cellValue === "function") {
-                value = col.props.cellValue(row);
+                value = col.props.cellValue({ row, rowIndex, data });
               } else if (col.props.id) {
                 value = row[col.props.id];
               }
 
-              const context = { row, value };
+              const context = { row, rowIndex, data, value };
 
               const className = typeof col.props.className === "function" 
                 ? col.props.className(context)
@@ -209,17 +220,20 @@ export const Table = ({ data, visibleColumns, children }) => {
         <tr>
           {columns.map((col, i) => {
             let value = undefined;
+
             if (typeof col.props.footerValue === "function") {
               value = col.props.footerValue({ data });
             }
 
+            const context = { row: null, data, value };
+
             const className = typeof col.props.className === "function" 
-              ? col.props.className({ row: null, value })
+              ? col.props.className(context)
               : col.props.className;
 
             return (
               <td key={i} className={className}>
-                {col.props.footer ? col.props.footer({ data, value }) : null}
+                {col.props.footer ? col.props.footer(context) : null}
               </td>
             );
           })}

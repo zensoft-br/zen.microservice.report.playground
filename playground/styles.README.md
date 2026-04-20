@@ -31,6 +31,7 @@
     │   │
     │   └── section (Group - optional)
     │       ├── header (Group header - optional)
+    │       │   └── h2 (Report title)
     │       ├── .content (Data)
     │       │   ├── table (Lists)
     │       │   │   ├── thead > tr > th

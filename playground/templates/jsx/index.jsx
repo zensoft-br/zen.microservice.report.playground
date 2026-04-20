@@ -1,8 +1,8 @@
 import * as utils from "./utils.jsx";
 import { Column, Table } from "./utils.jsx";
 
-export default function ({ data = [], meta, t }) {
-  const report = meta?.report || {};
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
 
   // map by department
   const groupedData = data.reduce((acc, item) => {
@@ -22,25 +22,27 @@ export default function ({ data = [], meta, t }) {
           <section className="parameters">
             <dl>
               <dt>{t("/@word/dateStart")}</dt>
-              <dd>{utils.formatDate(report.parameters.dateStart)}</dd>
+              <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
             </dl>
             <dl>
               <dt>{t("/@word/dateEnd")}</dt>
-              <dd>{utils.formatDate(report.parameters.dateEnd)}</dd>
+              <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
             </dl>
           </section>
         </header>
         <main>
           {Object.entries(groupedData).map(([dept, items]) => (
             <section key={dept}>
-              <header>{t("/@word/department")}: {dept}</header>
+              <header>
+                <h2>{t("/@word/department")}: {dept}</h2>
+              </header>
               <div className="content">
                 <Table
                   data={items}
                   visibleColumns={["id", "name", "age"]}>
-                  <Column id="id" header={t("/@word/id")} cell={({ value }) => utils.formatNumber(value)} />
+                  <Column id="id" header={t("/@word/id")} className="number" cell={({ value }) => utils.formatNumber(value)} />
                   <Column id="name" header={t("/@word/name")} />
-                  <Column id="age" header={t("/@word/age")} cell={({ value }) => utils.formatNumber(value)} />
+                  <Column id="age" header={t("/@word/age")} className="number" cell={({ value }) => utils.formatNumber(value)} />
                   <Column id="department" header={t("/@word/department")} />
                 </Table>
               </div>

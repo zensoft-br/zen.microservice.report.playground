@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import * as utils from "./utils.jsx";
 import { Column, Table } from "./utils.jsx";
 
-export default function ({ report = {}, data: rawData = [], t }) {
+export default function ({ data: rawData = [], meta = {}, t }) {
+  const { report = {} } = meta;
   const nature = "DR";
 
   let showColumns = undefined;

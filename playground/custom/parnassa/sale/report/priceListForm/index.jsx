@@ -1,4 +1,6 @@
-export default function ({ report, data = [] }) {
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
+
   data.sort((a, b) => {
     return Number(a.product.code) - Number(b.product.code);
   });

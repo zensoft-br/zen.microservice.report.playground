@@ -1,7 +1,7 @@
 import * as utils from "./utils.jsx";
 
-export default function ({data = [], meta = {}, t}) {
-  const { report } = meta;
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
   
   data = calculateVolumeMetrics(data);
 
