@@ -269,11 +269,6 @@ async function compile(reportFolder) {
       build.meta = template.meta;
     }
 
-    // TODO remove
-    if (template.metadata) {
-      build.metadata = template.metadata;
-    }
-
     const renderRequest = {
       ...build,
     };

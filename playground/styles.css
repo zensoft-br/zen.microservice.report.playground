@@ -150,12 +150,16 @@ body {
   padding-top: 5px;
 }
 .report-wrapper .report-container > main .content table:not(.custom) {
+  table-layout: fixed;
   width: 100%;
   border-collapse: separate;
   border-spacing: var(--padding) 0;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
   text-align: left;
+}
+.report-wrapper .report-container > main .content table:not(.custom) td {
+  overflow-wrap: break-word;
 }
 .report-wrapper .report-container > footer {
   margin-top: 4rem;
@@ -266,4 +270,59 @@ body {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   display: block;
+}
+.report-wrapper .badge {
+  display: inline-block;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.2em;
+  padding: 0.2em 0.4em;
+}
+.report-wrapper .badge.c-1 {
+  background-color: #E63946;
+}
+.report-wrapper .badge.c-2 {
+  background-color: #FB8500;
+}
+.report-wrapper .badge.c-3 {
+  background-color: #2A9D8F;
+}
+.report-wrapper .badge.c-4 {
+  background-color: #0077B6;
+}
+.report-wrapper .badge.c-5 {
+  background-color: #8338EC;
+}
+.report-wrapper .badge.c-6 {
+  background-color: #FF006E;
+}
+.report-wrapper .badge.c-7 {
+  background-color: #00AFB9;
+}
+.report-wrapper .badge.c-8 {
+  background-color: #F4A261;
+}
+.report-wrapper .badge.c-9 {
+  background-color: #3A0CA3;
+}
+.report-wrapper .badge.c-10 {
+  background-color: #006D77;
+}
+.report-wrapper .badge.c-11 {
+  background-color: #C11277;
+}
+.report-wrapper .badge.c-12 {
+  background-color: #00B4D8;
+}
+.report-wrapper .badge.c-13 {
+  background-color: #2B2D42;
+}
+.report-wrapper .badge.c-14 {
+  background-color: #70E000;
+}
+.report-wrapper .badge.c-15 {
+  background-color: #D00000;
+}
+.report-wrapper .badge.c-16 {
+  background-color: #5A189A;
 }

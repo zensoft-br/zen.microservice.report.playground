@@ -17,8 +17,5 @@
     "resources": {
       "fallback": {}
     }
-  },
-  "metadata": {
-    "dataSource": null
   }
 }

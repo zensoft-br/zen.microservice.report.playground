@@ -1,6 +1,5 @@
-import React from "react";
 import * as utils from "./utils.jsx";
-import { Column, GroupSections, Table } from "./utils.jsx";
+import { Badge, Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -8,21 +7,31 @@ export default function ({ data = [], meta = {}, t }) {
   const columns = [
     { id: "id",
       header: utils.cellHeader(t("/@word/id")),
-      className: "number",
+      width: "7ch",
+      className: "id",
       cell: ({ value }) => utils.formatNumber(value),
       footerValue: ({ data }) => data.length, 
       footer: ({ value }) => utils.formatNumber(value),
     },
     { id: "name",
       header: utils.cellHeader(t("/@word/name")),
+      width: "30ch",
     },
-    { id: "age",
-      header: utils.cellHeader(t("/@word/age")),
+    { id: "score",
+      header: utils.cellHeader(t("/@word/score")),
+      width: "7ch",
       className: "number",
-      cell: ({ value }) => utils.formatNumber(value),
+      cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
     },
-    { id: "department",
-      header: utils.cellHeader(t("/@word/department")), 
+    { id: "category1",
+      header: utils.cellHeader(t("/@word/category1")),
+      width: "15ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    { id: "status",
+      header: utils.cellHeader(t("/@word/status")),
+      width: "15ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
   ];
 
@@ -38,11 +47,13 @@ export default function ({ data = [], meta = {}, t }) {
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
-            {report.parameters?.dateStart && <dl>
-              <dt>{t("/@word/dateStart")}</dt>
-              <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
-            </dl>}
-            {report.parameters?.dateEnd && <dl>
+            {report.parameters?.dateStart &&
+              <dl>
+                <dt>{t("/@word/dateStart")}</dt>
+                <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
+              </dl>}
+            {report.parameters?.dateEnd &&
+            <dl>
               <dt>{t("/@word/dateEnd")}</dt>
               <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
             </dl>}

@@ -7,7 +7,9 @@ export const config = {
 };
 
 export function cellHeader(...args) {
-  return args.filter(arg => arg != null).map((arg, index) => index === 0 ? arg : String(arg).toLowerCase()).join(", ");
+  return args.filter(arg => arg != null)
+    .map((arg, index) => index === 0 ? arg : String(arg).toLowerCase())
+    .join(", ");
 }
 
 export function formatCurrency(value, options = {}) {
@@ -209,6 +211,25 @@ function validateDate(value, timeZone = config.timeZone) {
   return new Date(value);
 }
 
+function hash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash);
+}
+
+export const Badge = ({ children }) => {
+  const s = String(children || "").toLowerCase();
+  const hashValue = hash(s) % 16 + 1;
+
+  return (
+    <div className={`badge c-${hashValue}`}>
+      {children}
+    </div>
+  );
+};
+
 export const Column = () => null;
 
 export const Table = ({ data, visibleColumns, children }) => {
@@ -244,14 +265,13 @@ export const Table = ({ data, visibleColumns, children }) => {
           {columns.map((col, i) => {
             const context = { row: null, data };
 
-            const baseClassName = col.props.headerClassName || col.props.className;
-      
-            const className = typeof baseClassName === "function"
-              ? baseClassName(context)
-              : baseClassName;
+            let className = col.props.headerClassName || col.props.className;
+            className = typeof className === "function"
+              ? className(context)
+              : className;
 
             return (
-              <th key={i} className={className}>
+              <th key={i} className={className} width={col.props.width || "10ch"}>
                 {col.props.header}
               </th>
             );
@@ -272,9 +292,10 @@ export const Table = ({ data, visibleColumns, children }) => {
 
               const context = { row, rowIndex, data, value };
 
-              const className = typeof col.props.className === "function" 
-                ? col.props.className(context)
-                : col.props.className;
+              let className = col.props.className;
+              className = typeof className === "function"
+                ? className(context)
+                : className;
     
               return (
                 <td key={colIndex} className={className} style={col.props.style}>
@@ -298,9 +319,10 @@ export const Table = ({ data, visibleColumns, children }) => {
 
             const context = { row: null, data, value };
 
-            const className = typeof col.props.className === "function" 
-              ? col.props.className(context)
-              : col.props.className;
+            let className = col.props.footerClassName || col.props.className;
+            className = typeof className === "function"
+              ? className(context)
+              : className;
 
             return (
               <td key={i} className={className}>
@@ -329,15 +351,18 @@ export const GroupSections = ({ data, children, groups = [], columns = [], level
       {entries.map(([key, value], index) => {
         let displayValue = key;
         if (key !== null) {
+          let value = key;
           if (column?.cellValue) {
-            displayValue = column.cellValue({ row: { key }, rowIndex: 0, data: [] });
+            value = column.cellValue({ row: { key }, rowIndex: 0, data: [] });
           }
           if (column?.cell) {
-            displayValue = column.cell({ value: displayValue, data: [] });
+            value = column.cell({ value: value, data: [] });
           }
 
           if (column.header) {
-            displayValue = `${column.header}: ${displayValue}`;
+            displayValue = <>{column.header}: {value}</>;
+          } else {
+            displayValue = value;
           }
         }
 

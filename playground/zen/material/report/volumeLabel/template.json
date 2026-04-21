@@ -15,9 +15,7 @@
         "fontSize": "9pt",
         "hideColumns": "quality"
       }
-    }
-  },
-  "metadata": {
+    },
     "dataSource": "/material/report/volume"
   }
 }

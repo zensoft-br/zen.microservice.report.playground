@@ -9,7 +9,7 @@
       "@file:styles.css"
     ]
   },
-  "metadata": {
+  "meta": {
     "dataSource": "/fiscal/data/invoiceForm"
   }
 }

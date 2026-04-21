@@ -2,19 +2,71 @@
   {
     "id": 1001,
     "name": "John Anderson",
-    "age": 30,
-    "department": "Engineering"
+    "score": 7.6,
+    "category1": "Engineering",
+    "status": "active"
   },
   {
     "id": 1002,
     "name": "Jane Smith",
-    "age": 25,
-    "department": "Marketing"
+    "score": 8.95,
+    "category1": "Marketing",
+    "status": "inactive"
   },
   {
     "id": 1003,
     "name": "Alice Johnson",
-    "age": 28,
-    "department": "Engineering"
+    "score": 8.2,
+    "category1": "Engineering",
+    "status": "busy"
+  },
+  {
+    "id": 1004,
+    "name": "Bob Brown",
+    "score": 6.5,
+    "category1": "Sales",
+    "status": "inactive"
+  },
+  {
+    "id": 1005,
+    "name": "Charlie Davis",
+    "score": 9.1,
+    "category1": "Product",
+    "status": "active"
+  },
+  {
+    "id": 1006,
+    "name": "Emily Wilson",
+    "score": 7.8,
+    "category1": "Sales",
+    "status": "busy"
+  },
+  {
+    "id": 1007,
+    "name": "David Lee",
+    "score": 8.3,
+    "category1": "Engineering",
+    "status": "busy"
+  },
+  {
+    "id": 1008,
+    "name": "Sarah Miller",
+    "score": 9.0,
+    "category1": "Product",
+    "status": "active"
+  },
+  {
+    "id": 1009,
+    "name": "Michael Taylor",
+    "score": 6.9,
+    "category1": "Sales",
+    "status": "inactive"
+  },
+  {
+    "id": 1010,
+    "name": "Jessica Anderson",
+    "score": 8.7,
+    "category1": "Business",
+    "status": "active"
   }
 ]

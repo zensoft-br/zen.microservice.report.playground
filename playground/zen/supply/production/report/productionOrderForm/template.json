@@ -18,7 +18,7 @@
       }
     }
   },
-  "metadata": {
+  "meta": {
     "dataSource": "/supply/production/data/productionOrderForm"
   }
 }

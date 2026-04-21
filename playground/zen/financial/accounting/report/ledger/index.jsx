@@ -1,8 +1,10 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import * as utils from "./utils.jsx";
+import { Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data: rawData = [], meta = {}, t }) {
   const { report = {} } = meta;
+
   const nature = "DR";
 
   let showColumns = undefined;
@@ -12,6 +14,100 @@ export default function ({ data: rawData = [], meta = {}, t }) {
   const showColumn = (column) => {
     return showColumns?.includes(column);
   };
+
+  const columns = [
+    { id: "date",
+      header: utils.cellHeader(t("/@word/date")),
+      width: "10ch",
+      cell: ({ value }) => utils.formatDate(value),
+    },
+    { id: "journalEntry_id",
+      header: utils.cellHeader(t("/financial/accounting/journalEntry")),
+      headerClassName: "number",
+      width: "8ch",
+      className: "number",
+      cell: ({ row }) => utils.formatNumber(row.journal_entry_id),
+    },
+    { id: "account",
+      ids: ["account_id", "account_code", "account_description", "account_full_description"],
+      header: utils.cellHeader(t("/financial/accounting/account")),
+      width: "24ch",
+      cell: ({ row }) => [
+        showColumn("account_id") ? row.account_id : null,
+        showColumn("account_code") ? row.account_code : null,
+        showColumn("account_description") ? row.account_description : null,
+        showColumn("account_full_description") ? row.account_full_description : null,
+      ].filter(Boolean).join(", "),
+    },
+    { id: "accountCounterpart",
+      ids: ["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_full_description"],
+      header: utils.cellHeader(t("/financial/accounting/ledgerItem.accountCounterpart")),
+      width: "24ch",
+      cell: ({ row }) => [
+        showColumn("accountCounterpart_id") ? row.accountCounterpart_id : null,
+        showColumn("accountCounterpart_code") ? row.accountCounterpart_code : null,
+        showColumn("accountCounterpart_description") ? row.accountCounterpart_description : null,
+        showColumn("accountCounterpart_full_description") ? row.accountCounterpart_full_description : null,
+      ].filter(Boolean).join(", "),
+    },
+    { id: "description",
+      header: utils.cellHeader(t("/@word/description")),
+      width: "32ch",
+    },
+    { id: "debit",
+      header: utils.cellHeader(t("/financial/accounting/sign/enum/DR")),
+      headerClassName: "number",
+      width: "16ch",
+      className: () => `number ${getColor(nature, "DR")}`,
+      cell: ({ row, value }) => row.sign === "DR" ? utils.formatCurrency(value) : undefined,
+      footerValue: ({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.debit : 0), 2), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    { id: "credit",
+      header: utils.cellHeader(t("/financial/accounting/sign/enum/CR")),
+      headerClassName: "number",
+      width: "16ch",
+      className: () => `number ${getColor(nature, "CR")}`,
+      cell: ({ row, value }) => row.sign === "CR" ? utils.formatCurrency(value) : undefined,
+      footerValue: ({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.credit : 0), 2), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    { id: "balance",
+      ids: ["balance", "balance_sign"],
+      header: utils.cellHeader(t("/@word/balance")),
+      headerClassName: "number",
+      width: "16ch",
+      className: ({ row, value }) => `number ${getColor(nature, "DR", row?.balance_sign, value)}`,
+      cell: ({ row, value }) => utils.formatCurrency(value) + (row.balance === 0 ? "" : " " + t(`/financial/accounting/sign/enum/${row.balance_sign}/sign`)),
+    },
+    { id: "resultCenter",
+      ids: ["resultCenter_id", "resultCenter_code", "resultCenter_description", "resultCenter_full_description"],
+      header: utils.cellHeader(t("/financial/accounting/resultCenter")),
+      width: "24ch",
+      cell: ({ row }) => [
+        showColumn("resultCenter_id") ? row.result_center_id : null,
+        showColumn("resultCenter_code") ? row.result_center_code : null,
+        showColumn("resultCenter_description") ? row.result_center_description : null,
+        showColumn("resultCenter_full_description") ? row.result_center_full_description : null,
+      ].filter(Boolean).join(", "),
+    },
+    { id: "person",
+      ids: ["person_id", "person_name", "person_fantasy_name", "person_name_calc"],
+      header: utils.cellHeader(t("/catalog/person/person")),
+      width: "24ch",
+      cell: ({ row }) => [
+        showColumn("person_id") ? row.person_id : null,
+        showColumn("person_name") ? row.person_name : null,
+        showColumn("person_fantasy_name") ? row.person_fantasy_name : null,
+        showColumn("person_name_calc") ? row.person_name_calc : null,
+      ].filter(Boolean).join(", "),
+    },
+    { id: "tags",
+      header: utils.cellHeader(t("/@word/tags")),
+      width: "16ch",
+      cell: ({ row }) => row.journal_entry_tags,
+    },
+  ];
 
   const data = useMemo(() => {
     const firstRow = rawData[0];
@@ -41,184 +137,76 @@ export default function ({ data: rawData = [], meta = {}, t }) {
         <header>
           <h1>{t("/financial/accounting/report/ledger")}</h1>
           <section className="parameters">
-            {report?.parameters?.ACCOUNT_ID && (
+            {report?.parameters?.ACCOUNT_ID && 
               <dl>
                 <dt>{t("/financial/accounting/account")}</dt>
                 <dd>{report?.parameters?.ACCOUNT_ID_DESC ?? report?.parameters?.ACCOUNT_ID}</dd>
-              </dl>
-            )}
-            {report?.parameters?.ACCOUNT_CODE && (
+              </dl>}
+            {report?.parameters?.ACCOUNT_CODE &&
               <dl>
                 <dt>{t("/financial/accounting/account")}</dt>
                 <dd>{report?.parameters?.ACCOUNT_CODE_DESC ?? report?.parameters?.ACCOUNT_CODE}</dd>
               </dl>
-            )}
-            {report?.parameters?.DATE_START && (
+            }
+            {report?.parameters?.DATE_START &&
               <dl>
                 <dt>{t("/@word/dateStart")}</dt>
                 <dd>{utils.formatDate(report?.parameters?.DATE_START)}</dd>
               </dl>
-            )}
-            {report?.parameters?.DATE_END && (
+            }
+            {report?.parameters?.DATE_END &&
               <dl>
                 <dt>{t("/@word/dateEnd")}</dt>
                 <dd>{utils.formatDate(report?.parameters?.DATE_END)}</dd>
-              </dl>
-            )}
-            {report?.parameters?.SOCIETY_IDS && (
+              </dl>}
+            {report?.parameters?.SOCIETY_IDS &&
               <dl>
                 <dt>{t("/catalog/company/society")}</dt>
                 <dd>{report?.parameters?.SOCIETY_IDS_DESC ?? report?.parameters?.SOCIETY_IDS.join(", ")}</dd>
-              </dl>
-            )}
-            {report?.parameters?.COMPANY_IDS && (
+              </dl>}
+            {report?.parameters?.COMPANY_IDS &&
               <dl>
                 <dt>{t("/catalog/company/company")}</dt>
                 <dd>{report?.parameters?.COMPANY_IDS_DESC ?? report?.parameters?.COMPANY_IDS.join(", ")}</dd>
-              </dl>
-            )}
-            {report?.parameters?.RESULT_CENTER_IDS && (
+              </dl>}
+            {report?.parameters?.RESULT_CENTER_IDS &&
               <dl>
                 <dt>{t("/financial/accounting/resultCenter")}</dt>
                 <dd>{report?.parameters?.RESULT_CENTER_IDS_DESC ?? report?.parameters?.RESULT_CENTER_IDS.join(", ")}</dd>
-              </dl>
-            )}
-            {report?.parameters?.PERSON_IDS && (
+              </dl>}
+            {report?.parameters?.PERSON_IDS &&
               <dl>
                 <dt>{t("/catalog/person/person")}</dt>
                 <dd>{report?.parameters?.PERSON_IDS_DESC ?? report?.parameters?.PERSON_IDS.join(", ")}</dd>
-              </dl>
-            )}
-            {report?.parameters?.PERSON_GROUP_IDS && (
+              </dl>}
+            {report?.parameters?.PERSON_GROUP_IDS &&
               <dl>
                 <dt>{t("/catalog/person/personGroup")}</dt>
                 <dd>{report?.parameters?.PERSON_GROUP_IDS_DESC ?? report?.parameters?.PERSON_GROUP_IDS.join(", ")}</dd>
-              </dl>
-            )}
-            {report?.parameters?.TAGS && (
+              </dl>}
+            {report?.parameters?.TAGS &&
               <dl>
                 <dt>{t("/@word/tags")}</dt>
                 <dd>{report?.parameters?.TAGS.join(", ")}</dd>
-              </dl>
-            )}
+              </dl>}
           </section>
         </header>
         <main>
-          <div className="content">
-            <Table data={data}
-              visibleColumns={visibleColumns}>
-              <Column
-                id="date"
-                header={t("/@word/date")}
-                cell={({ value }) => utils.formatDate(value)}
-              />
-
-              <Column
-                id="journalEntry_id"
-                header={t("/financial/accounting/journalEntry")}
-                headerClassName="number"
-                className="number"
-                cell={({ row }) => utils.formatNumber(row.journal_entry_id)}
-              />
-
-              <Column
-                id="account"
-                ids={["account_id", "account_code", "account_description", "account_full_description"]}
-                header={t("/financial/accounting/account")}
-                cell={({ row }) => [
-                  showColumn("account_id") ? row.account_id : null,
-                  showColumn("account_code") ? row.account_code : null,
-                  showColumn("account_description") ? row.account_description : null,
-                  showColumn("account_full_description") ? row.account_full_description : null,
-                ].filter(Boolean).join(", ")}
-              />
-
-              <Column
-                id="accountCounterpart"
-                ids={["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_full_description"]}
-                header={t("/financial/accounting/ledgerItem.accountCounterpart")}
-                cell={({ row }) => [
-                  showColumn("accountCounterpart_id") ? row.account_counterpart_id : null,
-                  showColumn("accountCounterpart_code") ? row.account_counterpart_code : null,
-                  showColumn("accountCounterpart_description") ? row.account_counterpart_description : null,
-                  showColumn("accountCounterpart_full_description") ? row.account_counterpart_full_description : null,
-                ].filter(Boolean).join(", ")}
-              />
-
-              <Column
-                id="description"
-                header={t("/@word/description")}
-                style={{ maxWidth: "20em" }}
-              />
-
-              <Column
-                id="debit"
-                header={t("/financial/accounting/sign/enum/DR")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "DR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "DR" ? utils.formatCurrency(value) : undefined}
-                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "DR" ? row.debit : 0), 2), 0)}
-                footer={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="credit"
-                header={t("/financial/accounting/sign/enum/CR")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${row ? getColor(nature, row?.sign, value) : (nature === "CR" ? "positive" : "negative")}`}
-                cell={({ row, value }) => row.sign === "CR" ? utils.formatCurrency(value) : undefined}
-                footerValue={({ data }) => data.reduce((red, row) => utils.round(red + (row.sign === "CR" ? row.credit : 0), 2), 0)}
-                footer={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="balance"
-                header={t("/@word/balance")}
-                headerClassName="number"
-                className={({ row, value }) => `number ${getColor(nature, row?.balance_sign, value)}`}
-                cell={({ value }) => utils.formatCurrency(value)}
-              />
-
-              <Column
-                id="balance_sign"
-                ids={["balance"]}
-                header=""
-                visible={showColumn("balance")}
-                className={({ row, value }) => `number ${getColor(nature, value, row?.balance)}`}
-                cell={({ row, value }) => row.balance === 0 ? " " : t(`/financial/accounting/sign/enum/${value}/sign`)}
-              />
-
-              <Column
-                id="resultCenter"
-                ids={["resultCenter_id", "resultCenter_code", "resultCenter_description", "resultCenter_full_description"]}
-                header={t("/financial/accounting/resultCenter")}
-                cell={({ row }) => [
-                  showColumn("resultCenter_id") ? row.result_center_id : null,
-                  showColumn("resultCenter_code") ? row.result_center_code : null,
-                  showColumn("resultCenter_description") ? row.result_center_description : null,
-                  showColumn("resultCenter_full_description") ? row.result_center_full_description : null,
-                ].filter(Boolean).join(", ")}
-              />
-
-              <Column
-                id="person"
-                ids={["person_id", "person_name", "person_fantasy_name", "person_name_calc"]}
-                header={t("/catalog/person/person")}
-                cell={({ row }) => [
-                  showColumn("person_id") ? row.person_id : null,
-                  showColumn("person_name") ? row.person_name : null,
-                  showColumn("person_fantasy_name") ? row.person_fantasy_name : null,
-                  showColumn("person_name_calc") ? row.person_name_calc : null,
-                ].filter(Boolean).join(", ")}
-              />
-
-              <Column
-                id="tags"
-                header={t("/@word/tags")}
-                cell={({ row }) => row.journal_entry_tags}
-              />
-            </Table>
-          </div>
+          <GroupSections 
+            columns={columns}
+            data={data} 
+            groups={report.properties?.settings?.groups || []}>
+            {(groupData) => (
+              <div className="content">
+                <Table data={groupData}
+                  visibleColumns={visibleColumns}>
+                  {columns.map((column, index) => (
+                    <Column key={index} {...column} />
+                  ))}
+                </Table>
+              </div>
+            )}
+          </GroupSections>
         </main>
       </div>
     </div>
@@ -234,94 +222,3 @@ function getColor(nature, sign, value) {
     return sign === "CR" ? "positive" : "negative";
   }
 }
-
-const Column = () => null;
-
-const Table = ({ data, visibleColumns, children }) => {
-  const columns = React.Children.toArray(children)
-    .filter((child) => {
-      if (!child) return false;
-      if (child.props.visible != null) return child.props.visible;
-      if (visibleColumns == null) return true;
-      if (child.props.ids && visibleColumns) {
-        return child.props.ids.some(id => visibleColumns.includes(id));
-      }
-      if (child.props.id && visibleColumns) {
-        return visibleColumns.includes(child.props.id);
-      }
-      return false;
-    })
-    .sort((a, b) => {
-      if (visibleColumns) {
-        const getMinIndex = (props) => {
-          const ids = props.ids || [props.id];
-          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
-          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
-        };
-        return getMinIndex(a.props) - getMinIndex(b.props);
-      }
-      return (a.props.order ?? 0) - (b.props.order ?? 0);
-    });
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          {columns.map((col, i) => (
-            <th key={i} className={col.props.headerClassName}>
-              {col.props.header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {columns.map((col, colIndex) => { 
-              let value = undefined;
-              if (typeof col.props.cellValue === "function") {
-                value = col.props.cellValue(row);
-              } else if (col.props.id) {
-                value = row[col.props.id];
-              }
-
-              const context = { row, value };
-
-              const className = typeof col.props.className === "function" 
-                ? col.props.className(context)
-                : col.props.className;
-    
-              return (
-                <td key={colIndex} className={className} style={col.props.style}>
-                  {col.props.cell 
-                    ? col.props.cell(context) 
-                    : (value ?? null)} 
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-      <tfoot>
-        <tr>
-          {columns.map((col, i) => {
-            let value = undefined;
-            if (typeof col.props.footerValue === "function") {
-              value = col.props.footerValue({ data });
-            }
-
-            const className = typeof col.props.className === "function" 
-              ? col.props.className({ row: null, value })
-              : col.props.className;
-
-            return (
-              <td key={i} className={className}>
-                {col.props.footer ? col.props.footer({ data, value }) : null}
-              </td>
-            );
-          })}
-        </tr>
-      </tfoot>
-    </table>
-  );
-};

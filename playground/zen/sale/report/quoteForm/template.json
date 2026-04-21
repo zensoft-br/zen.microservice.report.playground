@@ -3,7 +3,7 @@
   "assets": {
     "styles": "@file:/styles.css"
   },
-  "metadata": {
+  "meta": {
     "dataSource": "/sale/data/quoteForm"
   }
 }

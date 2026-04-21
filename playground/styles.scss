@@ -192,10 +192,12 @@ body {
 
       .content {
         table:not(.custom) {
+          table-layout: fixed;
+
           width: 100%;
+
           border-collapse: separate;
           border-spacing: var(--padding) 0;
-          // margin-bottom: 0.5rem;
 
           th {
             text-align: left;
@@ -207,6 +209,8 @@ body {
           td {
             // padding: 8px;
             // border-bottom: 1px solid #f1f1f1;
+            // word-break: break-all;
+            overflow-wrap: break-word;
           }
 
           tfoot {
@@ -335,5 +339,79 @@ body {
     page-break-inside: avoid;
 
     display: block;
+  }
+
+  .badge {
+    display: inline-block;
+
+    color: white;
+    font-weight: 500;
+
+    border-radius: 0.2em;
+    padding: 0.2em 0.4em;
+
+    &.c-1 {
+      background-color: #E63946;
+    }
+
+    &.c-2 {
+      background-color: #FB8500;
+    }
+
+    &.c-3 {
+      background-color: #2A9D8F;
+    }
+
+    &.c-4 {
+      background-color: #0077B6;
+    }
+
+    &.c-5 {
+      background-color: #8338EC;
+    }
+
+    &.c-6 {
+      background-color: #FF006E;
+    }
+
+    &.c-7 {
+      background-color: #00AFB9;
+    }
+
+    &.c-8 {
+      background-color: #F4A261;
+    }
+
+    &.c-9 {
+      background-color: #3A0CA3;
+    }
+
+    &.c-10 {
+      background-color: #006D77;
+    }
+
+    &.c-11 {
+      background-color: #C11277;
+    }
+
+    &.c-12 {
+      background-color: #00B4D8;
+    }
+
+    &.c-13 {
+      background-color: #2B2D42;
+    }
+
+    &.c-14 {
+      background-color: #70E000;
+    }
+
+    &.c-15 {
+      background-color: #D00000;
+    }
+
+    &.c-16 {
+      background-color: #5A189A;
+    }
   }
 }

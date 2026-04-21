@@ -8,6 +8,7 @@
     "properties": {
       "settings": {
         "columns": [
+          "status",
           "productPacking_code",
           "product_description",
           "productPacking_complement",
@@ -24,9 +25,6 @@
         "groups": [
           {
             "columnId": "availabilityDate"
-          },
-          {
-            "columnId": "product_code"
           }
         ]
       }

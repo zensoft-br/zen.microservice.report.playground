@@ -9,7 +9,7 @@
       "@file:styles.css"
     ]
   },
-  "metadata": {
+  "meta": {
     "dataSource": "/financial/accounting/report/ledger"
   }
 }

@@ -8,23 +8,5 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
-  },
-  "meta": {
-    "report": {
-      "title": "My report",
-      "parameters": {
-        "dateStart": "2026-01-01",
-        "dateEnd": "2026-01-31"
-      },
-      "properties": {
-        "settings": {
-          "groups": [
-            {
-              "columnId": "department"
-            }
-          ]
-        }
-      }
-    }
   }
 }

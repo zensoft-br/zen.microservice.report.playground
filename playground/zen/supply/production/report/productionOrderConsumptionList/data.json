@@ -191,7 +191,7 @@
   },
   {
     "id": null,
-    "status": "APPROVED",
+    "status": "PREPARING",
     "code": null,
     "date": null,
     "availabilityDate": "2026-04-20",
@@ -267,7 +267,7 @@
   },
   {
     "id": null,
-    "status": "APPROVED",
+    "status": "PREPARED",
     "code": null,
     "date": null,
     "availabilityDate": "2026-04-24",
