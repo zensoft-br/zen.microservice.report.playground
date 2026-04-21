@@ -1,0 +1,35 @@
+{
+  "report": {
+    "code": "jsx",
+    "parameters": {
+      "DATE_START": "2026-01-01",
+      "DATE_END": "2026-01-31"
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          "productPacking_code",
+          "product_description",
+          "productPacking_complement",
+          "productVariant_description",
+          "sum_balance"
+        ],
+        "sort": [
+          {
+            "columnId": "availabilityDate",
+            "direction": "asc",
+            "nulls": "last"
+          }
+        ],
+        "groups": [
+          {
+            "columnId": "availabilityDate"
+          },
+          {
+            "columnId": "product_code"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -38,7 +38,9 @@ function fileExists(p) {
 async function readJson(p, fallback) {
   if (!(await fileExists(p))) return fallback;
   try {
-    return JSON.parse(await fs.readFile(p, "utf8"));
+    const content = await fs.readFile(p, "utf8");
+    if (!content.trim()) return fallback;
+    return JSON.parse(content);
   } catch (e) {
     throw new Error(`Invalid JSON in ${path.basename(p)}: ${e.message}`);
   }
@@ -117,60 +119,52 @@ function deepMerge(source, patch) {
 
 async function compile(reportFolder) {
   const relativeBase = path.relative(playgroundDir, reportFolder);
+
   const templateFile = path.join(reportFolder, "template.json");
   const dataFile = path.join(reportFolder, "data.json");
-  const outFile = path.join(reportFolder, "report.html");
+  const metaFile = path.join(reportFolder, "meta.json");
   const buildFile = path.join(reportFolder, "build.json");
+  const outFile = path.join(reportFolder, "report.html");
 
   try {
-    const config = await readJson(templateFile, null);
-    if (!config?.engine) throw new Error("template.engine is required");
+    // template
+    const template = await readJson(templateFile, null);
+    if (!template?.engine) throw new Error("template.engine is required");
 
-    // Find source file
-    if (!config.source) {
-      const exts = ENGINE_EXTENSIONS[config.engine] || [];
+    // Inject source file if not provided
+    if (!template.source) {
+      const exts = ENGINE_EXTENSIONS[template.engine] || [];
       for (const ext of exts) {
         const p = path.join(reportFolder, `index${ext}`);
         if (await fileExists(p)) {
-          config.source = `@file:index${ext}`;
+          template.source = `@file:index${ext}`;
           break;
         }
       }
     }
 
-    const dataText = (await fileExists(dataFile))
+    // data
+    const data = (await fileExists(dataFile))
       ? await fs.readFile(dataFile, "utf8")
       : null;
 
-    const renderRequest = {
-      engine: config.engine,
+    // meta
+    const meta = (await fileExists(metaFile)) ? await readJson(metaFile, null) : null;
+
+    const build = {
+      engine: template.engine,
       template: { 
-        source: config.source,
+        source: template.source,
       },
-      assets: JSON.parse(JSON.stringify(config.assets || {})),
-      i18n: config.i18n,
+      assets: JSON.parse(JSON.stringify(template.assets || {})),
+      i18n: template.i18n,
       data: undefined,
     };
 
-    // Handle Data (Upload if large)
-    if (dataText) {
-      if (dataText.length <= 3096) {
-        renderRequest.data = JSON.parse(dataText);
-      } else {
-        const prep = await fetchWithTimeout(
-          `${REPORT_API}/report/prepare-upload`,
-          { method: "POST" },
-        );
-        const { key, uploadUrl } = await prep.json();
-        await fetchWithTimeout(uploadUrl, { method: "PUT", body: dataText });
-        renderRequest.data = key;
-      }
-    }
-
     // Process source (can be a string or map)
     {
-      if (typeof config.source === "string" && config.source.startsWith("@file:")) {
-        const filePath = config.source.slice(6);
+      if (typeof template.source === "string" && template.source.startsWith("@file:")) {
+        const filePath = template.source.slice(6);
         let sourcePath;
         if (filePath.startsWith("/")) {
           sourcePath = path.join(process.cwd(), "playground", filePath);
@@ -178,14 +172,14 @@ async function compile(reportFolder) {
           sourcePath = path.resolve(reportFolder, filePath);
         }
         try {
-          renderRequest.template.source = await fs.readFile(sourcePath, "utf8");
+          build.template.source = await fs.readFile(sourcePath, "utf8");
         } catch (err) {
           throw new Error(
             `Source file missing: ${filePath}\n Resolved as: ${sourcePath}`,
           );
         }
-      } else if (typeof config.source === "object") {
-        const entries = Object.entries(config.source);
+      } else if (typeof template.source === "object") {
+        const entries = Object.entries(template.source);
         for (const [key, value] of entries) {
           if (typeof value === "string" && value.startsWith("@file:")) {
             const filePath = value.slice(6);
@@ -196,7 +190,7 @@ async function compile(reportFolder) {
               sourcePath = path.resolve(reportFolder, filePath);
             }
             try {
-              renderRequest.template.source[key] = await fs.readFile(sourcePath, "utf8");
+              build.template.source[key] = await fs.readFile(sourcePath, "utf8");
             } catch (err) {
               throw new Error(
                 `Source file missing: ${filePath}\n Resolved as: ${sourcePath}`,
@@ -208,9 +202,9 @@ async function compile(reportFolder) {
     }
     
     // Process scripts (@file: logic)
-    if (renderRequest.assets?.scripts) {
+    if (build.assets?.scripts) {
       const processed = await Promise.all(
-        Object.entries(renderRequest.assets.scripts).map(async ([key, s]) => {
+        Object.entries(build.assets.scripts).map(async ([key, s]) => {
           if (typeof s === "string" && s.startsWith("@file:")) {
             const filePath = s.slice(6);
       
@@ -234,12 +228,12 @@ async function compile(reportFolder) {
         }),
       );
 
-      renderRequest.assets.scripts = processed.reduce((acc, val) => ({ ...acc, ...val }), {});
+      build.assets.scripts = processed.reduce((acc, val) => ({ ...acc, ...val }), {});
     }
 
     // Process styles (@file: logic)
-    if (renderRequest.assets?.styles) {
-      const styles = renderRequest.assets.styles;
+    if (build.assets?.styles) {
+      const styles = build.assets.styles;
       const isArray = Array.isArray(styles);
       const styleEntries = isArray ? styles : [styles];
 
@@ -268,10 +262,37 @@ async function compile(reportFolder) {
         }),
       );
 
-      renderRequest.assets.styles = isArray ? processed : processed[0];
+      build.assets.styles = isArray ? processed : processed[0];
     }
 
-    // Inject i18n defaults and merge with template config
+    if (template.meta ) {
+      build.meta = template.meta;
+    }
+
+    // TODO remove
+    if (template.metadata) {
+      build.metadata = template.metadata;
+    }
+
+    const renderRequest = {
+      ...build,
+    };
+
+    // Handle data (upload if large)
+    if (data) {
+      if (data.length <= 3096) {
+        renderRequest.data = JSON.parse(data);
+      } else {
+        const prep = await fetchWithTimeout(`${REPORT_API}/report/prepare-upload`, { 
+          method: "POST",
+        });
+        const { key, uploadUrl } = await prep.json();
+        await fetchWithTimeout(uploadUrl, { method: "PUT", body: data });
+        renderRequest.data = key;
+      }
+    }
+
+    // Inject i18n defaults
     const i18n = {
       locale: "pt-BR",
       timeZone: "America/Sao_Paulo",
@@ -283,38 +304,25 @@ async function compile(reportFolder) {
         "zh-CN": "https://zenerp.app.br/resources.zh-CN.json",
       },
     };
+    renderRequest.i18n = deepMerge(i18n, renderRequest.i18n || {});
 
-    if (config.meta ) {
-      renderRequest.meta = config.meta;
+    if (meta) {
+      renderRequest.meta = deepMerge(renderRequest.meta || {}, meta);
     }
 
-    if (config.metadata) {
-      renderRequest.metadata = config.metadata;
-    }
-
-    const mergedRequest = {
-      ...renderRequest,
-      i18n: {
-        ...deepMerge(i18n, renderRequest.i18n || {}),
-      },
-    };
-
-    const genRes = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
+    const response = await fetchWithTimeout(`${REPORT_API}/report/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(mergedRequest),
+      body: JSON.stringify(renderRequest),
     });
+    if (!response.ok)
+      throw new Error(await response.text());
 
-    if (!genRes.ok) throw new Error(await genRes.text());
-    const { url } = await genRes.json();
+    const { url } = await response.json();
     const html = await (await fetchWithTimeout(url)).text();
 
-    // console.log(url);
-    
     // Save outputs
-    // eslint-disable-next-line no-unused-vars
-    const { data, ...buildInfo } = renderRequest;
-    await fs.writeFile(buildFile, JSON.stringify(buildInfo, null, 2));
+    await fs.writeFile(buildFile, JSON.stringify(build, null, 2));
     await fs.writeFile(outFile, html);
 
     console.log(`\x1b[32m[REPORT]\x1b[0m ${relativeBase}`);

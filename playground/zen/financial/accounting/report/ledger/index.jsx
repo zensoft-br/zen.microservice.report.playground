@@ -33,6 +33,8 @@ export default function ({ data: rawData = [], meta = {}, t }) {
     ];
   }, [rawData, t]);
 
+  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+
   return (
     <div className="report-wrapper">
       <div className="report-container" style={{ "width": report?.properties?.width }}>
@@ -104,7 +106,7 @@ export default function ({ data: rawData = [], meta = {}, t }) {
         <main>
           <div className="content">
             <Table data={data}
-              visibleColumns={showColumns}>
+              visibleColumns={visibleColumns}>
               <Column
                 id="date"
                 header={t("/@word/date")}
