@@ -7,12 +7,9 @@ export default function ({ data: rawData = [], meta = {}, t }) {
 
   const nature = "DR";
 
-  let showColumns = undefined;
-  if (report?.parameters?.showColumns) {
-    showColumns = report.parameters.showColumns.split(",");
-  }
+  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
   const showColumn = (column) => {
-    return showColumns?.includes(column);
+    return visibleColumns?.includes(column);
   };
 
   const columns = [
@@ -26,28 +23,28 @@ export default function ({ data: rawData = [], meta = {}, t }) {
       headerClassName: "number",
       width: "8ch",
       className: "number",
-      cell: ({ row }) => utils.formatNumber(row.journal_entry_id),
+      cell: ({ row }) => utils.formatNumber(row.journalEntry_id),
     },
     { id: "account",
-      ids: ["account_id", "account_code", "account_description", "account_full_description"],
+      ids: ["account_id", "account_code", "account_description", "account_fullDescription"],
       header: utils.cellHeader(t("/financial/accounting/account")),
       width: "24ch",
       cell: ({ row }) => [
         showColumn("account_id") ? row.account_id : null,
         showColumn("account_code") ? row.account_code : null,
         showColumn("account_description") ? row.account_description : null,
-        showColumn("account_full_description") ? row.account_full_description : null,
+        showColumn("account_fullDescription") ? row.account_fullDescription : null,
       ].filter(Boolean).join(", "),
     },
     { id: "accountCounterpart",
-      ids: ["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_full_description"],
-      header: utils.cellHeader(t("/financial/accounting/ledgerItem.accountCounterpart")),
+      ids: ["accountCounterpart_id", "accountCounterpart_code", "accountCounterpart_description", "accountCounterpart_fullDescription"],
+      header: utils.cellHeader(t("/financial/accounting/accountCounterpart")),
       width: "24ch",
       cell: ({ row }) => [
         showColumn("accountCounterpart_id") ? row.accountCounterpart_id : null,
         showColumn("accountCounterpart_code") ? row.accountCounterpart_code : null,
         showColumn("accountCounterpart_description") ? row.accountCounterpart_description : null,
-        showColumn("accountCounterpart_full_description") ? row.accountCounterpart_full_description : null,
+        showColumn("accountCounterpart_fullDescription") ? row.accountCounterpart_fullDescription : null,
       ].filter(Boolean).join(", "),
     },
     { id: "description",
@@ -77,42 +74,42 @@ export default function ({ data: rawData = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/balance")),
       headerClassName: "number",
       width: "16ch",
-      className: ({ row, value }) => `number ${getColor(nature, "DR", row?.balance_sign, value)}`,
+      className: ({ row, value }) => `number ${getColor(nature, row?.balance_sign, value)}`,
       cell: ({ row, value }) => utils.formatCurrency(value) + (row.balance === 0 ? "" : " " + t(`/financial/accounting/sign/enum/${row.balance_sign}/sign`)),
     },
     { id: "resultCenter",
-      ids: ["resultCenter_id", "resultCenter_code", "resultCenter_description", "resultCenter_full_description"],
+      ids: ["resultCenter_id", "resultCenter_code", "resultCenter_description", "resultCenter_fullDescription"],
       header: utils.cellHeader(t("/financial/accounting/resultCenter")),
       width: "24ch",
       cell: ({ row }) => [
-        showColumn("resultCenter_id") ? row.result_center_id : null,
-        showColumn("resultCenter_code") ? row.result_center_code : null,
-        showColumn("resultCenter_description") ? row.result_center_description : null,
-        showColumn("resultCenter_full_description") ? row.result_center_full_description : null,
+        showColumn("resultCenter_id") ? row.resultCenter_id : null,
+        showColumn("resultCenter_code") ? row.resultCenter_code : null,
+        showColumn("resultCenter_description") ? row.resultCenter_description : null,
+        showColumn("resultCenter_fullDescription") ? row.resultCenter_fullDescription : null,
       ].filter(Boolean).join(", "),
     },
     { id: "person",
-      ids: ["person_id", "person_name", "person_fantasy_name", "person_name_calc"],
+      ids: ["person_id", "person_name", "person_fantasyName", "person_nameCalc"],
       header: utils.cellHeader(t("/catalog/person/person")),
       width: "24ch",
       cell: ({ row }) => [
         showColumn("person_id") ? row.person_id : null,
         showColumn("person_name") ? row.person_name : null,
-        showColumn("person_fantasy_name") ? row.person_fantasy_name : null,
-        showColumn("person_name_calc") ? row.person_name_calc : null,
+        showColumn("person_fantasyName") ? row.person_fantasyName : null,
+        showColumn("person_nameCalc") ? row.person_nameCalc : null,
       ].filter(Boolean).join(", "),
     },
     { id: "tags",
       header: utils.cellHeader(t("/@word/tags")),
       width: "16ch",
-      cell: ({ row }) => row.journal_entry_tags,
+      cell: ({ row }) => row.journalEntry_tags,
     },
   ];
 
   const data = useMemo(() => {
     const firstRow = rawData[0];
     const initialBalance = firstRow 
-      ? firstRow.balance + (firstRow.sign === "DR" ? -firstRow.debit : firstRow.credit) 
+      ? (firstRow.balance_sign === "DR" ? firstRow.balance : -firstRow.balance) - (firstRow.sign === "DR" ? firstRow.debit : -firstRow.credit) 
       : 0;
     
     const balance_sign = initialBalance === 0 ? undefined : initialBalance > 0 ? "DR" : "CR";
@@ -122,14 +119,12 @@ export default function ({ data: rawData = [], meta = {}, t }) {
         id: 0,
         date: report?.parameters?.DATE_START,
         description: t("/@word/balanceStart"),
-        balance: initialBalance,
+        balance: Math.abs(initialBalance),
         balance_sign,
       },
       ...rawData,
     ];
   }, [rawData, t]);
-
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
 
   return (
     <div className="report-wrapper">
