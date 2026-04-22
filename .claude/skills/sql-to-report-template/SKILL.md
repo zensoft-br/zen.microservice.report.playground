@@ -120,7 +120,7 @@ The skill ships a Node script that resolves title + columns + params against the
 
    ```json
    {
-     "title": { "resolved": false, "emit": "t(\"/ai/invoiceCube\")", "missing": ["/ai/invoiceCube"] },
+     "title": { "resolved": false, "emit": "t(\"/@unknown/report/invoiceCube\")", "missing": ["/@unknown/report/invoiceCube"] },
      "columns": {
        "invoice_id": {
          "resolved": true,
@@ -142,7 +142,7 @@ The skill ships a Node script that resolves title + columns + params against the
      },
      "summary": {
        "total": 5, "resolved": 4, "missing": 1,
-       "missingList": [{ "kind": "title", "name": "invoiceCube", "attempted": "/ai/invoiceCube" }]
+       "missingList": [{ "kind": "title", "name": "invoiceCube", "attempted": "/@unknown/report/invoiceCube" }]
      }
    }
    ```
@@ -180,8 +180,8 @@ For prefixed aliases: second arg is `t("/@word/<suffix>")`. For `sum_*`: no name
 
 | Suffix / name       | width   | numeric? | cell                              | footer                                                        |
 |---------------------|---------|----------|-----------------------------------|---------------------------------------------------------------|
-| `id` (standalone)   | `8ch`   | yes      | `formatNumber`                    | **count** — `data.length`                                     |
-| `*_id` (prefixed, incl. `*_id_\d+`) | `8ch` | yes | `formatNumber`          | **count** — `data.length`                                     |
+| `id` (standalone)   | `8ch`   | yes      | `formatNumber`                    | **count** — `({ data }) => data.length`                                     |
+| `*_id` (prefixed, incl. `*_id_\d+`) | `8ch` | yes | `formatNumber`          | **count** — `({ data }) => data.length`                                     |
 | `*_code`, `code`    | `16ch`  | no       | —                                 | —                                                             |
 | `unit_code`         | `8ch`   | no       | —                                 | —                                                             |
 | `*_description`     | `24ch`  | no       | —                                 | —                                                             |
@@ -197,7 +197,14 @@ For prefixed aliases: second arg is `t("/@word/<suffix>")`. For `sum_*`: no name
 - **Count footer**: alias === `id`, OR ends with `_id`, OR matches `*_id_\d+`.
 - **Sum footer**: suffix / alias contains any of `quantity`, `qty`, `served`, `balance`, `excess`, `adjusted`, `units`, `weight`, `kg`, `volume`, `margin` (quantity-like → `formatNumber`) OR `value`, `price`, `cost`, `amount`, `commission`+`value` (monetary → `formatCurrency`). Also explicit `sum_*`, `count_*` prefixes.
 - **Applies regardless of SQL aggregate type.** A `SUM()` aliased without `sum_` prefix (e.g. `invoiceItem_totalValue`, `salesCommissionBaseValue`) gets a sum footer. A `MAX()` aliased with a value token (e.g. `invoiceItem_unitValue`) also gets a sum footer — the user trims in meta if semantically wrong.
-- **Null-safe reducer mandatory** for Zen cube SQL (`CASE WHEN :SHOW_X THEN ... ELSE NULL END` patterns): use `data.reduce((r, item) => r + (Number(item.<alias>) || 0), 0)`.
+- **Null-safe reducer mandatory** for Zen cube SQL (`CASE WHEN :SHOW_X THEN ... ELSE NULL END` patterns). `footerValue` must be a **function** `({ data }) => ...`, not a bare expression:
+
+  ```jsx
+  footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.<alias>) || 0), 0),
+  footer: ({ value }) => utils.formatNumber(value),
+  ```
+
+  Writing `footerValue: data.reduce(...)` without the `({ data }) =>` wrapper breaks rendering — the footer tds come out empty. Always wrap.
 
 **"Numeric" columns get BOTH `className: "number"` AND `headerClassName: "number"`** (per `docs/engine_enUS_changes.md` — the header must also align right). Non-numeric columns get neither.
 
@@ -257,7 +264,7 @@ export default function ({ data = [], meta = {}, t }) {
 
 Rules:
 - Import list is exactly those two lines. Even if a feature (e.g. Badge) is not needed, keep both lines — the reference does, and consistency beats micro-optimization here.
-- `<TITLE_KEY>` comes from the resolver output (`result.title.emit`). Pass the report `<name>` (output folder name) to the resolver as `input.title`. If the resolver returns `resolved: false`, the fallback `/ai/<name>` is already baked into the emit string and the title is recorded in `missingList` — surface it in the "Reporting back" missing-keys section so the user adds a translation.
+- `<TITLE_KEY>` comes from the resolver output (`result.title.emit`). Pass the report `<name>` (output folder name) to the resolver as `input.title`. If the resolver returns `resolved: false`, the fallback `/@unknown/report/<name>` is already baked into the emit string and the title is recorded in `missingList` — surface it in the "Reporting back" missing-keys section so the user adds a translation.
 - Column objects use trailing commas after each property, matching the reference style.
 - Do not hardcode CSS; do not emit styles.css; do not import anything beyond `./utils.jsx`.
 
@@ -271,11 +278,11 @@ Write a companion `meta.json` next to every index.jsx. Pre-fill parameters + a *
 
 Every non-SHOW SQL bind parameter, values set to `null`. Paired `_IDS_DESC` for every `_IDS` param. Key order = SQL first-appearance order.
 
-### Columns — curated default view (TARGET 6-15 COLUMNS)
+### Columns — curated default view (TARGET 6-10 COLUMNS)
 
-**Hard cap: 15 columns in `settings.columns`. Target: 6-15.** More than that causes horizontal squish that makes the preview unreadable. The full column list still lives in `index.jsx` — meta just filters.
+**Hard cap: 10 columns in `settings.columns`. Target: 6-10.** More than that causes horizontal squish that makes the preview unreadable. The full column list still lives in `index.jsx` — meta just filters.
 
-Pick columns using this priority order. Stop when you hit 15 (aim for 10-12):
+Pick columns using this priority order. Stop when you hit 10 (aim for 6-10):
 
 **Tier 1 — always include every measurement** (the point of the report):
 - Every `sum_*` column.
@@ -289,7 +296,7 @@ Pick columns using this priority order. Stop when you hit 15 (aim for 10-12):
 5. Secondary entity: `product_code` if present and not already added.
 6. Secondary description: `product_description` if present.
 
-**Tier 3 — only if still under 15 after Tiers 1+2**:
+**Tier 3 — only if still under 10 after Tiers 1+2**:
 - `_properties_<subkey>` text-extracted columns that carry user-relevant data (e.g. `product_properties_br_NCM`, `invoice_properties_volumes`).
 - First `*_complement` column.
 
@@ -302,7 +309,7 @@ Pick columns using this priority order. Stop when you hit 15 (aim for 10-12):
 - Numbered category variants: `personCategory_*_\d+`, `productCategory_*_\d+`, `salespersonCategory_*_\d+` (all indexes).
 - Secondary-entity id/name families beyond the first two (e.g. once `person` is in, skip `personGroup`, `city`, `state`, `country`, `shipping`, `salesperson`, etc. unless you still have headroom).
 
-**If Tier 1 already exceeds 15** (reports with >15 aggregated measurements): keep only the top 10 `sum_*` + all `count_*`, ordered by SQL appearance, and include at most 5 dimensions from Tier 2. Aim for ≤15 total.
+**If Tier 1 alone exceeds 10** (reports with many aggregated measurements): keep only the top 6 `sum_*` + up to 2 `count_*`, ordered by SQL appearance, and include at most 2 dimensions from Tier 2 (date + primary entity name). Aim for ≤10 total.
 
 **Degenerate fallback**: If the curated set ends up empty (no sums, no dimensions detected), include bare `id`, `code`, and first 5 columns in SQL order.
 
@@ -459,7 +466,7 @@ Read the output files back and verify:
 2. **Column order = SQL SELECT order.** First alias first, last alias last.
 3. **Every column has `id`, `header`, `width`**; plus `className` + `headerClassName` + `cell` when the suffix rules above require them. Every numeric column has BOTH `className: "number"` and `headerClassName: "number"`.
 4. **Footers are suffix-driven, not prefix-driven.**
-   - Every `id` column (bare `id`, `*_id`, `*_id_\d+`) has a count footer: `footerValue: data.length`, `footer: formatNumber`.
+   - Every `id` column (bare `id`, `*_id`, `*_id_\d+`) has a count footer: `footerValue: ({ data }) => data.length`, `footer: ({ value }) => utils.formatNumber(value)`. **Both must be functions** — not bare `data.length` or string `formatNumber`.
    - Every column whose suffix contains a quantity token (`quantity`, `qty`, `served`, `balance`, `excess`, `adjusted`, `units`, `weight`, `kg`, `volume`, `margin`) or monetary token (`value`, `price`, `cost`, `amount`, `commission`+`Value`) has a sum footer with null-safe reducer.
    - Applies even when the alias does NOT carry a `sum_` / `count_` prefix (e.g. `invoiceItem_totalValue`, `invoiceItem_quantity`, `salesCommissionBaseValue` — all get sum footers despite the legacy-style alias).
    - Other columns (strings, dates, status, code, description, name, `*_day`/`*_month`/`*_year`, `invoice_number`) have NO footer.
@@ -494,7 +501,7 @@ Parameters rendered: <list>
 Title key: t("<TITLE_KEY>")   (<resolved | NOT FOUND — please edit>)
 
 Missing i18n keys (need translation or manual edit):
-- title "<TITLE_KEY>" → no /report/<name> match found; fallback "/ai/<name>" used
+- title "<TITLE_KEY>" → no /report/<name> match found; fallback "/@unknown/report/<name>" used
 - column <alias> → "<fallback_key>" (no /@word/<suffix> or namespace match)
 - parameter <PARAM> → "<fallback_key>" (no label key found)
 (or "none — all keys resolved" when the list is empty)

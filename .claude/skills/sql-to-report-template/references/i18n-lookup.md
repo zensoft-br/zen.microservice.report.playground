@@ -53,7 +53,7 @@ Each entry carries an `emit` string — paste it verbatim into the JSX:
 
 ### Titles
 
-Scans for keys ending in `/report/<name>`. First hit wins. Zero hits → fallback `/ai/<name>` (recorded as missing).
+Scans for keys ending in `/report/<name>`. First hit wins. Zero hits → fallback `/@unknown/report/<name>` (recorded as missing; grep-discoverable via the `/@unknown/` convention).
 
 ### Columns
 
@@ -63,9 +63,18 @@ Scans for keys ending in `/report/<name>`. First hit wins. Zero hits → fallbac
    - **Properties shortcut**: if token 2 is `properties`, try dotted-key match first (e.g., `product_properties_br_NCM` → `/catalog/product.properties.fiscal_br_NCM`).
    - **Namespace + suffix** (standard): scan keys whose last path segment equals the first token (filtered: no `/@*`, `/plural`, `/report/`, `/tag/`, no dotted segments, no `args*` descriptors). Score candidates: entity-doubled form (`/catalog/company/company`) beats single-segment (`/catalog/company`) beats `/fiscal/invoice`. Pair with `/@word/<rest-joined-by-underscore>`; if that misses and tokens ≥3, try `/@word/<last-token>`.
    - **Dotted-key catchall**: for other aliases, search dotted keys where `<first>.` starts a path segment and remaining tokens appear in order within it.
-   - **Namespace-only fallback**: if namespace matched but suffix didn't → emit `utils.cellHeader(t("<ns>"), t("/@word/<rest>"))` with the raw suffix (flagged missing).
-   - **Suffix-only fallback**: if suffix matched but no namespace → emit `utils.cellHeader(t("/@word/<rest>"))`.
-   - **Raw fallback**: neither → `utils.cellHeader(t("/@word/<full-alias>"))`, flagged missing.
+   - **Namespace-only fallback**: if namespace matched but suffix didn't → emit `utils.cellHeader(t("<ns>"), t("/@unknown/<rest>"))` with `/@unknown/` marking the gap (flagged missing).
+   - **Suffix-only fallback**: if suffix matched but no namespace → emit `utils.cellHeader(t("/@word/<rest>"))` (suffix IS resolved, kept as `/@word/`).
+   - **Raw fallback**: neither resolved → `utils.cellHeader(t("/@unknown/<full-alias>"))`, flagged missing.
+
+### The `/@unknown/` convention
+
+When a key **cannot be resolved** against the catalog, the resolver emits a `/@unknown/<segment>` key instead of `/@word/<segment>`. This makes unresolved keys stand out at render time (they render as the raw path since `/@unknown/*` is not in any locale) and gives the user a single grep pattern to find every gap: `rg "/@unknown/"`.
+
+Rules:
+- `/@word/*` is emitted ONLY when the key exists in the catalog — it's a positive signal.
+- `/@unknown/*` is emitted for every miss — positive signal of "please translate this".
+- Full namespace paths (e.g. `/fiscal/invoice`, `/catalog/company/company`) are emitted as-is when they resolve; when they don't, the resolver falls back to `/@unknown/<alias>`.
 
 ### Parameters
 

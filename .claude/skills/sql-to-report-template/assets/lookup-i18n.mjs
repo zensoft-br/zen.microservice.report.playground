@@ -103,7 +103,7 @@ function resolveTitle(name) {
       emit: `t("${key}")`,
     };
   }
-  const key = `/ai/${name}`;
+  const key = `/@unknown/report/${name}`;
   return { resolved: false, key, candidates: [], emit: `t("${key}")`, missing: [key] };
 }
 
@@ -205,18 +205,19 @@ function resolveMultiToken(alias) {
     };
   }
 
-  // 4. Namespace present, suffix missing → two-arg with raw suffix (flagged missing).
+  // 4. Namespace present, suffix missing → two-arg with /@unknown suffix (flagged missing).
   if (nsCandidates.length > 0) {
     const ns = pickBestNamespace(nsCandidates, first);
+    const unknownSuffix = `/@unknown/${rest}`;
     return {
       resolved: false,
       resolution: "two-arg-missing-suffix",
       namespace: ns,
       namespaceValue: catalog[ns],
       namespaceCandidates: nsCandidates.slice(0, 5),
-      suffix: suffixKey,
-      emit: `utils.cellHeader(t("${ns}"), t("${suffixKey}"))`,
-      missing: [suffixKey],
+      suffix: unknownSuffix,
+      emit: `utils.cellHeader(t("${ns}"), t("${unknownSuffix}"))`,
+      missing: [unknownSuffix],
     };
   }
 
@@ -237,10 +238,10 @@ function resolveMultiToken(alias) {
 }
 
 function columnFallback(alias) {
-  const key = `/@word/${alias}`;
+  const key = `/@unknown/${alias}`;
   return {
     resolved: false,
-    resolution: "fallback-raw-key",
+    resolution: "fallback-unknown",
     suffix: key,
     emit: `utils.cellHeader(t("${key}"))`,
     missing: [key],
@@ -374,7 +375,8 @@ function resolveParam(name) {
         note: "/@word/ fallback",
       };
     }
-    return { resolved: false, type: "ids", labelKey: wordKey, emit: `t("${wordKey}")`, missing: [wordKey] };
+    const unknownKey = `/@unknown/${entity}`;
+    return { resolved: false, type: "ids", labelKey: unknownKey, emit: `t("${unknownKey}")`, missing: [unknownKey] };
   }
   // _LIST
   if (/_LIST$/.test(name)) {
@@ -395,7 +397,8 @@ function resolveParam(name) {
         note: "stripped List suffix",
       };
     }
-    return { resolved: false, type: "list", labelKey: key2, emit: `t("${key2}")`, missing: [key2] };
+    const unknownKey = `/@unknown/${camel}`;
+    return { resolved: false, type: "list", labelKey: unknownKey, emit: `t("${unknownKey}")`, missing: [unknownKey] };
   }
   // Other
   return resolveWordParam(name, "other");
@@ -407,7 +410,8 @@ function resolveWordParam(name, type) {
   if (catalog[key] !== undefined) {
     return { resolved: true, type, labelKey: key, value: catalog[key], emit: `t("${key}")` };
   }
-  return { resolved: false, type, labelKey: key, emit: `t("${key}")`, missing: [key] };
+  const unknownKey = `/@unknown/${camel}`;
+  return { resolved: false, type, labelKey: unknownKey, emit: `t("${unknownKey}")`, missing: [unknownKey] };
 }
 
 function findPluralKey(entity) {
