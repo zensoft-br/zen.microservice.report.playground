@@ -5,7 +5,7 @@ description: Generate a Zen ERP report template (index.jsx + template.json) from
 
 # sql-to-report-template
 
-Scaffold a Zen ERP JSX report (template.json + index.jsx + meta.json + optional data.json) from a SQL query plus a sample data.json. The output must follow the **current** engine conventions documented in `docs/engine_enUS_changes.md` — these include `headerClassName` on numeric columns and `utils.formatCurrency` for monetary fields, which supersede the older shape seen in `playground/zen/supply/production/report/productionOrderConsumptionList/` (that reference predates the new rules; treat its structure / order / i18n-key style as authoritative, but update numeric columns and monetary formatting per the new rules).
+Scaffold a Zen ERP JSX report (template.json + index.jsx + meta.json + optional data.json) from a SQL query plus a sample data.json. The output must follow the **current** engine conventions documented in `references/engine-spec.md` — these include `headerClassName` on numeric columns and `utils.formatCurrency` for monetary fields, which supersede the older shape seen in `playground/zen/supply/production/report/productionOrderConsumptionList/` (that reference predates the new rules; treat its structure / order / i18n-key style as authoritative, but update numeric columns and monetary formatting per the new rules).
 
 ## Inputs
 
@@ -206,7 +206,7 @@ For prefixed aliases: second arg is `t("/@word/<suffix>")`. For `sum_*`: no name
 
   Writing `footerValue: data.reduce(...)` without the `({ data }) =>` wrapper breaks rendering — the footer tds come out empty. Always wrap.
 
-**"Numeric" columns get BOTH `className: "number"` AND `headerClassName: "number"`** (per `docs/engine_enUS_changes.md` — the header must also align right). Non-numeric columns get neither.
+**"Numeric" columns get BOTH `className: "number"` AND `headerClassName: "number"`** (per `references/engine-spec.md` — the header must also align right). Non-numeric columns get neither.
 
 Emit columns in the **same order** they appear in the SQL SELECT list. Preserve the exact alias casing as the column `id`.
 
@@ -479,7 +479,7 @@ Read the output files back and verify:
 9. **template.json is the verbatim skeleton** — engine jsx, scripts/styles assets, fallback i18n. No `template` section (index.jsx is auto-loaded).
 10. **meta.json exists** with: non-SHOW SQL params pre-filled (values `null`, `_IDS` params paired with `_IDS_DESC`); `settings.columns` populated with the **curated essentials subset** (see "meta.json — per-report scaffold" section); `settings.sort` set to one sensible default (date desc or code asc); `settings.groups` set to one sensible default (first `_nameCalc` / `_fantasyName` / bare `date`) or empty if none apply.
 11. **data.json** — copied verbatim when the user provided one; absent otherwise.
-12. **No external imports**, no inline styles, no `async`/`await`, no `window`/`document` access (engine constraints from `docs/engine_enUS_changes.md`).
+12. **No external imports**, no inline styles, no `async`/`await`, no `window`/`document` access (engine constraints from `references/engine-spec.md`).
 13. **Parameter block in index.jsx** contains only non-SHOW params, each guarded appropriately (on `PARAM` for dates/lists, on `PARAM_DESC` for `_IDS`), ordered: dates → `_IDS` → `_LIST` → others.
 14. If data.json was provided: **spot-check** that a couple of non-SHOW aliases exist as keys in the first data row. Mismatch = parsing went wrong.
 

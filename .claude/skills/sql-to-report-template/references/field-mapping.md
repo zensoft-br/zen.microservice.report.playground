@@ -44,7 +44,7 @@ Use the prefix verbatim (camelCase preserved). Second arg is always `t("/@word/<
 
 Match suffix first. If the alias is bare, match the whole alias against the "Standalone" column.
 
-**Every numeric column gets BOTH `className: "number"` AND `headerClassName: "number"`** (per `docs/engine_enUS_changes.md` key rules — the header must align right too). "Numeric column" = anything whose suffix matches `id`, `*_id`, `*_units`, or `sum_*`, or any column formatted with `formatNumber` / `formatCurrency`.
+**Every numeric column gets BOTH `className: "number"` AND `headerClassName: "number"`** (per `references/engine-spec.md` key rules — the header must align right too). "Numeric column" = anything whose suffix matches `id`, `*_id`, `*_units`, or `sum_*`, or any column formatted with `formatNumber` / `formatCurrency`.
 
 | Suffix / bare name     | `width`  | `className` + `headerClassName` | `cell`                                  | `footerValue` / `footer`                                                                                                |
 |------------------------|----------|--------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|

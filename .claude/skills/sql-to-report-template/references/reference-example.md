@@ -1,6 +1,6 @@
 # Reference example — productionOrderConsumptionList (adapted)
 
-This is the **canonical output shape** the skill produces, derived from the real reference at `playground/zen/supply/production/report/productionOrderConsumptionList/index.jsx` and updated for the current engine rules in `docs/engine_enUS_changes.md`. The live reference predates `headerClassName` and `utils.formatCurrency` — this file shows the post-update shape. When in conflict: trust this file + `field-mapping.md`, not the live reference.
+This is the **canonical output shape** the skill produces, derived from the real reference at `playground/zen/supply/production/report/productionOrderConsumptionList/index.jsx` and updated for the current engine rules in `references/engine-spec.md`. The live reference predates `headerClassName` and `utils.formatCurrency` — this file shows the post-update shape. When in conflict: trust this file + `field-mapping.md`, not the live reference.
 
 ## Source SQL aliases (in order)
 
