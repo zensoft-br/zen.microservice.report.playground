@@ -1,0 +1,17 @@
+{
+  "report": {
+    "code": "jsx",
+    "parameters": {
+      /* __PARAMETERS__ */
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          /* __COLUMNS__ */
+        ],
+        "sort": [],
+        "groups": []
+      }
+    }
+  }
+}
