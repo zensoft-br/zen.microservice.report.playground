@@ -1,0 +1,48 @@
+{
+  "report": {
+    "code": "jsx",
+    "parameters": {
+      "PRODUCT_IDS": null,
+      "PRODUCT_IDS_DESC": null,
+      "PRODUCT_CATEGORY_IDS_1": null,
+      "PRODUCT_CATEGORY_IDS_1_DESC": null,
+      "PRODUCT_CATEGORY_IDS_2": null,
+      "PRODUCT_CATEGORY_IDS_2_DESC": null,
+      "PRODUCT_CATEGORY_IDS_3": null,
+      "PRODUCT_CATEGORY_IDS_3_DESC": null,
+      "PRODUCT_CATEGORY_IDS_4": null,
+      "PRODUCT_CATEGORY_IDS_4_DESC": null,
+      "PRODUCT_CATEGORY_IDS_5": null,
+      "PRODUCT_CATEGORY_IDS_5_DESC": null,
+      "PRODUCT_PACKING_IDS": null,
+      "PRODUCT_PACKING_IDS_DESC": null,
+      "UNIT_IDS": null,
+      "UNIT_IDS_DESC": null,
+      "PRODUCT_VARIANT_IDS": null,
+      "PRODUCT_VARIANT_IDS_DESC": null,
+      "STOCK_CLUSTER_IDS": null,
+      "STOCK_CLUSTER_IDS_DESC": null,
+      "STOCK_TYPE": null,
+      "INVENTORY_MANAGEMENT": null
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          "product_code",
+          "product_description",
+          "productPacking_code",
+          "unit_code",
+          "minimumStock",
+          "stock_quantity",
+          "purchase_quantity",
+          "sale_quantity",
+          "balance"
+        ],
+        "sort": [
+          { "columnId": "product_code", "direction": "asc", "nulls": "last" }
+        ],
+        "groups": []
+      }
+    }
+  }
+}
