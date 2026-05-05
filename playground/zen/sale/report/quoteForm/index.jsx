@@ -1,4 +1,31 @@
-export default function ({ data = [], t }) {
+import * as utils from "./utils.jsx";
+import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+
+export default function ({ data = [], meta = {}, t }) {
+
+  const columns = [
+    { id: "id",
+      header: utils.cellHeader(t("/@word/id")),
+      width: "7ch",
+      className: "id",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length, 
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "productPacking_code",
+      header: utils.cellHeader(t("/@word/code")),
+      cellValue: ({ row }) => row.productPacking?.code,
+    },
+    {
+      id: "product_description",
+      header: utils.cellHeader(t("/@word/description")),
+      cellValue: ({ row }) => row.productPacking?.product?.description,
+    },
+  ];
+
+  const visibleColumns = columns.map(column => column.id);
+  
   return (
     <div className="report-wrapper">
       {data.map((quote) => (
@@ -62,6 +89,13 @@ export default function ({ data = [], t }) {
           <main>
             <section>
               <div className="content">
+                {/* <Table data={quote.items.map(item => (item.proposals.map(p => ({ ...item, ...p })) || [item])).flat()}
+                  visibleColumns={visibleColumns}>
+                  {columns.map((column, index) => (
+                    <Column key={index} {...column} />
+                  ))}
+                </Table> */}
+
                 <table>
                   <thead>
                     <tr>

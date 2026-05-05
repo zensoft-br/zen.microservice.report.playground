@@ -23,7 +23,7 @@
       "STOCK_CLUSTER_IDS": null,
       "STOCK_CLUSTER_IDS_DESC": null,
       "STOCK_TYPE": null,
-      "INVENTORY_MANAGEMENT": null
+      "INVENTORY_MANAGEMENT_ID": null
     },
     "properties": {
       "settings": {
@@ -31,15 +31,19 @@
           "product_code",
           "product_description",
           "productPacking_code",
-          "unit_code",
           "minimumStock",
           "stock_quantity",
+          "productionOrder_quantity",
           "purchase_quantity",
           "sale_quantity",
-          "balance"
+          "replenishment"
         ],
         "sort": [
-          { "columnId": "product_code", "direction": "asc", "nulls": "last" }
+          {
+            "columnId": "product_code",
+            "direction": "asc",
+            "nulls": "last"
+          }
         ],
         "groups": []
       }

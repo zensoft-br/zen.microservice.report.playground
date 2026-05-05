@@ -156,6 +156,7 @@ body {
   border-spacing: var(--padding) 0;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
+  overflow-wrap: break-word;
   text-align: left;
 }
 .report-wrapper .report-container > main .content table:not(.custom) td {

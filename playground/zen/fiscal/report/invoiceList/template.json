@@ -4,9 +4,8 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": "@file:/styles.css"
-  },
-  "meta": {
-    "dataSource": "/sale/data/quoteForm"
+    "styles": [
+      "@file:/styles.css"
+    ]
   }
 }

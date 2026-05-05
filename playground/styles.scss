@@ -200,6 +200,7 @@ body {
           border-spacing: var(--padding) 0;
 
           th {
+            overflow-wrap: break-word;
             text-align: left;
             // background: #f8f9fa;
             // padding: 8px;
