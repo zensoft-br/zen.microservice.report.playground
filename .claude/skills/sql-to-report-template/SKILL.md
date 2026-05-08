@@ -92,15 +92,28 @@ Budget: 1 curl + 1 node call + ~3 reads + ~4 writes. Everything else is reasonin
 1. **Read SQL**, strip `--` line comments and `/* */` block comments.
 2. **Locate the outermost SELECT.** With `WITH ... AS (...)` CTEs, parse only the final top-level SELECT — inner subqueries don't contribute columns.
 3. **Extract aliases** from `AS "alias"` (preserve casing). Drop `SHOW_*`.
-4. **Extract bind params** (`:NAME` tokens from WHERE / WITH). Drop `:SHOW_*`. Preserve verbatim — never strip suffixes like `_ID`/`_IDS`/`_LIST`.
+4. **Extract bind params** via shipped helper:
+
+   ```bash
+   node .claude/skills/sql-to-report-template/assets/extract-binds.mjs <sql> > /tmp/binds.json
+   ```
+
+   The helper handles comment stripping, dedup, drop-list. Use the JSON array as input to the resolver. **Do not hand-curate the param list** — if a bind seems missing, fix the helper, never silently skip in the prompt. Reserved-keyword binds (`:LIMIT`, `:OFFSET`) are still real binds; the helper preserves them.
 5. **Resolve i18n keys** in one resolver call (next section).
-6. **Map each alias to a column** using `references/field-mapping.md`. Header comes from the resolver — never reconstruct.
+5b. **Type-check sample data** (when supplied):
+
+   ```bash
+   node .claude/skills/sql-to-report-template/assets/sample-types.mjs <data.json> > /tmp/sample-types.json
+   ```
+
+   Used as a hard signal for column shaping in step 6 — sample types override alias-suffix rules when they conflict. See `references/field-mapping.md` § Sample-driven overrides. Skip when no sample provided.
+6. **Map each alias to a column** using `references/field-mapping.md`. Header comes from the resolver — never reconstruct. Apply sample-driven overrides from `/tmp/sample-types.json` when present.
 7. **Render parameters** using `references/parameter-rendering.md`.
 8. **Assemble index.jsx** from `assets/index.jsx.skeleton`. Substitute `__TITLE_KEY__`, `__COLUMNS__`, `__PARAMETERS__`.
 9. **Write template.json** verbatim from `assets/template.json`.
 10. **Write meta.json** from `assets/meta.json.skeleton` + extracted params + curated column subset (see meta.json scaffold below).
 11. **Copy data.json** verbatim if supplied; otherwise omit.
-12. **Validate** against Self-check.
+12. **Validate** against Self-check. Findings go into the final report — never halt mid-run.
 
 ## i18n resolver
 
@@ -263,10 +276,12 @@ Render one `<dl>` per non-SHOW param inside `<section className="parameters">`. 
 
 **Order in JSX (NOT SQL order):** dates → `_IDS` → `_LIST` → others. Preserve SQL first-appearance order within each group.
 
-## Self-check (before declaring done)
+## Self-check (run before reporting back, never halt)
+
+The skill **never interrupts mid-run** for these checks. Run them after writing all files; surface every finding in the final report under a `Validation` block. When unsure → emit `/@unknown/<segment>` and surface in the report. Don't second-guess in-place; don't re-emit; don't ask the user.
 
 1. **Columns:** count = non-SHOW alias count from SQL; order = SQL SELECT order; alias casing preserved as `id`.
-2. **Column shape:** every column matches its `references/field-mapping.md` rule — width, paired `className`/`headerClassName` on numerics, `cell` formatter, footer (count/sum/none).
+2. **Column shape:** every column matches its `references/field-mapping.md` rule — width, paired `className`/`headerClassName` on numerics, `cell` formatter, footer (count/sum/none). Sample-driven overrides applied where `/tmp/sample-types.json` disagrees with suffix rule.
 3. **Footers:** suffix-driven, not prefix-driven. `footerValue` is a function `({ data }) => ...` (not bare). Null-safe reducer for cube SQL. Monetary tokens use `formatCurrency`; quantity tokens use `formatNumber`.
 4. **i18n keys:** all output keys are resolver `emit` strings — none hand-crafted. Missing-keys report mirrors `summary.missingList` verbatim plus `nearMatches`.
 5. **JSX:** imports match `assets/index.jsx.skeleton` exactly. No external imports, no inline styles, no `async`/`await`, no `window`/`document`.
@@ -274,8 +289,27 @@ Render one `<dl>` per non-SHOW param inside `<section className="parameters">`. 
 7. **meta.json:** non-SHOW params filled (`_IDS` paired with `_IDS_DESC`); `settings.columns` is the curated subset; one default sort; one default group or empty.
 8. **Parameter `<dl>` blocks:** only non-SHOW params; ordered dates → `_IDS` → `_LIST` → others; each guarded.
 9. **data.json:** copied verbatim when provided; absent otherwise. Spot-check a couple of non-SHOW aliases as keys in row 0.
+10. **Param completeness:** every name in `/tmp/binds.json` appears in `meta.json.parameters` (or as `<NAME>_DESC` for `_IDS`) AND in `index.jsx` `<dl>` block. Cross-check command:
 
-If any check fails, fix before reporting done.
+    ```bash
+    node -e '
+    const binds = JSON.parse(require("fs").readFileSync("/tmp/binds.json", "utf8"));
+    const meta = JSON.parse(require("fs").readFileSync("<output>/meta.json", "utf8"));
+    const jsx = require("fs").readFileSync("<output>/index.jsx", "utf8");
+    const metaKeys = new Set(Object.keys(meta.report.parameters));
+    for (const p of binds) {
+      const inMeta = metaKeys.has(p) || metaKeys.has(p + "_DESC");
+      const inJsx = jsx.includes("report.parameters?." + p) || jsx.includes("report.parameters?." + p + "_DESC");
+      if (!inMeta || !inJsx) console.log("MISSING:", p, "meta:", inMeta, "jsx:", inJsx);
+    }
+    '
+    ```
+
+    Any `MISSING:` line → list under `Validation: missing params` in the final report. Do not halt.
+
+11. **Sample-driven overrides:** if `/tmp/sample-types.json` exists, list every alias whose sample type drove a deviation from the suffix rule (UUID dropping numeric formatting, datetime adding `formatDateTime`, integer adding `formatNumber`, mixed dropping all formatters). Surface under `Validation: sample overrides` in the final report so the reviewer sees what the sample changed.
+
+Findings populate the final report. The skill writes once and reports — no in-place rewrites and no user prompts.
 
 ## Reporting back
 
@@ -289,6 +323,7 @@ Created:
 Columns: <N> (dropped <M> SHOW_* aliases)
 Parameters rendered: <list>
 Title key: t("<TITLE_KEY>")   (<resolved | NOT FOUND — please edit>)
+Area: <areaInput> → <areaResolved>   (only when resolver remapped, e.g. "audit" → "system/audit")
 
 Missing i18n keys (need translation or manual edit):
 - title "<TITLE_KEY>" → "<fallback_key>" (no /report/<name> match)
@@ -297,11 +332,19 @@ Missing i18n keys (need translation or manual edit):
   Possible matches: ...
 - parameter <PARAM> → "<fallback_key>"
   Possible matches: ...
+
+Validation: sample overrides (data.json type beat alias-suffix rule):
+- <alias>: suffix rule → <expected>; sample type → <type> → emitted as <actual>. Verify.
+- (omit block when no overrides applied)
+
+Validation: missing params (binds in SQL not rendered):
+- <PARAM_NAME> — missing from <meta.json | index.jsx | both>
+- (omit block when complete)
 ```
 
-Group missing list by kind (title → columns → params). Omit the "Possible matches" line when `nearMatches` is empty. Suggestions are not auto-substituted — the user picks. If the list is empty, say "All i18n keys resolved." explicitly.
+Group missing list by kind (title → columns → params). Omit the "Possible matches" line when `nearMatches` is empty. Suggestions are not auto-substituted — the user picks. If the missing-keys list is empty, say "All i18n keys resolved." explicitly. Omit Validation blocks when empty. Surface `Area:` line only when resolver remapped (i.e. `areaResolved !== areaInput`).
 
-No narration beyond that block.
+No narration beyond that block. The skill does not halt or prompt — every uncertainty surfaces here.
 
 ## What NOT to do
 

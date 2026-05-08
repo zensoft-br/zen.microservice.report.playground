@@ -261,10 +261,46 @@ Input SQL alias → Output column object:
 },
 ```
 
+## Sample-driven overrides (when data.json supplied)
+
+Run `node assets/sample-types.mjs <data.json> > /tmp/sample-types.json` once per skill run (SKILL.md step 5b).
+
+Sample data is **hard signal**; alias suffix is **heuristic**. When they conflict, sample wins. Determinism: every classification is regex match or `typeof` — binary outcomes only.
+
+### Override matrix
+
+| Alias-suffix rule emits | Sample type | Final emit |
+|---|---|---|
+| `_id` numeric (className + cell + count footer) | `uuid` | DROP className/headerClassName/cell/footer. Plain string column. Keep header. |
+| `_id` numeric | `string` | same as above |
+| `_id` numeric | `integer` / `number` | keep numeric formatting (no override needed) |
+| no formatter | `datetime` | ADD `cell: ({ value }) => utils.formatDateTime(value)` |
+| no formatter | `date` | ADD `cell: ({ value }) => utils.formatDate(value)` |
+| any | `object` | ADD `cell: ({ value }) => value != null ? JSON.stringify(value) : null` (formalizes existing JSONB rule) |
+| no numeric formatting | `integer` | ADD `className: "number"`, `headerClassName: "number"`, `cell: ({ value }) => utils.formatNumber(value)`. NO footer (footer requires a suffix-rule trigger). |
+| any | `mixed` (`conflict: true`) | DROP all formatters. Plain text. Surface in Validation report. |
+| any | `empty` | no override (sample silent) |
+
+When data.json is **absent** (`/tmp/sample-types.json` missing or empty `{}`), suffix rules apply unchanged — no overrides.
+
+### Reporting
+
+Every override emits one line under `Validation: sample overrides` in the final report:
+
+```
+Validation: sample overrides (data.json type beat alias-suffix rule):
+- session_id: suffix rule → numeric+count footer; sample type → uuid → emitted as plain string. Verify.
+- properties_ms: no suffix rule; sample type → integer → added formatNumber + className.
+- some_alias: suffix rule → numeric; sample type → mixed (string, number) → emitted as plain text. Verify.
+```
+
+The skill does not halt — every override is reported, never blocked.
+
 ## Rule precedence when multiple match
 
 If an alias fits more than one rule, apply the most specific. Concretely:
 
+- **Sample-driven overrides take precedence over suffix rules** — see § above. Suffix rule applies only when sample is silent (`empty` / no data.json) or agrees.
 - `unit_code` matches both `*_code` (width 16ch) and `unit_code` (width 8ch) — use 8ch.
 - `id` matches both "id (bare)" and would hypothetically match `*_id` — bare `id` wins and carries the count footer.
 - `productPacking_id` matches `*_id` — count footer applies (bare `id` is just the strongest case).

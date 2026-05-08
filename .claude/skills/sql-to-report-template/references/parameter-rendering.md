@@ -4,11 +4,21 @@ Each SQL bind parameter `:NAME` can appear as a `<dl>` in the report header's `<
 
 ## Extraction
 
-Scan the full SQL (CTEs + final SELECT + WHERE clauses) for `:NAME` tokens. Deduplicate. Preserve first-appearance order.
+Always use the shipped helper (called from SKILL.md step 4):
 
-**Drop:**
+```bash
+node .claude/skills/sql-to-report-template/assets/extract-binds.mjs <sql> > /tmp/binds.json
+```
+
+The helper scans the full SQL (CTEs + final SELECT + WHERE clauses + LIMIT) for `:NAME` tokens, strips `--` and `/* */` comments first, deduplicates, and preserves first-appearance order. Don't re-implement extraction in the prompt.
+
+**Always extract** (do not skip even when the name resembles a SQL keyword): `LIMIT`, `OFFSET`, any `:NAME` token. Reserved-keyword collisions are real binds.
+
+**Drop list (hard-coded in helper):**
 - Any param whose name starts with `SHOW_` (case-insensitive).
-- Any param whose name is pure internal plumbing: `MULT`, `MAX_RECORDS`, `PRICE_LIST_ID` (IDs used as join keys, not user-facing filters). These are implementation details. When in doubt, include.
+- These exact names (internal join keys, never user-facing): `MULT`, `MAX_RECORDS`, `PRICE_LIST_ID`.
+
+To extend the drop list, edit `assets/extract-binds.mjs` `DROP_EXACT` set — never silently skip in the prompt.
 
 ## camelCase conversion
 

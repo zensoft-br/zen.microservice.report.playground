@@ -36,7 +36,17 @@ const catalog = JSON.parse(fs.readFileSync(catalogPath, "utf8"));
 const input = JSON.parse(fs.readFileSync(inputPath, "utf8"));
 const keys = Object.keys(catalog);
 
-const area = (input.area || "").replace(/^\/+|\/+$/g, "");
+let area = (input.area || "").replace(/^\/+|\/+$/g, "");
+const areaInput = area;
+
+// Auto-detect catalog placement: <area> at top level vs nested under system/.
+// Pure key-count comparison, no heuristics. Catalog is authoritative.
+if (area && !area.includes("/")) {
+  const direct = keys.filter(k => k.startsWith(`/${area}/`)).length;
+  const system = keys.filter(k => k.startsWith(`/system/${area}/`)).length;
+  if (system > direct) area = `system/${area}`;
+}
+
 const entity = input.entity || "";
 const areaPrefix = area ? `/${area}/` : null;
 
@@ -44,7 +54,14 @@ const out = {
   title: null,
   columns: {},
   params: {},
-  summary: { total: 0, resolved: 0, missing: 0, missingList: [] },
+  summary: {
+    total: 0,
+    resolved: 0,
+    missing: 0,
+    missingList: [],
+    areaInput,
+    areaResolved: area,
+  },
 };
 
 // ---- title ----
