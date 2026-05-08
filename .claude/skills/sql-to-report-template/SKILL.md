@@ -5,65 +5,78 @@ description: Generate a Zen ERP report template (index.jsx + template.json) from
 
 # sql-to-report-template
 
-Scaffold a Zen ERP JSX report (template.json + index.jsx + meta.json + optional data.json) from a SQL query plus a sample data.json. The output must follow the **current** engine conventions documented in `references/engine-spec.md` — these include `headerClassName` on numeric columns and `utils.formatCurrency` for monetary fields, which supersede the older shape seen in `playground/zen/supply/production/report/productionOrderConsumptionList/` (that reference predates the new rules; treat its structure / order / i18n-key style as authoritative, but update numeric columns and monetary formatting per the new rules).
+Scaffold a Zen ERP JSX report (template.json + index.jsx + meta.json + optional data.json) from a SQL query plus a sample data.json. Authoritative tables live in references — read them during the run:
+
+- `references/engine-spec.md` — engine conventions (sandboxing, formatters, classNames).
+- `references/field-mapping.md` — alias → column shape (width / className / cell / footer).
+- `references/i18n-lookup.md` — resolver algorithm.
+- `references/parameter-rendering.md` — `<dl>` rules for the parameters block.
+- `references/reference-example.md` — full worked example.
+
+## Determinism principle (load-bearing)
+
+Every i18n key emitted by index.jsx must exist in the fetched catalog `/tmp/zen-i18n/resources.en-US.json`. When a candidate cannot be verified, fall back to `/@unknown/<segment>` — never guess a path. Wrong keys render as silent mistranslations; `/@unknown/` is grep-discoverable and surfaces in the missing-keys report. The resolver enforces this — it only returns `resolved: true` when `catalog[key] !== undefined`.
+
+Same principle for column shape: numeric formatting, footer aggregators, and class names emit only when the alias matches an explicit token rule from `references/field-mapping.md`. Ambiguous aliases (`minimumStock`, `replenishmentBatch`, etc.) emit as plain text — the user adds `className: "number"` + `formatNumber` cell on review when warranted.
 
 ## Inputs
 
-The user will point at:
+1. **SQL file** (required) — aliased SELECT (`AS "fieldName"`) plus bind params (`:PARAM_NAME`).
+2. **data.json** (optional but preferred) — used to spot-check alias coverage.
+3. **Output folder** (optional, see below).
 
-1. **A SQL file** (required) — e.g. `C:\Users\Theo\Downloads\template.sql`. Contains a `SELECT` with aliased output columns (`... AS "fieldName"`) and SQL bind parameters (`:PARAM_NAME`).
-2. **A data.json file** (optional but strongly preferred) — an array of rows matching the SQL output shape. Use it to double-check that every alias extracted from SQL appears in a row (minus SHOW_* fields).
-3. **An output folder** (optional).
+## Output folder
 
-**Default output location: `playground/ai/<name>/`** — pick `<name>` by trying these in order:
+Default `playground/ai/<name>/`. Pick `<name>` in this order:
 
-1. **Infer from main FROM table.** Parse the outermost `FROM <SCHEMA>.<TABLE>` in the SQL (the first real table after the top-level SELECT, skipping CTEs). Strip the `PS_ERP.` schema prefix and the leading module code (the `FIS_`/`PRD_`/`CAT_`/`SAL_`/etc. before the first underscore), then lowerCamelCase the rest. Examples:
-   - `PS_ERP.PRD_PRODUCTION_ORDER` → `productionOrder`
-   - `PS_ERP.FIS_INVOICE` → `invoice`
-   - `PS_ERP.SAL_SALE` → `sale`
-   - `PS_ERP.CAT_PRODUCT` → `product`
-   Prefer this over the SQL filename because filenames are often generic (`template.sql`, `query.sql`, `sql2.sql`) while the table name always reflects the report's subject.
+1. **From main FROM table.** Strip `PS_ERP.` schema and module prefix (`MAT_`/`FIS_`/etc.), lowerCamelCase the rest. `MAT_INVENTORY_MANAGEMENT_ITEM` → `inventoryManagementItem`. Prefer this over filename — filenames are often generic. **DB↔app name drift is normal** (e.g. DB `inventoryManagementItem` ↔ catalog `stockManagementItem`). Folder name stays DB-derived; the user renames after seeing the output. Never rename via heuristics.
+2. **From SQL filename** (without `.sql`) when descriptive — anything NOT in `template`/`query`/`sql[N]`/`sample`/`test[N]`/`report`/`data`/`tmp`/`temp`.
+3. **Fallback** to today's date `YYYY-MM-DD`. Suffix `-HHmm` on collision.
 
-2. **Use the SQL filename** (without `.sql` extension) when it is descriptive — anything NOT in the generic list: `template`, `query`, `sql`, `sql[0-9]+`, `sample`, `test`, `report`, `data`, `test[0-9]+`, `tmp`, `temp`.
+**Collision rule:** if the chosen folder already has a `template.json`, append `-2`, `-3`, … — never overwrite without explicit permission.
 
-3. **Fallback to the current date** in `YYYY-MM-DD` form (e.g. `playground/ai/2026-04-21/`) when neither the table nor the filename yields a clean name. If the folder already exists, suffix `-HHmm` for uniqueness.
+**Reserved namespace:** `playground/ai/` is for AI output only. Do not write into `playground/zen/...` or any other hand-maintained folder unless the user explicitly asks.
 
-**Collision rule.** If the chosen folder already exists and already contains a `template.json`, append `-2`, `-3`, … until a fresh path is found — do not overwrite without explicit user permission.
+**Explicit user-named folder wins** — skip inference.
 
-**Reserved namespace.** The `playground/ai/` directory is for AI-generated templates only. Do not write into `playground/zen/...` or any other hand-maintained folder unless the user explicitly asks. This keeps AI output clearly separated from reviewed human work and avoids clobbering the golden examples.
+## Module-prefix → area mapping (for i18n)
 
-**Explicit override wins.** If the user names a different output folder, honor it — skip the inference entirely.
+Drives every area-scoped resolver lookup (titles, dotted entity keys, parameter labels):
+
+| Prefix | Area              | | Prefix | Area          |
+|--------|-------------------|-|--------|---------------|
+| `MAT_` | `material`        | | `FIN_` | `finance`     |
+| `CAT_` | `catalog`         | | `INT_` | `integration` |
+| `FIS_` | `fiscal`          | | `SEC_` | `security`    |
+| `SAL_` | `sale`            | | `AUD_` | `audit`       |
+| `PUR_` | `supply/purchase` | | `BIL_` | `billing`     |
+| `PRD_` | `supply/production` | | `RPT_` | `report`    |
+
+Unmapped prefix → omit `area` from resolver input. **Never invent area names.**
+
+**Entity** = lowerCamelCase of FROM table minus module prefix (same value as the folder name).
 
 ## What to produce
 
-Create these files in the output folder:
-
 ```
 <output>/
-  template.json    # engine config, asset links, fallback i18n (verbatim skeleton)
-  index.jsx        # React component rendering the report
-  meta.json        # sample/empty meta — driver for parameters + settings
-  data.json        # ONLY when the user provides a sample — copy it in verbatim
+  template.json    # verbatim copy of assets/template.json
+  index.jsx        # generated React component
+  meta.json        # assets/meta.json.skeleton + extracted params + curated columns
+  data.json        # ONLY when user supplied a sample (verbatim copy)
 ```
 
-Rules:
-
-- **`template.json`** — always write. Verbatim copy of `assets/template.json` (no customization).
-- **`index.jsx`** — always write. Generated from the SQL + the column mapping rules.
-- **`meta.json`** — always write. Use the skeleton in `assets/meta.json.skeleton`: empty `columns` array, empty `sort`, empty `groups`, parameters object populated with the non-SHOW params extracted from the SQL (all set to `null` / empty so the user can fill them). This gives the playground watcher something testable immediately; the user tunes values afterward.
-- **`data.json`** — only when the user points at a sample data file. Copy its contents unchanged to the output folder. Do not generate synthetic data — if no sample is provided, omit the file.
-
-Do NOT create styles.css, styles.scss, or build.json. The playground watcher produces `build.json`; styles come from the global `playground/styles.css`.
+Do NOT create styles.css, styles.scss, or build.json. The playground watcher handles build.json; styles come from the global `playground/styles.css`.
 
 ## Performance contract
 
-A correct run takes **~10-20 tool calls and <2 minutes** for a typical 30-150 column SQL. Hard rules to stay fast:
+Target: ~10-20 tool calls, <2 minutes, 30-150 column SQL.
 
-- **Do NOT write ad-hoc helper scripts** (no Python / Node one-offs for SQL parsing). Pattern-match the SELECT list inline with Grep/Read — Zen SQL aliases follow `AS "name"` and that's extractable in one pass.
-- **Do use the shipped i18n resolver.** Every i18n key (title + columns + params) is resolved by `assets/lookup-i18n.mjs` via a single `node` invocation. Do NOT grep the catalog yourself. See the "i18n resolver" section below.
-- **No repeated file reads.** Read SKILL.md + references + assets once per run, then operate from memory.
+- **No ad-hoc helper scripts.** Pattern-match `AS "name"` inline with Grep/Read.
+- **One catalog fetch + one resolver invocation** per run.
+- **No repeated file reads.** Read SKILL.md + references + assets once, then operate from memory.
 
-Budget: ~1 curl (catalog fetch) + ~1 node call (full i18n resolution) + ~3 file reads (SQL + data.json + references) + ~4 writes (template, index, meta, data). Everything else is reasoning.
+Budget: 1 curl + 1 node call + ~3 reads + ~4 writes. Everything else is reasoning.
 
 ## Core workflow
 
@@ -74,420 +87,197 @@ Budget: ~1 curl (catalog fetch) + ~1 node call (full i18n resolution) + ~3 file 
    curl -fsS -o /tmp/zen-i18n/resources.en-US.json "https://zenerp.app.br/resources.en-US.json"
    ```
 
-   If curl fails (non-2xx or network error), abort and tell the user: "Unable to fetch i18n catalog from https://zenerp.app.br/resources.en-US.json — check network, then retry." Do NOT proceed when the catalog is unreachable — every header key would end up in the missing-keys list.
+   On failure (non-2xx or network error), abort and tell the user. No offline fallback — without the catalog, every header would land in missing-keys.
 
-   On success this pulls the current production catalog (~5800 keys, ~345 KB).
+1. **Read SQL**, strip `--` line comments and `/* */` block comments.
+2. **Locate the outermost SELECT.** With `WITH ... AS (...)` CTEs, parse only the final top-level SELECT — inner subqueries don't contribute columns.
+3. **Extract aliases** from `AS "alias"` (preserve casing). Drop `SHOW_*`.
+4. **Extract bind params** (`:NAME` tokens from WHERE / WITH). Drop `:SHOW_*`. Preserve verbatim — never strip suffixes like `_ID`/`_IDS`/`_LIST`.
+5. **Resolve i18n keys** in one resolver call (next section).
+6. **Map each alias to a column** using `references/field-mapping.md`. Header comes from the resolver — never reconstruct.
+7. **Render parameters** using `references/parameter-rendering.md`.
+8. **Assemble index.jsx** from `assets/index.jsx.skeleton`. Substitute `__TITLE_KEY__`, `__COLUMNS__`, `__PARAMETERS__`.
+9. **Write template.json** verbatim from `assets/template.json`.
+10. **Write meta.json** from `assets/meta.json.skeleton` + extracted params + curated column subset (see meta.json scaffold below).
+11. **Copy data.json** verbatim if supplied; otherwise omit.
+12. **Validate** against Self-check.
 
-1. **Read the SQL file.** Strip line comments (`-- ...`) and block comments (`/* ... */`) before parsing.
-2. **Locate the outermost `SELECT ... FROM` block.** When the query uses `WITH ... AS (...)` CTEs, skip past all CTE bodies and parse only the final top-level SELECT list. Inner subqueries do NOT contribute columns.
-3. **Extract aliases.** Every expression ending in `AS "alias"` (double-quoted) in the outer SELECT list is a column. Preserve casing — alias becomes column `id`.
-4. **Drop SHOW_\* aliases.** Never emit them as columns.
-5. **Extract SQL bind parameters** from WHERE / WITH clauses: every `:NAME` token. Drop `:SHOW_*` binds. Remainder drives the header parameters block.
-6. **Resolve all i18n keys in one `node` call** (see "i18n resolver" below). This produces the `emit` strings for every column header, every parameter label, and the title — plus the missing-keys list. Do NOT grep the catalog yourself.
-7. **Map each alias to a column definition** using `references/field-mapping.md` (width / className / cell / footer). The header string comes from the resolver output — do NOT reconstruct it manually.
-8. **Render parameters** in the header using `references/parameter-rendering.md`.
-9. **Assemble index.jsx** from `assets/index.jsx.skeleton`, substituting the title, parameters block, and columns array.
-10. **Write template.json** from the exact skeleton in `assets/template.json` (same for every report — no customization).
-11. **Write meta.json** from `assets/meta.json.skeleton` — pre-fill non-SHOW params (values `null`) and every non-SHOW alias in `settings.columns`.
-12. **Copy data.json** verbatim if the user supplied one. Otherwise skip.
-13. **Validate** against the Self-check list before reporting done.
+## i18n resolver
 
-## i18n resolver (`assets/lookup-i18n.mjs`)
-
-The skill ships a Node script that resolves title + columns + params against the cached catalog in a single call. This replaces per-key grepping.
+The shipped Node script `assets/lookup-i18n.mjs` resolves title + columns + params against the cached catalog in one pass. Don't grep the catalog yourself.
 
 ### Invocation
 
-1. Build an input JSON with the aliases and params you extracted from the SQL, and the inferred title name. Write to a temp file (Git Bash path like `/tmp/lookup-input.json` works on Windows — the watcher is not involved here).
+Build `/tmp/lookup-input.json`:
 
-   ```json
-   {
-     "title": "invoiceCube",
-     "columns": ["id", "company_fantasyName", "invoice_id", "product_properties_br_NCM", "sum_quantity"],
-     "params": ["DATE_START", "COMPANY_IDS", "STATUS_LIST"]
-   }
-   ```
-
-2. Run the resolver:
-
-   ```bash
-   node .claude/skills/sql-to-report-template/assets/lookup-i18n.mjs \
-     /tmp/zen-i18n/resources.en-US.json \
-     /tmp/lookup-input.json > /tmp/lookup-output.json
-   ```
-
-3. Read the output. Each column / param / title entry carries an `emit` string you drop into index.jsx verbatim. Example:
-
-   ```json
-   {
-     "title": { "resolved": false, "emit": "t(\"/@unknown/report/invoiceCube\")", "missing": ["/@unknown/report/invoiceCube"] },
-     "columns": {
-       "invoice_id": {
-         "resolved": true,
-         "resolution": "two-arg",
-         "emit": "utils.cellHeader(t(\"/fiscal/invoice\"), t(\"/@word/id\"))"
-       },
-       "product_properties_br_NCM": {
-         "resolved": true,
-         "resolution": "single-arg-dotted",
-         "emit": "utils.cellHeader(t(\"/catalog/product.properties.fiscal_br_NCM\"))"
-       }
-     },
-     "params": {
-       "STATUS_LIST": {
-         "resolved": true,
-         "emit": "t(\"/@word/status\")",
-         "note": "stripped List suffix"
-       }
-     },
-     "summary": {
-       "total": 5, "resolved": 4, "missing": 1,
-       "missingList": [{ "kind": "title", "name": "invoiceCube", "attempted": "/@unknown/report/invoiceCube" }]
-     }
-   }
-   ```
-
-### Rules
-
-- Use each entry's `emit` string as-is for the column's `header:` / parameter's `<dt>{...}</dt>` / title's `<h1>{...}</h1>`. Do not re-derive headers from the alias.
-- Everything in `summary.missingList` goes into the "Reporting back" missing-keys report. Do not drop entries — the user needs the gap list.
-- A resolved entry with `resolution: "two-arg-missing-suffix"` or `"single-arg-suffix-no-namespace"` is still listed as missing in `missingList` when applicable. Trust the resolver's `resolved` flag.
-- If the script exits non-zero, abort and surface the error — do not guess headers manually.
-
-The resolver handles: pre-computed entity namespaces (company, person, product...), single-segment areas (`/fiscal/invoice`, `/supply/productionOrder`), dotted property keys (`/catalog/product.properties.fiscal_br_NCM`), `_LIST` strip-suffix fallback, `_IDS` plural lookup, and numbered param variants (`PERSON_CATEGORY_IDS_1..5`). Full algorithm in `references/i18n-lookup.md`.
-
-## Column mapping — key rules (full table in `references/field-mapping.md`)
-
-Alias shape determines every property. Two axes: the **namespace prefix** (before `_`) sets the i18n header path; the **suffix** (after `_`, or the whole name if no underscore) sets width / className / cell / footer.
-
-**Namespace prefix → header path** (read `references/field-mapping.md` for the complete, authoritative table):
-
-| Prefix         | First arg to `cellHeader`                        |
-|----------------|--------------------------------------------------|
-| (none)         | `t("/@word/<alias>")`                             |
-| `sum`          | `t("/@word/<suffix>")` (single arg, no namespace) |
-| `company`      | `t("/catalog/company/company")`                   |
-| `person`       | `t("/catalog/person/person")`                     |
-| `product`      | `t("/catalog/product/product")`                   |
-| `productProfile` | `t("/catalog/product/productProfile")`         |
-| `productPacking` | `t("/catalog/product/productPacking")`         |
-| `productVariant` | `t("/catalog/product/productVariant")`         |
-| `unit`         | `t("/catalog/product/unit")`                      |
-
-For prefixed aliases: second arg is `t("/@word/<suffix>")`. For `sum_*`: no namespace, just `t("/@word/<suffix>")`.
-
-**Suffix → column props** (summary; full table including `headerClassName` and monetary rule in `references/field-mapping.md`):
-
-| Suffix / name       | width   | numeric? | cell                              | footer                                                        |
-|---------------------|---------|----------|-----------------------------------|---------------------------------------------------------------|
-| `id` (standalone)   | `8ch`   | yes      | `formatNumber`                    | **count** — `({ data }) => data.length`                                     |
-| `*_id` (prefixed, incl. `*_id_\d+`) | `8ch` | yes | `formatNumber`          | **count** — `({ data }) => data.length`                                     |
-| `*_code`, `code`    | `16ch`  | no       | —                                 | —                                                             |
-| `unit_code`         | `8ch`   | no       | —                                 | —                                                             |
-| `*_description`     | `24ch`  | no       | —                                 | —                                                             |
-| `*_complement`      | `16ch`  | no       | —                                 | —                                                             |
-| `*_name`, `*_fantasyName`, `*_nameCalc` | `24ch` | no | — | —                                        |
-| `*_units`           | `8ch`   | yes      | `formatNumber`                    | **sum** — `reduce(+item.<alias>)`, `formatNumber`             |
-| `status`            | `16ch`  | no       | `<Badge>{value}</Badge>`          | —                                                             |
-| `date`, `*Date`     | `10ch`  | no       | `formatDate`                      | —                                                             |
-| quantity/value token match (see below) | `16ch` | yes | `formatNumber` or `formatCurrency` | **sum** — `reduce(+item.<alias>)`, matching formatter |
-
-**Footer eligibility is suffix-driven, not alias-prefix driven.** Trigger tokens (case-insensitive substring):
-
-- **Count footer**: alias === `id`, OR ends with `_id`, OR matches `*_id_\d+`.
-- **Sum footer**: suffix / alias contains any of `quantity`, `qty`, `served`, `balance`, `excess`, `adjusted`, `units`, `weight`, `kg`, `volume`, `margin` (quantity-like → `formatNumber`) OR `value`, `price`, `cost`, `amount`, `commission`+`value` (monetary → `formatCurrency`). Also explicit `sum_*`, `count_*` prefixes.
-- **Applies regardless of SQL aggregate type.** A `SUM()` aliased without `sum_` prefix (e.g. `invoiceItem_totalValue`, `salesCommissionBaseValue`) gets a sum footer. A `MAX()` aliased with a value token (e.g. `invoiceItem_unitValue`) also gets a sum footer — the user trims in meta if semantically wrong.
-- **Null-safe reducer mandatory** for Zen cube SQL (`CASE WHEN :SHOW_X THEN ... ELSE NULL END` patterns). `footerValue` must be a **function** `({ data }) => ...`, not a bare expression:
-
-  ```jsx
-  footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.<alias>) || 0), 0),
-  footer: ({ value }) => utils.formatNumber(value),
-  ```
-
-  Writing `footerValue: data.reduce(...)` without the `({ data }) =>` wrapper breaks rendering — the footer tds come out empty. Always wrap.
-
-**"Numeric" columns get BOTH `className: "number"` AND `headerClassName: "number"`** (per `references/engine-spec.md` — the header must also align right). Non-numeric columns get neither.
-
-Emit columns in the **same order** they appear in the SQL SELECT list. Preserve the exact alias casing as the column `id`.
-
-**i18n keys come from the resolver, not manual lookup.** The `emit` string for every column header is produced by `assets/lookup-i18n.mjs` (see "i18n resolver" section). Paste it verbatim into the `header:` property. Do NOT reconstruct `t("...")` calls by hand — the resolver handles namespace + suffix + dotted-key patterns the hand rules miss.
-
-## JSX skeleton — non-negotiable shape
-
-Every output index.jsx has this exact top-level structure (no variations, no creative rewrites):
-
-```jsx
-import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
-
-export default function ({ data = [], meta = {}, t }) {
-  const { report = {} } = meta;
-
-  const columns = [
-    /* one entry per non-SHOW alias, in SQL order */
-  ];
-
-  data = utils.sort(data, report.properties?.settings?.sort || []);
-  data = utils.group(data, report.properties?.settings?.groups || [], columns);
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
-
-  return (
-    <div className="report-wrapper">
-      <div className="report-container">
-        <header>
-          <h1>{t("<TITLE_KEY>")}</h1>
-          <section className="parameters">
-            {/* one conditional <dl> per rendered parameter */}
-          </section>
-        </header>
-        <main>
-          <GroupSections
-            columns={columns}
-            data={data}
-            groups={report.properties?.settings?.groups || []}>
-            {(groupData) => (
-              <div className="content">
-                <Table data={groupData} visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
-        </main>
-      </div>
-    </div>
-  );
+```json
+{
+  "title":   "<report-name>",
+  "area":    "<from-mapping-table>",
+  "entity":  "<lowerCamelCase-FROM-table>",
+  "columns": ["<alias1>", "<alias2>", ...],
+  "params":  ["<PARAM1>", "<PARAM2>", ...]
 }
 ```
 
-Rules:
-- Import list is exactly those two lines. Even if a feature (e.g. Badge) is not needed, keep both lines — the reference does, and consistency beats micro-optimization here.
-- `<TITLE_KEY>` comes from the resolver output (`result.title.emit`). Pass the report `<name>` (output folder name) to the resolver as `input.title`. If the resolver returns `resolved: false`, the fallback `/@unknown/report/<name>` is already baked into the emit string and the title is recorded in `missingList` — surface it in the "Reporting back" missing-keys section so the user adds a translation.
-- Column objects use trailing commas after each property, matching the reference style.
-- Do not hardcode CSS; do not emit styles.css; do not import anything beyond `./utils.jsx`.
+`area` and `entity` are optional but unlock area-direct lookups (`/<area>/report/<title>`, `/<area>/<entity>.<alias>`, `/<area>/<paramCamel>`) and area-scoped tail-search single-match. Omit when the module prefix is unmapped — never guess.
 
-Full field-by-field example and edge cases live in `references/reference-example.md`.
+Run:
 
-## meta.json — per-report scaffold with sensible defaults
+```bash
+node .claude/skills/sql-to-report-template/assets/lookup-i18n.mjs \
+  /tmp/zen-i18n/resources.en-US.json \
+  /tmp/lookup-input.json > /tmp/lookup-output.json
+```
 
-Write a companion `meta.json` next to every index.jsx. Pre-fill parameters + a **curated** column subset + default sort + default group so the rendered preview is immediately useful (not 150 columns wide). The user trims further from there.
+### Output contract
+
+- `result.title.emit` → `<h1>{<emit>}</h1>` content (already `t("...")`).
+- `result.columns.<alias>.emit` → column's `header:` value.
+- `result.params.<NAME>.emit` → `<dt>{<emit>}</dt>` content.
+- `result.summary.missingList` → drop verbatim into the missing-keys report. Each entry has a `nearMatches` array — surface as suggestions only, never auto-substitute.
+
+Use `emit` strings as-is. Never reconstruct `t("...")` calls by hand. If the script exits non-zero, abort and surface the error. Full algorithm — including multi-token left-trim, area-scoped tail-search, numbered-category params, and the verified-emit guarantee — in `references/i18n-lookup.md`.
+
+## Column mapping
+
+`references/field-mapping.md` owns the lookup tables. Read once per run. It covers:
+
+- Namespace prefix → first arg to `cellHeader` (`product`/`company`/`unit`/etc., plus `sum`/`count`/`avg`/`min`/`max` aggregate prefixes).
+- Suffix → `width`, `className`, `cell`, `footer` (`id` / `*_id` / `*_code` / `*_description` / `*_units` / `status` / `date` / quantity-or-monetary tokens / `_properties_*`).
+- Footer rule (count for ids, sum for quantity/monetary tokens, none otherwise — suffix-driven, not prefix-driven).
+- Monetary detection (suffix contains `Value`/`Price`/`Cost`/`Amount` → `formatCurrency`; else `formatNumber`).
+- JSONB object stringify rule (bare `_properties` terminus).
+
+**Hard rules to preserve when emitting columns:**
+
+- Emit columns in **SQL SELECT order**. Preserve alias casing as `id`.
+- **Numeric columns get BOTH `className: "number"` AND `headerClassName: "number"`.**
+- **`footerValue` MUST be a function**: `({ data }) => data.reduce(...)`. Bare expressions break footer rendering.
+- **Null-safe reducer mandatory** for cube SQL (`CASE WHEN :SHOW_X THEN ... ELSE NULL END`):
+  ```jsx
+  footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.<alias>) || 0), 0),
+  footer: ({ value }) => utils.formatNumber(value),   // or formatCurrency
+  ```
+- Headers come from the resolver `emit`. Never reconstruct `t("...")` by hand.
+
+## index.jsx skeleton
+
+Authoritative skeleton: `assets/index.jsx.skeleton`. Substitute three placeholders:
+
+- `__TITLE_KEY__` → resolver's `result.title.emit` strips out the outer `t("...")` wrapper — use the inner key.
+- `__COLUMNS__` → comma-separated column objects, in SQL order, shaped per `references/field-mapping.md`.
+- `__PARAMETERS__` → conditional `<dl>` blocks per `references/parameter-rendering.md`.
+
+The skeleton's import list (`import * as utils ...` + the named imports) is fixed — keep both lines verbatim even when a feature like `Badge` is unused. No external imports beyond `./utils.jsx`. No inline styles. No `async`/`await`. No `window`/`document`.
+
+## meta.json scaffold
+
+Fill `assets/meta.json.skeleton` with extracted params + curated columns + sensible defaults so the playground preview is immediately readable.
 
 ### Parameters
 
-Every non-SHOW SQL bind parameter, values set to `null`. Paired `_IDS_DESC` for every `_IDS` param. Key order = SQL first-appearance order.
+Every non-SHOW SQL bind param, value `null`. Pair every `_IDS` with its `_IDS_DESC`. Order = SQL first-appearance.
 
-### Columns — curated default view (TARGET 6-10 COLUMNS)
+### Columns — curated default view (target 6-10, hard cap 10)
 
-**Hard cap: 10 columns in `settings.columns`. Target: 6-10.** More than that causes horizontal squish that makes the preview unreadable. The full column list still lives in `index.jsx` — meta just filters.
+Pick by tier. Stop at 10:
 
-Pick columns using this priority order. Stop when you hit 10 (aim for 6-10):
+**Tier 1 — always include:** every `sum_*` and `count_*` column.
 
-**Tier 1 — always include every measurement** (the point of the report):
-- Every `sum_*` column.
-- Every `count_*` column.
+**Tier 2 — in order, until cap:**
+1. Primary date: bare `date`, `*_date`, or camelCase `*Date`.
+2. Status: bare `status` or `*_status`.
+3. Primary entity: `<mainEntity>_number`, else first `*_code`, else bare `code`.
+4. Primary subject name: first `*_nameCalc` (priority `person > company > rest`), else `*_fantasyName`, else `*_name`.
+5. `product_code` if not yet added.
+6. `product_description` if not yet added.
 
-**Tier 2 — minimal dimensions** (add in this order until cap is reached):
-1. Primary date: first alias matching bare `date`, `*_date`, or `*Date` camelCase (`availabilityDate`, `issueDate`).
-2. Status: first alias matching `status` (bare) or `*_status`.
-3. Primary entity identifier: `<mainEntity>_number` if present (e.g. `invoice_number`), else first `*_code` from the main entity (main = the FROM-table alias used to infer the output folder name), else bare `code`.
-4. Primary subject name: first `*_nameCalc` in priority order `person > company > <first-remaining>`, else `*_fantasyName`, else `*_name`.
-5. Secondary entity: `product_code` if present and not already added.
-6. Secondary description: `product_description` if present.
+**Tier 3 — only if still under cap:** `_properties_<subkey>` text columns; first `*_complement`.
 
-**Tier 3 — only if still under 10 after Tiers 1+2**:
-- `_properties_<subkey>` text-extracted columns that carry user-relevant data (e.g. `product_properties_br_NCM`, `invoice_properties_volumes`).
-- First `*_complement` column.
+**Never include:** `*_id` columns; `*_day`/`*_month`/`*_year`; control aliases (`flow`, `returned`, `sign`); raw JSONB (`_properties` terminus); `-- LEGACY` aliases; numbered category variants (`personCategory_*_\d+` etc.); secondary-entity families beyond the first two.
 
-**Never include in the default view**:
-- Any `*_id` column (prefixed ids — the name/code column already identifies the entity).
-- `*_day`, `*_month`, `*_year` (redundant next to date).
-- Control aliases: `flow`, `returned`, `sign`.
-- Raw JSONB object columns (bare `_properties` terminus).
-- Legacy duplicates (aliases preceded by `-- LEGACY` in SQL).
-- Numbered category variants: `personCategory_*_\d+`, `productCategory_*_\d+`, `salespersonCategory_*_\d+` (all indexes).
-- Secondary-entity id/name families beyond the first two (e.g. once `person` is in, skip `personGroup`, `city`, `state`, `country`, `shipping`, `salesperson`, etc. unless you still have headroom).
+**If Tier 1 alone exceeds 10:** keep top 6 `sum_*` + 2 `count_*` + ≤2 dimensions (date + name).
 
-**If Tier 1 alone exceeds 10** (reports with many aggregated measurements): keep only the top 6 `sum_*` + up to 2 `count_*`, ordered by SQL appearance, and include at most 2 dimensions from Tier 2 (date + primary entity name). Aim for ≤10 total.
+**Empty result:** include bare `id`, `code`, and first 5 SQL columns.
 
-**Degenerate fallback**: If the curated set ends up empty (no sums, no dimensions detected), include bare `id`, `code`, and first 5 columns in SQL order.
+### Default sort (one column)
 
-### Default sort
+1. Bare `date` / `<entity>_date` → `desc`, `nulls: "last"`.
+2. Else `*Date` camelCase → `desc`, `nulls: "last"`.
+3. Else `_code` / bare `code` → `asc`, `nulls: "last"`.
+4. Else empty.
 
-Pick one column, descending for dates / ascending otherwise:
+### Default group (one column)
 
-1. First bare `date` or `<entity>_date` column → `direction: "desc"`, `nulls: "last"`.
-2. Else first `*Date` camelCase column → `desc`, `nulls: "last"`.
-3. Else first `_code` or bare `code` column → `asc`, `nulls: "last"`.
-4. Else empty array.
+1. First `<entity>_nameCalc`.
+2. Else `<entity>_fantasyName` / `<entity>_name`.
+3. Else bare `date`.
+4. Else empty.
 
-### Default group
-
-Pick one grouping column to demonstrate grouping visually:
-
-1. First `<entity>_nameCalc` column (typically person or the main subject of the report).
-2. Else first `<entity>_fantasyName` or `<entity>_name`.
-3. Else first bare `date` column (group-by-date is common in cube reports).
-4. Else empty array.
-
-### Example — invoice cube SQL
+### Example
 
 ```json
 {
   "report": {
     "code": "jsx",
     "parameters": {
-      "DATE_START": null,
-      "DATE_END": null,
-      "COMPANY_IDS": null,
-      "COMPANY_IDS_DESC": null,
-      "PERSON_IDS": null,
-      "PERSON_IDS_DESC": null,
+      "DATE_START": null, "DATE_END": null,
+      "COMPANY_IDS": null, "COMPANY_IDS_DESC": null,
       "STATUS_LIST": null
     },
     "properties": {
       "settings": {
         "columns": [
-          "invoice_date",
-          "invoice_status",
-          "invoice_number",
-          "person_nameCalc",
-          "product_code",
-          "product_description",
-          "sum_quantity",
-          "sum_productValue",
-          "sum_totalValue",
-          "count_invoice"
+          "invoice_date", "invoice_status", "invoice_number",
+          "person_nameCalc", "product_code", "product_description",
+          "sum_quantity", "sum_totalValue", "count_invoice"
         ],
-        "sort": [
-          { "columnId": "invoice_date", "direction": "desc", "nulls": "last" }
-        ],
-        "groups": [
-          { "columnId": "person_nameCalc" }
-        ]
+        "sort": [{"columnId": "invoice_date", "direction": "desc", "nulls": "last"}],
+        "groups": [{"columnId": "person_nameCalc"}]
       }
     }
   }
 }
 ```
 
-### Example — simple list SQL
-
-Aliases `id`, `code`, `sum_quantity`, params `:DATE_START`, `:DATE_END`, `:COMPANY_IDS`, `:STATUS_LIST`:
-
-```json
-{
-  "report": {
-    "code": "jsx",
-    "parameters": {
-      "DATE_START": null,
-      "DATE_END": null,
-      "COMPANY_IDS": null,
-      "COMPANY_IDS_DESC": null,
-      "STATUS_LIST": null
-    },
-    "properties": {
-      "settings": {
-        "columns": ["id", "code", "sum_quantity"],
-        "sort": [{ "columnId": "code", "direction": "asc", "nulls": "last" }],
-        "groups": []
-      }
-    }
-  }
-}
-```
-
-Rationale: the user asked for immediate visual testability. Default view = essentials + one sort + one group. The full column list lives in index.jsx; meta just filters/orders what's visible. User can replace the settings manually when the report's real intent is known.
+The full column list still lives in index.jsx; meta just filters/orders the visible subset.
 
 ## data.json — copy through, don't synthesize
 
-If the user supplied a sample data file (e.g. `--data playground/zen/.../data.json`), copy it verbatim to `<output>/data.json`. Do not edit, prune, or regenerate its contents — the playground watcher uses it as-is to drive the preview, and the user has already curated the sample rows to cover edge cases.
+Copy the user's sample verbatim to `<output>/data.json`. Never edit, prune, or invent rows — wrong types cause silent render bugs, and the user has already curated the sample to cover edge cases. If no sample, omit the file.
 
-If no data file was supplied, omit `data.json` entirely. Do not invent rows — wrong types will cause silent render bugs.
+## template.json
 
-## template.json — fixed skeleton
+Verbatim copy of `assets/template.json`. No per-report customization.
 
-Write this verbatim — no customization per report:
+## Parameter rendering — quick reference
 
-```json
-{
-  "engine": "jsx",
-  "assets": {
-    "scripts": {
-      "utils.jsx": "@file:/utils.jsx"
-    },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
-  },
-  "i18n": {
-    "fallbackLocale": "fallback",
-    "resources": {
-      "fallback": {}
-    }
-  }
-}
-```
+Render one `<dl>` per non-SHOW param inside `<section className="parameters">`. Full rules in `references/parameter-rendering.md`.
 
-This exact content is in `assets/template.json`. Copy it as-is.
+| Suffix          | `<dd>` value                              | Conditional guard       | Label         |
+|-----------------|-------------------------------------------|-------------------------|---------------|
+| `_START`/`_END` | `utils.formatDate(report.parameters.PARAM)` | on `PARAM`            | resolver `emit` |
+| `_IDS`          | `report.parameters.PARAM_DESC` (string)   | on `PARAM_DESC`         | resolver `emit` |
+| `_LIST`/other   | `report.parameters.PARAM` (raw)           | on `PARAM`              | resolver `emit` |
 
-## Parameter rendering rules (details in `references/parameter-rendering.md`)
+**Order in JSX (NOT SQL order):** dates → `_IDS` → `_LIST` → others. Preserve SQL first-appearance order within each group.
 
-Render a `<dl>` inside `<section className="parameters">` for each extracted SQL bind parameter, in the order they first appear in the SQL source. Skip any `SHOW_*`. Formatting depends on parameter name shape:
+## Self-check (before declaring done)
 
-- Ends with `_START` / `_END` → treat as date: `{utils.formatDate(report.parameters.PARAM)}`, label `t("/@word/<camelCase(PARAM)>")` (e.g. `DATE_START` → `/@word/dateStart`).
-- Ends with `_IDS` → render the paired `_IDS_DESC` string value plainly, label = plural of the entity: e.g. `COMPANY_IDS` → `{report.parameters.COMPANY_IDS_DESC}`, label `t("/catalog/company/company/plural")`.
-- Ends with `_LIST` / others → render plainly with `t("/@word/<camelCase(PARAM)>")` label, raw value.
-
-Each `<dl>` must be wrapped in a conditional so empty params are omitted at runtime. The guarded key matches the *rendered* value key, not the input parameter name:
-
-- Date params: guard on `PARAM` directly — `{report.parameters?.DATE_START && <dl>...</dl>}`.
-- `_IDS` params: guard on `PARAM_DESC` (because the rendered value reads from `_DESC`) — `{report.parameters?.COMPANY_IDS_DESC && <dl>...</dl>}`.
-- Others: guard on `PARAM` directly.
-
-**Label keys come from the resolver.** Each param's `<dt>{...}</dt>` uses the `emit` string returned by `lookup-i18n.mjs` under `result.params.<NAME>.emit`. The resolver handles date camelCasing, `_IDS` plural lookup, `_LIST` strip-suffix fallback, and numbered variants (`PERSON_CATEGORY_IDS_1..5`) automatically. Do not hand-craft `t("/@word/<camelCase>")` paths.
-
-**Ordering in the rendered JSX** follows a fixed type order (NOT SQL first-appearance order — Zen convention puts dates first):
-
-1. All `_START` / `_END` date params (pair `_START` with its matching `_END`).
-2. All `_IDS` params (preserve SQL first-appearance order within this group).
-3. All `_LIST` params.
-4. All other params.
-
-See `references/parameter-rendering.md` for the camelCase rule, the entity-to-namespace plural lookup, and the exhaustive example.
-
-## Self-check (run before declaring done)
-
-Read the output files back and verify:
-
-1. **Column count = non-SHOW alias count** from the SQL. No missing, no extras.
-2. **Column order = SQL SELECT order.** First alias first, last alias last.
-3. **Every column has `id`, `header`, `width`**; plus `className` + `headerClassName` + `cell` when the suffix rules above require them. Every numeric column has BOTH `className: "number"` and `headerClassName: "number"`.
-4. **Footers are suffix-driven, not prefix-driven.**
-   - Every `id` column (bare `id`, `*_id`, `*_id_\d+`) has a count footer: `footerValue: ({ data }) => data.length`, `footer: ({ value }) => utils.formatNumber(value)`. **Both must be functions** — not bare `data.length` or string `formatNumber`.
-   - Every column whose suffix contains a quantity token (`quantity`, `qty`, `served`, `balance`, `excess`, `adjusted`, `units`, `weight`, `kg`, `volume`, `margin`) or monetary token (`value`, `price`, `cost`, `amount`, `commission`+`Value`) has a sum footer with null-safe reducer.
-   - Applies even when the alias does NOT carry a `sum_` / `count_` prefix (e.g. `invoiceItem_totalValue`, `invoiceItem_quantity`, `salesCommissionBaseValue` — all get sum footers despite the legacy-style alias).
-   - Other columns (strings, dates, status, code, description, name, `*_day`/`*_month`/`*_year`, `invoice_number`) have NO footer.
-5. **Monetary columns use `formatCurrency`** for both cell and footer; quantity columns use `formatNumber`. Monetary detection = suffix contains `Value`/`Price`/`Cost`/`Amount`. See full rule in `references/field-mapping.md`.
-6. **All i18n keys emitted by the template are the resolver's `emit` strings.** The resolver already verified each against `/tmp/zen-i18n/resources.en-US.json`. The missing-keys list comes from `result.summary.missingList` verbatim — nothing added, nothing dropped.
-
-6a. **Title key** = `result.title.emit`. If `result.title.resolved` is `false`, the missing-keys list already includes the title entry.
-7. **Imports match reference exactly:** `import * as utils from "./utils.jsx";` and `import { Badge, Column, GroupSections, Table } from "./utils.jsx";`.
-8. **Title key** matches the output folder path convention.
-9. **template.json is the verbatim skeleton** — engine jsx, scripts/styles assets, fallback i18n. No `template` section (index.jsx is auto-loaded).
-10. **meta.json exists** with: non-SHOW SQL params pre-filled (values `null`, `_IDS` params paired with `_IDS_DESC`); `settings.columns` populated with the **curated essentials subset** (see "meta.json — per-report scaffold" section); `settings.sort` set to one sensible default (date desc or code asc); `settings.groups` set to one sensible default (first `_nameCalc` / `_fantasyName` / bare `date`) or empty if none apply.
-11. **data.json** — copied verbatim when the user provided one; absent otherwise.
-12. **No external imports**, no inline styles, no `async`/`await`, no `window`/`document` access (engine constraints from `references/engine-spec.md`).
-13. **Parameter block in index.jsx** contains only non-SHOW params, each guarded appropriately (on `PARAM` for dates/lists, on `PARAM_DESC` for `_IDS`), ordered: dates → `_IDS` → `_LIST` → others.
-14. If data.json was provided: **spot-check** that a couple of non-SHOW aliases exist as keys in the first data row. Mismatch = parsing went wrong.
+1. **Columns:** count = non-SHOW alias count from SQL; order = SQL SELECT order; alias casing preserved as `id`.
+2. **Column shape:** every column matches its `references/field-mapping.md` rule — width, paired `className`/`headerClassName` on numerics, `cell` formatter, footer (count/sum/none).
+3. **Footers:** suffix-driven, not prefix-driven. `footerValue` is a function `({ data }) => ...` (not bare). Null-safe reducer for cube SQL. Monetary tokens use `formatCurrency`; quantity tokens use `formatNumber`.
+4. **i18n keys:** all output keys are resolver `emit` strings — none hand-crafted. Missing-keys report mirrors `summary.missingList` verbatim plus `nearMatches`.
+5. **JSX:** imports match `assets/index.jsx.skeleton` exactly. No external imports, no inline styles, no `async`/`await`, no `window`/`document`.
+6. **template.json:** byte-for-byte equal to `assets/template.json`.
+7. **meta.json:** non-SHOW params filled (`_IDS` paired with `_IDS_DESC`); `settings.columns` is the curated subset; one default sort; one default group or empty.
+8. **Parameter `<dl>` blocks:** only non-SHOW params; ordered dates → `_IDS` → `_LIST` → others; each guarded.
+9. **data.json:** copied verbatim when provided; absent otherwise. Spot-check a couple of non-SHOW aliases as keys in row 0.
 
 If any check fails, fix before reporting done.
 
 ## Reporting back
-
-After writing the files, output:
 
 ```
 Created:
@@ -496,27 +286,31 @@ Created:
 - <output>/meta.json
 - <output>/data.json    (only if copied from a user-provided sample)
 
-Columns: <N> (dropped <M> SHOW_* aliases, <K> commented-out aliases)
+Columns: <N> (dropped <M> SHOW_* aliases)
 Parameters rendered: <list>
 Title key: t("<TITLE_KEY>")   (<resolved | NOT FOUND — please edit>)
 
 Missing i18n keys (need translation or manual edit):
-- title "<TITLE_KEY>" → no /report/<name> match found; fallback "/@unknown/report/<name>" used
-- column <alias> → "<fallback_key>" (no /@word/<suffix> or namespace match)
-- parameter <PARAM> → "<fallback_key>" (no label key found)
-(or "none — all keys resolved" when the list is empty)
+- title "<TITLE_KEY>" → "<fallback_key>" (no /report/<name> match)
+  Possible matches: <comma-separated nearMatches if any>
+- column <alias> → "<fallback_key>"
+  Possible matches: ...
+- parameter <PARAM> → "<fallback_key>"
+  Possible matches: ...
 ```
 
-Group the missing-keys section by kind (title first, then columns, then parameters). If the list is empty, say "All i18n keys resolved." explicitly so the user has a clean confirmation.
+Group missing list by kind (title → columns → params). Omit the "Possible matches" line when `nearMatches` is empty. Suggestions are not auto-substituted — the user picks. If the list is empty, say "All i18n keys resolved." explicitly.
 
-No narration beyond that. The user can diff against the reference themselves.
+No narration beyond that block.
 
 ## What NOT to do
 
-- Do not invent columns that aren't in the SQL.
-- Do not reorder columns alphabetically or by type.
-- Do not add "nice-to-have" columns like `createdAt`, `updatedAt` unless they're in the SQL.
-- Do not translate header labels into Portuguese or English — always use `t(...)` keys; i18n resolution happens at render time.
-- Do not add a `styles.css` or touch `utils.jsx`.
-- Do not add inline comments explaining what columns do. The reference has none.
-- Do not wrap values like `row.company_code` — cells for string columns use the default (no `cell` prop).
+- Don't invent columns the SQL does not select. If the team needs an extra column, they add it during review.
+- Don't reorder columns alphabetically or by type — preserve SQL SELECT order.
+- Don't add "nice-to-have" columns like `createdAt`/`updatedAt` unless they're in the SQL.
+- Don't translate header labels into Portuguese / English — always use `t(...)` keys.
+- Don't add a `styles.css` or touch `utils.jsx`.
+- Don't add inline comments explaining what columns do.
+- Don't wrap string-column cells (no `cell` prop for plain strings).
+- Don't normalize bind param names. `:INVENTORY_MANAGEMENT` stays `INVENTORY_MANAGEMENT`.
+- Don't infer numeric formatting from domain knowledge — only the explicit token rules from `references/field-mapping.md`. When uncertain, plain text.

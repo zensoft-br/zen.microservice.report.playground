@@ -49,7 +49,8 @@ Match suffix first. If the alias is bare, match the whole alias against the "Sta
 | Suffix / bare name     | `width`  | `className` + `headerClassName` | `cell`                                  | `footerValue` / `footer`                                                                                                |
 |------------------------|----------|--------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `id` (bare)            | `"8ch"`  | `"number"` / `"number"`        | `({ value }) => utils.formatNumber(value)` | **count** — `footerValue: ({ data }) => data.length`, `footer: ({ value }) => utils.formatNumber(value)`                |
-| `*_id` (prefixed)      | `"8ch"`  | `"number"` / `"number"`        | `({ value }) => utils.formatNumber(value)` | **count** — same as bare `id` (applies to numbered variants too: `personCategory_id_1..5`)                              |
+| `*_id` (prefixed, NOT numbered) | `"8ch"` | `"number"` / `"number"`  | `({ value }) => utils.formatNumber(value)` | **count** — same as bare `id`                                                                                          |
+| `*_id_<N>` (numbered indexed: `personCategory_id_1`, `productCategory_id_2`, etc.) | `"8ch"` | `"number"` / —                  | —                                          | —                                                                                                                        |
 | `status` (bare)        | `"16ch"` | — / —                          | `({ value }) => <Badge>{value}</Badge>`  | —                                                                                                                        |
 | `code` (bare)          | `"16ch"` | — / —                          | —                                         | —                                                                                                                        |
 | `*_code` (prefixed)    | `"16ch"` | — / —                          | —                                         | —                                                                                                                        |
@@ -69,7 +70,8 @@ Match suffix first. If the alias is bare, match the whole alias against the "Sta
 Footer eligibility is **suffix-driven**, not alias-prefix driven. Three-way decision per alias:
 
 **1. Count footer** — column counts rows.
-- Triggers: alias === `id` (bare), OR alias ends in `_id`, OR alias matches `*_id_\d+` (numbered variants like `personCategory_id_1..5`).
+- Triggers: alias === `id` (bare), OR alias ends in `_id` **AND is NOT numbered**.
+- **Excludes** numbered indexed `*_id_<N>` (e.g. `personCategory_id_1..5`, `productCategory_id_3`, `salespersonCategory_id_2`). These are minimal columns: `className: "number"` only — no `headerClassName`, no `cell`, no `footer`. Index disambiguators don't represent unique entities to count.
 - Emit:
   ```jsx
   footerValue: ({ data }) => data.length,
@@ -265,7 +267,8 @@ If an alias fits more than one rule, apply the most specific. Concretely:
 
 - `unit_code` matches both `*_code` (width 16ch) and `unit_code` (width 8ch) — use 8ch.
 - `id` matches both "id (bare)" and would hypothetically match `*_id` — bare `id` wins and carries the count footer.
-- `productPacking_id` matches `*_id` — no count footer (only bare `id` gets that).
+- `productPacking_id` matches `*_id` — count footer applies (bare `id` is just the strongest case).
+- `personCategory_id_1` matches both `*_id` and `*_id_<N>` — numbered indexed wins: minimal column (`className: "number"` only, no `headerClassName`/`cell`/`footer`).
 
 ## When the SQL has alias casing you don't recognize
 
