@@ -1,5 +1,5 @@
-import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+import * as utils from "./utils.js";
+import { Badge, Column, GroupSections, Table } from "./utils.js";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -587,6 +587,13 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/unitValue")),
       width: "16ch",
       className: "number",
+      cell: ({ value }) => utils.formatCurrency(value),
+    },
+    { id: "invoiceItem_unitValueUnits",
+      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/unitValueUnits")),
+      width: "16ch",
+      className: "number",
+      cell: ({ value }) => utils.formatCurrency(value),
     },
     { id: "unit_id",
       header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/id")),
@@ -860,23 +867,23 @@ export default function ({ data = [], meta = {}, t }) {
               <dd>{report.parameters.PERSON_IDS_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_CATEGORY_IDS_1_DESC && <dl>
-              <dt>{t("/@unknown/personCategory")}</dt>
+              <dt>{`${t("/catalog/person/person")}, ${t("/catalog/person/person.category1")}`}</dt>
               <dd>{report.parameters.PERSON_CATEGORY_IDS_1_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_CATEGORY_IDS_2_DESC && <dl>
-              <dt>{t("/@unknown/personCategory")}</dt>
+              <dt>{`${t("/catalog/person/person")}, ${t("/catalog/person/person.category2")}`}</dt>
               <dd>{report.parameters.PERSON_CATEGORY_IDS_2_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_CATEGORY_IDS_3_DESC && <dl>
-              <dt>{t("/@unknown/personCategory")}</dt>
+              <dt>{`${t("/catalog/person/person")}, ${t("/catalog/person/person.category3")}`}</dt>
               <dd>{report.parameters.PERSON_CATEGORY_IDS_3_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_CATEGORY_IDS_4_DESC && <dl>
-              <dt>{t("/@unknown/personCategory")}</dt>
+              <dt>{`${t("/catalog/person/person")}, ${t("/catalog/person/person.category4")}`}</dt>
               <dd>{report.parameters.PERSON_CATEGORY_IDS_4_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_CATEGORY_IDS_5_DESC && <dl>
-              <dt>{t("/@unknown/personCategory")}</dt>
+              <dt>{`${t("/catalog/person/person")}, ${t("/catalog/person/person.category5")}`}</dt>
               <dd>{report.parameters.PERSON_CATEGORY_IDS_5_DESC}</dd>
             </dl>}
             {report.parameters?.FISCAL_PROFILE_OPERATION_IDS_DESC && <dl>
@@ -888,7 +895,7 @@ export default function ({ data = [], meta = {}, t }) {
               <dd>{report.parameters.INVOICE_SERIES_IDS_DESC}</dd>
             </dl>}
             {report.parameters?.SALESPERSON_IDS_DESC && <dl>
-              <dt>{t("/@unknown/salesperson")}</dt>
+              <dt>{t("/@unknowasn/salesperson")}</dt>
               <dd>{report.parameters.SALESPERSON_IDS_DESC}</dd>
             </dl>}
             {report.parameters?.PERSON_SHIPPING_IDS_DESC && <dl>
@@ -908,23 +915,23 @@ export default function ({ data = [], meta = {}, t }) {
               <dd>{report.parameters.FISCAL_PROFILE_PRODUCT_IDS_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_CATEGORY_IDS_1_DESC && <dl>
-              <dt>{t("/@unknown/productCategory")}</dt>
+              <dt>{`${t("/catalog/product/product")}, ${t("/catalog/product/product.category1")}`}</dt>
               <dd>{report.parameters.PRODUCT_CATEGORY_IDS_1_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_CATEGORY_IDS_2_DESC && <dl>
-              <dt>{t("/@unknown/productCategory")}</dt>
+              <dt>{`${t("/catalog/product/product")}, ${t("/catalog/product/product.category2")}`}</dt>
               <dd>{report.parameters.PRODUCT_CATEGORY_IDS_2_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_CATEGORY_IDS_3_DESC && <dl>
-              <dt>{t("/@unknown/productCategory")}</dt>
+              <dt>{`${t("/catalog/product/product")}, ${t("/catalog/product/product.category3")}`}</dt>
               <dd>{report.parameters.PRODUCT_CATEGORY_IDS_3_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_CATEGORY_IDS_4_DESC && <dl>
-              <dt>{t("/@unknown/productCategory")}</dt>
+              <dt>{`${t("/catalog/product/product")}, ${t("/catalog/product/product.category4")}`}</dt>
               <dd>{report.parameters.PRODUCT_CATEGORY_IDS_4_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_CATEGORY_IDS_5_DESC && <dl>
-              <dt>{t("/@unknown/productCategory")}</dt>
+              <dt>{`${t("/catalog/product/product")}, ${t("/catalog/product/product.category5")}`}</dt>
               <dd>{report.parameters.PRODUCT_CATEGORY_IDS_5_DESC}</dd>
             </dl>}
             {report.parameters?.PRODUCT_PACKING_IDS_DESC && <dl>

@@ -1,0 +1,39 @@
+{
+  "report": {
+    "code": "jsx",
+    "parameters": {
+      "LEVEL_LIST": null,
+      "DATETIME_START": null,
+      "DATETIME_END": null,
+      "OPERATION": null,
+      "SOURCE": null,
+      "EXPIRATION_START": null,
+      "EXPIRATION_END": null,
+      "TAGS_LIST": null,
+      "SESSION_IDS": null,
+      "SESSION_IDS_DESC": null,
+      "ROLE_IDS": null,
+      "ROLE_IDS_DESC": null,
+      "LIMIT": null
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          "dateTime",
+          "level",
+          "operation",
+          "role_code",
+          "day",
+          "month",
+          "year"
+        ],
+        "sort": [
+          { "columnId": "dateTime" }
+        ],
+        "groups": [
+          { "columnId": "day" }
+        ]
+      }
+    }
+  }
+}
