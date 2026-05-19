@@ -336,6 +336,80 @@ export const Table = ({ data, visibleColumns, children }) => {
   );
 };
 
+export const Footer = ({ data, visibleColumns, children }) => {
+  const columns = React.Children.toArray(children)
+    .filter((child) => {
+      if (!child) return false;
+      if (child.props.visible != null) return child.props.visible;
+      if (visibleColumns == null) return true;
+      if (child.props.ids && visibleColumns) {
+        return child.props.ids.some(id => visibleColumns.includes(id));
+      }
+      if (child.props.id && visibleColumns) {
+        return visibleColumns.includes(child.props.id);
+      }
+      return false;
+    })
+    .sort((a, b) => {
+      if (visibleColumns) {
+        const getMinIndex = (props) => {
+          const ids = props.ids || [props.id];
+          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
+          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
+        };
+        return getMinIndex(a.props) - getMinIndex(b.props);
+      }
+      return (a.props.order ?? 0) - (b.props.order ?? 0);
+    });
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          {columns.map((col, i) => {
+            const context = { row: null, data };
+
+            let className = col.props.headerClassName || col.props.className;
+            className = typeof className === "function"
+              ? className(context)
+              : className;
+
+            return (
+              <th key={i} className={className} width={col.props.width || "10ch"}>
+                {col.props.footer ? col.props.header : undefined}
+              </th>
+            );
+          })}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          {columns.map((col, i) => {
+            let value = undefined;
+
+            if (typeof col.props.footerValue === "function") {
+              value = col.props.footerValue({ data });
+            }
+
+            const context = { row: null, data, value };
+
+            let className = col.props.footerClassName || col.props.className;
+            className = typeof className === "function"
+              ? className(context)
+              : className;
+
+            return (
+              <td key={i} className={className}>
+                {col.props.footer ? col.props.footer(context) : null}
+              </td>
+            );
+          })}
+        </tr>
+      </tfoot>
+    </table>
+  );
+};
+
 export const GroupSections = ({ data, children, groups = [], columns = [], level = 0 }) => {
   if (Array.isArray(data)) {
     return <>{children(data)}</>;

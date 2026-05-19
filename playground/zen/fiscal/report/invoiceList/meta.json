@@ -78,7 +78,7 @@
           "sum_referencedQuantity",
           "sum_referencedBalance",
           "sum_quantity_units",
-          "sum_grossProductValue",
+          "sum_totalValue",
           "sum_discountValue",
           "invoiceItem_unitValue",
           "invoiceItem_unitValueUnits",

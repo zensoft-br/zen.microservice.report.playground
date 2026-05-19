@@ -172,31 +172,30 @@ body {
   justify-content: space-between;
   margin-top: 2rem;
 }
-.report-wrapper .report-container > footer dl {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap);
-  margin: 0;
-}
-.report-wrapper .report-container > footer dl div,
-.report-wrapper .report-container > footer dl dl {
+.report-wrapper .report-container > footer section {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: var(--gap);
+  margin: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: var(--padding);
+}
+.report-wrapper .report-container > footer section div,
+.report-wrapper .report-container > footer section dl {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  flex: 1;
   min-width: 4cm;
 }
-.report-wrapper .report-container > footer dl div dt,
-.report-wrapper .report-container > footer dl dl dt {
-  font-size: 8pt;
+.report-wrapper .report-container > footer section div dt,
+.report-wrapper .report-container > footer section dl dt {
   color: gray;
-  text-transform: uppercase;
   font-weight: bold;
 }
-.report-wrapper .report-container > footer dl div dd,
-.report-wrapper .report-container > footer dl dl dd {
+.report-wrapper .report-container > footer section div dd,
+.report-wrapper .report-container > footer section dl dd {
   margin: 0;
 }
 .report-wrapper .flex {

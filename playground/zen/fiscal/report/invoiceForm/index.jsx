@@ -3,8 +3,13 @@ import * as utils from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
   
-  data.forEach(item => {
-    item.billingTitles = item.billingTitles?.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  data.forEach(invoice => {
+    invoice.items?.sort((a, b) => {
+      let i = Number(a.properties.sequence ?? 0) - Number(b.properties.sequence ?? 0);
+      if (i !== 0) return i;
+      return (a.code ?? a.productPacking.code).localeCompare(b.code ?? b.productPacking.code);
+    });
+    invoice.billingTitles = invoice.billingTitles?.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   });
 
   return (
@@ -334,7 +339,7 @@ export default function ({ data = [], meta = {}, t }) {
                     </div>
                     <div className="slot">
                       <label>Frete por conta</label>
-                      <div>{item.freightType === "RECIPIENT" ? "1 - Destinatário" : "0 - Emitente"}</div>
+                      <div>{{"NONE": "9 - Sem frete", "ISSUER": "0 - Emitente", "RECIPIENT": "1 - Destinatário"}[item.freightType]}</div>
                     </div>
                     <div className="slot">
                       <label>Código ANTT</label>

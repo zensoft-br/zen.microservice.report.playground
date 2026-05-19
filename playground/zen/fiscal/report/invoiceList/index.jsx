@@ -1,5 +1,5 @@
-import * as utils from "./utils.js";
-import { Badge, Column, GroupSections, Table } from "./utils.js";
+import * as utils from "./utils.jsx";
+import { Badge, Column, Footer, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -822,9 +822,14 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
+  const summary = {
+    quantity: data.reduce((red, item) => red + (Number(item.sum_quantity) || 0), 0),
+    totalValue: data.reduce((red, item) => red + (Number(item.sum_totalValue) || 0), 0),
+  };
+
   data = utils.sort(data, report.properties?.settings?.sort || []);
 
-  data = utils.group(data, report.properties?.settings?.groups || [], columns);
+  const groupedData = utils.group(data, report.properties?.settings?.groups || [], columns);
 
   const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
 
@@ -999,7 +1004,7 @@ export default function ({ data = [], meta = {}, t }) {
         <main>
           <GroupSections
             columns={columns}
-            data={data}
+            data={groupedData}
             groups={report.properties?.settings?.groups || []}>
             {(groupData) => (
               <div className="content">
@@ -1012,6 +1017,15 @@ export default function ({ data = [], meta = {}, t }) {
               </div>
             )}
           </GroupSections>
+          <div className="content">
+            <h1>{t("/@word/summary")}</h1>
+            <Footer data={data}
+              visibleColumns={visibleColumns}>
+              {columns.map((column, index) => (
+                <Column key={index} {...column} />
+              ))}
+            </Footer>
+          </div>
         </main>
       </div>
     </div>

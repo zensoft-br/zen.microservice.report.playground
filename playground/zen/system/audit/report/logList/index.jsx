@@ -14,7 +14,7 @@ export default function ({ data = [], meta = {}, t }) {
     { id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "8ch",
-      className: "number",
+      className: "id",
       cell: ({ value }) => utils.formatNumber(value),
       footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
@@ -31,17 +31,14 @@ export default function ({ data = [], meta = {}, t }) {
     { id: "day",
       header: utils.cellHeader(t("/@word/day")),
       width: "8ch",
-      // cellValue: ({ row }) => Number(row.dateTime?.substring(8, 10)),
     },
     { id: "month",
       header: utils.cellHeader(t("/@word/month")),
       width: "8ch",
-      // cellValue: ({ row }) => Number(row.dateTime?.substring(5, 7)),
     },
     { id: "year",
       header: utils.cellHeader(t("/@word/year")),
       width: "8ch",
-      // cellValue: ({ row }) => Number(row.dateTime?.substring(0, 4)),
     },
     { id: "operation",
       header: utils.cellHeader(t("/system/audit/log.operation")),
@@ -57,7 +54,7 @@ export default function ({ data = [], meta = {}, t }) {
     },
     { id: "content",
       header: utils.cellHeader(t("/system/audit/log.content")),
-      width: "16ch",
+      width: "32ch",
     },
     { id: "expiration",
       header: utils.cellHeader(t("/system/audit/log.expiration")),
@@ -79,12 +76,13 @@ export default function ({ data = [], meta = {}, t }) {
     },
     { id: "session_id",
       header: utils.cellHeader(t("/system/security/session"), t("/@word/id")),
-      width: "8ch",
+      width: "16ch",
+      className: "id",
     },
     { id: "role_id",
       header: utils.cellHeader(t("/system/security/role"), t("/@word/id")),
       width: "8ch",
-      className: "number",
+      className: "id",
       cell: ({ value }) => utils.formatNumber(value),
     },
     { id: "role_code",
@@ -94,6 +92,24 @@ export default function ({ data = [], meta = {}, t }) {
     { id: "role_description",
       header: utils.cellHeader(t("/system/security/role"), t("/@word/description")),
       width: "24ch",
+    },
+    { id: "person_id",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/id")),
+      width: "8ch",
+      className: "id",
+      cell: ({ value }) => utils.formatNumber(value),
+    },
+    { id: "person_name",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/name")),
+      width: "24ch",
+    },
+    { id: "person_fantasyName",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/fantasyName")),
+      width: "16ch",
+    },
+    { id: "person_nameCalc",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/nameCalc")),
+      width: "16ch",
     },
   ];
 
@@ -110,11 +126,11 @@ export default function ({ data = [], meta = {}, t }) {
           <h1>{t("/system/audit/report/logList")}</h1>
           <section className="parameters">
             {report.parameters?.DATETIME_START && <dl>
-              <dt>{t("/@word/datetimeStart")}</dt>
+              <dt>{t("/@word/dateTimeStart")}</dt>
               <dd>{utils.formatDate(report.parameters.DATETIME_START)}</dd>
             </dl>}
             {report.parameters?.DATETIME_END && <dl>
-              <dt>{t("/@word/datetimeEnd")}</dt>
+              <dt>{t("/@word/dateTimeEnd")}</dt>
               <dd>{utils.formatDate(report.parameters.DATETIME_END)}</dd>
             </dl>}
             {report.parameters?.EXPIRATION_START && <dl>

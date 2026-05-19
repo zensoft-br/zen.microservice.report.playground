@@ -1,0 +1,1240 @@
+[
+  {
+    "id": 1161,
+    "status": "PREPARING",
+    "company": {
+      "id": 1001,
+      "code": "CC",
+      "person": {
+        "id": 20321,
+        "type": "CORPORATION",
+        "name": "CAMPCLEAN COM IMP EXPORTACAO LTDA",
+        "fantasyName": "CAMPCLEAN",
+        "nationality": {
+          "id": 1030,
+          "name": "Brasil",
+          "codeA2": "BR",
+          "codeA3": "BRA",
+          "codeN": "076",
+          "tags": "#system,southAmerica",
+          "properties": {
+            "fiscal_br_cPais": "1058"
+          }
+        },
+        "documentType": "BR_CNPJ",
+        "documentNumber": "61.347.761/0001-09",
+        "document2Type": "BR_INSCRICAO_ESTADUAL",
+        "document2Number": "244361190115",
+        "zipcode": "13052-205",
+        "street": "Avenida das Amoreiras",
+        "number": "8172",
+        "district": "Jardim Paraíso de Viracopos",
+        "city": {
+          "id": 5820,
+          "name": "Campinas",
+          "state": {
+            "id": 1026,
+            "code": "SP",
+            "name": "São Paulo",
+            "country": {
+              "id": 1030,
+              "name": "Brasil",
+              "codeA2": "BR",
+              "codeA3": "BRA",
+              "codeN": "076",
+              "tags": "#system,southAmerica",
+              "properties": {
+                "fiscal_br_cPais": "1058"
+              }
+            },
+            "tags": "#system,sudeste",
+            "properties": {
+              "fiscal_br_cUF": "35"
+            }
+          },
+          "tags": "#system",
+          "properties": {
+            "fiscal_br_cMun": "3509502"
+          }
+        },
+        "codeConversionList": {
+          "id": 4798,
+          "code": "4798",
+          "description": "CAMPCLEAN COM IMPORTACAO EXPORT LT",
+          "properties": {}
+        },
+        "fiscalProfilePerson": {
+          "id": 1136,
+          "fiscalRegion": {
+            "id": 1001,
+            "code": "BR",
+            "tags": "#system"
+          },
+          "description": "Regime Normal SP",
+          "tags": "#system",
+          "properties": {}
+        },
+        "tags": "#company,customer,supplier",
+        "properties": {
+          "cod ": "2012012110",
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2026-04-01T09:48:43.416755767-03:00[America/Sao_Paulo]",
+          "comments ": null
+        }
+      },
+      "locale": "pt-BR",
+      "timeZone": "America/Sao_Paulo",
+      "society": {
+        "id": 1001,
+        "code": "DEFAULT",
+        "description": "Default society",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T07:16:39.820233393-03:00[America/Sao_Paulo]"
+        }
+      },
+      "fiscalRegion": {
+        "id": 1001,
+        "code": "BR",
+        "tags": "#system"
+      },
+      "fiscalProfileCompany": {
+        "id": 1055,
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "description": "Lucro Presumido SP",
+        "properties": {}
+      },
+      "currency": {
+        "id": 1001,
+        "code": "BRL",
+        "symbol": "R$",
+        "tags": "#system"
+      },
+      "stockCluster": {
+        "id": 1001,
+        "code": "CC",
+        "description": "Campclean",
+        "assetValuationMethod": "WAC",
+        "priceListCost": {
+          "id": 1014,
+          "type": "PURCHASE",
+          "code": "precoCusto",
+          "description": "precoCusto",
+          "currency": {
+            "id": 1001,
+            "code": "BRL",
+            "symbol": "R$",
+            "tags": "#system"
+          },
+          "tags": "asset,incominginvoice-auto",
+          "properties": {
+            "code": "precoCusto",
+            "#user": "support@personalsoft.com.br",
+            "#userId": 1,
+            "#created": "2026-05-05T17:54:58.516423964-03:00[America/Sao_Paulo]"
+          }
+        },
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T07:18:08.066563069-03:00[America/Sao_Paulo]"
+        }
+      },
+      "warehouse": {
+        "id": 1001,
+        "code": "CP",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+        }
+      },
+      "priceList": {
+        "id": 1016,
+        "type": "PURCHASE",
+        "code": "precoBase",
+        "description": "precoBase",
+        "currency": {
+          "id": 1001,
+          "code": "BRL",
+          "symbol": "R$",
+          "tags": "#system"
+        },
+        "properties": {
+          "code": "precoBase",
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2026-05-05T18:21:50.96970386-03:00[America/Sao_Paulo]"
+        }
+      },
+      "image": {
+        "id": 1004,
+        "description": "Logotipo Campclean",
+        "contentType": "image/png",
+        "url": "https://zenerp.s3.amazonaws.com/tenants/campclean/images/81bf2aa6-fd9a-4fcd-b3d7-e494c70e44ef.png",
+        "size": 46379,
+        "width": 890,
+        "height": 332,
+        "tags": "@cover",
+        "properties": {
+          "#user": "nicole",
+          "#userId": 1003,
+          "#created": "2026-01-30T16:10:44.486086482-03:00[America/Sao_Paulo]"
+        }
+      },
+      "mailerConfig": {
+        "id": 1001,
+        "code": "1001",
+        "description": "nfecampclean@campclean.com.br",
+        "tags": "@default",
+        "properties": {
+          "#user": "nicole",
+          "#userId": 1003,
+          "#created": "2026-03-26T11:39:31.42234877-03:00[America/Sao_Paulo]",
+          "repplyTo": "nfecampclean@campclean.com.br",
+          "mail.smtp.auth": true,
+          "mail.smtp.from": "nfecampclean@campclean.com.br",
+          "mail.smtp.host": "email-ssl.com.br",
+          "mail.smtp.port": 465,
+          "mail.smtp.user": "nfecampclean@campclean.com.br",
+          "mail.smtp.password": "nfec8172",
+          "mail.smtp.ssl.enable": true,
+          "mail.smtp.starttls.enable": true
+        }
+      },
+      "properties": {
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2025-02-01T07:19:13.640894795-03:00[America/Sao_Paulo]",
+        "fiscal_br_CRT": "3",
+        "fiscal_br_tpAmb": "1",
+        "fiscal_br_keyStore": 1002,
+        "mailerConfig_commercial_sale": 1001,
+        "mailerConfig_supply_purchase": 1001,
+        "mailerConfig_financial_payable": 1001,
+        "mailerConfig_financial_receivable": 1001,
+        "mailerConfig_fiscal_incomingInvoice": 1001,
+        "mailerConfig_fiscal_outgoingInvoice": 1001
+      }
+    },
+    "saleProfile": {
+      "id": 1001,
+      "code": "VENDAS",
+      "description": "Vendas",
+      "fiscalProfileOperation": {
+        "id": 1060,
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "code": "Venda",
+        "description": "Venda",
+        "tags": "#system,@sale,out,revenue,stock",
+        "properties": {}
+      },
+      "workflow": {
+        "id": 1002,
+        "status": "APPROVED",
+        "code": "VENDAS",
+        "description": "Vendas",
+        "tags": "mermaid,resetOnReopen,sale",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2026-01-29T16:55:01.281688816-03:00[America/Sao_Paulo]"
+        }
+      },
+      "warehouse": {
+        "id": 1001,
+        "code": "CP",
+        "properties": {
+          "#user": "support@personalsoft.com.br",
+          "#userId": 1,
+          "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+        }
+      },
+      "invoiceSeriesTag": "@default",
+      "pickingProfile": {
+        "id": 0,
+        "code": "DEFAULT",
+        "description": "Default",
+        "tags": "#system,@default",
+        "properties": {}
+      },
+      "tags": "@default",
+      "properties": {
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2025-03-27T09:51:19.931457601-03:00[America/Sao_Paulo]",
+        "quote_comments": "Validade: 7 dias\nImpostos inclusos\nMínimo p/ entrega: R$300,00\nPrazo de entrega: 72hrs"
+      }
+    },
+    "person": {
+      "id": 20451,
+      "type": "CORPORATION",
+      "name": "INSTITUTO DE ENSINO SUP INDAIATUBA LTDA.",
+      "fantasyName": "FAC UNIMAX MAXPLANC",
+      "nationality": {
+        "id": 1030,
+        "name": "Brasil",
+        "codeA2": "BR",
+        "codeA3": "BRA",
+        "codeN": "076",
+        "tags": "#system,southAmerica",
+        "properties": {
+          "fiscal_br_cPais": "1058"
+        }
+      },
+      "documentType": "BR_CNPJ",
+      "documentNumber": "03.791.661/0001-70",
+      "email": "compras.emilly@unieduk.com.br",
+      "phone": "019 3885-8500",
+      "fiscalProfilePerson": {
+        "id": 1136,
+        "fiscalRegion": {
+          "id": 1001,
+          "code": "BR",
+          "tags": "#system"
+        },
+        "description": "Regime Normal SP",
+        "tags": "#system",
+        "properties": {}
+      },
+      "properties": {
+        "#user": "carla",
+        "#userId": 1188,
+        "#created": "2026-05-11T10:28:53.575145433-03:00[America/Sao_Paulo]"
+      }
+    },
+    "code": "1161",
+    "date": "2026-05-11",
+    "availabilityDate": "2026-05-11",
+    "totalValue": 0,
+    "properties": {
+      "#user": "carla",
+      "#userId": 1188,
+      "#created": "2026-05-11T10:37:15.524268905-03:00[America/Sao_Paulo]"
+    },
+    "items": [
+      {
+        "id": 1680,
+        "status": "AVAILABLE",
+        "quote": {
+          "id": 1161,
+          "status": "PREPARING",
+          "company": {
+            "id": 1001,
+            "code": "CC",
+            "person": {
+              "id": 20321,
+              "type": "CORPORATION",
+              "name": "CAMPCLEAN COM IMP EXPORTACAO LTDA",
+              "fantasyName": "CAMPCLEAN",
+              "nationality": {
+                "id": 1030,
+                "name": "Brasil",
+                "codeA2": "BR",
+                "codeA3": "BRA",
+                "codeN": "076",
+                "tags": "#system,southAmerica",
+                "properties": {
+                  "fiscal_br_cPais": "1058"
+                }
+              },
+              "documentType": "BR_CNPJ",
+              "documentNumber": "61.347.761/0001-09",
+              "document2Type": "BR_INSCRICAO_ESTADUAL",
+              "document2Number": "244361190115",
+              "zipcode": "13052-205",
+              "street": "Avenida das Amoreiras",
+              "number": "8172",
+              "district": "Jardim Paraíso de Viracopos",
+              "city": {
+                "id": 5820,
+                "name": "Campinas",
+                "state": {
+                  "id": 1026,
+                  "code": "SP",
+                  "name": "São Paulo",
+                  "country": {
+                    "id": 1030,
+                    "name": "Brasil",
+                    "codeA2": "BR",
+                    "codeA3": "BRA",
+                    "codeN": "076",
+                    "tags": "#system,southAmerica",
+                    "properties": {
+                      "fiscal_br_cPais": "1058"
+                    }
+                  },
+                  "tags": "#system,sudeste",
+                  "properties": {
+                    "fiscal_br_cUF": "35"
+                  }
+                },
+                "tags": "#system",
+                "properties": {
+                  "fiscal_br_cMun": "3509502"
+                }
+              },
+              "codeConversionList": {
+                "id": 4798,
+                "code": "4798",
+                "description": "CAMPCLEAN COM IMPORTACAO EXPORT LT",
+                "properties": {}
+              },
+              "fiscalProfilePerson": {
+                "id": 1136,
+                "fiscalRegion": {
+                  "id": 1001,
+                  "code": "BR",
+                  "tags": "#system"
+                },
+                "description": "Regime Normal SP",
+                "tags": "#system",
+                "properties": {}
+              },
+              "tags": "#company,customer,supplier",
+              "properties": {
+                "cod ": "2012012110",
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2026-04-01T09:48:43.416755767-03:00[America/Sao_Paulo]",
+                "comments ": null
+              }
+            },
+            "locale": "pt-BR",
+            "timeZone": "America/Sao_Paulo",
+            "society": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "Default society",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-02-01T07:16:39.820233393-03:00[America/Sao_Paulo]"
+              }
+            },
+            "fiscalRegion": {
+              "id": 1001,
+              "code": "BR",
+              "tags": "#system"
+            },
+            "fiscalProfileCompany": {
+              "id": 1055,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "Lucro Presumido SP",
+              "properties": {}
+            },
+            "currency": {
+              "id": 1001,
+              "code": "BRL",
+              "symbol": "R$",
+              "tags": "#system"
+            },
+            "stockCluster": {
+              "id": 1001,
+              "code": "CC",
+              "description": "Campclean",
+              "assetValuationMethod": "WAC",
+              "priceListCost": {
+                "id": 1014,
+                "type": "PURCHASE",
+                "code": "precoCusto",
+                "description": "precoCusto",
+                "currency": {
+                  "id": 1001,
+                  "code": "BRL",
+                  "symbol": "R$",
+                  "tags": "#system"
+                },
+                "tags": "asset,incominginvoice-auto",
+                "properties": {
+                  "code": "precoCusto",
+                  "#user": "support@personalsoft.com.br",
+                  "#userId": 1,
+                  "#created": "2026-05-05T17:54:58.516423964-03:00[America/Sao_Paulo]"
+                }
+              },
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-02-01T07:18:08.066563069-03:00[America/Sao_Paulo]"
+              }
+            },
+            "warehouse": {
+              "id": 1001,
+              "code": "CP",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+              }
+            },
+            "priceList": {
+              "id": 1016,
+              "type": "PURCHASE",
+              "code": "precoBase",
+              "description": "precoBase",
+              "currency": {
+                "id": 1001,
+                "code": "BRL",
+                "symbol": "R$",
+                "tags": "#system"
+              },
+              "properties": {
+                "code": "precoBase",
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2026-05-05T18:21:50.96970386-03:00[America/Sao_Paulo]"
+              }
+            },
+            "image": {
+              "id": 1004,
+              "description": "Logotipo Campclean",
+              "contentType": "image/png",
+              "url": "https://zenerp.s3.amazonaws.com/tenants/campclean/images/81bf2aa6-fd9a-4fcd-b3d7-e494c70e44ef.png",
+              "size": 46379,
+              "width": 890,
+              "height": 332,
+              "tags": "@cover",
+              "properties": {
+                "#user": "nicole",
+                "#userId": 1003,
+                "#created": "2026-01-30T16:10:44.486086482-03:00[America/Sao_Paulo]"
+              }
+            },
+            "mailerConfig": {
+              "id": 1001,
+              "code": "1001",
+              "description": "nfecampclean@campclean.com.br",
+              "tags": "@default",
+              "properties": {
+                "#user": "nicole",
+                "#userId": 1003,
+                "#created": "2026-03-26T11:39:31.42234877-03:00[America/Sao_Paulo]",
+                "repplyTo": "nfecampclean@campclean.com.br",
+                "mail.smtp.auth": true,
+                "mail.smtp.from": "nfecampclean@campclean.com.br",
+                "mail.smtp.host": "email-ssl.com.br",
+                "mail.smtp.port": 465,
+                "mail.smtp.user": "nfecampclean@campclean.com.br",
+                "mail.smtp.password": "nfec8172",
+                "mail.smtp.ssl.enable": true,
+                "mail.smtp.starttls.enable": true
+              }
+            },
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#userId": 1,
+              "#created": "2025-02-01T07:19:13.640894795-03:00[America/Sao_Paulo]",
+              "fiscal_br_CRT": "3",
+              "fiscal_br_tpAmb": "1",
+              "fiscal_br_keyStore": 1002,
+              "mailerConfig_commercial_sale": 1001,
+              "mailerConfig_supply_purchase": 1001,
+              "mailerConfig_financial_payable": 1001,
+              "mailerConfig_financial_receivable": 1001,
+              "mailerConfig_fiscal_incomingInvoice": 1001,
+              "mailerConfig_fiscal_outgoingInvoice": 1001
+            }
+          },
+          "saleProfile": {
+            "id": 1001,
+            "code": "VENDAS",
+            "description": "Vendas",
+            "fiscalProfileOperation": {
+              "id": 1060,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "code": "Venda",
+              "description": "Venda",
+              "tags": "#system,@sale,out,revenue,stock",
+              "properties": {}
+            },
+            "workflow": {
+              "id": 1002,
+              "status": "APPROVED",
+              "code": "VENDAS",
+              "description": "Vendas",
+              "tags": "mermaid,resetOnReopen,sale",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2026-01-29T16:55:01.281688816-03:00[America/Sao_Paulo]"
+              }
+            },
+            "warehouse": {
+              "id": 1001,
+              "code": "CP",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+              }
+            },
+            "invoiceSeriesTag": "@default",
+            "pickingProfile": {
+              "id": 0,
+              "code": "DEFAULT",
+              "description": "Default",
+              "tags": "#system,@default",
+              "properties": {}
+            },
+            "tags": "@default",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "#userId": 1,
+              "#created": "2025-03-27T09:51:19.931457601-03:00[America/Sao_Paulo]",
+              "quote_comments": "Validade: 7 dias\nImpostos inclusos\nMínimo p/ entrega: R$300,00\nPrazo de entrega: 72hrs"
+            }
+          },
+          "person": {
+            "id": 20451,
+            "type": "CORPORATION",
+            "name": "INSTITUTO DE ENSINO SUP INDAIATUBA LTDA.",
+            "fantasyName": "FAC UNIMAX MAXPLANC",
+            "nationality": {
+              "id": 1030,
+              "name": "Brasil",
+              "codeA2": "BR",
+              "codeA3": "BRA",
+              "codeN": "076",
+              "tags": "#system,southAmerica",
+              "properties": {
+                "fiscal_br_cPais": "1058"
+              }
+            },
+            "documentType": "BR_CNPJ",
+            "documentNumber": "03.791.661/0001-70",
+            "email": "compras.emilly@unieduk.com.br",
+            "phone": "019 3885-8500",
+            "fiscalProfilePerson": {
+              "id": 1136,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "Regime Normal SP",
+              "tags": "#system",
+              "properties": {}
+            },
+            "properties": {
+              "#user": "carla",
+              "#userId": 1188,
+              "#created": "2026-05-11T10:28:53.575145433-03:00[America/Sao_Paulo]"
+            }
+          },
+          "code": "1161",
+          "date": "2026-05-11",
+          "availabilityDate": "2026-05-11",
+          "totalValue": 0,
+          "properties": {
+            "#user": "carla",
+            "#userId": 1188,
+            "#created": "2026-05-11T10:37:15.524268905-03:00[America/Sao_Paulo]"
+          }
+        },
+        "productPacking": {
+          "id": 6992,
+          "product": {
+            "id": 7937,
+            "productProfile": {
+              "id": 1001,
+              "code": "DEFAULT",
+              "description": "PADRAO",
+              "tags": "@default,fiscalInfoRequired,interchangeableComplement,interchangeableUnits,interchangeableVariant,productPackingCreate,stock.unit.convert",
+              "properties": {}
+            },
+            "type": "PRODUCT",
+            "code": "91409",
+            "description": "ACESSORIO ESPECIAL",
+            "unit": {
+              "id": 1016,
+              "dimension": {
+                "id": 1005,
+                "code": "unit",
+                "description": "@@:/catalog/unit/dimension/code/unit",
+                "standardUnit": "un",
+                "tags": "#system"
+              },
+              "code": "un",
+              "description": "un",
+              "conversionFactor": 1,
+              "tags": "#system"
+            },
+            "fiscalProfileProduct": {
+              "id": 1423,
+              "fiscalRegion": {
+                "id": 1001,
+                "code": "BR",
+                "tags": "#system"
+              },
+              "description": "39269090.0",
+              "properties": {
+                "#user": "support@personalsoft.com.br",
+                "#userId": 1,
+                "#created": "2025-10-07T12:56:13.248169595-03:00[America/Sao_Paulo]",
+                "fiscal_br_orig": "0"
+              }
+            },
+            "lengthCm": 0,
+            "widthCm": 0,
+            "heightCm": 0,
+            "volumeM3": 0,
+            "netWeightKg": 0,
+            "grossWeightKg": 0,
+            "barcode": "SEMCODIGO",
+            "properties": {
+              "#user": "support@personalsoft.com.br",
+              "scale": 0,
+              "#userId": 1,
+              "#created": "2026-01-16T15:54:10.431568293-03:00[America/Sao_Paulo]",
+              "fiscal_br_NCM": "39269090",
+              "fiscal_br_CEST": null
+            }
+          },
+          "code": "91409",
+          "barcode": "SEMCODIGO",
+          "units": 1,
+          "lengthCm": 0,
+          "widthCm": 0,
+          "heightCm": 0,
+          "volumeM3": 0,
+          "netWeightKg": 0,
+          "grossWeightKg": 0,
+          "tags": "#default",
+          "properties": {}
+        },
+        "referenceCode": "Container 240lt com pedal e rodas preto JSN",
+        "quantity": 2,
+        "properties": {
+          "#user": "carla",
+          "#userId": 1188,
+          "#created": "2026-05-11T10:37:42.801361257-03:00[America/Sao_Paulo]",
+          "proposalCount": 1
+        },
+        "proposals": [
+          {
+            "id": 1765,
+            "status": "PENDING",
+            "quoteItem": {
+              "id": 1680,
+              "status": "AVAILABLE",
+              "quote": {
+                "id": 1161,
+                "status": "PREPARING",
+                "company": {
+                  "id": 1001,
+                  "code": "CC",
+                  "person": {
+                    "id": 20321,
+                    "type": "CORPORATION",
+                    "name": "CAMPCLEAN COM IMP EXPORTACAO LTDA",
+                    "fantasyName": "CAMPCLEAN",
+                    "nationality": {
+                      "id": 1030,
+                      "name": "Brasil",
+                      "codeA2": "BR",
+                      "codeA3": "BRA",
+                      "codeN": "076",
+                      "tags": "#system,southAmerica",
+                      "properties": {
+                        "fiscal_br_cPais": "1058"
+                      }
+                    },
+                    "documentType": "BR_CNPJ",
+                    "documentNumber": "61.347.761/0001-09",
+                    "document2Type": "BR_INSCRICAO_ESTADUAL",
+                    "document2Number": "244361190115",
+                    "zipcode": "13052-205",
+                    "street": "Avenida das Amoreiras",
+                    "number": "8172",
+                    "district": "Jardim Paraíso de Viracopos",
+                    "city": {
+                      "id": 5820,
+                      "name": "Campinas",
+                      "state": {
+                        "id": 1026,
+                        "code": "SP",
+                        "name": "São Paulo",
+                        "country": {
+                          "id": 1030,
+                          "name": "Brasil",
+                          "codeA2": "BR",
+                          "codeA3": "BRA",
+                          "codeN": "076",
+                          "tags": "#system,southAmerica",
+                          "properties": {
+                            "fiscal_br_cPais": "1058"
+                          }
+                        },
+                        "tags": "#system,sudeste",
+                        "properties": {
+                          "fiscal_br_cUF": "35"
+                        }
+                      },
+                      "tags": "#system",
+                      "properties": {
+                        "fiscal_br_cMun": "3509502"
+                      }
+                    },
+                    "codeConversionList": {
+                      "id": 4798,
+                      "code": "4798",
+                      "description": "CAMPCLEAN COM IMPORTACAO EXPORT LT",
+                      "properties": {}
+                    },
+                    "fiscalProfilePerson": {
+                      "id": 1136,
+                      "fiscalRegion": {
+                        "id": 1001,
+                        "code": "BR",
+                        "tags": "#system"
+                      },
+                      "description": "Regime Normal SP",
+                      "tags": "#system",
+                      "properties": {}
+                    },
+                    "tags": "#company,customer,supplier",
+                    "properties": {
+                      "cod ": "2012012110",
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2026-04-01T09:48:43.416755767-03:00[America/Sao_Paulo]",
+                      "comments ": null
+                    }
+                  },
+                  "locale": "pt-BR",
+                  "timeZone": "America/Sao_Paulo",
+                  "society": {
+                    "id": 1001,
+                    "code": "DEFAULT",
+                    "description": "Default society",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-02-01T07:16:39.820233393-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "fiscalRegion": {
+                    "id": 1001,
+                    "code": "BR",
+                    "tags": "#system"
+                  },
+                  "fiscalProfileCompany": {
+                    "id": 1055,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "Lucro Presumido SP",
+                    "properties": {}
+                  },
+                  "currency": {
+                    "id": 1001,
+                    "code": "BRL",
+                    "symbol": "R$",
+                    "tags": "#system"
+                  },
+                  "stockCluster": {
+                    "id": 1001,
+                    "code": "CC",
+                    "description": "Campclean",
+                    "assetValuationMethod": "WAC",
+                    "priceListCost": {
+                      "id": 1014,
+                      "type": "PURCHASE",
+                      "code": "precoCusto",
+                      "description": "precoCusto",
+                      "currency": {
+                        "id": 1001,
+                        "code": "BRL",
+                        "symbol": "R$",
+                        "tags": "#system"
+                      },
+                      "tags": "asset,incominginvoice-auto",
+                      "properties": {
+                        "code": "precoCusto",
+                        "#user": "support@personalsoft.com.br",
+                        "#userId": 1,
+                        "#created": "2026-05-05T17:54:58.516423964-03:00[America/Sao_Paulo]"
+                      }
+                    },
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-02-01T07:18:08.066563069-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "warehouse": {
+                    "id": 1001,
+                    "code": "CP",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "priceList": {
+                    "id": 1016,
+                    "type": "PURCHASE",
+                    "code": "precoBase",
+                    "description": "precoBase",
+                    "currency": {
+                      "id": 1001,
+                      "code": "BRL",
+                      "symbol": "R$",
+                      "tags": "#system"
+                    },
+                    "properties": {
+                      "code": "precoBase",
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2026-05-05T18:21:50.96970386-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "image": {
+                    "id": 1004,
+                    "description": "Logotipo Campclean",
+                    "contentType": "image/png",
+                    "url": "https://zenerp.s3.amazonaws.com/tenants/campclean/images/81bf2aa6-fd9a-4fcd-b3d7-e494c70e44ef.png",
+                    "size": 46379,
+                    "width": 890,
+                    "height": 332,
+                    "tags": "@cover",
+                    "properties": {
+                      "#user": "nicole",
+                      "#userId": 1003,
+                      "#created": "2026-01-30T16:10:44.486086482-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "mailerConfig": {
+                    "id": 1001,
+                    "code": "1001",
+                    "description": "nfecampclean@campclean.com.br",
+                    "tags": "@default",
+                    "properties": {
+                      "#user": "nicole",
+                      "#userId": 1003,
+                      "#created": "2026-03-26T11:39:31.42234877-03:00[America/Sao_Paulo]",
+                      "repplyTo": "nfecampclean@campclean.com.br",
+                      "mail.smtp.auth": true,
+                      "mail.smtp.from": "nfecampclean@campclean.com.br",
+                      "mail.smtp.host": "email-ssl.com.br",
+                      "mail.smtp.port": 465,
+                      "mail.smtp.user": "nfecampclean@campclean.com.br",
+                      "mail.smtp.password": "nfec8172",
+                      "mail.smtp.ssl.enable": true,
+                      "mail.smtp.starttls.enable": true
+                    }
+                  },
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2025-02-01T07:19:13.640894795-03:00[America/Sao_Paulo]",
+                    "fiscal_br_CRT": "3",
+                    "fiscal_br_tpAmb": "1",
+                    "fiscal_br_keyStore": 1002,
+                    "mailerConfig_commercial_sale": 1001,
+                    "mailerConfig_supply_purchase": 1001,
+                    "mailerConfig_financial_payable": 1001,
+                    "mailerConfig_financial_receivable": 1001,
+                    "mailerConfig_fiscal_incomingInvoice": 1001,
+                    "mailerConfig_fiscal_outgoingInvoice": 1001
+                  }
+                },
+                "saleProfile": {
+                  "id": 1001,
+                  "code": "VENDAS",
+                  "description": "Vendas",
+                  "fiscalProfileOperation": {
+                    "id": 1060,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "code": "Venda",
+                    "description": "Venda",
+                    "tags": "#system,@sale,out,revenue,stock",
+                    "properties": {}
+                  },
+                  "workflow": {
+                    "id": 1002,
+                    "status": "APPROVED",
+                    "code": "VENDAS",
+                    "description": "Vendas",
+                    "tags": "mermaid,resetOnReopen,sale",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2026-01-29T16:55:01.281688816-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "warehouse": {
+                    "id": 1001,
+                    "code": "CP",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-02-01T07:18:57.145836702-03:00[America/Sao_Paulo]"
+                    }
+                  },
+                  "invoiceSeriesTag": "@default",
+                  "pickingProfile": {
+                    "id": 0,
+                    "code": "DEFAULT",
+                    "description": "Default",
+                    "tags": "#system,@default",
+                    "properties": {}
+                  },
+                  "tags": "@default",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2025-03-27T09:51:19.931457601-03:00[America/Sao_Paulo]",
+                    "quote_comments": "Validade: 7 dias\nImpostos inclusos\nMínimo p/ entrega: R$300,00\nPrazo de entrega: 72hrs"
+                  }
+                },
+                "person": {
+                  "id": 20451,
+                  "type": "CORPORATION",
+                  "name": "INSTITUTO DE ENSINO SUP INDAIATUBA LTDA.",
+                  "fantasyName": "FAC UNIMAX MAXPLANC",
+                  "nationality": {
+                    "id": 1030,
+                    "name": "Brasil",
+                    "codeA2": "BR",
+                    "codeA3": "BRA",
+                    "codeN": "076",
+                    "tags": "#system,southAmerica",
+                    "properties": {
+                      "fiscal_br_cPais": "1058"
+                    }
+                  },
+                  "documentType": "BR_CNPJ",
+                  "documentNumber": "03.791.661/0001-70",
+                  "email": "compras.emilly@unieduk.com.br",
+                  "phone": "019 3885-8500",
+                  "fiscalProfilePerson": {
+                    "id": 1136,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "Regime Normal SP",
+                    "tags": "#system",
+                    "properties": {}
+                  },
+                  "properties": {
+                    "#user": "carla",
+                    "#userId": 1188,
+                    "#created": "2026-05-11T10:28:53.575145433-03:00[America/Sao_Paulo]"
+                  }
+                },
+                "code": "1161",
+                "date": "2026-05-11",
+                "availabilityDate": "2026-05-11",
+                "totalValue": 0,
+                "properties": {
+                  "#user": "carla",
+                  "#userId": 1188,
+                  "#created": "2026-05-11T10:37:15.524268905-03:00[America/Sao_Paulo]"
+                }
+              },
+              "productPacking": {
+                "id": 6992,
+                "product": {
+                  "id": 7937,
+                  "productProfile": {
+                    "id": 1001,
+                    "code": "DEFAULT",
+                    "description": "PADRAO",
+                    "tags": "@default,fiscalInfoRequired,interchangeableComplement,interchangeableUnits,interchangeableVariant,productPackingCreate,stock.unit.convert",
+                    "properties": {}
+                  },
+                  "type": "PRODUCT",
+                  "code": "91409",
+                  "description": "ACESSORIO ESPECIAL",
+                  "unit": {
+                    "id": 1016,
+                    "dimension": {
+                      "id": 1005,
+                      "code": "unit",
+                      "description": "@@:/catalog/unit/dimension/code/unit",
+                      "standardUnit": "un",
+                      "tags": "#system"
+                    },
+                    "code": "un",
+                    "description": "un",
+                    "conversionFactor": 1,
+                    "tags": "#system"
+                  },
+                  "fiscalProfileProduct": {
+                    "id": 1423,
+                    "fiscalRegion": {
+                      "id": 1001,
+                      "code": "BR",
+                      "tags": "#system"
+                    },
+                    "description": "39269090.0",
+                    "properties": {
+                      "#user": "support@personalsoft.com.br",
+                      "#userId": 1,
+                      "#created": "2025-10-07T12:56:13.248169595-03:00[America/Sao_Paulo]",
+                      "fiscal_br_orig": "0"
+                    }
+                  },
+                  "lengthCm": 0,
+                  "widthCm": 0,
+                  "heightCm": 0,
+                  "volumeM3": 0,
+                  "netWeightKg": 0,
+                  "grossWeightKg": 0,
+                  "barcode": "SEMCODIGO",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "scale": 0,
+                    "#userId": 1,
+                    "#created": "2026-01-16T15:54:10.431568293-03:00[America/Sao_Paulo]",
+                    "fiscal_br_NCM": "39269090",
+                    "fiscal_br_CEST": null
+                  }
+                },
+                "code": "91409",
+                "barcode": "SEMCODIGO",
+                "units": 1,
+                "lengthCm": 0,
+                "widthCm": 0,
+                "heightCm": 0,
+                "volumeM3": 0,
+                "netWeightKg": 0,
+                "grossWeightKg": 0,
+                "tags": "#default",
+                "properties": {}
+              },
+              "referenceCode": "Container 240lt com pedal e rodas preto JSN",
+              "quantity": 2,
+              "properties": {
+                "#user": "carla",
+                "#userId": 1188,
+                "#created": "2026-05-11T10:37:42.801361257-03:00[America/Sao_Paulo]",
+                "proposalCount": 1
+              }
+            },
+            "productPacking": {
+              "id": 6992,
+              "product": {
+                "id": 7937,
+                "productProfile": {
+                  "id": 1001,
+                  "code": "DEFAULT",
+                  "description": "PADRAO",
+                  "tags": "@default,fiscalInfoRequired,interchangeableComplement,interchangeableUnits,interchangeableVariant,productPackingCreate,stock.unit.convert",
+                  "properties": {}
+                },
+                "type": "PRODUCT",
+                "code": "91409",
+                "description": "ACESSORIO ESPECIAL",
+                "unit": {
+                  "id": 1016,
+                  "dimension": {
+                    "id": 1005,
+                    "code": "unit",
+                    "description": "@@:/catalog/unit/dimension/code/unit",
+                    "standardUnit": "un",
+                    "tags": "#system"
+                  },
+                  "code": "un",
+                  "description": "un",
+                  "conversionFactor": 1,
+                  "tags": "#system"
+                },
+                "fiscalProfileProduct": {
+                  "id": 1423,
+                  "fiscalRegion": {
+                    "id": 1001,
+                    "code": "BR",
+                    "tags": "#system"
+                  },
+                  "description": "39269090.0",
+                  "properties": {
+                    "#user": "support@personalsoft.com.br",
+                    "#userId": 1,
+                    "#created": "2025-10-07T12:56:13.248169595-03:00[America/Sao_Paulo]",
+                    "fiscal_br_orig": "0"
+                  }
+                },
+                "lengthCm": 0,
+                "widthCm": 0,
+                "heightCm": 0,
+                "volumeM3": 0,
+                "netWeightKg": 0,
+                "grossWeightKg": 0,
+                "barcode": "SEMCODIGO",
+                "properties": {
+                  "#user": "support@personalsoft.com.br",
+                  "scale": 0,
+                  "#userId": 1,
+                  "#created": "2026-01-16T15:54:10.431568293-03:00[America/Sao_Paulo]",
+                  "fiscal_br_NCM": "39269090",
+                  "fiscal_br_CEST": null
+                }
+              },
+              "code": "91409",
+              "barcode": "SEMCODIGO",
+              "units": 1,
+              "lengthCm": 0,
+              "widthCm": 0,
+              "heightCm": 0,
+              "volumeM3": 0,
+              "netWeightKg": 0,
+              "grossWeightKg": 0,
+              "tags": "#default",
+              "properties": {}
+            },
+            "quantity": 32,
+            "currency": {
+              "id": 1001,
+              "code": "BRL",
+              "symbol": "R$",
+              "tags": "#system"
+            },
+            "unitValue": 899,
+            "costUnitValue": 20,
+            "totalValue": 1798,
+            "properties": {
+              "#user": "carla",
+              "#userId": 1188,
+              "#created": "2026-05-11T10:37:43.128328715-03:00[America/Sao_Paulo]"
+            },
+            "exchangeRate": 1,
+            "unitValueLocal": 899
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "quantity": 2,
+      "totalValue": 1798
+    }
+  }
+]
