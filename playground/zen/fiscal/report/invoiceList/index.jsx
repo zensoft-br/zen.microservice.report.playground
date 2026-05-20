@@ -822,11 +822,6 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  const summary = {
-    quantity: data.reduce((red, item) => red + (Number(item.sum_quantity) || 0), 0),
-    totalValue: data.reduce((red, item) => red + (Number(item.sum_totalValue) || 0), 0),
-  };
-
   data = utils.sort(data, report.properties?.settings?.sort || []);
 
   const groupedData = utils.group(data, report.properties?.settings?.groups || [], columns);

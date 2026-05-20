@@ -19,8 +19,6 @@ export default function ({ data = [], meta = {}, t }) {
         utils.config.locale = item.company.locale;
         utils.config.timeZone = item.company.timeZone;
 
-        console.log(utils.config);
-
         return (
           <div key={item.id} className="report-container">
             {!item.nfeOut ? <div className="stamp">SEM VALIDADE FISCAL</div> : null}
