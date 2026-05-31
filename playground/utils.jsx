@@ -79,6 +79,10 @@ export function formatDateTime(value, options = {}) {
 
 export function formatNumber(value, options = {}) {
   if (value == null) return null;
+  if (options.digits != null) {
+    options.minimumFractionDigits = options.digits;
+    options.maximumFractionDigits = options.digits;
+  }
   const { 
     locale = options.locale ?? config.locale, 
     ...rest } = options;
@@ -156,11 +160,15 @@ export function sort(data, criteria) {
     sensitivity: "base", 
   });
 
+  const getNestedValue = (obj, path) => {
+    return path.split(".").reduce((acc, part) => acc?.[part], obj);
+  };
+
   return data.sort((a, b) => {
     for (const { columnId, direction = "asc", nulls = "last" } of criteria) {
-      const valA = a[columnId];
-      const valB = b[columnId];
-
+      const valA = getNestedValue(a, columnId);
+      const valB = getNestedValue(b, columnId);
+      
       const isANull = valA == null || valA === "";
       const isBNull = valB == null || valB === "";
 
@@ -232,7 +240,7 @@ export const Badge = ({ children }) => {
 
 export const Column = () => null;
 
-export const Table = ({ data, visibleColumns, children }) => {
+export const Table = ({ className, data, visibleColumns, children }) => {
   const columns = React.Children.toArray(children)
     .filter((child) => {
       if (!child) return false;
@@ -259,7 +267,7 @@ export const Table = ({ data, visibleColumns, children }) => {
     });
 
   return (
-    <table>
+    <table className={className}>
       <thead>
         <tr>
           {columns.map((col, i) => {
@@ -271,7 +279,7 @@ export const Table = ({ data, visibleColumns, children }) => {
               : className;
 
             return (
-              <th key={i} className={className} width={col.props.width || "10ch"}>
+              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.header}
               </th>
             );
@@ -336,7 +344,7 @@ export const Table = ({ data, visibleColumns, children }) => {
   );
 };
 
-export const Footer = ({ data, visibleColumns, children }) => {
+export const Footer = ({ className, data, visibleColumns, children }) => {
   const columns = React.Children.toArray(children)
     .filter((child) => {
       if (!child) return false;
@@ -363,7 +371,7 @@ export const Footer = ({ data, visibleColumns, children }) => {
     });
 
   return (
-    <table>
+    <table className={className}>
       <thead>
         <tr>
           {columns.map((col, i) => {
@@ -375,7 +383,7 @@ export const Footer = ({ data, visibleColumns, children }) => {
               : className;
 
             return (
-              <th key={i} className={className} width={col.props.width || "10ch"}>
+              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.footer ? col.props.header : undefined}
               </th>
             );

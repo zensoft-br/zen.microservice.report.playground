@@ -88,6 +88,14 @@ body {
       padding: 2mm;
 
       background-color: white;
+
+      &.a4 {
+        width: 210mm;
+
+        &.landscape {
+          width: 297mm;
+        }
+      }
     }
 
     // 1. Status Stamp
@@ -101,6 +109,10 @@ body {
       font-size: 300%;
       opacity: 0.3;
       color: red;
+    }
+
+    section.parameters {
+      @include parameter-box;
     }
 
     // Main Header
@@ -125,8 +137,7 @@ body {
         font-size: 20pt;
       }
 
-      &>dl,
-      section.parameters {
+      &>dl {
         @include parameter-box;
       }
     }
@@ -192,15 +203,22 @@ body {
 
       .content {
         table:not(.custom) {
-          table-layout: fixed;
+          // table-layout: fixed;
 
           width: 100%;
 
           border-collapse: separate;
-          border-spacing: var(--padding) 0;
+          border-spacing: 0;
+
+          &.striped {
+            tr:nth-child(even) {
+              background-color: #f8f8f8;
+            }
+          }
 
           th {
             overflow-wrap: break-word;
+            padding: 2px calc(var(--padding) / 2);
             text-align: left;
             // background: #f8f9fa;
             // padding: 8px;
@@ -212,6 +230,7 @@ body {
             // border-bottom: 1px solid #f1f1f1;
             // word-break: break-all;
             overflow-wrap: break-word;
+            padding: 2px calc(var(--padding) / 2);
           }
 
           tfoot {
@@ -237,7 +256,7 @@ body {
         margin-top: 2rem;
       }
 
-      section {
+      section.summary {
         display: flex;
         flex-direction: column;
         gap: var(--gap);

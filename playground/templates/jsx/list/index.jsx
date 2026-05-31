@@ -43,7 +43,7 @@ export default function ({ data = [], meta = {}, t }) {
   
   return (
     <div className="report-wrapper">
-      <div className="report-container">
+      <div className="report-container a4">
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">

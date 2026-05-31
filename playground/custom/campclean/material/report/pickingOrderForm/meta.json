@@ -1,0 +1,27 @@
+{
+  "report": {
+    "title": "My report",
+    "parameters": {
+      "dateStart": "2026-01-01",
+      "dateEnd": "2026-01-31"
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          "productPacking_code",
+          "product_description",
+          "productPacking_complement",
+          "quantity",
+          "productPacking_units",
+          "grossWeightKg"
+        ],
+        "groups": [],
+        "sort": [
+          {
+            "columnId": "productPacking.code"
+          }
+        ]
+      }
+    }
+  }
+}

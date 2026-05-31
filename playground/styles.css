@@ -44,6 +44,12 @@ body {
     padding: 2mm;
     background-color: white;
   }
+  .report-wrapper .report-container.a4 {
+    width: 210mm;
+  }
+  .report-wrapper .report-container.a4.landscape {
+    width: 297mm;
+  }
 }
 .report-wrapper .report-container .stamp {
   position: absolute;
@@ -53,6 +59,33 @@ body {
   font-size: 300%;
   opacity: 0.3;
   color: red;
+}
+.report-wrapper .report-container section.parameters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  margin: 0;
+}
+.report-wrapper .report-container section.parameters div,
+.report-wrapper .report-container section.parameters dl {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  min-width: 4cm;
+}
+.report-wrapper .report-container section.parameters div dt,
+.report-wrapper .report-container section.parameters dl dt {
+  font-size: 8pt;
+  color: gray;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.report-wrapper .report-container section.parameters div dd,
+.report-wrapper .report-container section.parameters dl dd {
+  margin: 0;
 }
 .report-wrapper .report-container > header {
   display: flex;
@@ -72,17 +105,14 @@ body {
   margin: 0;
   font-size: 20pt;
 }
-.report-wrapper .report-container > header > dl,
-.report-wrapper .report-container > header section.parameters {
+.report-wrapper .report-container > header > dl {
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap);
   margin: 0;
 }
 .report-wrapper .report-container > header > dl div,
-.report-wrapper .report-container > header > dl dl,
-.report-wrapper .report-container > header section.parameters div,
-.report-wrapper .report-container > header section.parameters dl {
+.report-wrapper .report-container > header > dl dl {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -92,18 +122,14 @@ body {
   min-width: 4cm;
 }
 .report-wrapper .report-container > header > dl div dt,
-.report-wrapper .report-container > header > dl dl dt,
-.report-wrapper .report-container > header section.parameters div dt,
-.report-wrapper .report-container > header section.parameters dl dt {
+.report-wrapper .report-container > header > dl dl dt {
   font-size: 8pt;
   color: gray;
   text-transform: uppercase;
   font-weight: bold;
 }
 .report-wrapper .report-container > header > dl div dd,
-.report-wrapper .report-container > header > dl dl dd,
-.report-wrapper .report-container > header section.parameters div dd,
-.report-wrapper .report-container > header section.parameters dl dd {
+.report-wrapper .report-container > header > dl dl dd {
   margin: 0;
 }
 .report-wrapper .report-container > main .kpi-grid {
@@ -150,17 +176,21 @@ body {
   padding-top: 5px;
 }
 .report-wrapper .report-container > main .content table:not(.custom) {
-  table-layout: fixed;
   width: 100%;
   border-collapse: separate;
-  border-spacing: var(--padding) 0;
+  border-spacing: 0;
+}
+.report-wrapper .report-container > main .content table:not(.custom).striped tr:nth-child(even) {
+  background-color: #f8f8f8;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
   overflow-wrap: break-word;
+  padding: 2px calc(var(--padding) / 2);
   text-align: left;
 }
 .report-wrapper .report-container > main .content table:not(.custom) td {
   overflow-wrap: break-word;
+  padding: 2px calc(var(--padding) / 2);
 }
 .report-wrapper .report-container > footer {
   margin-top: 4rem;
@@ -172,7 +202,7 @@ body {
   justify-content: space-between;
   margin-top: 2rem;
 }
-.report-wrapper .report-container > footer section {
+.report-wrapper .report-container > footer section.summary {
   display: flex;
   flex-direction: column;
   gap: var(--gap);
@@ -181,21 +211,21 @@ body {
   border-radius: var(--border-radius);
   padding: var(--padding);
 }
-.report-wrapper .report-container > footer section div,
-.report-wrapper .report-container > footer section dl {
+.report-wrapper .report-container > footer section.summary div,
+.report-wrapper .report-container > footer section.summary dl {
   display: flex;
   flex-direction: row;
   gap: var(--gap);
   flex: 1;
   min-width: 4cm;
 }
-.report-wrapper .report-container > footer section div dt,
-.report-wrapper .report-container > footer section dl dt {
+.report-wrapper .report-container > footer section.summary div dt,
+.report-wrapper .report-container > footer section.summary dl dt {
   color: gray;
   font-weight: bold;
 }
-.report-wrapper .report-container > footer section div dd,
-.report-wrapper .report-container > footer section dl dd {
+.report-wrapper .report-container > footer section.summary div dd,
+.report-wrapper .report-container > footer section.summary dl dd {
   margin: 0;
 }
 .report-wrapper .flex {

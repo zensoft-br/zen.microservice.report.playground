@@ -2,6 +2,12 @@ import * as utils from "./utils.jsx";
 import { Badge, Column, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
+  data.forEach(quote => {
+    quote.items.sort((a, b) => {
+      if (a.itemSequence !== b.itemSequence) return a.itemSequence - b.itemSequence;
+      return a.proposalSequence - b.proposalSequence;
+    });
+  });
 
   const columns = [
     { id: "id",
@@ -32,7 +38,7 @@ export default function ({ data = [], meta = {}, t }) {
         <div className="report-container">
           <header>
             <div className="brand">
-              <img src={quote.company?.image.url} style={{ width: "3cm" }}></img>
+              <img src={quote.company?.image?.url} style={{ width: "3cm" }}></img>
             </div>
             <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>{t("/sale/quote")} {quote.id}
               <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
@@ -87,6 +93,7 @@ export default function ({ data = [], meta = {}, t }) {
               <dl>
                 <dt>{t("/@word/comments")}</dt>
                 <dd><pre>{[
+                  quote.properties?.comments ? `${quote.properties?.comments}\n`: undefined,
                   quote.saleProfile?.properties?.quote_comments,
                   quote.person.properties?.freightType ? (
                     quote.person.properties?.freightType === "ISSUER" ? "Contratação de frete por conta do remetente (CIF)" : "Contratação de frete por conta do destinatário (FOB)"
@@ -102,10 +109,12 @@ export default function ({ data = [], meta = {}, t }) {
                 <table>
                   <thead>
                     <tr>
-                      <th>{t("/@word/item")}</th>
+                      <th>{t("/sale/quoteItem.itemSequence")}</th>
+                      <th>{t("/sale/quoteItem.proposalSequence")}</th>
                       <th>{t("/@word/code")}</th>
                       <th>{t("/@word/description")}</th>
                       <th>{t("/catalog/product.properties.fiscal_br_NCM")}</th>
+                      <th className="number">ICMS %</th>
                       <th className="number">{t("/@word/quantity")}</th>
                       <th className="number">{t("/@word/unitValue")}</th>
                       <th className="number">{t("/@word/totalValue")}</th>
@@ -114,23 +123,24 @@ export default function ({ data = [], meta = {}, t }) {
                   <tbody>
                     {
                       quote.items?.map((item, index1) => (
-                        (item.proposals.length ? item.proposals : [{}]).map((proposal, index2) => (
-                          <tr key={item.id} style={{ fontStyle: index2 > 0 ? "italic" : undefined, opacity: index2 > 0 ? "0.5" : undefined }}>
-                            <td>{index2 === 0 ? index1 + 1 : undefined}</td>
-                            <td>{index2 === 0 ? item.productPacking?.code : undefined}</td>
-                            <td>{index2 === 0 ? (item.referenceCode ?? item.productPacking?.product.description) : undefined}</td>
-                            <td>{index2 === 0 ? item.productPacking?.product.properties?.fiscal_br_NCM : undefined}</td>
-                            <td className="number">{utils.formatNumber(proposal.quantity)}</td>
-                            <td className="number">{utils.formatCurrency(proposal.unitValue, { minimumFractionDigits: 2 })}</td>
-                            <td className="number">{utils.formatCurrency(proposal.totalValue, { minimumFractionDigits: 2 })}</td>
-                          </tr>
-                        ))
+                        <tr key={item.id} style={{ fontStyle: item.proposalSequence > 1 ? "italic" : undefined, opacity: item.proposalSequence > 1 ? "0.5" : undefined }}>
+                          <td>{item.itemSequence}</td>
+                          <td>{item.proposalSequence}</td>
+                          <td>{item.code ?? item.productPacking?.code}</td>
+                          <td>{item.properties?.description ?? item.productPacking?.product.description}</td>
+                          <td>{item.productPacking?.product.properties?.fiscal_br_NCM}</td>
+                          <td className="number">{item.taxationRule?.properties?.["tax.ICMS.taxRate"]}</td>
+                          <td className="number">{utils.formatNumber(item.quantity)}</td>
+                          <td className="number">{utils.formatCurrency(item.unitValue, { minimumFractionDigits: 2 })}</td>
+                          <td className="number">{utils.formatCurrency(item.totalValue, { minimumFractionDigits: 2 })}</td>
+                        </tr>
                       ))}
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colSpan={5} className="number">{utils.formatNumber(quote.items?.reduce((acc, item) => acc + (item.proposals[0]?.quantity ?? item.quantity), 0), { digits: 0 })}</th>
-                      <th colSpan={2} className="number">{utils.formatCurrency(quote.items?.reduce((acc, item) => acc + (item.proposals[0]?.totalValue ?? 0), 0))}</th>
+                      <th colSpan={7} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0))}</th>
+                      <th colSpan={2} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.totalValue, 0), { minimumFractionDigits: 2 })}</th>
+                      <th></th>
                     </tr>
                   </tfoot>
                 </table>
