@@ -1,5 +1,6 @@
 SELECT
   S1.ID AS "sale_id",
+  S1.CODE AS "sale_code",
   I1.URL AS "company_logo",
   P1.NAME AS "person_name",
   PS_ERP.TAGS_TO_LITERAL(P2.TAGS) AS "product_tags",

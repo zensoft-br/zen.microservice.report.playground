@@ -109,8 +109,8 @@ export default function ({ data = [], meta = {}, t }) {
                 <table>
                   <thead>
                     <tr>
-                      <th>{t("/sale/quoteItem.itemSequence")}</th>
-                      <th>{t("/sale/quoteItem.proposalSequence")}</th>
+                      {/* <th>{t("/sale/quoteItem.itemSequence")}</th>
+                      <th>{t("/sale/quoteItem.proposalSequence")}</th> */}
                       <th>{t("/@word/code")}</th>
                       <th>{t("/@word/description")}</th>
                       <th>{t("/catalog/product.properties.fiscal_br_NCM")}</th>
@@ -124,8 +124,8 @@ export default function ({ data = [], meta = {}, t }) {
                     {
                       quote.items?.map((item, index1) => (
                         <tr key={item.id} style={{ fontStyle: item.proposalSequence > 1 ? "italic" : undefined, opacity: item.proposalSequence > 1 ? "0.5" : undefined }}>
-                          <td>{item.itemSequence}</td>
-                          <td>{item.proposalSequence}</td>
+                          {/* <td>{item.itemSequence}</td>
+                          <td>{item.proposalSequence}</td> */}
                           <td>{item.code ?? item.productPacking?.code}</td>
                           <td>{item.properties?.description ?? item.productPacking?.product.description}</td>
                           <td>{item.productPacking?.product.properties?.fiscal_br_NCM}</td>
@@ -138,7 +138,7 @@ export default function ({ data = [], meta = {}, t }) {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colSpan={7} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0))}</th>
+                      <th colSpan={5} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0))}</th>
                       <th colSpan={2} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.totalValue, 0), { minimumFractionDigits: 2 })}</th>
                       <th></th>
                     </tr>

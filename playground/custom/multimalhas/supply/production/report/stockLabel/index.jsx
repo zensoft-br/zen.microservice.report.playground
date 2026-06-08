@@ -18,10 +18,16 @@ export default function ({data, t}) {
                   <dl style={{ gridArea: "A" }}>
                     <dd><img src={obj.company_logo} /></dd>
                   </dl>
-                  <dl style={{ gridArea: "B" }}>
-                    <dt>{t("/sale/sale")}</dt>
-                    <dd>{obj.sale_id}</dd>
-                  </dl>
+                  <div className="flex h " style={{ gridArea: "B" }}>
+                    <dl>
+                      <dt>Pedido interno</dt>
+                      <dd>{obj.sale_id}</dd>
+                    </dl>
+                    <dl>
+                      <dt>Pedido do cliente</dt>
+                      <dd>{obj.sale_code}</dd>
+                    </dl>
+                  </div>
                   <dl className="flex v align-center" style={{ gridArea: "C", justifyContent: "space-around" }}>
                     <div className="flex v align-center">
                       <dt>{t("/@word/quantity")}</dt>

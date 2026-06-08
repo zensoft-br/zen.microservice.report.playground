@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+import { Badge, Column, getVisibleColumns, GroupSections, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -39,8 +39,19 @@ export default function ({ data = [], meta = {}, t }) {
   
   data = utils.group(data, report.properties?.settings?.groups || [], columns);
   
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
-  
+  const visibleColumns = getVisibleColumns({
+    availableColumns: columns.map(column => column.id),
+    overrideColumns: report.properties?.overrideColumns?.split(","),
+    standardColumns:  [
+      "id",
+      "name",
+      "score",
+      "status",
+    ],
+    addColumns: report.properties?.showColumns?.split(","),
+    removeColumns: report.properties?.hideColumns?.split(","),
+  });
+
   return (
     <div className="report-wrapper">
       <div className="report-container a4">

@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+import { Badge, Column, Table, getVisibleColumns } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -9,14 +9,20 @@ export default function ({ data = [], meta = {}, t }) {
       width: "3ch",
       cellValue: () => <span style={{ fontSize: "1.3em" }}>☐</span>,
     },
-    // { id: "id",
-    //   header: utils.cellHeader(t("/@word/id")),
-    //   width: "7ch",
-    //   className: "id",
-    //   cell: ({ value }) => utils.formatNumber(value),
-    //   footerValue: ({ data }) => data.length, 
-    //   footer: ({ value }) => utils.formatNumber(value),
-    // },
+    { id: "id",
+      header: utils.cellHeader(t("/@word/id")),
+      width: "7ch",
+      className: "id",
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length, 
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    { id: "productPacking_image",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/system/image")),
+      width: "10ch",
+      cellValue: ({ row }) => row.productPacking.image?.url,
+      cell: ({ value }) => <img src={value} style={{ width: "1.25cm", height: "1.25cm", objectFit: "contain" }}></img>,
+    },
     { id: "productPacking_code",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
       width: "15ch",
@@ -55,15 +61,15 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) => row.productPacking.units,
       cell: ({ row, value }) => <><Badge>{value === 1 ? row.productPacking.product.unit.code : value}</Badge></>,
     },
-    // { id: "netWeightKg",
-    //   header: utils.cellHeader(t("/@word/netWeightKg")),
-    //   width: "7ch",
-    //   className: "number",
-    //   cellValue: ({ row }) => row.quantity * row.productPacking.product?.netWeightKg || 0,
-    //   cell: ({ value }) => utils.formatNumber(value, { digits: 1 }),
-    //   footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.netWeightKg || 0), 0),
-    //   footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
-    // },
+    { id: "netWeightKg",
+      header: utils.cellHeader(t("/@word/netWeightKg")),
+      width: "7ch",
+      className: "number",
+      cellValue: ({ row }) => row.quantity * row.productPacking.product?.netWeightKg || 0,
+      cell: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.netWeightKg || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+    },
     { id: "grossWeightKg",
       header: utils.cellHeader(t("/@word/grossWeightKg")),
       width: "10ch",
@@ -73,15 +79,15 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.grossWeightKg || 0), 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
     },
-    // { id: "volumeM3",
-    //   header: utils.cellHeader(t("/@word/volumeM3")),
-    //   width: "7ch",
-    //   className: "number",
-    //   cellValue: ({ row }) => row.quantity * row.productPacking.product?.volumeM3 || 0,
-    //   cell: ({ value }) => utils.formatNumber(value, { digits: 1 }),
-    //   footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.volumeM3 || 0), 0),
-    //   footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
-    // },
+    { id: "volumeM3",
+      header: utils.cellHeader(t("/@word/volumeM3")),
+      width: "7ch",
+      className: "number",
+      cellValue: ({ row }) => row.quantity * row.productPacking.product?.volumeM3 || 0,
+      cell: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.volumeM3 || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+    },
   ];
 
   data.forEach(pickingOrder => {
@@ -94,18 +100,23 @@ export default function ({ data = [], meta = {}, t }) {
       ]);
   });
 
-  // data = utils.group(data, report.properties?.settings?.groups || [], columns);
-  
-  const visibleColumns = columns.map(col => col.id);
-  // report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",") ??
-  // [
-  //   "product_description",
-  //   "productVariant_description",
-  //   "quantity",
-  //   "productPacking_units",
-  //   "grossWeightKg",
-  // ];
-  
+  const visibleColumns = getVisibleColumns({
+    availableColumns: columns.map(column => column.id),
+    overrideColumns: report.properties?.overrideColumns?.split(","),
+    standardColumns: [
+      "productPacking_code",
+      "product_description",
+      "productPacking_complement",
+      "productVariant_description",
+      "address_code",
+      "quantity",
+      "productPacking_units",
+      "grossWeightKg",
+    ],
+    addColumns: report.properties?.showColumns?.split(","),
+    removeColumns: report.properties?.hideColumns?.split(","),
+  });
+
   return (
     <div className="report-wrapper">
       {data.map(pickingOrder => (

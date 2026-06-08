@@ -7,6 +7,7 @@
     "productVariant_description": "Preto",
     "quantity": 150,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:100"
   },
   {
@@ -17,6 +18,7 @@
     "productVariant_description": "Preto",
     "quantity": 250,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:100"
   },
   {
@@ -27,6 +29,7 @@
     "productVariant_description": "Preto",
     "quantity": 250,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:100"
   },
   {
@@ -37,6 +40,7 @@
     "productVariant_description": "Preto",
     "quantity": 250,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   },
   {
@@ -47,6 +51,7 @@
     "productVariant_description": "Preto",
     "quantity": 150,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   },
   {
@@ -57,6 +62,7 @@
     "productVariant_description": "Chocolate",
     "quantity": 50,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   },
   {
@@ -67,6 +73,7 @@
     "productVariant_description": "Preto",
     "quantity": 100,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   },
   {
@@ -77,6 +84,7 @@
     "productVariant_description": "Chocolate",
     "quantity": 100,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   },
   {
@@ -87,6 +95,7 @@
     "productVariant_description": "Preto",
     "quantity": 100,
     "sale_id": 1301,
+    "sale_code": "S001",
     "priceListItem_tags": "q:50"
   }
 ]

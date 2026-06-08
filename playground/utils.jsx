@@ -120,6 +120,20 @@ export function formatTime(value, options = {}) {
   }
 }
 
+export function getVisibleColumns(settings) {
+  // User explicitly defined the exact layout and order
+  if (settings.overrideColumns?.length) {
+    return settings.overrideColumns.filter(col => settings.availableColumns.includes(col));
+  }
+
+  const activeSet = new Set(settings.standardColumns?.length ? settings.standardColumns : settings.availableColumns);
+  
+  settings.addColumns?.forEach(col => activeSet.add(col));
+  settings.removeColumns?.forEach(col => activeSet.delete(col));
+
+  return settings.availableColumns.filter(col => activeSet.has(col));
+}
+
 export function group(data, groups = []) {
   const root = new Map();
 

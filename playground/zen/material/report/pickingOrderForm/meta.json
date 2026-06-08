@@ -7,14 +7,6 @@
     },
     "properties": {
       "settings": {
-        "columns": [
-          "productPacking_code",
-          "product_description",
-          "productPacking_complement",
-          "quantity",
-          "productPacking_units",
-          "grossWeightKg"
-        ],
         "groups": [],
         "sort": [
           {
