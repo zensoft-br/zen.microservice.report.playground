@@ -10,6 +10,6 @@
     ]
   },
   "meta": {
-    "dataSource": "/sale/data/saleForm"
+    "dataSource": "/financial/data/payableForm"
   }
 }

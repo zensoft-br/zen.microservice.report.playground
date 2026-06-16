@@ -39,7 +39,7 @@ The rendering engine automatically injects a translation helper function, `t`, i
 Destructure the `t` function from the props object:
 
 ```javascript
-export default function({ data = [], t }) {
+export default function ({ data = [], t }) {
   return (
     <dl>
       <dt>{t("/@word/date")}</dt>

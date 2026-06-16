@@ -8,8 +8,5 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
-  },
-  "meta": {
-    "dataSource": "/sale/data/saleForm"
   }
 }
