@@ -71,11 +71,11 @@ export default function ({ data = [], meta = {}, t }) {
                 <dd>{data.person.name}</dd>
               </dl>
             </section>
-            {data.wallet?.code && (
+            {data.wallet && (
               <section className="parameters">
                 <dl>
                   <dt>Carteira</dt>
-                  <dd>{data.wallet?.code}</dd>
+                  <dd>{data.wallet.description ?? data.wallet.code}</dd>
                 </dl>
               </section>
             )}

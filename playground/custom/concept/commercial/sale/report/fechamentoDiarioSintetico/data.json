@@ -1,0 +1,92 @@
+[
+	{
+		"index" : 1,
+		"group" : "RESUMO",
+		"topic" : "FATURAMENTO",
+		"quantity_today" : 4121.43,
+		"totalValue_today" : 170561.68000000,
+		"quantity_toDate" : 82394.01,
+		"totalValue_toDate" : 673416.58000000
+	},
+	{
+		"index" : 1,
+		"group" : "RESUMO",
+		"topic" : "ENTRADAS",
+		"quantity_today" : 14466.35,
+		"totalValue_today" : 819182.65000000,
+		"quantity_toDate" : 265464.48,
+		"totalValue_toDate" : 3654934.29000000
+	},
+	{
+		"index" : 1,
+		"group" : "RESUMO",
+		"topic" : "CANCELAMENTO",
+		"quantity_today" : 5.00,
+		"totalValue_today" : 199.50000000,
+		"quantity_toDate" : 5403.37,
+		"totalValue_toDate" : 34960.54000000
+	},
+	{
+		"index" : 2,
+		"group" : "ENTRADA PEDIDOS",
+		"topic" : "Programação",
+		"quantity_today" : 12639.57,
+		"totalValue_today" : 760882.58000000,
+		"quantity_toDate" : 148629.04,
+		"totalValue_toDate" : 2654690.73000000
+	},
+	{
+		"index" : 2,
+		"group" : "ENTRADA PEDIDOS",
+		"topic" : "Pronta entrega",
+		"quantity_today" : 1826.78,
+		"totalValue_today" : 58300.07000000,
+		"quantity_toDate" : 116835.43,
+		"totalValue_toDate" : 1000243.56000000
+	},
+	{
+		"index" : 3,
+		"group" : "ENTRADAS POR REGIONAL",
+		"topic" : null,
+		"quantity_today" : 0.00,
+		"totalValue_today" : 0,
+		"quantity_toDate" : 406.91,
+		"totalValue_toDate" : 10235.05000000
+	},
+	{
+		"index" : 3,
+		"group" : "ENTRADAS POR REGIONAL",
+		"topic" : "Regional Roberta",
+		"quantity_today" : 10529.87,
+		"totalValue_today" : 687762.91000000,
+		"quantity_toDate" : 85873.46,
+		"totalValue_toDate" : 1952493.64000000
+	},
+	{
+		"index" : 3,
+		"group" : "ENTRADAS POR REGIONAL",
+		"topic" : "Regional Camila",
+		"quantity_today" : 3936.48,
+		"totalValue_today" : 131419.74000000,
+		"quantity_toDate" : 179184.10,
+		"totalValue_toDate" : 1692205.60000000
+	},
+	{
+		"index" : 4,
+		"group" : "CANCELAMENTOS POR REGIONAL",
+		"topic" : "Regional Camila",
+		"quantity_today" : 0.00,
+		"totalValue_today" : 0,
+		"quantity_toDate" : 1768.04,
+		"totalValue_toDate" : 8428.34000000
+	},
+	{
+		"index" : 4,
+		"group" : "CANCELAMENTOS POR REGIONAL",
+		"topic" : "Regional Roberta",
+		"quantity_today" : 5.00,
+		"totalValue_today" : 199.50000000,
+		"quantity_toDate" : 3635.34,
+		"totalValue_toDate" : 26532.20000000
+	}
+]

@@ -1,8 +1,8 @@
 [
   {
-    "id": 51154,
+    "id": 50946,
     "flow": "OUT",
-    "status": "PREPARING",
+    "status": "APPROVED",
     "company": {
       "id": 1002,
       "code": "CSC",
@@ -734,10 +734,10 @@
       }
     },
     "person": {
-      "id": 2126,
+      "id": 5897,
       "type": "CORPORATION",
-      "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
-      "fantasyName": "OLAVO / GO",
+      "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
+      "fantasyName": "FITLOG TRANSPORTES - SP",
       "nationality": {
         "id": 1030,
         "name": "Brasil",
@@ -750,19 +750,20 @@
         }
       },
       "documentType": "BR_CNPJ",
-      "documentNumber": "36.448.773/0001-82",
-      "zipcode": "74560-070",
-      "street": "AVENIDA BERNARDO SAYAO",
-      "number": "1966",
-      "complement": "QUADRA25 LOTE 18",
-      "district": "SETOR MARECHAL RONDON",
+      "documentNumber": "31.423.169/0001-88",
+      "document2Type": "BR_INSCRICAO_ESTADUAL",
+      "document2Number": "127190353119",
+      "zipcode": "07034-010",
+      "street": "RUA PRESIDENTE DUTRA",
+      "number": "S/N",
+      "district": "JARDIM SANTA FRANCISCA",
       "city": {
-        "id": 1977,
-        "name": "Goiânia",
+        "id": 5926,
+        "name": "Guarulhos",
         "state": {
-          "id": 1009,
-          "code": "GO",
-          "name": "Goiás",
+          "id": 1026,
+          "code": "SP",
+          "name": "São Paulo",
           "country": {
             "id": 1030,
             "name": "Brasil",
@@ -774,27 +775,26 @@
               "fiscal_br_cPais": "1058"
             }
           },
-          "tags": "#system,centrooeste",
+          "tags": "#system,sudeste",
           "properties": {
-            "fiscal_br_cUF": "52"
+            "fiscal_br_cUF": "35"
           }
         },
         "tags": "#system",
         "properties": {
-          "fiscal_br_cMun": "5208707"
+          "fiscal_br_cMun": "3518800"
         }
       },
-      "email": "cassianorep.src@gmail.com",
-      "phone": "62 9180-3993",
-      "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
+      "email": "sac2.sp@fitlogistica.com.br",
+      "phone": "(11) 94361-7935 / WHATS COMERCIAL",
       "fiscalProfilePerson": {
-        "id": 1163,
+        "id": 1136,
         "fiscalRegion": {
           "id": 1001,
           "code": "BR",
           "tags": "#system"
         },
-        "description": "Simples Nacional SP",
+        "description": "Regime Normal SP",
         "tags": "#system",
         "properties": {}
       },
@@ -824,31 +824,210 @@
           }
         }
       },
-      "category2": {
-        "id": 1162,
-        "category": {
-          "id": 1007,
-          "code": "PERSON2",
-          "description": "REGIONAL",
-          "tags": "#system",
+      "tags": "customer,personalErp,shipping",
+      "properties": {
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2026-05-31T01:59:48.855234694-03:00[America/Sao_Paulo]",
+        "u4_gerente": "N",
+        "personalErp": {
+          "key": "559631",
+          "record": {
+            "key": "559631",
+            "city": "Guarulhos",
+            "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
+            "tags": "personalErp",
+            "type": "CORPORATION",
+            "email": "sac2.sp@fitlogistica.com.br",
+            "phone": "(11) 94361-7935 / WHATS COMERCIAL",
+            "state": "SP",
+            "number": "S/N",
+            "street": "RUA PRESIDENTE DUTRA",
+            "country": "BRA",
+            "zipcode": "07034010",
+            "city_key": "9024",
+            "comments": null,
+            "contacts": [
+              {
+                "id": 712733,
+                "tipo": "CELULAR",
+                "conta_key": "559631",
+                "descricao": "(47) 99962-1198"
+              },
+              {
+                "id": 714191,
+                "tipo": "CELULAR",
+                "conta_key": "559631",
+                "descricao": "(11) 2212-3600"
+              },
+              {
+                "id": 713833,
+                "tipo": "EMAIL",
+                "conta_key": "559631",
+                "descricao": "coordenadorasac.sp@fitlogistica.com.br"
+              },
+              {
+                "id": 719457,
+                "tipo": "TELEFONE",
+                "conta_key": "559631",
+                "descricao": "94361-7935 ISABELLA"
+              },
+              {
+                "id": 713834,
+                "tipo": "EMAIL",
+                "conta_key": "559631",
+                "descricao": "dir.operacional@fitlogistica.com.br"
+              },
+              {
+                "id": 717208,
+                "tipo": "CELULAR",
+                "conta_key": "559631",
+                "descricao": "(11) 96840-2312"
+              },
+              {
+                "id": 713835,
+                "tipo": "EMAIL",
+                "conta_key": "559631",
+                "descricao": "faturamento.sp@fitlogistica.com.br"
+              }
+            ],
+            "district": "JARDIM SANTA FRANCISCA",
+            "complement": null,
+            "icms_payer": 1,
+            "u4_gerente": "N",
+            "u4_remessa": null,
+            "fantasyName": "FITLOG TRANSPORTES - SP",
+            "tag_blocked": null,
+            "billing_city": null,
+            "documentType": "BR_CNPJ",
+            "tag_customer": "customer",
+            "tag_employee": null,
+            "tag_inactive": null,
+            "tag_shipping": "shipping",
+            "tag_supplier": null,
+            "u4_historico": null,
+            "billing_state": null,
+            "category1_key": 711628,
+            "document2Type": "BR_INSCRICAO_ESTADUAL",
+            "fiscalProfile": "RegimePeriodicoApuracao",
+            "shipping_city": null,
+            "billing_number": null,
+            "billing_street": null,
+            "category1_code": "Outros",
+            "documentNumber": "31423169000188",
+            "shipping_state": null,
+            "u4_aceite_porc": 10,
+            "billing_country": null,
+            "billing_zipcode": null,
+            "document2Number": "127190353119",
+            "personGroup_key": null,
+            "shipping_number": null,
+            "shipping_street": null,
+            "tag_salesperson": null,
+            "billing_city_key": null,
+            "billing_district": null,
+            "creditLine_limit": 1,
+            "personGroup_code": null,
+            "shipping_country": null,
+            "shipping_zipcode": null,
+            "shipping_city_key": null,
+            "shipping_district": null,
+            "billing_complement": null,
+            "personShipping_key": null,
+            "shipping_complement": null,
+            "u4_conta_id_gerente": null,
+            "u4_particularidades": null,
+            "category1_description": "Outros",
+            "personSalesperson_key": null,
+            "personTranshipping_key": null,
+            "u4_data_limite_credito": "2020-01-01T03:00:00.000Z",
+            "u4_data_ultima_atribuicao": null
+          }
+        },
+        "u4_aceite_porc": 10,
+        "u4_data_limite_credito": "2020-01-01T03:00:00.000Z"
+      }
+    },
+    "type": "BILLING_TITLE",
+    "code": "0203197-3",
+    "description": "CTE's:",
+    "date": "2026-06-03",
+    "issueDate": "2026-06-03",
+    "dueDate": "2026-06-17",
+    "value": 167.64,
+    "valueSettlement": 0,
+    "valueDiscount": 0,
+    "valueRenegotiation": 0,
+    "valueAddition": 0,
+    "balance": 167.64,
+    "wallet": {
+      "id": 1001,
+      "code": "4",
+      "description": "Itaú 109",
+      "type": "BR_CNAB",
+      "batchLastSequence": 556,
+      "bankNumberLastSequence": 33163,
+      "interestRateMonth": 0.033,
+      "lateFee": 2,
+      "tags": "acceptUnknownBillingTitle,approve,cnab400,personalErp",
+      "properties": {
+        "bank": 341,
+        "#user": "support@personalsoft.com.br",
+        "#userId": 1,
+        "#created": "2026-05-31T04:33:12.479046298-03:00[America/Sao_Paulo]",
+        "bankBranch": 585,
+        "bankWallet": 109,
+        "bankAccount": 3040,
+        "personalErp": {
+          "key": "4",
+          "record": {
+            "key": 4,
+            "bank": 341,
+            "code": null,
+            "lateFee": 2,
+            "bankBranch": "0585",
+            "bankWallet": 109,
+            "bankAccount": "03040",
+            "description": "Itaú 109",
+            "bankContract": null,
+            "protestAfterDays": 5,
+            "interestRateMonth": 0.033,
+            "bankBranchChecksum": null,
+            "bankAccountChecksum": "6",
+            "bankNumberLastSequence": 556
+          }
+        },
+        "bankContract": null,
+        "protestAfterDays": 5,
+        "bankBranchChecksum": null,
+        "bankAccountChecksum": "6"
+      }
+    },
+    "assetTag": {
+      "id": 15831,
+      "account": {
+        "id": 1037,
+        "accountChart": {
+          "id": 1001,
+          "code": "BR_BASICO",
+          "description": "Plano de contas básico (BR)",
+          "mask": "#.#.#.###",
           "properties": {}
         },
-        "code": "CAMILA",
-        "description": "Regional Camila",
+        "code": "2.1.1.001",
+        "level": 4,
+        "type": "ANALYTIC",
+        "description": "Fornecedores",
+        "fullDescription": "Passivo, Circulante, Obrigações, Fornecedores",
         "properties": {
-          "#user": "support@personalsoft.com.br",
-          "#userId": 1,
-          "#created": "2026-06-08T16:28:16.274242254-03:00[America/Sao_Paulo]",
-          "personalERP": {
-            "key": "DBD0A643-F0C8-4841-7A42-56BF2C734125"
-          }
+          "complementPerson": "ALWAYS"
         }
       },
-      "personSalesperson": {
-        "id": 1259,
-        "type": "INDIVIDUAL",
-        "name": "CAMILA MURIAS RODRIGUES",
-        "fantasyName": "CAMILA / (SR)",
+      "person": {
+        "id": 5897,
+        "type": "CORPORATION",
+        "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
+        "fantasyName": "FITLOG TRANSPORTES - SP",
         "nationality": {
           "id": 1030,
           "name": "Brasil",
@@ -860,18 +1039,17 @@
             "fiscal_br_cPais": "1058"
           }
         },
-        "documentType": "BR_CPF",
-        "documentNumber": "286.998.868-02",
-        "document2Type": "BR_RG",
-        "document2Number": "287540947",
-        "zipcode": "03210-001",
-        "street": "Rua Costa Barros",
-        "number": "2103",
-        "complement": "APT 22 BLOCO 03",
-        "district": "Sítio Pinheirinho",
+        "documentType": "BR_CNPJ",
+        "documentNumber": "31.423.169/0001-88",
+        "document2Type": "BR_INSCRICAO_ESTADUAL",
+        "document2Number": "127190353119",
+        "zipcode": "07034-010",
+        "street": "RUA PRESIDENTE DUTRA",
+        "number": "S/N",
+        "district": "JARDIM SANTA FRANCISCA",
         "city": {
-          "id": 6276,
-          "name": "São Paulo",
+          "id": 5926,
+          "name": "Guarulhos",
           "state": {
             "id": 1026,
             "code": "SP",
@@ -894,23 +1072,21 @@
           },
           "tags": "#system",
           "properties": {
-            "fiscal_br_cMun": "3550308"
+            "fiscal_br_cMun": "3518800"
           }
         },
-        "email": "camila.murias@concept.com.br",
+        "email": "sac2.sp@fitlogistica.com.br",
+        "phone": "(11) 94361-7935 / WHATS COMERCIAL",
         "fiscalProfilePerson": {
-          "id": 1027,
+          "id": 1136,
           "fiscalRegion": {
             "id": 1001,
             "code": "BR",
             "tags": "#system"
           },
-          "description": "Consumidor SP",
+          "description": "Regime Normal SP",
           "tags": "#system",
-          "properties": {
-            "fiscal_br_indFinal": "1",
-            "outgoingInvoiceComments": "{ibpt}"
-          }
+          "properties": {}
         },
         "category1": {
           "id": 1011,
@@ -938,240 +1114,109 @@
             }
           }
         },
-        "personSalesperson": {
-          "id": 1259,
-          "type": "INDIVIDUAL",
-          "name": "CAMILA MURIAS RODRIGUES",
-          "fantasyName": "CAMILA / (SR)",
-          "nationality": {
-            "id": 1030,
-            "name": "Brasil",
-            "codeA2": "BR",
-            "codeA3": "BRA",
-            "codeN": "076",
-            "tags": "#system,southAmerica",
-            "properties": {
-              "fiscal_br_cPais": "1058"
-            }
-          },
-          "documentType": "BR_CPF",
-          "documentNumber": "286.998.868-02",
-          "document2Type": "BR_RG",
-          "document2Number": "287540947",
-          "zipcode": "03210-001",
-          "street": "Rua Costa Barros",
-          "number": "2103",
-          "complement": "APT 22 BLOCO 03",
-          "district": "Sítio Pinheirinho",
-          "city": {
-            "id": 6276,
-            "name": "São Paulo",
-            "state": {
-              "id": 1026,
-              "code": "SP",
-              "name": "São Paulo",
-              "country": {
-                "id": 1030,
-                "name": "Brasil",
-                "codeA2": "BR",
-                "codeA3": "BRA",
-                "codeN": "076",
-                "tags": "#system,southAmerica",
-                "properties": {
-                  "fiscal_br_cPais": "1058"
-                }
-              },
-              "tags": "#system,sudeste",
-              "properties": {
-                "fiscal_br_cUF": "35"
-              }
-            },
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_cMun": "3550308"
-            }
-          },
-          "email": "camila.murias@concept.com.br",
-          "fiscalProfilePerson": {
-            "id": 1027,
-            "fiscalRegion": {
-              "id": 1001,
-              "code": "BR",
-              "tags": "#system"
-            },
-            "description": "Consumidor SP",
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_indFinal": "1",
-              "outgoingInvoiceComments": "{ibpt}"
-            }
-          },
-          "category1": {
-            "id": 1011,
-            "category": {
-              "id": 1006,
-              "code": "PERSON1",
-              "description": "SEGMENTO",
-              "tags": "#system",
-              "properties": {}
-            },
-            "code": "Outros",
-            "description": "Outros",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-              "personalErp": {
-                "key": "person1:711628",
-                "record": {
-                  "key": "person1:711628",
-                  "code": "Outros",
-                  "description": "Outros",
-                  "category_code": "PERSON1"
-                }
-              }
-            }
-          },
-          "personSalesperson": null,
-          "tags": "employee,personalErp",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-            "u4_gerente": "S",
-            "personalErp": {
-              "key": "561416",
-              "record": {
-                "key": "561416",
-                "city": "São Paulo",
-                "name": "CAMILA MURIAS RODRIGUES",
-                "tags": "personalErp",
-                "type": "INDIVIDUAL",
-                "email": "camila.murias@concept.com.br",
-                "state": "SP",
-                "number": "2103",
-                "street": "Rua Costa Barros",
-                "country": "BRA",
-                "zipcode": "03210001",
-                "city_key": "9508",
-                "comments": null,
-                "contacts": [],
-                "district": "Sítio Pinheirinho",
-                "complement": "APT 22 BLOCO 03",
-                "icms_payer": 9,
-                "u4_gerente": "S",
-                "u4_remessa": null,
-                "fantasyName": "CAMILA / (SR)",
-                "tag_blocked": null,
-                "billing_city": null,
-                "documentType": "BR_CPF",
-                "tag_customer": null,
-                "tag_employee": "employee",
-                "tag_inactive": null,
-                "tag_shipping": null,
-                "tag_supplier": null,
-                "u4_historico": null,
-                "billing_state": null,
-                "category1_key": 711628,
-                "document2Type": "BR_RG",
-                "fiscalProfile": "RegimePeriodicoApuracao",
-                "shipping_city": null,
-                "billing_number": null,
-                "billing_street": null,
-                "category1_code": "Outros",
-                "documentNumber": "28699886802",
-                "shipping_state": null,
-                "u4_aceite_porc": 10,
-                "billing_country": null,
-                "billing_zipcode": null,
-                "document2Number": "287540947",
-                "personGroup_key": null,
-                "shipping_number": null,
-                "shipping_street": null,
-                "tag_salesperson": "salesperson",
-                "billing_city_key": null,
-                "billing_district": null,
-                "creditLine_limit": null,
-                "personGroup_code": null,
-                "shipping_country": null,
-                "shipping_zipcode": null,
-                "shipping_city_key": null,
-                "shipping_district": null,
-                "billing_complement": null,
-                "personShipping_key": null,
-                "shipping_complement": null,
-                "u4_conta_id_gerente": 561416,
-                "u4_particularidades": null,
-                "category1_description": "Outros",
-                "personSalesperson_key": null,
-                "personTranshipping_key": null,
-                "u4_data_limite_credito": null,
-                "u4_data_ultima_atribuicao": null
-              }
-            },
-            "u4_aceite_porc": 10,
-            "u4_conta_id_gerente": 561416
-          }
-        },
-        "tags": "employee,personalErp",
+        "tags": "customer,personalErp,shipping",
         "properties": {
           "#user": "support@personalsoft.com.br",
           "#userId": 1,
-          "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-          "u4_gerente": "S",
+          "#created": "2026-05-31T01:59:48.855234694-03:00[America/Sao_Paulo]",
+          "u4_gerente": "N",
           "personalErp": {
-            "key": "561416",
+            "key": "559631",
             "record": {
-              "key": "561416",
-              "city": "São Paulo",
-              "name": "CAMILA MURIAS RODRIGUES",
+              "key": "559631",
+              "city": "Guarulhos",
+              "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
               "tags": "personalErp",
-              "type": "INDIVIDUAL",
-              "email": "camila.murias@concept.com.br",
+              "type": "CORPORATION",
+              "email": "sac2.sp@fitlogistica.com.br",
+              "phone": "(11) 94361-7935 / WHATS COMERCIAL",
               "state": "SP",
-              "number": "2103",
-              "street": "Rua Costa Barros",
+              "number": "S/N",
+              "street": "RUA PRESIDENTE DUTRA",
               "country": "BRA",
-              "zipcode": "03210001",
-              "city_key": "9508",
+              "zipcode": "07034010",
+              "city_key": "9024",
               "comments": null,
-              "contacts": [],
-              "district": "Sítio Pinheirinho",
-              "complement": "APT 22 BLOCO 03",
-              "icms_payer": 9,
-              "u4_gerente": "S",
+              "contacts": [
+                {
+                  "id": 712733,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(47) 99962-1198"
+                },
+                {
+                  "id": 714191,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(11) 2212-3600"
+                },
+                {
+                  "id": 713833,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "coordenadorasac.sp@fitlogistica.com.br"
+                },
+                {
+                  "id": 719457,
+                  "tipo": "TELEFONE",
+                  "conta_key": "559631",
+                  "descricao": "94361-7935 ISABELLA"
+                },
+                {
+                  "id": 713834,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "dir.operacional@fitlogistica.com.br"
+                },
+                {
+                  "id": 717208,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(11) 96840-2312"
+                },
+                {
+                  "id": 713835,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "faturamento.sp@fitlogistica.com.br"
+                }
+              ],
+              "district": "JARDIM SANTA FRANCISCA",
+              "complement": null,
+              "icms_payer": 1,
+              "u4_gerente": "N",
               "u4_remessa": null,
-              "fantasyName": "CAMILA / (SR)",
+              "fantasyName": "FITLOG TRANSPORTES - SP",
               "tag_blocked": null,
               "billing_city": null,
-              "documentType": "BR_CPF",
-              "tag_customer": null,
-              "tag_employee": "employee",
+              "documentType": "BR_CNPJ",
+              "tag_customer": "customer",
+              "tag_employee": null,
               "tag_inactive": null,
-              "tag_shipping": null,
+              "tag_shipping": "shipping",
               "tag_supplier": null,
               "u4_historico": null,
               "billing_state": null,
               "category1_key": 711628,
-              "document2Type": "BR_RG",
+              "document2Type": "BR_INSCRICAO_ESTADUAL",
               "fiscalProfile": "RegimePeriodicoApuracao",
               "shipping_city": null,
               "billing_number": null,
               "billing_street": null,
               "category1_code": "Outros",
-              "documentNumber": "28699886802",
+              "documentNumber": "31423169000188",
               "shipping_state": null,
               "u4_aceite_porc": 10,
               "billing_country": null,
               "billing_zipcode": null,
-              "document2Number": "287540947",
+              "document2Number": "127190353119",
               "personGroup_key": null,
               "shipping_number": null,
               "shipping_street": null,
-              "tag_salesperson": "salesperson",
+              "tag_salesperson": null,
               "billing_city_key": null,
               "billing_district": null,
-              "creditLine_limit": null,
+              "creditLine_limit": 1,
               "personGroup_code": null,
               "shipping_country": null,
               "shipping_zipcode": null,
@@ -1180,683 +1225,24 @@
               "billing_complement": null,
               "personShipping_key": null,
               "shipping_complement": null,
-              "u4_conta_id_gerente": 561416,
+              "u4_conta_id_gerente": null,
               "u4_particularidades": null,
               "category1_description": "Outros",
               "personSalesperson_key": null,
               "personTranshipping_key": null,
-              "u4_data_limite_credito": null,
+              "u4_data_limite_credito": "2020-01-01T03:00:00.000Z",
               "u4_data_ultima_atribuicao": null
             }
           },
           "u4_aceite_porc": 10,
-          "u4_conta_id_gerente": 561416
-        }
-      },
-      "tags": "personalErp,salesperson",
-      "properties": {
-        "tmp": "DBD0A643-F0C8-4841-7A42-56BF2C734125",
-        "#user": "support@personalsoft.com.br",
-        "#userId": 1,
-        "#created": "2026-05-31T01:52:40.872400668-03:00[America/Sao_Paulo]",
-        "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-        "u4_gerente": "N",
-        "personalErp": {
-          "key": "561520",
-          "record": {
-            "key": "561520",
-            "city": "Goiânia",
-            "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
-            "tags": "personalErp",
-            "type": "CORPORATION",
-            "email": "cassianorep.src@gmail.com",
-            "phone": "62 9180-3993",
-            "state": "GO",
-            "number": "1966",
-            "street": "AVENIDA BERNARDO SAYAO",
-            "country": "BRA",
-            "zipcode": "74560070",
-            "city_key": "2135",
-            "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-            "contacts": [],
-            "district": "SETOR MARECHAL RONDON",
-            "complement": "QUADRA25 LOTE 18",
-            "icms_payer": 9,
-            "u4_gerente": "N",
-            "u4_remessa": null,
-            "fantasyName": "OLAVO / GO",
-            "tag_blocked": null,
-            "billing_city": null,
-            "documentType": "BR_CNPJ",
-            "tag_customer": null,
-            "tag_employee": null,
-            "tag_inactive": null,
-            "tag_shipping": null,
-            "tag_supplier": null,
-            "u4_historico": null,
-            "billing_state": null,
-            "category1_key": 711628,
-            "document2Type": "BR_INSCRICAO_ESTADUAL",
-            "fiscalProfile": "SimplesNacional",
-            "shipping_city": null,
-            "billing_number": null,
-            "billing_street": null,
-            "category1_code": "Outros",
-            "documentNumber": "36448773000182",
-            "shipping_state": null,
-            "u4_aceite_porc": 10,
-            "billing_country": null,
-            "billing_zipcode": null,
-            "document2Number": null,
-            "personGroup_key": null,
-            "shipping_number": null,
-            "shipping_street": null,
-            "tag_salesperson": "salesperson",
-            "billing_city_key": null,
-            "billing_district": null,
-            "creditLine_limit": null,
-            "personGroup_code": null,
-            "shipping_country": null,
-            "shipping_zipcode": null,
-            "shipping_city_key": null,
-            "shipping_district": null,
-            "billing_complement": null,
-            "personShipping_key": null,
-            "shipping_complement": null,
-            "u4_conta_id_gerente": 561416,
-            "u4_particularidades": null,
-            "category1_description": "Outros",
-            "personSalesperson_key": null,
-            "personTranshipping_key": null,
-            "u4_data_limite_credito": null,
-            "u4_data_ultima_atribuicao": null
-          }
-        },
-        "u4_aceite_porc": 10,
-        "u4_conta_id_gerente": 561416
-      }
-    },
-    "type": "BILLING_TITLE",
-    "code": "undefined2",
-    "description": "Comissão Abril/2026 - Abatido IRRF R$ 16,72.",
-    "installment": 2,
-    "date": "2026-06-11",
-    "issueDate": "2026-06-11",
-    "dueDate": "2026-06-15",
-    "value": 1114.77,
-    "valueSettlement": 0,
-    "valueDiscount": 0,
-    "valueRenegotiation": 0,
-    "valueAddition": 0,
-    "balance": 1114.77,
-    "assetTag": {
-      "id": 16098,
-      "account": {
-        "id": 1037,
-        "accountChart": {
-          "id": 1001,
-          "code": "BR_BASICO",
-          "description": "Plano de contas básico (BR)",
-          "mask": "#.#.#.###",
-          "properties": {}
-        },
-        "code": "2.1.1.001",
-        "level": 4,
-        "type": "ANALYTIC",
-        "description": "Fornecedores",
-        "fullDescription": "Passivo, Circulante, Obrigações, Fornecedores",
-        "properties": {
-          "complementPerson": "ALWAYS"
-        }
-      },
-      "person": {
-        "id": 2126,
-        "type": "CORPORATION",
-        "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
-        "fantasyName": "OLAVO / GO",
-        "nationality": {
-          "id": 1030,
-          "name": "Brasil",
-          "codeA2": "BR",
-          "codeA3": "BRA",
-          "codeN": "076",
-          "tags": "#system,southAmerica",
-          "properties": {
-            "fiscal_br_cPais": "1058"
-          }
-        },
-        "documentType": "BR_CNPJ",
-        "documentNumber": "36.448.773/0001-82",
-        "zipcode": "74560-070",
-        "street": "AVENIDA BERNARDO SAYAO",
-        "number": "1966",
-        "complement": "QUADRA25 LOTE 18",
-        "district": "SETOR MARECHAL RONDON",
-        "city": {
-          "id": 1977,
-          "name": "Goiânia",
-          "state": {
-            "id": 1009,
-            "code": "GO",
-            "name": "Goiás",
-            "country": {
-              "id": 1030,
-              "name": "Brasil",
-              "codeA2": "BR",
-              "codeA3": "BRA",
-              "codeN": "076",
-              "tags": "#system,southAmerica",
-              "properties": {
-                "fiscal_br_cPais": "1058"
-              }
-            },
-            "tags": "#system,centrooeste",
-            "properties": {
-              "fiscal_br_cUF": "52"
-            }
-          },
-          "tags": "#system",
-          "properties": {
-            "fiscal_br_cMun": "5208707"
-          }
-        },
-        "email": "cassianorep.src@gmail.com",
-        "phone": "62 9180-3993",
-        "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-        "fiscalProfilePerson": {
-          "id": 1163,
-          "fiscalRegion": {
-            "id": 1001,
-            "code": "BR",
-            "tags": "#system"
-          },
-          "description": "Simples Nacional SP",
-          "tags": "#system",
-          "properties": {}
-        },
-        "category1": {
-          "id": 1011,
-          "category": {
-            "id": 1006,
-            "code": "PERSON1",
-            "description": "SEGMENTO",
-            "tags": "#system",
-            "properties": {}
-          },
-          "code": "Outros",
-          "description": "Outros",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-            "personalErp": {
-              "key": "person1:711628",
-              "record": {
-                "key": "person1:711628",
-                "code": "Outros",
-                "description": "Outros",
-                "category_code": "PERSON1"
-              }
-            }
-          }
-        },
-        "category2": {
-          "id": 1162,
-          "category": {
-            "id": 1007,
-            "code": "PERSON2",
-            "description": "REGIONAL",
-            "tags": "#system",
-            "properties": {}
-          },
-          "code": "CAMILA",
-          "description": "Regional Camila",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-06-08T16:28:16.274242254-03:00[America/Sao_Paulo]",
-            "personalERP": {
-              "key": "DBD0A643-F0C8-4841-7A42-56BF2C734125"
-            }
-          }
-        },
-        "personSalesperson": {
-          "id": 1259,
-          "type": "INDIVIDUAL",
-          "name": "CAMILA MURIAS RODRIGUES",
-          "fantasyName": "CAMILA / (SR)",
-          "nationality": {
-            "id": 1030,
-            "name": "Brasil",
-            "codeA2": "BR",
-            "codeA3": "BRA",
-            "codeN": "076",
-            "tags": "#system,southAmerica",
-            "properties": {
-              "fiscal_br_cPais": "1058"
-            }
-          },
-          "documentType": "BR_CPF",
-          "documentNumber": "286.998.868-02",
-          "document2Type": "BR_RG",
-          "document2Number": "287540947",
-          "zipcode": "03210-001",
-          "street": "Rua Costa Barros",
-          "number": "2103",
-          "complement": "APT 22 BLOCO 03",
-          "district": "Sítio Pinheirinho",
-          "city": {
-            "id": 6276,
-            "name": "São Paulo",
-            "state": {
-              "id": 1026,
-              "code": "SP",
-              "name": "São Paulo",
-              "country": {
-                "id": 1030,
-                "name": "Brasil",
-                "codeA2": "BR",
-                "codeA3": "BRA",
-                "codeN": "076",
-                "tags": "#system,southAmerica",
-                "properties": {
-                  "fiscal_br_cPais": "1058"
-                }
-              },
-              "tags": "#system,sudeste",
-              "properties": {
-                "fiscal_br_cUF": "35"
-              }
-            },
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_cMun": "3550308"
-            }
-          },
-          "email": "camila.murias@concept.com.br",
-          "fiscalProfilePerson": {
-            "id": 1027,
-            "fiscalRegion": {
-              "id": 1001,
-              "code": "BR",
-              "tags": "#system"
-            },
-            "description": "Consumidor SP",
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_indFinal": "1",
-              "outgoingInvoiceComments": "{ibpt}"
-            }
-          },
-          "category1": {
-            "id": 1011,
-            "category": {
-              "id": 1006,
-              "code": "PERSON1",
-              "description": "SEGMENTO",
-              "tags": "#system",
-              "properties": {}
-            },
-            "code": "Outros",
-            "description": "Outros",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-              "personalErp": {
-                "key": "person1:711628",
-                "record": {
-                  "key": "person1:711628",
-                  "code": "Outros",
-                  "description": "Outros",
-                  "category_code": "PERSON1"
-                }
-              }
-            }
-          },
-          "personSalesperson": {
-            "id": 1259,
-            "type": "INDIVIDUAL",
-            "name": "CAMILA MURIAS RODRIGUES",
-            "fantasyName": "CAMILA / (SR)",
-            "nationality": {
-              "id": 1030,
-              "name": "Brasil",
-              "codeA2": "BR",
-              "codeA3": "BRA",
-              "codeN": "076",
-              "tags": "#system,southAmerica",
-              "properties": {
-                "fiscal_br_cPais": "1058"
-              }
-            },
-            "documentType": "BR_CPF",
-            "documentNumber": "286.998.868-02",
-            "document2Type": "BR_RG",
-            "document2Number": "287540947",
-            "zipcode": "03210-001",
-            "street": "Rua Costa Barros",
-            "number": "2103",
-            "complement": "APT 22 BLOCO 03",
-            "district": "Sítio Pinheirinho",
-            "city": {
-              "id": 6276,
-              "name": "São Paulo",
-              "state": {
-                "id": 1026,
-                "code": "SP",
-                "name": "São Paulo",
-                "country": {
-                  "id": 1030,
-                  "name": "Brasil",
-                  "codeA2": "BR",
-                  "codeA3": "BRA",
-                  "codeN": "076",
-                  "tags": "#system,southAmerica",
-                  "properties": {
-                    "fiscal_br_cPais": "1058"
-                  }
-                },
-                "tags": "#system,sudeste",
-                "properties": {
-                  "fiscal_br_cUF": "35"
-                }
-              },
-              "tags": "#system",
-              "properties": {
-                "fiscal_br_cMun": "3550308"
-              }
-            },
-            "email": "camila.murias@concept.com.br",
-            "fiscalProfilePerson": {
-              "id": 1027,
-              "fiscalRegion": {
-                "id": 1001,
-                "code": "BR",
-                "tags": "#system"
-              },
-              "description": "Consumidor SP",
-              "tags": "#system",
-              "properties": {
-                "fiscal_br_indFinal": "1",
-                "outgoingInvoiceComments": "{ibpt}"
-              }
-            },
-            "category1": {
-              "id": 1011,
-              "category": {
-                "id": 1006,
-                "code": "PERSON1",
-                "description": "SEGMENTO",
-                "tags": "#system",
-                "properties": {}
-              },
-              "code": "Outros",
-              "description": "Outros",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#userId": 1,
-                "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-                "personalErp": {
-                  "key": "person1:711628",
-                  "record": {
-                    "key": "person1:711628",
-                    "code": "Outros",
-                    "description": "Outros",
-                    "category_code": "PERSON1"
-                  }
-                }
-              }
-            },
-            "personSalesperson": null,
-            "tags": "employee,personalErp",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-              "u4_gerente": "S",
-              "personalErp": {
-                "key": "561416",
-                "record": {
-                  "key": "561416",
-                  "city": "São Paulo",
-                  "name": "CAMILA MURIAS RODRIGUES",
-                  "tags": "personalErp",
-                  "type": "INDIVIDUAL",
-                  "email": "camila.murias@concept.com.br",
-                  "state": "SP",
-                  "number": "2103",
-                  "street": "Rua Costa Barros",
-                  "country": "BRA",
-                  "zipcode": "03210001",
-                  "city_key": "9508",
-                  "comments": null,
-                  "contacts": [],
-                  "district": "Sítio Pinheirinho",
-                  "complement": "APT 22 BLOCO 03",
-                  "icms_payer": 9,
-                  "u4_gerente": "S",
-                  "u4_remessa": null,
-                  "fantasyName": "CAMILA / (SR)",
-                  "tag_blocked": null,
-                  "billing_city": null,
-                  "documentType": "BR_CPF",
-                  "tag_customer": null,
-                  "tag_employee": "employee",
-                  "tag_inactive": null,
-                  "tag_shipping": null,
-                  "tag_supplier": null,
-                  "u4_historico": null,
-                  "billing_state": null,
-                  "category1_key": 711628,
-                  "document2Type": "BR_RG",
-                  "fiscalProfile": "RegimePeriodicoApuracao",
-                  "shipping_city": null,
-                  "billing_number": null,
-                  "billing_street": null,
-                  "category1_code": "Outros",
-                  "documentNumber": "28699886802",
-                  "shipping_state": null,
-                  "u4_aceite_porc": 10,
-                  "billing_country": null,
-                  "billing_zipcode": null,
-                  "document2Number": "287540947",
-                  "personGroup_key": null,
-                  "shipping_number": null,
-                  "shipping_street": null,
-                  "tag_salesperson": "salesperson",
-                  "billing_city_key": null,
-                  "billing_district": null,
-                  "creditLine_limit": null,
-                  "personGroup_code": null,
-                  "shipping_country": null,
-                  "shipping_zipcode": null,
-                  "shipping_city_key": null,
-                  "shipping_district": null,
-                  "billing_complement": null,
-                  "personShipping_key": null,
-                  "shipping_complement": null,
-                  "u4_conta_id_gerente": 561416,
-                  "u4_particularidades": null,
-                  "category1_description": "Outros",
-                  "personSalesperson_key": null,
-                  "personTranshipping_key": null,
-                  "u4_data_limite_credito": null,
-                  "u4_data_ultima_atribuicao": null
-                }
-              },
-              "u4_aceite_porc": 10,
-              "u4_conta_id_gerente": 561416
-            }
-          },
-          "tags": "employee,personalErp",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-            "u4_gerente": "S",
-            "personalErp": {
-              "key": "561416",
-              "record": {
-                "key": "561416",
-                "city": "São Paulo",
-                "name": "CAMILA MURIAS RODRIGUES",
-                "tags": "personalErp",
-                "type": "INDIVIDUAL",
-                "email": "camila.murias@concept.com.br",
-                "state": "SP",
-                "number": "2103",
-                "street": "Rua Costa Barros",
-                "country": "BRA",
-                "zipcode": "03210001",
-                "city_key": "9508",
-                "comments": null,
-                "contacts": [],
-                "district": "Sítio Pinheirinho",
-                "complement": "APT 22 BLOCO 03",
-                "icms_payer": 9,
-                "u4_gerente": "S",
-                "u4_remessa": null,
-                "fantasyName": "CAMILA / (SR)",
-                "tag_blocked": null,
-                "billing_city": null,
-                "documentType": "BR_CPF",
-                "tag_customer": null,
-                "tag_employee": "employee",
-                "tag_inactive": null,
-                "tag_shipping": null,
-                "tag_supplier": null,
-                "u4_historico": null,
-                "billing_state": null,
-                "category1_key": 711628,
-                "document2Type": "BR_RG",
-                "fiscalProfile": "RegimePeriodicoApuracao",
-                "shipping_city": null,
-                "billing_number": null,
-                "billing_street": null,
-                "category1_code": "Outros",
-                "documentNumber": "28699886802",
-                "shipping_state": null,
-                "u4_aceite_porc": 10,
-                "billing_country": null,
-                "billing_zipcode": null,
-                "document2Number": "287540947",
-                "personGroup_key": null,
-                "shipping_number": null,
-                "shipping_street": null,
-                "tag_salesperson": "salesperson",
-                "billing_city_key": null,
-                "billing_district": null,
-                "creditLine_limit": null,
-                "personGroup_code": null,
-                "shipping_country": null,
-                "shipping_zipcode": null,
-                "shipping_city_key": null,
-                "shipping_district": null,
-                "billing_complement": null,
-                "personShipping_key": null,
-                "shipping_complement": null,
-                "u4_conta_id_gerente": 561416,
-                "u4_particularidades": null,
-                "category1_description": "Outros",
-                "personSalesperson_key": null,
-                "personTranshipping_key": null,
-                "u4_data_limite_credito": null,
-                "u4_data_ultima_atribuicao": null
-              }
-            },
-            "u4_aceite_porc": 10,
-            "u4_conta_id_gerente": 561416
-          }
-        },
-        "tags": "personalErp,salesperson",
-        "properties": {
-          "tmp": "DBD0A643-F0C8-4841-7A42-56BF2C734125",
-          "#user": "support@personalsoft.com.br",
-          "#userId": 1,
-          "#created": "2026-05-31T01:52:40.872400668-03:00[America/Sao_Paulo]",
-          "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-          "u4_gerente": "N",
-          "personalErp": {
-            "key": "561520",
-            "record": {
-              "key": "561520",
-              "city": "Goiânia",
-              "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
-              "tags": "personalErp",
-              "type": "CORPORATION",
-              "email": "cassianorep.src@gmail.com",
-              "phone": "62 9180-3993",
-              "state": "GO",
-              "number": "1966",
-              "street": "AVENIDA BERNARDO SAYAO",
-              "country": "BRA",
-              "zipcode": "74560070",
-              "city_key": "2135",
-              "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-              "contacts": [],
-              "district": "SETOR MARECHAL RONDON",
-              "complement": "QUADRA25 LOTE 18",
-              "icms_payer": 9,
-              "u4_gerente": "N",
-              "u4_remessa": null,
-              "fantasyName": "OLAVO / GO",
-              "tag_blocked": null,
-              "billing_city": null,
-              "documentType": "BR_CNPJ",
-              "tag_customer": null,
-              "tag_employee": null,
-              "tag_inactive": null,
-              "tag_shipping": null,
-              "tag_supplier": null,
-              "u4_historico": null,
-              "billing_state": null,
-              "category1_key": 711628,
-              "document2Type": "BR_INSCRICAO_ESTADUAL",
-              "fiscalProfile": "SimplesNacional",
-              "shipping_city": null,
-              "billing_number": null,
-              "billing_street": null,
-              "category1_code": "Outros",
-              "documentNumber": "36448773000182",
-              "shipping_state": null,
-              "u4_aceite_porc": 10,
-              "billing_country": null,
-              "billing_zipcode": null,
-              "document2Number": null,
-              "personGroup_key": null,
-              "shipping_number": null,
-              "shipping_street": null,
-              "tag_salesperson": "salesperson",
-              "billing_city_key": null,
-              "billing_district": null,
-              "creditLine_limit": null,
-              "personGroup_code": null,
-              "shipping_country": null,
-              "shipping_zipcode": null,
-              "shipping_city_key": null,
-              "shipping_district": null,
-              "billing_complement": null,
-              "personShipping_key": null,
-              "shipping_complement": null,
-              "u4_conta_id_gerente": 561416,
-              "u4_particularidades": null,
-              "category1_description": "Outros",
-              "personSalesperson_key": null,
-              "personTranshipping_key": null,
-              "u4_data_limite_credito": null,
-              "u4_data_ultima_atribuicao": null
-            }
-          },
-          "u4_aceite_porc": 10,
-          "u4_conta_id_gerente": 561416
+          "u4_data_limite_credito": "2020-01-01T03:00:00.000Z"
         }
       }
     },
     "assetTagCounterpart": {
-      "id": 16098,
+      "id": 16557,
       "account": {
-        "id": 1037,
+        "id": 1088,
         "accountChart": {
           "id": 1001,
           "code": "BR_BASICO",
@@ -1864,20 +1250,18 @@
           "mask": "#.#.#.###",
           "properties": {}
         },
-        "code": "2.1.1.001",
+        "code": "4.1.4.002",
         "level": 4,
         "type": "ANALYTIC",
-        "description": "Fornecedores",
-        "fullDescription": "Passivo, Circulante, Obrigações, Fornecedores",
-        "properties": {
-          "complementPerson": "ALWAYS"
-        }
+        "description": "Fretes",
+        "fullDescription": "Despesas, Despesas operacionais, Despesas com vendas, Fretes",
+        "properties": {}
       },
       "person": {
-        "id": 2126,
+        "id": 5897,
         "type": "CORPORATION",
-        "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
-        "fantasyName": "OLAVO / GO",
+        "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
+        "fantasyName": "FITLOG TRANSPORTES - SP",
         "nationality": {
           "id": 1030,
           "name": "Brasil",
@@ -1890,19 +1274,20 @@
           }
         },
         "documentType": "BR_CNPJ",
-        "documentNumber": "36.448.773/0001-82",
-        "zipcode": "74560-070",
-        "street": "AVENIDA BERNARDO SAYAO",
-        "number": "1966",
-        "complement": "QUADRA25 LOTE 18",
-        "district": "SETOR MARECHAL RONDON",
+        "documentNumber": "31.423.169/0001-88",
+        "document2Type": "BR_INSCRICAO_ESTADUAL",
+        "document2Number": "127190353119",
+        "zipcode": "07034-010",
+        "street": "RUA PRESIDENTE DUTRA",
+        "number": "S/N",
+        "district": "JARDIM SANTA FRANCISCA",
         "city": {
-          "id": 1977,
-          "name": "Goiânia",
+          "id": 5926,
+          "name": "Guarulhos",
           "state": {
-            "id": 1009,
-            "code": "GO",
-            "name": "Goiás",
+            "id": 1026,
+            "code": "SP",
+            "name": "São Paulo",
             "country": {
               "id": 1030,
               "name": "Brasil",
@@ -1914,27 +1299,26 @@
                 "fiscal_br_cPais": "1058"
               }
             },
-            "tags": "#system,centrooeste",
+            "tags": "#system,sudeste",
             "properties": {
-              "fiscal_br_cUF": "52"
+              "fiscal_br_cUF": "35"
             }
           },
           "tags": "#system",
           "properties": {
-            "fiscal_br_cMun": "5208707"
+            "fiscal_br_cMun": "3518800"
           }
         },
-        "email": "cassianorep.src@gmail.com",
-        "phone": "62 9180-3993",
-        "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
+        "email": "sac2.sp@fitlogistica.com.br",
+        "phone": "(11) 94361-7935 / WHATS COMERCIAL",
         "fiscalProfilePerson": {
-          "id": 1163,
+          "id": 1136,
           "fiscalRegion": {
             "id": 1001,
             "code": "BR",
             "tags": "#system"
           },
-          "description": "Simples Nacional SP",
+          "description": "Regime Normal SP",
           "tags": "#system",
           "properties": {}
         },
@@ -1964,437 +1348,109 @@
             }
           }
         },
-        "category2": {
-          "id": 1162,
-          "category": {
-            "id": 1007,
-            "code": "PERSON2",
-            "description": "REGIONAL",
-            "tags": "#system",
-            "properties": {}
-          },
-          "code": "CAMILA",
-          "description": "Regional Camila",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-06-08T16:28:16.274242254-03:00[America/Sao_Paulo]",
-            "personalERP": {
-              "key": "DBD0A643-F0C8-4841-7A42-56BF2C734125"
-            }
-          }
-        },
-        "personSalesperson": {
-          "id": 1259,
-          "type": "INDIVIDUAL",
-          "name": "CAMILA MURIAS RODRIGUES",
-          "fantasyName": "CAMILA / (SR)",
-          "nationality": {
-            "id": 1030,
-            "name": "Brasil",
-            "codeA2": "BR",
-            "codeA3": "BRA",
-            "codeN": "076",
-            "tags": "#system,southAmerica",
-            "properties": {
-              "fiscal_br_cPais": "1058"
-            }
-          },
-          "documentType": "BR_CPF",
-          "documentNumber": "286.998.868-02",
-          "document2Type": "BR_RG",
-          "document2Number": "287540947",
-          "zipcode": "03210-001",
-          "street": "Rua Costa Barros",
-          "number": "2103",
-          "complement": "APT 22 BLOCO 03",
-          "district": "Sítio Pinheirinho",
-          "city": {
-            "id": 6276,
-            "name": "São Paulo",
-            "state": {
-              "id": 1026,
-              "code": "SP",
-              "name": "São Paulo",
-              "country": {
-                "id": 1030,
-                "name": "Brasil",
-                "codeA2": "BR",
-                "codeA3": "BRA",
-                "codeN": "076",
-                "tags": "#system,southAmerica",
-                "properties": {
-                  "fiscal_br_cPais": "1058"
-                }
-              },
-              "tags": "#system,sudeste",
-              "properties": {
-                "fiscal_br_cUF": "35"
-              }
-            },
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_cMun": "3550308"
-            }
-          },
-          "email": "camila.murias@concept.com.br",
-          "fiscalProfilePerson": {
-            "id": 1027,
-            "fiscalRegion": {
-              "id": 1001,
-              "code": "BR",
-              "tags": "#system"
-            },
-            "description": "Consumidor SP",
-            "tags": "#system",
-            "properties": {
-              "fiscal_br_indFinal": "1",
-              "outgoingInvoiceComments": "{ibpt}"
-            }
-          },
-          "category1": {
-            "id": 1011,
-            "category": {
-              "id": 1006,
-              "code": "PERSON1",
-              "description": "SEGMENTO",
-              "tags": "#system",
-              "properties": {}
-            },
-            "code": "Outros",
-            "description": "Outros",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-              "personalErp": {
-                "key": "person1:711628",
-                "record": {
-                  "key": "person1:711628",
-                  "code": "Outros",
-                  "description": "Outros",
-                  "category_code": "PERSON1"
-                }
-              }
-            }
-          },
-          "personSalesperson": {
-            "id": 1259,
-            "type": "INDIVIDUAL",
-            "name": "CAMILA MURIAS RODRIGUES",
-            "fantasyName": "CAMILA / (SR)",
-            "nationality": {
-              "id": 1030,
-              "name": "Brasil",
-              "codeA2": "BR",
-              "codeA3": "BRA",
-              "codeN": "076",
-              "tags": "#system,southAmerica",
-              "properties": {
-                "fiscal_br_cPais": "1058"
-              }
-            },
-            "documentType": "BR_CPF",
-            "documentNumber": "286.998.868-02",
-            "document2Type": "BR_RG",
-            "document2Number": "287540947",
-            "zipcode": "03210-001",
-            "street": "Rua Costa Barros",
-            "number": "2103",
-            "complement": "APT 22 BLOCO 03",
-            "district": "Sítio Pinheirinho",
-            "city": {
-              "id": 6276,
-              "name": "São Paulo",
-              "state": {
-                "id": 1026,
-                "code": "SP",
-                "name": "São Paulo",
-                "country": {
-                  "id": 1030,
-                  "name": "Brasil",
-                  "codeA2": "BR",
-                  "codeA3": "BRA",
-                  "codeN": "076",
-                  "tags": "#system,southAmerica",
-                  "properties": {
-                    "fiscal_br_cPais": "1058"
-                  }
-                },
-                "tags": "#system,sudeste",
-                "properties": {
-                  "fiscal_br_cUF": "35"
-                }
-              },
-              "tags": "#system",
-              "properties": {
-                "fiscal_br_cMun": "3550308"
-              }
-            },
-            "email": "camila.murias@concept.com.br",
-            "fiscalProfilePerson": {
-              "id": 1027,
-              "fiscalRegion": {
-                "id": 1001,
-                "code": "BR",
-                "tags": "#system"
-              },
-              "description": "Consumidor SP",
-              "tags": "#system",
-              "properties": {
-                "fiscal_br_indFinal": "1",
-                "outgoingInvoiceComments": "{ibpt}"
-              }
-            },
-            "category1": {
-              "id": 1011,
-              "category": {
-                "id": 1006,
-                "code": "PERSON1",
-                "description": "SEGMENTO",
-                "tags": "#system",
-                "properties": {}
-              },
-              "code": "Outros",
-              "description": "Outros",
-              "properties": {
-                "#user": "support@personalsoft.com.br",
-                "#userId": 1,
-                "#created": "2026-05-19T10:41:07.783729393-03:00[America/Sao_Paulo]",
-                "personalErp": {
-                  "key": "person1:711628",
-                  "record": {
-                    "key": "person1:711628",
-                    "code": "Outros",
-                    "description": "Outros",
-                    "category_code": "PERSON1"
-                  }
-                }
-              }
-            },
-            "personSalesperson": null,
-            "tags": "employee,personalErp",
-            "properties": {
-              "#user": "support@personalsoft.com.br",
-              "#userId": 1,
-              "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-              "u4_gerente": "S",
-              "personalErp": {
-                "key": "561416",
-                "record": {
-                  "key": "561416",
-                  "city": "São Paulo",
-                  "name": "CAMILA MURIAS RODRIGUES",
-                  "tags": "personalErp",
-                  "type": "INDIVIDUAL",
-                  "email": "camila.murias@concept.com.br",
-                  "state": "SP",
-                  "number": "2103",
-                  "street": "Rua Costa Barros",
-                  "country": "BRA",
-                  "zipcode": "03210001",
-                  "city_key": "9508",
-                  "comments": null,
-                  "contacts": [],
-                  "district": "Sítio Pinheirinho",
-                  "complement": "APT 22 BLOCO 03",
-                  "icms_payer": 9,
-                  "u4_gerente": "S",
-                  "u4_remessa": null,
-                  "fantasyName": "CAMILA / (SR)",
-                  "tag_blocked": null,
-                  "billing_city": null,
-                  "documentType": "BR_CPF",
-                  "tag_customer": null,
-                  "tag_employee": "employee",
-                  "tag_inactive": null,
-                  "tag_shipping": null,
-                  "tag_supplier": null,
-                  "u4_historico": null,
-                  "billing_state": null,
-                  "category1_key": 711628,
-                  "document2Type": "BR_RG",
-                  "fiscalProfile": "RegimePeriodicoApuracao",
-                  "shipping_city": null,
-                  "billing_number": null,
-                  "billing_street": null,
-                  "category1_code": "Outros",
-                  "documentNumber": "28699886802",
-                  "shipping_state": null,
-                  "u4_aceite_porc": 10,
-                  "billing_country": null,
-                  "billing_zipcode": null,
-                  "document2Number": "287540947",
-                  "personGroup_key": null,
-                  "shipping_number": null,
-                  "shipping_street": null,
-                  "tag_salesperson": "salesperson",
-                  "billing_city_key": null,
-                  "billing_district": null,
-                  "creditLine_limit": null,
-                  "personGroup_code": null,
-                  "shipping_country": null,
-                  "shipping_zipcode": null,
-                  "shipping_city_key": null,
-                  "shipping_district": null,
-                  "billing_complement": null,
-                  "personShipping_key": null,
-                  "shipping_complement": null,
-                  "u4_conta_id_gerente": 561416,
-                  "u4_particularidades": null,
-                  "category1_description": "Outros",
-                  "personSalesperson_key": null,
-                  "personTranshipping_key": null,
-                  "u4_data_limite_credito": null,
-                  "u4_data_ultima_atribuicao": null
-                }
-              },
-              "u4_aceite_porc": 10,
-              "u4_conta_id_gerente": 561416
-            }
-          },
-          "tags": "employee,personalErp",
-          "properties": {
-            "#user": "support@personalsoft.com.br",
-            "#userId": 1,
-            "#created": "2026-05-31T01:51:26.127951913-03:00[America/Sao_Paulo]",
-            "u4_gerente": "S",
-            "personalErp": {
-              "key": "561416",
-              "record": {
-                "key": "561416",
-                "city": "São Paulo",
-                "name": "CAMILA MURIAS RODRIGUES",
-                "tags": "personalErp",
-                "type": "INDIVIDUAL",
-                "email": "camila.murias@concept.com.br",
-                "state": "SP",
-                "number": "2103",
-                "street": "Rua Costa Barros",
-                "country": "BRA",
-                "zipcode": "03210001",
-                "city_key": "9508",
-                "comments": null,
-                "contacts": [],
-                "district": "Sítio Pinheirinho",
-                "complement": "APT 22 BLOCO 03",
-                "icms_payer": 9,
-                "u4_gerente": "S",
-                "u4_remessa": null,
-                "fantasyName": "CAMILA / (SR)",
-                "tag_blocked": null,
-                "billing_city": null,
-                "documentType": "BR_CPF",
-                "tag_customer": null,
-                "tag_employee": "employee",
-                "tag_inactive": null,
-                "tag_shipping": null,
-                "tag_supplier": null,
-                "u4_historico": null,
-                "billing_state": null,
-                "category1_key": 711628,
-                "document2Type": "BR_RG",
-                "fiscalProfile": "RegimePeriodicoApuracao",
-                "shipping_city": null,
-                "billing_number": null,
-                "billing_street": null,
-                "category1_code": "Outros",
-                "documentNumber": "28699886802",
-                "shipping_state": null,
-                "u4_aceite_porc": 10,
-                "billing_country": null,
-                "billing_zipcode": null,
-                "document2Number": "287540947",
-                "personGroup_key": null,
-                "shipping_number": null,
-                "shipping_street": null,
-                "tag_salesperson": "salesperson",
-                "billing_city_key": null,
-                "billing_district": null,
-                "creditLine_limit": null,
-                "personGroup_code": null,
-                "shipping_country": null,
-                "shipping_zipcode": null,
-                "shipping_city_key": null,
-                "shipping_district": null,
-                "billing_complement": null,
-                "personShipping_key": null,
-                "shipping_complement": null,
-                "u4_conta_id_gerente": 561416,
-                "u4_particularidades": null,
-                "category1_description": "Outros",
-                "personSalesperson_key": null,
-                "personTranshipping_key": null,
-                "u4_data_limite_credito": null,
-                "u4_data_ultima_atribuicao": null
-              }
-            },
-            "u4_aceite_porc": 10,
-            "u4_conta_id_gerente": 561416
-          }
-        },
-        "tags": "personalErp,salesperson",
+        "tags": "customer,personalErp,shipping",
         "properties": {
-          "tmp": "DBD0A643-F0C8-4841-7A42-56BF2C734125",
           "#user": "support@personalsoft.com.br",
           "#userId": 1,
-          "#created": "2026-05-31T01:52:40.872400668-03:00[America/Sao_Paulo]",
-          "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
+          "#created": "2026-05-31T01:59:48.855234694-03:00[America/Sao_Paulo]",
           "u4_gerente": "N",
           "personalErp": {
-            "key": "561520",
+            "key": "559631",
             "record": {
-              "key": "561520",
-              "city": "Goiânia",
-              "name": "CASSIANO REPRESENTACAO TEXTIL EIRELI",
+              "key": "559631",
+              "city": "Guarulhos",
+              "name": "FITLOG TRANSPORTES E LOGISTICA LTDA",
               "tags": "personalErp",
               "type": "CORPORATION",
-              "email": "cassianorep.src@gmail.com",
-              "phone": "62 9180-3993",
-              "state": "GO",
-              "number": "1966",
-              "street": "AVENIDA BERNARDO SAYAO",
+              "email": "sac2.sp@fitlogistica.com.br",
+              "phone": "(11) 94361-7935 / WHATS COMERCIAL",
+              "state": "SP",
+              "number": "S/N",
+              "street": "RUA PRESIDENTE DUTRA",
               "country": "BRA",
-              "zipcode": "74560070",
-              "city_key": "2135",
-              "comments": "BANCO 0077 INTER\r\nAGENCIA 0001\n\r\nC/ Corrente: 049.972.392-9",
-              "contacts": [],
-              "district": "SETOR MARECHAL RONDON",
-              "complement": "QUADRA25 LOTE 18",
-              "icms_payer": 9,
+              "zipcode": "07034010",
+              "city_key": "9024",
+              "comments": null,
+              "contacts": [
+                {
+                  "id": 712733,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(47) 99962-1198"
+                },
+                {
+                  "id": 714191,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(11) 2212-3600"
+                },
+                {
+                  "id": 713833,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "coordenadorasac.sp@fitlogistica.com.br"
+                },
+                {
+                  "id": 719457,
+                  "tipo": "TELEFONE",
+                  "conta_key": "559631",
+                  "descricao": "94361-7935 ISABELLA"
+                },
+                {
+                  "id": 713834,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "dir.operacional@fitlogistica.com.br"
+                },
+                {
+                  "id": 717208,
+                  "tipo": "CELULAR",
+                  "conta_key": "559631",
+                  "descricao": "(11) 96840-2312"
+                },
+                {
+                  "id": 713835,
+                  "tipo": "EMAIL",
+                  "conta_key": "559631",
+                  "descricao": "faturamento.sp@fitlogistica.com.br"
+                }
+              ],
+              "district": "JARDIM SANTA FRANCISCA",
+              "complement": null,
+              "icms_payer": 1,
               "u4_gerente": "N",
               "u4_remessa": null,
-              "fantasyName": "OLAVO / GO",
+              "fantasyName": "FITLOG TRANSPORTES - SP",
               "tag_blocked": null,
               "billing_city": null,
               "documentType": "BR_CNPJ",
-              "tag_customer": null,
+              "tag_customer": "customer",
               "tag_employee": null,
               "tag_inactive": null,
-              "tag_shipping": null,
+              "tag_shipping": "shipping",
               "tag_supplier": null,
               "u4_historico": null,
               "billing_state": null,
               "category1_key": 711628,
               "document2Type": "BR_INSCRICAO_ESTADUAL",
-              "fiscalProfile": "SimplesNacional",
+              "fiscalProfile": "RegimePeriodicoApuracao",
               "shipping_city": null,
               "billing_number": null,
               "billing_street": null,
               "category1_code": "Outros",
-              "documentNumber": "36448773000182",
+              "documentNumber": "31423169000188",
               "shipping_state": null,
               "u4_aceite_porc": 10,
               "billing_country": null,
               "billing_zipcode": null,
-              "document2Number": null,
+              "document2Number": "127190353119",
               "personGroup_key": null,
               "shipping_number": null,
               "shipping_street": null,
-              "tag_salesperson": "salesperson",
+              "tag_salesperson": null,
               "billing_city_key": null,
               "billing_district": null,
-              "creditLine_limit": null,
+              "creditLine_limit": 1,
               "personGroup_code": null,
               "shipping_country": null,
               "shipping_zipcode": null,
@@ -2403,60 +1459,60 @@
               "billing_complement": null,
               "personShipping_key": null,
               "shipping_complement": null,
-              "u4_conta_id_gerente": 561416,
+              "u4_conta_id_gerente": null,
               "u4_particularidades": null,
               "category1_description": "Outros",
               "personSalesperson_key": null,
               "personTranshipping_key": null,
-              "u4_data_limite_credito": null,
+              "u4_data_limite_credito": "2020-01-01T03:00:00.000Z",
               "u4_data_ultima_atribuicao": null
             }
           },
           "u4_aceite_porc": 10,
-          "u4_conta_id_gerente": 561416
+          "u4_data_limite_credito": "2020-01-01T03:00:00.000Z"
         }
       }
     },
-    "tags": "#manual,#repeat,1,legacy,personalErp",
+    "tags": "#manual,#repeat,1,personalErp",
     "properties": {
       "#user": "support@personalsoft.com.br",
       "#userId": 1,
-      "#created": "2026-05-31T11:28:40.031540726-03:00[America/Sao_Paulo]",
+      "#created": "2026-05-31T11:29:30.375635735-03:00[America/Sao_Paulo]",
+      "comments": "702866.",
       "personalErp": {
-        "key": "178133",
+        "key": "180606",
         "record": {
-          "key": 178133,
-          "code": "30",
-          "date": "2026-05-11",
+          "key": 180606,
+          "code": "0201299-5",
+          "date": "2026-05-28",
           "flow": -1,
-          "value": 1114.77,
+          "value": 2452.38,
           "notary": null,
-          "status": "QUITADA",
-          "balance": 0,
+          "status": "DEFINIR",
+          "balance": 2452.38,
           "barcode": null,
-          "dueDate": "2026-05-15",
+          "dueDate": "2026-06-08",
           "protest": null,
           "subtype": "FinancaPagar",
-          "comments": null,
+          "comments": "697619 - 697620 - 697621 - 697622 - 697623 - 697624\r\n697625 - 698244 - 698245 - 698246 - 698247 - 698917.",
           "bank_code": 341,
           "freefield": null,
-          "issueDate": "2026-05-11",
+          "issueDate": "2026-05-25",
           "provision": "N",
           "bankNumber": null,
-          "person_key": 561520,
+          "person_key": 559631,
           "wallet_key": 4,
           "company_key": 2,
-          "description": "Comissão Abril/2026 - Abatido IRRF R$ 16,72.",
+          "description": "CTE's:",
           "installment": null,
           "invoice_key": null,
-          "account_code": "2.02.10",
+          "account_code": "2.10.10",
           "u4_historico": null,
           "department_key": 1,
           "resultCenter_code": "n/d"
         }
       },
-      "originalDueDate": "2026-05-15",
-      "comments": "Linha 1\nLinha 2\nLinha 3"
+      "originalDueDate": "2026-06-17"
     }
   }
 ]
