@@ -1,0 +1,15 @@
+{
+  "engine": "jsx",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": [
+      "@file:/styles.css",
+      "@file:styles.css"
+    ]
+  },
+  "meta": {
+    "dataSource": "/custom/concept/fechamentoDiarioSintetico"
+  }
+}

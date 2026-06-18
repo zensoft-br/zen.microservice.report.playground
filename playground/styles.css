@@ -297,9 +297,8 @@ body {
 }
 .report-wrapper .no-break {
   break-inside: avoid;
-  -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
-  display: block;
+  -webkit-column-break-inside: avoid;
 }
 .report-wrapper .badge {
   display: inline-block;
