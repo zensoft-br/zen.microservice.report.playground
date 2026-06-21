@@ -29,9 +29,9 @@
     │   │       ├── div { dt, dd }
     │   │       └── .kpi-trend (trend span)
     │   │
-    │   └── section (Group - optional)
-    │       ├── header (Group header - optional)
-    │       │   └── h2 (Report title)
+    │   └── section.group.level-{n} (Group - optional)
+    │       ├── header.group-header (Group header - optional)
+    │       │   └── div (Report title)
     │       ├── .content (Data)
     │       │   ├── table (Lists)
     │       │   │   ├── thead > tr > th

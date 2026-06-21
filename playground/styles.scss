@@ -176,28 +176,64 @@ body {
       }
 
       // Recursive Section Logic
-      section {
-        margin-top: 1.5rem;
+      section.group {
+        margin-top: var(--gap);
 
-        // Auto-indent nested sections
-        section {
-          // margin-left: 10px;
-          // border-left: 1px solid #eee;
-          padding-left: 1rem;
-        }
-
-        >header {
+        >header.group-header {
           font-weight: bold;
-          // font-size: 12pt;
+          font-size: 1.2em;
+
           border-bottom: $border;
-          margin-bottom: 0.5rem;
+          padding: calc(var(--gap) / 2) 0;
+          margin-bottom: var(--gap);
         }
 
-        >footer {
-          font-size: 9pt;
-          font-style: italic;
-          color: gray;
-          padding-top: 5px;
+        >footer.group-footer>div {
+          font-weight: bold;
+
+          padding: calc(var(--gap) / 2) 0;
+        }
+
+        >header.group-header {
+          &.level-1 {
+          }
+
+          &.level-2 {
+            margin-left: calc(var(--gap) * 1);
+          }
+
+          &.level-3 {
+            margin-left: calc(var(--gap) * 2);
+          }
+
+          &.level-4 {
+            margin-left: calc(var(--gap) * 3);
+          }
+
+          &.level-5 {
+            margin-left: calc(var(--gap) * 4);
+          }
+        }
+
+        >footer.group-footer>div {
+          &.level-1 {
+          }
+
+          &.level-2 {
+            margin-left: calc(var(--gap) * 1);
+          }
+
+          &.level-3 {
+            margin-left: calc(var(--gap) * 2);
+          }
+
+          &.level-4 {
+            margin-left: calc(var(--gap) * 3);
+          }
+
+          &.level-5 {
+            margin-left: calc(var(--gap) * 4);
+          }
         }
       }
 
@@ -236,7 +272,7 @@ body {
           tfoot {
             tr {
               td {
-                //
+                border-top: 1px solid var(--color-border);
               }
             }
           }

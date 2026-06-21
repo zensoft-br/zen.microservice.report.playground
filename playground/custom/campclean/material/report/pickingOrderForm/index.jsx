@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+import { Badge, Column, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -53,8 +53,6 @@ export default function ({ data = [], meta = {}, t }) {
       ]);
   });
 
-  // data = utils.group(data, report.properties?.settings?.groups || [], columns);
-  
   const visibleColumns = columns.map(col => col.id);
   
   return (
@@ -157,9 +155,8 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table className="striped"
-                data={pickingOrder.items}
-                visibleColumns={visibleColumns}>
+              <Table visibleColumns={visibleColumns}
+                data={pickingOrder.items}>
                 {columns.map((column, index) => (
                   <Column key={index} {...column} />
                 ))}

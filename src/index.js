@@ -18,6 +18,7 @@ const ENGINE_EXTENSIONS = {
   jsx: [".jsx"],
   liquid: [".liquid"],
   nunjucks: [".nunjucks"],
+  react: [".jsx"],
 };
 
 const EXTENSIONS = Object.values(ENGINE_EXTENSIONS).flat();

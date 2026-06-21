@@ -72,7 +72,7 @@ export interface Template {
 
 ```json
 {
-  "engine": "jsx",
+  "engine": "react",
   "template": {
     "source": "@file:index.jsx",
   },
@@ -205,7 +205,7 @@ Este exemplo demonstra o mínimo necessário: cabeçalho, parâmetros, agrupamen
 
 ```json
 {
-  "engine": "jsx",
+  "engine": "react",
   "assets": {
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"

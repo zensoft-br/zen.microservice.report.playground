@@ -2,6 +2,7 @@ import * as utils from "./utils.jsx";
 
 export default function ({ data = [], t }) {
 
+  // Agrupa os itens por produto
   data = data.reduce((red, e) => {
     if (!red[e.product.id]) {
       red[e.product.id] = [];

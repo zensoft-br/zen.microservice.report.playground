@@ -10,7 +10,7 @@ The `i18n` object can be defined within the report template metadata.
 
 ```json
 {
-  "engine": "jsx",
+  "engine": "react",
   "i18n": {
     "locale": "pt-BR",
     "fallbackLocale": "fallback",

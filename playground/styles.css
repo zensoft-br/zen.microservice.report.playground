@@ -158,22 +158,43 @@ body {
   font-size: 8pt;
   align-self: flex-end;
 }
-.report-wrapper .report-container > main section {
-  margin-top: 1.5rem;
+.report-wrapper .report-container > main section.group {
+  margin-top: var(--gap);
 }
-.report-wrapper .report-container > main section section {
-  padding-left: 1rem;
-}
-.report-wrapper .report-container > main section > header {
+.report-wrapper .report-container > main section.group > header.group-header {
   font-weight: bold;
+  font-size: 1.2em;
   border-bottom: 1px solid var(--color-border);
-  margin-bottom: 0.5rem;
+  padding: calc(var(--gap) / 2) 0;
+  margin-bottom: var(--gap);
 }
-.report-wrapper .report-container > main section > footer {
-  font-size: 9pt;
-  font-style: italic;
-  color: gray;
-  padding-top: 5px;
+.report-wrapper .report-container > main section.group > footer.group-footer > div {
+  font-weight: bold;
+  padding: calc(var(--gap) / 2) 0;
+}
+.report-wrapper .report-container > main section.group > header.group-header.level-2 {
+  margin-left: calc(var(--gap) * 1);
+}
+.report-wrapper .report-container > main section.group > header.group-header.level-3 {
+  margin-left: calc(var(--gap) * 2);
+}
+.report-wrapper .report-container > main section.group > header.group-header.level-4 {
+  margin-left: calc(var(--gap) * 3);
+}
+.report-wrapper .report-container > main section.group > header.group-header.level-5 {
+  margin-left: calc(var(--gap) * 4);
+}
+.report-wrapper .report-container > main section.group > footer.group-footer > div.level-2 {
+  margin-left: calc(var(--gap) * 1);
+}
+.report-wrapper .report-container > main section.group > footer.group-footer > div.level-3 {
+  margin-left: calc(var(--gap) * 2);
+}
+.report-wrapper .report-container > main section.group > footer.group-footer > div.level-4 {
+  margin-left: calc(var(--gap) * 3);
+}
+.report-wrapper .report-container > main section.group > footer.group-footer > div.level-5 {
+  margin-left: calc(var(--gap) * 4);
 }
 .report-wrapper .report-container > main .content table:not(.custom) {
   width: 100%;
@@ -191,6 +212,9 @@ body {
 .report-wrapper .report-container > main .content table:not(.custom) td {
   overflow-wrap: break-word;
   padding: 2px calc(var(--padding) / 2);
+}
+.report-wrapper .report-container > main .content table:not(.custom) tfoot tr td {
+  border-top: 1px solid var(--color-border);
 }
 .report-wrapper .report-container > footer {
   margin-top: 4rem;

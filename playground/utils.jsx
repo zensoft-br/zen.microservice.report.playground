@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 export const config = {
   currency: "BRL",
@@ -93,6 +93,12 @@ export function formatNumber(value, options = {}) {
   } catch (_) {
     return null;
   }
+}
+
+export function formatQuantity(value, options = {}) {
+  const result = formatNumber(value, options);
+  
+  return result + (options.unit_code ? ` ${options.unit_code}` : "");
 }
 
 export function formatTime(value, options = {}) {
@@ -252,18 +258,16 @@ export const Badge = ({ children }) => {
   );
 };
 
-export const Column = () => null;
-
-export const Table = ({ className, data, visibleColumns, children }) => {
-  const columns = React.Children.toArray(children)
+const getSortedActiveColumns = (children, visibleColumns) => {
+  return React.Children.toArray(children)
     .filter((child) => {
       if (!child) return false;
       if (child.props.visible != null) return child.props.visible;
       if (visibleColumns == null) return true;
-      if (child.props.ids && visibleColumns) {
+      if (child.props.ids) {
         return child.props.ids.some(id => visibleColumns.includes(id));
       }
-      if (child.props.id && visibleColumns) {
+      if (child.props.id) {
         return visibleColumns.includes(child.props.id);
       }
       return false;
@@ -279,6 +283,128 @@ export const Table = ({ className, data, visibleColumns, children }) => {
       }
       return (a.props.order ?? 0) - (b.props.order ?? 0);
     });
+};
+
+export const Column = () => null;
+
+export const GroupSections = ({
+  data,
+  children, 
+  groups = [], 
+  columns = [], 
+  visibleColumns,
+  level = 0, 
+  tableClassName,
+  t,
+}) => {
+  if (level >= groups.length || !data || data.length === 0) {
+    return <>{children(data)}</>;
+  }
+
+  const currentGroupConfig = groups[level];
+  const groupColumn = columns.find(c => c.id === currentGroupConfig?.columnId);
+
+  const uniqueKeys = useMemo(() => {
+    const keys = data.map(row => row[groupColumn?.id]);
+    return Array.from(new Set(keys));
+  }, [data, groupColumn]);
+
+  // Helper template to instantiate Column elements consistently
+  const renderColumns = () => 
+    columns.map((column, index) => <Column key={index} {...column} />);
+
+  return (
+    <>
+      {uniqueKeys.map((key, index) => {
+        const filteredGroupData = data.filter(row => row[groupColumn?.id] === key);
+
+        let displayValue = key;
+        if (key !== null && key !== undefined) {
+          let val = key;
+          if (groupColumn?.cellValue) {
+            val = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
+          }
+          if (groupColumn?.cell) {
+            val = groupColumn.cell({ value: val, data: filteredGroupData });
+          }
+          displayValue = groupColumn?.header ? <>{groupColumn.header}: {val}</> : val;
+        }
+
+        return (
+          <section key={index} className={`group level-${level + 1}`}>
+            {key !== null && key !== undefined && (
+              <header className={`group-header level-${level + 1}`}>
+                {displayValue}
+              </header>
+            )}
+            
+            <GroupSections
+              data={filteredGroupData} 
+              level={level + 1} 
+              groups={groups} 
+              columns={columns}
+              visibleColumns={visibleColumns}
+              tableClassName={tableClassName}
+              t={t}
+            >
+              {children}
+            </GroupSections>
+
+            {/* OPTIMIZED: Reusing the standard Footer component for group sub-footers */}
+            {key !== null && key !== undefined && (
+              <footer className="group-footer">
+                {level < groups.length - 1 ? <div className={`level-${level + 1}`}>{t("/@word/summary")}: {displayValue}</div> : null}
+                <Footer 
+                  className={tableClassName} 
+                  data={filteredGroupData} 
+                  visibleColumns={visibleColumns}
+                >
+                  {renderColumns()}
+                </Footer>
+              </footer>
+            )}
+          </section>
+        );
+      })}
+    </>
+  );
+};
+
+export const GroupTable = ({ className, columns, visibleColumns, data, groups, t }) => {
+  const renderColumns = () => 
+    columns.map((column, index) => <Column key={index} {...column} />);
+
+  return (
+    <>
+      <GroupSections
+        columns={columns}
+        visibleColumns={visibleColumns}
+        data={data}
+        groups={groups}
+        tableClassName={className}
+        t={t}
+      >
+        {(groupData) => (
+          <Table className={className} data={groupData} visibleColumns={visibleColumns}>
+            {renderColumns()}
+          </Table>
+        )}
+      </GroupSections>
+
+      <h2>{t("/@word/summary")}</h2>
+      
+      <Footer className={className} data={data} visibleColumns={visibleColumns}>
+        {renderColumns()}
+      </Footer>
+    </>
+  );
+};
+
+export const Table = ({ className, data, visibleColumns, children }) => {
+  const columns = useMemo(() => 
+    getSortedActiveColumns(children, visibleColumns), 
+  [children, visibleColumns],
+  );
 
   return (
     <table className={className}>
@@ -293,7 +419,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <th key={i} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.header}
               </th>
             );
@@ -320,7 +446,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
                 : className;
     
               return (
-                <td key={colIndex} className={className} style={col.props.style}>
+                <td key={colIndex} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                   {col.props.cell 
                     ? col.props.cell(context) 
                     : (value ?? null)} 
@@ -330,80 +456,18 @@ export const Table = ({ className, data, visibleColumns, children }) => {
           </tr>
         ))}
       </tbody>
-      <tfoot>
-        <tr>
-          {columns.map((col, i) => {
-            let value = undefined;
-
-            if (typeof col.props.footerValue === "function") {
-              value = col.props.footerValue({ data });
-            }
-
-            const context = { row: null, data, value };
-
-            let className = col.props.footerClassName || col.props.className;
-            className = typeof className === "function"
-              ? className(context)
-              : className;
-
-            return (
-              <td key={i} className={className}>
-                {col.props.footer ? col.props.footer(context) : null}
-              </td>
-            );
-          })}
-        </tr>
-      </tfoot>
     </table>
   );
 };
 
 export const Footer = ({ className, data, visibleColumns, children }) => {
-  const columns = React.Children.toArray(children)
-    .filter((child) => {
-      if (!child) return false;
-      if (child.props.visible != null) return child.props.visible;
-      if (visibleColumns == null) return true;
-      if (child.props.ids && visibleColumns) {
-        return child.props.ids.some(id => visibleColumns.includes(id));
-      }
-      if (child.props.id && visibleColumns) {
-        return visibleColumns.includes(child.props.id);
-      }
-      return false;
-    })
-    .sort((a, b) => {
-      if (visibleColumns) {
-        const getMinIndex = (props) => {
-          const ids = props.ids || [props.id];
-          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
-          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
-        };
-        return getMinIndex(a.props) - getMinIndex(b.props);
-      }
-      return (a.props.order ?? 0) - (b.props.order ?? 0);
-    });
+  const columns = useMemo(() => 
+    getSortedActiveColumns(children, visibleColumns), 
+  [children, visibleColumns],
+  );
 
   return (
     <table className={className}>
-      <thead>
-        <tr>
-          {columns.map((col, i) => {
-            const context = { row: null, data };
-
-            let className = col.props.headerClassName || col.props.className;
-            className = typeof className === "function"
-              ? className(context)
-              : className;
-
-            return (
-              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
-                {col.props.footer ? col.props.header : undefined}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
       <tfoot>
         <tr>
           {columns.map((col, i) => {
@@ -421,7 +485,7 @@ export const Footer = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <td key={i} className={className}>
+              <td key={i} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.footer ? col.props.footer(context) : null}
               </td>
             );
@@ -432,56 +496,51 @@ export const Footer = ({ className, data, visibleColumns, children }) => {
   );
 };
 
-export const GroupSections = ({ data, children, groups = [], columns = [], level = 0 }) => {
-  if (Array.isArray(data)) {
-    return <>{children(data)}</>;
-  }
+const aggregateBy = (data, groupFn, valueFn, operation) => {
+  if (!Array.isArray(data)) return {};
 
-  const entries = Array.from(data.entries());
-  
-  const currentGroup = groups[level];
-  const column = columns.find(c => c.id === currentGroup?.columnId);
+  // Step 1: Group into arrays of numbers
+  const grouped = data.reduce((acc, item) => {
+    const groupKey = groupFn(item);
+    const val = Number(valueFn(item));
+    if (groupKey && !isNaN(val)) {
+      (acc[groupKey] ??= []).push(val);
+    }
+    return acc;
+  }, {});
 
-  return (
-    <>
-      {entries.map(([key, value], index) => {
-        let displayValue = key;
-        if (key !== null) {
-          let value = key;
-          if (column?.cellValue) {
-            value = column.cellValue({ row: { key }, rowIndex: 0, data: [] });
-          }
-          if (column?.cell) {
-            value = column.cell({ value: value, data: [] });
-          }
-
-          if (column.header) {
-            displayValue = <>{column.header}: {value}</>;
-          } else {
-            displayValue = value;
-          }
-        }
-
-        return (
-          <section key={key ?? index} className={`group-level-${level + 1}`}>
-            {key !== null && (
-              <header className="group-header">
-                {React.createElement(`h${Math.min(level + 2, 6)}`, {}, displayValue)}
-              </header>
-            )}
-            
-            {/* Pass level + 1 to move to the next grouping column */}
-            <GroupSections
-              data={value} 
-              level={level + 1} 
-              groups={groups} 
-              columns={columns}
-            >
-              {children}
-            </GroupSections>
-          </section>
-        );
-      })}
-    </>
+  // Step 2: Run the specific math operation
+  return Object.fromEntries(
+    Object.entries(grouped).map(([key, values]) => {
+      if (values.length === 0) return [key, 0];
+      return [key, operation(values)];
+    }),
   );
+};
+
+export const sum = (data, valueFn) => {
+  if (!Array.isArray(data)) return 0;
+  return data.reduce((acc, item) => acc + (Number(valueFn(item)) || 0), 0);
+};
+
+export const sumBy = (data, groupFn, valueFn) => 
+  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0));
+
+export const avgBy = (data, groupFn, valueFn) => 
+  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0) / vals.length);
+
+export const minBy = (data, groupFn, valueFn) => 
+  aggregateBy(data, groupFn, valueFn, (vals) => Math.min(...vals));
+
+export const maxBy = (data, groupFn, valueFn) => 
+  aggregateBy(data, groupFn, valueFn, (vals) => Math.max(...vals));
+
+export const renderAggr = (value, formatFn) => {
+  if (!value || typeof value !== "object") return null;
+
+  return Object.entries(value).map(([key, value]) => (
+    <div key={key} className="footer-grouped-row">
+      {formatFn ? formatFn(value, key) : `${value} ${key}`}
+    </div>
+  ));
 };

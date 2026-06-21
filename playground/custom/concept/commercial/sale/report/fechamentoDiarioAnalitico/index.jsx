@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, getVisibleColumns, GroupSections, Table } from "./utils.jsx";
+import { Badge, getVisibleColumns, GroupTable } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -90,13 +90,12 @@ export default function ({ data = [], meta = {}, t }) {
     { "columnId": "product_description" },
   ]);
   
-  const groupConfig = [
+  const groups = [
     { "columnId": "topic" },
     { "columnId": "manager_code" },
     { "columnId": "personSalesperson_name" },
     { "columnId": "person_name" },
   ];
-  data = utils.group(data, groupConfig);
   
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
@@ -133,21 +132,14 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          <GroupSections 
-            columns={columns}
-            data={data} 
-            groups={groupConfig}>
-            {(group2Data) => (
-              <div className="content">
-                <Table data={group2Data}
-                  visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
+          <div className="content">
+            <GroupTable
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              t={t} />
+          </div>
         </main>
       </div>
     </div>

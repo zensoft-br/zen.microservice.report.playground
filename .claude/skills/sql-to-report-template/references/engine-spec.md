@@ -66,7 +66,7 @@ Canonical template.json the skill emits:
 
 ```json
 {
-  "engine": "jsx",
+  "engine": "react",
   "assets": {
     "scripts": { "utils.jsx": "@file:/utils.jsx" },
     "styles": ["@file:/styles.css", "@file:styles.css"]

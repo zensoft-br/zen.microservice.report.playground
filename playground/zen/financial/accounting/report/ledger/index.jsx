@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import * as utils from "./utils.jsx";
-import { Column, GroupSections, Table } from "./utils.jsx";
+import { GroupTable } from "./utils.jsx";
 
 export default function ({ data: rawData = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -126,6 +126,8 @@ export default function ({ data: rawData = [], meta = {}, t }) {
     ];
   }, [rawData, t]);
 
+  const groups = report.properties?.settings?.groups || [];
+
   return (
     <div className="report-wrapper">
       <div className="report-container" style={{ "width": report?.properties?.width }}>
@@ -187,21 +189,14 @@ export default function ({ data: rawData = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          <GroupSections 
-            columns={columns}
-            data={data} 
-            groups={report.properties?.settings?.groups || []}>
-            {(groupData) => (
-              <div className="content">
-                <Table data={groupData}
-                  visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
+          <div className="content">
+            <GroupTable
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              t={t} />
+          </div>
         </main>
       </div>
     </div>

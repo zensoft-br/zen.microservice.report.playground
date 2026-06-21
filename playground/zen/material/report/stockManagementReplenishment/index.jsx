@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, GroupSections, Table } from "./utils.jsx";
+import { GroupTable } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -217,8 +217,10 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   data = utils.sort(data, report.properties?.settings?.sort || []);
-  data = utils.group(data, report.properties?.settings?.groups || [], columns);
+  
   const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+
+  const groups = report.properties?.settings?.groups || [];
 
   return (
     <div className="report-wrapper">
@@ -301,20 +303,14 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          <GroupSections
-            columns={columns}
-            data={data}
-            groups={report.properties?.settings?.groups || []}>
-            {(groupData) => (
-              <div className="content">
-                <Table data={groupData} visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
+          <div className="content">
+            <GroupTable
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              t={t} />
+          </div>
         </main>
       </div>
     </div>

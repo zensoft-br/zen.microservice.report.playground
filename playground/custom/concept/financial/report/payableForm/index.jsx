@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, getVisibleColumns, GroupSections, Table } from "./utils.jsx";
+import { Badge, getVisibleColumns } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -36,8 +36,6 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   // data = utils.sort(data, report.properties?.settings?.sort || []);
-  
-  // data = utils.group(data, report.properties?.settings?.groups || [], columns);
   
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),

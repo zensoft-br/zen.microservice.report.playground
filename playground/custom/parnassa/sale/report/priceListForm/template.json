@@ -1,5 +1,5 @@
 {
-  "engine": "jsx",
+  "engine": "react",
   "assets": {
     "styles": ["@file:/styles.css", "@file:styles.css"]
   }

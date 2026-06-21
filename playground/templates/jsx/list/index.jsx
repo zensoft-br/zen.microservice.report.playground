@@ -37,8 +37,6 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = utils.sort(data, report.properties?.settings?.sort || []);
   
-  data = utils.group(data, report.properties?.settings?.groups || [], columns);
-  
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
@@ -51,6 +49,8 @@ export default function ({ data = [], meta = {}, t }) {
     addColumns: report.properties?.showColumns?.split(","),
     removeColumns: report.properties?.hideColumns?.split(","),
   });
+
+  const groups = report.properties?.settings?.groups || [];
 
   return (
     <div className="report-wrapper">
@@ -71,21 +71,14 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          <GroupSections 
-            columns={columns}
-            data={data} 
-            groups={report.properties?.settings?.groups || []}>
-            {(groupData) => (
-              <div className="content">
-                <Table data={groupData}
-                  visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
+          <div className="content">
+            <GroupTable
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              t={t} />
+          </div>
         </main>
       </div>
     </div>

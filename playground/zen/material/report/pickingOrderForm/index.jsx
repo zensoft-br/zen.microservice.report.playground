@@ -223,9 +223,8 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table className="striped"
-                data={pickingOrder.items}
-                visibleColumns={visibleColumns}>
+              <Table visibleColumns={visibleColumns}
+                data={pickingOrder.items}>
                 {columns.map((column, index) => (
                   <Column key={index} {...column} />
                 ))}

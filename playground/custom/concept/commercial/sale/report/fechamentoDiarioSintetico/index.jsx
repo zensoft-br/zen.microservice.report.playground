@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, getVisibleColumns, GroupSections, Table } from "./utils.jsx";
+import { Badge, getVisibleColumns, GroupTable } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -51,8 +51,6 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = utils.sort(data, [{ "columnId": "index" }, { "columnId": "index2" }, { "columnId": "topic" }]);
   
-  data = utils.group(data, [{ "columnId": "group" }]);
-  
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
@@ -67,6 +65,8 @@ export default function ({ data = [], meta = {}, t }) {
     removeColumns: report.properties?.hideColumns?.split(","),
   });
 
+  const groups = [{ "columnId": "group" }];
+
   return (
     <div className="report-wrapper">
       <div className="report-container a4">
@@ -80,21 +80,14 @@ export default function ({ data = [], meta = {}, t }) {
           </section>
         </header>
         <main>
-          <GroupSections 
-            columns={columns}
-            data={data} 
-            groups={[{ "columnId": "group" }]}>
-            {(groupData) => (
-              <div className="content">
-                <Table data={groupData}
-                  visibleColumns={visibleColumns}>
-                  {columns.map((column, index) => (
-                    <Column key={index} {...column} />
-                  ))}
-                </Table>
-              </div>
-            )}
-          </GroupSections>
+          <div className="content">
+            <GroupTable
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              t={t} />
+          </div>
         </main>
       </div>
     </div>
