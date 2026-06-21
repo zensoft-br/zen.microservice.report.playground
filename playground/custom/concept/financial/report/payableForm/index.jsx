@@ -80,7 +80,7 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>Valor</dt>
-                <dd style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "1.2em" }}>{utils.formatCurrency(data.value)}</dd>
+                <dd style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "1.2em" }}>{utils.formatCurrency(data.balance)}</dd>
               </dl>
             </section>
             <section className="parameters">
@@ -114,7 +114,7 @@ export default function ({ data = [], meta = {}, t }) {
                     <td>{data.code ?? data.id}</td>
                     <td>{utils.formatDate(data.date)}</td>
                     <td>{utils.formatDate(data.dueDate)}</td>
-                    <td className="number">{utils.formatCurrency(data.value)}</td>
+                    <td className="number">{utils.formatCurrency(data.balance)}</td>
                   </tr>
                 </tbody>
               </table>

@@ -201,7 +201,7 @@ body {
   border-collapse: separate;
   border-spacing: 0;
 }
-.report-wrapper .report-container > main .content table:not(.custom).striped tr:nth-child(even) {
+.report-wrapper .report-container > main .content table:not(.custom):not(.plain) tr:nth-child(even) {
   background-color: #f8f8f8;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {

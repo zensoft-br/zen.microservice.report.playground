@@ -166,6 +166,7 @@ export default function ({ data = [], meta = {}, t }) {
     { id: "unit_code",
       header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/code")),
       width: "8ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
 
     // CONTRACT_ITEM
