@@ -86,6 +86,7 @@ body {
 .report-wrapper .report-container section.parameters div dd,
 .report-wrapper .report-container section.parameters dl dd {
   margin: 0;
+  word-break: break-word;
 }
 .report-wrapper .report-container > header {
   display: flex;
@@ -131,6 +132,7 @@ body {
 .report-wrapper .report-container > header > dl div dd,
 .report-wrapper .report-container > header > dl dl dd {
   margin: 0;
+  word-break: break-word;
 }
 .report-wrapper .report-container > main .kpi-grid {
   display: grid;
@@ -251,6 +253,7 @@ body {
 .report-wrapper .report-container > footer section.summary div dd,
 .report-wrapper .report-container > footer section.summary dl dd {
   margin: 0;
+  word-break: break-word;
 }
 .report-wrapper .flex {
   display: flex;

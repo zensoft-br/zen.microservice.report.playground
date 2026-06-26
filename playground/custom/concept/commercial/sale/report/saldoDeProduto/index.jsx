@@ -10,6 +10,18 @@ export default function ({ data = [], meta = {}, t }) {
       width: "15ch",
     },
     {
+      id: "produtoMestre_codigo",
+      header: "Produto mestre",
+      width: "15ch",
+      cell: ({ row, value }) => <><Badge>{value}</Badge> {row?.produto_descricao ?? ""}</>,
+    },
+    {
+      id: "produtoMestre_classe",
+      header: "Classe",
+      width: "15ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
       id: "produto_codigo",
       header: "Produto",
       width: "15ch",
@@ -157,7 +169,7 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = utils.sort(data, [{ "columnId": "variante_descricao" }, { "columnId": "produto_codigo" }, { "columnId": "compra_disponibilidade" }]);
   
-  const groups = [{ "columnId": "variante_descricao" }, { "columnId": "produto_codigo" }];
+  const groups = report.properties?.settings?.groups || [];
   
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
@@ -188,7 +200,7 @@ export default function ({ data = [], meta = {}, t }) {
     <div className="report-wrapper">
       <div className="report-container a4 landscape">
         <header>
-          <h1>Saldo de Produto</h1>
+          <h1>{report.title}</h1>
           <section className="parameters">
             <dl>
               <dt>Data</dt>

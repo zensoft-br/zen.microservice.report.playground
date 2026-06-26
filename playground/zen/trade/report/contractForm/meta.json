@@ -1,0 +1,29 @@
+{
+  "report": {
+    "title": "My report",
+    "parameters": {
+      "dateStart": "2026-01-01",
+      "dateEnd": "2026-01-31"
+    },
+    "properties": {
+      "settings": {
+        "columns": [
+          "productPacking.code",
+          "name",
+          "score",
+          "status"
+        ],
+        "groups": [
+        ],
+        "sort": [
+          {
+            "columnId": "category1"
+          },
+          {
+            "columnId": "status"
+          }
+        ]
+      }
+    }
+  }
+}

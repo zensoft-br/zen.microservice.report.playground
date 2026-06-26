@@ -206,7 +206,10 @@ export default function ({ data = [], meta = {}, t }) {
               </dl>
               <dl>
                 <dt>{t("/@word/personShipping")}</dt>
-                <dd>{pickingOrder.sale?.personShipping?.name}</dd>
+                <dd>{[
+                  pickingOrder.sale?.personShipping?.name,
+                  pickingOrder.sale?.personShipping?.documentNumber,
+                ].filter(Boolean).join(", ")}</dd>
               </dl>
             </section>
             {pickingOrder.properties?.comments ? <section className="parameters">

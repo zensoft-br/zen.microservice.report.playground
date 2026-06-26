@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Column, Footer, GroupSections, GroupTable, Table } from "./utils.jsx";
+import { Badge, GroupTable } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -22,6 +22,12 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "contract_workflowNode_code",
+      header: utils.cellHeader(t("/trade/contract"), t("/system/workflow/workflowNode")),
+      width: "16ch",
+      cell: ({ value }) => value ? <Badge>{value}</Badge> : null,
+    },
+    {
+      id: "contract_workflowNode_description",
       header: utils.cellHeader(t("/trade/contract"), t("/system/workflow/workflowNode")),
       width: "16ch",
       cell: ({ value }) => value ? <Badge>{value}</Badge> : null,
@@ -194,23 +200,23 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => utils.sum(data, (item) => item.sum_contractItem_quantity_units),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "sum_contractItem_clearedQuantity",
-      header: utils.cellHeader(t("/trade/contract"), t("/@word/quantity")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) => utils.sum(data, (item) => item.sum_contractItem_clearedQuantity),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
     { id: "sum_contractItem_shippedQuantity",
-      header: utils.cellHeader(t("/trade/contract"), t("/@word/quantity")),
+      header: utils.cellHeader(t("/trade/contract"), t("/@word/shippedQuantity")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) => utils.sum(data, (item) => item.sum_contractItem_shippedQuantity),
-      footer: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>  utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_shippedQuantity),
+      footer: ({ value }) => utils.renderAggr(value, (val, unit_code) => utils.formatQuantity(val, { unit_code })),
+    },
+    { id: "sum_contractItem_clearedQuantity",
+      header: utils.cellHeader(t("/trade/contract"), t("/@word/clearedQuantity")),
+      width: "16ch",
+      className: "number",
+      headerClassName: "number",
+      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
+      footerValue: ({ data }) =>  utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_clearedQuantity),
+      footer: ({ value }) => utils.renderAggr(value, (val, unit_code) => utils.formatQuantity(val, { unit_code })),
     },
     { id: "sum_contractItem_totalValue",
       header: utils.cellHeader(t("/trade/contract"), t("/@word/totalValue")),
@@ -254,6 +260,12 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "shipment_workflowNode_code",
+      header: utils.cellHeader(t("/trade/shipment"), t("/system/workflow/workflowNode")),
+      width: "16ch",
+      cell: ({ value }) => value ? <Badge>{value}</Badge> : null,
+    },
+    {
+      id: "shipment_workflowNode_description",
       header: utils.cellHeader(t("/trade/shipment"), t("/system/workflow/workflowNode")),
       width: "16ch",
       cell: ({ value }) => value ? <Badge>{value}</Badge> : null,
@@ -363,7 +375,18 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => utils.sum(data, (item) => item.sum_shipmentItem_grossWeightKg),
       footer: ({ value }) => utils.formatNumber(value),
     },
-
+    {
+      id: "shipmentContainer_id",
+      header: utils.cellHeader(t("/trade/shipmentContainer"), t("/@word/id")),
+      width: "8ch",
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "shipmentContainer_number",
+      header: utils.cellHeader(t("/trade/shipmentContainer"), t("/@word/number")),
+      width: "16ch",
+    },
     // CLEARANCE
     { id: "clearance_id",
       header: utils.cellHeader(t("/trade/clearance"), t("/@word/id")),
@@ -378,6 +401,12 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "clearance_workflowNode_code",
+      header: utils.cellHeader(t("/trade/clearance"), t("/system/workflow/workflowNode")),
+      width: "16ch",
+      cell: ({ value }) => value ? <Badge>{value}</Badge> : null,
+    },
+    {
+      id: "clearance_workflowNode_description",
       header: utils.cellHeader(t("/trade/clearance"), t("/system/workflow/workflowNode")),
       width: "16ch",
       cell: ({ value }) => value ? <Badge>{value}</Badge> : null,

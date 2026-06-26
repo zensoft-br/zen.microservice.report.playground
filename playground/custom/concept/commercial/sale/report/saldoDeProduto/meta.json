@@ -1,21 +1,30 @@
 {
   "report": {
-    "title": "My report",
+    "title_cor": "Saldo de produto por cor",
+    "title": "Saldo de produto por produto mestre",
     "parameters": {
-      "dateStart": "2026-01-01",
-      "dateEnd": "2026-01-31"
     },
     "properties": {
       "settings": {
         "columns": [
-          "id",
-          "name",
-          "score",
-          "status"
+        ],
+        "groups_cor": [
+          {
+            "columnId": "produtoMestre_classe"
+          },
+          {
+            "columnId": "variante_descricao"
+          },
+          {
+            "columnId": "produto_codigo"
+          }
         ],
         "groups": [
           {
-            "columnId": "category1"
+            "columnId": "produtoMestre_codigo"
+          },
+          {
+            "columnId": "produto_codigo"
           }
         ],
         "sort": [

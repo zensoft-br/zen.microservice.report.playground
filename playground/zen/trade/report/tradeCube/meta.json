@@ -52,17 +52,11 @@
       "TAGS": null
     },
     "properties": {
-      "showColumns": "contract_status,contract_id,sum_contractItem_quantity,sum_contractItem_totalValue,sum_clearanceItem_netWeightKg",
+      "showColumns": "contract_id,product_code,product_description,sum_contractItem_quantity,sum_contractItem_shippedQuantity,sum_contractItem_clearedQuantity,sum_contractItem_totalValue,shipmentContainer_number,sum_shipmentItem_totalValue,shipment_person_nameCalc",
       "settings": {
         "groups": [
           {
-            "columnId": "contract_currency_code"
-          },
-          {
-            "columnId": "contract_status"
-          },
-          {
-            "columnId": "contract_id"
+            "columnId": "contract_workflowNode_description"
           }
         ]
       }

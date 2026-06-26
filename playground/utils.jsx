@@ -419,7 +419,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <th key={i} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <th key={i} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.header}
               </th>
             );
@@ -446,7 +446,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
                 : className;
     
               return (
-                <td key={colIndex} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+                <td key={colIndex} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                   {col.props.cell 
                     ? col.props.cell(context) 
                     : (value ?? null)} 
@@ -485,7 +485,7 @@ export const Footer = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <td key={i} className={className} style={{ minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <td key={i} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.footer ? col.props.footer(context) : null}
               </td>
             );
