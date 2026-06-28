@@ -316,12 +316,9 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table visibleColumns={visibleColumns}
-                data={data.items}>
-                {columns.map((column, index) => (
-                  <Column key={index} {...column} />
-                ))}
-              </Table>
+              <Table columns={columns}
+                visibleColumns={visibleColumns}
+                data={data.items} />
             </div>
           </main>
         </div>

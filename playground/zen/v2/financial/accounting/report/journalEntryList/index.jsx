@@ -199,7 +199,6 @@ export default function ({ data: rawData = [], meta = {}, t }) {
       header: t("/@word/tags"),
     },
   ];
-
     
   return (
     <div className="report-wrapper">
@@ -265,12 +264,9 @@ export default function ({ data: rawData = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table visibleColumns={showColumns} 
-              data={data}>
-              {columns.map((column, index) => (
-                <Column key={index} {...column} />
-              ))}
-            </Table>
+            <Table columns={columns} 
+              visibleColumns={showColumns} 
+              data={data} />
           </div>
         </main>
       </div>

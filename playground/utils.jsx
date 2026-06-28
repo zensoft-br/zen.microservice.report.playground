@@ -258,45 +258,9 @@ export const Badge = ({ children }) => {
   );
 };
 
-const getSortedActiveColumns = (children, visibleColumns) => {
-  return React.Children.toArray(children)
-    .filter((child) => {
-      if (!child) return false;
-      if (child.props.visible != null) return child.props.visible;
-      if (visibleColumns == null) return true;
-      if (child.props.ids) {
-        return child.props.ids.some(id => visibleColumns.includes(id));
-      }
-      if (child.props.id) {
-        return visibleColumns.includes(child.props.id);
-      }
-      return false;
-    })
-    .sort((a, b) => {
-      if (visibleColumns) {
-        const getMinIndex = (props) => {
-          const ids = props.ids || [props.id];
-          const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
-          return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
-        };
-        return getMinIndex(a.props) - getMinIndex(b.props);
-      }
-      return (a.props.order ?? 0) - (b.props.order ?? 0);
-    });
-};
-
 export const Column = () => null;
 
-export const GroupSections = ({
-  data,
-  children, 
-  groups = [], 
-  columns = [], 
-  visibleColumns,
-  level = 0, 
-  tableClassName,
-  t,
-}) => {
+export const GroupSections = ({ data, children, groups = [], columns = [], visibleColumns, level = 0, tableClassName, t }) => {
   if (level >= groups.length || !data || data.length === 0) {
     return <>{children(data)}</>;
   }
@@ -308,10 +272,6 @@ export const GroupSections = ({
     const keys = data.map(row => row[groupColumn?.id]);
     return Array.from(new Set(keys));
   }, [data, groupColumn]);
-
-  // Helper template to instantiate Column elements consistently
-  const renderColumns = () => 
-    columns.map((column, index) => <Column key={index} {...column} />);
 
   return (
     <>
@@ -356,11 +316,9 @@ export const GroupSections = ({
                 {level < groups.length - 1 ? <div className={`level-${level + 1}`}>{t("/@word/summary")}: {displayValue}</div> : null}
                 <Footer 
                   className={tableClassName} 
-                  data={filteredGroupData} 
+                  columns={columns}
                   visibleColumns={visibleColumns}
-                >
-                  {renderColumns()}
-                </Footer>
+                  data={filteredGroupData} />
               </footer>
             )}
           </section>
@@ -371,9 +329,6 @@ export const GroupSections = ({
 };
 
 export const GroupTable = ({ className, columns, visibleColumns, data, groups, t }) => {
-  const renderColumns = () => 
-    columns.map((column, index) => <Column key={index} {...column} />);
-
   return (
     <>
       <GroupSections
@@ -382,35 +337,74 @@ export const GroupTable = ({ className, columns, visibleColumns, data, groups, t
         data={data}
         groups={groups}
         tableClassName={className}
-        t={t}
-      >
+        t={t}>
         {(groupData) => (
-          <Table className={className} data={groupData} visibleColumns={visibleColumns}>
-            {renderColumns()}
-          </Table>
+          <Table className={className}
+            columns={columns}
+            visibleColumns={visibleColumns}
+            data={groupData} />
         )}
       </GroupSections>
 
       <h2>{t("/@word/summary")}</h2>
       
-      <Footer className={className} data={data} visibleColumns={visibleColumns}>
-        {renderColumns()}
-      </Footer>
+      <Footer className={className}
+        columns={columns}
+        visibleColumns={visibleColumns}
+        data={data} />
     </>
   );
 };
 
-export const Table = ({ className, data, visibleColumns, children }) => {
-  const columns = useMemo(() => 
-    getSortedActiveColumns(children, visibleColumns), 
-  [children, visibleColumns],
-  );
+function getCalculatedColumns(columns, visibleColumns, children) {
+  if (columns) {
+    const calculatedColumns = (visibleColumns && visibleColumns.length > 0)
+      ? visibleColumns
+        .map(id => columns.find(col => col.id === id))
+        .filter(col => col !== undefined)
+      : columns;
+    return calculatedColumns.map((column, index) => (
+      <Column key={index} {...column} />
+    ));
+  } else {
+    // Legacy support for children as Column elements
+    return React.Children.toArray(children)
+      .filter((child) => {
+        if (!child) return false;
+        if (child.props.visible != null) return child.props.visible;
+        if (visibleColumns == null) return true;
+        if (child.props.ids) {
+          return child.props.ids.some(id => visibleColumns.includes(id));
+        }
+        if (child.props.id) {
+          return visibleColumns.includes(child.props.id);
+        }
+        return false;
+      })
+      .sort((a, b) => {
+        if (visibleColumns) {
+          const getMinIndex = (props) => {
+            const ids = props.ids || [props.id];
+            const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
+            return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
+          };
+          return getMinIndex(a.props) - getMinIndex(b.props);
+        }
+        return (a.props.order ?? 0) - (b.props.order ?? 0);
+      });
+  }
+}
+
+export const Table = ({ className, columns, visibleColumns, data, children }) => {
+  const calculatedColumns = useMemo(() => 
+    getCalculatedColumns(columns, visibleColumns, children), 
+  [columns, visibleColumns, children]);
 
   return (
     <table className={className}>
       <thead>
         <tr>
-          {columns.map((col, i) => {
+          {calculatedColumns.map((col, i) => {
             const context = { row: null, data };
 
             let className = col.props.headerClassName || col.props.className;
@@ -419,7 +413,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <th key={i} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.header}
               </th>
             );
@@ -429,7 +423,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
       <tbody>
         {data.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {columns.map((col, colIndex) => { 
+            {calculatedColumns.map((col, colIndex) => { 
               let value = undefined;
 
               if (typeof col.props.cellValue === "function") {
@@ -446,7 +440,7 @@ export const Table = ({ className, data, visibleColumns, children }) => {
                 : className;
     
               return (
-                <td key={colIndex} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+                <td key={colIndex} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                   {col.props.cell 
                     ? col.props.cell(context) 
                     : (value ?? null)} 
@@ -460,17 +454,16 @@ export const Table = ({ className, data, visibleColumns, children }) => {
   );
 };
 
-export const Footer = ({ className, data, visibleColumns, children }) => {
-  const columns = useMemo(() => 
-    getSortedActiveColumns(children, visibleColumns), 
-  [children, visibleColumns],
-  );
+export const Footer = ({ className, columns, visibleColumns, data, children }) => {
+  const calculatedColumns = useMemo(() => 
+    getCalculatedColumns(columns, visibleColumns, children), 
+  [columns, visibleColumns, children]);
 
   return (
     <table className={className}>
       <tfoot>
         <tr>
-          {columns.map((col, i) => {
+          {calculatedColumns.map((col, i) => {
             let value = undefined;
 
             if (typeof col.props.footerValue === "function") {
@@ -485,7 +478,7 @@ export const Footer = ({ className, data, visibleColumns, children }) => {
               : className;
 
             return (
-              <td key={i} className={className} style={{ width: col.props.width || "10ch", minWidth: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <td key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
                 {col.props.footer ? col.props.footer(context) : null}
               </td>
             );

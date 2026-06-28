@@ -120,7 +120,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper">
       {data.map(pickingOrder => (
-        <div className="report-container a4 landscape">
+        <div className="report-container a4">
           <header>
             <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
               <img src={pickingOrder.company?.image?.url} style={{ height: "1.5cm" }}></img>
@@ -226,12 +226,9 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table visibleColumns={visibleColumns}
-                data={pickingOrder.items}>
-                {columns.map((column, index) => (
-                  <Column key={index} {...column} />
-                ))}
-              </Table>
+              <Table columns={columns}
+                visibleColumns={visibleColumns}
+                data={pickingOrder.items} />
             </div>
           </main>
           <footer>
