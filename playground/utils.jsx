@@ -260,76 +260,6 @@ export const Badge = ({ children }) => {
 
 export const Column = () => null;
 
-export const GroupSections = ({ data, children, groups = [], columns = [], visibleColumns, level = 0, tableClassName, t }) => {
-  if (level >= groups.length || !data || data.length === 0) {
-    return <>{children(data)}</>;
-  }
-
-  const currentGroupConfig = groups[level];
-  const groupColumn = columns.find(c => c.id === currentGroupConfig?.columnId);
-
-  const uniqueKeys = useMemo(() => {
-    const keys = data.map(row => row[groupColumn?.id]);
-    return Array.from(new Set(keys));
-  }, [data, groupColumn]);
-
-  return (
-    <>
-      {uniqueKeys.map((key, index) => {
-        const filteredGroupData = data.filter(row => row[groupColumn?.id] === key);
-
-        let displayValue = key;
-        if (key !== null && key !== undefined) {
-          let val = key;
-          if (groupColumn?.cellValue) {
-            val = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
-          }
-          if (groupColumn?.cell) {
-            val = groupColumn.cell({ value: val, data: filteredGroupData });
-          }
-          displayValue = groupColumn?.header ? <>{groupColumn.header}: {val}</> : val;
-        }
-
-        return (
-          <section key={index} className={`group level-${level + 1}`}>
-            {key !== null && key !== undefined && (
-              <header className={`group-header level-${level + 1}`}>
-                {displayValue}
-              </header>
-            )}
-            
-            <GroupSections
-              data={filteredGroupData}
-              level={level + 1}
-              groups={groups}
-              columns={columns}
-              visibleColumns={visibleColumns}
-              tableClassName={tableClassName}
-              t={t}
-            >
-              {children}
-            </GroupSections>
-
-            {key !== null && key !== undefined && (
-              <footer className={`group-footer level-${level + 1}`}>
-                {level < groups.length - 1 ?
-                  <div className={`level-${level + 1}`}>
-                    ≡ {displayValue}
-                  </div> : null}
-                <Footer
-                  className={tableClassName}
-                  columns={columns}
-                  visibleColumns={visibleColumns}
-                  data={filteredGroupData} />
-              </footer>
-            )}
-          </section>
-        );
-      })}
-    </>
-  );
-};
-
 function getActiveColumns(columns, visibleColumns, children) {
   if (columns) {
     const activeColumns = (visibleColumns && visibleColumns.length > 0)
@@ -398,35 +328,7 @@ function getColumnsStyles(activeColumns) {
   };
 }
 
-const GroupTable = ({ className, columns, visibleColumns, data, groups, t }) => {
-  return (
-    <>
-      <GroupSections
-        columns={columns}
-        visibleColumns={visibleColumns}
-        data={data}
-        groups={groups}
-        tableClassName={className}
-        t={t}>
-        {(groupData) => (
-          <BaseTable className={className}
-            columns={columns}
-            visibleColumns={visibleColumns}
-            data={groupData} />
-        )}
-      </GroupSections>
-
-      <h2>≡</h2>
-      
-      <Footer className={className}
-        columns={columns}
-        visibleColumns={visibleColumns}
-        data={data} />
-    </>
-  );
-};
-
-export const TableContainer = ({ className, columns, visibleColumns = [], children }) => {
+export const TableContainer = ({ className, columns, visibleColumns, children }) => {
   const activeColumns = useMemo(() =>
     getActiveColumns(columns, visibleColumns),
   [columns, visibleColumns, children]);
@@ -443,89 +345,172 @@ export const TableContainer = ({ className, columns, visibleColumns = [], childr
   );
 };
 
-const BaseTable = ({ className, columns, visibleColumns, data, children }) => {
-  const activeColumns = useMemo(() =>
-    getActiveColumns(columns, visibleColumns, children),
-  [columns, visibleColumns, children]);
+const HeaderRow = ({ activeColumns, data }) => (
+  <tr className="repeated-column-headers">
+    {activeColumns.map((col, i) => {
+      const context = { row: null, data };
+      let headerClass = col.props.headerClassName || col.props.className;
+      headerClass = typeof headerClass === "function" ? headerClass(context) : headerClass;
 
-  const columnStyles = useMemo(() => {
-    return getColumnsStyles(activeColumns);
-  }, [activeColumns]);
+      return (
+        <th key={i} className={headerClass} scope="col">
+          {col.props.header}
+        </th>
+      );
+    })}
+  </tr>
+);
 
+const FooterRow = ({ data, activeColumns, className: customClassName }) => {
   return (
-    <table className={className} style={columnStyles}>
-      <thead>
-        <tr>
-          {activeColumns.map((col, i) => {
-            const context = { row: null, data };
+    <>
+      {activeColumns.map((col, i) => {
+        let value = undefined;
+        if (typeof col.props.footerValue === "function") {
+          value = col.props.footerValue({ data });
+        }
+        const context = { row: null, data, value };
 
-            let className = col.props.headerClassName || col.props.className;
-            className = typeof className === "function"
-              ? className(context)
-              : className;
+        let className = col.props.footerClassName || col.props.className;
+        className = typeof className === "function" ? className(context) : className;
+        
+        const combinedClass = [className, customClassName].filter(Boolean).join(" ");
 
-            return (
-              <th key={i} className={className}>
-                {col.props.header}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            {activeColumns.map((col, colIndex) => {
-              let value = undefined;
-
-              if (typeof col.props.cellValue === "function") {
-                value = col.props.cellValue({ row, rowIndex, data });
-              } else if (col.props.id) {
-                value = row[col.props.id];
-              }
-
-              const context = { row, rowIndex, data, value };
-
-              let className = col.props.className;
-              className = typeof className === "function"
-                ? className(context)
-                : className;
-    
-              return (
-                <td key={colIndex} className={className}>
-                  {col.props.cell
-                    ? col.props.cell(context)
-                    : (value ?? null)}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        return (
+          <td key={i} className={combinedClass}>
+            {col.props.footer ? col.props.footer(context) : null}
+          </td>
+        );
+      })}
+    </>
   );
 };
 
-export const Table = ({ groups, t, ...props }) => {
-  if (groups && groups.length > 0) {
+const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, activeColumns }) => {
+  if (level >= groups.length || !data || data.length === 0) {
     return (
-      <TableContainer columns={props.columns} visibleColumns={props.visibleColumns}>
-        <GroupTable {...props} groups={groups} t={t} />
-      </TableContainer>
+      <>
+        {data.map((row, rowIndex) => { 
+          const stripeClass = rowIndex % 2 === 0 ? "data-row-even" : "data-row-odd";
+
+          return (
+            <tr key={rowIndex} className={stripeClass} style={{ "--level": level }}>
+              {activeColumns.map((col, colIndex) => {
+                let value = undefined;
+                if (typeof col.props.cellValue === "function") {
+                  value = col.props.cellValue({ row, rowIndex, data });
+                } else if (col.props.id) {
+                  value = row[col.props.id];
+                }
+
+                const context = { row, rowIndex, data, value };
+                let className = col.props.className;
+                className = typeof className === "function" ? className(context) : className;
+
+                return (
+                  <td key={colIndex} className={className}>
+                    {col.props.cell ? col.props.cell(context) : (value ?? null)}
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
+      </>
     );
   }
 
+  const currentGroupConfig = groups[level];
+  const groupColumn = columns.find(c => c.id === currentGroupConfig?.columnId);
+
+  const shouldRenderHeader = currentGroupConfig?.showHeader !== undefined
+    ? currentGroupConfig.showHeader
+    : level === 0;
+
+  const uniqueKeys = useMemo(() => {
+    const keys = data.map(row => row[groupColumn?.id]);
+    return Array.from(new Set(keys));
+  }, [data, groupColumn]);
+
+  const totalCols = activeColumns.length;
+
   return (
-    <TableContainer columns={props.columns} visibleColumns={props.visibleColumns}>
-      <BaseTable {...props} />
-      <Footer columns={props.columns}
-        visibleColumns={props.visibleColumns}
-        data={props.data} />
-    </TableContainer>
+    <>
+      {uniqueKeys.map((key, index) => {
+        const filteredGroupData = data.filter(row => row[groupColumn?.id] === key);
+
+        let displayValue = key;
+        if (key !== null && key !== undefined) {
+          let val = key;
+          if (groupColumn?.cellValue) {
+            val = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
+          }
+          if (groupColumn?.cell) {
+            val = groupColumn.cell({ value: val, data: filteredGroupData });
+          }
+          displayValue = groupColumn?.header ? <>{groupColumn.header}:&nbsp;{val}</> : val;
+        }
+
+        const RowContent = (
+          <>
+            {shouldRenderHeader && (
+              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} />
+            )}
+
+            {key !== null && key !== undefined && (
+              <tr className={`group-header level-${level + 1}`} style={{ "--level": level }}>
+                <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
+                  {displayValue}
+                </th>
+              </tr>
+            )}
+
+            <Groups
+              data={filteredGroupData}
+              level={level + 1}
+              groups={groups}
+              columns={columns}
+              visibleColumns={visibleColumns}
+              activeColumns={activeColumns}
+            />
+
+            {/* Clean Group Footer Stack */}
+            {key !== null && key !== undefined && (
+              <>
+                {level < groups.length - 1 && (
+                  <tr className={`group-footer level-${level + 1}`} style={{ "--level": level }}>
+                    <th colSpan={totalCols} scope="rowgroup">
+                      <div className={`level-${level + 1}`}>{"≡".repeat(level + 1)} {displayValue}</div>
+                    </th>
+                  </tr>
+                )}
+
+                <tr className={`group-footer-values level-${level + 1}`} style={{ "--level": level }}>
+                  <FooterRow 
+                    data={filteredGroupData} 
+                    activeColumns={activeColumns} 
+                  />
+                </tr>
+              </>
+            )}
+          </>
+        );
+
+        return level === 0 ? (
+          <tbody key={index} className={`group level-${level + 1}`}>
+            {RowContent}
+          </tbody>
+        ) : (
+          <React.Fragment key={index}>
+            {RowContent}
+          </React.Fragment>
+        );
+      })}
+    </>
   );
 };
 
-export const Footer = ({ className, columns, visibleColumns, data, children }) => {
+export const Table = ({ className, columns, visibleColumns, groups, data, children }) => {
   const activeColumns = useMemo(() =>
     getActiveColumns(columns, visibleColumns, children),
   [columns, visibleColumns, children]);
@@ -534,30 +519,57 @@ export const Footer = ({ className, columns, visibleColumns, data, children }) =
     return getColumnsStyles(activeColumns);
   }, [activeColumns]);
 
+  const hasGroups = groups && groups.length > 0;
+
   return (
     <table className={className} style={columnStyles}>
-      <tfoot>
-        <tr>
-          {activeColumns.map((col, i) => {
-            let value = undefined;
+      {!hasGroups && (
+        <thead>
+          <HeaderRow activeColumns={activeColumns} data={data} />
+        </thead>
+      )}
 
-            if (typeof col.props.footerValue === "function") {
-              value = col.props.footerValue({ data });
-            }
-
-            const context = { row: null, data, value };
-
-            let className = col.props.footerClassName || col.props.className;
-            className = typeof className === "function"
-              ? className(context)
-              : className;
-
+      {hasGroups ? (
+        <Groups
+          data={data}
+          groups={groups}
+          columns={columns}
+          visibleColumns={visibleColumns}
+          activeColumns={activeColumns}
+        />
+      ) : (
+        <tbody>
+          {data.map((row, rowIndex) => {
+            const stripeClass = rowIndex % 2 === 0 ? "data-row-even" : "data-row-odd";
             return (
-              <td key={i} className={className}>
-                {col.props.footer ? col.props.footer(context) : null}
-              </td>
+              <tr key={rowIndex} className={stripeClass} style={{ "--level": 0 }}>
+                {activeColumns.map((col, colIndex) => {
+                  let value = undefined;
+                  if (typeof col.props.cellValue === "function") {
+                    value = col.props.cellValue({ row, rowIndex, data });
+                  } else if (col.props.id) {
+                    value = row[col.props.id];
+                  }
+                  const context = { row, rowIndex, data, value };
+                  return (
+                    <td key={colIndex} className={col.props.className}>
+                      {col.props.cell ? col.props.cell(context) : (value ?? null)}
+                    </td>
+                  );
+                })}
+              </tr>
             );
           })}
+        </tbody>
+      )}
+
+      <tfoot>
+        <tr>
+          <FooterRow 
+            data={data} 
+            activeColumns={activeColumns} 
+            prefix={hasGroups ? "≡ " : ""} 
+          />
         </tr>
       </tfoot>
     </table>

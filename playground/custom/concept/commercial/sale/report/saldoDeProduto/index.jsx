@@ -7,7 +7,7 @@ export default function ({ data = [], meta = {}, t }) {
   const columns = [
     { id: "compra_codigo",
       header: "Origem",
-      width: "15ch",
+      width: "20ch",
     },
     {
       id: "produtoMestre_codigo",

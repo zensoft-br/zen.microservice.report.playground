@@ -37,9 +37,9 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       className: "number",
       cellValue: ({ row }) => row.quantity * row.productPacking.product?.grossWeightKg || 0,
-      cell: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
       footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.grossWeightKg || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
     },
   ];
 

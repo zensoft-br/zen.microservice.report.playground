@@ -251,6 +251,25 @@ body {
   justify-content: flex-end;
   text-align: right;
 }
+.report-wrapper .report-container > main .content table:not(.custom) .group-header,
+.report-wrapper .report-container > main .content table:not(.custom) .group-footer {
+  padding-left: calc(8px + (var(--level) - 1) * 1rem);
+}
+.report-wrapper .report-container > main .content table:not(.custom) .group-header th,
+.report-wrapper .report-container > main .content table:not(.custom) .group-header td,
+.report-wrapper .report-container > main .content table:not(.custom) .group-footer th,
+.report-wrapper .report-container > main .content table:not(.custom) .group-footer td {
+  display: block;
+  grid-column: 1/-1;
+}
+.report-wrapper .report-container > main .content table:not(.custom) .group-footer-values {
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.report-wrapper .report-container > main .content table:not(.custom) .group-footer-values.level-1 {
+  margin-bottom: 1.5rem;
+}
 .report-wrapper .report-container > main .content table:not(.custom) {
   height: fit-content;
   background-color: inherit;
@@ -258,7 +277,7 @@ body {
   border-collapse: separate;
   border-spacing: 0;
 }
-.report-wrapper .report-container > main .content table:not(.custom):not(.plain) tr:nth-child(even) {
+.report-wrapper .report-container > main .content table:not(.custom):not(.plain) tr.data-row-odd {
   background-color: #f8f8f8;
 }
 .report-wrapper .report-container > main .content table:not(.custom) th {
@@ -284,22 +303,13 @@ body {
     width: 100% !important;
   }
 }
-.report-wrapper .report-container > main .content .table-container section.group,
-.report-wrapper .report-container > main .content .table-container table,
-.report-wrapper .report-container > main .content .table-container thead,
-.report-wrapper .report-container > main .content .table-container tbody,
-.report-wrapper .report-container > main .content .table-container tfoot,
-.report-wrapper .report-container > main .content .table-container footer {
+.report-wrapper .report-container > main .content .table-container table {
   display: contents;
 }
-.report-wrapper .report-container > main .content .table-container header.group-header,
-.report-wrapper .report-container > main .content .table-container footer.group-footer > div,
-.report-wrapper .report-container > main .content .table-container h2 {
+.report-wrapper .report-container > main .content .table-container table > tr {
+  display: grid;
+  grid-template-columns: subgrid;
   grid-column: 1/-1;
-  width: 100%;
-}
-.report-wrapper .report-container > main .content .table-container footer.group-footer.level-1 tr {
-  margin-bottom: 1.5rem;
 }
 .report-wrapper .report-container > footer {
   margin-top: 4rem;
