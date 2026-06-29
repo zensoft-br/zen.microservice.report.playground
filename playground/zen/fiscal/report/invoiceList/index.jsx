@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, GroupTable } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -830,7 +830,7 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper">
-      <div className="report-container">
+      <div className="report-container a4 landscape">
         <header>
           <h1>{t("/fiscal/report/invoiceList")}</h1>
           <section className="parameters">
@@ -998,7 +998,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <GroupTable
+            <Table
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}

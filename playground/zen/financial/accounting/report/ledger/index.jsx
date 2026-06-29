@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import * as utils from "./utils.jsx";
-import { GroupTable } from "./utils.jsx";
+import { Table } from "./utils.jsx";
 
 export default function ({ data: rawData = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -190,7 +190,7 @@ export default function ({ data: rawData = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <GroupTable
+            <Table
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}

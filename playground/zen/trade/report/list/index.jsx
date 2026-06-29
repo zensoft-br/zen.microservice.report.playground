@@ -1,5 +1,5 @@
 import * as utils from "./utils.js";
-import { Badge, Column, getVisibleColumns, GroupSections, Table } from "./utils.js";
+import { Badge, getVisibleColumns, Table } from "./utils.js";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -72,7 +72,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <GroupTable
+            <Table
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}

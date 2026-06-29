@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, getVisibleColumns, GroupTable } from "./utils.jsx";
+import { Badge, getVisibleColumns, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -28,7 +28,7 @@ export default function ({ data = [], meta = {}, t }) {
     },
     { id: "compra_disponibilidade",
       header: "Previsão",
-      width: "10ch",
+      width: "14ch",
       cell: ({ value }) => utils.formatDate(value),
     },
     { id: "variante_descricao",
@@ -210,7 +210,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <GroupTable
+            <Table
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}

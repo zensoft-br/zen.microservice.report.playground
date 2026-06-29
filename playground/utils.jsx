@@ -14,9 +14,9 @@ export function cellHeader(...args) {
 
 export function formatCurrency(value, options = {}) {
   if (value == null) return null;
-  const { 
-    locale = options.locale ?? config.locale, 
-    currency = options.currency ?? config.currency, 
+  const {
+    locale = options.locale ?? config.locale,
+    currency = options.currency ?? config.currency,
     ...rest } = options;
   try {
     return new Intl.NumberFormat(locale, {
@@ -31,9 +31,9 @@ export function formatCurrency(value, options = {}) {
 
 export function formatDate(value, options = {}) {
   if (value == null) return null;
-  const { 
-    locale = options.locale ?? config.locale, 
-    timeZone = options.timeZone ?? config.timeZone, 
+  const {
+    locale = options.locale ?? config.locale,
+    timeZone = options.timeZone ?? config.timeZone,
     ...rest } = options;
   const date = validateDate(value, timeZone);
   try {
@@ -48,11 +48,11 @@ export function formatDate(value, options = {}) {
 
 export function formatDateTime(value, options = {}) {
   if (value == null) return null;
-  const { 
-    locale = options.locale ?? config.locale, 
-    timeZone = options.timeZone ?? config.timeZone, 
-    year = "numeric", 
-    month = "2-digit", 
+  const {
+    locale = options.locale ?? config.locale,
+    timeZone = options.timeZone ?? config.timeZone,
+    year = "numeric",
+    month = "2-digit",
     day = "2-digit",
     hour = "2-digit",
     minute = "2-digit",
@@ -83,8 +83,8 @@ export function formatNumber(value, options = {}) {
     options.minimumFractionDigits = options.digits;
     options.maximumFractionDigits = options.digits;
   }
-  const { 
-    locale = options.locale ?? config.locale, 
+  const {
+    locale = options.locale ?? config.locale,
     ...rest } = options;
   try {
     return new Intl.NumberFormat(locale, {
@@ -103,12 +103,12 @@ export function formatQuantity(value, options = {}) {
 
 export function formatTime(value, options = {}) {
   if (value == null) return null;
-  const { 
-    locale = options.locale ?? config.locale, 
-    timeZone = options.timeZone ?? config.timeZone, 
-    hour = "2-digit", 
-    minute = "2-digit", 
-    second = "2-digit", 
+  const {
+    locale = options.locale ?? config.locale,
+    timeZone = options.timeZone ?? config.timeZone,
+    hour = "2-digit",
+    minute = "2-digit",
+    second = "2-digit",
     hour12 = false,
     ...rest } = options;  
   const date = validateDate(value, timeZone);
@@ -175,9 +175,9 @@ export function round(value, decimals = 2) {
 }
 
 export function sort(data, criteria) {
-  const collator = new Intl.Collator(undefined, { 
-    numeric: true, 
-    sensitivity: "base", 
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: "base",
   });
 
   const getNestedValue = (obj, path) => {
@@ -299,9 +299,9 @@ export const GroupSections = ({ data, children, groups = [], columns = [], visib
             )}
             
             <GroupSections
-              data={filteredGroupData} 
-              level={level + 1} 
-              groups={groups} 
+              data={filteredGroupData}
+              level={level + 1}
+              groups={groups}
               columns={columns}
               visibleColumns={visibleColumns}
               tableClassName={tableClassName}
@@ -310,12 +310,14 @@ export const GroupSections = ({ data, children, groups = [], columns = [], visib
               {children}
             </GroupSections>
 
-            {/* OPTIMIZED: Reusing the standard Footer component for group sub-footers */}
             {key !== null && key !== undefined && (
-              <footer className="group-footer">
-                {level < groups.length - 1 ? <div className={`level-${level + 1}`}>{t("/@word/summary")}: {displayValue}</div> : null}
-                <Footer 
-                  className={tableClassName} 
+              <footer className={`group-footer level-${level + 1}`}>
+                {level < groups.length - 1 ?
+                  <div className={`level-${level + 1}`}>
+                    ≡ {displayValue}
+                  </div> : null}
+                <Footer
+                  className={tableClassName}
                   columns={columns}
                   visibleColumns={visibleColumns}
                   data={filteredGroupData} />
@@ -328,42 +330,14 @@ export const GroupSections = ({ data, children, groups = [], columns = [], visib
   );
 };
 
-export const GroupTable = ({ className, columns, visibleColumns, data, groups, t }) => {
-  return (
-    <>
-      <GroupSections
-        columns={columns}
-        visibleColumns={visibleColumns}
-        data={data}
-        groups={groups}
-        tableClassName={className}
-        t={t}>
-        {(groupData) => (
-          <Table className={className}
-            columns={columns}
-            visibleColumns={visibleColumns}
-            data={groupData} />
-        )}
-      </GroupSections>
-
-      <h2>{t("/@word/summary")}</h2>
-      
-      <Footer className={className}
-        columns={columns}
-        visibleColumns={visibleColumns}
-        data={data} />
-    </>
-  );
-};
-
-function getCalculatedColumns(columns, visibleColumns, children) {
+function getActiveColumns(columns, visibleColumns, children) {
   if (columns) {
-    const calculatedColumns = (visibleColumns && visibleColumns.length > 0)
+    const activeColumns = (visibleColumns && visibleColumns.length > 0)
       ? visibleColumns
         .map(id => columns.find(col => col.id === id))
         .filter(col => col !== undefined)
       : columns;
-    return calculatedColumns.map((column, index) => (
+    return activeColumns.map((column, index) => (
       <Column key={index} {...column} />
     ));
   } else {
@@ -395,16 +369,94 @@ function getCalculatedColumns(columns, visibleColumns, children) {
   }
 }
 
-export const Table = ({ className, columns, visibleColumns, data, children }) => {
-  const calculatedColumns = useMemo(() => 
-    getCalculatedColumns(columns, visibleColumns, children), 
+function getColumnsStyles(activeColumns) {
+  const columnBases = activeColumns.map(col => {
+    if (typeof col.props.width === "string" && col.props.width.endsWith("ch")) {
+      return parseInt(col.props.width, 10);
+    }
+    return 9;
+  });
+
+  const screenColumns = activeColumns.map((col, index) => {
+    const base = columnBases[index];
+    const max = base * 2;
+
+    if (base >= 20) {
+      return `minmax(${base}ch, 1fr)`;
+    }
+
+    return `fit-content(${max}ch)`;
+  }).join(" ");
+
+  const printColumns = columnBases.map(base => `minmax(0, ${base}fr)`).join(" ");
+
+  // return { screenColumns: printColumns, printColumns };
+
+  return {
+    "--screen-cols": printColumns,
+    "--print-cols": printColumns,
+  };
+}
+
+const GroupTable = ({ className, columns, visibleColumns, data, groups, t }) => {
+  return (
+    <>
+      <GroupSections
+        columns={columns}
+        visibleColumns={visibleColumns}
+        data={data}
+        groups={groups}
+        tableClassName={className}
+        t={t}>
+        {(groupData) => (
+          <BaseTable className={className}
+            columns={columns}
+            visibleColumns={visibleColumns}
+            data={groupData} />
+        )}
+      </GroupSections>
+
+      <h2>≡</h2>
+      
+      <Footer className={className}
+        columns={columns}
+        visibleColumns={visibleColumns}
+        data={data} />
+    </>
+  );
+};
+
+export const TableContainer = ({ className, columns, visibleColumns = [], children }) => {
+  const activeColumns = useMemo(() =>
+    getActiveColumns(columns, visibleColumns),
   [columns, visibleColumns, children]);
 
+  const columnStyles = useMemo(() => {
+    return getColumnsStyles(activeColumns);
+  }, [activeColumns]);
+
   return (
-    <table className={className}>
+    <div className={`table-container ${className || ""}`.trim()}
+      style={columnStyles}>
+      {children}
+    </div>
+  );
+};
+
+const BaseTable = ({ className, columns, visibleColumns, data, children }) => {
+  const activeColumns = useMemo(() =>
+    getActiveColumns(columns, visibleColumns, children),
+  [columns, visibleColumns, children]);
+
+  const columnStyles = useMemo(() => {
+    return getColumnsStyles(activeColumns);
+  }, [activeColumns]);
+
+  return (
+    <table className={className} style={columnStyles}>
       <thead>
         <tr>
-          {calculatedColumns.map((col, i) => {
+          {activeColumns.map((col, i) => {
             const context = { row: null, data };
 
             let className = col.props.headerClassName || col.props.className;
@@ -413,7 +465,7 @@ export const Table = ({ className, columns, visibleColumns, data, children }) =>
               : className;
 
             return (
-              <th key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <th key={i} className={className}>
                 {col.props.header}
               </th>
             );
@@ -423,7 +475,7 @@ export const Table = ({ className, columns, visibleColumns, data, children }) =>
       <tbody>
         {data.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {calculatedColumns.map((col, colIndex) => { 
+            {activeColumns.map((col, colIndex) => {
               let value = undefined;
 
               if (typeof col.props.cellValue === "function") {
@@ -440,10 +492,10 @@ export const Table = ({ className, columns, visibleColumns, data, children }) =>
                 : className;
     
               return (
-                <td key={colIndex} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
-                  {col.props.cell 
-                    ? col.props.cell(context) 
-                    : (value ?? null)} 
+                <td key={colIndex} className={className}>
+                  {col.props.cell
+                    ? col.props.cell(context)
+                    : (value ?? null)}
                 </td>
               );
             })}
@@ -454,16 +506,39 @@ export const Table = ({ className, columns, visibleColumns, data, children }) =>
   );
 };
 
-export const Footer = ({ className, columns, visibleColumns, data, children }) => {
-  const calculatedColumns = useMemo(() => 
-    getCalculatedColumns(columns, visibleColumns, children), 
-  [columns, visibleColumns, children]);
+export const Table = ({ groups, t, ...props }) => {
+  if (groups && groups.length > 0) {
+    return (
+      <TableContainer columns={props.columns} visibleColumns={props.visibleColumns}>
+        <GroupTable {...props} groups={groups} t={t} />
+      </TableContainer>
+    );
+  }
 
   return (
-    <table className={className}>
+    <TableContainer columns={props.columns} visibleColumns={props.visibleColumns}>
+      <BaseTable {...props} />
+      <Footer columns={props.columns}
+        visibleColumns={props.visibleColumns}
+        data={props.data} />
+    </TableContainer>
+  );
+};
+
+export const Footer = ({ className, columns, visibleColumns, data, children }) => {
+  const activeColumns = useMemo(() =>
+    getActiveColumns(columns, visibleColumns, children),
+  [columns, visibleColumns, children]);
+
+  const columnStyles = useMemo(() => {
+    return getColumnsStyles(activeColumns);
+  }, [activeColumns]);
+
+  return (
+    <table className={className} style={columnStyles}>
       <tfoot>
         <tr>
-          {calculatedColumns.map((col, i) => {
+          {activeColumns.map((col, i) => {
             let value = undefined;
 
             if (typeof col.props.footerValue === "function") {
@@ -478,7 +553,7 @@ export const Footer = ({ className, columns, visibleColumns, data, children }) =
               : className;
 
             return (
-              <td key={i} className={className} style={{ width: col.props.width || "10ch", maxWidth: col.props.width || "10ch" }}>
+              <td key={i} className={className}>
                 {col.props.footer ? col.props.footer(context) : null}
               </td>
             );
@@ -516,16 +591,16 @@ export const sum = (data, valueFn) => {
   return data.reduce((acc, item) => acc + (Number(valueFn(item)) || 0), 0);
 };
 
-export const sumBy = (data, groupFn, valueFn) => 
+export const sumBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0));
 
-export const avgBy = (data, groupFn, valueFn) => 
+export const avgBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0) / vals.length);
 
-export const minBy = (data, groupFn, valueFn) => 
+export const minBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => Math.min(...vals));
 
-export const maxBy = (data, groupFn, valueFn) => 
+export const maxBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => Math.max(...vals));
 
 export const renderAggr = (value, formatFn) => {

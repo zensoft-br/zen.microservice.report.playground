@@ -60,6 +60,11 @@ body {
   font-family: 'AnekLatin', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11pt;
 
+  // PDF file size drops from 40MB to 500KB when using Segoe UI instead of AnekLatin for printing.
+  @media print {
+    font-family: Tahoma, Arial, "Segoe UI", sans-serif !important;
+  }
+
   // Reset
   dl {
     display: block;
@@ -238,7 +243,54 @@ body {
 
       .content {
         table:not(.custom) {
-          // table-layout: fixed;
+          display: grid;
+          grid-template-columns: var(--screen-cols);
+          column-gap: var(--gap);
+
+          @media print {
+            grid-template-columns: var(--print-cols) !important;
+            width: 100% !important;
+          }
+
+          >thead,
+          >tbody,
+          >tfoot {
+            display: contents;
+
+            &>tr {
+              display: grid;
+              grid-template-columns: subgrid;
+              grid-column: 1 / -1;
+              // align-items: baseline;
+
+              >th,
+              >td {
+                display: flex;
+                align-items: center;
+
+                width: 100%;
+                height: 100%;
+
+                min-width: 0;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                white-space: normal;
+
+                // background-color: red;
+
+                &.number {
+                  justify-content: flex-end;
+                  text-align: right;
+                }
+              }
+            }
+          }
+
+          // position: relative;
+
+          height: fit-content;
+
+          background-color: inherit;
 
           width: 100%;
 
@@ -274,6 +326,37 @@ body {
                 border-top: 1px solid var(--color-border);
               }
             }
+          }
+        }
+
+        .table-container {
+          display: grid;
+          grid-template-columns: var(--screen-cols);
+          column-gap: var(--gap);
+
+          @media print {
+            grid-template-columns: var(--print-cols) !important;
+            width: 100% !important;
+          }
+
+          section.group,
+          table,
+          thead,
+          tbody,
+          tfoot,
+          footer {
+            display: contents;
+          }
+
+          header.group-header,
+          footer.group-footer>div,
+          h2 {
+            grid-column: 1 / -1;
+            width: 100%;
+          }
+
+          footer.group-footer.level-1 tr {
+            margin-bottom: 1.5rem;
           }
         }
       }
