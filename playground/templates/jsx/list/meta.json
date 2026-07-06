@@ -10,12 +10,18 @@
         "columns": [
           "id",
           "name",
+          "picture",
           "score",
-          "status"
+          "status",
+          "quantity",
+          "value"
         ],
         "groups": [
           {
-            "columnId": "category1"
+            "columnId": "virtual_column_1"
+          },
+          {
+            "columnId": "status"
           }
         ],
         "sort": [

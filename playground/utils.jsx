@@ -346,30 +346,33 @@ export const TableContainer = ({ className, columns, visibleColumns, children })
 };
 
 const HeaderRow = ({ activeColumns, data }) => (
-  <tr className="repeated-column-headers">
+  <tr className="column-headers">
     {activeColumns.map((col, i) => {
-      const context = { row: null, data };
+      const context = { row: data[0], data };
+
       let headerClass = col.props.headerClassName || col.props.className;
       headerClass = typeof headerClass === "function" ? headerClass(context) : headerClass;
 
+      let header = typeof col.props.header === "function" ? col.props.header(context) : col.props.header;
+
       return (
         <th key={i} className={headerClass} scope="col">
-          {col.props.header}
+          {header}
         </th>
       );
     })}
   </tr>
 );
 
-const FooterRow = ({ data, activeColumns, className: customClassName }) => {
+const FooterRow = ({ data, activeColumns, className: customClassName, level }) => {
   return (
     <>
       {activeColumns.map((col, i) => {
         let value = undefined;
         if (typeof col.props.footerValue === "function") {
-          value = col.props.footerValue({ data });
+          value = col.props.footerValue({ data, level });
         }
-        const context = { row: null, data, value };
+        const context = { row: null, data, value, level };
 
         let className = col.props.footerClassName || col.props.className;
         className = typeof className === "function" ? className(context) : className;
@@ -425,10 +428,19 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
 
   const shouldRenderHeader = currentGroupConfig?.showHeader !== undefined
     ? currentGroupConfig.showHeader
-    : level === 0;
+    : level === groups.length - 1;
+
+  const fn = (row) => {
+    if (groupColumn?.cellValue) {
+      return groupColumn.cellValue({ row, rowIndex: 0, data });
+    }
+    return row[groupColumn?.id];
+  };
 
   const uniqueKeys = useMemo(() => {
-    const keys = data.map(row => row[groupColumn?.id]);
+    const keys = data.map((row, index) => {
+      return fn(row);
+    });
     return Array.from(new Set(keys));
   }, [data, groupColumn]);
 
@@ -437,7 +449,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
   return (
     <>
       {uniqueKeys.map((key, index) => {
-        const filteredGroupData = data.filter(row => row[groupColumn?.id] === key);
+        const filteredGroupData = data.filter(row => fn(row) === key);
 
         let displayValue = key;
         if (key !== null && key !== undefined) {
@@ -446,23 +458,23 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             val = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
           }
           if (groupColumn?.cell) {
-            val = groupColumn.cell({ value: val, data: filteredGroupData });
+            val = groupColumn.cell({ row: filteredGroupData[0], rowIndex: 0, value: val, data: filteredGroupData });
           }
-          displayValue = groupColumn?.header ? <>{groupColumn.header}:&nbsp;{val}</> : val;
+          displayValue = val;
         }
 
         const RowContent = (
           <>
-            {shouldRenderHeader && (
-              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} />
-            )}
-
             {key !== null && key !== undefined && (
               <tr className={`group-header level-${level + 1}`} style={{ "--level": level }}>
                 <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
-                  {displayValue}
+                  {groupColumn?.header ? <>{groupColumn.header}:&nbsp;{displayValue}</> : displayValue}
                 </th>
               </tr>
+            )}
+
+            {shouldRenderHeader && (
+              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} />
             )}
 
             <Groups
@@ -480,7 +492,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
                 {level < groups.length - 1 && (
                   <tr className={`group-footer level-${level + 1}`} style={{ "--level": level }}>
                     <th colSpan={totalCols} scope="rowgroup">
-                      <div className={`level-${level + 1}`}>{"≡".repeat(level + 1)} {displayValue}</div>
+                      <div className={`level-${level + 1}`}>{"≡".repeat(level + 1)} {groupColumn?.header}</div>
                     </th>
                   </tr>
                 )}
@@ -488,7 +500,8 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
                 <tr className={`group-footer-values level-${level + 1}`} style={{ "--level": level }}>
                   <FooterRow 
                     data={filteredGroupData} 
-                    activeColumns={activeColumns} 
+                    activeColumns={activeColumns}
+                    level={level + 1}
                   />
                 </tr>
               </>
@@ -510,7 +523,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
   );
 };
 
-export const Table = ({ className, columns, visibleColumns, groups, data, children }) => {
+export const Table = ({ className, columns, visibleColumns, groups, data, footerTitle, children }) => {
   const activeColumns = useMemo(() =>
     getActiveColumns(columns, visibleColumns, children),
   [columns, visibleColumns, children]);
@@ -564,11 +577,19 @@ export const Table = ({ className, columns, visibleColumns, groups, data, childr
       )}
 
       <tfoot>
-        <tr>
+        {footerTitle && (
+          <tr className={"group-footer level-0"} style={{ "--level": 0 }}>
+            <th colSpan={activeColumns.length} scope="rowgroup">
+              <div className={"level-0"}>{footerTitle}</div>
+            </th>
+          </tr>
+        )}
+        <tr className={"group-footer-values level-0"} style={{ "--level": 0 }}>
           <FooterRow 
             data={data} 
             activeColumns={activeColumns} 
             prefix={hasGroups ? "≡ " : ""} 
+            level={0}
           />
         </tr>
       </tfoot>

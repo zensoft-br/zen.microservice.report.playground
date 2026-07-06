@@ -10,3 +10,55 @@ tfoot td {
 .number.percent {
   font-size: 0.7rem;
 }
+
+th.last,
+td.last {
+  border-right: 1px solid gray !important;
+}
+
+.group .column-headers {
+  font-size: 0.7rem;
+}
+.group .column-headers > .real {
+  border-top: 4px solid green;
+}
+.group .column-headers > .sobrevenda {
+  border-top: 4px solid yellow;
+}
+.group .column-headers > .fila {
+  border-top: 4px solid red;
+}
+.group .column-headers > .total {
+  border-top: 4px solid cyan;
+}
+
+.group-header > th {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: var(--gap);
+}
+
+.group-footer-values {
+  margin-bottom: 0.5rem;
+}
+.group-footer-values.level-2 {
+  background-color: var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+th {
+  position: relative;
+}
+th img {
+  position: absolute;
+  top: 0;
+  width: 2cm;
+  max-width: calc(100% - var(--padding));
+  object-fit: contain;
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+  overflow: hidden;
+  box-sizing: border-box;
+}

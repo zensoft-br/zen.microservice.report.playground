@@ -1,5 +1,5 @@
 .report-wrapper {
-   font-size: 10pt;
+  font-size: 10pt;
 }
 
 tfoot {
@@ -11,4 +11,84 @@ tfoot {
 
 .number.percent {
   font-size: 0.7rem;
+}
+
+th,
+td {
+  &.last {
+    border-right: 1px solid gray !important;
+  }
+}
+
+.group .column-headers {
+  font-size: 0.7rem;
+
+  &>.real {
+    border-top: 4px solid green;
+
+    // text-decoration: underline;
+    // text-decoration-thickness: 3px;
+    // text-decoration-color: green;
+  }
+
+  &>.sobrevenda {
+    border-top: 4px solid yellow;
+
+    // text-decoration: underline;
+    // text-decoration-thickness: 3px;
+    // text-decoration-color: yellow;
+  }
+
+  &>.fila {
+    border-top: 4px solid red;
+
+    // text-decoration: underline;
+    // text-decoration-thickness: 3px;
+    // text-decoration-color: red;
+  }
+
+  &>.total {
+    border-top: 4px solid cyan;
+
+    // text-decoration: underline;
+    // text-decoration-thickness: 3px;
+    // text-decoration-color: cyan;
+  }
+}
+
+.group-header>th {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: var(--gap);
+}
+
+.group-footer-values {
+  margin-bottom: 0.5rem;
+
+  &.level-2 {
+    background-color: var(--color-border);
+    // border-bottom: 3px solid var(--color-border);
+    margin-bottom: 1.5rem;
+  }
+}
+
+th {
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+
+    width: 2cm;
+    max-width: calc(100% - var(--padding));
+    object-fit: contain;
+
+    border-radius: 0.5rem;
+    border: 1px solid gray;
+    overflow: hidden;
+
+    box-sizing: border-box;
+  }
 }

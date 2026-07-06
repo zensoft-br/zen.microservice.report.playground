@@ -1,32 +1,12 @@
 {
   "report": {
-    "title_cor": "Saldo de produto por cor",
-    "title": "Saldo de produto por produto mestre",
+    "title": "Saldo de produto por cor",
+    "title1": "Saldo de produto por produto mestre",
     "parameters": {
     },
     "properties": {
+      "showColumns": "saldoDeProduto",
       "settings": {
-        "columns": [
-        ],
-        "groups_cor": [
-          {
-            "columnId": "produtoMestre_classe"
-          },
-          {
-            "columnId": "variante_descricao"
-          },
-          {
-            "columnId": "produto_codigo"
-          }
-        ],
-        "groups": [
-          {
-            "columnId": "produtoMestre_codigo"
-          },
-          {
-            "columnId": "produto_codigo"
-          }
-        ],
         "sort": [
           {
             "columnId": "category1"

@@ -5,15 +5,29 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const columns = [
-    { id: "compra_codigo",
+    { 
+      id: "un",
+      header: "Unidade",
+      width: "8ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    { 
+      id: "compra_codigo",
       header: "Origem",
       width: "20ch",
+    },
+    {
+      id: "produtoMestre_calc",
+      header: "Produto mestre",
+      width: "15ch",
+      cellValue: ({ row }) => row?.produtoMestre_codigo,
+      cell: ({ row }) => <><Badge>{row.produtoMestre_codigo}</Badge> {row?.produtoMestre_descricao ?? ""}&nbsp;&nbsp;&nbsp;unidade: {row?.un ?? ""}&nbsp;&nbsp;&nbsp;coleção: <Badge>{row?.produtoMestre_colecao ?? ""}</Badge>&nbsp;&nbsp;&nbsp;classe: <Badge>{row?.produtoMestre_classe ?? ""}</Badge></>,
     },
     {
       id: "produtoMestre_codigo",
       header: "Produto mestre",
       width: "15ch",
-      cell: ({ row, value }) => <><Badge>{value}</Badge> {row?.produto_descricao ?? ""}</>,
+      cell: ({ row, value }) => <><Badge>{value}</Badge> {row?.produtoMestre_descricao ?? ""}</>,
     },
     {
       id: "produtoMestre_classe",
@@ -22,14 +36,22 @@ export default function ({ data = [], meta = {}, t }) {
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
     {
+      id: "produto_calc",
+      header: "Produto",
+      width: "15ch",
+      cellValue: ({ row }) => row?.produto_codigo,
+      cell: ({ row, value }) => <><Badge>{value}</Badge> {row.produtoMestre_descricao} / {row.variante_descricao ?? ""}</>,
+    },
+    {
       id: "produto_codigo",
       header: "Produto",
       width: "15ch",
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
     { id: "compra_disponibilidade",
       header: "Previsão",
       width: "14ch",
-      cell: ({ value }) => utils.formatDate(value),
+      cell: ({ value }) => utils.formatDate(value, { year: "2-digit", month: "numeric", day: "numeric" }),
     },
     { id: "variante_descricao",
       header: "Grade",
@@ -38,118 +60,138 @@ export default function ({ data = [], meta = {}, t }) {
     },
     { id: "real_embarcado",
       header: "Real, embarcado",
-      className: "number",
+      className: "number real",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.real_embarcado, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.real_embarcado * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "real_faturavel",
       header: "Real, faturável",
-      className: "number",
+      className: "number real",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.real_faturavel, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.real_faturavel * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     {
       id: "real_faturavel_percent",
       header: "%",
-      className: "number percent",
+      className: "number percent real",
       width: "10ch",
-      cell: ({ row }) => utils.formatNumber(row.real_faturavel_percent, { digits: 1 }),
+      cell: ({ row }) => utils.formatNumber(row.real_faturavel_percent, { digits: 0 }),
       footerValue: ({ data }) => {
         const totalRealEmbarcado = data.reduce((acc, row) => acc + row.real_embarcado, 0);
         const totalRealFaturavel = data.reduce((acc, row) => acc + row.real_faturavel, 0);
         return totalRealEmbarcado ? (totalRealFaturavel / totalRealEmbarcado) * 100 : 0;
       },
-      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "real_vendido",
       header: "Real, vendido",
-      className: "number",
+      className: "number real",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.real_vendido, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.real_vendido * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "real_disponivel",
       header: "Real, disponível",
-      className: "number",
+      className: "number real",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.real_disponivel, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.real_disponivel * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     {
       id: "real_disponivel_percent",
       header: "%",
-      className: "number percent",
+      className: "number percent real last",
       width: "10ch",
-      cell: ({ row }) => utils.formatNumber(row.real_disponivel_percent, { digits: 1 }),
+      cell: ({ row }) => utils.formatNumber(row.real_disponivel_percent, { digits: 0 }),
       footerValue: ({ data }) => {
         const totalRealEmbarcado = data.reduce((acc, row) => acc + row.real_embarcado, 0);
         const totalRealDisponivel = data.reduce((acc, row) => acc + row.real_disponivel, 0);
         return totalRealEmbarcado ? (totalRealDisponivel / totalRealEmbarcado) * 100 : 0;
       },
-      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "sobrevenda_embarcado",
       header: "Sobrevenda, embarcado",
-      className: "number",
+      className: "number sobrevenda",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + (row.real_embarcado * 1.2), 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + (row.real_embarcado * 1.2) * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "sobrevenda_disponivel",
       header: "Sobrevenda, disponível",
-      className: "number",
+      className: "number sobrevenda",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.sobrevenda_disponivel, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.sobrevenda_disponivel * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     {
       id: "sobrevenda_disponivel_percent",
       header: "%",
-      className: "number percent",
+      className: "number percent sobrevenda last",
       width: "10ch",
-      cell: ({ row }) => utils.formatNumber(row.sobrevenda_disponivel_percent, { digits: 1 }),
+      cell: ({ row }) => utils.formatNumber(row.sobrevenda_disponivel_percent, { digits: 0 }),
       footerValue: ({ data }) => {
         const totalSobrevendaEmbarcado = data.reduce((acc, row) => acc + (row.real_embarcado * 1.2), 0);
         const totalSobrevendaDisponivel = data.reduce((acc, row) => acc + row.sobrevenda_disponivel, 0);
         return totalSobrevendaEmbarcado ? (totalSobrevendaDisponivel / totalSobrevendaEmbarcado) * 100 : 0;
       },
-      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footer: ({ value, level }) => utils.formatNumber(value, { digits: 0 }),
     },
     {
-      id: "fila_vendido",
+      id: "filaEspera_vendido",
       header: "Fila, vendido",
-      className: "number",
+      className: "number fila",
       width: "15ch",
-      cellValue: ({ row }) => 0,
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.filaEspera_vendido * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+    },
+    {
+      id: "filaEspera_vendido_percent",
+      header: "%",
+      className: "number percent fila last",
+      width: "10ch",
+      cell: ({ row }) => utils.formatNumber(row.filaEspera_vendido_percent, { digits: 0 }),
+      footerValue: ({ data }) => {
+        const totalFilaVendido = data.reduce((acc, row) => acc + row.filaEspera_vendido, 0);
+        const totalRealEmbarcado = data.reduce((acc, row) => acc + row.real_embarcado, 0);
+        return totalRealEmbarcado ? (totalFilaVendido / totalRealEmbarcado) * 100 : 0;
+      },
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     { id: "venda_total",
       header: "Venda total",
-      className: "number",
+      className: "number total",
       width: "15ch",
-      cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((acc, row) => acc + row.real_vendido, 0),
-      footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
+      cell: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+      footerValue: ({ data, level }) => data.reduce((acc, row) => acc + row.real_vendido * (level == 0 ? row.rendimento : 1), 0),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
     },
     {
       id: "venda_total_percent",
       header: "%",
-      className: "number percent",
+      className: "number percent total",
       width: "10ch",
-      cell: ({ row }) => utils.formatNumber(row.venda_total_percent, { digits: 1 }),
+      cell: ({ row }) => utils.formatNumber(row.venda_total_percent, { digits: 0 }),
       footerValue: ({ data }) => {
         const totalRealEmbarcado = data.reduce((acc, row) => acc + row.real_embarcado, 0);
         const totalVendaTotal = data.reduce((acc, row) => acc + row.real_vendido, 0);
         return totalRealEmbarcado ? (totalVendaTotal / totalRealEmbarcado) * 100 : 0;
       },
-      footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
+      footer: ({ value }) => utils.formatNumber(value, { digits: 0 }),
+    },
+    {
+      id: "product_image",
+      header: ({ row }) => row.product_image ? <img src={row.product_image} alt="Product" /> : null,
+      width: "10ch",
+      cell: () => null,
     },
   ];
 
@@ -157,9 +199,8 @@ export default function ({ data = [], meta = {}, t }) {
     row.real_faturavel = Math.min(row.real_embarcado, row.real_vendido);
     row.real_disponivel = row.real_embarcado - row.real_vendido;
     row.sobrevenda_embarcado = row.real_embarcado * 1.2;
-    row.sobrevenda_disponivel = row.real_embarcado * 1.2 - row.real_vendido;
-    row.fila_vendido = 0;
-    row.venda_total = row.real_vendido;
+    row.sobrevenda_disponivel = row.sobrevenda_embarcado - row.real_vendido;
+    row.venda_total = row.real_vendido + row.filaEspera_vendido;
 
     row.real_faturavel_percent = round((row.real_faturavel / row.real_embarcado) * 100, 2);
     row.real_disponivel_percent = round((row.real_disponivel / row.real_embarcado) * 100, 2);
@@ -168,9 +209,39 @@ export default function ({ data = [], meta = {}, t }) {
   });
 
   data = utils.sort(data, [{ "columnId": "variante_descricao" }, { "columnId": "produto_codigo" }, { "columnId": "compra_disponibilidade" }]);
-  
-  const groups = report.properties?.settings?.groups || [];
-  
+    
+  let groups = [];
+  if (report.properties?.showColumns === "saldoDeProduto") {
+    report.title = "Saldo de produto";
+    groups = [
+      {
+        "columnId": "un",
+      },
+      {
+        "columnId": "produtoMestre_calc",
+      },
+      {
+        "columnId": "produto_calc",
+      },
+    ];
+  } else if (report.properties?.showColumns === "saldoDeProdutoPorCor") {
+    report.title = "Saldo de produto por cor";
+    groups = [
+      {
+        "columnId": "un",
+      },
+      {
+        "columnId": "produtoMestre_classe",
+      },
+      {
+        "columnId": "variante_descricao",
+      },
+      {
+        "columnId": "produto_calc",
+      },
+    ];
+  }
+
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
@@ -188,9 +259,11 @@ export default function ({ data = [], meta = {}, t }) {
       "sobrevenda_embarcado",
       "sobrevenda_disponivel",
       "sobrevenda_disponivel_percent",
-      "fila_vendido",
+      "filaEspera_vendido",
+      "filaEspera_vendido_percent",
       "venda_total",
       "venda_total_percent",
+      "product_image",
     ],
     addColumns: report.properties?.showColumns?.split(","),
     removeColumns: report.properties?.hideColumns?.split(","),
@@ -204,7 +277,7 @@ export default function ({ data = [], meta = {}, t }) {
           <section className="parameters">
             <dl>
               <dt>Data</dt>
-              <dd>{utils.formatDate(new Date())}</dd>
+              <dd>{utils.formatDate(new Date(), { year: "2-digit", month: "numeric", day: "numeric" })}</dd>
             </dl>
           </section>
         </header>
@@ -215,7 +288,7 @@ export default function ({ data = [], meta = {}, t }) {
               visibleColumns={visibleColumns}
               data={data}
               groups={groups}
-              t={t} />
+              footerTitle="Total m (convertido)" />
           </div>
         </main>
       </div>

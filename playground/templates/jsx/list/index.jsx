@@ -5,7 +5,8 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const columns = [
-    { id: "id",
+    { 
+      id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "7ch",
       className: "id",
@@ -13,25 +14,62 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length, 
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "name",
+    { 
+      id: "name",
       header: utils.cellHeader(t("/@word/name")),
       width: "30ch",
     },
-    { id: "score",
+    { 
+      id: "score",
       header: utils.cellHeader(t("/@word/score")),
-      width: "7ch",
+      width: "10ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
+      footerValue: ({ data }) => utils.sum(data, (row) => row.score),
+      footer: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
     },
-    { id: "category1",
-      header: utils.cellHeader(t("/@word/category1")),
+    { 
+      id: "category1",
+      header: utils.cellHeader(t("/catalog/category")),
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { id: "status",
-      header: utils.cellHeader(t("/@word/status")),
+    { 
+      id: "status",
+      header: <i>{utils.cellHeader(t("/@word/status"))}</i>,
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    { 
+      id: "quantity",
+      className: "number",
+      header: utils.cellHeader(t("/@word/quantity")),
+      width: "10ch",
+      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit }),
+      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit, (item) => item.quantity),
+      footer: ({ value }) => utils.renderAggr(value, (quantity, unit_code) => utils.formatQuantity(quantity, { unit_code })),
+    },
+    { 
+      id: "value",
+      className: "number",
+      header: <i>{utils.cellHeader(t("/@word/value"))}</i>,
+      width: "15ch",
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency }),
+      footerValue: ({ data }) => utils.sumBy(data, (item) => item.currency, (item) => item.value),
+      footer: ({ value }) => utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
+    },
+    {
+      id: "picture",
+      header: utils.cellHeader(t("/system/image")),
+      width: "10ch",
+      cell: ({ value }) => value ? <img src={value} alt="picture" style={{ width: "1.5cm" }} /> : null,
+    },
+    {
+      id: "virtual_column_1",
+      header: utils.cellHeader(t("/@word/group1")),
+      width: "15ch",
+      cellValue: ({ row }) => `${row.category1} - ${row.status}`,
+      cell: ({ row }) => <><Badge>{row.category1}</Badge> <Badge>{row.status}</Badge></>,
     },
   ];
 
@@ -40,7 +78,7 @@ export default function ({ data = [], meta = {}, t }) {
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
-    standardColumns:  [
+    standardColumns: report.properties?.settings?.columns ?? [
       "id",
       "name",
       "score",
@@ -77,7 +115,7 @@ export default function ({ data = [], meta = {}, t }) {
               visibleColumns={visibleColumns}
               data={data}
               groups={groups}
-              t={t} />
+              footerTitle={t("/@word/summary")} />
           </div>
         </main>
       </div>

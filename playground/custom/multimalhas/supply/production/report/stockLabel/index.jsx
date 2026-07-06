@@ -15,9 +15,6 @@ export default function ({data, t}) {
             <div key={index} className="report-container">
               <main className="flex v">
                 <div className="content flex-1">
-                  <dl style={{ gridArea: "A" }}>
-                    <dd><img src={obj.company_logo} /></dd>
-                  </dl>
                   <div className="flex h " style={{ gridArea: "B" }}>
                     <dl>
                       <dt>Pedido interno</dt>
@@ -32,11 +29,10 @@ export default function ({data, t}) {
                     <div className="flex v align-center">
                       <dt>{t("/@word/quantity")}</dt>
                       <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>
-                        {utils.formatNumber(q, { maximumFractionDigits: 2 })}
+                        {utils.formatNumber(q, { maximumFractionDigits: 2 })}&nbsp;{fn(obj.productPacking_code)}
                       </dd>
                     </div>
                     <div className="flex v align-center">
-                      <dd className="tag">{fn(obj.productPacking_code)}</dd>
                       {boxes.length > 1 && (
                         <dd>{index + 1} de {boxes.length}</dd>
                       )}
@@ -58,10 +54,9 @@ export default function ({data, t}) {
                     <dt>Tamanho</dt>
                     <dd>{obj.productPacking_code.split(".")[2]}</dd>
                   </dl>
-                </div>
-                <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "end" }}>
-                  {/* <div>{index + 1} de {consumption.quantity} de {totalQuantity}</div> */}
-                  <div>zenerp.com.br</div>
+                  <dl style={{ gridArea: "H" }}>
+                    <dd><img src={obj.company_logo} /></dd>
+                  </dl>
                 </div>
               </main>
             </div>

@@ -1,4 +1,5 @@
 import * as utils from "./utils.jsx";
+import { Table } from "./utils.jsx";
 
 export default function ({ data = [], t }) {
   data.forEach(quote => {
@@ -7,6 +8,74 @@ export default function ({ data = [], t }) {
       return a.proposalSequence - b.proposalSequence;
     });
   });
+
+  const columns = [
+    {
+      id: "itemSequence",
+      header: t("/sale/quoteItem.itemSequence"),
+    },
+    {
+      id: "proposalSequence",
+      header: t("/sale/quoteItem.proposalSequence"),
+    },
+    {
+      id: "item_code",
+      header: t("/@word/code"),
+      width: "16ch",
+      cellValue: ({ row }) => row.code ?? row.productPacking?.code,
+    },
+    {
+      id: "product_description",
+      header: t("/@word/description"),
+      width: "16ch",
+      cellValue: ({ row }) => row.properties?.description ?? row.productPacking?.product.description,
+    },
+    {
+      id: "quantity",
+      header: t("/@word/quantity"),
+      className: "number",
+      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.productPacking?.product?.unit?.code }),
+      footerValue: (quote) => utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0)),
+    },
+    {
+      id: "unitValue",
+      header: t("/@word/unitValue"),
+      className: "number",
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
+    },
+    {
+      id: "unitValueLocal",
+      header: t("/@word/unitValue") + " BRL",
+      className: "number",
+      cell: ({ value }) => utils.formatCurrency(value, { currency: "BRL" }),
+    },
+    {
+      id: "totalValue",
+      header: t("/@word/totalValue"),
+      className: "number",
+      width: "10ch",
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
+      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code, (row) => row.totalValue),
+      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+    },
+    {
+      id: "origin",
+      header: "Proc.",
+      cellValue: ({ row }) => row.properties?.origin,
+    },
+    {
+      id: "brand",
+      header: "Marca",
+      cellValue: ({ row }) => row.properties?.brand,
+    },
+    {
+      id: "availabilityDate",
+      header: t("/@word/availabilityDate"),
+      cellValue: ({ row }) => utils.formatDate(row.quote.availabilityDate),
+    },
+  ];
+
+  // const visibleColumns = columns.map((column) => column.id);
 
   return (
     <div className="report-wrapper">
@@ -71,50 +140,9 @@ export default function ({ data = [], t }) {
           <main>
             <section>
               <div className="content">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>{t("/sale/quoteItem.itemSequence")}</th>
-                      <th>{t("/sale/quoteItem.proposalSequence")}</th>
-                      <th>{t("/@word/code")}</th>
-                      <th>{t("/@word/description")}</th>
-                      <th className="number">{t("/@word/quantity")}</th>
-                      <th>{t("/financial/currency")}</th>
-                      <th className="number">{t("/@word/unitValue")}</th>
-                      <th className="number">{t("/@word/unitValue")} BRL</th>
-                      <th className="number">{t("/@word/totalValue")}</th>
-                      <th>Proc.</th>
-                      <th>Marca</th>
-                      <th>{t("/@word/availabilityDate")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      quote.items?.map((item, index1) => (
-                        <tr key={item.id} style={{ fontStyle: item.proposalSequence > 1 ? "italic" : undefined, opacity: item.proposalSequence > 1 ? "0.5" : undefined }}>
-                          <td>{item.itemSequence}</td>
-                          <td>{item.proposalSequence}</td>
-                          <td>{item.code ?? item.productPacking?.code}</td>
-                          <td>{item.properties?.description ?? item.productPacking?.product.description}</td>
-                          <td className="number">{utils.formatNumber(item.quantity)}</td>
-                          <td>{item.currency?.code}</td>
-                          <td className="number">{utils.formatNumber(item.unitValue, { minimumFractionDigits: 2 })}</td>
-                          <td className="number">{utils.formatNumber(item.unitValueLocal, { minimumFractionDigits: 2 })}</td>
-                          <td className="number">{utils.formatNumber(item.totalValue, { minimumFractionDigits: 2 })}</td>
-                          <td>{item.properties?.origin}</td>
-                          <td>{item.properties?.brand}</td>
-                          <td>{utils.formatDate(quote.availabilityDate)}</td>
-                        </tr>
-                      ))}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colSpan={5} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0))}</th>
-                      <th colSpan={4} className="number">{utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.totalValue, 0), { minimumFractionDigits: 2 })}</th>
-                      <th></th>
-                    </tr>
-                  </tfoot>
-                </table>
+                <Table columns={columns} 
+                  visibleColumns={[]} 
+                  data={quote.items} />
               </div>
             </section>
           </main>

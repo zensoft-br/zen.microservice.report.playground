@@ -4,69 +4,110 @@
     "name": "John Anderson",
     "score": 7.6,
     "category1": "Engineering",
-    "status": "active"
+    "status": "active",
+    "quantity": 5,
+    "unit": "m",
+    "value": 100,
+    "currency": "USD"
   },
   {
     "id": 1002,
     "name": "Jane Smith",
     "score": 8.95,
-    "category1": "Marketing",
-    "status": "inactive"
+    "category1": "Engineering",
+    "status": "busy",
+    "quantity": 3,
+    "unit": "m",
+    "value": 50,
+    "currency": "BRL"
   },
   {
     "id": 1003,
-    "name": "Alice Johnson",
+    "name": "Alice Johnson Long Long Long Long Long Long Long Long Long Name Example",
     "score": 8.2,
     "category1": "Engineering",
-    "status": "busy"
+    "status": "busy",
+    "quantity": 4,
+    "unit": "kg",
+    "value": 80,
+    "currency": "CNY"
   },
   {
     "id": 1004,
     "name": "Bob Brown",
     "score": 6.5,
     "category1": "Sales",
-    "status": "inactive"
+    "status": "inactive",
+    "quantity": 2,
+    "unit": "m",
+    "value": 75,
+    "currency": "USD"
   },
   {
     "id": 1005,
     "name": "Charlie Davis",
     "score": 9.1,
     "category1": "Product",
-    "status": "active"
+    "status": "active",
+    "quantity": 6,
+    "unit": "kg",
+    "value": 110.5,
+    "currency": "BRL"
   },
   {
     "id": 1006,
     "name": "Emily Wilson",
     "score": 7.8,
     "category1": "Sales",
-    "status": "busy"
+    "status": "busy",
+    "quantity": 1,
+    "unit": "m",
+    "value": 70.9,
+    "currency": "BRL",
+    "picture": "https://img.magnific.com/free-photo/woman-with-blond-short-hair-tanned-smiling-cute-gazing-camera-with-friendly_176420-44610.jpg"
   },
   {
     "id": 1007,
     "name": "David Lee",
     "score": 8.3,
     "category1": "Engineering",
-    "status": "busy"
+    "status": "busy",
+    "quantity": 4,
+    "unit": "m",
+    "value": 40,
+    "currency": "USD"
   },
   {
     "id": 1008,
     "name": "Sarah Miller",
     "score": 9.0,
     "category1": "Product",
-    "status": "active"
+    "status": "active",
+    "quantity": 5,
+    "unit": "kg",
+    "value": 75,
+    "currency": "BRL"
   },
   {
     "id": 1009,
     "name": "Michael Taylor",
     "score": 6.9,
     "category1": "Sales",
-    "status": "inactive"
+    "status": "inactive",
+    "quantity": 2,
+    "unit": "kg",
+    "value": 38,
+    "currency": "CNY"
   },
   {
     "id": 1010,
     "name": "Jessica Anderson",
     "score": 8.7,
     "category1": "Business",
-    "status": "active"
+    "status": "active",
+    "quantity": 3,
+    "unit": "kg",
+    "value": 105,
+    "currency": "USD"
   }
 ]

@@ -250,7 +250,6 @@ body {
         table:not(.custom) {
           display: grid;
           grid-template-columns: var(--screen-cols);
-          column-gap: var(--gap);
 
           @media print {
             grid-template-columns: var(--print-cols) !important;
@@ -266,12 +265,11 @@ body {
               display: grid;
               grid-template-columns: subgrid;
               grid-column: 1 / -1;
-              // align-items: baseline;
 
               >th,
               >td {
-                display: flex;
-                align-items: center;
+                display: block;
+                align-content: center;
 
                 width: 100%;
                 height: 100%;
@@ -281,10 +279,7 @@ body {
                 word-break: break-word;
                 white-space: normal;
 
-                // background-color: red;
-
                 &.number {
-                  justify-content: flex-end;
                   text-align: right;
                 }
               }
@@ -293,12 +288,14 @@ body {
 
           .group-header,
           .group-footer {
+            margin-bottom: calc(var(--gap) / 2);
+            // border-bottom: calc(1px * (var(--level) + 1)) solid var(--color-border);
             padding-left: calc(8px + (var(--level) - 1) * 1rem);
 
             th,
             td {
               display: block;
-              
+
               grid-column: 1 / -1;
             }
           }
@@ -310,7 +307,7 @@ body {
             font-weight: bold;
 
             &.level-1 {
-              margin-bottom: 1.5rem;
+              margin-bottom: var(--gap);
             }
           }
 
@@ -331,13 +328,18 @@ body {
 
           th {
             overflow-wrap: break-word;
-            padding: 2px calc(var(--padding) / 2);
+
+            box-sizing: border-box;
+            padding: calc(var(--padding) / 2);
+
             text-align: left;
           }
 
           td {
             overflow-wrap: break-word;
-            padding: 2px calc(var(--padding) / 2);
+
+            box-sizing: border-box;
+            padding: calc(var(--padding) / 2);
           }
 
           tfoot {
@@ -346,6 +348,14 @@ body {
                 border-top: 1px solid var(--color-border);
               }
             }
+          }
+
+          img {
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+
+            overflow: hidden;
+            object-fit: contain;
           }
         }
 

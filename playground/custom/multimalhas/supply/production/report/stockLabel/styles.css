@@ -24,7 +24,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(4, minmax(0, 1fr));
-  grid-template-areas: "A B B C" "A D D C" "A E E C" "A F G C";
+  grid-template-areas: "B B B C" "D D D C" "E E E H" "F G G H";
   min-height: 0;
   border-bottom: 1px solid black;
   border-right: 1px solid black;

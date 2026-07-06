@@ -188,7 +188,7 @@ export default function ({ data = [], meta = {}, t }) {
       className: "number",
       headerClassName: "number",
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) =>  utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_quantity),
+      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_quantity),
       footer: ({ value }) => utils.renderAggr(value, (val, unit_code) => utils.formatQuantity(val, { unit_code })),
     },
     { id: "sum_contractItem_quantity_units",
@@ -206,7 +206,7 @@ export default function ({ data = [], meta = {}, t }) {
       className: "number",
       headerClassName: "number",
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) =>  utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_shippedQuantity),
+      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_shippedQuantity),
       footer: ({ value }) => utils.renderAggr(value, (val, unit_code) => utils.formatQuantity(val, { unit_code })),
     },
     { id: "sum_contractItem_clearedQuantity",
@@ -215,7 +215,7 @@ export default function ({ data = [], meta = {}, t }) {
       className: "number",
       headerClassName: "number",
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) =>  utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_clearedQuantity),
+      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_contractItem_clearedQuantity),
       footer: ({ value }) => utils.renderAggr(value, (val, unit_code) => utils.formatQuantity(val, { unit_code })),
     },
     { id: "sum_contractItem_totalValue",
@@ -649,8 +649,7 @@ export default function ({ data = [], meta = {}, t }) {
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}
-              groups={groups}
-              t={t} />
+              groups={groups} />
           </div>
         </main>
       </div>

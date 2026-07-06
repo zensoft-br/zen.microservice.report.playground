@@ -177,8 +177,7 @@ export default function ({ data = [], meta = {}, t }) {
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}
-              groups={groups}
-              t={t} />
+              groups={groups} />
           </div>
         </main>
       </div>
