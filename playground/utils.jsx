@@ -247,12 +247,12 @@ function hash(str) {
   return Math.abs(hash);
 }
 
-export const Badge = ({ children }) => {
+export const Badge = ({ className, children }) => {
   const s = String(children || "").toLowerCase();
   const hashValue = hash(s) % 16 + 1;
 
   return (
-    <div className={`badge c-${hashValue}`}>
+    <div className={`badge c-${hashValue} ${className || ""}`}>
       {children}
     </div>
   );

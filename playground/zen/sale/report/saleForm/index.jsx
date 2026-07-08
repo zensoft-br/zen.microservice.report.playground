@@ -1,16 +1,27 @@
-import React from "react";
 import * as utils from "./utils.jsx";
-import { Column, getVisibleColumns, Table } from "./utils.jsx";
+import { Badge, getVisibleColumns, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const columns = [
     { id: "product_image",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/system/image")),
+      width: "7ch",
+      cellValue: ({ row }) => row.productPacking.product.image?.url,
+      cell: ({ value }) => value ? <img src={value}></img> : null,
+    },
+    { id: "productPacking_image",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/system/image")),
+      width: "7ch",
+      cellValue: ({ row }) => row.productPacking.image?.url,
+      cell: ({ value }) => value ? <img src={value}></img> : null,
+    },
+    { id: "productPacking_image_calc",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/system/image")),
       width: "7ch",
       cellValue: ({ row }) => row.productPacking.image?.url ?? row.productPacking.product.image?.url,
-      cell: ({ value }) => <img src={value} style={{ width: "1.25cm", height: "1.25cm", objectFit: "contain" }}></img>,
+      cell: ({ value }) => value ? <img src={value}></img> : null,
     },
     { id: "productPacking_code",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
@@ -47,35 +58,35 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => utils.sumBy(data, (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code, (row) => row.quantity),
+      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),     
     },
     { id: "unit_code",
       // header: utils.cellHeader(t("/@word/unitValue")),
       width: "5ch",
-      cellValue: ({ row }) => row.productPacking.product.unit.code,
+      cellValue: ({ row }) => <Badge>{row.productPacking.unit?.code ?? row.productPacking.product.unit.code}</Badge>,
     },
     { id: "unitValue",
       header: utils.cellHeader(t("/@word/unitValue")),
       width: "10ch",
       className: "number",
-      cell: ({ value }) => utils.formatCurrency(value, { maximumFractionDigits: 8 }),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code, maximumFractionDigits: 8 }),
     },
     { id: "grossProductValue",
       header: utils.cellHeader(t("/@word/grossProductValue")),
       width: "10ch",
       className: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.grossProductValue || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
+      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.grossProductValue),
+      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),     
     },
     { id: "totalValue",
       header: utils.cellHeader(t("/@word/totalValue")),
       width: "10ch",
       className: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.totalValue || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
+      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.totalValue),
+      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),     
     },
     { id: "netWeightKg",
       header: utils.cellHeader(t("/@word/netWeightKg")),
@@ -99,9 +110,9 @@ export default function ({ data = [], meta = {}, t }) {
         width: "10ch",
         className: "number",
         cellValue: ({ row }) => row.taxations?.find(taxation => taxation.tax.code === tax)?.baseValue,
-        cell: ({ value }) => utils.formatCurrency(value),
-        footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.taxations?.find(taxation => taxation.tax.code === tax)?.baseValue || 0), 0),
-        footer: ({ value }) => utils.formatCurrency(value),
+        cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
+        footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.taxations?.find(taxation => taxation.tax.code === tax)?.baseValue),
+        footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
       },
       { id: `tax_${tax}_taxRate`,
         header: utils.cellHeader(tax, t("/fiscal/taxation/taxation.taxRate")),
@@ -115,32 +126,14 @@ export default function ({ data = [], meta = {}, t }) {
         width: "10ch",
         className: "number",
         cellValue: ({ row }) => row.taxations?.find(taxation => taxation.tax.code === tax)?.taxValue,
-        cell: ({ value }) => utils.formatCurrency(value),
-        footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.taxations?.find(taxation => taxation.tax.code === tax)?.taxValue || 0), 0),
-        footer: ({ value }) => utils.formatCurrency(value),
+        cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
+        footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.taxations?.find(taxation => taxation.tax.code === tax)?.taxValue),
+        footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
       },
     ])),
   ];
 
   if (meta.explain) {
-    // return (
-    //   <table>
-    //     <thead>
-    //       <tr>
-    //         <th>id</th>
-    //         <th>header</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {columns.map((column, index) => (
-    //         <tr key={index}>
-    //           <td>{column.id}</td>
-    //           <td>{column.header}</td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // );
     return <pre>{JSON.stringify(columns.map(column => ({ id: column.id, header: column.header })), null, 2)}</pre>;
   }
 
@@ -308,7 +301,7 @@ export default function ({ data = [], meta = {}, t }) {
                 <section className="parameters">
                   <dl>
                     <dt>{t("/@word/comments")}</dt>
-                    <dd>{data.properties?.comments}</dd>
+                    <dd><pre>{data.properties?.comments}</pre></dd>
                   </dl>
                 </section>
               }

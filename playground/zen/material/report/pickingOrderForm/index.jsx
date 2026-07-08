@@ -30,7 +30,7 @@ export default function ({ data = [], meta = {}, t }) {
     },
     { id: "product_description",
       header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
-      width: "45ch",
+      width: "30ch",
       cellValue: ({ row }) => row.productPacking.product?.description,
     },
     { id: "productPacking_complement",
@@ -52,14 +52,29 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/quantity")),
       width: "7ch",
       className: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
+      cell: ({ row, value }) => utils.formatQuantity(value),
+      footerValue: ({ data }) => utils.sumBy(data, (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code, (row) => row.quantity),
+      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),
+
+    },
+    { id: "unit_code",
+      header: utils.cellHeader(t("/catalog/product/unit/abbr")),
+      width: "6ch",  
+      cellValue: ({ row }) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+      cell: ({ value }) => <><Badge>{value}</Badge></>,
     },
     { id: "productPacking_units",
-      width: "4ch",  
+      width: "6ch",  
       cellValue: ({ row }) => row.productPacking.units,
       cell: ({ row, value }) => <><Badge>{value === 1 ? row.productPacking.product.unit.code : value}</Badge></>,
+    },
+    { id: "quantityUnits",
+      header: utils.cellHeader(t("/@word/quantityUnits")),
+      width: "7ch",
+      className: "number",
+      cell: ({ row }) => utils.formatNumber(row.quantity * row.productPacking.units),
+      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.units || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
     },
     { id: "netWeightKg",
       header: utils.cellHeader(t("/@word/netWeightKg")),
@@ -110,7 +125,7 @@ export default function ({ data = [], meta = {}, t }) {
       "productVariant_description",
       "address_code",
       "quantity",
-      "productPacking_units",
+      "unit_code",
       "grossWeightKg",
     ],
     addColumns: report.properties?.showColumns?.split(","),
@@ -120,7 +135,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper">
       {data.map(pickingOrder => (
-        <div className="report-container a4">
+        <div className="report-container a4 landscape">
           <header>
             <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
               <img src={pickingOrder.company?.image?.url} style={{ height: "1.5cm" }}></img>

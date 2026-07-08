@@ -434,51 +434,105 @@ body {
   border-radius: 0.2em;
   padding: 0.2em 0.4em;
 }
-.report-wrapper .badge.c-1 {
+.report-wrapper .badge:not(.inverted).c-1 {
   background-color: #E63946;
 }
-.report-wrapper .badge.c-2 {
+.report-wrapper .badge:not(.inverted).c-2 {
   background-color: #FB8500;
 }
-.report-wrapper .badge.c-3 {
+.report-wrapper .badge:not(.inverted).c-3 {
   background-color: #2A9D8F;
 }
-.report-wrapper .badge.c-4 {
+.report-wrapper .badge:not(.inverted).c-4 {
   background-color: #0077B6;
 }
-.report-wrapper .badge.c-5 {
+.report-wrapper .badge:not(.inverted).c-5 {
   background-color: #8338EC;
 }
-.report-wrapper .badge.c-6 {
+.report-wrapper .badge:not(.inverted).c-6 {
   background-color: #FF006E;
 }
-.report-wrapper .badge.c-7 {
+.report-wrapper .badge:not(.inverted).c-7 {
   background-color: #00AFB9;
 }
-.report-wrapper .badge.c-8 {
+.report-wrapper .badge:not(.inverted).c-8 {
   background-color: #F4A261;
 }
-.report-wrapper .badge.c-9 {
+.report-wrapper .badge:not(.inverted).c-9 {
   background-color: #3A0CA3;
 }
-.report-wrapper .badge.c-10 {
+.report-wrapper .badge:not(.inverted).c-10 {
   background-color: #006D77;
 }
-.report-wrapper .badge.c-11 {
+.report-wrapper .badge:not(.inverted).c-11 {
   background-color: #C11277;
 }
-.report-wrapper .badge.c-12 {
+.report-wrapper .badge:not(.inverted).c-12 {
   background-color: #00B4D8;
 }
-.report-wrapper .badge.c-13 {
+.report-wrapper .badge:not(.inverted).c-13 {
   background-color: #2B2D42;
 }
-.report-wrapper .badge.c-14 {
+.report-wrapper .badge:not(.inverted).c-14 {
   background-color: #70E000;
 }
-.report-wrapper .badge.c-15 {
+.report-wrapper .badge:not(.inverted).c-15 {
   background-color: #D00000;
 }
-.report-wrapper .badge.c-16 {
+.report-wrapper .badge:not(.inverted).c-16 {
   background-color: #5A189A;
+}
+.report-wrapper .badge.inverted {
+  color: unset;
+  font-weight: bold;
+  border-radius: unset;
+  padding: unset;
+}
+.report-wrapper .badge.inverted.c-1 {
+  color: #E63946;
+}
+.report-wrapper .badge.inverted.c-2 {
+  color: #FB8500;
+}
+.report-wrapper .badge.inverted.c-3 {
+  color: #2A9D8F;
+}
+.report-wrapper .badge.inverted.c-4 {
+  color: #0077B6;
+}
+.report-wrapper .badge.inverted.c-5 {
+  color: #8338EC;
+}
+.report-wrapper .badge.inverted.c-6 {
+  color: #FF006E;
+}
+.report-wrapper .badge.inverted.c-7 {
+  color: #00AFB9;
+}
+.report-wrapper .badge.inverted.c-8 {
+  color: #F4A261;
+}
+.report-wrapper .badge.inverted.c-9 {
+  color: #3A0CA3;
+}
+.report-wrapper .badge.inverted.c-10 {
+  color: #006D77;
+}
+.report-wrapper .badge.inverted.c-11 {
+  color: #C11277;
+}
+.report-wrapper .badge.inverted.c-12 {
+  color: #00B4D8;
+}
+.report-wrapper .badge.inverted.c-13 {
+  color: #2B2D42;
+}
+.report-wrapper .badge.inverted.c-14 {
+  color: #70E000;
+}
+.report-wrapper .badge.inverted.c-15 {
+  color: #D00000;
+}
+.report-wrapper .badge.inverted.c-16 {
+  color: #5A189A;
 }

@@ -1,0 +1,14 @@
+{
+  "explain": false,
+  "report": {
+    "title": "My report",
+    "parameters": {},
+    "properties": {
+      "settings": {
+        "columns": [],
+        "groups": [],
+        "sort": []
+      }
+    }
+  }
+}
