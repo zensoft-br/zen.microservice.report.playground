@@ -13,7 +13,7 @@ export default function ({ data = [], meta = {}, t }) {
   });
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((item) => {
         utils.config.currency = item.company.currency.code;
         utils.config.locale = item.company.locale;

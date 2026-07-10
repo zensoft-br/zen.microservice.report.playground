@@ -2,7 +2,7 @@
 
 export default function ({ data = [], t }) {
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj, index) => (
         <div className="report-container">
           <main className="flex v">

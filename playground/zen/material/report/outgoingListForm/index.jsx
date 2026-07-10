@@ -164,7 +164,7 @@ export default function ({ data = [], meta = {}, t }) {
   // Adicionar qrcode com o id do romaneio
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {map.values().map((data) => (
         <div className="report-container a4">
           <header>

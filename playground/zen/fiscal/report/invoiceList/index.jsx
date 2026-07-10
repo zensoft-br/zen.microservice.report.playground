@@ -829,7 +829,7 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = report.properties?.settings?.groups || [];
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       <div className="report-container a4 landscape">
         <header>
           <h1>{t("/fiscal/report/invoiceList")}</h1>

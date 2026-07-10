@@ -133,7 +133,7 @@ export default function ({ data = [], meta = {}, t }) {
   });
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map(pickingOrder => (
         <div className="report-container a4 landscape">
           <header>

@@ -2,7 +2,7 @@ import * as utils from "./utils.jsx";
 
 export default function ({data, t}) {
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => {
         const tags = [
           ...(obj.priceListItem_tags ?? "").split(",").filter(tag => tag.startsWith("q:")),

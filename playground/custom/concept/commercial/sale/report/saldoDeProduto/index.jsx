@@ -270,7 +270,7 @@ export default function ({ data = [], meta = {}, t }) {
   });
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       <div className="report-container a4 landscape">
         <header>
           <h1>{report.title}</h1>

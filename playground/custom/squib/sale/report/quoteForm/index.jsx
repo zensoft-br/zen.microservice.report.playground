@@ -78,7 +78,7 @@ export default function ({ data = [], t }) {
   // const visibleColumns = columns.map((column) => column.id);
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((quote) => (
         <div className="report-container">
           <header>

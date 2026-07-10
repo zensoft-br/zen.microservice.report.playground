@@ -68,7 +68,7 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = [{ "columnId": "group" }];
 
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       <div className="report-container a4">
         <header>
           <h1>Fechamento diário sintético</h1>

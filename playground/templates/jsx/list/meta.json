@@ -6,6 +6,9 @@
       "dateEnd": "2026-01-31"
     },
     "properties": {
+      "fontSize": null,
+      "showColumns": null,
+      "hideColumns": null,
       "settings": {
         "columns": [
           "id",

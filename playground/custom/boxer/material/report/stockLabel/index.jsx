@@ -1,6 +1,6 @@
 export default function ({ data = [] }) {
   return (
-    <div className="report-wrapper">
+    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => (
         <div className="report-container flex">
           <main className="flex flex-1">
