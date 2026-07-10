@@ -1,4 +1,6 @@
-export default function ({ data = [] }) {
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
+  
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => (

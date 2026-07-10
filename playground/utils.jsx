@@ -529,7 +529,7 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
   const hasGroups = groups && groups.length > 0;
 
   return (
-    <table className={`grid ${className}`} style={{...columnStyles, "--max-level": hasGroups ? groups.length : 0}}>
+    <table className={`grid ${className}`} style={{...columnStyles, "--max-level": hasGroups ? groups.length : 1}}>
       {!hasGroups && (
         <thead>
           <HeaderRow activeColumns={activeColumns} data={data} />

@@ -360,27 +360,20 @@ body {
             padding: var(--padding-cell);
           }
 
-          tfoot {
-            tr {
-              td {
-                // border-top: $border;
-              }
-            }
-          }
-
           img {
             border: $border;
             border-radius: var(--border-radius);
 
             overflow: hidden;
             object-fit: contain;
+
+            max-width: 100%;
           }
         }
 
         .table-container {
           display: grid;
           grid-template-columns: var(--screen-cols);
-          column-gap: var(--gap);
 
           @media print {
             grid-template-columns: var(--print-cols) !important;
@@ -390,11 +383,11 @@ body {
           table.grid {
             display: contents;
 
-            &>tr {
-              display: grid;
-              grid-template-columns: subgrid;
-              grid-column: 1 / -1;
-            }
+            // &>tr {
+            //   display: grid;
+            //   grid-template-columns: subgrid;
+            //   grid-column: 1 / -1;
+            // }
           }
         }
       }
