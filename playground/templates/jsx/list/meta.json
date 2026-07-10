@@ -18,7 +18,7 @@
         ],
         "groups": [
           {
-            "columnId": "virtual_column_1"
+            "columnId": "virtual_column"
           },
           {
             "columnId": "status"

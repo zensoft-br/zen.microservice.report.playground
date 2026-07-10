@@ -345,8 +345,8 @@ export const TableContainer = ({ className, columns, visibleColumns, children })
   );
 };
 
-const HeaderRow = ({ activeColumns, data }) => (
-  <tr className="column-headers">
+const HeaderRow = ({ activeColumns, data, level }) => (
+  <tr className="column-headers" style={{ "--level": level + 1 }} >
     {activeColumns.map((col, i) => {
       const context = { row: data[0], data };
 
@@ -394,10 +394,8 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
     return (
       <>
         {data.map((row, rowIndex) => { 
-          const stripeClass = rowIndex % 2 === 0 ? "data-row-even" : "data-row-odd";
-
           return (
-            <tr key={rowIndex} className={stripeClass} style={{ "--level": level }}>
+            <tr key={rowIndex} className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"} style={{ "--level": level + 1 - 1 }}>
               {activeColumns.map((col, colIndex) => {
                 let value = undefined;
                 if (typeof col.props.cellValue === "function") {
@@ -466,7 +464,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
         const RowContent = (
           <>
             {key !== null && key !== undefined && (
-              <tr className={`group-header level-${level + 1}`} style={{ "--level": level }}>
+              <tr className={`group-header level-${level + 1}`} style={{ "--level": level + 1 }}>
                 <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
                   {groupColumn?.header ? <>{groupColumn.header}:&nbsp;{displayValue}</> : displayValue}
                 </th>
@@ -474,7 +472,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             )}
 
             {shouldRenderHeader && (
-              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} />
+              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} level={level} />
             )}
 
             <Groups
@@ -490,14 +488,14 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             {key !== null && key !== undefined && (
               <>
                 {level < groups.length - 1 && (
-                  <tr className={`group-footer level-${level + 1}`} style={{ "--level": level }}>
+                  <tr className={`group-footer level-${level + 1}`} style={{ "--level": level + 1 }}>
                     <th colSpan={totalCols} scope="rowgroup">
                       <div className={`level-${level + 1}`}>{"≡".repeat(level + 1)} {groupColumn?.header}</div>
                     </th>
                   </tr>
                 )}
 
-                <tr className={`group-footer-values level-${level + 1}`} style={{ "--level": level }}>
+                <tr className={`group-footer-values level-${level + 1} ${level === groups.length - 1 ? "last-level" : ""}`} style={{ "--level": level + 1 }}>
                   <FooterRow 
                     data={filteredGroupData} 
                     activeColumns={activeColumns}
@@ -509,11 +507,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
           </>
         );
 
-        return level === 0 ? (
-          <tbody key={index} className={`group level-${level + 1}`}>
-            {RowContent}
-          </tbody>
-        ) : (
+        return (
           <React.Fragment key={index}>
             {RowContent}
           </React.Fragment>
@@ -523,7 +517,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
   );
 };
 
-export const Table = ({ className, columns, visibleColumns, groups, data, footerTitle, children }) => {
+export const Table = ({ className = "", columns, visibleColumns, groups, data, footerTitle, children }) => {
   const activeColumns = useMemo(() =>
     getActiveColumns(columns, visibleColumns, children),
   [columns, visibleColumns, children]);
@@ -535,56 +529,55 @@ export const Table = ({ className, columns, visibleColumns, groups, data, footer
   const hasGroups = groups && groups.length > 0;
 
   return (
-    <table className={className} style={columnStyles}>
+    <table className={`grid ${className}`} style={{...columnStyles, "--max-level": hasGroups ? groups.length : 0}}>
       {!hasGroups && (
         <thead>
           <HeaderRow activeColumns={activeColumns} data={data} />
         </thead>
       )}
 
-      {hasGroups ? (
-        <Groups
-          data={data}
-          groups={groups}
-          columns={columns}
-          visibleColumns={visibleColumns}
-          activeColumns={activeColumns}
-        />
-      ) : (
-        <tbody>
-          {data.map((row, rowIndex) => {
-            const stripeClass = rowIndex % 2 === 0 ? "data-row-even" : "data-row-odd";
-            return (
-              <tr key={rowIndex} className={stripeClass} style={{ "--level": 0 }}>
-                {activeColumns.map((col, colIndex) => {
-                  let value = undefined;
-                  if (typeof col.props.cellValue === "function") {
-                    value = col.props.cellValue({ row, rowIndex, data });
-                  } else if (col.props.id) {
-                    value = row[col.props.id];
-                  }
-                  const context = { row, rowIndex, data, value };
-                  return (
-                    <td key={colIndex} className={col.props.className}>
-                      {col.props.cell ? col.props.cell(context) : (value ?? null)}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      )}
+      <tbody>
+        {hasGroups ? (
+          <Groups
+            data={data}
+            groups={groups}
+            columns={columns}
+            visibleColumns={visibleColumns}
+            activeColumns={activeColumns}
+          />
+        ) : (
+          <>
+            {data.map((row, rowIndex) => {
+              return (
+                <tr key={rowIndex} className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"} style={{ "--level": 1 }}>
+                  {activeColumns.map((col, colIndex) => {
+                    let value = undefined;
+                    if (typeof col.props.cellValue === "function") {
+                      value = col.props.cellValue({ row, rowIndex, data });
+                    } else if (col.props.id) {
+                      value = row[col.props.id];
+                    }
+                    const context = { row, rowIndex, data, value };
+                    return (
+                      <td key={colIndex} className={col.props.className}>
+                        {col.props.cell ? col.props.cell(context) : (value ?? null)}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </>
+        )}
+      </tbody>
 
       <tfoot>
-        {footerTitle && (
-          <tr className={"group-footer level-0"} style={{ "--level": 0 }}>
-            <th colSpan={activeColumns.length} scope="rowgroup">
-              <div className={"level-0"}>{footerTitle}</div>
-            </th>
-          </tr>
-        )}
-        <tr className={"group-footer-values level-0"} style={{ "--level": 0 }}>
+        <tr className={"group-footer level-0"} style={{ "--level": 1 }}>
+          <th colSpan={activeColumns.length} scope="rowgroup">
+            <div className={"level-0"}>{footerTitle ?? "≡"}</div>
+          </th>
+        </tr>
+        <tr className={"group-footer-values level-0"} style={{ "--level": 1 }}>
           <FooterRow 
             data={data} 
             activeColumns={activeColumns} 

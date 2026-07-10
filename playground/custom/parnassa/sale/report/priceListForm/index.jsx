@@ -5,6 +5,13 @@ export default function ({ data = [], meta = {}, t }) {
     return Number(a.product.code) - Number(b.product.code);
   });
 
+  const columns = [
+    {
+      id: "code",
+      header: data[0],
+    },
+  ];
+
   return (
     <div className="report-wrapper">
       <div className="report-container">

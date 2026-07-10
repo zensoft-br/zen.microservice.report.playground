@@ -8,7 +8,7 @@ export default function ({ data = [], meta = {}, t }) {
     { 
       id: "id",
       header: utils.cellHeader(t("/@word/id")),
-      width: "7ch",
+      width: "10ch",
       className: "id",
       cell: ({ value }) => utils.formatNumber(value),
       footerValue: ({ data }) => data.length, 
@@ -65,11 +65,11 @@ export default function ({ data = [], meta = {}, t }) {
       cell: ({ value }) => value ? <img src={value} alt="picture" style={{ width: "1.5cm" }} /> : null,
     },
     {
-      id: "virtual_column_1",
-      header: utils.cellHeader(t("/@word/group1")),
+      id: "virtual_column",
+      header: "Virtual column",
       width: "15ch",
-      cellValue: ({ row }) => `${row.category1} - ${row.status}`,
-      cell: ({ row }) => <><Badge>{row.category1}</Badge> <Badge>{row.status}</Badge></>,
+      cellValue: ({ row }) => `${row.category1}`,
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
   ];
 
