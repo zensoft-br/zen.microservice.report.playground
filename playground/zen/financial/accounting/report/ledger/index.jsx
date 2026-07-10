@@ -130,7 +130,7 @@ export default function ({ data: rawData = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
-      <div className="report-container" style={{ "width": report?.properties?.width }}>
+      <div className="report-container">
         <header>
           <h1>{t("/financial/accounting/report/ledger")}</h1>
           <section className="parameters">

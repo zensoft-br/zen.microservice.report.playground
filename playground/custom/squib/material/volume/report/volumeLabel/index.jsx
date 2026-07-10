@@ -6,7 +6,7 @@ export default function ({data = [], t}) {
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container flex v">
+        <div className="report-container">
           <main className="flex flex-1">
             <div className="content flex v flex-1">
               <div style={{ position: "absolute", top: "4.83cm", left: "2.82cm" }}>{obj.code}, {obj.vol_x} de {obj.vol_y}</div>

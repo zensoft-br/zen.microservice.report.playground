@@ -8,7 +8,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: report?.properties?.fontSize || "9pt" }}>
       {data.map((obj) => (
-        <div className="report-container flex v">
+        <div className="report-container">
           <main className="flex v flex-1">
             <div className="content flex v flex-1">
               <div className="flex h" style={{ flex: "2 0 0", display: "grid", gridTemplateColumns: "2fr 1fr 2fr 2fr" }}>

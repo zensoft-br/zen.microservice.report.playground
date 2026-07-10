@@ -149,7 +149,7 @@ export default async function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((data) => (
-        <div className="report-container a4 flex v gap">
+        <div className="report-container">
 
           {/* Logo */}
           {data.company.image?.url && (

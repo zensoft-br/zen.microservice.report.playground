@@ -2,7 +2,7 @@ export default function ({ data = [] }) {
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container flex">
+        <div className="report-container">
           <main className="flex flex-1">
             <div className="content flex-1">
               <div className="cell" style={{ gridArea: "A" }}>

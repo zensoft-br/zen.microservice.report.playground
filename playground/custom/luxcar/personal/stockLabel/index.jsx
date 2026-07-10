@@ -2,7 +2,7 @@ export default function ({data}) {
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container flex v">
+        <div className="report-container">
           <main className="flex flex-1">
             <div className="content flex v flex-1">
               <div className="grid" style={{ flex: "2 0 0", gridTemplateColumns: "1fr 2fr 2fr" }}>

@@ -73,8 +73,6 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  data = utils.sort(data, report.properties?.settings?.sort || []);
-  
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
@@ -90,9 +88,11 @@ export default function ({ data = [], meta = {}, t }) {
 
   const groups = report.properties?.settings?.groups || [];
 
+  data = utils.sort(data, report.properties?.settings?.sort || []);
+
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
-      <div className="report-container a4">
+      <div className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}>
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
