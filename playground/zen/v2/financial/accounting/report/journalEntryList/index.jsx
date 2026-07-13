@@ -53,6 +53,8 @@ export default function ({ data: rawData = [], meta = {}, t }) {
     return result;
   }, [rawData, t]);
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     { 
       id: "id",

@@ -8,6 +8,8 @@ export default function ({ data = [], meta = {}, t }) {
     });
   });
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     { id: "id",
       header: utils.cellHeader(t("/@word/id")),

@@ -12,6 +12,32 @@ export function cellHeader(...args) {
     .join(", ");
 }
 
+export function deepMerge(target, source) {
+  const isObject = (item) => item && typeof item === "object" && !Array.isArray(item);
+
+  if (!isObject(source)) {
+    return target;
+  }
+
+  const normalizedTarget = isObject(target) ? target : {};
+
+  const result = { ...normalizedTarget };
+
+  for (const [key, value] of Object.entries(source)) {
+    if (key === "__proto__" || key === "constructor") {
+      continue;
+    }
+
+    if (isObject(value) && isObject(normalizedTarget[key])) {
+      result[key] = deepMerge(normalizedTarget[key], value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result;
+}
+
 export function formatCurrency(value, options = {}) {
   if (value == null) return null;
   const {
@@ -590,6 +616,20 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
   );
 };
 
+export const mapBy = (arr, keyFn) => {
+  return arr.reduce((red, e) => {
+    const key = keyFn(e);
+    red.set(key, red.get(key) ?? []);
+    red.get(key).push(e);
+    return red;
+  }, new Map());
+};
+
+export const sum = (data, valueFn) => {
+  if (!Array.isArray(data)) return 0;
+  return data.reduce((acc, item) => acc + (Number(valueFn(item)) || 0), 0);
+};
+
 const aggregateBy = (data, groupFn, valueFn, operation) => {
   if (!Array.isArray(data)) return {};
 
@@ -612,11 +652,6 @@ const aggregateBy = (data, groupFn, valueFn, operation) => {
   );
 };
 
-export const sum = (data, valueFn) => {
-  if (!Array.isArray(data)) return 0;
-  return data.reduce((acc, item) => acc + (Number(valueFn(item)) || 0), 0);
-};
-
 export const sumBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0));
 
@@ -628,6 +663,8 @@ export const minBy = (data, groupFn, valueFn) =>
 
 export const maxBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => Math.max(...vals));
+
+// export const aggr = { sumBy, avgBy, minBy, maxBy };
 
 export const renderAggr = (value, formatFn) => {
   if (!value || typeof value !== "object") return null;

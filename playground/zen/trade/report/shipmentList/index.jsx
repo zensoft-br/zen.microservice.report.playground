@@ -4,6 +4,8 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     { id: "shipment_id",
       header: utils.cellHeader(t("/trade/shipment"), t("/@word/id")),

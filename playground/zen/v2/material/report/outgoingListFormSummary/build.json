@@ -1,0 +1,54 @@
+{
+  "engine": "react",
+  "template": {
+    "source": "export default function () {\r\n  return \"Placeholder\";\r\n}"
+  },
+  "assets": {},
+  "meta": {
+    "dataSource": "/material/data/outgoingListCube",
+    "delegate": "/v2/material/report/outgoingListForm",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "productPacking_code",
+            "productPacking_complement",
+            "productVariant_description",
+            "sum_quantity",
+            "sum_grossWeightKg",
+            "count"
+          ],
+          "dataSource": {
+            "parameters": {
+              "SHOW_ENTITY": true,
+              "SHOW_ITEM": false,
+              "SHOW_PRODUCT": true,
+              "SHOW_UNIT": true,
+              "SHOW_PRODUCT_PACKING": true,
+              "SHOW_PRODUCT_VARIANT": true,
+              "SHOW_ADDRESS": false,
+              "SHOW_QUALITY": false,
+              "SHOW_LOT": false,
+              "SHOW_SERIAL": false,
+              "SHOW_EXPIRATION_DATE": false,
+              "SHOW_HANDLING_UNIT": false
+            }
+          },
+          "groups": [
+            {
+              "columnId": "product_calc"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "product_code"
+            },
+            {
+              "columnId": "productPacking_code"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

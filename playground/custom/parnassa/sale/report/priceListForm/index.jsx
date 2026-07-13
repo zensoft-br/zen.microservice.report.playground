@@ -5,6 +5,8 @@ export default function ({ data = [], meta = {}, t }) {
     return Number(a.product.code) - Number(b.product.code);
   });
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     {
       id: "code",

@@ -9,6 +9,8 @@ export default function ({ data = [], t }) {
     });
   });
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     {
       id: "itemSequence",

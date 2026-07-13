@@ -7,5 +7,9 @@
     "styles": [
       "@file:/styles.css"
     ]
+  },
+  "meta": {
+    "dataSource": null,
+    "report": null
   }
 }

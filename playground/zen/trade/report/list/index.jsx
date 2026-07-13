@@ -1,8 +1,10 @@
-import * as utils from "./utils.js";
-import { Badge, getVisibleColumns, Table } from "./utils.js";
+import * as utils from "./utils.jsx";
+import { Badge, getVisibleColumns, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
+
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     { id: "id",

@@ -12,6 +12,8 @@ export default function ({ data: rawData = [], meta = {}, t }) {
     return visibleColumns?.includes(column);
   };
 
+  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const columns = [
     { id: "date",
       header: utils.cellHeader(t("/@word/date")),
