@@ -89,7 +89,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "product_calc",
       header: utils.cellHeader(t("/catalog/product/product")),
-      cellValue: ({ row }) => `${row.product_code} - ${row.product_description}`,
+      cellValue: ({ row }) => `${row.product_code} - ${row.product_description} - ${row.product_complement}`,
     },
     {
       id: "productPacking_code",
@@ -98,19 +98,23 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "productPacking_calc",
       header: utils.cellHeader(t("/catalog/product/productPacking")),
-      cellValue: ({ row }) => `${row.productPacking_code} - ${row.productPacking_complement}`,
+      cellValue: ({ row }) => `${row.productPacking_code} - ${row.productVariant_description}`,
+    },
+    {
+      id: "person_nameCalc",
+      header: utils.cellHeader(t("@@:/catalog/person/person")),
     },
     {
       id: "lot_code",
       header: utils.cellHeader(t("/material/lot")),
-      // inspecionar data e contar os valores diferentes  
-      // footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.quantity),
+      footerValue: ({ data }) => new Set(data.map(item => item.lot_code).filter(Boolean)).size,
+      footer: ({ value }) => utils.formatNumber(value),
     },
     {
       id: "serial_code",
-      header: utils.cellHeader(t("/material/serial")),
-      // inspecionar data e contar os valores diferentes  
-      // footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.quantity),
+      header: utils.cellHeader(t("/material/serial")), 
+      footerValue: ({ data }) => new Set(data.map(item => item.serial_code).filter(Boolean)).size,
+      footer: ({ value }) => utils.formatNumber(value),
     },
     {
       id: "quantity",
@@ -160,14 +164,17 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  // Adicionar logotipo da empresa
-  // Adicionar qrcode com o id do romaneio
 
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
       {map.values().map((data) => (
         <div className="report-container a4">
           <header>
+            <h1 className="grid" style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
+              <img src={data[0]?.company_image_url} style={{ height: "2cm", width: "4cm", objectFit: "contain" }} />
+              <span>{t("/material/outgoingList")} {data[0].id}</span>
+              <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data[0].id}`} style={{ width: "2cm", justifySelf: "end" }} />
+            </h1>
             <h1>{report.title}</h1>
             <section className="parameters">
               <dl>
@@ -177,6 +184,24 @@ export default function ({ data = [], meta = {}, t }) {
               <dl>
                 <dt>{t("/material/outgoingList")}</dt>
                 <dd>{utils.formatNumber(data[0].id)}</dd>
+              </dl>
+              <dl>
+                <dt>{t("/@word/date")}</dt>
+                <dd>{utils.formatDate(data[0].date)}</dd>
+              </dl>
+            </section>
+            <section className="parameters">
+              <dl>
+                <dt>{t("/catalog/person/person")}</dt>
+                <dd>{data[0].person_nameCalc}</dd>
+              </dl>
+              <dl>
+                <dt>{t("/sale/sale")}</dt>
+                <dd>{0}</dd>
+              </dl>
+              <dl>
+                <dt>{t("/fiscal/outgoingInvoice")}</dt>
+                <dd>{0}</dd>
               </dl>
             </section>
           </header>
