@@ -10,6 +10,37 @@
   },
   "meta": {
     "dataSource": null,
-    "report": null
+    "delegate": null,
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "id",
+            "name",
+            "picture",
+            "score",
+            "status",
+            "quantity",
+            "value"
+          ],
+          "groups": [
+            {
+              "columnId": "virtual_column"
+            },
+            {
+              "columnId": "status"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "category1"
+            },
+            {
+              "columnId": "status"
+            }
+          ]
+        }
+      }
+    }
   }
 }

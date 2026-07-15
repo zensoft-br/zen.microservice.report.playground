@@ -7,7 +7,7 @@ export default function ({ data = [], meta = {}, t }) {
   const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { 
+    {
       id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "10ch",
@@ -16,12 +16,12 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length, 
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { 
+    {
       id: "name",
       header: utils.cellHeader(t("/@word/name")),
       width: "30ch",
     },
-    { 
+    {
       id: "score",
       header: utils.cellHeader(t("/@word/score")),
       width: "10ch",
@@ -30,19 +30,19 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => utils.sum(data, (row) => row.score),
       footer: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
     },
-    { 
+    {
       id: "category1",
       header: utils.cellHeader(t("/catalog/category")),
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { 
+    {
       id: "status",
       header: <i>{utils.cellHeader(t("/@word/status"))}</i>,
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { 
+    {
       id: "quantity",
       className: "number",
       header: utils.cellHeader(t("/@word/quantity")),
@@ -51,7 +51,7 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit, (item) => item.quantity),
       footer: ({ value }) => utils.renderAggr(value, (quantity, unit_code) => utils.formatQuantity(quantity, { unit_code })),
     },
-    { 
+    {
       id: "value",
       className: "number",
       header: <i>{utils.cellHeader(t("/@word/value"))}</i>,
@@ -77,20 +77,15 @@ export default function ({ data = [], meta = {}, t }) {
 
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
-    overrideColumns: report.properties?.overrideColumns?.split(","),
-    standardColumns: report.properties?.settings?.columns ?? [
-      "id",
-      "name",
-      "score",
-      "status",
-    ],
-    addColumns: report.properties?.showColumns?.split(","),
-    removeColumns: report.properties?.hideColumns?.split(","),
+    overrideColumns: report?.properties?.overrideColumns?.split(","),
+    standardColumns: settings?.columns,
+    addColumns: report?.properties?.showColumns?.split(","),
+    removeColumns: report?.properties?.hideColumns?.split(","),
   });
 
-  const groups = report.properties?.settings?.groups || [];
+  const groups = settings?.groups || [];
 
-  data = utils.sort(data, report.properties?.settings?.sort || []);
+  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>

@@ -1,0 +1,25 @@
+.number {
+  font-size: 0.8em;
+}
+
+td.CD {
+  color: inherit;
+}
+td.CD::after {
+  content: "";
+  display: inline-block;
+  text-align: right;
+  min-width: 1.5ch;
+}
+td.CD.C {
+  color: red;
+}
+td.CD.C::after {
+  content: var(--credit);
+}
+td.CD.D {
+  color: blue;
+}
+td.CD.D::after {
+  content: var(--debit);
+}

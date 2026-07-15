@@ -1,0 +1,50 @@
+{
+  "engine": "react",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": [
+      "@file:/styles.css",
+      "@file:styles.css"
+    ]
+  },
+  "meta": {
+    "dataSource": null,
+    "delegate": null,
+    "report": {
+      "properties": {
+        "#settings": {
+          "orientation": null,
+          "columns": [
+            "account_calc",
+            "opening_balance",
+            "debits",
+            "credits",
+            "delta",
+            "balance"
+          ],
+          "groups": [
+            {
+              "columnId": "fin_acc_account_chart_code"
+            },
+            {
+              "columnId": "account_code_level_1"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "fin_acc_account_code"
+            },
+            {
+              "columnId": "cat_person_name"
+            },
+            {
+              "columnId": "fin_acc_result_center_code"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

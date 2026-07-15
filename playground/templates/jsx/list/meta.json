@@ -6,40 +6,7 @@
       "dateEnd": "2026-01-31"
     },
     "properties": {
-      "pageSize": null,
-      "orientation": null,
-      "width": null,
-      "height": null,
-      "fontSize": null,
-      "showColumns": null,
-      "hideColumns": null,
-      "settings": {
-        "columns": [
-          "id",
-          "name",
-          "picture",
-          "score",
-          "status",
-          "quantity",
-          "value"
-        ],
-        "groups": [
-          {
-            "columnId": "virtual_column"
-          },
-          {
-            "columnId": "status"
-          }
-        ],
-        "sort": [
-          {
-            "columnId": "category1"
-          },
-          {
-            "columnId": "status"
-          }
-        ]
-      }
+      "userSettings": null
     }
   }
 }

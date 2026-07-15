@@ -1,55 +1,7 @@
 {
   "report": {
     "properties": {
-      "pageSize": null,
-      "orientation": null,
-      "width": null,
-      "height": null,
-      "fontSize": null,
-      "showColumns": null,
-      "hideColumns": null,
-      "userSettings1": {
-        "columns": [
-          "lot_code",
-          "serial_code",
-          "serial_extra1",
-          "serial_extra2",
-          "sum_quantity",
-          "sum_grossWeightKg",
-          "count"
-        ]
-      },
-      "userSettings2": {
-        "columns": [
-          "stockCluster_code",
-          "address_code",
-          "quality_code",
-          "lot_code",
-          "serial_code",
-          "expirationDate",
-          "sum_quantity",
-          "sum_grossWeightKg"
-        ],
-        "groups": [
-          {
-            "columnId": "product_calc"
-          },
-          {
-            "columnId": "productPacking_calc"
-          }
-        ],
-        "sort": [
-          {
-            "columnId": "product_code"
-          },
-          {
-            "columnId": "productPacking_code"
-          },
-          {
-            "columnId": "sum_quantity"
-          }
-        ]
-      }
+      "userSettings": null
     }
   }
 }

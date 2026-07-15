@@ -405,11 +405,11 @@ const FooterRow = ({ data, activeColumns, className: customClassName, level }) =
         
         const combinedClass = [className, customClassName].filter(Boolean).join(" ");
 
-        return (
+        return value ? (
           <td key={i} className={combinedClass}>
             {col.props.footer ? col.props.footer(context) : null}
           </td>
-        );
+        ) : <td key={i} />;
       })}
     </>
   );
@@ -511,7 +511,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             />
 
             {/* Clean Group Footer Stack */}
-            {key !== null && key !== undefined && (
+            {key !== null && key !== undefined && activeColumns.some(col => col.props?.footerValue || col.props?.footer) && (
               <>
                 {level < groups.length - 1 && (
                   <tr className={`group-footer level-${level + 1}`} style={{ "--level": level + 1 }}>
@@ -583,9 +583,14 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
                     } else if (col.props.id) {
                       value = row[col.props.id];
                     }
+                    
                     const context = { row, rowIndex, data, value };
+
+                    let className = col.props.className;
+                    className = typeof className === "function" ? className(context) : className;
+
                     return (
-                      <td key={colIndex} className={col.props.className}>
+                      <td key={colIndex} className={className}>
                         {col.props.cell ? col.props.cell(context) : (value ?? null)}
                       </td>
                     );
@@ -597,21 +602,23 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
         )}
       </tbody>
 
-      <tfoot>
-        <tr className={"group-footer level-0"} style={{ "--level": 1 }}>
-          <th colSpan={activeColumns.length} scope="rowgroup">
-            <div className={"level-0"}>{footerTitle ?? "≡"}</div>
-          </th>
-        </tr>
-        <tr className={"group-footer-values level-0"} style={{ "--level": 1 }}>
-          <FooterRow 
-            data={data} 
-            activeColumns={activeColumns} 
-            prefix={hasGroups ? "≡ " : ""} 
-            level={0}
-          />
-        </tr>
-      </tfoot>
+      {activeColumns.some(col => col.props.footerValue || col.props.footer) &&
+        <tfoot>
+          <tr className={"group-footer level-0"} style={{ "--level": 1 }}>
+            <th colSpan={activeColumns.length} scope="rowgroup">
+              <div className={"level-0"}>{footerTitle ?? "≡"}</div>
+            </th>
+          </tr>
+          <tr className={"group-footer-values level-0"} style={{ "--level": 1 }}>
+            <FooterRow 
+              data={data} 
+              activeColumns={activeColumns} 
+              prefix={hasGroups ? "≡ " : ""} 
+              level={0}
+            />
+          </tr>
+        </tfoot>
+      }
     </table>
   );
 };

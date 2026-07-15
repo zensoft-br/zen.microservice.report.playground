@@ -1,0 +1,23 @@
+{
+  "report": {
+    "title": "My report",
+    "parameters": {
+      "dateStart": "2026-01-01",
+      "dateEnd": "2026-01-31"
+    },
+    "properties": {
+      "userSettings1": {
+        "pageSize": null,
+        "orientation": null,
+        "width": null,
+        "height": null,
+        "fontSize": null,
+        "showColumns": null,
+        "hideColumns": null,
+        "columns": null,
+        "groups": null,
+        "sort": null
+      }
+    }
+  }
+}

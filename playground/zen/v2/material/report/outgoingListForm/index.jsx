@@ -277,7 +277,29 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => utils.sum(data, (item) => item.count),
       footer: ({ value }) => utils.formatNumber(value),
     },
+    // {
+    //   id: "product_calc_textile",
+    //   width: "24ch",
+    //   header: utils.cellHeader(t("/catalog/product/product")),
+    //   cellValue: ({ row }) => row.product_code,
+    //   cell: ({ row, value }) => <div className="flex h gap" style={{ alignItems: "center"}}>
+    //     <div>{<Badge>{value}</Badge>} {[
+    //       row.product_description,
+    //       row.product_properties?.textileComposition,
+    //     ].filter(Boolean).join(", ")}</div>
+    //     <div className="flex h gap">{[
+    //       row.product_properties?.textileCare01,
+    //       row.product_properties?.textileCare02,
+    //       row.product_properties?.textileCare03,
+    //       row.product_properties?.textileCare04,
+    //       row.product_properties?.textileCare05,
+    //     ].filter(Boolean).map((care, index) => <img key={index} src={`https://zenerp.s3.amazonaws.com/public/material/images/${care}`} alt={`textile care ${index + 1}`} 
+    //       style={{ height: "2rem", objectFit: "contain", border: "0" }} />)}</div>
+    //   </div>,
+    // },
   ];
+
+  // return JSON.stringify(columns.map(column => column.id));
 
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),

@@ -1,0 +1,34 @@
+.number {
+  font-size: 0.8em;
+}
+
+td {
+  &.CD {
+    color: inherit;
+
+    &::after {
+      content: "";
+
+      display: inline-block;
+      text-align: right;
+
+      min-width: 1.5ch;
+    }
+
+    &.C {
+      color: red;
+
+      &::after {
+        content: var(--credit);
+      }
+    }
+
+    &.D {
+      color: blue;
+
+      &::after {
+        content: var(--debit);
+      }
+    }
+  }
+}
