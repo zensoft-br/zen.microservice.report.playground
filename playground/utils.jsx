@@ -376,13 +376,13 @@ const HeaderRow = ({ activeColumns, data, level }) => (
     {activeColumns.map((col, i) => {
       const context = { row: data[0], data };
 
-      let headerClass = col.props.headerClassName || col.props.className;
-      headerClass = typeof headerClass === "function" ? headerClass(context) : headerClass;
+      let headerClassName = col.props.headerClassName || col.props.className;
+      headerClassName = typeof headerClassName === "function" ? headerClassName(context) : headerClassName;
 
       let header = typeof col.props.header === "function" ? col.props.header(context) : col.props.header;
 
       return (
-        <th key={i} className={headerClass} scope="col">
+        <th key={i} className={headerClassName} scope="col">
           {header}
         </th>
       );
@@ -390,7 +390,7 @@ const HeaderRow = ({ activeColumns, data, level }) => (
   </tr>
 );
 
-const FooterRow = ({ data, activeColumns, className: customClassName, level }) => {
+const FooterRow = ({ data, activeColumns, className, level }) => {
   return (
     <>
       {activeColumns.map((col, i) => {
@@ -400,16 +400,16 @@ const FooterRow = ({ data, activeColumns, className: customClassName, level }) =
         }
         const context = { row: null, data, value, level };
 
-        let className = col.props.footerClassName || col.props.className;
-        className = typeof className === "function" ? className(context) : className;
+        let footerClassName = col.props.footerClassName || col.props.className;
+        footerClassName = typeof footerClassName === "function" ? footerClassName(context) : footerClassName;
         
-        const combinedClass = [className, customClassName].filter(Boolean).join(" ");
+        const combinedClass = [footerClassName, className].filter(Boolean).join(" ");
 
-        return value ? (
+        return value == null ?
+          <td key={i} /> :
           <td key={i} className={combinedClass}>
             {col.props.footer ? col.props.footer(context) : null}
-          </td>
-        ) : <td key={i} />;
+          </td>;
       })}
     </>
   );
@@ -475,16 +475,22 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
       {uniqueKeys.map((key, index) => {
         const filteredGroupData = data.filter(row => fn(row) === key);
 
-        let displayValue = key;
+        let cell = key;
         if (key !== null && key !== undefined) {
-          let val = key;
+          let value = key;
+
           if (groupColumn?.cellValue) {
-            val = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
+            value = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
           }
-          if (groupColumn?.cell) {
-            val = groupColumn.cell({ row: filteredGroupData[0], rowIndex: 0, value: val, data: filteredGroupData });
+
+          if (groupColumn?.groupCell) {
+            cell = typeof groupColumn.groupCell === "function" ? groupColumn.groupCell({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData }) : groupColumn.groupCell;
+          } else if (groupColumn?.cell) {
+            cell = groupColumn.cell({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData });
+            if (groupColumn?.header) {
+              cell = <>{typeof groupColumn.header === "function" ? groupColumn.header({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData }) : groupColumn.header}:&nbsp;{cell}</>;
+            }
           }
-          displayValue = val;
         }
 
         const RowContent = (
@@ -492,7 +498,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             {key !== null && key !== undefined && (
               <tr className={`group-header level-${level + 1}`} style={{ "--level": level + 1 }}>
                 <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
-                  {groupColumn?.header ? <>{groupColumn.header}:&nbsp;{displayValue}</> : displayValue}
+                  {cell}
                 </th>
               </tr>
             )}

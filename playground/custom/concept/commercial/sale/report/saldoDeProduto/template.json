@@ -18,10 +18,10 @@
           "title": "Saldo de produto",
           "groups": [
             {
-              "columnId": "produtoMestre_calc"
+              "columnId": "produtoMestre_codigo"
             },
             {
-              "columnId": "produto_calc"
+              "columnId": "produto_codigo"
             }
           ],
           "sort": [
