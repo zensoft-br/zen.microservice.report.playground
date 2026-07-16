@@ -131,7 +131,7 @@ export default function ({ data: rawData = [], meta = {}, t }) {
   const groups = report.properties?.settings?.groups || [];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container">
         <header>
           <h1>{t("/financial/accounting/report/ledger")}</h1>

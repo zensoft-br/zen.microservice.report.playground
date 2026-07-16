@@ -48,7 +48,7 @@ export default function ({ data = [], t }) {
   });
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container">
         <header>
           <h1>Ordens de produção pendentes</h1>

@@ -544,12 +544,13 @@ body {
     display: inline-block;
 
     color: white;
-    font-weight: 500;
 
     border-radius: 0.2em;
     padding: var(--padding-cell) calc(var(--padding-cell) * 2);
 
     &:not(.inverted) {
+      font-weight: 500;
+
       &.c-1 {
         background-color: #E63946;
       }
@@ -617,7 +618,7 @@ body {
 
     &.inverted {
       color: unset;
-      font-weight: bold;
+      // font-weight: bold;
 
       border-radius: unset;
       padding: unset;

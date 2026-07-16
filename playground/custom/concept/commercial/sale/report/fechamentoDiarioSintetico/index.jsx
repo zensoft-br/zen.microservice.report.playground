@@ -51,7 +51,7 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  data = utils.sort(data, [{ "columnId": "index" }, { "columnId": "index2" }, { "columnId": "topic" }]);
+  // data = utils.sort(data, [{ "columnId": "sort1" }, { "columnId": "sort2" }, { "columnId": "topic" }]);
   
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
@@ -70,7 +70,7 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = [{ "columnId": "group" }];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container a4">
         <header>
           <h1>Fechamento diário sintético</h1>

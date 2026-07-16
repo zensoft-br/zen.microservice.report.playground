@@ -34,7 +34,7 @@ export default function ({ data = [], meta = {}, t }) {
   const visibleColumns = columns.map(column => column.id);
   
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((quote) => (
         <div className="report-container">
           <header>

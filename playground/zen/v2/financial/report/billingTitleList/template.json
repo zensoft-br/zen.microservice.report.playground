@@ -1,0 +1,42 @@
+{
+  "engine": "react",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": [
+      "@file:/styles.css"
+    ]
+  },
+  "meta": {
+    "dataSource": null,
+    "delegate": null,
+    "report": {
+      "properties": {
+        "#settings": {
+          "fontSize": null,
+          "columns": [
+            "id",
+            "type",
+            "code",
+            "status",
+            "date",
+            "dueDate",
+            "settlementDate",
+            "sum_value",
+            "invoice_id"
+          ],
+          "groups": [
+            {
+              "columnId": "company_code"
+            },
+            {
+              "columnId": "person_id"
+            }
+          ],
+          "sort": []
+        }
+      }
+    }
+  }
+}

@@ -207,7 +207,7 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = report.properties?.settings?.groups || [];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container">
         <header>
           <h1>{t("/supply/production/report/productionOrderConsumptionList")}</h1>

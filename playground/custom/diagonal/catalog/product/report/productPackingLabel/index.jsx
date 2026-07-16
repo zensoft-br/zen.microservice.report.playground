@@ -9,7 +9,7 @@ export default function ({ data = [], t }) {
   }
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {new Array(Math.ceil(data.length / 5)).fill({}).map((obj, index) => (
         <div className="report-container">
           <main className="flex v">

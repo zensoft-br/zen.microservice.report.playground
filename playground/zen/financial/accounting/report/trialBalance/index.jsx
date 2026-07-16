@@ -30,7 +30,6 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "account_code_level_1",
-      width: "5h",
       header: utils.cellHeader(t("/@word/group")),
       cellValue: ({ row }) => row.fin_acc_account_code?.split(".")[0],
       cell: ({ row }) => `${row.fin_acc_account_description}`,

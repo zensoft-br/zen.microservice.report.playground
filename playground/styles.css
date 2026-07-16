@@ -434,9 +434,11 @@ body {
 .report-wrapper .badge {
   display: inline-block;
   color: white;
-  font-weight: 500;
   border-radius: 0.2em;
   padding: var(--padding-cell) calc(var(--padding-cell) * 2);
+}
+.report-wrapper .badge:not(.inverted) {
+  font-weight: 500;
 }
 .report-wrapper .badge:not(.inverted).c-1 {
   background-color: #E63946;
@@ -488,7 +490,6 @@ body {
 }
 .report-wrapper .badge.inverted {
   color: unset;
-  font-weight: bold;
   border-radius: unset;
   padding: unset;
 }

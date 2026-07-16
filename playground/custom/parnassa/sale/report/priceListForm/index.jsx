@@ -15,7 +15,7 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container">
         <header>
           <h1>Lista de Preços</h1>

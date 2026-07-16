@@ -1,6 +1,6 @@
 export default function ({ data = [], t }) {
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
         <div className="report-container">
           <header>

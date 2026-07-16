@@ -273,8 +273,8 @@ function hash(str) {
   return Math.abs(hash);
 }
 
-export const Badge = ({ className, children }) => {
-  const s = String(children || "").toLowerCase();
+export const Badge = ({ className, expression, children }) => {
+  const s = String(expression || children || "").toLowerCase();
   const hashValue = hash(s) % 16 + 1;
 
   return (

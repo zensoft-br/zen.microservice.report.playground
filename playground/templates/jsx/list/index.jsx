@@ -88,7 +88,7 @@ export default function ({ data = [], meta = {}, t }) {
   data = utils.sort(data, settings?.sort || []);
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}>
         <header>
           <h1>{report.title}</h1>

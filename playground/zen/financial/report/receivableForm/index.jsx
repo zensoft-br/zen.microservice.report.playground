@@ -147,7 +147,7 @@ export default async function ({ data = [], meta = {}, t }) {
   };
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
         <div className="report-container">
 

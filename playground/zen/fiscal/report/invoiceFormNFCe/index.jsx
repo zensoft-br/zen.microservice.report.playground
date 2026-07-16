@@ -17,7 +17,7 @@ export default async function ({ data = [] }) {
   // const nProt = xmlDoc.getElementsByTagNameNS(ns, "nProt")[0]?.textContent;
 
   return (
-    <div className="report-wrapper" style={{ fontSize: report.properties?.fontSize }}>
+    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((item) => (
         <div key={item.id} className="report-container">
           <div className="container">
