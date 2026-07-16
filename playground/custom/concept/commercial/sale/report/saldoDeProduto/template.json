@@ -8,5 +8,35 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
+  },
+  "meta": {
+    "dataSource": null,
+    "delegate": null,
+    "report": {
+      "properties": {
+        "#settings": {
+          "title": "Saldo de produto",
+          "groups": [
+            {
+              "columnId": "produtoMestre_calc"
+            },
+            {
+              "columnId": "produto_calc"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "produtoMestre_descricao"
+            },
+            {
+              "columnId": "variante_descricao"
+            },
+            {
+              "columnId": "compra_disponibilidade"
+            }
+          ]
+        }
+      }
+    }
   }
 }

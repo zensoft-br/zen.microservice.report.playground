@@ -7,13 +7,13 @@ export default function ({ data = [], meta = {}, t }) {
   const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { 
+    {
       id: "un",
       header: "Unidade",
       width: "8ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { 
+    {
       id: "compra_codigo",
       header: "Origem",
       width: "20ch",
@@ -210,48 +210,12 @@ export default function ({ data = [], meta = {}, t }) {
     row.venda_total_percent = round((row.venda_total / row.real_embarcado) * 100, 2);
   });
 
-  data = utils.sort(data, [{ "columnId": "variante_descricao" }, { "columnId": "produto_codigo" }, { "columnId": "compra_disponibilidade" }]);
-    
-  let groups = [];
-  if (report.properties?.showColumns === "saldoDeProduto") {
-    report.title = "Saldo de produto";
-    groups = [
-      {
-        "columnId": "un",
-      },
-      {
-        "columnId": "produtoMestre_calc",
-      },
-      {
-        "columnId": "produto_calc",
-      },
-    ];
-  } else if (report.properties?.showColumns === "saldoDeProdutoPorCor") {
-    report.title = "Saldo de produto por cor";
-    groups = [
-      {
-        "columnId": "un",
-      },
-      {
-        "columnId": "produtoMestre_classe",
-      },
-      {
-        "columnId": "variante_descricao",
-      },
-      {
-        "columnId": "produto_calc",
-      },
-    ];
-  }
-
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
     overrideColumns: report.properties?.overrideColumns?.split(","),
-    // overrideColumns: columns.map(column => column.id),
     standardColumns:  [
       "compra_codigo",
       "compra_disponibilidade",
-      // "variante_descricao",
       "real_embarcado",
       "real_faturavel",
       "real_faturavel_percent",
@@ -267,15 +231,19 @@ export default function ({ data = [], meta = {}, t }) {
       "venda_total_percent",
       "product_image",
     ],
-    addColumns: report.properties?.showColumns?.split(","),
-    removeColumns: report.properties?.hideColumns?.split(","),
+    addColumns: report?.properties?.showColumns?.split(","),
+    removeColumns: report?.properties?.hideColumns?.split(","),
   });
+
+  const groups = settings?.groups || [];
+
+  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div className="report-container a4 landscape">
         <header>
-          <h1>{report.title}</h1>
+          <h1>{settings.title}</h1>
           <section className="parameters">
             <dl>
               <dt>Data</dt>

@@ -298,6 +298,10 @@ export default function ({ data = [], meta = {}, t }) {
                   <dt>{t("/@word/paymentMethods")}</dt>
                   <dd>{data.properties?.paymentMethods}</dd>
                 </dl>
+                <dl>
+                  <dt>{t("/@word/datetime")}</dt>
+                  <dd>{utils.formatDateTime(new Date())}</dd>
+                </dl>
               </section>
               {data.properties?.comments &&
                 <section className="parameters">
