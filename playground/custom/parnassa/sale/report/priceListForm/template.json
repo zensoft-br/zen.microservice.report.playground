@@ -1,6 +1,12 @@
 {
   "engine": "react",
   "assets": {
-    "styles": ["@file:/styles.css", "@file:styles.css"]
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": [
+      "@file:/styles.css",
+      "@file:styles.css"
+    ]
   }
 }

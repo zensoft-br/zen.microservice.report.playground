@@ -1,3 +1,6 @@
+import * as utils from "./utils.jsx";
+import { Table, getVisibleColumns } from "./utils.jsx";
+
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
@@ -10,9 +13,53 @@ export default function ({ data = [], meta = {}, t }) {
   const columns = [
     {
       id: "code",
-      header: data[0],
+      header: utils.cellHeader("Código"),
+      width: "12ch",
+      cellValue: ({ row }) => row.product?.code,
     },
+    {
+      id: "product",
+      header: utils.cellHeader("Produto"),
+      width: "40ch",
+      cellValue: ({ row }) => row.product?.description,
+    },
+    {
+      id: "valorFob",
+      header: utils.cellHeader("Valor FOB"),
+      width: "15ch",
+      className: "number",
+      cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 4, maximumFractionDigits: 4 }),
+    },
+    {
+      id: "nacionalizacao",
+      header: utils.cellHeader("% NAC"),
+      width: "12ch",
+      className: "number",
+      cellValue: ({ row }) => (row.nacionalizacao - 1) * 100,
+      cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
+    },
+    // Automatically generate the 10 dynamic item columns
+    ...Array.from({ length: 10 }).map((_, index) => ({
+      id: `item_${index}`,
+      header: utils.cellHeader(data[0]?.items?.[index]?.descricao || ""),
+      width: "15ch",
+      className: "number",
+      cellValue: ({ row }) => row.items?.[index]?.valor,
+      cell: ({ value }) => utils.formatNumber(value, {
+        locale: report.locale,
+        minimumFractionDigits: 4,
+        maximumFractionDigits: 4,
+      }),
+    })),
   ];
+
+  const visibleColumns = getVisibleColumns({
+    availableColumns: columns.map(column => column.id),
+    overrideColumns: report?.properties?.overrideColumns?.split(","),
+    standardColumns: settings?.columns,
+    addColumns: report?.properties?.showColumns?.split(","),
+    removeColumns: report?.properties?.hideColumns?.split(","),
+  });
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
@@ -28,47 +75,14 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <table>
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th style={{ width: "40%" }}>Produto</th>
-                  <th className="number">{data[0]?.items[0]?.descricao}</th>
-                  <th className="number">{data[0]?.items[1]?.descricao}</th>
-                  <th className="number">{data[0]?.items[2]?.descricao}</th>
-                  <th className="number">{data[0]?.items[3]?.descricao}</th>
-                  <th className="number">{data[0]?.items[4]?.descricao}</th>
-                  <th className="number">{data[0]?.items[5]?.descricao}</th>
-                  <th className="number">{data[0]?.items[6]?.descricao}</th>
-                  <th className="number">{data[0]?.items[7]?.descricao}</th>
-                  <th className="number">{data[0]?.items[8]?.descricao}</th>
-                  <th className="number">{data[0]?.items[9]?.descricao}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((obj) => (
-                  <tr>
-                    <td>{obj.product.code}</td>
-                    <td>{obj.product.description}</td>
-                    {obj.items?.map((item, index) => (
-                      <td key={index} className="number">
-                        {number(item.valor, {
-                          locale: report.locale,
-                          minimumFractionDigits: 2,
-                        })}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <Table
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              footerTitle={t("/@word/summary")} />
           </div>
         </main>
       </div>
     </div>
   );
-}
-
-function number(value, args) {
-  return new Intl.NumberFormat(args.locale ?? "pt-BR", args).format(value);
 }
