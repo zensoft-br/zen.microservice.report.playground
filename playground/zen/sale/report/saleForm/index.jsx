@@ -286,7 +286,7 @@ export default function ({ data = [], meta = {}, t }) {
                 </dl>
                 <dl>
                   <dt>{t("/@word/personShippingTransshipment")}</dt>
-                  <dd>{data.personShippingTransshipment?.name}</dd>
+                  <dd>{data?.properties?.personShippingTransshipment}</dd>
                 </dl>
               </section>
               <section className="parameters">
@@ -299,6 +299,10 @@ export default function ({ data = [], meta = {}, t }) {
                   <dd>{data?.properties?.salesCommission}</dd>
                 </dl>
                 <dl>
+                  <dt>{t("/@word/salesChannel")}</dt>
+                  <dd>{data?.properties?.salesChannel}</dd>
+                </dl>
+                <dl>
                   <dt>{t("/@word/paymentMethods")}</dt>
                   <dd>{data.properties?.paymentMethods}</dd>
                 </dl>
@@ -307,7 +311,7 @@ export default function ({ data = [], meta = {}, t }) {
                   <dd>{utils.formatDateTime(new Date())}</dd>
                 </dl>
               </section>
-              {data.properties?.comments &&
+              {data?.properties?.comments &&
                 <section className="parameters">
                   <dl>
                     <dt>{t("/@word/comments")}</dt>
