@@ -278,7 +278,7 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl>
                   <dt>{t("/@word/freightType")}</dt>
-                  <dd>{data.freightType}</dd>
+                  <dd>{t(`/commercial/freightType/enum/${data.freightType}`)}</dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/personShipping")}</dt>
@@ -293,6 +293,10 @@ export default function ({ data = [], meta = {}, t }) {
                 <dl>
                   <dt>{t("/@word/personSalesperson")}</dt>
                   <dd>{data.personSalesperson?.name}</dd>
+                </dl>
+                <dl>
+                  <dt>{t("/@word/salesCommission")}</dt>
+                  <dd>{data?.properties?.salesCommission}</dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/paymentMethods")}</dt>
