@@ -201,7 +201,7 @@ export default function ({ data = [], meta = {}, t }) {
                     data.company.person.district,
                     data.company.person.city?.name,
                     data.company.person.city?.state?.code,
-                    data.company.person.zipCode,
+                    data.company.person.zipcode,
                   ].filter(Boolean).join(", ")}</dd>
                 </dl>
                 <dl style={{ flex: "2" }}>
@@ -237,7 +237,7 @@ export default function ({ data = [], meta = {}, t }) {
                     data.person.district,
                     data.person.city?.name,
                     data.person.city?.state?.code,
-                    data.person.zipCode,
+                    data.person.zipcode,
                   ].filter(Boolean).join(", ")}</dd>
                 </dl>
                 <dl style={{ flex: "2" }}>

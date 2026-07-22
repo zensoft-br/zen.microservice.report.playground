@@ -147,7 +147,7 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>{t("/catalog/company/company")}</dt>
-                <dd>{pickingOrder.company.person.name}</dd>
+                <dd>{pickingOrder?.company?.person?.name}</dd>
               </dl>
               <dl>
                 <dt>{t("/@word/date")}</dt>
@@ -183,30 +183,30 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>{t("/catalog/person/person")}</dt>
-                <dd>{pickingOrder.person.name}</dd>
+                <dd>{pickingOrder?.person?.name}</dd>
               </dl>
               <dl>
                 <dt>{t("/@word/fantasyName")}</dt>
-                <dd>{pickingOrder.person.fantasyName}</dd>
+                <dd>{pickingOrder?.person?.fantasyName}</dd>
               </dl>
               <dl>
                 <dt>{t("/catalog/location/city")}</dt>
                 <dd>{pickingOrder.sale?.personAddressShipping ? 
                   [pickingOrder.sale?.personAddressShipping.city?.name, pickingOrder.sale?.personAddressShipping.city?.state?.code].filter(Boolean).join(", ") : 
-                  [pickingOrder.person.city?.name, pickingOrder.person.city?.state?.code].filter(Boolean).join(", ")}</dd>
+                  [pickingOrder?.person?.city?.name, pickingOrder.person.city?.state?.code].filter(Boolean).join(", ")}</dd>
               </dl>
             </section>
             <section className="parameters">
               <dl>
                 <dt>{t("/@word/address")}</dt>
                 <dd>{[
-                  pickingOrder.person.street,
-                  pickingOrder.person.number,
-                  pickingOrder.person.complement,
-                  pickingOrder.person.city.name,
-                  pickingOrder.person.city.state.code,
-                  pickingOrder.person.city.state.country.codeA2,
-                  pickingOrder.person.zipcode,
+                  pickingOrder.person?.street,
+                  pickingOrder.person?.number,
+                  pickingOrder.person?.complement,
+                  pickingOrder.person?.city?.name,
+                  pickingOrder.person?.city?.state?.code,
+                  pickingOrder.person?.city?.state?.country?.codeA2,
+                  pickingOrder.person?.zipcode,
                 ].filter(Boolean).join(", ")}</dd>
               </dl>
               <dl>
