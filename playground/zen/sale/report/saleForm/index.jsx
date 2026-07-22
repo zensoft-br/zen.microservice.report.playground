@@ -268,7 +268,7 @@ export default function ({ data = [], meta = {}, t }) {
                 </dl>
                 <dl>
                   <dt>{t("/@word/status")}</dt>
-                  <dd>{data.status}</dd>
+                  <dd>{t(`/sale/saleStatus/enum/${data.status}`)}</dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/tags")}</dt>
