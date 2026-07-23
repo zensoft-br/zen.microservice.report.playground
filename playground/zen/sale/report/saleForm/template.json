@@ -10,6 +10,28 @@
     ]
   },
   "meta": {
-    "dataSource": "/sale/data/saleForm"
+    "dataSource": "/sale/data/saleForm",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "productPacking_code",
+            "product_description",
+            "taxationOperation_code",
+            "quantity",
+            "unitValue",
+            "totalValue",
+            "tax_ICMS_taxRate",
+            "tax_ICMS_ST_taxRate",
+            "tax_IPI_taxRate"
+          ],
+          "sort": [
+            {
+              "columnId": "productPacking.code"
+            }
+          ]
+        }
+      }
+    }
   }
 }

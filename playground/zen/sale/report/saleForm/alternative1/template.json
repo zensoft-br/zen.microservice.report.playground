@@ -1,0 +1,6 @@
+{
+  "engine": "react",
+  "meta": {
+    "delegate": "/sale/report/saleForm"
+  }
+}

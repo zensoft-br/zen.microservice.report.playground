@@ -53,13 +53,13 @@ export default function ({ data = [], meta = {}, t }) {
     { id: "taxationOperation_code",
       header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/code")),
       width: "7ch",
-      cellValue: ({ row }) => row.taxationOperation.code,
+      cellValue: ({ row }) => row.taxationOperation?.code,
     },
     { id: "quantity",
       header: utils.cellHeader(t("/@word/quantity")),
       width: "10ch",
       className: "number",
-      cell: ({ value }) => utils.formatNumber(value),
+      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code }),
       footerValue: ({ data }) => utils.sumBy(data, (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code, (row) => row.quantity),
       footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),     
     },
@@ -111,6 +111,13 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       cellValue: ({ row }) => row?.address?.code,
     },
+    {
+      id: "salesCommission",
+      className: "number",
+      header: utils.cellHeader(t("/@word/salesCommission")),
+      cellValue: ({ row }) => row.properties?.salesCommission,
+      cell: ({ value }) => utils.formatNumber(value),
+    },
     ...["ICMS", "ICMS_SN", "ICMS_ST", "IPI", "PIS", "COFINS"].flatMap((tax) => ([
       { id: `tax_${tax}_baseValue`,
         header: utils.cellHeader(tax, t("/@word/baseValue")),
@@ -147,29 +154,25 @@ export default function ({ data = [], meta = {}, t }) {
 
   const visibleColumns = getVisibleColumns({
     availableColumns: columns.map(column => column.id),
-    overrideColumns: report.properties?.overrideColumns?.split(","),
-    standardColumns:  [
-      "productPacking_code",
-      "product_description",
-      "taxationOperation_code",
-      "quantity",
-      "unit_code",
-      "unitValue",
-      "totalValue",
-      "tax_ICMS_taxRate",
-      "tax_ICMS_ST_taxRate",
-      "tax_IPI_taxRate",
-    ],
-    addColumns: report.properties?.showColumns?.split(","),
-    removeColumns: report.properties?.hideColumns?.split(","),
+    overrideColumns: report?.properties?.overrideColumns?.split(","),
+    standardColumns: settings?.columns,
+    addColumns: report?.properties?.showColumns?.split(","),
+    removeColumns: report?.properties?.hideColumns?.split(","),
   });
 
   data.forEach(row => {
     row.items.forEach(item => {
       item.netWeightKg = utils.round(item.quantity * (item.productPacking.netWeightKg || item.productPacking.product.netWeightKg || 0), 3);
       item.grossWeightKg = utils.round(item.quantity * (item.productPacking.grossWeightKg || item.productPacking.product.grossWeightKg || 0), 3);
+      item.properties.salesCommission = item.properties?.salesCommission ?? row.properties?.salesCommission;
     });
+
+    utils.sort(row.items, settings?.sort || []);
   });
+
+  const groups = settings?.groups || [];
+
+  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
@@ -328,9 +331,12 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table columns={columns}
+              <Table
+                columns={columns}
                 visibleColumns={visibleColumns}
-                data={data.items} />
+                data={data.items}
+                groups={groups}
+                footerTitle={t("/@word/summary")} />
             </div>
           </main>
         </div>

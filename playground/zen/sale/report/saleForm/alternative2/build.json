@@ -1,0 +1,10 @@
+{
+  "engine": "react",
+  "template": {
+    "source": "export default function () {\r\n  return \"Placeholder\";\r\n}"
+  },
+  "assets": {},
+  "meta": {
+    "delegate": "/sale/report/saleForm"
+  }
+}

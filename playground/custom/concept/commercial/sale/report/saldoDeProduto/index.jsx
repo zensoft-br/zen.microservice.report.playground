@@ -35,7 +35,7 @@ export default function ({ data = [], meta = {}, t }) {
       id: "produto_codigo",
       header: "Produto",
       width: "15ch",
-      groupCell: ({ row }) => <>Produto: <Badge>{row.produto_codigo}</Badge> {row?.produtoMestre_descricao ?? ""} / {row?.variante_descricao ?? ""}</>,
+      groupCell: ({ row }) => <>Produto: <Badge>{row.produto_codigo}</Badge> {row?.produtoMestre_descricao ?? ""} / {row?.variante_descricao ?? ""}&nbsp;&nbsp;&nbsp;unidade: <Badge>{row.un}</Badge></>,
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
     { id: "compra_disponibilidade",
