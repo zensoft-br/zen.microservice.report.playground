@@ -183,6 +183,10 @@ export default function ({ data = [], meta = {}, t }) {
                   <dd>{data.company.person.name}</dd>
                 </dl>
                 <dl>
+                  <dt>{t("/@word/fantasyName")}</dt>
+                  <dd>{data.company.person.fantasyName}</dd>
+                </dl>
+                <dl>
                   <dt>CNPJ</dt>
                   <dd>{data.company.person.documentNumber}</dd>
                 </dl>
