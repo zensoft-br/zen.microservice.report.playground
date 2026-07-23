@@ -10,6 +10,53 @@
     ]
   },
   "meta": {
-    "dataSource": "/custom/concept/fechamentoDiarioSintetico"
+    "dataSource": "/custom/concept/fechamentoDiarioSintetico",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "product_code",
+            "product_description",
+            "quantity_today",
+            "unitValue",
+            "totalValue_today"
+          ],
+          "sort": [
+            {
+              "columnId": "index"
+            },
+            {
+              "columnId": "index2"
+            },
+            {
+              "columnId": "manager_code"
+            },
+            {
+              "columnId": "personSalesperson_name"
+            },
+            {
+              "columnId": "person_name"
+            },
+            {
+              "columnId": "product_description"
+            }
+          ],
+          "groups": [
+            {
+              "columnId": "topic"
+            },
+            {
+              "columnId": "manager_code"
+            },
+            {
+              "columnId": "personSalesperson_name"
+            },
+            {
+              "columnId": "person_name"
+            }
+          ]
+        }
+      }
+    }
   }
 }

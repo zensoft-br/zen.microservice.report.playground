@@ -7,7 +7,8 @@ export default function ({ data: rawData = [], meta = {}, t }) {
 
   const nature = "DR";
 
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+  const visibleColumns = settings?.columns ?? [];
+
   const showColumn = (column) => {
     return visibleColumns?.includes(column);
   };

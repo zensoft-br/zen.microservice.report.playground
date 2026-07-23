@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Table, getVisibleColumns } from "./utils.jsx";
+import { Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -53,13 +53,7 @@ export default function ({ data = [], meta = {}, t }) {
     })),
   ];
 
-  const visibleColumns = getVisibleColumns({
-    availableColumns: columns.map(column => column.id),
-    overrideColumns: report?.properties?.overrideColumns?.split(","),
-    standardColumns: settings?.columns,
-    addColumns: report?.properties?.showColumns?.split(","),
-    removeColumns: report?.properties?.hideColumns?.split(","),
-  });
+  const visibleColumns = settings?.columns ?? [];
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>

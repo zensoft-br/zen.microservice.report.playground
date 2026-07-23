@@ -8,5 +8,22 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "productPacking_code",
+            "product_description",
+            "productPacking_complement",
+            "productVariant_description",
+            "quantity",
+            "unitValue",
+            "totalValue"
+          ]
+        }
+      }
+    }
   }
 }

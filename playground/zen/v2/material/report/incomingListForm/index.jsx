@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, getVisibleColumns, Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -279,13 +279,7 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  const visibleColumns = getVisibleColumns({
-    availableColumns: columns.map(column => column.id),
-    overrideColumns: report?.properties?.overrideColumns?.split(","),
-    standardColumns: settings?.columns,
-    addColumns: report?.properties?.showColumns?.split(","),
-    removeColumns: report?.properties?.hideColumns?.split(","),
-  });
+  const visibleColumns = settings?.columns ?? [];
 
   const groups = settings?.groups || [];
 

@@ -471,9 +471,9 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  data = utils.sort(data, report.properties?.settings?.sort || []);
+  data = utils.sort(data, settings?.sort || []);
 
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+  const visibleColumns = settings?.columns ?? [];
 
   const groups = report.properties?.settings?.groups || [];
 

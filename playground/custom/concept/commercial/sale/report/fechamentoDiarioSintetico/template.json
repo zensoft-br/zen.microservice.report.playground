@@ -10,6 +10,19 @@
     ]
   },
   "meta": {
-    "dataSource": "/custom/concept/fechamentoDiarioSintetico"
+    "dataSource": "/custom/concept/fechamentoDiarioSintetico",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "topic",
+            "quantity_today",
+            "totalValue_today",
+            "quantity_toDate",
+            "totalValue_toDate"
+          ]
+        }
+      }
+    }
   }
 }

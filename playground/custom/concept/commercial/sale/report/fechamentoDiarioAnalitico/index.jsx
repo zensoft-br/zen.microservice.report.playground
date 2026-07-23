@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, getVisibleColumns, Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -83,43 +83,11 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = data.filter(row => row.quantity_today !== 0);
 
-  data = utils.sort(data, [
-    { "columnId": "index" }, 
-    { "columnId": "index2" },
-    { "columnId": "manager_code" },
-    { "columnId": "personSalesperson_name" },
-    { "columnId": "person_name" },
-    { "columnId": "product_description" },
-  ]);
-  
-  const groups = [
-    { "columnId": "topic" },
-    { "columnId": "manager_code" },
-    { "columnId": "personSalesperson_name" },
-    { "columnId": "person_name" },
-  ];
-  
-  const visibleColumns = getVisibleColumns({
-    availableColumns: columns.map(column => column.id),
-    overrideColumns: [
-      // "topic",
-      // "manager_code",
-      // "personSalesperson_name",
-      // "person_name",
-      "product_code",
-      "product_description",
-      "quantity_today",
-      "unitValue",
-      "totalValue_today",
-    ],
-    standardColumns:  [
-      "person_id",
-      "quantity_today",
-      "totalValue_today",
-    ],
-    addColumns: report.properties?.showColumns?.split(","),
-    removeColumns: report.properties?.hideColumns?.split(","),
-  });
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
+  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>

@@ -10,6 +10,22 @@
     ]
   },
   "meta": {
-    "dataSource": "/material/data/pickingOrderForm"
+    "dataSource": "/material/data/pickingOrderForm",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "productPacking_code",
+            "product_description",
+            "productPacking_complement",
+            "productVariant_description",
+            "address_code",
+            "quantity",
+            "unit_code",
+            "grossWeightKg"
+          ]
+        }
+      }
+    }
   }
 }

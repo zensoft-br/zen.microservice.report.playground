@@ -8,5 +8,19 @@
       "@file:/styles.css",
       "@file:styles.css"
     ]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "id",
+            "name",
+            "score",
+            "status"
+          ]
+        }
+      }
+    }
   }
 }

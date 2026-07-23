@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, getVisibleColumns, Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -198,30 +198,7 @@ export default function ({ data = [], meta = {}, t }) {
     row.venda_total_percent = round((row.venda_total / row.real_embarcado) * 100, 2);
   });
 
-  const visibleColumns = getVisibleColumns({
-    availableColumns: columns.map(column => column.id),
-    overrideColumns: report.properties?.overrideColumns?.split(","),
-    standardColumns:  [
-      "compra_codigo",
-      "compra_disponibilidade",
-      "real_embarcado",
-      "real_faturavel",
-      "real_faturavel_percent",
-      "real_vendido",
-      "real_disponivel",
-      "real_disponivel_percent",
-      "sobrevenda_embarcado",
-      "sobrevenda_disponivel",
-      "sobrevenda_disponivel_percent",
-      "filaEspera_vendido",
-      "filaEspera_vendido_percent",
-      "venda_total",
-      "venda_total_percent",
-      "product_image",
-    ],
-    addColumns: report?.properties?.showColumns?.split(","),
-    removeColumns: report?.properties?.hideColumns?.split(","),
-  });
+  const visibleColumns = settings?.columns ?? [];
 
   const groups = settings?.groups || [];
 

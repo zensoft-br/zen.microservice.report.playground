@@ -12,7 +12,7 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = utils.group(data, report.properties?.settings?.groups || [], columns);
 
-  const visibleColumns = report?.properties?.settings?.columns ?? report?.properties?.showColumns?.split(",");
+  const visibleColumns = settings?.columns ?? [];
 
   return (
     <div className="report-wrapper">

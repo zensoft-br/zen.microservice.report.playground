@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, getVisibleColumns, Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -64,7 +64,6 @@ export default function ({ data = [], meta = {}, t }) {
       footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),     
     },
     { id: "unit_code",
-      // header: utils.cellHeader(t("/@word/unitValue")),
       width: "5ch",
       cellValue: ({ row }) => <Badge>{row.productPacking.unit?.code ?? row.productPacking.product.unit.code}</Badge>,
     },
@@ -151,15 +150,6 @@ export default function ({ data = [], meta = {}, t }) {
     return <pre>{JSON.stringify(columns.map(column => ({ id: column.id, header: column.header })), null, 2)}</pre>;
   }
 
-
-  const visibleColumns = getVisibleColumns({
-    availableColumns: columns.map(column => column.id),
-    overrideColumns: report?.properties?.overrideColumns?.split(","),
-    standardColumns: settings?.columns,
-    addColumns: report?.properties?.showColumns?.split(","),
-    removeColumns: report?.properties?.hideColumns?.split(","),
-  });
-
   data.forEach(row => {
     row.items.forEach(item => {
       item.netWeightKg = utils.round(item.quantity * (item.productPacking.netWeightKg || item.productPacking.product.netWeightKg || 0), 3);
@@ -169,6 +159,8 @@ export default function ({ data = [], meta = {}, t }) {
 
     utils.sort(row.items, settings?.sort || []);
   });
+
+  const visibleColumns = settings?.columns ?? [];
 
   const groups = settings?.groups || [];
 
