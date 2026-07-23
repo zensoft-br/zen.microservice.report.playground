@@ -106,6 +106,11 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.grossWeightKg || 0), 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
     },
+    { id: "address_code",
+      header: utils.cellHeader(t("/material/address"), t("/@word/code")),
+      width: "10ch",
+      cellValue: ({ row }) => row?.address?.code,
+    },
     ...["ICMS", "ICMS_SN", "ICMS_ST", "IPI", "PIS", "COFINS"].flatMap((tax) => ([
       { id: `tax_${tax}_baseValue`,
         header: utils.cellHeader(tax, t("/@word/baseValue")),
@@ -278,7 +283,7 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl>
                   <dt>{t("/@word/freightType")}</dt>
-                  <dd>{t(`/commercial/freightType/enum/${data.freightType}`)}</dd>
+                  <dd>{data?.freightType && t(`/commercial/freightType/enum/${data.freightType}`)}</dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/personShipping")}</dt>
@@ -286,7 +291,7 @@ export default function ({ data = [], meta = {}, t }) {
                 </dl>
                 <dl>
                   <dt>{t("/@word/personShippingTransshipment")}</dt>
-                  <dd>{data?.properties?.personShippingTransshipment}</dd>
+                  <dd>{data?.personShippingTransshipment?.name}</dd>
                 </dl>
               </section>
               <section className="parameters">
