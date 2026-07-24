@@ -52,7 +52,7 @@
       "TAGS": null
     },
     "properties": {
-      "settings": {
+      "userSettings": {
         "columns": [
           "contract_date",
           "person_nameCalc",
@@ -60,13 +60,8 @@
           "contractItem_unitValue",
           "sum_totalValue"
         ],
-        "sort": [
-          { "columnId": "person_nameCalc" },
-          { "columnId": "contract_date" }
-        ],
-        "groups": [
-          { "columnId": "person_nameCalc" }
-        ]
+        "sort": [{ "columnId": "person_nameCalc" }, { "columnId": "contract_date" }],
+        "groups": [{ "columnId": "person_nameCalc" }]
       }
     }
   }

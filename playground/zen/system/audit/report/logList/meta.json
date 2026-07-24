@@ -17,22 +17,10 @@
       "LIMIT": null
     },
     "properties": {
-      "settings": {
-        "columns": [
-          "dateTime",
-          "level",
-          "operation",
-          "role_code",
-          "day",
-          "month",
-          "year"
-        ],
-        "sort": [
-          { "columnId": "dateTime" }
-        ],
-        "groups": [
-          { "columnId": "day" }
-        ]
+      "userSettings": {
+        "columns": ["dateTime", "level", "operation", "role_code", "day", "month", "year"],
+        "sort": [{ "columnId": "dateTime" }],
+        "groups": [{ "columnId": "day" }]
       }
     }
   }

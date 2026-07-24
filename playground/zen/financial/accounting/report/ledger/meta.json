@@ -5,16 +5,7 @@
       "DATE_END": "2026-01-31"
     },
     "properties": {
-      "settings": {
-        "columns": [
-          "date",
-          "description",
-          "debit",
-          "credit",
-          "balance",
-          "balance_sign"
-        ]
-      }
+      "userSettings": {}
     }
   }
 }

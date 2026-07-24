@@ -4,11 +4,7 @@
     "title": "My report",
     "parameters": {},
     "properties": {
-      "settings": {
-        "columns": [],
-        "groups": [],
-        "sort": []
-      }
+      "userSettings": {}
     }
   }
 }

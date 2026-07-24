@@ -12,6 +12,23 @@ export default function ({ data: rawData = [], meta = {}, t }) {
 
   const visibleColumns = settings?.columns ?? [];
 
+  const groups = settings?.groups || [];
+
+  // Insert columns before the first column that starts with the given pattern
+  const insertBefore = (arr, pattern, elementToInsert) => {
+    const index = arr.findIndex((item) => item.startsWith(pattern));
+
+    if (index !== -1) {
+      arr.splice(index, 0, elementToInsert);
+    }
+
+    return arr;
+  };
+  insertBefore(visibleColumns, "account_", "account");
+  insertBefore(visibleColumns, "accountCounterpart_", "accountCounterpart");
+  insertBefore(visibleColumns, "resultCenter_", "resultCenter");
+  insertBefore(visibleColumns, "person_", "person");
+
   const showColumn = (column) => {
     return visibleColumns?.includes(column);
   };
@@ -167,8 +184,6 @@ export default function ({ data: rawData = [], meta = {}, t }) {
       ...rawData,
     ];
   }, [rawData, t]);
-
-  const groups = settings?.groups || [];
 
   // data = utils.sort(data, settings?.sort || []);
 

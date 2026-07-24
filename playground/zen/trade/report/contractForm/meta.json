@@ -6,15 +6,9 @@
       "dateEnd": "2026-01-31"
     },
     "properties": {
-      "settings": {
-        "columns": [
-          "productPacking.code",
-          "name",
-          "score",
-          "status"
-        ],
-        "groups": [
-        ],
+      "userSettings": {
+        "columns": ["productPacking.code", "name", "score", "status"],
+        "groups": [],
         "sort": [
           {
             "columnId": "category1"

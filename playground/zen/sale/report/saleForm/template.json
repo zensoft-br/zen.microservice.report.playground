@@ -20,8 +20,8 @@
             "unitValue",
             "totalValue",
             "tax_ICMS_taxRate",
-            "tax_ICMS_ST_taxRate",
-            "tax_IPI_taxRate"
+            "tax_IPI_taxRate",
+            "currency_code"
           ],
           "sort": [
             {

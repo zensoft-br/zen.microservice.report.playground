@@ -7,6 +7,17 @@ export default function ({ data = [], meta = {}, t }) {
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
+  // When currency_code is visible, currency columns will be formatted as numbers (no currency symbol)
+  const formatCurrency = (value, options) => {
+    return visibleColumns.includes("currency_code")
+      ? utils.formatNumber(value, options)
+      : utils.formatCurrency(value, options);
+  };
+
   const columns = [
     {
       id: "product_image",
@@ -97,7 +108,7 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       className: "number",
       cell: ({ row, value }) =>
-        utils.formatCurrency(value, {
+        formatCurrency(value, {
           currency: row.currency?.code ?? row.sale.currency.code,
           maximumFractionDigits: 8,
         }),
@@ -108,7 +119,7 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       className: "number",
       cell: ({ row, value }) =>
-        utils.formatCurrency(value, {
+        formatCurrency(value, {
           currency: row.currency?.code ?? row.sale.currency.code,
         }),
       footerValue: ({ data }) =>
@@ -126,7 +137,7 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       className: "number",
       cell: ({ row, value }) =>
-        utils.formatCurrency(value, {
+        formatCurrency(value, {
           currency: row.currency?.code ?? row.sale.currency.code,
         }),
       footerValue: ({ data }) =>
@@ -191,7 +202,7 @@ export default function ({ data = [], meta = {}, t }) {
         cellValue: ({ row }) =>
           row.taxations?.find((taxation) => taxation.tax.code === tax)?.baseValue || 0,
         cell: ({ row, value }) =>
-          utils.formatCurrency(value, {
+          formatCurrency(value, {
             currency: row.currency?.code ?? row.sale.currency.code,
           }),
         footerValue: ({ data }) =>
@@ -220,7 +231,7 @@ export default function ({ data = [], meta = {}, t }) {
         cellValue: ({ row }) =>
           row.taxations?.find((taxation) => taxation.tax.code === tax)?.taxValue || 0,
         cell: ({ row, value }) =>
-          utils.formatCurrency(value, {
+          formatCurrency(value, {
             currency: row.currency?.code ?? row.sale.currency.code,
           }),
         footerValue: ({ data }) =>
@@ -231,6 +242,12 @@ export default function ({ data = [], meta = {}, t }) {
           ),
         footer: ({ value }) =>
           utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+      },
+      {
+        id: "currency_code",
+        header: utils.cellHeader(t("/financial/currency")),
+        width: "5ch",
+        cellValue: ({ row }) => <Badge>{row.currency?.code ?? row.sale.currency.code}</Badge>,
       },
     ]),
   ];
@@ -266,10 +283,6 @@ export default function ({ data = [], meta = {}, t }) {
     utils.sort(row.items, settings?.sort || []);
   });
 
-  const visibleColumns = settings?.columns ?? [];
-
-  const groups = settings?.groups || [];
-
   data = utils.sort(data, settings?.sort || []);
 
   return (
@@ -296,7 +309,7 @@ export default function ({ data = [], meta = {}, t }) {
                 style={{ width: "2cm", justifySelf: "end" }}
               />
             </h1>
-            <div className="flex v gap" style={{ fontSize: "0.8rem" }}>
+            <div className="flex v gap">
               <section className="parameters">
                 <dl>
                   <dt>{t("/catalog/company/company")}</dt>
@@ -415,6 +428,13 @@ export default function ({ data = [], meta = {}, t }) {
                   <dd>{data.personShipping?.name}</dd>
                 </dl>
                 <dl>
+                  <dt>{t("/@word/freightTypeTransshipment")}</dt>
+                  <dd>
+                    {data?.properties?.freightTypeTransshipment &&
+                      t(`/commercial/freightType/enum/${data.properties.freightTypeTransshipment}`)}
+                  </dd>
+                </dl>
+                <dl>
                   <dt>{t("/@word/personShippingTransshipment")}</dt>
                   <dd>{data?.personShippingTransshipment?.name}</dd>
                 </dl>
@@ -431,6 +451,10 @@ export default function ({ data = [], meta = {}, t }) {
                 <dl>
                   <dt>{t("/@word/salesChannel")}</dt>
                   <dd>{data?.properties?.salesChannel}</dd>
+                </dl>
+                <dl>
+                  <dt>{t("/@word/salesHub")}</dt>
+                  <dd>{data?.properties?.salesHub}</dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/paymentMethods")}</dt>

@@ -6,13 +6,8 @@
       "dateEnd": "2026-01-31"
     },
     "properties": {
-      "settings": {
-        "columns": [
-          "id",
-          "name",
-          "score",
-          "status"
-        ],
+      "userSettings": {
+        "columns": ["id", "name", "score", "status"],
         "groups": [
           {
             "columnId": "category1"

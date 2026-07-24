@@ -1,3 +1,7 @@
 tfoot {
   display: none !important;
 }
+
+table tr:nth-child(1 of .group-footer-values) {
+  display: none !important;
+}

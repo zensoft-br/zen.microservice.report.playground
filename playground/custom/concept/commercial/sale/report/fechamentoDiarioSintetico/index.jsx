@@ -4,20 +4,19 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "group",
-      header: null,
-      width: "15ch",
-      cell: ({ value }) => <Badge>{value}</Badge>,
-    },
-    { id: "topic",
+    { id: "group", header: null, width: "15ch", cell: ({ value }) => <Badge>{value}</Badge> },
+    {
+      id: "topic",
       header: "Origem",
       width: "15ch",
       // cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { id: "quantity_today",
+    {
+      id: "quantity_today",
       header: "m, hoje",
       className: "number",
       width: "15ch",
@@ -25,7 +24,8 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((acc, row) => acc + row.quantity_today, 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
     },
-    { id: "totalValue_today",
+    {
+      id: "totalValue_today",
       header: "Valor, hoje",
       className: "number",
       width: "15ch",
@@ -33,7 +33,8 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((acc, row) => acc + row.totalValue_today, 0),
       footer: ({ value }) => utils.formatCurrency(value, { digits: 2 }),
     },
-    { id: "quantity_toDate",
+    {
+      id: "quantity_toDate",
       header: "m, mês",
       className: "number",
       width: "15ch",
@@ -41,7 +42,8 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((acc, row) => acc + row.quantity_toDate, 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
     },
-    { id: "totalValue_toDate",
+    {
+      id: "totalValue_toDate",
       header: "Valor, mês",
       className: "number",
       width: "15ch",
@@ -52,10 +54,10 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   // data = utils.sort(data, settings?.sort || []);
-  
+
   const visibleColumns = settings?.columns ?? [];
 
-  const groups = [{ "columnId": "group" }];
+  const groups = [{ columnId: "group" }];
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
@@ -71,11 +73,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table
-              columns={columns}
-              visibleColumns={visibleColumns}
-              data={data}
-              groups={groups} />
+            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
           </div>
         </main>
       </div>

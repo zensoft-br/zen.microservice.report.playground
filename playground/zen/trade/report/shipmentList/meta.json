@@ -52,7 +52,7 @@
       "TAGS": null
     },
     "properties": {
-      "settings": {
+      "userSettings": {
         "columns": [
           "shipment_date",
           "person_nameCalc",
@@ -60,13 +60,8 @@
           "shipmentItem_unitValue",
           "sum_totalValue"
         ],
-        "sort": [
-          { "columnId": "person_nameCalc" },
-          { "columnId": "shipment_date" }
-        ],
-        "groups": [
-          { "columnId": "person_nameCalc" }
-        ]
+        "sort": [{ "columnId": "person_nameCalc" }, { "columnId": "shipment_date" }],
+        "groups": [{ "columnId": "person_nameCalc" }]
       }
     }
   }

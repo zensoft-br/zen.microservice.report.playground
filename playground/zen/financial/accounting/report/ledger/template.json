@@ -4,12 +4,29 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
+    "styles": ["@file:/styles.css", "@file:styles.css"]
   },
   "meta": {
-    "dataSource": "/financial/accounting/report/ledger"
+    "dataSource": "/financial/accounting/report/ledger",
+    "report": {
+      "properties": {
+        "#settings": {
+          "availableColumns": [
+            "date",
+            "journalEntry_id",
+            "account",
+            "accountCounterpart",
+            "description",
+            "debit",
+            "credit",
+            "balance",
+            "resultCenter",
+            "person",
+            "tags"
+          ],
+          "columns": ["date", "description", "debit", "credit", "balance"]
+        }
+      }
+    }
   }
 }
