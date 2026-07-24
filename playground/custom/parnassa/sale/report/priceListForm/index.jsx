@@ -8,7 +8,8 @@ export default function ({ data = [], meta = {}, t }) {
     return Number(a.product.code) - Number(b.product.code);
   });
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -28,7 +29,8 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader("Valor FOB"),
       width: "15ch",
       className: "number",
-      cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 4, maximumFractionDigits: 4 }),
+      cell: ({ value }) =>
+        utils.formatNumber(value, { minimumFractionDigits: 4, maximumFractionDigits: 4 }),
     },
     {
       id: "nacionalizacao",
@@ -36,7 +38,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       className: "number",
       cellValue: ({ row }) => (row.nacionalizacao - 1) * 100,
-      cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
+      cell: ({ value }) =>
+        utils.formatNumber(value, { minimumFractionDigits: 1, maximumFractionDigits: 1 }),
     },
     // Automatically generate the 10 dynamic item columns
     ...Array.from({ length: 10 }).map((_, index) => ({
@@ -45,11 +48,12 @@ export default function ({ data = [], meta = {}, t }) {
       width: "15ch",
       className: "number",
       cellValue: ({ row }) => row.items?.[index]?.valor,
-      cell: ({ value }) => utils.formatNumber(value, {
-        locale: report.locale,
-        minimumFractionDigits: 4,
-        maximumFractionDigits: 4,
-      }),
+      cell: ({ value }) =>
+        utils.formatNumber(value, {
+          locale: report.locale,
+          minimumFractionDigits: 4,
+          maximumFractionDigits: 4,
+        }),
     })),
   ];
 
@@ -57,7 +61,7 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>Lista de Preços</h1>
           <section className="parameters">
@@ -73,7 +77,8 @@ export default function ({ data = [], meta = {}, t }) {
               columns={columns}
               visibleColumns={visibleColumns}
               data={data}
-              footerTitle={t("/@word/summary")} />
+              footerTitle={t("/@word/summary")}
+            />
           </div>
         </main>
       </div>

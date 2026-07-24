@@ -15,7 +15,6 @@
             "productPacking_code",
             "product_description",
             "fiscal_br_NCM",
-            "tax_ICMS_taxRate",
             "quantity",
             "unit_code",
             "unitValue",

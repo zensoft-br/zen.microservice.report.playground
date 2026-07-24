@@ -4,10 +4,35 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
+    "styles": ["@file:/styles.css", "@file:styles.css"]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "status",
+            "productPacking_code",
+            "product_description",
+            "productPacking_complement",
+            "productVariant_description",
+            "sum_balance"
+          ],
+          "sort": [
+            {
+              "columnId": "availabilityDate",
+              "direction": "asc",
+              "nulls": "last"
+            }
+          ],
+          "groups": [
+            {
+              "columnId": "availabilityDate"
+            }
+          ]
+        }
+      }
+    }
   },
   "i18n": {
     "fallbackLocale": "fallback",

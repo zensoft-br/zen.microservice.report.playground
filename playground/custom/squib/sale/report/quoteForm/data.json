@@ -1486,8 +1486,8 @@
           "costTotalValue": 14544,
           "properties": {}
         },
-        "itemSequence": 2,
-        "proposalSequence": 1,
+        "itemSequence": 1,
+        "proposalSequence": 2,
         "productPacking": {
           "id": 17665,
           "product": {

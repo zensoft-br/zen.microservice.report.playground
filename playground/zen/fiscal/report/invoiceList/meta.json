@@ -68,31 +68,6 @@
       "SALES_CHANNEL_LIST": null,
       "FISCAL_PROFILE_OPERATION_TAGS": null,
       "TAGS": null
-    },
-    "properties": {
-      "settings": {
-        "columns": [
-          "invoice_date",
-          "person_nameCalc",
-          "sum_quantity",
-          "sum_referencedQuantity",
-          "sum_referencedBalance",
-          "sum_quantity_units",
-          "sum_totalValue",
-          "sum_discountValue",
-          "invoiceItem_unitValue",
-          "invoiceItem_unitValueUnits",
-          "count_invoice",
-          "count_invoiceItem"
-        ],
-        "sort": [
-          { "columnId": "person_nameCalc" },
-          { "columnId": "invoice_date" }
-        ],
-        "groups": [
-          { "columnId": "person_nameCalc" }
-        ]
-      }
     }
   }
 }

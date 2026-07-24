@@ -33,12 +33,7 @@ de geração de relatórios. Cada relatório é composto por:
 ### Definição do arquivo `template.json`
 
 ```typescript
-export type TemplateEngineType =
-  | "eta"
-  | "handlebars"
-  | "jsx"
-  | "liquid"
-  | "nunjucks";
+export type TemplateEngineType = "eta" | "handlebars" | "jsx" | "liquid" | "nunjucks";
 
 export interface Template {
   engine: TemplateEngineType;
@@ -74,7 +69,7 @@ export interface Template {
 {
   "engine": "react",
   "template": {
-    "source": "@file:index.jsx",
+    "source": "@file:index.jsx"
   },
   "assets": {
     "scripts": {
@@ -105,7 +100,9 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
   return (
     <div className="report-wrapper">
-      <div className="report-container"></div>
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+      ></div>
     </div>
   );
 }
@@ -272,7 +269,7 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper">
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
@@ -290,15 +287,25 @@ export default function ({ data = [], meta = {}, t }) {
           {Object.entries(groupedData).map(([dept, items]) => (
             <section key={dept}>
               <header>
-                <h2>{t("/@word/department")}: {dept}</h2>
+                <h2>
+                  {t("/@word/department")}: {dept}
+                </h2>
               </header>
               <div className="content">
-                <Table
-                  data={items}
-                  visibleColumns={["id", "name", "age"]}>
-                  <Column id="id" header={t("/@word/id")} className="number" cell={({ value }) => utils.formatNumber(value)} />
+                <Table data={items} visibleColumns={["id", "name", "age"]}>
+                  <Column
+                    id="id"
+                    header={t("/@word/id")}
+                    className="number"
+                    cell={({ value }) => utils.formatNumber(value)}
+                  />
                   <Column id="name" header={t("/@word/name")} />
-                  <Column id="age" header={t("/@word/age")} className="number" cell={({ value }) => utils.formatNumber(value)} />
+                  <Column
+                    id="age"
+                    header={t("/@word/age")}
+                    className="number"
+                    cell={({ value }) => utils.formatNumber(value)}
+                  />
                   <Column id="department" header={t("/@word/department")} />
                 </Table>
               </div>

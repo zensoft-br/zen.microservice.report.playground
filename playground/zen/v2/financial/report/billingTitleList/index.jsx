@@ -4,7 +4,8 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -35,7 +36,11 @@ export default function ({ data = [], meta = {}, t }) {
       id: "code",
       width: "16ch",
       header: utils.cellHeader(t("/@word/code")),
-      cell: ({ row, value }) => <Badge className="inverted" expression={row.invoice_id ?? row.id}>{value}</Badge>,
+      cell: ({ row, value }) => (
+        <Badge className="inverted" expression={row.invoice_id ?? row.id}>
+          {value}
+        </Badge>
+      ),
     },
     {
       id: "description",
@@ -52,7 +57,10 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/date")),
       cell: ({ value }) => utils.formatDate(value),
-      footerValue: ({ data }) => getAverageDate(data.map((item) => ({ date: item.date, value: item.sum_value })))?.toISOString().substring(0, 10),
+      footerValue: ({ data }) =>
+        getAverageDate(data.map((item) => ({ date: item.date, value: item.sum_value })))
+          ?.toISOString()
+          .substring(0, 10),
       footer: ({ value }) => utils.formatDate(value),
     },
     {
@@ -60,7 +68,10 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/issueDate")),
       cell: ({ value }) => utils.formatDate(value),
-      footerValue: ({ data }) => getAverageDate(data.map((item) => ({ date: item.issueDate, value: item.sum_value })))?.toISOString().substring(0, 10),
+      footerValue: ({ data }) =>
+        getAverageDate(data.map((item) => ({ date: item.issueDate, value: item.sum_value })))
+          ?.toISOString()
+          .substring(0, 10),
       footer: ({ value }) => utils.formatDate(value),
     },
     {
@@ -68,7 +79,10 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/dueDate")),
       cell: ({ value }) => utils.formatDate(value),
-      footerValue: ({ data }) => getAverageDate(data.map((item) => ({ date: item.dueDate, value: item.sum_value })))?.toISOString().substring(0, 10),
+      footerValue: ({ data }) =>
+        getAverageDate(data.map((item) => ({ date: item.dueDate, value: item.sum_value })))
+          ?.toISOString()
+          .substring(0, 10),
       footer: ({ value }) => utils.formatDate(value),
     },
     {
@@ -76,7 +90,10 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/settlementDate")),
       cell: ({ value }) => utils.formatDate(value),
-      footerValue: ({ data }) => getAverageDate(data.map((item) => ({ date: item.settlementDate, value: item.sum_value })))?.toISOString().substring(0, 10),
+      footerValue: ({ data }) =>
+        getAverageDate(data.map((item) => ({ date: item.settlementDate, value: item.sum_value })))
+          ?.toISOString()
+          .substring(0, 10),
       footer: ({ value }) => utils.formatDate(value),
     },
     {
@@ -127,7 +144,11 @@ export default function ({ data = [], meta = {}, t }) {
       width: "24ch",
       header: utils.cellHeader(t("/catalog/person/person")),
       cellValue: ({ row }) => row.person_nameCalc,
-      cell: ({ row, value }) => <><Badge>{row.person_documentNumber}</Badge> {value}</>,
+      cell: ({ row, value }) => (
+        <>
+          <Badge>{row.person_documentNumber}</Badge> {value}
+        </>
+      ),
     },
     {
       id: "person_documentType",
@@ -300,20 +321,24 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation ?? "landscape"}`}>
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation ?? "landscape"}`}
+      >
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
-            {report.parameters?.dateStart &&
+            {report.parameters?.dateStart && (
               <dl>
                 <dt>{t("/@word/dateStart")}</dt>
                 <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
-              </dl>}
-            {report.parameters?.dateEnd &&
-            <dl>
-              <dt>{t("/@word/dateEnd")}</dt>
-              <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
-            </dl>}
+              </dl>
+            )}
+            {report.parameters?.dateEnd && (
+              <dl>
+                <dt>{t("/@word/dateEnd")}</dt>
+                <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
+              </dl>
+            )}
           </section>
         </header>
         <main>
@@ -323,7 +348,8 @@ export default function ({ data = [], meta = {}, t }) {
               visibleColumns={visibleColumns}
               data={data}
               groups={groups}
-              footerTitle={t("/@word/summary")} />
+              footerTitle={t("/@word/summary")}
+            />
           </div>
         </main>
       </div>

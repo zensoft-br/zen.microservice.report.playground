@@ -4,9 +4,35 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css"
-    ]
+    "styles": ["@file:/styles.css"]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "orientation": "landscape",
+          "columns": [
+            "product_code",
+            "product_description",
+            "productPacking_code",
+            "minimumStock",
+            "stock_quantity",
+            "productionOrder_quantity",
+            "purchase_quantity",
+            "sale_quantity",
+            "replenishment"
+          ],
+          "sort": [
+            {
+              "columnId": "product_code",
+              "direction": "asc",
+              "nulls": "last"
+            }
+          ],
+          "groups": []
+        }
+      }
+    }
   },
   "i18n": {
     "fallbackLocale": "fallback",

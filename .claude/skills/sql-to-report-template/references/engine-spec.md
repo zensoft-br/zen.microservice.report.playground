@@ -17,7 +17,7 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
   return (
     <div className="report-wrapper">
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         {/* ... */}
       </div>
     </div>
@@ -97,8 +97,8 @@ Skill-relevant shape:
     "properties": {
       "settings": {
         "columns": ["invoice_date", "person_nameCalc", "sum_quantity"],
-        "sort":    [{ "columnId": "invoice_date", "direction": "desc", "nulls": "last" }],
-        "groups":  [{ "columnId": "person_nameCalc" }]
+        "sort": [{ "columnId": "invoice_date", "direction": "desc", "nulls": "last" }],
+        "groups": [{ "columnId": "person_nameCalc" }]
       }
     }
   }
@@ -142,7 +142,9 @@ Skill-relevant shape:
 
 ```jsx
 <Table data={groupData} visibleColumns={visibleColumns}>
-  {columns.map((column, index) => <Column key={index} {...column} />)}
+  {columns.map((column, index) => (
+    <Column key={index} {...column} />
+  ))}
 </Table>
 ```
 
@@ -183,14 +185,13 @@ Props:
 ### `<GroupSections>`
 
 ```jsx
-<GroupSections
-  columns={columns}
-  data={data}
-  groups={report.properties?.settings?.groups || []}>
+<GroupSections columns={columns} data={data} groups={report.properties?.groups || []}>
   {(groupData) => (
     <div className="content">
       <Table data={groupData} visibleColumns={visibleColumns}>
-        {columns.map((column, index) => <Column key={index} {...column} />)}
+        {columns.map((column, index) => (
+          <Column key={index} {...column} />
+        ))}
       </Table>
     </div>
   )}
@@ -235,10 +236,10 @@ All accept `null` / `undefined` safely, returning `null` (renders as nothing).
 Joins non-null args with `", "`, lowercases all but the first:
 
 ```js
-utils.cellHeader(t("/catalog/company/company"), t("/@word/fantasyName"))
+utils.cellHeader(t("/catalog/company/company"), t("/@word/fantasyName"));
 // → "Company, fantasy name"
 
-utils.cellHeader(t("/@word/quantity"))
+utils.cellHeader(t("/@word/quantity"));
 // → "Quantity"
 ```
 
@@ -247,7 +248,7 @@ Signature is variadic. Skill passes 1–3 args (namespace, suffix, optional inde
 ### `utils.sort(data, criteria)`
 
 ```js
-data = utils.sort(data, report.properties?.settings?.sort || []);
+data = utils.sort(data, report.properties?.sort || []);
 ```
 
 Sorts in place using `Intl.Collator(numeric:true)`. `criteria` = array of `{ columnId, direction = "asc", nulls = "last" }`.
@@ -255,7 +256,7 @@ Sorts in place using `Intl.Collator(numeric:true)`. `criteria` = array of `{ col
 ### `utils.group(data, groups)`
 
 ```js
-data = utils.group(data, report.properties?.settings?.groups || [], columns);
+data = utils.group(data, report.properties?.groups || [], columns);
 ```
 
 Returns a nested `Map` keyed by group-column values. Empty `groups` → single bucket with `null` key. `<GroupSections>` consumes this structure.
@@ -279,6 +280,6 @@ These were missing from `docs/engine.md`; skill-generated templates rely on them
 - `<GroupSections>` — group-level rendering with render-prop child.
 - `<Badge>` — status pill.
 - `utils.sort`, `utils.group` — used before `<GroupSections>` / `<Table>`.
-- `meta.properties.settings.{columns,sort,groups}` — drives visibility / ordering / grouping at runtime; not in kit docs but honored by the engine.
+- `meta.properties.{columns,sort,groups}` — drives visibility / ordering / grouping at runtime; not in kit docs but honored by the engine.
 
 If the engine ever diverges from this spec, update this file — it's the skill's source of truth.

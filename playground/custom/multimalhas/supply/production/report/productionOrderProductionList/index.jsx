@@ -3,11 +3,11 @@ import * as utils from "./utils.jsx";
 export default function ({ data = [], t }) {
   // Group data by person_id
   data = data.reduce((red, obj) => {
-    const key = `${obj.properties?.sale_id || "unknown"}:${obj.person_id}`; 
+    const key = `${obj.properties?.sale_id || "unknown"}:${obj.person_id}`;
     if (!red[key]) {
-      red[key] = { 
+      red[key] = {
         data: obj,
-        items: [],  
+        items: [],
       };
     }
     red[key].items.push(obj);
@@ -15,7 +15,7 @@ export default function ({ data = [], t }) {
   }, {});
 
   // Group items by productVariant_id within each person_id group
-  Object.values(data).forEach(obj => {
+  Object.values(data).forEach((obj) => {
     obj.items = obj.items.reduce((red, item) => {
       let key_part1 = (item.product_code ?? "").split(".").slice(0, 2).join(".");
       const key = `${key_part1}:${item.productVariant_id || "unknown"}`;
@@ -23,22 +23,22 @@ export default function ({ data = [], t }) {
         red[key] = {
           key_part1,
           data: item,
-          items: [],  
+          items: [],
         };
       }
       red[key].items.push(item);
       return red;
     }, {});
 
-    Object.values(obj.items).forEach(obj => {
+    Object.values(obj.items).forEach((obj) => {
       obj.items = obj.items.reduce((red, item) => {
         let key = (item.product_code ?? "").split(/[\./]/)[2] || "unknown";
         if (!["38", "40", "42", "44", "46", "48", "50", "52", "54", "56"].includes(key))
           key = "unknown";
         if (!red[key]) {
-          red[key] = { 
+          red[key] = {
             data: item,
-            items: [],  
+            items: [],
           };
         }
         red[key].items.push(item);
@@ -49,7 +49,7 @@ export default function ({ data = [], t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>Ordens de produção pendentes</h1>
         </header>
@@ -99,38 +99,213 @@ export default function ({ data = [], t }) {
                       <tr key={index}>
                         <td style={{ width: "5cm" }}>{item.key_part1}</td>
                         <td style={{ width: "5cm" }}>{item.data.productVariant_description}</td>
-                        <td className="number">{utils.formatNumber(item.items["38"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["40"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["42"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["44"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["46"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["48"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["50"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["52"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["54"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["56"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(item.items["unknown"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) || 0)}</td>
-                        <td className="number">{utils.formatNumber(Object.values(item.items).reduce((sum, i) => sum + i.items.reduce((s, j) => s + j.sum_quantity, 0), 0))}</td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["38"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["40"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["42"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["44"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["46"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["48"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["50"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["52"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["54"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["56"]?.items.reduce((sum, i) => sum + i.sum_quantity, 0) ||
+                              0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            item.items["unknown"]?.items.reduce(
+                              (sum, i) => sum + i.sum_quantity,
+                              0,
+                            ) || 0,
+                          )}
+                        </td>
+                        <td className="number">
+                          {utils.formatNumber(
+                            Object.values(item.items).reduce(
+                              (sum, i) => sum + i.items.reduce((s, j) => s + j.sum_quantity, 0),
+                              0,
+                            ),
+                          )}
+                        </td>
                       </tr>
-                    ))
-                    }
+                    ))}
                   </tbody>
                   <tfoot>
                     <tr>
                       <td>{t("/@word/total")}</td>
                       <td></td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["38"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["40"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["42"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["44"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["46"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["48"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["50"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["52"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["54"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["56"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + (i.items["unknown"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0), 0))}</td>
-                      <td className="number">{utils.formatNumber(Object.values(value.items).reduce((sum, i) => sum + Object.values(i.items).reduce((s, j) => s + j.items.reduce((a, b) => a + b.sum_quantity, 0), 0), 0))}</td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["38"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["40"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["42"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["44"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["46"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["48"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["50"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["52"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["54"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["56"]?.items.reduce((s, j) => s + j.sum_quantity, 0) || 0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              (i.items["unknown"]?.items.reduce((s, j) => s + j.sum_quantity, 0) ||
+                                0),
+                            0,
+                          ),
+                        )}
+                      </td>
+                      <td className="number">
+                        {utils.formatNumber(
+                          Object.values(value.items).reduce(
+                            (sum, i) =>
+                              sum +
+                              Object.values(i.items).reduce(
+                                (s, j) => s + j.items.reduce((a, b) => a + b.sum_quantity, 0),
+                                0,
+                              ),
+                            0,
+                          ),
+                        )}
+                      </td>
                     </tr>
                   </tfoot>
                 </table>
@@ -141,4 +316,4 @@ export default function ({ data = [], t }) {
       </div>
     </div>
   );
-};
+}

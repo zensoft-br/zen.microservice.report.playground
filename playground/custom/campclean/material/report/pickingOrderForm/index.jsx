@@ -5,10 +5,7 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const settings =
-    utils.deepMerge(
-      report?.properties?.["#settings"],
-      report?.properties?.userSettings,
-    ) ?? {};
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -18,19 +15,13 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "product_description",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/@word/description"),
-      ),
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
       width: "45ch",
       cellValue: ({ row }) => row.productPacking.product?.description,
     },
     {
       id: "productVariant_description",
-      header: utils.cellHeader(
-        t("/catalog/product/productVariant"),
-        t("/@word/description"),
-      ),
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
       width: "15ch",
       cellValue: ({ row }) => row.productPacking.variant?.description,
     },
@@ -43,22 +34,17 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) =>
         utils.sumBy(
           data,
-          (row) =>
-            row.productPacking.unit?.code ??
-            row.productPacking.product.unit.code,
+          (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
           (row) => row.quantity,
         ),
       footer: ({ value }) =>
-        utils.renderAggr(value, (val, key) =>
-          utils.formatQuantity(val, { unit_code: key }),
-        ),
+        utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),
     },
     {
       id: "unit_code",
       header: utils.cellHeader(t("/catalog/product/unit/abbr")),
       width: "6ch",
-      cellValue: ({ row }) =>
-        row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+      cellValue: ({ row }) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
       cell: ({ value }) => (
         <>
           <Badge>{value}</Badge>
@@ -75,14 +61,11 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/grossWeightKg")),
       width: "10ch",
       className: "number",
-      cellValue: ({ row }) =>
-        row.quantity * row.productPacking.product?.grossWeightKg || 0,
+      cellValue: ({ row }) => row.quantity * row.productPacking.product?.grossWeightKg || 0,
       cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
       footerValue: ({ data }) =>
         data.reduce(
-          (sum, row) =>
-            sum +
-            (row.quantity * row.productPacking.product?.grossWeightKg || 0),
+          (sum, row) => sum + (row.quantity * row.productPacking.product?.grossWeightKg || 0),
           0,
         ),
       footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
@@ -94,7 +77,7 @@ export default function ({ data = [], meta = {}, t }) {
   data.forEach((pickingOrder) => {
     pickingOrder.items = utils.sort(
       pickingOrder.items,
-      // report.properties?.settings?.sort ||
+      // settings?.sort ||
       [
         {
           columnId: "productPacking.product.description",
@@ -108,14 +91,8 @@ export default function ({ data = [], meta = {}, t }) {
       {data.map((pickingOrder) => (
         <div className="report-container a4 landscape">
           <header>
-            <h1
-              className="flex h gap align-center"
-              style={{ justifyContent: "space-between" }}
-            >
-              <img
-                src={pickingOrder.company?.image?.url}
-                style={{ height: "1.5cm" }}
-              ></img>
+            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
+              <img src={pickingOrder.company?.image?.url} style={{ height: "1.5cm" }}></img>
               <span>
                 {t("/material/pickingOrder")} {pickingOrder.id}
               </span>
@@ -203,8 +180,7 @@ export default function ({ data = [], meta = {}, t }) {
                     pickingOrder.sale?.personAddressShipping?.complement,
                     pickingOrder.sale?.personAddressShipping?.city?.name,
                     pickingOrder.sale?.personAddressShipping?.city?.state?.code,
-                    pickingOrder.sale?.personAddressShipping?.city?.state
-                      ?.country?.codeA2,
+                    pickingOrder.sale?.personAddressShipping?.city?.state?.country?.codeA2,
                     pickingOrder.sale?.personAddressShipping?.zipcode,
                   ]
                     .filter(Boolean)
@@ -220,8 +196,7 @@ export default function ({ data = [], meta = {}, t }) {
                     <pre>
                       {[
                         pickingOrder.properties?.comments,
-                        pickingOrder.sale?.person.properties
-                          ?.outgoingInvoiceComments,
+                        pickingOrder.sale?.person.properties?.outgoingInvoiceComments,
                       ]
                         .filter(Boolean)
                         .join("\n")}
@@ -233,11 +208,7 @@ export default function ({ data = [], meta = {}, t }) {
           </header>
           <main>
             <div className="content">
-              <Table
-                columns={columns}
-                visibleColumns={visibleColumns}
-                data={pickingOrder.items}
-              />
+              <Table columns={columns} visibleColumns={visibleColumns} data={pickingOrder.items} />
             </div>
           </main>
         </div>

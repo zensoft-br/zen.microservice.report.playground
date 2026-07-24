@@ -4,33 +4,35 @@ import { Badge } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "id",
+    {
+      id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "7ch",
       className: "id",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length, 
+      footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "name",
-      header: utils.cellHeader(t("/@word/name")),
-      width: "30ch",
-    },
-    { id: "score",
+    { id: "name", header: utils.cellHeader(t("/@word/name")), width: "30ch" },
+    {
+      id: "score",
       header: utils.cellHeader(t("/@word/score")),
       width: "7ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
     },
-    { id: "category1",
+    {
+      id: "category1",
       header: utils.cellHeader(t("/@word/category1")),
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { id: "status",
+    {
+      id: "status",
       header: utils.cellHeader(t("/@word/status")),
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
@@ -38,7 +40,7 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   // data = utils.sort(data, settings?.sort || []);
-  
+
   const visibleColumns = settings?.columns ?? [];
 
   return (
@@ -71,7 +73,9 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>Valor</dt>
-                <dd style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "1.2em" }}>{utils.formatCurrency(data.balance)}</dd>
+                <dd style={{ fontFamily: "monospace", fontWeight: "bold", fontSize: "1.2em" }}>
+                  {utils.formatCurrency(data.balance)}
+                </dd>
               </dl>
             </section>
             <section className="parameters">
@@ -84,7 +88,9 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl>
                   <dt>Observações</dt>
-                  <dd><pre>{data.properties?.comments}</pre></dd>
+                  <dd>
+                    <pre>{data.properties?.comments}</pre>
+                  </dd>
                 </dl>
               </section>
             )}
@@ -113,8 +119,12 @@ export default function ({ data = [], meta = {}, t }) {
               <br />
               <br />
               <br />
-              <span style={{ display: "block", textAlign: "center" }}>_________________________________________________________________</span>
-              <span style={{ display: "block", textAlign: "center" }}>{`${data.company.person.city?.name}, ${utils.formatDate(new Date().toISOString())}`}</span>
+              <span style={{ display: "block", textAlign: "center" }}>
+                _________________________________________________________________
+              </span>
+              <span
+                style={{ display: "block", textAlign: "center" }}
+              >{`${data.company.person.city?.name}, ${utils.formatDate(new Date().toISOString())}`}</span>
             </div>
           </main>
           <footer className="flex v gap">
@@ -123,7 +133,11 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>Tesoureiro</dt>
-                <dd>&nbsp;<br/>&nbsp;</dd>
+                <dd>
+                  &nbsp;
+                  <br />
+                  &nbsp;
+                </dd>
               </dl>
               <dl>
                 <dt>Procurador</dt>
@@ -137,11 +151,19 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>Assinatura</dt>
-                <dd>&nbsp;<br/>&nbsp;</dd>
+                <dd>
+                  &nbsp;
+                  <br />
+                  &nbsp;
+                </dd>
               </dl>
               <dl>
                 <dt>Data</dt>
-                <dd>&nbsp;<br/>&nbsp;</dd>
+                <dd>
+                  &nbsp;
+                  <br />
+                  &nbsp;
+                </dd>
               </dl>
             </section>
           </footer>

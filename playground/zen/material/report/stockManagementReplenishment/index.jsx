@@ -4,10 +4,12 @@ import { Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "product_id",
+    {
+      id: "product_id",
       header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")),
       width: "8ch",
       className: "number",
@@ -16,15 +18,18 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "product_code",
+    {
+      id: "product_code",
       header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")),
       width: "16ch",
     },
-    { id: "product_description",
+    {
+      id: "product_description",
       header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
       width: "24ch",
     },
-    { id: "unit_id",
+    {
+      id: "unit_id",
       header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/id")),
       width: "8ch",
       className: "number",
@@ -33,11 +38,13 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "unit_code",
+    {
+      id: "unit_code",
       header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/code")),
       width: "8ch",
     },
-    { id: "productPacking_id",
+    {
+      id: "productPacking_id",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")),
       width: "8ch",
       className: "number",
@@ -46,21 +53,25 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "productPacking_code",
+    {
+      id: "productPacking_code",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
       width: "16ch",
     },
-    { id: "productPacking_complement",
+    {
+      id: "productPacking_complement",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
       width: "16ch",
     },
-    { id: "productPacking_units",
+    {
+      id: "productPacking_units",
       header: utils.cellHeader(t("/catalog/product/productPacking.units")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "productVariant_id",
+    {
+      id: "productVariant_id",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/id")),
       width: "8ch",
       className: "number",
@@ -69,164 +80,195 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "productVariant_code",
+    {
+      id: "productVariant_code",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/code")),
       width: "16ch",
     },
-    { id: "productVariant_description",
+    {
+      id: "productVariant_description",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
       width: "24ch",
     },
-    { id: "averageDailyConsumption",
+    {
+      id: "averageDailyConsumption",
       header: utils.cellHeader(t("/material/stockManagementItem.averageDailyConsumption")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "replenishmentTimeDays",
+    {
+      id: "replenishmentTimeDays",
       header: utils.cellHeader(t("/material/stockManagementItem.replenishmentTimeDays")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "safetyStockPercentage",
+    {
+      id: "safetyStockPercentage",
       header: utils.cellHeader(t("/material/stockManagementItem.safetyStockPercentage")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "minimumStock",
+    {
+      id: "minimumStock",
       header: utils.cellHeader(t("/material/stockManagementItem.minimumStock")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "replenishmentMinimum",
+    {
+      id: "replenishmentMinimum",
       header: utils.cellHeader(t("/material/stockManagementItem.replenishmentMinimum")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "replenishmentBatch",
+    {
+      id: "replenishmentBatch",
       header: utils.cellHeader(t("/material/stockManagementItem.replenishmentBatch")),
       width: "16ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
     },
-    { id: "acquisitionType",
+    {
+      id: "acquisitionType",
       header: utils.cellHeader(t("/material/stockManagementItem.acquisitionType")),
       width: "16ch",
     },
-    { id: "stock_quantity_excess",
+    {
+      id: "stock_quantity_excess",
       header: utils.cellHeader(t("/material/stock"), t("/@word/excess")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_excess) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_excess) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity_external",
+    {
+      id: "stock_quantity_external",
       header: utils.cellHeader(t("/material/stock"), t("/@word/external")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_external) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_external) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity_lack",
+    {
+      id: "stock_quantity_lack",
       header: utils.cellHeader(t("/material/stock"), t("/@word/lack")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_lack) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_lack) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity_regular",
+    {
+      id: "stock_quantity_regular",
       header: utils.cellHeader(t("/material/stock"), t("/@word/regular")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_regular) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_regular) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity_regular_free",
+    {
+      id: "stock_quantity_regular_free",
       header: utils.cellHeader(t("/material/stock"), t("/@word/free")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_regular_free) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_regular_free) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity_regular_reserved",
+    {
+      id: "stock_quantity_regular_reserved",
       header: utils.cellHeader(t("/material/stock"), t("/@word/reserved")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity_regular_reserved) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity_regular_reserved) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "stock_quantity",
+    {
+      id: "stock_quantity",
       header: utils.cellHeader(t("/material/stock"), t("/@word/quantity")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.stock_quantity) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.stock_quantity) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "productionOrder_quantity",
+    {
+      id: "productionOrder_quantity",
       header: utils.cellHeader(t("/supply/production/productionOrder"), t("/@word/quantity")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.productionOrder_quantity) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.productionOrder_quantity) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "purchase_quantity",
+    {
+      id: "purchase_quantity",
       header: utils.cellHeader(t("/supply/purchase/purchase"), t("/@word/quantity")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.purchase_quantity) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.purchase_quantity) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "sale_quantity",
+    {
+      id: "sale_quantity",
       header: utils.cellHeader(t("/sale/sale"), t("/@word/quantity")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.sale_quantity) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sale_quantity) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "replenishment",
+    {
+      id: "replenishment",
       header: utils.cellHeader(t("/@word/replenishment")),
       width: "16ch",
       className: "number",
       headerClassName: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.reduce((red, item) => red + (Number(item.replenishment) || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.replenishment) || 0), 0),
       footer: ({ value }) => utils.formatNumber(value),
     },
   ];
 
   data = utils.sort(data, settings?.sort || []);
-  
+
   const visibleColumns = settings?.columns ?? [];
 
-  const groups = report.properties?.settings?.groups || [];
+  const groups = settings?.groups || [];
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>{t("/material/report/stockManagementReplenishment")}</h1>
           <section className="parameters">
@@ -306,11 +348,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table
-              columns={columns}
-              visibleColumns={visibleColumns}
-              data={data}
-              groups={groups} />
+            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
           </div>
         </main>
       </div>

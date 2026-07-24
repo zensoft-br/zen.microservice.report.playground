@@ -4,8 +4,17 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css"
-    ]
+    "styles": ["@file:/styles.css"]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "orientation": "landscape",
+          "columns": ["dateTime", "level", "operation", "role_code", "day", "month", "year"],
+          "sort": [{ "columnId": "dateTime" }]
+        }
+      }
+    }
   }
 }

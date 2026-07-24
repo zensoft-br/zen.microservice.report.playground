@@ -4,16 +4,14 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
+    "styles": ["@file:/styles.css", "@file:styles.css"]
   },
   "meta": {
     "dataSource": "/sale/data/saleForm",
     "report": {
       "properties": {
         "#settings": {
+          "orientation": "landscape",
           "columns": [
             "productPacking_code",
             "product_description",

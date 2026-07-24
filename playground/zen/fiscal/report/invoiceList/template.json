@@ -4,8 +4,30 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css"
-    ]
+    "styles": ["@file:/styles.css"]
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "company_code",
+            "invoice_id",
+            "invoice_date",
+            "invoice_number",
+            "fiscalProfileOperation_code",
+            "person_nameCalc",
+            "productPacking_code",
+            "product_description",
+            "invoiceItem_unitValue",
+            "unit_code",
+            "sum_quantity",
+            "sum_grossProductValue",
+            "sum_totalValue"
+          ],
+          "sort": [{ "columnId": "invoice_date", "direction": "desc", "nulls": "last" }]
+        }
+      }
+    }
   }
 }

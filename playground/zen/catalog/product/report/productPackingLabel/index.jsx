@@ -4,7 +4,7 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj, index) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex v">
             <div className="content flex h flex-1">
               <div className="flex v" style={{ flex: "3" }}>
@@ -39,7 +39,11 @@ export default function ({ data = [], t }) {
               </div>
               <div className="flex v" style={{ flex: "1" }}>
                 <dl style={{ gridArea: "H" }}>
-                  <dd><img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.barcode ?? obj.code}`} /></dd>
+                  <dd>
+                    <img
+                      src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.barcode ?? obj.code}`}
+                    />
+                  </dd>
                 </dl>
               </div>
             </div>
@@ -51,4 +55,4 @@ export default function ({ data = [], t }) {
       ))}
     </div>
   );
-};
+}

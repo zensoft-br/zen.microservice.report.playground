@@ -16,45 +16,46 @@ export default function ({ data = [] }) {
 
     return k1.localeCompare(k2);
   });
-  const totalsByProduct = data
-    .reduce((acc, obj) => {
-      obj.steps?.forEach((step) => {
-        (step.consumptions ?? [])
-          // Filtro solicitado pelo Leonardo, para não considerar CAIXA e FITA no consumo total
-          .filter((e) => !["CAIXA", "FITA"].includes(e.productPacking.product.productProfile.code))
-          .forEach((consumption) => {
-            let variant;
-            if (consumption.productPacking.product.productProfile.code === "ESPUMA") {
-              variant = step.productions[0]?.productPacking.variant;
-            }
+  const totalsByProduct = data.reduce((acc, obj) => {
+    obj.steps?.forEach((step) => {
+      (step.consumptions ?? [])
+        // Filtro solicitado pelo Leonardo, para não considerar CAIXA e FITA no consumo total
+        .filter((e) => !["CAIXA", "FITA"].includes(e.productPacking.product.productProfile.code))
+        .forEach((consumption) => {
+          let variant;
+          if (consumption.productPacking.product.productProfile.code === "ESPUMA") {
+            variant = step.productions[0]?.productPacking.variant;
+          }
 
-            const key = consumption.productPacking.code + (variant ? `-${variant.id}` : "");
-            const qty = consumption.quantity || 0;
+          const key = consumption.productPacking.code + (variant ? `-${variant.id}` : "");
+          const qty = consumption.quantity || 0;
 
-            // 3. Accumulate sum grouped by code
-            if (!acc[key]) {
-              acc[key] = {
-                code: consumption.productPacking.code,
-                variant,
-                description: [
-                  consumption.productPacking.product.description,
-                  consumption.productPacking.complement,
-                  consumption.productPacking.variant?.description,
-                ].filter(Boolean).join(", "),
-                unit: consumption.productPacking.product.unit,
-                quantity: 0,
-              };
-            }
-            acc[key].quantity += qty;
-          });
-      });
-      return acc;
-    }, {});
+          // 3. Accumulate sum grouped by code
+          if (!acc[key]) {
+            acc[key] = {
+              code: consumption.productPacking.code,
+              variant,
+              description: [
+                consumption.productPacking.product.description,
+                consumption.productPacking.complement,
+                consumption.productPacking.variant?.description,
+              ]
+                .filter(Boolean)
+                .join(", "),
+              unit: consumption.productPacking.product.unit,
+              quantity: 0,
+            };
+          }
+          acc[key].quantity += qty;
+        });
+    });
+    return acc;
+  }, {});
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {/* Impresso 1, Ordens de produção */}
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>Ordens de Produção</h1>
         </header>
@@ -64,19 +65,23 @@ export default function ({ data = [] }) {
               <div className="no-break">
                 <div class="flex h full gap padding panel">
                   <div>
-                    <strong>Cliente</strong><br />
+                    <strong>Cliente</strong>
+                    <br />
                     {obj.person.name}
                   </div>
                   <div>
-                    <strong>Data</strong><br />
+                    <strong>Data</strong>
+                    <br />
                     {obj.date ? date(obj.date) : "-"}
                   </div>
                   <div>
-                    <strong>Disponibilidade</strong><br />
+                    <strong>Disponibilidade</strong>
+                    <br />
                     {obj.availabilityDate ? date(obj.availabilityDate) : "-"}
                   </div>
                   <div>
-                    <strong>Pedido</strong><br />
+                    <strong>Pedido</strong>
+                    <br />
                     {obj.code}
                   </div>
                 </div>
@@ -86,8 +91,15 @@ export default function ({ data = [] }) {
                       <div class="flex v gap padding center" style={{ flex: "2" }}>
                         <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
                         <div class="xxl">{step.productPacking.code}</div>
-                        <div><span className="xxl">{step.quantity}</span>&nbsp;{step.productPacking.product.unit.code}</div>
-                        {step.productions?.[0]?.productPacking.product.category5 && <div>Medida: {step.productions?.[0]?.productPacking.product.category5?.code}</div>}
+                        <div>
+                          <span className="xxl">{step.quantity}</span>&nbsp;
+                          {step.productPacking.product.unit.code}
+                        </div>
+                        {step.productions?.[0]?.productPacking.product.category5 && (
+                          <div>
+                            Medida: {step.productions?.[0]?.productPacking.product.category5?.code}
+                          </div>
+                        )}
                       </div>
 
                       <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
@@ -103,13 +115,18 @@ export default function ({ data = [] }) {
                             {step.consumptions?.map((consumption, index) => (
                               <tr key={index}>
                                 {/* <td>{consumption.productPacking.code}</td> */}
-                                <td>{[
-                                  consumption.productPacking.product.description,
-                                  consumption.productPacking.complement,
-                                  consumption.productPacking.variant?.description,
-                                ].filter(Boolean).join(", ")}</td>
+                                <td>
+                                  {[
+                                    consumption.productPacking.product.description,
+                                    consumption.productPacking.complement,
+                                    consumption.productPacking.variant?.description,
+                                  ]
+                                    .filter(Boolean)
+                                    .join(", ")}
+                                </td>
                                 <td className="number">
-                                  <strong>{number(consumption.quantity)}</strong>&nbsp;{consumption.productPacking.product.unit.code}
+                                  <strong>{number(consumption.quantity)}</strong>&nbsp;
+                                  {consumption.productPacking.product.unit.code}
                                 </td>
                               </tr>
                             ))}
@@ -126,7 +143,7 @@ export default function ({ data = [] }) {
       </div>
 
       {/* Impresso 2,  */}
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>Consumo de materiais por lote de produção</h1>
           <section className="parameters">
@@ -154,15 +171,18 @@ export default function ({ data = [] }) {
                 <th className="number">Quantidade</th>
               </thead>
               <tbody>
-                {Object
-                  .entries(totalsByProduct)
+                {Object.entries(totalsByProduct)
                   .sort(([codeA], [codeB]) => codeA.localeCompare(codeB))
                   .map(([code, total]) => (
                     <tr key={code}>
-                      <td><strong>{total.code}</strong></td>
+                      <td>
+                        <strong>{total.code}</strong>
+                      </td>
                       <td>{total.description}</td>
                       <td>{total.variant?.description}</td>
-                      <td className="number"><strong>{`${number(total.quantity)}`}</strong>&nbsp;{total.unit.code}</td>
+                      <td className="number">
+                        <strong>{`${number(total.quantity)}`}</strong>&nbsp;{total.unit.code}
+                      </td>
                     </tr>
                   ))}
               </tbody>
@@ -172,13 +192,25 @@ export default function ({ data = [] }) {
       </div>
 
       {/* Impresso 3, Itens a produzir */}
-      <div className="report-container">
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>Itens a produzir</h1>
         </header>
-        <div className="grid" style={{ gridTemplateColumns: "repeat(4, 1fr)", gap: "var(--gap)", fontSize: "1.25rem", fontWeight: "bold" }}>
+        <div
+          className="grid"
+          style={{
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "var(--gap)",
+            fontSize: "1.25rem",
+            fontWeight: "bold",
+          }}
+        >
           {data.map((obj) => (
-            <div key={obj.id} className="card flex v align-center justify-center" style={{ gap: "2rem" }}>
+            <div
+              key={obj.id}
+              className="card flex v align-center justify-center"
+              style={{ gap: "2rem" }}
+            >
               {obj.steps?.map((step, index) => (
                 <React.Fragment key={index}>
                   {step.productions?.map((production, index) => (
@@ -194,10 +226,9 @@ export default function ({ data = [] }) {
           ))}
         </div>
       </div>
-
     </div>
   );
-};
+}
 
 function date(value) {
   return new Intl.DateTimeFormat("pt-BR").format(new Date(value));

@@ -1,8 +1,8 @@
-export default function ({data}) {
+export default function ({ data }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex flex-1">
             <div className="content flex v flex-1">
               <div className="grid" style={{ flex: "2 0 0", gridTemplateColumns: "1fr 2fr 2fr" }}>
@@ -10,7 +10,10 @@ export default function ({data}) {
                   <dt>{fn(obj.person_id)}</dt>
                 </dl>
                 <dl className="flex v align-center">
-                  <img style={{ objectFit: "contain", flex: "2 0 0" }} src="https://s3.sa-east-1.amazonaws.com/zenerp.com.br/assets/tenants/luxcar/logo.png" />
+                  <img
+                    style={{ objectFit: "contain", flex: "2 0 0" }}
+                    src="https://s3.sa-east-1.amazonaws.com/zenerp.com.br/assets/tenants/luxcar/logo.png"
+                  />
                   <strong style={{ flex: "1 0 0" }}>{obj.volume_code}</strong>
                 </dl>
                 {/* <dl>
@@ -18,17 +21,25 @@ export default function ({data}) {
                 </dl> */}
                 <dl className="flex v align-center flex-space-around">
                   <dt>Nota fiscal</dt>
-                  <dd><strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong></dd>
-                  <dd style={{ fontSize: "0.7em" }}>OS {number(obj.ordemSeparacao_codigo)}, Carga {number(obj.carga_codigo)}</dd>
+                  <dd>
+                    <strong style={{ fontSize: "1.5rem" }}>{number(obj.invoice_number)}</strong>
+                  </dd>
+                  <dd style={{ fontSize: "0.7em" }}>
+                    OS {number(obj.ordemSeparacao_codigo)}, Carga {number(obj.carga_codigo)}
+                  </dd>
                 </dl>
               </div>
               <dl style={{ flex: "1 0 0" }}>
                 <dt>Destinatário</dt>
-                <dd><strong>{obj.person_fantasyName ?? obj.person_name}</strong></dd>
+                <dd>
+                  <strong>{obj.person_fantasyName ?? obj.person_name}</strong>
+                </dd>
               </dl>
               <dl style={{ flex: "1 0 0" }}>
                 <dt>Cidade</dt>
-                <dd><strong>{`${obj.person_city}, ${obj.person_state}`}</strong></dd>
+                <dd>
+                  <strong>{`${obj.person_city}, ${obj.person_state}`}</strong>
+                </dd>
               </dl>
               <dl style={{ flex: "1 0 0" }}>
                 <dt>Transportadora</dt>
@@ -36,15 +47,23 @@ export default function ({data}) {
               </dl>
               <dl style={{ flex: "1 0 0" }}>
                 <dt>Itens</dt>
-                <dd>{number(obj.product_num)}/{number(obj.product_count)}, {obj.product_code}, {obj.product_description}, x{obj.productPacking_units}</dd>
+                <dd>
+                  {number(obj.product_num)}/{number(obj.product_count)}, {obj.product_code},{" "}
+                  {obj.product_description}, x{obj.productPacking_units}
+                </dd>
               </dl>
               <div className="grid" style={{ flex: "1 0 0", gridTemplateColumns: "1fr 3fr" }}>
                 <dl>
                   <dt>Volume</dt>
-                  <dd>{obj.item_num}/{obj.item_count}</dd>
+                  <dd>
+                    {obj.item_num}/{obj.item_count}
+                  </dd>
                 </dl>
                 <dl>
-                  <img style={{ objectFit: "contain" }} src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=5&scaleY=1&text=${obj.volume_code}`}></img>
+                  <img
+                    style={{ objectFit: "contain" }}
+                    src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=5&scaleY=1&text=${obj.volume_code}`}
+                  ></img>
                 </dl>
               </div>
             </div>
@@ -54,7 +73,7 @@ export default function ({data}) {
       ))}
     </div>
   );
-};
+}
 
 function number(value, options = {}) {
   return new Intl.NumberFormat("pt-BR", options).format(value);

@@ -4,12 +4,13 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const fn = (value) => {
     if (value == 0) {
       return "";
-    } else  if (value > 0) {
+    } else if (value > 0) {
       return "D";
     } else {
       return "C";
@@ -81,7 +82,10 @@ export default function ({ data = [], meta = {}, t }) {
       id: "result_center_calc",
       width: "15ch",
       header: utils.cellHeader(t("/financial/accounting/resultCenter")),
-      cell: ({ row }) => row.fin_acc_result_center_code ? `${row.fin_acc_result_center_code}, ${row.fin_acc_result_center_description}` : null,
+      cell: ({ row }) =>
+        row.fin_acc_result_center_code
+          ? `${row.fin_acc_result_center_code}, ${row.fin_acc_result_center_description}`
+          : null,
     },
     {
       id: "cat_person_name",
@@ -98,49 +102,57 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className={`report-container ${report.properties?.pageSize ?? "a4"} ${settings?.orientation}`}>
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>{t("/financial/accounting/report/trialBalance")}</h1>
           <section className="parameters">
-            {report.parameters?.society_desc &&
+            {report.parameters?.society_desc && (
               <dl>
                 <dt>{t("/catalog/company/society")}</dt>
                 <dd>{report.parameters?.society_desc}</dd>
-              </dl>}
-            {report.parameters?.company_desc &&
+              </dl>
+            )}
+            {report.parameters?.company_desc && (
               <dl>
                 <dt>{t("/catalog/company/company")}</dt>
                 <dd>{report.parameters?.company_desc}</dd>
-              </dl>}
-            {report.parameters?.person_desc &&
+              </dl>
+            )}
+            {report.parameters?.person_desc && (
               <dl>
                 <dt>{t("/catalog/person/person")}</dt>
                 <dd>{report.parameters?.person_desc}</dd>
-              </dl>}
-            {report.parameters?.resultCenter_desc &&
+              </dl>
+            )}
+            {report.parameters?.resultCenter_desc && (
               <dl>
                 <dt>{t("/financial/accounting/resultCenter")}</dt>
                 <dd>{report.parameters?.resultCenter_desc}</dd>
-              </dl>}
-            {report.parameters?.dateStart &&
+              </dl>
+            )}
+            {report.parameters?.dateStart && (
               <dl>
                 <dt>{t("/@word/dateStart")}</dt>
                 <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
-              </dl>}
-            {report.parameters?.dateEnd &&
-            <dl>
-              <dt>{t("/@word/dateEnd")}</dt>
-              <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
-            </dl>}
+              </dl>
+            )}
+            {report.parameters?.dateEnd && (
+              <dl>
+                <dt>{t("/@word/dateEnd")}</dt>
+                <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
+              </dl>
+            )}
           </section>
         </header>
         <main>
-          <div className="content" style={{ "--credit": `'${t("/financial/accounting/sign/enum/CR/sign")}'`, "--debit": `'${t("/financial/accounting/sign/enum/DR/sign")}'` }}>
-            <Table
-              columns={columns}
-              visibleColumns={visibleColumns}
-              data={data}
-              groups={groups} />
+          <div
+            className="content"
+            style={{
+              "--credit": `'${t("/financial/accounting/sign/enum/CR/sign")}'`,
+              "--debit": `'${t("/financial/accounting/sign/enum/DR/sign")}'`,
+            }}
+          >
+            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
           </div>
         </main>
       </div>

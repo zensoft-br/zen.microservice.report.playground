@@ -275,9 +275,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
-        <div
-          className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}
-        >
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <header>
             <h1
               className="grid"

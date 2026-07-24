@@ -1,22 +1,18 @@
 import * as utils from "./utils.jsx";
-import { Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   data.forEach((quote) => {
     quote.items.sort((a, b) => {
-      if (a.itemSequence !== b.itemSequence)
-        return a.itemSequence - b.itemSequence;
+      if (a.itemSequence !== b.itemSequence) return a.itemSequence - b.itemSequence;
       return a.proposalSequence - b.proposalSequence;
     });
   });
 
   const settings =
-    utils.deepMerge(
-      report?.properties?.["#settings"],
-      report?.properties?.userSettings,
-    ) ?? {};
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -26,6 +22,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "proposalSequence",
       header: t("/sale/quoteItem.proposalSequence"),
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
     {
       id: "item_code",
@@ -42,25 +39,36 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "quantity",
-      header: t("/@word/quantity"),
       className: "number",
+      header: utils.cellHeader(t("/@word/quantity")),
       cell: ({ row, value }) =>
         utils.formatQuantity(value, {
-          unit_code: row.productPacking?.product?.unit?.code,
+          unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
         }),
-      footerValue: (quote) =>
-        utils.formatNumber(
-          quote.items
-            ?.filter((item) => item.proposalSequence === 1)
-            .reduce((acc, item) => acc + item.quantity, 0),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data.filter((row) => row.proposalSequence === 1),
+          (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+          (row) => row.quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (quantity, unit_code) =>
+          utils.formatQuantity(quantity, { unit_code }),
         ),
     },
     {
       id: "unitValue",
-      header: t("/@word/unitValue"),
       className: "number",
-      cell: ({ row, value }) =>
-        utils.formatCurrency(value, { currency: row.currency?.code }),
+      header: utils.cellHeader(t("/@word/unitValue")),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.currency,
+          (item) => item.unitValue,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
     },
     {
       id: "unitValueLocal",
@@ -70,21 +78,18 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "totalValue",
-      header: t("/@word/totalValue"),
       className: "number",
       width: "10ch",
-      cell: ({ row, value }) =>
-        utils.formatCurrency(value, { currency: row.currency?.code }),
+      header: utils.cellHeader(t("/@word/totalValue")),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
       footerValue: ({ data }) =>
         utils.sumBy(
-          data,
+          data.filter((row) => row.proposalSequence === 1),
           (row) => row.currency?.code,
           (row) => row.totalValue,
         ),
       footer: ({ value }) =>
-        utils.renderAggr(value, (val, key) =>
-          utils.formatCurrency(val, { currency: key }),
-        ),
+        utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
     },
     {
       id: "origin",
@@ -110,24 +115,28 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((quote) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <header>
-            <div className="brand">
+            <h1
+              className="grid"
+              style={{
+                gridTemplateColumns: "1fr auto 1fr",
+                alignItems: "center",
+              }}
+            >
               <img
                 src={quote.company?.image?.url}
-                style={{ width: "3cm" }}
-              ></img>
-            </div>
-            <h1
-              className="flex h gap align-center"
-              style={{ justifyContent: "space-between" }}
-            >
-              {t("/sale/quote")} {quote.id}
+                style={{ height: "1.5cm", maxWidth: "4.5cm", objectFit: "contain" }}
+              />
+              <span>
+                {t("/sale/quote")} {quote.id}
+              </span>
               <img
                 src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`}
-                style={{ width: "1.5cm" }}
-              ></img>
+                style={{ height: "1.5cm", justifySelf: "end" }}
+              />
             </h1>
+
             <section className="parameters">
               <dl>
                 <dt>{t("/catalog/company/company")}</dt>
@@ -153,9 +162,7 @@ export default function ({ data = [], meta = {}, t }) {
               </dl>
               <dl>
                 <dt>
-                  {t(
-                    `/catalog/person/personDocumentType/enum/${quote.person?.documentType}`,
-                  )}
+                  {t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}
                 </dt>
                 <dd>{quote.person?.documentNumber}</dd>
               </dl>

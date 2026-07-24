@@ -4,10 +4,7 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
+    "styles": ["@file:/styles.css", "@file:styles.css"]
   },
   "meta": {
     "dataSource": null,
@@ -15,15 +12,8 @@
     "report": {
       "properties": {
         "#settings": {
-          "orientation": null,
-          "columns": [
-            "account_calc",
-            "opening_balance",
-            "debits",
-            "credits",
-            "delta",
-            "balance"
-          ],
+          "orientation": "landscape",
+          "columns": ["account_calc", "opening_balance", "debits", "credits", "delta", "balance"],
           "groups": [
             {
               "columnId": "fin_acc_account_chart_code"

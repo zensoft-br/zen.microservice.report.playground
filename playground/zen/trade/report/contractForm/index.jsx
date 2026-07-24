@@ -4,64 +4,88 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "id",
+    {
+      id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "7ch",
       className: "id",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length, 
+      footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
-    { id: "productPacking_code",
+    {
+      id: "productPacking_code",
       header: utils.cellHeader(t("/@word/code")),
       width: "10ch",
       cellValue: ({ row }) => row.productPacking?.code,
       cell: ({ value }) => value,
     },
-    { id: "product_description",
+    {
+      id: "product_description",
       header: utils.cellHeader(t("/@word/description")),
       width: "25ch",
       cellValue: ({ row }) => row.productPacking?.product.description,
       cell: ({ value }) => value,
     },
-    { id: "productPacking_complement",
+    {
+      id: "productPacking_complement",
       header: utils.cellHeader(t("/@word/complement")),
       width: "10ch",
       cellValue: ({ row }) => row.productPacking?.complement,
       cell: ({ value }) => value,
     },
-    { id: "productVariant_description",
+    {
+      id: "productVariant_description",
       header: utils.cellHeader(t("/catalog/product/productVariant")),
       width: "10ch",
       cellValue: ({ row }) => row.productPacking?.variant?.description,
       cell: ({ value }) => value,
     },
-    { id: "quantity",
+    {
+      id: "quantity",
       header: utils.cellHeader(t("/@word/quantity")),
       width: "10ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatNumber(value) + " " + row.productPacking?.product?.unit?.code,
-      footerValue: ({ data }) => utils.sumBy(data, (e) => e.productPacking.product.unit.code, (e) => e.quantity),
+      cell: ({ row, value }) =>
+        utils.formatNumber(value) + " " + row.productPacking?.product?.unit?.code,
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (e) => e.productPacking.product.unit.code,
+          (e) => e.quantity,
+        ),
       footer: ({ value }) => utils.renderAggr(value, (e, k) => `${utils.formatNumber(e)} ${k}`),
     },
-    { id: "unitValue",
+    {
+      id: "unitValue",
       header: utils.cellHeader(t("/@word/unitValue")),
       width: "10ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.contract.currency?.code }),
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, { currency: row.contract.currency?.code }),
     },
-    { id: "totalValue",
+    {
+      id: "totalValue",
       header: utils.cellHeader(t("/@word/totalValue")),
       width: "15ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.contract.currency?.code }),
-      footerValue: ({ data }) => utils.sumBy(data, (e) => e.contract.currency.code, (e) => e.totalValue),
-      footer: ({ value }) => utils.renderAggr(value, (e, k) => `${utils.formatCurrency(e, { currency: k })}`),
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, { currency: row.contract.currency?.code }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (e) => e.contract.currency.code,
+          (e) => e.totalValue,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (e, k) => `${utils.formatCurrency(e, { currency: k })}`),
     },
-    { id: "category1",
+    {
+      id: "category1",
       header: utils.cellHeader(t("/@word/category1")),
       width: "15ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
@@ -69,20 +93,31 @@ export default function ({ data = [], meta = {}, t }) {
   ];
 
   data = utils.sort(data, settings?.sort || []);
-  
+
   const visibleColumns = settings?.columns ?? [];
 
-  const groups = report.properties?.settings?.groups || [];
+  const groups = settings?.groups || [];
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((item, index) => (
         <div className="report-container a4">
           <header>
-            <h1 className="grid" style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
-              <img src={item.company.image?.url} style={{ height: "2cm", width: "4cm", objectFit: "contain" }} />
-              <span>{t("/trade/contract")} {item.id}</span>
-              <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${item.id}`} style={{ width: "2cm", justifySelf: "end" }} />
+            <h1
+              className="grid"
+              style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}
+            >
+              <img
+                src={item.company.image?.url}
+                style={{ height: "2cm", width: "4cm", objectFit: "contain" }}
+              />
+              <span>
+                {t("/trade/contract")} {item.id}
+              </span>
+              <img
+                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${item.id}`}
+                style={{ width: "2cm", justifySelf: "end" }}
+              />
             </h1>
             <section className="parameters">
               <dl>
@@ -123,7 +158,8 @@ export default function ({ data = [], meta = {}, t }) {
                 columns={columns}
                 visibleColumns={visibleColumns}
                 data={item.items}
-                groups={groups} />
+                groups={groups}
+              />
             </div>
           </main>
         </div>

@@ -2,13 +2,15 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj, index) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex v">
             <div className="content flex-1">
               <div className="flex v" style={{ gridArea: "A" }}>
                 <div className="cell">
                   <dt>Referência</dt>
-                  <dd><strong>{obj.productPacking_code}</strong></dd>
+                  <dd>
+                    <strong>{obj.productPacking_code}</strong>
+                  </dd>
                 </div>
                 <div className="cell">
                   <dt>{t("/@word/description")}</dt>
@@ -18,7 +20,10 @@ export default function ({ data = [], t }) {
               <div className="flex h" style={{ gridArea: "C" }}>
                 <div className="cell" style={{ gridArea: "C" }}>
                   <dt>{t("/@word/quantity")}</dt>
-                  <dd>{number(obj.quantity, { maximumFractionDigits: 2 })}{obj.unit_code}</dd>
+                  <dd>
+                    {number(obj.quantity, { maximumFractionDigits: 2 })}
+                    {obj.unit_code}
+                  </dd>
                 </div>
                 <div className="cell">
                   <dt>Identificação</dt>
@@ -31,7 +36,11 @@ export default function ({ data = [], t }) {
               </div>
               {/* Row 5 */}
               <div className="cell" style={{ gridArea: "D" }}>
-                <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} alt="" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                <img
+                  src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`}
+                  alt=""
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                />
               </div>
               <div className="cell" style={{ gridArea: "E" }}>
                 <dt>Lote</dt>
@@ -50,11 +59,17 @@ export default function ({ data = [], t }) {
                 <dd>{obj.serial_properties?.observacao}</dd>
               </div>
               <div className="cell" style={{ gridArea: "G" }}>
-                <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} alt="" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                <img
+                  src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`}
+                  alt=""
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                />
               </div>
             </div>
             <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "space-around" }}>
-              <div>{index + 1} de {data.length}</div>
+              <div>
+                {index + 1} de {data.length}
+              </div>
               <div>zenerp.com.br</div>
             </div>
           </main>
@@ -62,7 +77,7 @@ export default function ({ data = [], t }) {
       ))}
     </div>
   );
-};
+}
 
 function number(value, options = {}) {
   return new Intl.NumberFormat("pt-BR", options).format(value);

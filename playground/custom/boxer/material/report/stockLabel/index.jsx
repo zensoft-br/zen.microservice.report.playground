@@ -1,10 +1,10 @@
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
-  
+
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex flex-1">
             <div className="content flex-1">
               <div className="cell" style={{ gridArea: "A" }}>
@@ -12,11 +12,17 @@ export default function ({ data = [], meta = {}, t }) {
                 <div>{obj.serial_code}</div>
               </div>
               <div className="cell" style={{ gridArea: "B" }}>
-                <img src={`https://barcode.zensoft.com.br?bcid=code128&text=${obj.productPacking_barcode}`} alt="" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+                <img
+                  src={`https://barcode.zensoft.com.br?bcid=code128&text=${obj.productPacking_barcode}`}
+                  alt=""
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                />
                 <div>{obj.productPacking_barcode}</div>
               </div>
               <div className="cell" style={{ gridArea: "C" }}>
-                <dd><strong>{obj.productPacking_code}</strong></dd>
+                <dd>
+                  <strong>{obj.productPacking_code}</strong>
+                </dd>
                 <dd>{obj.product_description}</dd>
               </div>
               <div className="cell" style={{ gridArea: "D" }}>
@@ -28,4 +34,4 @@ export default function ({ data = [], meta = {}, t }) {
       ))}
     </div>
   );
-};
+}

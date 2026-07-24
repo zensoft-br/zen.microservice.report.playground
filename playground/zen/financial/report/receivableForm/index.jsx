@@ -4,9 +4,12 @@ import * as utils from "./utils.jsx";
 export default async function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
   const ctx = useMemo(() => ({ t, utils }), [t, utils]);
 
-  data.forEach(entity => {
+  data.forEach((entity) => {
     const dueDate = toUTCDate(entity.dueDate);
     const dueDateAdjusted = adjustWeekend(dueDate);
     const now = toUTCDate(new Date());
@@ -23,8 +26,14 @@ export default async function ({ data = [], meta = {}, t }) {
       // entity.dueDate = now.toISOString().substring(0, 10);
 
       if (entity.properties?.bankslip?.barcode) {
-        entity.properties.bankslip.barcode = generateBarcode(entity.properties.bankslip.barcode, now, entity.totalValue);
-        entity.properties.bankslip.barcodeFormatted = barcodeToBarcodeFormatted(entity.properties.bankslip.barcode);
+        entity.properties.bankslip.barcode = generateBarcode(
+          entity.properties.bankslip.barcode,
+          now,
+          entity.totalValue,
+        );
+        entity.properties.bankslip.barcodeFormatted = barcodeToBarcodeFormatted(
+          entity.properties.bankslip.barcode,
+        );
       }
     }
 
@@ -35,26 +44,26 @@ export default async function ({ data = [], meta = {}, t }) {
 
   const Band = ({ children, className, ...props }) => {
     return (
-      <div className={`flex ${className ?? ""} ${props.v ? "v" : "h"}`}
-        {...props}>
+      <div className={`flex ${className ?? ""} ${props.v ? "v" : "h"}`} {...props}>
         {children}
       </div>
     );
   };
-  
+
   const BankslipSection = ({ data, ctx }) => {
     return (
       <>
         <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.4fr) 0.6fr 5fr" }}>
           <Slot className="center middle">
             {data.wallet?.properties?.bank && (
-              <img className="logo"
+              <img
+                className="logo"
                 src={`https://zenerp.s3.amazonaws.com/public/financial/bank.BR.${data.wallet?.properties?.bank}.png`}
-                alt="bank" />
+                alt="bank"
+              />
             )}
           </Slot>
-          <Slot className="center middle"
-            style={{ fontSize: "1.1rem" }}>
+          <Slot className="center middle" style={{ fontSize: "1.1rem" }}>
             {data.wallet?.properties?.bank && (
               <>
                 {`${String(data.wallet?.properties?.bank).padStart(3, "0")}-${checkDigit11(
@@ -63,8 +72,7 @@ export default async function ({ data = [], meta = {}, t }) {
               </>
             )}
           </Slot>
-          <Slot className="center middle"
-            style={{ fontSize: "1.1rem" }}>
+          <Slot className="center middle" style={{ fontSize: "1.1rem" }}>
             {data.properties?.bankslip?.barcodeFormatted}
           </Slot>
         </div>
@@ -73,60 +81,39 @@ export default async function ({ data = [], meta = {}, t }) {
           <Slot description="Local de pagamento">
             Pagável em qualquer instituição financeira ou nos canais de atendimento.
           </Slot>
-          <Slot description="Vencimento"
-            className="right">
+          <Slot description="Vencimento" className="right">
             {utils.formatDate(data.dueDate)}
           </Slot>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "5fr 2fr" }}>
-          <Slot description="Beneficiário">
-            {formatPerson(data.company.person, ctx)}
-          </Slot>
-          <Slot description="Agência/Código do beneficiário"
-            className="right">
-            {`${String(data.wallet?.properties?.bankBranch).padStart(4, "0")}/${data.wallet?.properties.bankAccount
+          <Slot description="Beneficiário">{formatPerson(data.company.person, ctx)}</Slot>
+          <Slot description="Agência/Código do beneficiário" className="right">
+            {`${String(data.wallet?.properties?.bankBranch).padStart(4, "0")}/${
+              data.wallet?.properties.bankAccount
             }-${data.wallet?.properties.bankAccountChecksum}`}
           </Slot>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 2fr" }}>
-          <Slot description="Data do doc.">
-            {utils.formatDate(data.issueDate)}
-          </Slot>
-          <Slot description="Nº do doc.">
-            {data.code}
-          </Slot>
-          <Slot description="Espécie doc.">
-            DM
-          </Slot>
-          <Slot description="Aceite">
-            N
-          </Slot>
-          <Slot description="Data proces.">
-            {utils.formatDate(new Date())}
-          </Slot>
-          <Slot description="Nosso número"
-            className="right">
-            {data.properties?.bankslip?.bankNumberFormatted ?? data.properties?.bankslip?.bankNumber}
+          <Slot description="Data do doc.">{utils.formatDate(data.issueDate)}</Slot>
+          <Slot description="Nº do doc.">{data.code}</Slot>
+          <Slot description="Espécie doc.">DM</Slot>
+          <Slot description="Aceite">N</Slot>
+          <Slot description="Data proces.">{utils.formatDate(new Date())}</Slot>
+          <Slot description="Nosso número" className="right">
+            {data.properties?.bankslip?.bankNumberFormatted ??
+              data.properties?.bankslip?.bankNumber}
           </Slot>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 2fr" }}>
-          <Slot description="Uso do banco">
-          </Slot>
-          <Slot description="Carteira">
-            {data.wallet?.properties?.bankWallet}
-          </Slot>
-          <Slot description="Moeda">
-            R$
-          </Slot>
-          <Slot description="Quantidade">
-          </Slot>
-          <Slot description="Valor">
-          </Slot>
-          <Slot description="(=) Valor do documento"
-            className="right">
+          <Slot description="Uso do banco"></Slot>
+          <Slot description="Carteira">{data.wallet?.properties?.bankWallet}</Slot>
+          <Slot description="Moeda">R$</Slot>
+          <Slot description="Quantidade"></Slot>
+          <Slot description="Valor"></Slot>
+          <Slot description="(=) Valor do documento" className="right">
             {utils.formatNumber(data.value, { digits: 2 })}
           </Slot>
         </div>
@@ -136,11 +123,8 @@ export default async function ({ data = [], meta = {}, t }) {
 
   const Slot = ({ description, number, className, children, ...props }) => {
     return (
-      <div className={`z-slot ${number ? "number" : ""} ${className ?? ""}`}
-        {...props}>
-        {description && (
-          <label>{description}</label>
-        )}
+      <div className={`z-slot ${number ? "number" : ""} ${className ?? ""}`} {...props}>
+        {description && <label>{description}</label>}
         {children}
       </div>
     );
@@ -149,31 +133,24 @@ export default async function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
-        <div className="report-container">
-
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           {/* Logo */}
           {data.company.image?.url && (
             <Band v>
-              <img className="logo"
-                src={data.company.image.url}
-                alt="logo" />
+              <img className="logo" src={data.company.image.url} alt="logo" />
             </Band>
           )}
 
           <div className="frame">
-            <BankslipSection data={data}
-              ctx={ctx} />
+            <BankslipSection data={data} ctx={ctx} />
 
             <Band h>
               <Slot description="Pagador">{formatPerson(data.person, ctx)}</Slot>
             </Band>
 
             {/* Autenticação 1 */}
-            <Band h
-              id="autenticacao"
-              style={{ flex: 2 }}>
-              <Slot description="Autenticação mecânica"
-                className="frameless">
+            <Band h id="autenticacao" style={{ flex: 2 }}>
+              <Slot description="Autenticação mecânica" className="frameless">
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
               </Slot>
@@ -181,8 +158,7 @@ export default async function ({ data = [], meta = {}, t }) {
           </div>
 
           {/* Separator 2 */}
-          <Band h
-            id="separator2">
+          <Band h id="separator2">
             <span>✂</span>
             <div style={{ flex: 1 }}>
               <hr />
@@ -190,12 +166,10 @@ export default async function ({ data = [], meta = {}, t }) {
           </Band>
 
           <div className="frame">
-            <BankslipSection data={data}
-              ctx={ctx} />
+            <BankslipSection data={data} ctx={ctx} />
 
             <div style={{ display: "grid", gridTemplateColumns: "5fr 2fr" }}>
-              <Band h
-                style={{ flex: 2 }}>
+              <Band h style={{ flex: 2 }}>
                 <Slot description="Instruções (texto de responsabilidade do beneficiário)">
                   <div>Confira se o e-mail do remetente é o mesmo do seu fornecedor.</div>
                   {!!data.wallet?.lateFee && (
@@ -208,7 +182,7 @@ export default async function ({ data = [], meta = {}, t }) {
                   {!!data.wallet?.interestRateMonth && (
                     <div>
                       {`Após o vencimento, cobrar taxa de juros de ${data.wallet?.interestRateMonth}% ao mês (R$ ${utils.formatNumber(
-                        round(data.value * (data.wallet?.interestRateMonth / 100) / 30, 2),
+                        round((data.value * (data.wallet?.interestRateMonth / 100)) / 30, 2),
                       )} ao dia).`}
                     </div>
                   )}
@@ -222,16 +196,13 @@ export default async function ({ data = [], meta = {}, t }) {
               </Band>
 
               <Band v>
-                <Slot description="(-) Descontos/Abatimentos"
-                  className="right">
+                <Slot description="(-) Descontos/Abatimentos" className="right">
                   {utils.formatNumber(data.valueDiscount, { digits: 2 })}
                 </Slot>
-                <Slot description="(+) Mora/Multa"
-                  className="right">
+                <Slot description="(+) Mora/Multa" className="right">
                   {utils.formatNumber((data.fine ?? 0) + (data.interest ?? 0), { digits: 2 })}
                 </Slot>
-                <Slot description="Valor cobrado"
-                  className="right">
+                <Slot description="Valor cobrado" className="right">
                   {utils.formatNumber(data.totalValue, { digits: 2 })}
                 </Slot>
               </Band>
@@ -245,20 +216,20 @@ export default async function ({ data = [], meta = {}, t }) {
           {/* Autenticação 2 */}
           <div style={{ display: "grid", gridTemplateColumns: "4fr 3fr" }}>
             <div>
-              {data.properties?.bankslip?.barcode &&
-                <img className="barcode"
+              {data.properties?.bankslip?.barcode && (
+                <img
+                  className="barcode"
                   src={`https://barcode.zensoft.com.br/?bcid=code128&text=${data.properties?.bankslip?.barcode}&scaleX=2&scaleY=1`}
-                  alt="barcode" />
-              }
+                  alt="barcode"
+                />
+              )}
             </div>
             <div>
               <label>Autenticação mecânica</label>
             </div>
           </div>
 
-          <Band h
-            id="space"
-            style={{ flex: 2 }} />
+          <Band h id="space" style={{ flex: 2 }} />
         </div>
       ))}
     </div>
@@ -270,7 +241,9 @@ function formatPerson(person, ctx) {
 
   const result = [];
   result.push(person.name);
-  result.push(`${t(`/catalog/person/personDocumentType/enum/${person.documentType}`)} ${person.documentNumber}`);
+  result.push(
+    `${t(`/catalog/person/personDocumentType/enum/${person.documentType}`)} ${person.documentNumber}`,
+  );
   if (person.street) {
     result.push(person.street);
   }
@@ -321,11 +294,7 @@ function round(value, precision) {
 
 function dateToDueDateFactor(date) {
   const base = Date.UTC(1997, 9, 7); // 07/10/1997
-  const target = Date.UTC(
-    date.getUTCFullYear(),
-    date.getUTCMonth(),
-    date.getUTCDate(),
-  );
+  const target = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
 
   const diffDays = Math.floor((target - base) / (1000 * 60 * 60 * 24));
   if (diffDays < 0) {
@@ -483,18 +452,10 @@ function adjustWeekend(date) {
   console.log(day);
   if (day === 6) {
     // sábado → adiciona 2 dias
-    return new Date(Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate() + 2,
-    ));
+    return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 2));
   } else if (day === 0) {
     // domingo → adiciona 1 dia
-    return new Date(Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate() + 1,
-    ));
+    return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1));
   }
   return date; // já é dia útil
 }

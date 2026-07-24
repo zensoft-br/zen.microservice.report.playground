@@ -4,7 +4,8 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -13,7 +14,7 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       className: "id",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length, 
+      footerValue: ({ data }) => data.length,
       footer: ({ value }) => utils.formatNumber(value),
     },
     {
@@ -48,8 +49,16 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/quantity")),
       width: "10ch",
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit }),
-      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit, (item) => item.quantity),
-      footer: ({ value }) => utils.renderAggr(value, (quantity, unit_code) => utils.formatQuantity(quantity, { unit_code })),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.unit,
+          (item) => item.quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (quantity, unit_code) =>
+          utils.formatQuantity(quantity, { unit_code }),
+        ),
     },
     {
       id: "value",
@@ -57,14 +66,21 @@ export default function ({ data = [], meta = {}, t }) {
       header: <i>{utils.cellHeader(t("/@word/value"))}</i>,
       width: "15ch",
       cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency }),
-      footerValue: ({ data }) => utils.sumBy(data, (item) => item.currency, (item) => item.value),
-      footer: ({ value }) => utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.currency,
+          (item) => item.value,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
     },
     {
       id: "picture",
       header: utils.cellHeader(t("/system/image")),
       width: "10ch",
-      cell: ({ value }) => value ? <img src={value} alt="picture" style={{ width: "1.5cm" }} /> : null,
+      cell: ({ value }) =>
+        value ? <img src={value} alt="picture" style={{ width: "1.5cm" }} /> : null,
     },
     {
       id: "virtual_column",
@@ -83,20 +99,22 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}>
+      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
         <header>
           <h1>{report.title}</h1>
           <section className="parameters">
-            {report.parameters?.dateStart &&
+            {report.parameters?.dateStart && (
               <dl>
                 <dt>{t("/@word/dateStart")}</dt>
                 <dd>{utils.formatDate(report.parameters?.dateStart)}</dd>
-              </dl>}
-            {report.parameters?.dateEnd &&
-            <dl>
-              <dt>{t("/@word/dateEnd")}</dt>
-              <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
-            </dl>}
+              </dl>
+            )}
+            {report.parameters?.dateEnd && (
+              <dl>
+                <dt>{t("/@word/dateEnd")}</dt>
+                <dd>{utils.formatDate(report.parameters?.dateEnd)}</dd>
+              </dl>
+            )}
           </section>
         </header>
         <main>
@@ -106,7 +124,8 @@ export default function ({ data = [], meta = {}, t }) {
               visibleColumns={visibleColumns}
               data={data}
               groups={groups}
-              footerTitle={t("/@word/summary")} />
+              footerTitle={t("/@word/summary")}
+            />
           </div>
         </main>
       </div>

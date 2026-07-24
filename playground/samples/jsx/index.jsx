@@ -2,7 +2,7 @@ export default function ({ data = [] }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <h1>Hello, {text(obj.name)}!</h1>
           <ul>
             {obj.items?.map((item, index) => (
@@ -15,7 +15,7 @@ export default function ({ data = [] }) {
       ))}
     </div>
   );
-};
+}
 
 function number(value) {
   return new Intl.NumberFormat("pt-BR", {

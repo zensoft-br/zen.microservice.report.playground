@@ -2,11 +2,13 @@ export default function ({ properties = {}, data = [], t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj, index) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex v">
             <div className="content flex-1">
               <dl style={{ gridArea: "A" }}>
-                <dd><img src={obj.company_logo} /></dd>
+                <dd>
+                  <img src={obj.company_logo} />
+                </dd>
               </dl>
               <dl style={{ gridArea: "B" }}>
                 <dt>{obj.company_name}</dt>
@@ -14,23 +16,28 @@ export default function ({ properties = {}, data = [], t }) {
               </dl>
               <dl style={{ gridArea: "D" }}>
                 <dt>{t("/@word/code")}</dt>
-                <dd><strong>{obj.productPacking_code}</strong></dd>
+                <dd>
+                  <strong>{obj.productPacking_code}</strong>
+                </dd>
               </dl>
               <dl className="flex align-center" style={{ gridArea: "C" }}>
                 <dt>{t("/@word/quantity")}</dt>
-                <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>{number(obj.quantity, { maximumFractionDigits: 2 })}{obj.unit_code}</dd>
+                <dd style={{ fontSize: "1.8em", fontWeight: "bold" }}>
+                  {number(obj.quantity, { maximumFractionDigits: 2 })}
+                  {obj.unit_code}
+                </dd>
               </dl>
               <div className="flex v" style={{ gridArea: "E" }}>
-                <dl style={{ flex: "1 1 auto" }} >
+                <dl style={{ flex: "1 1 auto" }}>
                   <dt>{t("/@word/description")}</dt>
                   <dd>{`${obj.product_description}${obj.productVariant_id ? `, ${obj.productVariant_description}` : ""}${obj.productPacking_complement ? `, ${obj.productPacking_complement}` : ""}`}</dd>
                 </dl>
-                <dl style={{ flex: "1 1 auto" }} >
+                <dl style={{ flex: "1 1 auto" }}>
                   <dt>{t("/custom/zen/textile/catalog/product/fabricComposition")}</dt>
                   <dd>{obj.product_properties?.textileComposition}</dd>
                 </dl>
               </div>
-              <div className="flex h" style={{ gridArea: "G", width: "100%" }} >
+              <div className="flex h" style={{ gridArea: "G", width: "100%" }}>
                 {!(properties.hideColumns ?? "").split(",").includes("quality") && (
                   <dl>
                     <dt>{t("/material/quality")}</dt>
@@ -47,7 +54,9 @@ export default function ({ properties = {}, data = [], t }) {
                 </dl>
               </div>
               <dl style={{ gridArea: "H" }}>
-                <dd><img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} /></dd>
+                <dd>
+                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} />
+                </dd>
               </dl>
               <dl style={{ gridArea: "I" }}>
                 <dt>{t("/custom/zen/textile/catalog/product/fabricWidth")}</dt>
@@ -66,21 +75,28 @@ export default function ({ properties = {}, data = [], t }) {
                 <dd>{obj.product_properties?.textileCountry}</dd>
               </dl>
               <dl style={{ gridArea: "K" }}>
-                <dd><img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} /></dd>
+                <dd>
+                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${obj.code}`} />
+                </dd>
               </dl>
               <div className="flex h" style={{ gridArea: "N" }}>
-                {Object
-                  .entries(obj.product_properties)
-                  .filter(entry => entry[0].startsWith("textileCare"))
+                {Object.entries(obj.product_properties)
+                  .filter((entry) => entry[0].startsWith("textileCare"))
                   .map((entry, index) => (
                     <dl key={index}>
-                      <dd><img src={`https://zenerp.s3.amazonaws.com/public/material/images/${entry[1]}`} /></dd>
+                      <dd>
+                        <img
+                          src={`https://zenerp.s3.amazonaws.com/public/material/images/${entry[1]}`}
+                        />
+                      </dd>
                     </dl>
                   ))}
               </div>
             </div>
             <div className="flex h" style={{ fontSize: "0.8em", justifyContent: "space-around" }}>
-              <div>{index + 1} de {data.length}</div>
+              <div>
+                {index + 1} de {data.length}
+              </div>
               <div>zenerp.com.br</div>
             </div>
           </main>
@@ -88,7 +104,7 @@ export default function ({ properties = {}, data = [], t }) {
       ))}
     </div>
   );
-};
+}
 
 function number(value, options = {}) {
   return new Intl.NumberFormat("pt-BR", options).format(value);

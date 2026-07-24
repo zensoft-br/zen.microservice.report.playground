@@ -11,7 +11,7 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {new Array(Math.ceil(data.length / 5)).fill({}).map((obj, index) => (
-        <div className="report-container">
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <main className="flex v">
             <div className="content flex h flex-1">
               {data.slice(index * 5, index * 5 + 5).map((obj) => (
@@ -28,4 +28,4 @@ export default function ({ data = [], t }) {
       ))}
     </div>
   );
-};
+}

@@ -7,6 +7,21 @@
     "styles": "@file:/styles.css"
   },
   "meta": {
-    "dataSource": "/sale/data/quoteForm"
+    "dataSource": "/sale/data/quoteForm",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "itemSequence",
+            "proposalSequence",
+            "productPacking_code",
+            "product_description",
+            "quantity",
+            "unitValue",
+            "totalValue"
+          ]
+        }
+      }
+    }
   }
 }

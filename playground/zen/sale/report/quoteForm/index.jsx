@@ -1,24 +1,29 @@
 import * as utils from "./utils.jsx";
-import { Table } from "./utils.jsx";
+import { Badge, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   data.forEach((quote) => {
     quote.items.sort((a, b) => {
-      if (a.itemSequence !== b.itemSequence)
-        return a.itemSequence - b.itemSequence;
+      if (a.itemSequence !== b.itemSequence) return a.itemSequence - b.itemSequence;
       return a.proposalSequence - b.proposalSequence;
     });
   });
 
   const settings =
-    utils.deepMerge(
-      report?.properties?.["#settings"],
-      report?.properties?.userSettings,
-    ) ?? {};
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
+    {
+      id: "itemSequence",
+      header: t("/sale/quoteItem.itemSequence"),
+    },
+    {
+      id: "proposalSequence",
+      header: t("/sale/quoteItem.proposalSequence"),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
     {
       id: "id",
       header: utils.cellHeader(t("/@word/id")),
@@ -42,22 +47,16 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "fiscal_br_NCM",
       header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_NCM")),
-      cellValue: ({ row }) =>
-        row.productPacking?.product?.properties?.fiscal_br_NCM,
+      cellValue: ({ row }) => row.productPacking?.product?.properties?.fiscal_br_NCM,
     },
     {
       id: "tax_ICMS_taxRate",
       header: utils.cellHeader("ICMS %"),
       className: "number",
-      cellValue: ({ row }) =>
-        row.taxationRule?.properties?.["tax.ICMS.taxRate"],
+      cellValue: ({ row }) => row.taxationRule?.properties?.["tax.ICMS.taxRate"],
       footerValue: ({ data }) =>
-        utils.sum(
-          data,
-          (row) => row.taxationRule?.properties?.tax?.ICMS?.taxRate,
-        ),
-      footer: ({ value }) =>
-        utils.formatNumber(value, { minimumFractionDigits: 2 }),
+        utils.sum(data, (row) => row.taxationRule?.properties?.tax?.ICMS?.taxRate),
+      footer: ({ value }) => utils.formatNumber(value, { minimumFractionDigits: 2 }),
     },
     {
       id: "quantity",
@@ -65,17 +64,13 @@ export default function ({ data = [], meta = {}, t }) {
       header: utils.cellHeader(t("/@word/quantity")),
       cell: ({ row, value }) =>
         utils.formatQuantity(value, {
-          unit_code:
-            row.productPacking.unit?.code ??
-            row.productPacking.product.unit.code,
+          unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
         }),
       footerValue: ({ data }) =>
         utils.sumBy(
-          data,
-          (item) =>
-            item.productPacking.unit?.code ??
-            item.productPacking.product.unit.code,
-          (item) => item.quantity,
+          data.filter((row) => row.proposalSequence === 1),
+          (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+          (row) => row.quantity,
         ),
       footer: ({ value }) =>
         utils.renderAggr(value, (quantity, unit_code) =>
@@ -86,8 +81,7 @@ export default function ({ data = [], meta = {}, t }) {
       id: "unitValue",
       className: "number",
       header: utils.cellHeader(t("/@word/unitValue")),
-      cell: ({ row, value }) =>
-        utils.formatCurrency(value, { currency: row.currency?.code }),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
       footerValue: ({ data }) =>
         utils.sumBy(
           data,
@@ -95,26 +89,27 @@ export default function ({ data = [], meta = {}, t }) {
           (item) => item.unitValue,
         ),
       footer: ({ value }) =>
-        utils.renderAggr(value, (value, key) =>
-          utils.formatCurrency(value, { currency: key }),
-        ),
+        utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
     },
     {
       id: "totalValue",
       className: "number",
+      width: "10ch",
       header: utils.cellHeader(t("/@word/totalValue")),
-      cell: ({ row, value }) =>
-        utils.formatCurrency(value, { currency: row.currency?.code }),
+      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
       footerValue: ({ data }) =>
         utils.sumBy(
-          data,
-          (item) => item.currency?.code,
-          (item) => item.totalValue,
+          data.filter((row) => row.proposalSequence === 1),
+          (row) => row.currency?.code,
+          (row) => row.totalValue,
         ),
       footer: ({ value }) =>
-        utils.renderAggr(value, (value, key) =>
-          utils.formatCurrency(value, { currency: key }),
-        ),
+        utils.renderAggr(value, (value, key) => utils.formatCurrency(value, { currency: key })),
+    },
+    {
+      id: "availabilityDate",
+      header: t("/@word/availabilityDate"),
+      cellValue: ({ row }) => utils.formatDate(row.quote.availabilityDate),
     },
   ];
 
@@ -125,20 +120,12 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((quote) => (
-        <div
-          className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}
-        >
+        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
           <header>
             <div className="brand">
-              <img
-                src={quote.company?.image?.url}
-                style={{ width: "3cm" }}
-              ></img>
+              <img src={quote.company?.image?.url} style={{ width: "3cm" }}></img>
             </div>
-            <h1
-              className="flex h gap align-center"
-              style={{ justifyContent: "space-between" }}
-            >
+            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
               {t("/sale/quote")} {quote.id}
               <img
                 src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`}
@@ -170,9 +157,7 @@ export default function ({ data = [], meta = {}, t }) {
               </dl>
               <dl>
                 <dt>
-                  {t(
-                    `/catalog/person/personDocumentType/enum/${quote.person?.documentType}`,
-                  )}
+                  {t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}
                 </dt>
                 <dd>{quote.person?.documentNumber}</dd>
               </dl>
