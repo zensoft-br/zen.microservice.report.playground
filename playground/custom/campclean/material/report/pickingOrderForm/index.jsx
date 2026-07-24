@@ -4,74 +4,125 @@ import { Badge, Column, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(
+      report?.properties?.["#settings"],
+      report?.properties?.userSettings,
+    ) ?? {};
 
   const columns = [
-    { id: "check",
+    {
+      id: "check",
       width: "3ch",
       cellValue: () => <span style={{ fontSize: "1.3em" }}>☐</span>,
     },
-    { id: "product_description",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
+    {
+      id: "product_description",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/@word/description"),
+      ),
       width: "45ch",
       cellValue: ({ row }) => row.productPacking.product?.description,
     },
-    { id: "productVariant_description",
-      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
+    {
+      id: "productVariant_description",
+      header: utils.cellHeader(
+        t("/catalog/product/productVariant"),
+        t("/@word/description"),
+      ),
       width: "15ch",
       cellValue: ({ row }) => row.productPacking.variant?.description,
     },
-    { id: "quantity",
+    {
+      id: "quantity",
       header: utils.cellHeader(t("/@word/quantity")),
       width: "7ch",
       className: "number",
       cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => utils.sumBy(data, (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code, (row) => row.quantity),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) =>
+            row.productPacking.unit?.code ??
+            row.productPacking.product.unit.code,
+          (row) => row.quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) =>
+          utils.formatQuantity(val, { unit_code: key }),
+        ),
     },
-    { id: "unit_code",
+    {
+      id: "unit_code",
       header: utils.cellHeader(t("/catalog/product/unit/abbr")),
-      width: "6ch",  
-      cellValue: ({ row }) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
-      cell: ({ value }) => <><Badge>{value}</Badge></>,
+      width: "6ch",
+      cellValue: ({ row }) =>
+        row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+      cell: ({ value }) => (
+        <>
+          <Badge>{value}</Badge>
+        </>
+      ),
     },
     // { id: "productPacking_units",
-    //   width: "4ch",  
+    //   width: "4ch",
     //   cellValue: ({ row }) => row.productPacking.units,
     //   cell: ({ row, value }) => <><Badge>{value === 1 ? row.productPacking.product.unit.code : value}</Badge></>,
     // },
-    { id: "grossWeightKg",
+    {
+      id: "grossWeightKg",
       header: utils.cellHeader(t("/@word/grossWeightKg")),
       width: "10ch",
       className: "number",
-      cellValue: ({ row }) => row.quantity * row.productPacking.product?.grossWeightKg || 0,
+      cellValue: ({ row }) =>
+        row.quantity * row.productPacking.product?.grossWeightKg || 0,
       cell: ({ value }) => utils.formatNumber(value, { digits: 2 }),
-      footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.quantity * row.productPacking.product?.grossWeightKg || 0), 0),
+      footerValue: ({ data }) =>
+        data.reduce(
+          (sum, row) =>
+            sum +
+            (row.quantity * row.productPacking.product?.grossWeightKg || 0),
+          0,
+        ),
       footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
     },
   ];
 
-  data.forEach(pickingOrder => {
-    pickingOrder.items = utils.sort(pickingOrder.items, 
-      // report.properties?.settings?.sort || 
+  const visibleColumns = settings?.columns ?? [];
+
+  data.forEach((pickingOrder) => {
+    pickingOrder.items = utils.sort(
+      pickingOrder.items,
+      // report.properties?.settings?.sort ||
       [
         {
-          "columnId": "productPacking.product.description",
+          columnId: "productPacking.product.description",
         },
-      ]);
+      ],
+    );
   });
 
-  const visibleColumns = columns.map(col => col.id);
-  
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      {data.map(pickingOrder => (
+      {data.map((pickingOrder) => (
         <div className="report-container a4 landscape">
           <header>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
-              <img src={pickingOrder.company?.image?.url} style={{ height: "1.5cm" }}></img>
-              <span>{t("/material/pickingOrder")} {pickingOrder.id}</span>
-              <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${pickingOrder.id}`} style={{ height: "1.5cm" }}></img>
+            <h1
+              className="flex h gap align-center"
+              style={{ justifyContent: "space-between" }}
+            >
+              <img
+                src={pickingOrder.company?.image?.url}
+                style={{ height: "1.5cm" }}
+              ></img>
+              <span>
+                {t("/material/pickingOrder")} {pickingOrder.id}
+              </span>
+              <img
+                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${pickingOrder.id}`}
+                style={{ height: "1.5cm" }}
+              ></img>
             </h1>
             <section className="parameters">
               <dl>
@@ -106,7 +157,10 @@ export default function ({ data = [], meta = {}, t }) {
               </dl>
               <dl>
                 <dt>{t("/@word/personSalesperson")}</dt>
-                <dd>{pickingOrder.sale?.personSalesperson?.fantasyName ?? pickingOrder.sale?.personSalesperson?.name}</dd>
+                <dd>
+                  {pickingOrder.sale?.personSalesperson?.fantasyName ??
+                    pickingOrder.sale?.personSalesperson?.name}
+                </dd>
               </dl>
             </section>
             <section className="parameters">
@@ -126,46 +180,64 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="parameters">
               <dl>
                 <dt>{t("/@word/address")}</dt>
-                <dd>{[
-                  pickingOrder.person.street,
-                  pickingOrder.person.number,
-                  pickingOrder.person.complement,
-                  pickingOrder.person.city.name,
-                  pickingOrder.person.city.state.code,
-                  pickingOrder.person.city.state.country.codeA2,
-                  pickingOrder.person.zipcode,
-                ].filter(Boolean).join(", ")}</dd>
+                <dd>
+                  {[
+                    pickingOrder.person.street,
+                    pickingOrder.person.number,
+                    pickingOrder.person.complement,
+                    pickingOrder.person.city.name,
+                    pickingOrder.person.city.state.code,
+                    pickingOrder.person.city.state.country.codeA2,
+                    pickingOrder.person.zipcode,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                </dd>
               </dl>
               <dl>
                 <dt>{t("/@word/addressShipping")}</dt>
-                <dd>{[
-                  pickingOrder.sale?.personAddressShipping?.street,
-                  pickingOrder.sale?.personAddressShipping?.number,
-                  pickingOrder.sale?.personAddressShipping?.complement,
-                  pickingOrder.sale?.personAddressShipping?.city?.name,
-                  pickingOrder.sale?.personAddressShipping?.city?.state?.code,
-                  pickingOrder.sale?.personAddressShipping?.city?.state?.country?.codeA2,
-                  pickingOrder.sale?.personAddressShipping?.zipcode,
-                ].filter(Boolean).join(", ")}</dd>
-              </dl>
-            </section>
-            {pickingOrder.properties?.comments ? <section className="parameters">
-              <dl>
-                <dt>{t("/@word/comments")}</dt>
                 <dd>
-                  <pre>{[
-                    pickingOrder.properties?.comments,
-                    pickingOrder.sale?.person.properties?.outgoingInvoiceComments,
-                  ].filter(Boolean).join("\n")}</pre>
+                  {[
+                    pickingOrder.sale?.personAddressShipping?.street,
+                    pickingOrder.sale?.personAddressShipping?.number,
+                    pickingOrder.sale?.personAddressShipping?.complement,
+                    pickingOrder.sale?.personAddressShipping?.city?.name,
+                    pickingOrder.sale?.personAddressShipping?.city?.state?.code,
+                    pickingOrder.sale?.personAddressShipping?.city?.state
+                      ?.country?.codeA2,
+                    pickingOrder.sale?.personAddressShipping?.zipcode,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
                 </dd>
               </dl>
-            </section> : undefined}
+            </section>
+            {pickingOrder.properties?.comments ? (
+              <section className="parameters">
+                <dl>
+                  <dt>{t("/@word/comments")}</dt>
+                  <dd>
+                    <pre>
+                      {[
+                        pickingOrder.properties?.comments,
+                        pickingOrder.sale?.person.properties
+                          ?.outgoingInvoiceComments,
+                      ]
+                        .filter(Boolean)
+                        .join("\n")}
+                    </pre>
+                  </dd>
+                </dl>
+              </section>
+            ) : undefined}
           </header>
           <main>
             <div className="content">
-              <Table columns={columns}
+              <Table
+                columns={columns}
                 visibleColumns={visibleColumns}
-                data={pickingOrder.items} />
+                data={pickingOrder.items}
+              />
             </div>
           </main>
         </div>

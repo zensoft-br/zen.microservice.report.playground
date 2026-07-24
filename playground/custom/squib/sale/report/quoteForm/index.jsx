@@ -1,15 +1,22 @@
 import * as utils from "./utils.jsx";
 import { Table } from "./utils.jsx";
 
-export default function ({ data = [], t }) {
-  data.forEach(quote => {
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
+
+  data.forEach((quote) => {
     quote.items.sort((a, b) => {
-      if (a.itemSequence !== b.itemSequence) return a.itemSequence - b.itemSequence;
+      if (a.itemSequence !== b.itemSequence)
+        return a.itemSequence - b.itemSequence;
       return a.proposalSequence - b.proposalSequence;
     });
   });
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(
+      report?.properties?.["#settings"],
+      report?.properties?.userSettings,
+    ) ?? {};
 
   const columns = [
     {
@@ -30,20 +37,30 @@ export default function ({ data = [], t }) {
       id: "product_description",
       header: t("/@word/description"),
       width: "16ch",
-      cellValue: ({ row }) => row.properties?.description ?? row.productPacking?.product.description,
+      cellValue: ({ row }) =>
+        row.properties?.description ?? row.productPacking?.product.description,
     },
     {
       id: "quantity",
       header: t("/@word/quantity"),
       className: "number",
-      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.productPacking?.product?.unit?.code }),
-      footerValue: (quote) => utils.formatNumber(quote.items?.filter(item => item.proposalSequence === 1).reduce((acc, item) => acc + item.quantity, 0)),
+      cell: ({ row, value }) =>
+        utils.formatQuantity(value, {
+          unit_code: row.productPacking?.product?.unit?.code,
+        }),
+      footerValue: (quote) =>
+        utils.formatNumber(
+          quote.items
+            ?.filter((item) => item.proposalSequence === 1)
+            .reduce((acc, item) => acc + item.quantity, 0),
+        ),
     },
     {
       id: "unitValue",
       header: t("/@word/unitValue"),
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, { currency: row.currency?.code }),
     },
     {
       id: "unitValueLocal",
@@ -56,9 +73,18 @@ export default function ({ data = [], t }) {
       header: t("/@word/totalValue"),
       className: "number",
       width: "10ch",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code }),
-      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code, (row) => row.totalValue),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, { currency: row.currency?.code }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) => row.currency?.code,
+          (row) => row.totalValue,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) =>
+          utils.formatCurrency(val, { currency: key }),
+        ),
     },
     {
       id: "origin",
@@ -77,7 +103,9 @@ export default function ({ data = [], t }) {
     },
   ];
 
-  // const visibleColumns = columns.map((column) => column.id);
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
@@ -85,10 +113,20 @@ export default function ({ data = [], t }) {
         <div className="report-container">
           <header>
             <div className="brand">
-              <img src={quote.company?.image?.url} style={{ width: "3cm" }}></img>
+              <img
+                src={quote.company?.image?.url}
+                style={{ width: "3cm" }}
+              ></img>
             </div>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>{t("/sale/quote")} {quote.id}
-              <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`} style={{ width: "1.5cm" }}></img>
+            <h1
+              className="flex h gap align-center"
+              style={{ justifyContent: "space-between" }}
+            >
+              {t("/sale/quote")} {quote.id}
+              <img
+                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`}
+                style={{ width: "1.5cm" }}
+              ></img>
             </h1>
             <section className="parameters">
               <dl>
@@ -96,7 +134,11 @@ export default function ({ data = [], t }) {
                 <dd>{quote.company?.person.name}</dd>
               </dl>
               <dl>
-                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.company?.person.documentType}`)}</dt>
+                <dt>
+                  {t(
+                    `/catalog/person/personDocumentType/enum/${quote.company?.person.documentType}`,
+                  )}
+                </dt>
                 <dd>{quote.company?.person.documentNumber}</dd>
               </dl>
               <dl>
@@ -110,7 +152,11 @@ export default function ({ data = [], t }) {
                 <dd>{quote.person?.name}</dd>
               </dl>
               <dl>
-                <dt>{t(`/catalog/person/personDocumentType/enum/${quote.person?.documentType}`)}</dt>
+                <dt>
+                  {t(
+                    `/catalog/person/personDocumentType/enum/${quote.person?.documentType}`,
+                  )}
+                </dt>
                 <dd>{quote.person?.documentNumber}</dd>
               </dl>
               <dl>
@@ -135,16 +181,22 @@ export default function ({ data = [], t }) {
             <section className="parameters">
               <dl>
                 <dt>{t("/@word/comments")}</dt>
-                <dd><pre>{quote.saleProfile?.properties?.quote_comments}</pre></dd>
+                <dd>
+                  <pre>{quote.saleProfile?.properties?.quote_comments}</pre>
+                </dd>
               </dl>
             </section>
           </header>
           <main>
             <section>
               <div className="content">
-                <Table columns={columns} 
-                  visibleColumns={[]} 
-                  data={quote.items} />
+                <Table
+                  columns={columns}
+                  visibleColumns={visibleColumns}
+                  data={quote.items}
+                  groups={groups}
+                  footerTitle={t("/@word/summary")}
+                />
               </div>
             </section>
           </main>
@@ -152,4 +204,4 @@ export default function ({ data = [], t }) {
       ))}
     </div>
   );
-};
+}

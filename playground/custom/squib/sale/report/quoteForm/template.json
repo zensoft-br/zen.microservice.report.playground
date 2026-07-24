@@ -5,5 +5,26 @@
       "utils.jsx": "@file:/utils.jsx"
     },
     "styles": "@file:/styles.css"
+  },
+  "meta": {
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "itemSequence",
+            "proposalSequence",
+            "item_code",
+            "product_description",
+            "quantity",
+            "unitValue",
+            "unitValueLocal",
+            "totalValue",
+            "origin",
+            "brand",
+            "availabilityDate"
+          ]
+        }
+      }
+    }
   }
 }

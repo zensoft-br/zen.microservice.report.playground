@@ -4,92 +4,142 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "product_image",
+    {
+      id: "product_image",
       header: utils.cellHeader(t("/catalog/product/product"), t("/system/image")),
       width: "7ch",
       cellValue: ({ row }) => row.productPacking.product.image?.url,
-      cell: ({ value }) => value ? <img src={value}></img> : null,
+      cell: ({ value }) => (value ? <img src={value}></img> : null),
     },
-    { id: "productPacking_image",
+    {
+      id: "productPacking_image",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/system/image")),
       width: "7ch",
       cellValue: ({ row }) => row.productPacking.image?.url,
-      cell: ({ value }) => value ? <img src={value}></img> : null,
+      cell: ({ value }) => (value ? <img src={value}></img> : null),
     },
-    { id: "productPacking_image_calc",
+    {
+      id: "productPacking_image_calc",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/system/image")),
       width: "7ch",
-      cellValue: ({ row }) => row.productPacking.image?.url ?? row.productPacking.product.image?.url,
-      cell: ({ value }) => value ? <img src={value}></img> : null,
+      cellValue: ({ row }) =>
+        row.productPacking.image?.url ?? row.productPacking.product.image?.url,
+      cell: ({ value }) => (value ? <img src={value}></img> : null),
     },
-    { id: "productPacking_code",
+    {
+      id: "productPacking_code",
       header: utils.cellHeader(t("/@word/code")),
-      width: "15ch",
+      width: "12ch",
       cellValue: ({ row }) => row.productPacking.code,
     },
-    { id: "product_description",
+    {
+      id: "product_description",
       header: utils.cellHeader(t("/@word/description")),
       width: "30ch",
       cellValue: ({ row }) => row.productPacking.product.description,
     },
-    { id: "productPacking_complement",
+    {
+      id: "productPacking_complement",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
       width: "15ch",
       cellValue: ({ row }) => row.productPacking.complement,
     },
-    { id: "productVariant_code",
+    {
+      id: "productVariant_code",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/code")),
       width: "10ch",
       cellValue: ({ row }) => row.productPacking.variant?.code,
     },
-    { id: "productVariant_description",
+    {
+      id: "productVariant_description",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
       width: "15ch",
       cellValue: ({ row }) => row.productPacking.variant?.description,
     },
-    { id: "taxationOperation_code",
+    {
+      id: "taxationOperation_code",
       header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/code")),
       width: "7ch",
       cellValue: ({ row }) => row.taxationOperation?.code,
     },
-    { id: "quantity",
+    {
+      id: "quantity",
       header: utils.cellHeader(t("/@word/quantity")),
       width: "10ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code }),
-      footerValue: ({ data }) => utils.sumBy(data, (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code, (row) => row.quantity),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),     
+      cell: ({ row, value }) =>
+        utils.formatQuantity(value, {
+          unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+        }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+          (row) => row.quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),
     },
-    { id: "unit_code",
+    {
+      id: "unit_code",
       width: "5ch",
-      cellValue: ({ row }) => <Badge>{row.productPacking.unit?.code ?? row.productPacking.product.unit.code}</Badge>,
+      cellValue: ({ row }) => (
+        <Badge>{row.productPacking.unit?.code ?? row.productPacking.product.unit.code}</Badge>
+      ),
     },
-    { id: "unitValue",
+    {
+      id: "unitValue",
       header: utils.cellHeader(t("/@word/unitValue")),
       width: "10ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code, maximumFractionDigits: 8 }),
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, {
+          currency: row.currency?.code ?? row.sale.currency.code,
+          maximumFractionDigits: 8,
+        }),
     },
-    { id: "grossProductValue",
+    {
+      id: "grossProductValue",
       header: utils.cellHeader(t("/@word/grossProductValue")),
       width: "10ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
-      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.grossProductValue),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),     
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, {
+          currency: row.currency?.code ?? row.sale.currency.code,
+        }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) => row.currency?.code ?? row.sale.currency.code,
+          (row) => row.grossProductValue,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
     },
-    { id: "totalValue",
+    {
+      id: "totalValue",
       header: utils.cellHeader(t("/@word/totalValue")),
-      width: "10ch",
+      width: "12ch",
       className: "number",
-      cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
-      footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.totalValue),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),     
+      cell: ({ row, value }) =>
+        utils.formatCurrency(value, {
+          currency: row.currency?.code ?? row.sale.currency.code,
+        }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) => row.currency?.code ?? row.sale.currency.code,
+          (row) => row.totalValue,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
     },
-    { id: "netWeightKg",
+    {
+      id: "netWeightKg",
       header: utils.cellHeader(t("/@word/netWeightKg")),
       width: "10ch",
       className: "number",
@@ -97,7 +147,8 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.netWeightKg || 0), 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
     },
-    { id: "grossWeightKg",
+    {
+      id: "grossWeightKg",
       header: utils.cellHeader(t("/@word/grossWeightKg")),
       width: "10ch",
       className: "number",
@@ -105,7 +156,8 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((sum, row) => sum + (row.grossWeightKg || 0), 0),
       footer: ({ value }) => utils.formatNumber(value, { digits: 1 }),
     },
-    { id: "address_code",
+    {
+      id: "address_code",
       header: utils.cellHeader(t("/material/address"), t("/@word/code")),
       width: "10ch",
       cellValue: ({ row }) => row?.address?.code,
@@ -117,44 +169,98 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) => row.properties?.salesCommission,
       cell: ({ value }) => utils.formatNumber(value),
     },
-    ...["ICMS", "ICMS_SN", "ICMS_ST", "IPI", "PIS", "COFINS"].flatMap((tax) => ([
-      { id: `tax_${tax}_baseValue`,
+    ...[
+      "CBS",
+      "COFINS",
+      "IBS_MUN",
+      "IBS_UF",
+      "ICMS",
+      "ICMS_SN",
+      "ICMS_ST",
+      "IPI",
+      "IPI",
+      "IS",
+      "ISS",
+      "PIS",
+    ].flatMap((tax) => [
+      {
+        id: `tax_${tax}_baseValue`,
         header: utils.cellHeader(tax, t("/@word/baseValue")),
         width: "10ch",
         className: "number",
-        cellValue: ({ row }) => row.taxations?.find(taxation => taxation.tax.code === tax)?.baseValue || 0,
-        cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
-        footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.taxations?.find(taxation => taxation.tax.code === tax)?.baseValue),
-        footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+        cellValue: ({ row }) =>
+          row.taxations?.find((taxation) => taxation.tax.code === tax)?.baseValue || 0,
+        cell: ({ row, value }) =>
+          utils.formatCurrency(value, {
+            currency: row.currency?.code ?? row.sale.currency.code,
+          }),
+        footerValue: ({ data }) =>
+          utils.sumBy(
+            data,
+            (row) => row.currency?.code ?? row.sale.currency.code,
+            (row) => row.taxations?.find((taxation) => taxation.tax.code === tax)?.baseValue,
+          ),
+        footer: ({ value }) =>
+          utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
       },
-      { id: `tax_${tax}_taxRate`,
-        header: utils.cellHeader(tax, t("/fiscal/taxation/taxation.taxRate")),
+      {
+        id: `tax_${tax}_taxRate`,
+        header: utils.cellHeader(tax, t("/fiscal/taxation/taxation.taxRate/abbr")),
         width: "7ch",
         className: "number",
-        cellValue: ({ row }) => row.taxations?.find(taxation => taxation.tax.code === tax)?.taxRate || 0,
+        cellValue: ({ row }) =>
+          row.taxations?.find((taxation) => taxation.tax.code === tax)?.taxRate || 0,
         cell: ({ value }) => utils.formatNumber(value),
       },
-      { id: `tax_${tax}_taxValue`,
+      {
+        id: `tax_${tax}_taxValue`,
         header: utils.cellHeader(tax, t("/fiscal/taxation/taxation.taxValue")),
         width: "10ch",
         className: "number",
-        cellValue: ({ row }) => row.taxations?.find(taxation => taxation.tax.code === tax)?.taxValue || 0,
-        cell: ({ row, value }) => utils.formatCurrency(value, { currency: row.currency?.code ?? row.sale.currency.code }),
-        footerValue: ({ data }) => utils.sumBy(data, (row) => row.currency?.code ?? row.sale.currency.code, (row) => row.taxations?.find(taxation => taxation.tax.code === tax)?.taxValue),
-        footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+        cellValue: ({ row }) =>
+          row.taxations?.find((taxation) => taxation.tax.code === tax)?.taxValue || 0,
+        cell: ({ row, value }) =>
+          utils.formatCurrency(value, {
+            currency: row.currency?.code ?? row.sale.currency.code,
+          }),
+        footerValue: ({ data }) =>
+          utils.sumBy(
+            data,
+            (row) => row.currency?.code ?? row.sale.currency.code,
+            (row) => row.taxations?.find((taxation) => taxation.tax.code === tax)?.taxValue,
+          ),
+        footer: ({ value }) =>
+          utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
       },
-    ])),
+    ]),
   ];
 
   if (meta.explain) {
-    return <pre>{JSON.stringify(columns.map(column => ({ id: column.id, header: column.header })), null, 2)}</pre>;
+    return (
+      <pre>
+        {JSON.stringify(
+          columns.map((column) => ({ id: column.id, header: column.header })),
+          null,
+          2,
+        )}
+      </pre>
+    );
   }
 
-  data.forEach(row => {
-    row.items.forEach(item => {
-      item.netWeightKg = utils.round(item.quantity * (item.productPacking.netWeightKg || item.productPacking.product.netWeightKg || 0), 3);
-      item.grossWeightKg = utils.round(item.quantity * (item.productPacking.grossWeightKg || item.productPacking.product.grossWeightKg || 0), 3);
-      item.properties.salesCommission = item.properties?.salesCommission ?? row.properties?.salesCommission;
+  data.forEach((row) => {
+    row.items.forEach((item) => {
+      item.netWeightKg = utils.round(
+        item.quantity *
+          (item.productPacking.netWeightKg || item.productPacking.product.netWeightKg || 0),
+        3,
+      );
+      item.grossWeightKg = utils.round(
+        item.quantity *
+          (item.productPacking.grossWeightKg || item.productPacking.product.grossWeightKg || 0),
+        3,
+      );
+      item.properties.salesCommission =
+        item.properties?.salesCommission ?? row.properties?.salesCommission;
     });
 
     utils.sort(row.items, settings?.sort || []);
@@ -169,12 +275,28 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
-        <div className="report-container a4 landscape">
+        <div
+          className={`report-container ${report.properties?.pageSize ?? "a4"} ${report.properties?.orientation}`}
+        >
           <header>
-            <h1 className="grid" style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
-              <img src={data.company.image?.url} style={{ height: "2cm", width: "4cm", objectFit: "contain" }} />
-              <span>{t("/sale/sale")} {data.id}</span>
-              <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data.id}`} style={{ width: "2cm", justifySelf: "end" }} />
+            <h1
+              className="grid"
+              style={{
+                gridTemplateColumns: "1fr auto 1fr",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={data.company.image?.url}
+                style={{ height: "2cm", width: "4cm", objectFit: "contain" }}
+              />
+              <span>
+                {t("/sale/sale")} {data.id}
+              </span>
+              <img
+                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data.id}`}
+                style={{ width: "2cm", justifySelf: "end" }}
+              />
             </h1>
             <div className="flex v gap" style={{ fontSize: "0.8rem" }}>
               <section className="parameters">
@@ -194,15 +316,19 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl style={{ flex: "3" }}>
                   <dt>{t("/@word/address")}</dt>
-                  <dd>{[
-                    data.company.person.street,
-                    data.company.person.number,
-                    data.company.person.complement,
-                    data.company.person.district,
-                    data.company.person.city?.name,
-                    data.company.person.city?.state?.code,
-                    data.company.person.zipcode,
-                  ].filter(Boolean).join(", ")}</dd>
+                  <dd>
+                    {[
+                      data.company.person.street,
+                      data.company.person.number,
+                      data.company.person.complement,
+                      data.company.person.district,
+                      data.company.person.city?.name,
+                      data.company.person.city?.state?.code,
+                      data.company.person.zipcode,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </dd>
                 </dl>
                 <dl style={{ flex: "2" }}>
                   <dt>{t("/@word/email")}</dt>
@@ -230,15 +356,19 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl style={{ flex: "3" }}>
                   <dt>{t("/@word/address")}</dt>
-                  <dd>{[
-                    data.person.street,
-                    data.person.number,
-                    data.person.complement,
-                    data.person.district,
-                    data.person.city?.name,
-                    data.person.city?.state?.code,
-                    data.person.zipcode,
-                  ].filter(Boolean).join(", ")}</dd>
+                  <dd>
+                    {[
+                      data.person.street,
+                      data.person.number,
+                      data.person.complement,
+                      data.person.district,
+                      data.person.city?.name,
+                      data.person.city?.state?.code,
+                      data.person.zipcode,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </dd>
                 </dl>
                 <dl style={{ flex: "2" }}>
                   <dt>{t("/@word/email")}</dt>
@@ -278,7 +408,9 @@ export default function ({ data = [], meta = {}, t }) {
               <section className="parameters">
                 <dl>
                   <dt>{t("/@word/freightType")}</dt>
-                  <dd>{data?.freightType && t(`/commercial/freightType/enum/${data.freightType}`)}</dd>
+                  <dd>
+                    {data?.freightType && t(`/commercial/freightType/enum/${data.freightType}`)}
+                  </dd>
                 </dl>
                 <dl>
                   <dt>{t("/@word/personShipping")}</dt>
@@ -311,14 +443,16 @@ export default function ({ data = [], meta = {}, t }) {
                   <dd>{utils.formatDateTime(new Date())}</dd>
                 </dl>
               </section>
-              {data?.properties?.comments &&
+              {data?.properties?.comments && (
                 <section className="parameters">
                   <dl>
                     <dt>{t("/@word/comments")}</dt>
-                    <dd><pre>{data.properties?.comments}</pre></dd>
+                    <dd>
+                      <pre>{data.properties?.comments}</pre>
+                    </dd>
                   </dl>
                 </section>
-              }
+              )}
             </div>
           </header>
           <main>
@@ -328,11 +462,12 @@ export default function ({ data = [], meta = {}, t }) {
                 visibleColumns={visibleColumns}
                 data={data.items}
                 groups={groups}
-                footerTitle={t("/@word/summary")} />
+                footerTitle={t("/@word/summary")}
+              />
             </div>
           </main>
         </div>
       ))}
     </div>
   );
-};
+}

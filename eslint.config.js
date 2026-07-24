@@ -1,13 +1,10 @@
 import js from "@eslint/js";
+import prettier from "eslint-config-prettier";
 import globals from "globals";
-import stylistic from "@stylistic/eslint-plugin";
 
 export default [
   {
     files: ["**/*.{cjs,js,jsx,mjs}"],
-    plugins: {
-      "@stylistic": stylistic,
-    },
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -31,11 +28,8 @@ export default [
       //     caughtErrorsIgnorePattern: "^_",
       //   },
       // ],
-      // Formatting (Stylistic) rules
-      "@stylistic/indent": ["error", 2],
-      "@stylistic/quotes": ["error", "double"],
-      "@stylistic/semi": ["error", "always"],
-      "@stylistic/comma-dangle": ["error", "always-multiline"],
     },
   },
+  // Must be last: turns off ESLint rules that conflict with Prettier
+  prettier,
 ];

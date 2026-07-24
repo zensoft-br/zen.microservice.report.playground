@@ -7,6 +7,22 @@
     "styles": "@file:/styles.css"
   },
   "meta": {
-    "dataSource": "/sale/data/quoteForm"
+    "dataSource": "/sale/data/quoteForm",
+    "report": {
+      "properties": {
+        "#settings": {
+          "columns": [
+            "productPacking_code",
+            "product_description",
+            "fiscal_br_NCM",
+            "tax_ICMS_taxRate",
+            "quantity",
+            "unit_code",
+            "unitValue",
+            "totalValue"
+          ]
+        }
+      }
+    }
   }
 }

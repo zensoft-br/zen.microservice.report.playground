@@ -7,13 +7,15 @@ export const config = {
 };
 
 export function cellHeader(...args) {
-  return args.filter(arg => arg != null)
-    .map((arg, index) => index === 0 ? arg : String(arg).toLowerCase())
-    .join(", ");
+  return args
+    .filter((arg) => arg != null)
+    .map((arg, index) => (index === 0 ? arg : String(arg).toLowerCase()))
+    .join(" ");
 }
 
 export function deepMerge(target, source) {
-  const isObject = (item) => item && typeof item === "object" && !Array.isArray(item);
+  const isObject = (item) =>
+    item && typeof item === "object" && !Array.isArray(item);
 
   if (!isObject(source)) {
     return target;
@@ -43,7 +45,8 @@ export function formatCurrency(value, options = {}) {
   const {
     locale = options.locale ?? config.locale,
     currency = options.currency ?? config.currency,
-    ...rest } = options;
+    ...rest
+  } = options;
   try {
     return new Intl.NumberFormat(locale, {
       style: "currency",
@@ -60,7 +63,8 @@ export function formatDate(value, options = {}) {
   const {
     locale = options.locale ?? config.locale,
     timeZone = options.timeZone ?? config.timeZone,
-    ...rest } = options;
+    ...rest
+  } = options;
   const date = validateDate(value, timeZone);
   try {
     return Intl.DateTimeFormat(locale, {
@@ -84,10 +88,11 @@ export function formatDateTime(value, options = {}) {
     minute = "2-digit",
     second = "2-digit",
     hour12 = false,
-    ...rest } = options;
+    ...rest
+  } = options;
   const date = validateDate(value, timeZone);
   try {
-    return Intl.DateTimeFormat(locale, {  
+    return Intl.DateTimeFormat(locale, {
       timeZone,
       year,
       month,
@@ -109,9 +114,7 @@ export function formatNumber(value, options = {}) {
     options.minimumFractionDigits = options.digits;
     options.maximumFractionDigits = options.digits;
   }
-  const {
-    locale = options.locale ?? config.locale,
-    ...rest } = options;
+  const { locale = options.locale ?? config.locale, ...rest } = options;
   try {
     return new Intl.NumberFormat(locale, {
       ...rest,
@@ -123,7 +126,7 @@ export function formatNumber(value, options = {}) {
 
 export function formatQuantity(value, options = {}) {
   const result = formatNumber(value, options);
-  
+
   return result + (options.unit_code ? ` ${options.unit_code}` : "");
 }
 
@@ -136,7 +139,8 @@ export function formatTime(value, options = {}) {
     minute = "2-digit",
     second = "2-digit",
     hour12 = false,
-    ...rest } = options;  
+    ...rest
+  } = options;
   const date = validateDate(value, timeZone);
   try {
     return Intl.DateTimeFormat(locale, {
@@ -178,7 +182,7 @@ export function group(data, groups = []) {
 
     return acc;
   }, new Map());
-};
+}
 
 export function round(value, decimals = 2) {
   if (value == null) return null;
@@ -200,18 +204,18 @@ export function sort(data, criteria) {
     for (const { columnId, direction = "asc", nulls = "last" } of criteria) {
       const valA = getNestedValue(a, columnId);
       const valB = getNestedValue(b, columnId);
-      
+
       const isANull = valA == null || valA === "";
       const isBNull = valB == null || valB === "";
 
       if (isANull || isBNull) {
         if (isANull && isBNull) continue;
         const result = isANull ? -1 : 1;
-        return (nulls === "first" ? result : -result);
+        return nulls === "first" ? result : -result;
       }
 
       let comparison = 0;
-      
+
       if (valA === valB) continue;
 
       const numA = Number(valA);
@@ -229,12 +233,13 @@ export function sort(data, criteria) {
     }
     return 0;
   });
-};
+}
 
 function validateDate(value, timeZone = config.timeZone) {
   if (value instanceof Date) return value;
 
-  const isDateOnly = typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  const isDateOnly =
+    typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
 
   if (isDateOnly) {
     const [year, month, day] = value.split("-").map(Number);
@@ -261,12 +266,10 @@ function hash(str) {
 
 export const Badge = ({ className, expression, children }) => {
   const s = String(expression || children || "").toLowerCase();
-  const hashValue = hash(s) % 16 + 1;
+  const hashValue = (hash(s) % 16) + 1;
 
   return (
-    <div className={`badge c-${hashValue} ${className || ""}`}>
-      {children}
-    </div>
+    <div className={`badge c-${hashValue} ${className || ""}`}>{children}</div>
   );
 };
 
@@ -274,11 +277,12 @@ export const Column = () => null;
 
 function getActiveColumns(columns, visibleColumns, children) {
   if (columns) {
-    const activeColumns = (visibleColumns && visibleColumns.length > 0)
-      ? visibleColumns
-        .map(id => columns.find(col => col.id === id))
-        .filter(col => col !== undefined)
-      : columns;
+    const activeColumns =
+      visibleColumns && visibleColumns.length > 0
+        ? visibleColumns
+            .map((id) => columns.find((col) => col.id === id))
+            .filter((col) => col !== undefined)
+        : columns;
     return activeColumns.map((column, index) => (
       <Column key={index} {...column} />
     ));
@@ -290,7 +294,7 @@ function getActiveColumns(columns, visibleColumns, children) {
         if (child.props.visible != null) return child.props.visible;
         if (visibleColumns == null) return true;
         if (child.props.ids) {
-          return child.props.ids.some(id => visibleColumns.includes(id));
+          return child.props.ids.some((id) => visibleColumns.includes(id));
         }
         if (child.props.id) {
           return visibleColumns.includes(child.props.id);
@@ -301,8 +305,12 @@ function getActiveColumns(columns, visibleColumns, children) {
         if (visibleColumns) {
           const getMinIndex = (props) => {
             const ids = props.ids || [props.id];
-            const indices = ids.map(id => visibleColumns.indexOf(id)).filter(idx => idx !== -1);
-            return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
+            const indices = ids
+              .map((id) => visibleColumns.indexOf(id))
+              .filter((idx) => idx !== -1);
+            return indices.length > 0
+              ? Math.min(...indices)
+              : Number.MAX_SAFE_INTEGER;
           };
           return getMinIndex(a.props) - getMinIndex(b.props);
         }
@@ -312,25 +320,29 @@ function getActiveColumns(columns, visibleColumns, children) {
 }
 
 function getColumnsStyles(activeColumns) {
-  const columnBases = activeColumns.map(col => {
+  const columnBases = activeColumns.map((col) => {
     if (typeof col.props.width === "string" && col.props.width.endsWith("ch")) {
       return parseInt(col.props.width, 10);
     }
     return 9;
   });
 
-  const screenColumns = activeColumns.map((col, index) => {
-    const base = columnBases[index];
-    const max = base * 2;
+  const screenColumns = activeColumns
+    .map((col, index) => {
+      const base = columnBases[index];
+      const max = base * 2;
 
-    if (base >= 20) {
-      return `minmax(${base}ch, 1fr)`;
-    }
+      if (base >= 20) {
+        return `minmax(${base}ch, 1fr)`;
+      }
 
-    return `fit-content(${max}ch)`;
-  }).join(" ");
+      return `fit-content(${max}ch)`;
+    })
+    .join(" ");
 
-  const printColumns = columnBases.map(base => `minmax(0, ${base}fr)`).join(" ");
+  const printColumns = columnBases
+    .map((base) => `minmax(0, ${base}fr)`)
+    .join(" ");
 
   // return { screenColumns: printColumns, printColumns };
 
@@ -340,32 +352,46 @@ function getColumnsStyles(activeColumns) {
   };
 }
 
-export const TableContainer = ({ className, columns, visibleColumns, children }) => {
-  const activeColumns = useMemo(() =>
-    getActiveColumns(columns, visibleColumns),
-  [columns, visibleColumns, children]);
+export const TableContainer = ({
+  className,
+  columns,
+  visibleColumns,
+  children,
+}) => {
+  const activeColumns = useMemo(
+    () => getActiveColumns(columns, visibleColumns),
+    [columns, visibleColumns, children],
+  );
 
   const columnStyles = useMemo(() => {
     return getColumnsStyles(activeColumns);
   }, [activeColumns]);
 
   return (
-    <div className={`table-container ${className || ""}`.trim()}
-      style={columnStyles}>
+    <div
+      className={`table-container ${className || ""}`.trim()}
+      style={columnStyles}
+    >
       {children}
     </div>
   );
 };
 
 const HeaderRow = ({ activeColumns, data, level }) => (
-  <tr className="column-headers" style={{ "--level": level + 1 }} >
+  <tr className="column-headers" style={{ "--level": level + 1 }}>
     {activeColumns.map((col, i) => {
       const context = { row: data[0], data };
 
       let headerClassName = col.props.headerClassName || col.props.className;
-      headerClassName = typeof headerClassName === "function" ? headerClassName(context) : headerClassName;
+      headerClassName =
+        typeof headerClassName === "function"
+          ? headerClassName(context)
+          : headerClassName;
 
-      let header = typeof col.props.header === "function" ? col.props.header(context) : col.props.header;
+      let header =
+        typeof col.props.header === "function"
+          ? col.props.header(context)
+          : col.props.header;
 
       return (
         <th key={i} className={headerClassName} scope="col">
@@ -387,27 +413,45 @@ const FooterRow = ({ data, activeColumns, className, level }) => {
         const context = { row: null, data, value, level };
 
         let footerClassName = col.props.footerClassName || col.props.className;
-        footerClassName = typeof footerClassName === "function" ? footerClassName(context) : footerClassName;
-        
-        const combinedClass = [footerClassName, className].filter(Boolean).join(" ");
+        footerClassName =
+          typeof footerClassName === "function"
+            ? footerClassName(context)
+            : footerClassName;
 
-        return value == null ?
-          <td key={i} /> :
+        const combinedClass = [footerClassName, className]
+          .filter(Boolean)
+          .join(" ");
+
+        return value == null ? (
+          <td key={i} />
+        ) : (
           <td key={i} className={combinedClass}>
             {col.props.footer ? col.props.footer(context) : null}
-          </td>;
+          </td>
+        );
       })}
     </>
   );
 };
 
-const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, activeColumns }) => {
+const Groups = ({
+  columns = [],
+  visibleColumns,
+  groups = [],
+  data,
+  level = 0,
+  activeColumns,
+}) => {
   if (level >= groups.length || !data || data.length === 0) {
     return (
       <>
-        {data.map((row, rowIndex) => { 
+        {data.map((row, rowIndex) => {
           return (
-            <tr key={rowIndex} className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"} style={{ "--level": level + 1 - 1 }}>
+            <tr
+              key={rowIndex}
+              className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"}
+              style={{ "--level": level + 1 - 1 }}
+            >
               {activeColumns.map((col, colIndex) => {
                 let value = undefined;
                 if (typeof col.props.cellValue === "function") {
@@ -418,7 +462,10 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
 
                 const context = { row, rowIndex, data, value };
                 let className = col.props.className;
-                className = typeof className === "function" ? className(context) : className;
+                className =
+                  typeof className === "function"
+                    ? className(context)
+                    : className;
 
                 return (
                   <td key={colIndex} className={className}>
@@ -434,11 +481,14 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
   }
 
   const currentGroupConfig = groups[level];
-  const groupColumn = columns.find(c => c.id === currentGroupConfig?.columnId);
+  const groupColumn = columns.find(
+    (c) => c.id === currentGroupConfig?.columnId,
+  );
 
-  const shouldRenderHeader = currentGroupConfig?.showHeader !== undefined
-    ? currentGroupConfig.showHeader
-    : level === groups.length - 1;
+  const shouldRenderHeader =
+    currentGroupConfig?.showHeader !== undefined
+      ? currentGroupConfig.showHeader
+      : level === groups.length - 1;
 
   const fn = (row) => {
     if (groupColumn?.cellValue) {
@@ -459,22 +509,51 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
   return (
     <>
       {uniqueKeys.map((key, index) => {
-        const filteredGroupData = data.filter(row => fn(row) === key);
+        const filteredGroupData = data.filter((row) => fn(row) === key);
 
         let cell = key;
         if (key !== null && key !== undefined) {
           let value = key;
 
           if (groupColumn?.cellValue) {
-            value = groupColumn.cellValue({ row: filteredGroupData[0], rowIndex: 0, data: filteredGroupData });
+            value = groupColumn.cellValue({
+              row: filteredGroupData[0],
+              rowIndex: 0,
+              data: filteredGroupData,
+            });
           }
 
           if (groupColumn?.groupCell) {
-            cell = typeof groupColumn.groupCell === "function" ? groupColumn.groupCell({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData }) : groupColumn.groupCell;
+            cell =
+              typeof groupColumn.groupCell === "function"
+                ? groupColumn.groupCell({
+                    row: filteredGroupData[0],
+                    rowIndex: 0,
+                    value,
+                    data: filteredGroupData,
+                  })
+                : groupColumn.groupCell;
           } else if (groupColumn?.cell) {
-            cell = groupColumn.cell({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData });
+            cell = groupColumn.cell({
+              row: filteredGroupData[0],
+              rowIndex: 0,
+              value,
+              data: filteredGroupData,
+            });
             if (groupColumn?.header) {
-              cell = <>{typeof groupColumn.header === "function" ? groupColumn.header({ row: filteredGroupData[0], rowIndex: 0, value, data: filteredGroupData }) : groupColumn.header}:&nbsp;{cell}</>;
+              cell = (
+                <>
+                  {typeof groupColumn.header === "function"
+                    ? groupColumn.header({
+                        row: filteredGroupData[0],
+                        rowIndex: 0,
+                        value,
+                        data: filteredGroupData,
+                      })
+                    : groupColumn.header}
+                  :&nbsp;{cell}
+                </>
+              );
             }
           }
         }
@@ -482,15 +561,26 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
         const RowContent = (
           <>
             {key !== null && key !== undefined && (
-              <tr className={`group-header level-${level + 1}`} style={{ "--level": level + 1 }}>
-                <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
+              <tr
+                className={`group-header level-${level + 1}`}
+                style={{ "--level": level + 1 }}
+              >
+                <th
+                  colSpan={totalCols}
+                  scope="rowgroup"
+                  style={{ textAlign: "left" }}
+                >
                   {cell}
                 </th>
               </tr>
             )}
 
             {shouldRenderHeader && (
-              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} level={level} />
+              <HeaderRow
+                activeColumns={activeColumns}
+                data={filteredGroupData}
+                level={level}
+              />
             )}
 
             <Groups
@@ -503,42 +593,59 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
             />
 
             {/* Clean Group Footer Stack */}
-            {key !== null && key !== undefined && activeColumns.some(col => col.props?.footerValue || col.props?.footer) && (
-              <>
-                {level < groups.length - 1 && (
-                  <tr className={`group-footer level-${level + 1}`} style={{ "--level": level + 1 }}>
-                    <th colSpan={totalCols} scope="rowgroup">
-                      <div className={`level-${level + 1}`}>{"≡".repeat(level + 1)} {groupColumn?.header}</div>
-                    </th>
-                  </tr>
-                )}
+            {key !== null &&
+              key !== undefined &&
+              activeColumns.some(
+                (col) => col.props?.footerValue || col.props?.footer,
+              ) && (
+                <>
+                  {level < groups.length - 1 && (
+                    <tr
+                      className={`group-footer level-${level + 1}`}
+                      style={{ "--level": level + 1 }}
+                    >
+                      <th colSpan={totalCols} scope="rowgroup">
+                        <div className={`level-${level + 1}`}>
+                          {"≡".repeat(level + 1)} {groupColumn?.header}
+                        </div>
+                      </th>
+                    </tr>
+                  )}
 
-                <tr className={`group-footer-values level-${level + 1} ${level === groups.length - 1 ? "last-level" : ""}`} style={{ "--level": level + 1 }}>
-                  <FooterRow 
-                    data={filteredGroupData} 
-                    activeColumns={activeColumns}
-                    level={level + 1}
-                  />
-                </tr>
-              </>
-            )}
+                  <tr
+                    className={`group-footer-values level-${level + 1} ${level === groups.length - 1 ? "last-level" : ""}`}
+                    style={{ "--level": level + 1 }}
+                  >
+                    <FooterRow
+                      data={filteredGroupData}
+                      activeColumns={activeColumns}
+                      level={level + 1}
+                    />
+                  </tr>
+                </>
+              )}
           </>
         );
 
-        return (
-          <React.Fragment key={index}>
-            {RowContent}
-          </React.Fragment>
-        );
+        return <React.Fragment key={index}>{RowContent}</React.Fragment>;
       })}
     </>
   );
 };
 
-export const Table = ({ className = "", columns, visibleColumns, groups, data, footerTitle, children }) => {
-  const activeColumns = useMemo(() =>
-    getActiveColumns(columns, visibleColumns, children),
-  [columns, visibleColumns, children]);
+export const Table = ({
+  className = "",
+  columns,
+  visibleColumns,
+  groups,
+  data,
+  footerTitle,
+  children,
+}) => {
+  const activeColumns = useMemo(
+    () => getActiveColumns(columns, visibleColumns, children),
+    [columns, visibleColumns, children],
+  );
 
   const columnStyles = useMemo(() => {
     return getColumnsStyles(activeColumns);
@@ -547,7 +654,10 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
   const hasGroups = groups && groups.length > 0;
 
   return (
-    <table className={`grid ${className}`} style={{...columnStyles, "--max-level": hasGroups ? groups.length : 1}}>
+    <table
+      className={`grid ${className}`}
+      style={{ ...columnStyles, "--max-level": hasGroups ? groups.length : 1 }}
+    >
       {!hasGroups && (
         <thead>
           <HeaderRow activeColumns={activeColumns} data={data} />
@@ -567,7 +677,13 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
           <>
             {data.map((row, rowIndex) => {
               return (
-                <tr key={rowIndex} className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"} style={{ "--level": 1 }}>
+                <tr
+                  key={rowIndex}
+                  className={
+                    rowIndex % 2 === 0 ? "data-row even" : "data-row odd"
+                  }
+                  style={{ "--level": 1 }}
+                >
                   {activeColumns.map((col, colIndex) => {
                     let value = undefined;
                     if (typeof col.props.cellValue === "function") {
@@ -575,15 +691,20 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
                     } else if (col.props.id) {
                       value = row[col.props.id];
                     }
-                    
+
                     const context = { row, rowIndex, data, value };
 
                     let className = col.props.className;
-                    className = typeof className === "function" ? className(context) : className;
+                    className =
+                      typeof className === "function"
+                        ? className(context)
+                        : className;
 
                     return (
                       <td key={colIndex} className={className}>
-                        {col.props.cell ? col.props.cell(context) : (value ?? null)}
+                        {col.props.cell
+                          ? col.props.cell(context)
+                          : (value ?? null)}
                       </td>
                     );
                   })}
@@ -594,23 +715,28 @@ export const Table = ({ className = "", columns, visibleColumns, groups, data, f
         )}
       </tbody>
 
-      {activeColumns.some(col => col.props.footerValue || col.props.footer) &&
+      {activeColumns.some(
+        (col) => col.props.footerValue || col.props.footer,
+      ) && (
         <tfoot>
           <tr className={"group-footer level-0"} style={{ "--level": 1 }}>
             <th colSpan={activeColumns.length} scope="rowgroup">
               <div className={"level-0"}>{footerTitle ?? "≡"}</div>
             </th>
           </tr>
-          <tr className={"group-footer-values level-0"} style={{ "--level": 1 }}>
-            <FooterRow 
-              data={data} 
-              activeColumns={activeColumns} 
-              prefix={hasGroups ? "≡ " : ""} 
+          <tr
+            className={"group-footer-values level-0"}
+            style={{ "--level": 1 }}
+          >
+            <FooterRow
+              data={data}
+              activeColumns={activeColumns}
+              prefix={hasGroups ? "≡ " : ""}
               level={0}
             />
           </tr>
         </tfoot>
-      }
+      )}
     </table>
   );
 };
@@ -652,10 +778,17 @@ const aggregateBy = (data, groupFn, valueFn, operation) => {
 };
 
 export const sumBy = (data, groupFn, valueFn) =>
-  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0));
+  aggregateBy(data, groupFn, valueFn, (vals) =>
+    vals.reduce((a, b) => a + b, 0),
+  );
 
 export const avgBy = (data, groupFn, valueFn) =>
-  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0) / vals.length);
+  aggregateBy(
+    data,
+    groupFn,
+    valueFn,
+    (vals) => vals.reduce((a, b) => a + b, 0) / vals.length,
+  );
 
 export const minBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => Math.min(...vals));
