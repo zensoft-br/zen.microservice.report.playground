@@ -1,3 +1,4 @@
+import React from "react";
 import * as utils from "./utils.jsx";
 import { Badge, Table } from "./utils.jsx";
 
@@ -17,6 +18,287 @@ export default function ({ data = [], meta = {}, t }) {
       ? utils.formatNumber(value, options)
       : utils.formatCurrency(value, options);
   };
+
+  const visibleFields = settings?.fields ?? [];
+
+  const fields = [
+    {
+      id: "company_code",
+      group: "company",
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/code")),
+      value: (row) => row.company.code,
+    },
+    {
+      id: "company_name",
+      group: "company",
+      flex: 2,
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
+      value: (row) => row.company.person.name,
+    },
+    {
+      id: "company_nameCalc",
+      group: "company",
+      flex: 2,
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
+      value: (row) => row.company.person.fantasyName ?? row.company.person.name,
+    },
+    {
+      id: "company_documentNumber",
+      group: "company",
+      label: (row) =>
+        utils.cellHeader(
+          t("/catalog/company/company"),
+          t("/catalog/person/personDocumentType/enum/" + row.company.person.documentType),
+        ),
+      value: (row) => row.company.person.documentNumber,
+    },
+    {
+      id: "company_document2Number",
+      group: "company",
+      label: (row) =>
+        utils.cellHeader(
+          t("/catalog/company/company"),
+          t("/catalog/person/personDocumentType/enum/" + row.company.person.document2Type),
+        ),
+      value: (row) => row.company.person.document2Number,
+    },
+    {
+      id: "company_address",
+      group: "company",
+      flex: 4,
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/address")),
+      value: (row) =>
+        [
+          row.company.person.street,
+          row.company.person.number,
+          row.company.person.complement,
+          row.company.person.district,
+          row.company.person.city?.name,
+          row.company.person.city?.state?.code,
+          row.company.person.zipcode,
+        ]
+          .filter(Boolean)
+          .join(", "),
+    },
+    {
+      id: "company_email",
+      group: "company",
+      flex: 2,
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/email")),
+      value: (row) => row.company.person.email,
+    },
+    {
+      id: "company_phone",
+      group: "company",
+      label: utils.cellHeader(t("/catalog/company/company"), t("/@word/phone")),
+      value: (row) => row.company.person.phone,
+    },
+    {
+      id: "person_name",
+      group: "person",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/customer"), t("/@word/name")),
+      value: (row) => row.person.name,
+    },
+    {
+      id: "person_documentNumber",
+      group: "person",
+      label: (row) =>
+        utils.cellHeader(
+          t("/@word/customer"),
+          t("/catalog/person/personDocumentType/enum/" + row.person.documentType),
+        ),
+      value: (row) => row.person.documentNumber,
+    },
+    {
+      id: "person_document2Number",
+      group: "person",
+      label: (row) =>
+        utils.cellHeader(
+          t("/@word/customer"),
+          t("/catalog/person/personDocumentType/enum/" + row.person.document2Type),
+        ),
+      value: (row) => row.person.document2Number,
+    },
+    {
+      id: "person_address",
+      group: "person_address",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer"), t("/@word/address")),
+      value: (row) =>
+        [
+          row.person.street,
+          row.person.number,
+          row.person.complement,
+          row.person.district,
+          row.person.city?.name,
+          row.person.city?.state?.code,
+          row.person.zipcode,
+        ]
+          .filter(Boolean)
+          .join(", "),
+    },
+    {
+      id: "person_email",
+      group: "person",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/customer"), t("/@word/email")),
+      value: (row) => row.person.email,
+    },
+    {
+      id: "person_phone",
+      group: "person",
+      label: utils.cellHeader(t("/@word/customer"), t("/@word/phone")),
+      value: (row) => row.person.phone,
+    },
+    {
+      id: "saleProfile_code",
+      group: "sale",
+      label: t("/sale/saleProfile"),
+      value: (row) => row.saleProfile.code,
+    },
+    {
+      id: "code",
+      group: "sale",
+      label: t("/@word/code"),
+      value: (row) => row.code,
+    },
+    {
+      id: "date",
+      group: "sale",
+      label: t("/@word/date"),
+      value: (row) => utils.formatDate(row.date),
+    },
+    {
+      id: "availabilityDate",
+      group: "sale",
+      label: t("/@word/availabilityDate"),
+      value: (row) => utils.formatDate(row.availabilityDate),
+    },
+    {
+      id: "status",
+      group: "sale",
+      label: t("/@word/status"),
+      value: (row) => row.status,
+    },
+    {
+      id: "tags",
+      group: "sale",
+      label: t("/@word/tags"),
+      value: (row) => row.tags,
+    },
+    {
+      id: "personShipping_name",
+      group: "sale_shipment",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/personShipping"), t("/@word/name")),
+      value: (row) => row.personShipping?.name,
+    },
+    {
+      id: "personShipping_documentNumber",
+      group: "sale_shipment",
+      label: utils.cellHeader(t("/@word/personShipping"), t("/@word/documentNumber")),
+      value: (row) => row.personShipping?.documentNumber,
+    },
+    {
+      id: "freightType",
+      group: "sale_shipment",
+      label: t("/@word/freightType"),
+      value: (row) => t("/commercial/freightType/enum/" + row.freightType),
+    },
+    {
+      id: "personShippingTransshipment_name",
+      group: "sale_transshipment",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/name")),
+      value: (row) => row.personShippingTransshipment?.name,
+    },
+    {
+      id: "personShippingTransshipment_documentNumber",
+      group: "sale_transshipment",
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/documentNumber")),
+      value: (row) => row.personShippingTransshipment?.documentNumber,
+    },
+    {
+      id: "freightTypeTransshipment",
+      group: "sale_transshipment",
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/freightType")),
+      value: (row) =>
+        row.properties?.freightTypeTransshipment
+          ? t("/commercial/freightType/enum/" + row.properties?.freightTypeTransshipment)
+          : undefined,
+    },
+    {
+      id: "personSalesperson_name",
+      group: "sale",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/personSalesperson"), t("/@word/name")),
+      value: (row) => row.personSalesperson?.name,
+    },
+    {
+      id: "salesChannel",
+      group: "sale",
+      label: t("/@word/salesChannel"),
+      value: (row) => row.properties?.salesChannel,
+    },
+    {
+      id: "salesCommission",
+      group: "sale",
+      label: t("/@word/salesCommission"),
+      value: (row) => row.properties?.salesCommission,
+    },
+    {
+      id: "salesHub",
+      group: "sale",
+      label: t("/@word/salesHub"),
+      value: (row) => row.properties?.salesHub,
+    },
+    {
+      id: "paymentMethods",
+      group: "sale",
+      label: t("/@word/paymentMethods"),
+      value: (row) => row.properties?.paymentMethods,
+    },
+    {
+      id: "comments",
+      group: "sale_comments",
+      label: t("/@word/comments"),
+      value: (row) => row.properties?.comments,
+      as: "pre",
+    },
+  ];
+  // return JSON.stringify(
+  //   fields.map((field) => field.id),
+  //   null,
+  //   2,
+  // );
+
+  const fieldGroups = [
+    {
+      id: "company",
+      label: t("/catalog/company/company"),
+    },
+    {
+      id: "person",
+      label: t("/@word/customer"),
+    },
+    {
+      id: "sale",
+      label: t("/sale/sale"),
+    },
+    {
+      id: "sale_shipment",
+      label: t("/@word/personShipping"),
+    },
+    {
+      id: "sale_transshipment",
+      label: t("/@word/personShippingTransshipment"),
+    },
+    {
+      id: "sale_comments",
+      label: t("/@word/comments"),
+    },
+  ];
 
   const columns = [
     {
@@ -43,13 +325,13 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "productPacking_code",
-      header: utils.cellHeader(t("/@word/code")),
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
       width: "12ch",
       cellValue: ({ row }) => row.productPacking.code,
     },
     {
       id: "product_description",
-      header: utils.cellHeader(t("/@word/description")),
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
       width: "30ch",
       cellValue: ({ row }) => row.productPacking.product.description,
     },
@@ -121,6 +403,7 @@ export default function ({ data = [], meta = {}, t }) {
       cell: ({ row, value }) =>
         formatCurrency(value, {
           currency: row.currency?.code ?? row.sale.currency.code,
+          digits: 2,
         }),
       footerValue: ({ data }) =>
         utils.sumBy(
@@ -139,6 +422,7 @@ export default function ({ data = [], meta = {}, t }) {
       cell: ({ row, value }) =>
         formatCurrency(value, {
           currency: row.currency?.code ?? row.sale.currency.code,
+          digits: 2,
         }),
       footerValue: ({ data }) =>
         utils.sumBy(
@@ -204,6 +488,7 @@ export default function ({ data = [], meta = {}, t }) {
         cell: ({ row, value }) =>
           formatCurrency(value, {
             currency: row.currency?.code ?? row.sale.currency.code,
+            digits: 2,
           }),
         footerValue: ({ data }) =>
           utils.sumBy(
@@ -233,6 +518,7 @@ export default function ({ data = [], meta = {}, t }) {
         cell: ({ row, value }) =>
           formatCurrency(value, {
             currency: row.currency?.code ?? row.sale.currency.code,
+            digits: 2,
           }),
         footerValue: ({ data }) =>
           utils.sumBy(
@@ -246,23 +532,17 @@ export default function ({ data = [], meta = {}, t }) {
       {
         id: "currency_code",
         header: utils.cellHeader(t("/financial/currency")),
-        width: "5ch",
+        width: "7ch",
         cellValue: ({ row }) => <Badge>{row.currency?.code ?? row.sale.currency.code}</Badge>,
       },
     ]),
   ];
 
-  if (meta.explain) {
-    return (
-      <pre>
-        {JSON.stringify(
-          columns.map((column) => ({ id: column.id, header: column.header })),
-          null,
-          2,
-        )}
-      </pre>
-    );
-  }
+  // return JSON.stringify(
+  //   columns.map((field) => field.id),
+  //   null,
+  //   2,
+  // );
 
   data.forEach((row) => {
     row.items.forEach((item) => {
@@ -288,194 +568,37 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
-        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
+        <div
+          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          style={{ "--margin": settings?.margin }}
+          key={data.id}
+        >
           <header>
-            <h1
-              className="grid"
-              style={{
-                gridTemplateColumns: "1fr auto 1fr",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={data.company.image?.url}
-                style={{ height: "2cm", width: "4cm", objectFit: "contain" }}
-              />
-              <span>
-                {t("/sale/sale")} {data.id}
-              </span>
-              <img
-                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data.id}`}
-                style={{ width: "2cm", justifySelf: "end" }}
-              />
-            </h1>
-            <div className="flex v gap">
-              <section className="parameters">
-                <dl>
-                  <dt>{t("/catalog/company/company")}</dt>
-                  <dd>{data.company.person.name}</dd>
-                </dl>
-                <dl>
-                  <dt>CNPJ</dt>
-                  <dd>{data.company.person.documentNumber}</dd>
-                </dl>
-                <dl>
-                  <dt>Inscrição estadual</dt>
-                  <dd>{data.company.person.document2Number}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl style={{ flex: "3" }}>
-                  <dt>{t("/@word/address")}</dt>
-                  <dd>
-                    {[
-                      data.company.person.street,
-                      data.company.person.number,
-                      data.company.person.complement,
-                      data.company.person.district,
-                      data.company.person.city?.name,
-                      data.company.person.city?.state?.code,
-                      data.company.person.zipcode,
-                    ]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </dd>
-                </dl>
-                <dl style={{ flex: "2" }}>
-                  <dt>{t("/@word/email")}</dt>
-                  <dd>{data.company.person.email}</dd>
-                </dl>
-                <dl style={{ flex: "1" }}>
-                  <dt>{t("/@word/phone")}</dt>
-                  <dd>{data.company.person.phone}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl>
-                  <dt>{t("/@word/customer")}</dt>
-                  <dd>{data.person.name}</dd>
-                </dl>
-                <dl>
-                  <dt>CNPJ</dt>
-                  <dd>{data.person.documentNumber}</dd>
-                </dl>
-                <dl>
-                  <dt>Inscrição estadual</dt>
-                  <dd>{data.person.document2Number}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl style={{ flex: "3" }}>
-                  <dt>{t("/@word/address")}</dt>
-                  <dd>
-                    {[
-                      data.person.street,
-                      data.person.number,
-                      data.person.complement,
-                      data.person.district,
-                      data.person.city?.name,
-                      data.person.city?.state?.code,
-                      data.person.zipcode,
-                    ]
-                      .filter(Boolean)
-                      .join(", ")}
-                  </dd>
-                </dl>
-                <dl style={{ flex: "2" }}>
-                  <dt>{t("/@word/email")}</dt>
-                  <dd>{data.person.email}</dd>
-                </dl>
-                <dl style={{ flex: "1" }}>
-                  <dt>{t("/@word/phone")}</dt>
-                  <dd>{data.person.phone}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl>
-                  <dt>{t("/sale/saleProfile")}</dt>
-                  <dd>{data.saleProfile.code}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/code")}</dt>
-                  <dd>{data.code}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/date")}</dt>
-                  <dd>{utils.formatDate(data.date)}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/availabilityDate")}</dt>
-                  <dd>{utils.formatDate(data.availabilityDate)}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/status")}</dt>
-                  <dd>{t(`/sale/saleStatus/enum/${data.status}`)}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/tags")}</dt>
-                  <dd>{data.tags}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl>
-                  <dt>{t("/@word/freightType")}</dt>
-                  <dd>
-                    {data?.freightType && t(`/commercial/freightType/enum/${data.freightType}`)}
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/personShipping")}</dt>
-                  <dd>{data.personShipping?.name}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/freightTypeTransshipment")}</dt>
-                  <dd>
-                    {data?.properties?.freightTypeTransshipment &&
-                      t(`/commercial/freightType/enum/${data.properties.freightTypeTransshipment}`)}
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/personShippingTransshipment")}</dt>
-                  <dd>{data?.personShippingTransshipment?.name}</dd>
-                </dl>
-              </section>
-              <section className="parameters">
-                <dl>
-                  <dt>{t("/@word/personSalesperson")}</dt>
-                  <dd>{data.personSalesperson?.name}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/salesCommission")}</dt>
-                  <dd>{data?.properties?.salesCommission}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/salesChannel")}</dt>
-                  <dd>{data?.properties?.salesChannel}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/salesHub")}</dt>
-                  <dd>{data?.properties?.salesHub}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/paymentMethods")}</dt>
-                  <dd>{data.properties?.paymentMethods}</dd>
-                </dl>
-                <dl>
-                  <dt>{t("/@word/datetime")}</dt>
-                  <dd>{utils.formatDateTime(new Date())}</dd>
-                </dl>
-              </section>
-              {data?.properties?.comments && (
-                <section className="parameters">
-                  <dl>
-                    <dt>{t("/@word/comments")}</dt>
-                    <dd>
-                      <pre>{data.properties?.comments}</pre>
-                    </dd>
-                  </dl>
-                </section>
-              )}
-            </div>
+            <section className="title">
+              <dl style={{ flex: 0 }}>
+                <dd>
+                  <img src={data.company.image?.url} />
+                </dd>
+              </dl>
+              <dl style={{ flex: 1 }}>
+                <dd>
+                  <h1>
+                    {t("/sale/sale")} {data.id}
+                  </h1>
+                </dd>
+              </dl>
+              <dl style={{ flex: 0 }}>
+                <dd>
+                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data.id}`} />
+                </dd>
+              </dl>
+            </section>
+            {renderFields({
+              fields: fields,
+              visibleFields: visibleFields,
+              data: data,
+              groups: fieldGroups,
+            })}
           </header>
           <main>
             <div className="content">
@@ -492,4 +615,52 @@ export default function ({ data = [], meta = {}, t }) {
       ))}
     </div>
   );
+}
+
+function renderFields({ fields, visibleFields, data, groups }) {
+  if (visibleFields.length > 0) {
+    fields = fields
+      .filter((field) => visibleFields.includes(field.id))
+      .sort((a, b) => visibleFields.indexOf(a.id) - visibleFields.indexOf(b.id));
+  }
+
+  fields = fields.reduce((red, field) => {
+    const value = field.value instanceof Function ? field.value(data) : field.value;
+    if (value === undefined || value === null || value === "") {
+      return red;
+    }
+    red.push({
+      ...field,
+      value,
+    });
+    return red;
+  }, []);
+
+  const fieldsByGroup = fields.reduce((red, field) => {
+    const key = field.group ?? "ungrouped";
+    if (!red.has(key)) {
+      red.set(key, []);
+    }
+    red.get(key).push(field);
+    return red;
+  }, new Map());
+
+  return Array.from(fieldsByGroup.entries()).map(([group, fields]) => {
+    return (
+      <React.Fragment key={group}>
+        {/* <legend>{groups.find((g) => g.id === group)?.label ?? group}</legend> */}
+        <section className="parameters">
+          {fields.map((field) => {
+            const Tag = field.as ?? "dd";
+            return (
+              <dl key={field.id} style={{ flex: field.flex ?? 1 }}>
+                <dt>{field.label instanceof Function ? field.label(data) : field.label}</dt>
+                <Tag>{field.value}</Tag>
+              </dl>
+            );
+          })}
+        </section>
+      </React.Fragment>
+    );
+  });
 }

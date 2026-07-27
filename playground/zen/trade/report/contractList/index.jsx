@@ -699,7 +699,11 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
+        <div
+          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          style={{ "--margin": settings?.margin }}
+          key={data.id}
+        >
         <header>
           <h1>{t("/trade/report/contractList")}</h1>
           <section className="parameters">

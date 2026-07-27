@@ -11,7 +11,14 @@
     │
     ├── header (Report header)
     │   ├── .brand (Logo / Company info)
-    │   ├── h1 (Report title)
+    │   ├── h1 (Report title - deprecated)
+    │   ├── section.title (Report title)
+    │   │   ├── dl (Parameter 1)
+    │   │   │   ├── dt (Label)
+    │   │   │   └── dd (Value)
+    │   │   └── dl (Parameter <n>)
+    │   │       ├── dt
+    │   │       └── dd
     │   └── section.parameters (Parameters)
     │       ├── dl (Parameter 1)
     │       |   ├── dt (Label)

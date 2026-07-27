@@ -4,7 +4,11 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
-        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
+          <div
+          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          style={{ "--margin": settings?.margin }}
+          key={data.id}
+        >
           <main className="flex flex-1">
             <div className="content flex-1">
               <div className="cell" style={{ gridArea: "A" }}>

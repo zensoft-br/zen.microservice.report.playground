@@ -2,7 +2,11 @@ export default function ({ data = [], t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((obj) => (
-        <div className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}>
+          <div
+          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          style={{ "--margin": settings?.margin }}
+          key={data.id}
+        >
           <header>
             <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
               <img src={obj.company?.image?.url} style={{ width: "3cm" }} />

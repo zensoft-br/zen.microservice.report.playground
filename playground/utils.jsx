@@ -10,12 +10,11 @@ export function cellHeader(...args) {
   return args
     .filter((arg) => arg != null)
     .map((arg, index) => (index === 0 ? arg : String(arg).toLowerCase()))
-    .join(" ");
+    .join(", ");
 }
 
 export function deepMerge(target, source) {
-  const isObject = (item) =>
-    item && typeof item === "object" && !Array.isArray(item);
+  const isObject = (item) => item && typeof item === "object" && !Array.isArray(item);
 
   if (!isObject(source)) {
     return target;
@@ -238,8 +237,7 @@ export function sort(data, criteria) {
 function validateDate(value, timeZone = config.timeZone) {
   if (value instanceof Date) return value;
 
-  const isDateOnly =
-    typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  const isDateOnly = typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
 
   if (isDateOnly) {
     const [year, month, day] = value.split("-").map(Number);
@@ -268,9 +266,7 @@ export const Badge = ({ className, expression, children }) => {
   const s = String(expression || children || "").toLowerCase();
   const hashValue = (hash(s) % 16) + 1;
 
-  return (
-    <div className={`badge c-${hashValue} ${className || ""}`}>{children}</div>
-  );
+  return <div className={`badge c-${hashValue} ${className || ""}`}>{children}</div>;
 };
 
 export const Column = () => null;
@@ -283,9 +279,7 @@ function getActiveColumns(columns, visibleColumns, children) {
             .map((id) => columns.find((col) => col.id === id))
             .filter((col) => col !== undefined)
         : columns;
-    return activeColumns.map((column, index) => (
-      <Column key={index} {...column} />
-    ));
+    return activeColumns.map((column, index) => <Column key={index} {...column} />);
   } else {
     // Legacy support for children as Column elements
     return React.Children.toArray(children)
@@ -305,12 +299,8 @@ function getActiveColumns(columns, visibleColumns, children) {
         if (visibleColumns) {
           const getMinIndex = (props) => {
             const ids = props.ids || [props.id];
-            const indices = ids
-              .map((id) => visibleColumns.indexOf(id))
-              .filter((idx) => idx !== -1);
-            return indices.length > 0
-              ? Math.min(...indices)
-              : Number.MAX_SAFE_INTEGER;
+            const indices = ids.map((id) => visibleColumns.indexOf(id)).filter((idx) => idx !== -1);
+            return indices.length > 0 ? Math.min(...indices) : Number.MAX_SAFE_INTEGER;
           };
           return getMinIndex(a.props) - getMinIndex(b.props);
         }
@@ -340,9 +330,7 @@ function getColumnsStyles(activeColumns) {
     })
     .join(" ");
 
-  const printColumns = columnBases
-    .map((base) => `minmax(0, ${base}fr)`)
-    .join(" ");
+  const printColumns = columnBases.map((base) => `minmax(0, ${base}fr)`).join(" ");
 
   // return { screenColumns: printColumns, printColumns };
 
@@ -352,12 +340,7 @@ function getColumnsStyles(activeColumns) {
   };
 }
 
-export const TableContainer = ({
-  className,
-  columns,
-  visibleColumns,
-  children,
-}) => {
+export const TableContainer = ({ className, columns, visibleColumns, children }) => {
   const activeColumns = useMemo(
     () => getActiveColumns(columns, visibleColumns),
     [columns, visibleColumns, children],
@@ -368,10 +351,7 @@ export const TableContainer = ({
   }, [activeColumns]);
 
   return (
-    <div
-      className={`table-container ${className || ""}`.trim()}
-      style={columnStyles}
-    >
+    <div className={`table-container ${className || ""}`.trim()} style={columnStyles}>
       {children}
     </div>
   );
@@ -384,14 +364,10 @@ const HeaderRow = ({ activeColumns, data, level }) => (
 
       let headerClassName = col.props.headerClassName || col.props.className;
       headerClassName =
-        typeof headerClassName === "function"
-          ? headerClassName(context)
-          : headerClassName;
+        typeof headerClassName === "function" ? headerClassName(context) : headerClassName;
 
       let header =
-        typeof col.props.header === "function"
-          ? col.props.header(context)
-          : col.props.header;
+        typeof col.props.header === "function" ? col.props.header(context) : col.props.header;
 
       return (
         <th key={i} className={headerClassName} scope="col">
@@ -414,13 +390,9 @@ const FooterRow = ({ data, activeColumns, className, level }) => {
 
         let footerClassName = col.props.footerClassName || col.props.className;
         footerClassName =
-          typeof footerClassName === "function"
-            ? footerClassName(context)
-            : footerClassName;
+          typeof footerClassName === "function" ? footerClassName(context) : footerClassName;
 
-        const combinedClass = [footerClassName, className]
-          .filter(Boolean)
-          .join(" ");
+        const combinedClass = [footerClassName, className].filter(Boolean).join(" ");
 
         return value == null ? (
           <td key={i} />
@@ -434,14 +406,7 @@ const FooterRow = ({ data, activeColumns, className, level }) => {
   );
 };
 
-const Groups = ({
-  columns = [],
-  visibleColumns,
-  groups = [],
-  data,
-  level = 0,
-  activeColumns,
-}) => {
+const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, activeColumns }) => {
   if (level >= groups.length || !data || data.length === 0) {
     return (
       <>
@@ -462,10 +427,7 @@ const Groups = ({
 
                 const context = { row, rowIndex, data, value };
                 let className = col.props.className;
-                className =
-                  typeof className === "function"
-                    ? className(context)
-                    : className;
+                className = typeof className === "function" ? className(context) : className;
 
                 return (
                   <td key={colIndex} className={className}>
@@ -481,9 +443,7 @@ const Groups = ({
   }
 
   const currentGroupConfig = groups[level];
-  const groupColumn = columns.find(
-    (c) => c.id === currentGroupConfig?.columnId,
-  );
+  const groupColumn = columns.find((c) => c.id === currentGroupConfig?.columnId);
 
   const shouldRenderHeader =
     currentGroupConfig?.showHeader !== undefined
@@ -561,26 +521,15 @@ const Groups = ({
         const RowContent = (
           <>
             {key !== null && key !== undefined && (
-              <tr
-                className={`group-header level-${level + 1}`}
-                style={{ "--level": level + 1 }}
-              >
-                <th
-                  colSpan={totalCols}
-                  scope="rowgroup"
-                  style={{ textAlign: "left" }}
-                >
+              <tr className={`group-header level-${level + 1}`} style={{ "--level": level + 1 }}>
+                <th colSpan={totalCols} scope="rowgroup" style={{ textAlign: "left" }}>
                   {cell}
                 </th>
               </tr>
             )}
 
             {shouldRenderHeader && (
-              <HeaderRow
-                activeColumns={activeColumns}
-                data={filteredGroupData}
-                level={level}
-              />
+              <HeaderRow activeColumns={activeColumns} data={filteredGroupData} level={level} />
             )}
 
             <Groups
@@ -595,9 +544,7 @@ const Groups = ({
             {/* Clean Group Footer Stack */}
             {key !== null &&
               key !== undefined &&
-              activeColumns.some(
-                (col) => col.props?.footerValue || col.props?.footer,
-              ) && (
+              activeColumns.some((col) => col.props?.footerValue || col.props?.footer) && (
                 <>
                   {level < groups.length - 1 && (
                     <tr
@@ -679,9 +626,7 @@ export const Table = ({
               return (
                 <tr
                   key={rowIndex}
-                  className={
-                    rowIndex % 2 === 0 ? "data-row even" : "data-row odd"
-                  }
+                  className={rowIndex % 2 === 0 ? "data-row even" : "data-row odd"}
                   style={{ "--level": 1 }}
                 >
                   {activeColumns.map((col, colIndex) => {
@@ -695,16 +640,11 @@ export const Table = ({
                     const context = { row, rowIndex, data, value };
 
                     let className = col.props.className;
-                    className =
-                      typeof className === "function"
-                        ? className(context)
-                        : className;
+                    className = typeof className === "function" ? className(context) : className;
 
                     return (
                       <td key={colIndex} className={className}>
-                        {col.props.cell
-                          ? col.props.cell(context)
-                          : (value ?? null)}
+                        {col.props.cell ? col.props.cell(context) : (value ?? null)}
                       </td>
                     );
                   })}
@@ -715,19 +655,14 @@ export const Table = ({
         )}
       </tbody>
 
-      {activeColumns.some(
-        (col) => col.props.footerValue || col.props.footer,
-      ) && (
+      {activeColumns.some((col) => col.props.footerValue || col.props.footer) && (
         <tfoot>
           <tr className={"group-footer level-0"} style={{ "--level": 1 }}>
             <th colSpan={activeColumns.length} scope="rowgroup">
               <div className={"level-0"}>{footerTitle ?? "≡"}</div>
             </th>
           </tr>
-          <tr
-            className={"group-footer-values level-0"}
-            style={{ "--level": 1 }}
-          >
+          <tr className={"group-footer-values level-0"} style={{ "--level": 1 }}>
             <FooterRow
               data={data}
               activeColumns={activeColumns}
@@ -778,17 +713,10 @@ const aggregateBy = (data, groupFn, valueFn, operation) => {
 };
 
 export const sumBy = (data, groupFn, valueFn) =>
-  aggregateBy(data, groupFn, valueFn, (vals) =>
-    vals.reduce((a, b) => a + b, 0),
-  );
+  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0));
 
 export const avgBy = (data, groupFn, valueFn) =>
-  aggregateBy(
-    data,
-    groupFn,
-    valueFn,
-    (vals) => vals.reduce((a, b) => a + b, 0) / vals.length,
-  );
+  aggregateBy(data, groupFn, valueFn, (vals) => vals.reduce((a, b) => a + b, 0) / vals.length);
 
 export const minBy = (data, groupFn, valueFn) =>
   aggregateBy(data, groupFn, valueFn, (vals) => Math.min(...vals));

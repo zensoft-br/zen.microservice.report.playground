@@ -20,14 +20,6 @@ export default [
     },
     rules: {
       ...js.configs.recommended.rules,
-      // "no-unused-vars": [
-      //   "warn",
-      //   {
-      //     argsIgnorePattern: "^_",
-      //     varsIgnorePattern: "^_",
-      //     caughtErrorsIgnorePattern: "^_",
-      //   },
-      // ],
     },
   },
   // Must be last: turns off ESLint rules that conflict with Prettier
