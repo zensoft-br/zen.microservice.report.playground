@@ -4,25 +4,19 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css"
-    ]
+    "styles": ["@file:/styles.css"]
   },
   "meta": {
     "dataSource": null,
     "delegate": null,
     "report": {
       "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": []
+        },
         "#settings": {
-          "columns": [
-            "id",
-            "name",
-            "picture",
-            "score",
-            "status",
-            "quantity",
-            "value"
-          ],
+          "columns": ["id", "name", "picture", "score", "status", "quantity", "value"],
           "groups": [
             {
               "columnId": "virtual_column"

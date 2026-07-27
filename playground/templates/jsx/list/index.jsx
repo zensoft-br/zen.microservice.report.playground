@@ -7,6 +7,16 @@ export default function ({ data = [], meta = {}, t }) {
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
+  const visibleFields = settings?.fields ?? [];
+
+  const fields = [];
+
+  const fieldGroups = [];
+
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
   const columns = [
     {
       id: "id",
@@ -90,10 +100,6 @@ export default function ({ data = [], meta = {}, t }) {
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
   ];
-
-  const visibleColumns = settings?.columns ?? [];
-
-  const groups = settings?.groups || [];
 
   data = utils.sort(data, settings?.sort || []);
 
