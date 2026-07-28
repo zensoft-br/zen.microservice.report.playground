@@ -16,6 +16,7 @@ body {
   --color-border: rgba(0, 0, 0, 0.2);
   --color-shadow: rgba(0, 0, 0, 0.1);
   --gap: 0.3em;
+  --margin: 2.5mm;
   --padding: 0.3em;
   --padding-cell: 0.2em;
   box-sizing: border-box;
@@ -49,7 +50,7 @@ body {
 @media screen {
   .report-wrapper .report-container {
     margin-bottom: 1em;
-    padding: var(--margin, 2mm);
+    padding: var(--margin);
     background-color: white;
   }
   .report-wrapper .report-container.a4 {

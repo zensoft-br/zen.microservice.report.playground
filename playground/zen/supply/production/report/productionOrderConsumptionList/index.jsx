@@ -241,11 +241,15 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-        <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
-          key={data.id}
-        >
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         <header>
           <h1>{t("/supply/production/report/productionOrderConsumptionList")}</h1>
           <section className="parameters">

@@ -8,7 +8,11 @@ export default function ({ data = [], t }) {
       {data.map((obj) => (
         <div
           className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
+          style={{
+            "--width": settings?.width,
+            "--height": settings?.height,
+            "--margin": settings?.margin,
+          }}
           key={data.id}
         >
           <main className="flex flex-1">

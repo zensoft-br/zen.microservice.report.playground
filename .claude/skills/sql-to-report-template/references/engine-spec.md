@@ -17,11 +17,15 @@ export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
   return (
     <div className="report-wrapper">
-        <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
-          key={data.id}
-        >
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         {/* ... */}
       </div>
     </div>

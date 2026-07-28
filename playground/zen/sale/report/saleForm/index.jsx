@@ -170,6 +170,18 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => utils.formatDate(row.date),
     },
     {
+      id: "dateTime",
+      group: "sale",
+      label: t("/@word/dateTime"),
+      value: (row) => utils.formatDateTime(row.date),
+    },
+    {
+      id: "time",
+      group: "sale",
+      label: t("/@word/time"),
+      value: (row) => utils.formatTime(row.date),
+    },
+    {
       id: "availabilityDate",
       group: "sale",
       label: t("/@word/availabilityDate"),
@@ -189,39 +201,39 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "personShipping_name",
-      group: "sale_shipment",
+      group: "shipping",
       flex: 2,
       label: utils.cellHeader(t("/@word/personShipping"), t("/@word/name")),
       value: (row) => row.personShipping?.name,
     },
     {
       id: "personShipping_documentNumber",
-      group: "sale_shipment",
+      group: "shipping",
       label: utils.cellHeader(t("/@word/personShipping"), t("/@word/documentNumber")),
       value: (row) => row.personShipping?.documentNumber,
     },
     {
       id: "freightType",
-      group: "sale_shipment",
+      group: "shipping",
       label: t("/@word/freightType"),
       value: (row) => t("/commercial/freightType/enum/" + row.freightType),
     },
     {
       id: "personShippingTransshipment_name",
-      group: "sale_transshipment",
+      group: "shipping",
       flex: 2,
       label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/name")),
       value: (row) => row.personShippingTransshipment?.name,
     },
     {
       id: "personShippingTransshipment_documentNumber",
-      group: "sale_transshipment",
+      group: "shipping",
       label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/documentNumber")),
       value: (row) => row.personShippingTransshipment?.documentNumber,
     },
     {
       id: "freightTypeTransshipment",
-      group: "sale_transshipment",
+      group: "shipping",
       label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/freightType")),
       value: (row) =>
         row.properties?.freightTypeTransshipment
@@ -261,10 +273,16 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "comments",
-      group: "sale_comments",
+      group: "comments",
       label: t("/@word/comments"),
       value: (row) => row.properties?.comments,
       as: "pre",
+    },
+    {
+      id: "report_printedAt",
+      group: "sale",
+      label: t("/@word/report/printedAt"),
+      value: () => utils.formatDateTime(new Date()),
     },
   ];
   // return JSON.stringify(
@@ -275,6 +293,10 @@ export default function ({ data = [], meta = {}, t }) {
 
   const fieldGroups = [
     {
+      id: "sale",
+      label: t("/sale/sale"),
+    },
+    {
       id: "company",
       label: t("/catalog/company/company"),
     },
@@ -283,19 +305,11 @@ export default function ({ data = [], meta = {}, t }) {
       label: t("/@word/customer"),
     },
     {
-      id: "sale",
-      label: t("/sale/sale"),
-    },
-    {
-      id: "sale_shipment",
+      id: "shipping",
       label: t("/@word/personShipping"),
     },
     {
-      id: "sale_transshipment",
-      label: t("/@word/personShippingTransshipment"),
-    },
-    {
-      id: "sale_comments",
+      id: "comments",
       label: t("/@word/comments"),
     },
   ];
@@ -570,7 +584,11 @@ export default function ({ data = [], meta = {}, t }) {
       {data.map((data) => (
         <div
           className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
+          style={{
+            "--width": settings?.width,
+            "--height": settings?.height,
+            "--margin": settings?.margin,
+          }}
           key={data.id}
         >
           <header>

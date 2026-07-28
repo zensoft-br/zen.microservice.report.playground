@@ -55,11 +55,15 @@ export default function ({ data = [] }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {/* Impresso 1, Ordens de produção */}
-        <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
-          key={data.id}
-        >
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         <header>
           <h1>Ordens de Produção</h1>
         </header>
@@ -147,11 +151,15 @@ export default function ({ data = [] }) {
       </div>
 
       {/* Impresso 2,  */}
-        <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
-          key={data.id}
-        >
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         <header>
           <h1>Consumo de materiais por lote de produção</h1>
           <section className="parameters">
@@ -200,11 +208,15 @@ export default function ({ data = [] }) {
       </div>
 
       {/* Impresso 3, Itens a produzir */}
-        <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
-          key={data.id}
-        >
+      <div
+        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         <header>
           <h1>Itens a produzir</h1>
         </header>

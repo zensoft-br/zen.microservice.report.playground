@@ -120,9 +120,13 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((quote) => (
-          <div
+        <div
           className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-          style={{ "--margin": settings?.margin }}
+          style={{
+            "--width": settings?.width,
+            "--height": settings?.height,
+            "--margin": settings?.margin,
+          }}
           key={data.id}
         >
           <header>
