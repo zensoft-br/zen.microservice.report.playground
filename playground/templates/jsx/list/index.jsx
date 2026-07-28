@@ -20,7 +20,7 @@ export default function ({ data = [], meta = {}, t }) {
       id: "status",
       group: "main",
       label: utils.cellHeader(t("/@word/status")),
-      value: (row) => row.status,
+      value: (row) => <Badge>{t("/sale/saleStatus/enum/" + row.status)}</Badge>,
     },
   ];
 
