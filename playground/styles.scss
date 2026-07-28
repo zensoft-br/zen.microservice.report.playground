@@ -132,6 +132,7 @@ body {
       dl {
         align-items: center;
         justify-content: center;
+        padding: calc(var(--padding) * 2);
       }
 
       img {

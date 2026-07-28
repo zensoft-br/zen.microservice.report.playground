@@ -1,23 +1,11 @@
-import React from "react";
 import * as utils from "./utils.jsx";
-import { Badge, Table } from "./utils.jsx";
+import { Badge, Fields, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
-
-  const visibleColumns = settings?.columns ?? [];
-
-  const groups = settings?.groups || [];
-
-  // When currency_code is visible, currency columns will be formatted as numbers (no currency symbol)
-  const formatCurrency = (value, options) => {
-    return visibleColumns.includes("currency_code")
-      ? utils.formatNumber(value, options)
-      : utils.formatCurrency(value, options);
-  };
 
   const visibleFields = settings?.fields ?? [];
 
@@ -285,6 +273,7 @@ export default function ({ data = [], meta = {}, t }) {
       value: () => utils.formatDateTime(new Date()),
     },
   ];
+
   // return JSON.stringify(
   //   fields.map((field) => field.id),
   //   null,
@@ -313,6 +302,17 @@ export default function ({ data = [], meta = {}, t }) {
       label: t("/@word/comments"),
     },
   ];
+
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
+  // When currency_code is visible, currency columns will be formatted as numbers (no currency symbol)
+  const formatCurrency = (value, options) => {
+    return visibleColumns.includes("currency_code")
+      ? utils.formatNumber(value, options)
+      : utils.formatCurrency(value, options);
+  };
 
   const columns = [
     {
@@ -595,7 +595,7 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="title">
               <dl style={{ flex: 0 }}>
                 <dd>
-                  <img src={data.company.image?.url} />
+                  <img src={data.company?.image?.url} />
                 </dd>
               </dl>
               <dl style={{ flex: 1 }}>
@@ -611,12 +611,12 @@ export default function ({ data = [], meta = {}, t }) {
                 </dd>
               </dl>
             </section>
-            {renderFields({
-              fields: fields,
-              visibleFields: visibleFields,
-              data: data,
-              groups: fieldGroups,
-            })}
+            <Fields
+              fields={fields}
+              visibleFields={visibleFields}
+              data={data}
+              groups={fieldGroups}
+            />
           </header>
           <main>
             <div className="content">
@@ -633,52 +633,4 @@ export default function ({ data = [], meta = {}, t }) {
       ))}
     </div>
   );
-}
-
-function renderFields({ fields, visibleFields, data, groups }) {
-  if (visibleFields.length > 0) {
-    fields = fields
-      .filter((field) => visibleFields.includes(field.id))
-      .sort((a, b) => visibleFields.indexOf(a.id) - visibleFields.indexOf(b.id));
-  }
-
-  fields = fields.reduce((red, field) => {
-    const value = field.value instanceof Function ? field.value(data) : field.value;
-    if (value === undefined || value === null || value === "") {
-      return red;
-    }
-    red.push({
-      ...field,
-      value,
-    });
-    return red;
-  }, []);
-
-  const fieldsByGroup = fields.reduce((red, field) => {
-    const key = field.group ?? "ungrouped";
-    if (!red.has(key)) {
-      red.set(key, []);
-    }
-    red.get(key).push(field);
-    return red;
-  }, new Map());
-
-  return Array.from(fieldsByGroup.entries()).map(([group, fields]) => {
-    return (
-      <React.Fragment key={group}>
-        {/* <legend>{groups.find((g) => g.id === group)?.label ?? group}</legend> */}
-        <section className="parameters">
-          {fields.map((field) => {
-            const Tag = field.as ?? "dd";
-            return (
-              <dl key={field.id} style={{ flex: field.flex ?? 1 }}>
-                <dt>{field.label instanceof Function ? field.label(data) : field.label}</dt>
-                <Tag>{field.value}</Tag>
-              </dl>
-            );
-          })}
-        </section>
-      </React.Fragment>
-    );
-  });
 }

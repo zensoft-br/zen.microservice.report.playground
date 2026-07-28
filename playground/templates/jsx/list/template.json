@@ -16,6 +16,7 @@
           "availableColumns": []
         },
         "#settings": {
+          "fields": ["id", "status"],
           "columns": ["id", "name", "picture", "score", "status", "quantity", "value"],
           "groups": [
             {

@@ -340,6 +340,54 @@ function getColumnsStyles(activeColumns) {
   };
 }
 
+export function Fields({ fields, visibleFields, data, groups }) {
+  if (visibleFields.length > 0) {
+    fields = fields
+      .filter((field) => visibleFields.includes(field.id))
+      .sort((a, b) => visibleFields.indexOf(a.id) - visibleFields.indexOf(b.id));
+  }
+
+  fields = fields.reduce((red, field) => {
+    const value = field.value instanceof Function ? field.value(data) : field.value;
+    if (value === undefined || value === null || value === "") {
+      return red;
+    }
+    red.push({
+      ...field,
+      value,
+    });
+    return red;
+  }, []);
+
+  const fieldsByGroup = fields.reduce((red, field) => {
+    const key = field.group ?? "ungrouped";
+    if (!red.has(key)) {
+      red.set(key, []);
+    }
+    red.get(key).push(field);
+    return red;
+  }, new Map());
+
+  return Array.from(fieldsByGroup.entries()).map(([group, fields]) => {
+    return (
+      <React.Fragment key={group}>
+        <section className="parameters">
+          {/* <legend>{groups.find((g) => g.id === group)?.label ?? group}</legend> */}
+          {fields.map((field) => {
+            const Tag = field.as ?? "dd";
+            return (
+              <dl key={field.id} style={{ flex: field.flex ?? 1 }}>
+                <dt>{field.label instanceof Function ? field.label(data) : field.label}</dt>
+                <Tag>{field.value}</Tag>
+              </dl>
+            );
+          })}
+        </section>
+      </React.Fragment>
+    );
+  });
+}
+
 export const TableContainer = ({ className, columns, visibleColumns, children }) => {
   const activeColumns = useMemo(
     () => getActiveColumns(columns, visibleColumns),

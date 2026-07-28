@@ -1,5 +1,5 @@
 import * as utils from "./utils.jsx";
-import { Badge, Table } from "./utils.jsx";
+import { Badge, Fields, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
@@ -9,7 +9,26 @@ export default function ({ data = [], meta = {}, t }) {
 
   const visibleFields = settings?.fields ?? [];
 
-  const fields = [];
+  const fields = [
+    {
+      id: "id",
+      group: "main",
+      label: utils.cellHeader(t("/@word/id")),
+      value: (row) => row.id,
+    },
+    {
+      id: "status",
+      group: "main",
+      label: utils.cellHeader(t("/@word/status")),
+      value: (row) => row.status,
+    },
+  ];
+
+  // return JSON.stringify(
+  //   fields.map((field) => field.id),
+  //   null,
+  //   2,
+  // );
 
   const fieldGroups = [];
 
@@ -101,6 +120,12 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
+  // return JSON.stringify(
+  //   columns.map((field) => field.id),
+  //   null,
+  //   2,
+  // );
+
   data = utils.sort(data, settings?.sort || []);
 
   return (
@@ -111,7 +136,25 @@ export default function ({ data = [], meta = {}, t }) {
         key={data.id}
       >
         <header>
-          <h1>{report.title}</h1>
+          <section className="title">
+            <dl style={{ flex: 0 }}>
+              <dd>
+                <img src={data.company?.image?.url} />
+              </dd>
+            </dl>
+            <dl style={{ flex: 1 }}>
+              <dd>
+                <h1>
+                  {t("/sale/sale")} {data.id}
+                </h1>
+              </dd>
+            </dl>
+            <dl style={{ flex: 0 }}>
+              <dd>
+                <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${data.id}`} />
+              </dd>
+            </dl>
+          </section>
           <section className="parameters">
             {report.parameters?.dateStart && (
               <dl>
@@ -126,6 +169,12 @@ export default function ({ data = [], meta = {}, t }) {
               </dl>
             )}
           </section>
+          <Fields
+            fields={fields}
+            visibleFields={visibleFields}
+            data={data[0]}
+            groups={fieldGroups}
+          />
         </header>
         <main>
           <div className="content">
