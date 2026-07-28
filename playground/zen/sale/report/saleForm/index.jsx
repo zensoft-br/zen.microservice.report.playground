@@ -1,23 +1,11 @@
-import React from "react";
 import * as utils from "./utils.jsx";
-import { Badge, Table } from "./utils.jsx";
+import { Badge, Fields, Table } from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
-
-  const visibleColumns = settings?.columns ?? [];
-
-  const groups = settings?.groups || [];
-
-  // When currency_code is visible, currency columns will be formatted as numbers (no currency symbol)
-  const formatCurrency = (value, options) => {
-    return visibleColumns.includes("currency_code")
-      ? utils.formatNumber(value, options)
-      : utils.formatCurrency(value, options);
-  };
 
   const visibleFields = settings?.fields ?? [];
 
@@ -154,50 +142,52 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "saleProfile_code",
       group: "sale",
-      label: t("/sale/saleProfile"),
+      label: utils.cellHeader(t("/sale/saleProfile")),
       value: (row) => row.saleProfile.code,
     },
     {
       id: "code",
       group: "sale",
-      label: t("/@word/code"),
+      label: utils.cellHeader(t("/@word/code")),
       value: (row) => row.code,
     },
     {
       id: "date",
       group: "sale",
-      label: t("/@word/date"),
+      label: utils.cellHeader(t("/@word/date")),
       value: (row) => utils.formatDate(row.date),
     },
     {
       id: "dateTime",
       group: "sale",
-      label: t("/@word/dateTime"),
+      label: utils.cellHeader(t("/@word/dateTime")),
       value: (row) => utils.formatDateTime(row.date),
     },
     {
       id: "time",
       group: "sale",
-      label: t("/@word/time"),
+      label: utils.cellHeader(t("/@word/time")),
       value: (row) => utils.formatTime(row.date),
     },
     {
       id: "availabilityDate",
       group: "sale",
-      label: t("/@word/availabilityDate"),
+      label: utils.cellHeader(t("/@word/availabilityDate")),
       value: (row) => utils.formatDate(row.availabilityDate),
     },
     {
       id: "status",
       group: "sale",
-      label: t("/@word/status"),
-      value: (row) => row.status,
+      label: utils.cellHeader(t("/@word/status")),
+      value: (row) => <Badge>{t("/sale/saleStatus/enum/" + row.status)}</Badge>,
     },
     {
       id: "tags",
       group: "sale",
-      label: t("/@word/tags"),
-      value: (row) => row.tags,
+      flex: 2,
+      label: utils.cellHeader(t("/@word/tags")),
+      value: (row) =>
+        row.tags ? row.tags.split(",").map((tag) => <Badge key={tag}>{tag}</Badge>) : null,
     },
     {
       id: "personShipping_name",
@@ -215,7 +205,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "freightType",
       group: "shipping",
-      label: t("/@word/freightType"),
+      label: utils.cellHeader(t("/@word/freightType")),
       value: (row) => t("/commercial/freightType/enum/" + row.freightType),
     },
     {
@@ -250,46 +240,41 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "salesChannel",
       group: "sale",
-      label: t("/@word/salesChannel"),
+      label: utils.cellHeader(t("/@word/salesChannel")),
       value: (row) => row.properties?.salesChannel,
     },
     {
       id: "salesCommission",
       group: "sale",
-      label: t("/@word/salesCommission"),
+      label: utils.cellHeader(t("/@word/salesCommission")),
       value: (row) => row.properties?.salesCommission,
     },
     {
       id: "salesHub",
       group: "sale",
-      label: t("/@word/salesHub"),
+      label: utils.cellHeader(t("/@word/salesHub")),
       value: (row) => row.properties?.salesHub,
     },
     {
       id: "paymentMethods",
       group: "sale",
-      label: t("/@word/paymentMethods"),
+      label: utils.cellHeader(t("/@word/paymentMethods")),
       value: (row) => row.properties?.paymentMethods,
     },
     {
       id: "comments",
       group: "comments",
-      label: t("/@word/comments"),
+      label: utils.cellHeader(t("/@word/comments")),
       value: (row) => row.properties?.comments,
       as: "pre",
     },
     {
       id: "report_printedAt",
       group: "sale",
-      label: t("/@word/report/printedAt"),
+      label: utils.cellHeader(t("/@word/report/printedAt")),
       value: () => utils.formatDateTime(new Date()),
     },
   ];
-  // return JSON.stringify(
-  //   fields.map((field) => field.id),
-  //   null,
-  //   2,
-  // );
 
   const fieldGroups = [
     {
@@ -314,13 +299,73 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
+  // When currency_code is visible, currency columns will be formatted as numbers (no currency symbol)
+  const formatCurrency = (value, options) => {
+    return visibleColumns.includes("currency_code")
+      ? utils.formatNumber(value, options)
+      : utils.formatCurrency(value, options);
+  };
+
   const columns = [
+    {
+      id: "product_id",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")),
+      width: "8ch",
+      cellValue: ({ row }) => utils.formatNumber(row.productPacking.product.id),
+    },
+    {
+      id: "product_code",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")),
+      width: "12ch",
+      cellValue: ({ row }) => row.productPacking.product.code,
+    },
+    {
+      id: "product_description",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
+      width: "30ch",
+      cellValue: ({ row }) => row.productPacking.product.description,
+    },
     {
       id: "product_image",
       header: utils.cellHeader(t("/catalog/product/product"), t("/system/image")),
       width: "7ch",
       cellValue: ({ row }) => row.productPacking.product.image?.url,
       cell: ({ value }) => (value ? <img src={value}></img> : null),
+    },
+    {
+      id: "productPacking_id",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")),
+      width: "8ch",
+      cellValue: ({ row }) => utils.formatNumber(row.productPacking.id),
+    },
+    {
+      id: "productPacking_code",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
+      width: "12ch",
+      cellValue: ({ row }) => row.productPacking.code,
+    },
+    {
+      id: "productPacking_complement",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
+      width: "15ch",
+      cellValue: ({ row }) => row.productPacking.complement,
+    },
+    {
+      id: "productPacking_descriptionCalc",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
+      width: "30ch",
+      cellValue: ({ row }) =>
+        [
+          row.productPacking.product.description,
+          row.productPacking.complement,
+          row.productPacking.variant?.description,
+        ]
+          .filter(Boolean)
+          .join(", "),
     },
     {
       id: "productPacking_image",
@@ -336,24 +381,6 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) =>
         row.productPacking.image?.url ?? row.productPacking.product.image?.url,
       cell: ({ value }) => (value ? <img src={value}></img> : null),
-    },
-    {
-      id: "productPacking_code",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
-      width: "12ch",
-      cellValue: ({ row }) => row.productPacking.code,
-    },
-    {
-      id: "product_description",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
-      width: "30ch",
-      cellValue: ({ row }) => row.productPacking.product.description,
-    },
-    {
-      id: "productPacking_complement",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
-      width: "15ch",
-      cellValue: ({ row }) => row.productPacking.complement,
     },
     {
       id: "productVariant_code",
@@ -552,12 +579,6 @@ export default function ({ data = [], meta = {}, t }) {
     ]),
   ];
 
-  // return JSON.stringify(
-  //   columns.map((field) => field.id),
-  //   null,
-  //   2,
-  // );
-
   data.forEach((row) => {
     row.items.forEach((item) => {
       item.netWeightKg = utils.round(
@@ -579,6 +600,15 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = utils.sort(data, settings?.sort || []);
 
+  // return JSON.stringify(
+  //   {
+  //     availableFields: fields.map((field) => field.id).sort(),
+  //     availableColumns: columns.map((field) => field.id).sort(),
+  //   },
+  //   null,
+  //   2,
+  // );
+
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
@@ -595,7 +625,7 @@ export default function ({ data = [], meta = {}, t }) {
             <section className="title">
               <dl style={{ flex: 0 }}>
                 <dd>
-                  <img src={data.company.image?.url} />
+                  <img src={data.company?.image?.url} />
                 </dd>
               </dl>
               <dl style={{ flex: 1 }}>
@@ -611,12 +641,12 @@ export default function ({ data = [], meta = {}, t }) {
                 </dd>
               </dl>
             </section>
-            {renderFields({
-              fields: fields,
-              visibleFields: visibleFields,
-              data: data,
-              groups: fieldGroups,
-            })}
+            <Fields
+              fields={fields}
+              visibleFields={visibleFields}
+              data={data}
+              groups={fieldGroups}
+            />
           </header>
           <main>
             <div className="content">
@@ -633,52 +663,4 @@ export default function ({ data = [], meta = {}, t }) {
       ))}
     </div>
   );
-}
-
-function renderFields({ fields, visibleFields, data, groups }) {
-  if (visibleFields.length > 0) {
-    fields = fields
-      .filter((field) => visibleFields.includes(field.id))
-      .sort((a, b) => visibleFields.indexOf(a.id) - visibleFields.indexOf(b.id));
-  }
-
-  fields = fields.reduce((red, field) => {
-    const value = field.value instanceof Function ? field.value(data) : field.value;
-    if (value === undefined || value === null || value === "") {
-      return red;
-    }
-    red.push({
-      ...field,
-      value,
-    });
-    return red;
-  }, []);
-
-  const fieldsByGroup = fields.reduce((red, field) => {
-    const key = field.group ?? "ungrouped";
-    if (!red.has(key)) {
-      red.set(key, []);
-    }
-    red.get(key).push(field);
-    return red;
-  }, new Map());
-
-  return Array.from(fieldsByGroup.entries()).map(([group, fields]) => {
-    return (
-      <React.Fragment key={group}>
-        {/* <legend>{groups.find((g) => g.id === group)?.label ?? group}</legend> */}
-        <section className="parameters">
-          {fields.map((field) => {
-            const Tag = field.as ?? "dd";
-            return (
-              <dl key={field.id} style={{ flex: field.flex ?? 1 }}>
-                <dt>{field.label instanceof Function ? field.label(data) : field.label}</dt>
-                <Tag>{field.value}</Tag>
-              </dl>
-            );
-          })}
-        </section>
-      </React.Fragment>
-    );
-  });
 }
