@@ -276,12 +276,6 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  // return JSON.stringify(
-  //   fields.map((field) => field.id),
-  //   null,
-  //   2,
-  // );
-
   const fieldGroups = [
     {
       id: "sale",
@@ -318,11 +312,60 @@ export default function ({ data = [], meta = {}, t }) {
 
   const columns = [
     {
+      id: "product_id",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")),
+      width: "8ch",
+      cellValue: ({ row }) => utils.formatNumber(row.productPacking.product.id),
+    },
+    {
+      id: "product_code",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")),
+      width: "12ch",
+      cellValue: ({ row }) => row.productPacking.product.code,
+    },
+    {
+      id: "product_description",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
+      width: "30ch",
+      cellValue: ({ row }) => row.productPacking.product.description,
+    },
+    {
       id: "product_image",
       header: utils.cellHeader(t("/catalog/product/product"), t("/system/image")),
       width: "7ch",
       cellValue: ({ row }) => row.productPacking.product.image?.url,
       cell: ({ value }) => (value ? <img src={value}></img> : null),
+    },
+    {
+      id: "productPacking_id",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")),
+      width: "8ch",
+      cellValue: ({ row }) => utils.formatNumber(row.productPacking.id),
+    },
+    {
+      id: "productPacking_code",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
+      width: "12ch",
+      cellValue: ({ row }) => row.productPacking.code,
+    },
+    {
+      id: "productPacking_complement",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
+      width: "15ch",
+      cellValue: ({ row }) => row.productPacking.complement,
+    },
+    {
+      id: "productPacking_descriptionCalc",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
+      width: "30ch",
+      cellValue: ({ row }) =>
+        [
+          row.productPacking.product.description,
+          row.productPacking.complement,
+          row.productPacking.variant?.description,
+        ]
+          .filter(Boolean)
+          .join(", "),
     },
     {
       id: "productPacking_image",
@@ -338,24 +381,6 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) =>
         row.productPacking.image?.url ?? row.productPacking.product.image?.url,
       cell: ({ value }) => (value ? <img src={value}></img> : null),
-    },
-    {
-      id: "productPacking_code",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
-      width: "12ch",
-      cellValue: ({ row }) => row.productPacking.code,
-    },
-    {
-      id: "product_description",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
-      width: "30ch",
-      cellValue: ({ row }) => row.productPacking.product.description,
-    },
-    {
-      id: "productPacking_complement",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
-      width: "15ch",
-      cellValue: ({ row }) => row.productPacking.complement,
     },
     {
       id: "productVariant_code",
@@ -554,12 +579,6 @@ export default function ({ data = [], meta = {}, t }) {
     ]),
   ];
 
-  // return JSON.stringify(
-  //   columns.map((field) => field.id),
-  //   null,
-  //   2,
-  // );
-
   data.forEach((row) => {
     row.items.forEach((item) => {
       item.netWeightKg = utils.round(
@@ -580,6 +599,15 @@ export default function ({ data = [], meta = {}, t }) {
   });
 
   data = utils.sort(data, settings?.sort || []);
+
+  // return JSON.stringify(
+  //   {
+  //     availableFields: fields.map((field) => field.id).sort(),
+  //     availableColumns: columns.map((field) => field.id).sort(),
+  //   },
+  //   null,
+  //   2,
+  // );
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>

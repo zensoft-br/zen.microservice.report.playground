@@ -24,12 +24,6 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  // return JSON.stringify(
-  //   fields.map((field) => field.id),
-  //   null,
-  //   2,
-  // );
-
   const fieldGroups = [];
 
   const visibleColumns = settings?.columns ?? [];
@@ -120,19 +114,26 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
+  data = utils.sort(data, settings?.sort || []);
+
   // return JSON.stringify(
-  //   columns.map((field) => field.id),
+  //   {
+  //     availableFields: fields.map((field) => field.id).sort(),
+  //     availableColumns: columns.map((field) => field.id).sort(),
+  //   },
   //   null,
   //   2,
   // );
-
-  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div
         className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
-        style={{ "--margin": settings?.margin }}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
         key={data.id}
       >
         <header>
