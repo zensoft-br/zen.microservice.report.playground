@@ -1,0 +1,10 @@
+{
+  "explain": false,
+  "report": {
+    "title": "My report",
+    "parameters": {},
+    "properties": {
+      "userSettings": {}
+    }
+  }
+}
