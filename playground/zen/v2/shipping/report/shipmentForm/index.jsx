@@ -573,12 +573,8 @@ export default function ({ data = [], meta = {}, t }) {
           currency: row?.currency?.code ?? row?.sale?.currency.code,
           digits: 2,
         }),
-      footerValue: ({ data }) =>
-        utils.sumBy(data,
-          (row) => row?.currency?.code ?? row?.sale?.currency.code,
-          (row) => row.totalValue,
-        ),
-      footer: ({ value }) => utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
+      footerValue: ({ data }) => utils.sum(data, (item) => item.totalValue),
+      footer: ({ value }) => formatCurrency(value, { digits: 2, }),
     },
   ];
 
