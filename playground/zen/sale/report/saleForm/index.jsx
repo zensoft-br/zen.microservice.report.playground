@@ -89,6 +89,13 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.person.name,
     },
     {
+      id: "person_fantasyName",
+      group: "person",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/customer"), t("/@word/fantasyName")),
+      value: (row) => row.person.fantasyName,
+    },
+    {
       id: "person_documentNumber",
       group: "person",
       label: (row) =>
@@ -203,10 +210,18 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.personShipping?.documentNumber,
     },
     {
+      id: "personShipping_phone",
+      group: "shipping",
+      label: utils.cellHeader(t("/@word/personShipping"), t("/@word/phone")),
+      value: (row) => row.personShipping?.phone,
+    },
+    {
       id: "freightType",
       group: "shipping",
       label: utils.cellHeader(t("/@word/freightType")),
-      value: (row) => t("/commercial/freightType/enum/" + row.freightType),
+      value: (row) => row.freightType 
+        ? t("/commercial/freightType/enum/" + row.freightType)
+        : undefined
     },
     {
       id: "personShippingTransshipment_name",
@@ -220,6 +235,12 @@ export default function ({ data = [], meta = {}, t }) {
       group: "shipping",
       label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/documentNumber")),
       value: (row) => row.personShippingTransshipment?.documentNumber,
+    },
+    {
+      id: "personShippingTransshipment_phone",
+      group: "shipping",
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/phone")),
+      value: (row) => row.personShippingTransshipment?.phone,
     },
     {
       id: "freightTypeTransshipment",

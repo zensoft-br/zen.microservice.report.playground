@@ -1,0 +1,118 @@
+{
+  "engine": "react",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": ["@file:/styles.css"]
+  },
+  "meta": {
+    "dataSource": "/shipping/data/shipmentForm",
+    "report": {
+      "properties": {
+        "info": {
+          "availableFields": [
+          "company_name",
+          "company_fantasyName",
+          "company_nameCalc",
+          "company_documentNumber",
+          "company_document2Number",
+          "company_address_zipcode",
+          "company_address_street",
+          "company_address_number",
+          "company_address_district",
+          "company_address_calc",
+          "company_phone",
+          "company_email",
+          "person_name",
+          "person_fantasyName",
+          "person_nameCalc",
+          "person_documentNumber",
+          "person_document2Number",
+          "person_address_zipcode",
+          "person_address_street",
+          "person_address_number",
+          "person_address_complement",
+          "person_address_district",
+          "person_address_calc",
+          "person_phone",
+          "person_city_name",
+          "person_state_code",
+          "person_state_name",
+          "person_country_codeA2",
+          "person_country_name",
+          "date",
+          "status",
+          "driver",
+          "licensePlate",
+          "collect",
+          "exitDate"
+          ],
+          "availableColumns": [
+            "id",
+            "number",
+            "volume",
+            "person_name",
+            "person_fantasyName",
+            "person_nameCalc",
+            "person_documentNumber",
+            "person_document2Number",
+            "person_address_zipcode",
+            "person_address_street",
+            "person_address_number",
+            "person_address_district",
+            "person_address_calc",
+            "person_city_name",
+            "person_state_code",
+            "personTransshipment_name",
+            "personTransshipment_fantasyName",
+            "personTransshipment_nameCalc",
+            "personTransshipment_phone",
+            "netWeightKg",
+            "grossWeightKg",
+            "volumeM3",
+            "totalValue"
+          ]
+        },
+        "#settings": {
+          "orientation": "landscape",
+          "fields": [
+            "company_name",
+            "company_documentNumber",
+            "company_document2Number",
+            "company_address_calc",
+            "company_email",
+            "company_phone",
+            "person_name",
+            "person_fantasyName",
+            "person_documentNumber",
+            "person_address_calc",
+            "person_phone",
+            "date",
+            "status",
+            "driver",
+            "licensePlate",
+            "collect",
+            "exitDate"
+          ],
+          "columns": [
+            "number",
+            "person_name",
+            "person_city_name",
+            "person_state_code",
+            "volume",
+            "netWeightKg",
+            "grossWeightKg",
+            "totalValue",
+            "personTransshipment_name"
+          ],
+          "sort": [
+            {
+              "columnId": "number"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
