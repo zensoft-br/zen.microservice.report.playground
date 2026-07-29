@@ -62,12 +62,12 @@ export default function ({ data = [], meta = {}, t }) {
       group:"shipment",
       label: utils.cellHeader(t("/@word/status")),
       width: "10ch",
-      value: ( row ) => (t("/shipping/shipmentStatus/enum/"), row?.status),
+      value: (row) => <Badge>{t("/shipping/shipmentStatus/enum/" + row.status)}</Badge>,
     },
     {
       id: "company_name",
       group:"company",
-      flex: 2,
+      flex: 3,
       label: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
       width: "30ch",
       value: ( row ) => row.company_name,
@@ -75,7 +75,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "company_fantasyName",
       group:"company",
-      flex: 2,
+      flex: 3,
       label: utils.cellHeader(
         t("/catalog/company/company"),
         t("/@word/fantasyName"),
@@ -86,7 +86,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "company_nameCalc",
       group:"company",
-      flex: 2,
+      flex: 4,
       label: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
       width: "30ch",
       value: ( row ) => row.company_nameCalc,
@@ -157,10 +157,9 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "company_address_calc",
       group:"company",
-      flex: 2,
+      flex: 4,
       label: utils.cellHeader(
-        t("/catalog/company/company"), t("/@word/address"),
-        t("/@word/address"),
+        t("/catalog/company/company"), t("/@word/address")
       ),
       width: "40ch",
       value: ( row ) => row.company_address_calc,
@@ -190,7 +189,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "person_name",
       group:"personShipping",
-      flex: 2,
+      flex: 3,
       label: utils.cellHeader(t("/@word/personShipping"), t("/catalog/person/person.name")),
       width: "30ch",
       value: ( row ) => row.person_name,
@@ -198,7 +197,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "person_fantasyName",
       group:"personShipping",
-      flex: 2,
+      flex: 3,
       label: utils.cellHeader(
         t("/@word/personShipping"),
         t("/catalog/person/person.fantasyName"),
@@ -209,7 +208,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "person_nameCalc",
       group:"personShipping",
-      flex: 2,
+      flex: 4,
       label: utils.cellHeader(t("/@word/personShipping"), t("/catalog/person/person.name")),
       width: "30ch",
       value: ( row ) => row.person_nameCalc,
@@ -282,6 +281,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "person_address_district",
       group:"personShipping",
+      flex: 2,
       label: utils.cellHeader(
         t("/@word/personShipping"),
         t("/catalog/person/personAddress"),
@@ -296,8 +296,7 @@ export default function ({ data = [], meta = {}, t }) {
       flex: 2,
       label: utils.cellHeader(
         t("/@word/personShipping"),
-        t("/catalog/person/personAddress"),
-        t("/@word/address"),
+        t("/catalog/person/personAddress")
       ),
       width: "40ch",
       value: ( row ) => row.person_address_calc,
@@ -350,7 +349,6 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "person_country_name",
       group:"personShipping",
-      flex: 2,
       label: utils.cellHeader(
         t("/@word/personShipping"),
         t("/catalog/location/country"),
@@ -385,12 +383,14 @@ export default function ({ data = [], meta = {}, t }) {
       id: "id",
       header: utils.cellHeader(t("/@word/id")),
       width: "10ch",
+      className: "number",
       cellValue: ({ row }) => row.id,
     },
     {
       id: "number",
       header: utils.cellHeader(t("/@word/number")),
       width: "10ch",
+      className: "number",
       cellValue: ({ row }) => row.number,
       footerValue: ({ data }) => data.reduce((red, e) => red.add(e.number), new Set()).size,
       footer: ({ value }) => value,
@@ -399,6 +399,7 @@ export default function ({ data = [], meta = {}, t }) {
       id: "volume",
       header: utils.cellHeader(t("/@word/volume/plural")),
       width: "10ch",
+      className: "number",
       cellValue: ({ row }) => row.volume,
       footerValue: ({ data }) => utils.sum(data, (item) => item.volume),
       footer: ({ value }) => utils.formatNumber(value),
