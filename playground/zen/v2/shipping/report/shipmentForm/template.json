@@ -77,14 +77,11 @@
         "#settings": {
           "orientation": "landscape",
           "fields": [
-            "company_name",
             "company_documentNumber",
-            "company_document2Number",
             "company_address_calc",
             "company_email",
             "company_phone",
             "person_name",
-            "person_fantasyName",
             "person_documentNumber",
             "person_address_calc",
             "person_phone",
