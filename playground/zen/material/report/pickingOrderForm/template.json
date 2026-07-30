@@ -4,16 +4,106 @@
     "scripts": {
       "utils.jsx": "@file:/utils.jsx"
     },
-    "styles": [
-      "@file:/styles.css",
-      "@file:styles.css"
-    ]
+    "styles": ["@file:/styles.css"]
   },
   "meta": {
     "dataSource": "/material/data/pickingOrderForm",
     "report": {
       "properties": {
+        "info": {
+          "availableFields": [
+            "date",
+            "status",
+            "tags",
+            "reservation_id",
+            "company_code",
+            "company_name",
+            "company_fantasyName",
+            "company_nameCalc",
+            "company_documentNumber",
+            "company_document2Number",
+            "company_address",
+            "company_email",
+            "company_phone",
+            "sale_code",
+            "sale_code_calc",
+            "sale_date",
+            "sale_dateTime",
+            "sale_time",
+            "sale_availabilityDate",
+            "sale_status",
+            "sale_tags",
+            "sale_saleProfile_code",
+            "sale_personSalesperson_name",
+            "sale_personSalesperson_fantasyName",
+            "sale_personSalesperson_nameCalc",
+            "paymentMethods",
+            "person_name",
+            "person_nameCalc",
+            "person_fantasyName",
+            "person_documentNumber",
+            "person_document2Number",
+            "person_address_calc",
+            "person_email",
+            "person_phone",
+            "person_street",
+            "person_number",
+            "person_complement",
+            "person_district",
+            "person_city_name",
+            "person_state_code",
+            "person_zipcode",
+            "sale_addressShippingCalc",
+            "sale_personShipping_name",
+            "sale_personShipping_fantasyName",
+            "sale_personShipping_nameCalc",
+            "sale_personShipping_documentNumber",
+            "sale_personShipping_phone",
+            "sale_freightType",
+            "comments",
+            "signature_volume",
+            "signature_serial",
+            "signature_stockPicker",
+            "signature_stockChecker"
+          ],
+          "availableColumns": [
+            "check",
+            "id",
+            "productPacking_image",
+            "productPacking_code",
+            "product_description",
+            "productPacking_complement",
+            "productVariant_description",
+            "address_code",
+            "quantity",
+            "unit_code",
+            "productPacking_units",
+            "quantityUnits",
+            "netWeightKg",
+            "grossWeightKg",
+            "volumeM3"
+          ]
+        },
         "#settings": {
+          "fields": [
+            "company_nameCalc",
+            "date",
+            "reservation_id",
+            "sale_code_calc",
+            "sale_availabilityDate",
+            "sale_saleProfile_code",
+            "sale_personSalesperson_nameCalc",
+            "sale_tags",
+            "person_nameCalc",
+            "person_address_calc",
+            "sale_personShipping_nameCalc",
+            "sale_addressShippingCalc",
+            "comments",
+            "signature_volume",
+            "signature_serial",
+            "signature_stockPicker",
+            "signature_stockChecker"
+          ],
           "columns": [
             "productPacking_code",
             "product_description",
@@ -23,6 +113,11 @@
             "quantity",
             "unit_code",
             "grossWeightKg"
+          ],
+          "sort": [
+            {
+              "columnId": "productPacking.code"
+            }
           ]
         }
       }
