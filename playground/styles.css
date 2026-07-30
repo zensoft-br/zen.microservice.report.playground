@@ -144,7 +144,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-  margin-bottom: var(--gap);
 }
 .report-wrapper .report-container > header .brand {
   display: flex;
@@ -372,11 +371,6 @@ body {
 }
 .report-wrapper .report-container > main .content .table-container table.grid {
   display: contents;
-}
-.report-wrapper .report-container > footer {
-  margin-top: 4em;
-  border-top: 2px solid #000;
-  padding-top: 1em;
 }
 .report-wrapper .report-container > footer .signature-block {
   display: flex;

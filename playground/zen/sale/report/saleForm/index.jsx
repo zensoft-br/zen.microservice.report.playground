@@ -219,9 +219,8 @@ export default function ({ data = [], meta = {}, t }) {
       id: "freightType",
       group: "shipping",
       label: utils.cellHeader(t("/@word/freightType")),
-      value: (row) => row.freightType 
-        ? t("/commercial/freightType/enum/" + row.freightType)
-        : undefined
+      value: (row) =>
+        row.freightType ? t("/commercial/freightType/enum/" + row.freightType) : undefined,
     },
     {
       id: "personShippingTransshipment_name",
@@ -442,9 +441,8 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "unit_code",
       width: "5ch",
-      cellValue: ({ row }) => (
-        <Badge>{row.productPacking.unit?.code ?? row.productPacking.product.unit.code}</Badge>
-      ),
+      cellValue: ({ row }) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+      cell: ({ value }) => <Badge>{value}</Badge>,
     },
     {
       id: "unitValue",
@@ -526,6 +524,12 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) => row.properties?.salesCommission,
       cell: ({ value }) => utils.formatNumber(value),
     },
+    {
+      id: "currency_code",
+      header: utils.cellHeader(t("/financial/currency")),
+      width: "7ch",
+      cellValue: ({ row }) => <Badge>{row.currency?.code ?? row.sale.currency.code}</Badge>,
+    },
     ...[
       "CBS",
       "COFINS",
@@ -591,12 +595,6 @@ export default function ({ data = [], meta = {}, t }) {
         footer: ({ value }) =>
           utils.renderAggr(value, (val, key) => utils.formatCurrency(val, { currency: key })),
       },
-      {
-        id: "currency_code",
-        header: utils.cellHeader(t("/financial/currency")),
-        width: "7ch",
-        cellValue: ({ row }) => <Badge>{row.currency?.code ?? row.sale.currency.code}</Badge>,
-      },
     ]),
   ];
 
@@ -624,7 +622,7 @@ export default function ({ data = [], meta = {}, t }) {
   // return JSON.stringify(
   //   {
   //     availableFields: fields.map((field) => field.id).sort(),
-  //     availableColumns: columns.map((field) => field.id).sort(),
+  //     availableColumns: columns.map((column) => column.id).sort(),
   //   },
   //   null,
   //   2,
@@ -634,7 +632,7 @@ export default function ({ data = [], meta = {}, t }) {
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
         <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
           style={{
             "--width": settings?.width,
             "--height": settings?.height,
@@ -662,12 +660,14 @@ export default function ({ data = [], meta = {}, t }) {
                 </dd>
               </dl>
             </section>
-            <Fields
-              fields={fields}
-              visibleFields={visibleFields}
-              data={data}
-              groups={fieldGroups}
-            />
+            <div className="flex v gap">
+              <Fields
+                fields={fields}
+                visibleFields={visibleFields}
+                data={data}
+                groups={fieldGroups}
+              />
+            </div>
           </header>
           <main>
             <div className="content">

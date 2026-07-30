@@ -1,1 +1,29 @@
-"John"
+[
+  {
+    "method": "GET",
+    "url": "/ext/echo",
+    "headers": {
+      "authorization": "[REMOVED]",
+      "content-length": "0",
+      "host": "zenerp.custom.zenerp.app.br",
+      "tenant": "boxer",
+      "token": "[REMOVED]",
+      "user-agent": "Java-http-client/25.0.1",
+      "x-amzn-trace-id": "Root=1-6a6a50e3-4e20060817792afc75bdecc4",
+      "x-forwarded-for": "56.124.91.201",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https",
+      "x-request-id": "BSGTlgmRGjQEJEw="
+    },
+    "params": {},
+    "query": {
+      "p1": "v1"
+    },
+    "body": "",
+    "meta": {
+      "timestamp": "2026-07-29T19:13:39.306Z",
+      "ip": "56.124.91.201",
+      "protocol": "https"
+    }
+  }
+]

@@ -105,13 +105,11 @@
             "signature_stockChecker"
           ],
           "columns": [
+            "check",
             "productPacking_code",
-            "product_description",
-            "productPacking_complement",
-            "productVariant_description",
+            "productPacking_descriptionCalc",
             "address_code",
-            "quantity",
-            "unit_code",
+            "quantity_unit",
             "grossWeightKg"
           ],
           "sort": [

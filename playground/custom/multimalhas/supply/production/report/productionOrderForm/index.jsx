@@ -56,7 +56,7 @@ export default function ({ data = [] }) {
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {/* Impresso 1, Ordens de produção */}
       <div
-        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
           "--width": settings?.width,
           "--height": settings?.height,
@@ -152,7 +152,7 @@ export default function ({ data = [] }) {
 
       {/* Impresso 2,  */}
       <div
-        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
           "--width": settings?.width,
           "--height": settings?.height,
@@ -209,7 +209,7 @@ export default function ({ data = [] }) {
 
       {/* Impresso 3, Itens a produzir */}
       <div
-        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
           "--width": settings?.width,
           "--height": settings?.height,

@@ -4,20 +4,14 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
-    { id: "group",
-      header: null,
-      width: "15ch",
-      cell: ({ value }) => <Badge>{value}</Badge>,
-    },
-    { id: "topic",
-      header: "Origem",
-      width: "15ch",
-      cell: ({ value }) => <Badge>{value}</Badge>,
-    },
-    { id: "quantity_today",
+    { id: "group", header: null, width: "15ch", cell: ({ value }) => <Badge>{value}</Badge> },
+    { id: "topic", header: "Origem", width: "15ch", cell: ({ value }) => <Badge>{value}</Badge> },
+    {
+      id: "quantity_today",
       header: "m",
       className: "number",
       width: "15ch",
@@ -26,14 +20,15 @@ export default function ({ data = [], meta = {}, t }) {
       footer: ({ value }) => utils.formatNumber(value, { digits: 2 }),
     },
     {
-      "id": "unitValue",
-      "header": "R$/m",
-      "className": "number",
-      "width": "15ch",
-      "cellValue": ({ row }) => row.totalValue_today / row.quantity_today,
-      "cell": ({ value }) => utils.formatCurrency(value, { digits: 2 }),
+      id: "unitValue",
+      header: "R$/m",
+      className: "number",
+      width: "15ch",
+      cellValue: ({ row }) => row.totalValue_today / row.quantity_today,
+      cell: ({ value }) => utils.formatCurrency(value, { digits: 2 }),
     },
-    { id: "totalValue_today",
+    {
+      id: "totalValue_today",
       header: "R$",
       className: "number",
       width: "15ch",
@@ -41,47 +36,28 @@ export default function ({ data = [], meta = {}, t }) {
       footerValue: ({ data }) => data.reduce((acc, row) => acc + row.totalValue_today, 0),
       footer: ({ value }) => utils.formatCurrency(value, { digits: 2 }),
     },
-    { id: "person_id",
-      header: "Cliente, Id",
-      width: "10ch",
-    },
-    { id: "person_name",
-      header: "Cliente",
-      width: "20ch",
-    },
-    { id: "manager_id",
-      header: "Supervisor, Id",
-      width: "10ch",
-    },
-    { id: "manager_code",
+    { id: "person_id", header: "Cliente, Id", width: "10ch" },
+    { id: "person_name", header: "Cliente", width: "20ch" },
+    { id: "manager_id", header: "Supervisor, Id", width: "10ch" },
+    {
+      id: "manager_code",
       header: "Supervisor",
       width: "20ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { id: "personSalesperson_id",
-      header: "Vendedor, Id",
-      width: "10ch",
-    },
-    { id: "personSalesperson_name",
+    { id: "personSalesperson_id", header: "Vendedor, Id", width: "10ch" },
+    {
+      id: "personSalesperson_name",
       header: "Vendedor",
       width: "20ch",
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
-    { id: "product_id",
-      header: "Produto, Id",
-      width: "10ch",
-    },
-    { id: "product_code",
-      header: "Produto, Código",
-      width: "10ch",
-    },
-    { id: "product_description",
-      header: "Produto, Nome",
-      width: "25ch",
-    },
+    { id: "product_id", header: "Produto, Id", width: "10ch" },
+    { id: "product_code", header: "Produto, Código", width: "10ch" },
+    { id: "product_description", header: "Produto, Nome", width: "25ch" },
   ];
 
-  data = data.filter(row => row.quantity_today !== 0);
+  data = data.filter((row) => row.quantity_today !== 0);
 
   const visibleColumns = settings?.columns ?? [];
 
@@ -91,7 +67,15 @@ export default function ({ data = [], meta = {}, t }) {
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
-      <div className="report-container a4 landscape">
+      <div
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        style={{
+          "--width": settings?.width,
+          "--height": settings?.height,
+          "--margin": settings?.margin,
+        }}
+        key={data.id}
+      >
         <header>
           <h1>Fechamento diário analítico</h1>
           <section className="parameters">
@@ -103,11 +87,7 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table
-              columns={columns}
-              visibleColumns={visibleColumns}
-              data={data}
-              groups={groups} />
+            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
           </div>
         </main>
       </div>

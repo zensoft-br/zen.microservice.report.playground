@@ -4,7 +4,8 @@ import { Badge, Table } from "./utils.jsx";
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
 
-  const settings = utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const columns = [
     {
@@ -33,7 +34,11 @@ export default function ({ data = [], meta = {}, t }) {
       width: "24ch",
       header: utils.cellHeader(t("/catalog/product/product")),
       cellValue: ({ row }) => row.product_code,
-      cell: ({ row, value }) => <><Badge>{value}</Badge> {row.product_description}</>,
+      cell: ({ row, value }) => (
+        <>
+          <Badge>{value}</Badge> {row.product_description}
+        </>
+      ),
     },
     {
       id: "unit_id",
@@ -73,7 +78,14 @@ export default function ({ data = [], meta = {}, t }) {
       width: "24ch",
       header: utils.cellHeader(t("/catalog/product/productPacking")),
       cellValue: ({ row }) => row.productPacking_code,
-      cell: ({ row, value }) => <><Badge>{value}</Badge> {[row.productPacking_complement, row.productVariant_code, row.productVariant_description].filter(Boolean).join(", ")}</>,
+      cell: ({ row, value }) => (
+        <>
+          <Badge>{value}</Badge>{" "}
+          {[row.productPacking_complement, row.productVariant_code, row.productVariant_description]
+            .filter(Boolean)
+            .join(", ")}
+        </>
+      ),
     },
     {
       id: "productVariant_id",
@@ -99,7 +111,8 @@ export default function ({ data = [], meta = {}, t }) {
       id: "stockCluster_code",
       width: "8ch",
       header: utils.cellHeader(t("/material/stockCluster"), t("/@word/code")),
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.stockCluster_id), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.stockCluster_id), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -148,7 +161,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/lot"), t("/material/lot.properties.extra1")),
       cellValue: ({ row }) => row.lot_properties?.extra1,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.lot_properties?.extra1), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.lot_properties?.extra1), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -156,7 +170,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/lot"), t("/material/lot.properties.extra2")),
       cellValue: ({ row }) => row.lot_properties?.extra2,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.lot_properties?.extra2), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.lot_properties?.extra2), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -164,7 +179,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/lot"), t("/material/lot.properties.extra3")),
       cellValue: ({ row }) => row.lot_properties?.extra3,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.lot_properties?.extra3), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.lot_properties?.extra3), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -184,7 +200,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/serial"), t("/material/serial.properties.extra1")),
       cellValue: ({ row }) => row.serial_properties?.extra1,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.serial_properties?.extra1), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.serial_properties?.extra1), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -192,7 +209,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/serial"), t("/material/serial.properties.extra2")),
       cellValue: ({ row }) => row.serial_properties?.extra2,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.serial_properties?.extra2), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.serial_properties?.extra2), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -200,7 +218,8 @@ export default function ({ data = [], meta = {}, t }) {
       width: "12ch",
       header: utils.cellHeader(t("/material/serial"), t("/material/serial.properties.extra3")),
       cellValue: ({ row }) => row.serial_properties?.extra3,
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.serial_properties?.extra3), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.serial_properties?.extra3), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -220,7 +239,8 @@ export default function ({ data = [], meta = {}, t }) {
       id: "handlingUnit_code",
       width: "8ch",
       header: utils.cellHeader(t("/material/handlingUnit"), t("/@word/code")),
-      footerValue: ({ data }) => data.reduce((red, e) => red.add(e.handlingUnit_id), new Set()).size,
+      footerValue: ({ data }) =>
+        data.reduce((red, e) => red.add(e.handlingUnit_id), new Set()).size,
       footer: ({ value }) => value,
     },
     {
@@ -229,8 +249,16 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/quantity")),
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_quantity),
-      footer: ({ value }) => utils.renderAggr(value, (quantity, unit_code) => utils.formatQuantity(quantity, { unit_code })),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.unit_code,
+          (item) => item.sum_quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (quantity, unit_code) =>
+          utils.formatQuantity(quantity, { unit_code }),
+        ),
     },
     {
       id: "sum_quantity_units",
@@ -238,8 +266,16 @@ export default function ({ data = [], meta = {}, t }) {
       width: "10ch",
       header: utils.cellHeader(t("/@word/quantityUnits")),
       cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
-      footerValue: ({ data }) => utils.sumBy(data, (item) => item.unit_code, (item) => item.sum_quantity_units),
-      footer: ({ value }) => utils.renderAggr(value, (quantity, unit_code) => utils.formatQuantity(quantity, { unit_code })),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.unit_code,
+          (item) => item.sum_quantity_units,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (quantity, unit_code) =>
+          utils.formatQuantity(quantity, { unit_code }),
+        ),
     },
     {
       id: "sum_netWeightKg",
@@ -293,7 +329,7 @@ export default function ({ data = [], meta = {}, t }) {
     //       row.product_properties?.textileCare03,
     //       row.product_properties?.textileCare04,
     //       row.product_properties?.textileCare05,
-    //     ].filter(Boolean).map((care, index) => <img key={index} src={`https://zenerp.s3.amazonaws.com/public/material/images/${care}`} alt={`textile care ${index + 1}`} 
+    //     ].filter(Boolean).map((care, index) => <img key={index} src={`https://zenerp.s3.amazonaws.com/public/material/images/${care}`} alt={`textile care ${index + 1}`}
     //       style={{ height: "2rem", objectFit: "contain", border: "0" }} />)}</div>
     //   </div>,
     // },
@@ -319,12 +355,25 @@ export default function ({ data = [], meta = {}, t }) {
       {map.values().map((data) => {
         const first = data[0];
         return (
-          <div className={`report-container ${report?.properties?.pageSize ?? "a4"} ${report?.properties?.orientation}`}>
+          <div
+            className={`report-container flex v gap ${report?.properties?.pageSize ?? "a4"} ${report?.properties?.orientation}`}
+          >
             <header>
-              <h1 className="grid" style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
-                <img src={first.company_image_url} style={{ height: "1.5cm", width: "3cm", objectFit: "contain" }} />
-                <span>{t("/material/outgoingList")} {first.id}</span>
-                <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${first.id}`} style={{ height: "1.5cm", justifySelf: "end" }} />
+              <h1
+                className="grid"
+                style={{ gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}
+              >
+                <img
+                  src={first.company_image_url}
+                  style={{ height: "1.5cm", width: "3cm", objectFit: "contain" }}
+                />
+                <span>
+                  {t("/material/outgoingList")} {first.id}
+                </span>
+                <img
+                  src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${first.id}`}
+                  style={{ height: "1.5cm", justifySelf: "end" }}
+                />
               </h1>
               <section className="parameters">
                 <dl>
@@ -362,7 +411,8 @@ export default function ({ data = [], meta = {}, t }) {
                   visibleColumns={visibleColumns}
                   data={data}
                   groups={groups}
-                  footerTitle={t("/@word/summary")} />
+                  footerTitle={t("/@word/summary")}
+                />
               </div>
             </main>
           </div>

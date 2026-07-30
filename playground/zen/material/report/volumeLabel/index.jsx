@@ -9,7 +9,7 @@ export default function ({ data = [], meta = {}, t }) {
     <div className="report-wrapper" style={{ fontSize: report?.properties?.fontSize || "9pt" }}>
       {data.map((obj) => (
         <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
           style={{
             "--width": settings?.width,
             "--height": settings?.height,

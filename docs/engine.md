@@ -101,7 +101,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper">
       <div
-        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
       ></div>
     </div>
   );
@@ -270,7 +270,7 @@ export default function ({ data = [], meta = {}, t }) {
   return (
     <div className="report-wrapper">
       <div
-        className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
           "--width": settings?.width,
           "--height": settings?.height,

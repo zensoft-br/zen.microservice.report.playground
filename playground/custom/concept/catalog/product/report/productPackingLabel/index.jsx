@@ -16,7 +16,7 @@ export default function ({ data = [], t }) {
         const product = arr[0].product;
         return (
           <div
-            className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+            className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
           >
             <main className="flex v gap">
               <div className="flex v">

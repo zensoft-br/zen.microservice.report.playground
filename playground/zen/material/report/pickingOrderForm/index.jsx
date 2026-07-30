@@ -8,7 +8,7 @@ export default function ({ data = [], meta = {}, t }) {
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
   const visibleFields = settings?.fields ?? [];
-  
+
   const fields = [
     {
       id: "date",
@@ -162,7 +162,9 @@ export default function ({ data = [], meta = {}, t }) {
       flex: 2,
       label: utils.cellHeader(t("/sale/sale"), t("/@word/tags")),
       value: (row) =>
-        row.sale.tags ? row.sale.tags.split(",").map((tag) => <Badge key={tag}>{tag}</Badge>) : null,
+        row.sale.tags
+          ? row.sale.tags.split(",").map((tag) => <Badge key={tag}>{tag}</Badge>)
+          : null,
     },
     {
       id: "sale_saleProfile_code",
@@ -181,7 +183,11 @@ export default function ({ data = [], meta = {}, t }) {
       id: "sale_personSalesperson_fantasyName",
       group: "sale",
       flex: 2,
-      label: utils.cellHeader(t("/sale/sale"), t("/@word/personSalesperson"), t("/@word/fantasyName")),
+      label: utils.cellHeader(
+        t("/sale/sale"),
+        t("/@word/personSalesperson"),
+        t("/@word/fantasyName"),
+      ),
       value: (row) => row.sale?.personSalesperson?.fantasyName,
     },
     {
@@ -197,7 +203,7 @@ export default function ({ data = [], meta = {}, t }) {
       label: utils.cellHeader(t("/@word/paymentMethods")),
       value: (row) => row.properties?.paymentMethods,
     },
-   {
+    {
       id: "person_name",
       group: "person",
       flex: 2,
@@ -316,15 +322,18 @@ export default function ({ data = [], meta = {}, t }) {
       group: "shipping",
       flex: 4,
       label: utils.cellHeader(t("/@word/addressShipping")),
-      value: (row) => [
-                    row.sale?.personAddressShipping?.street,
-                    row.sale?.personAddressShipping?.number,
-                    row.sale?.personAddressShipping?.complement,
-                    row.sale?.personAddressShipping?.city?.name,
-                    row.sale?.personAddressShipping?.city?.state?.code,
-                    row.sale?.personAddressShipping?.city?.state?.country?.codeA2,
-                    row.sale?.personAddressShipping?.zipcode,
-                  ].filter(Boolean).join(", "),
+      value: (row) =>
+        [
+          row.sale?.personAddressShipping?.street,
+          row.sale?.personAddressShipping?.number,
+          row.sale?.personAddressShipping?.complement,
+          row.sale?.personAddressShipping?.city?.name,
+          row.sale?.personAddressShipping?.city?.state?.code,
+          row.sale?.personAddressShipping?.city?.state?.country?.codeA2,
+          row.sale?.personAddressShipping?.zipcode,
+        ]
+          .filter(Boolean)
+          .join(", "),
     },
     {
       id: "sale_personShipping_name",
@@ -345,14 +354,13 @@ export default function ({ data = [], meta = {}, t }) {
       group: "shipping",
       flex: 3,
       label: utils.cellHeader(t("/@word/personShipping"), t("/@word/name")),
-      value: (row) => [
-                    row.sale?.personShipping?.fantasyName,
-                    row.sale?.personShipping?.documentNumber,
-                  ].filter(Boolean).join(", ") 
-                ?? [
-                    row.sale?.personShipping?.name,
-                    row.sale?.personShipping?.documentNumber,
-                  ].filter(Boolean).join(", "),
+      value: (row) =>
+        [row.sale?.personShipping?.fantasyName, row.sale?.personShipping?.documentNumber]
+          .filter(Boolean)
+          .join(", ") ??
+        [row.sale?.personShipping?.name, row.sale?.personShipping?.documentNumber]
+          .filter(Boolean)
+          .join(", "),
     },
     {
       id: "sale_personShipping_documentNumber",
@@ -370,9 +378,10 @@ export default function ({ data = [], meta = {}, t }) {
       id: "sale_freightType",
       group: "shipping",
       label: utils.cellHeader(t("/@word/freightType")),
-      value: (row) => row.sale.freightType 
-        ? t("/commercial/freightType/enum/" + row.sale.freightType)
-        : undefined
+      value: (row) =>
+        row.sale.freightType
+          ? t("/commercial/freightType/enum/" + row.sale.freightType)
+          : undefined,
     },
     {
       id: "sale_personShippingTransshipment_name",
@@ -386,14 +395,19 @@ export default function ({ data = [], meta = {}, t }) {
       group: "shipping",
       flex: 2,
       label: utils.cellHeader(t("/@word/personShipping"), t("/@word/name")),
-      value: (row) => [
-                    row.sale?.personShippingTransshipment?.fantasyName,
-                    row.sale?.personShippingTransshipment?.documentNumber,
-                  ].filter(Boolean).join(", ") 
-                ?? [
-                    row.sale?.personShippingTransshipment?.name,
-                    row.sale?.personShippingTransshipment?.documentNumber,
-                  ].filter(Boolean).join(", "),
+      value: (row) =>
+        [
+          row.sale?.personShippingTransshipment?.fantasyName,
+          row.sale?.personShippingTransshipment?.documentNumber,
+        ]
+          .filter(Boolean)
+          .join(", ") ??
+        [
+          row.sale?.personShippingTransshipment?.name,
+          row.sale?.personShippingTransshipment?.documentNumber,
+        ]
+          .filter(Boolean)
+          .join(", "),
     },
     {
       id: "sale_personShippingTransshipment_documentNumber",
@@ -420,12 +434,11 @@ export default function ({ data = [], meta = {}, t }) {
       id: "comments",
       group: "comments",
       label: utils.cellHeader(t("/@word/comments")),
-      value: (row) =>{[
-                        data.properties?.comments,
-                        data.sale?.person.properties?.outgoingInvoiceComments,
-                      ]
-                      .filter(Boolean)
-                      .join("\n")},
+      value: (row) => {
+        [data.properties?.comments, data.sale?.person.properties?.outgoingInvoiceComments]
+          .filter(Boolean)
+          .join("\n");
+      },
       as: "pre",
     },
   ];
@@ -500,6 +513,19 @@ export default function ({ data = [], meta = {}, t }) {
       cellValue: ({ row }) => row.productPacking.complement,
     },
     {
+      id: "productPacking_descriptionCalc",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
+      width: "30ch",
+      cellValue: ({ row }) =>
+        [
+          row.productPacking.product.description,
+          row.productPacking.complement,
+          row.productPacking.variant?.description,
+        ]
+          .filter(Boolean)
+          .join(", "),
+    },
+    {
       id: "productVariant_description",
       header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
       width: "15ch",
@@ -517,6 +543,25 @@ export default function ({ data = [], meta = {}, t }) {
       width: "7ch",
       className: "number",
       cell: ({ row, value }) => utils.formatQuantity(value),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (row) => row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+          (row) => row.quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (val, key) => utils.formatQuantity(val, { unit_code: key })),
+    },
+    {
+      id: "quantity_unit",
+      header: utils.cellHeader(t("/@word/quantity")),
+      width: "10ch",
+      className: "number",
+      cellValue: ({ row }) => row.quantity,
+      cell: ({ row, value }) =>
+        utils.formatQuantity(value, {
+          unit_code: row.productPacking.unit?.code ?? row.productPacking.product.unit.code,
+        }),
       footerValue: ({ data }) =>
         utils.sumBy(
           data,
@@ -601,36 +646,36 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-    const signatures = [
-      {
-        id: "signature_volume",
-        group:"signature",
-        label: utils.cellHeader(t("/material/volume/plural")),
-        width: "30ch",
-        value: "\u00A0",
-      },
-      {
-        id: "signature_serial",
-        group:"signature",
-        label: utils.cellHeader(t("/material/serial/plural")),
-        width: "30ch",
-        value: "\u00A0",
-      },
-      {
-        id: "signature_stockPicker",
-        group:"signature",
-        label: utils.cellHeader(t("/@word/stockPicker")),
-        width: "30ch",
-        value: "\u00A0",
-      },
-      {
-        id: "signature_stockChecker",
-        group:"signature",
-        label: utils.cellHeader(t("/@word/stockChecker")),
-        width: "30ch",
-        value: "\u00A0",
-      },
-    ];
+  const signatures = [
+    {
+      id: "signature_volume",
+      group: "signature",
+      label: utils.cellHeader(t("/material/volume/plural")),
+      width: "30ch",
+      value: "\u00A0",
+    },
+    {
+      id: "signature_serial",
+      group: "signature",
+      label: utils.cellHeader(t("/material/serial/plural")),
+      width: "30ch",
+      value: "\u00A0",
+    },
+    {
+      id: "signature_stockPicker",
+      group: "signature",
+      label: utils.cellHeader(t("/@word/stockPicker")),
+      width: "30ch",
+      value: "\u00A0",
+    },
+    {
+      id: "signature_stockChecker",
+      group: "signature",
+      label: utils.cellHeader(t("/@word/stockChecker")),
+      width: "30ch",
+      value: "\u00A0",
+    },
+  ];
 
   data.forEach((row) => {
     utils.sort(row.items, settings?.sort || []);
@@ -641,7 +686,7 @@ export default function ({ data = [], meta = {}, t }) {
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {data.map((data) => (
         <div
-          className={`report-container ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+          className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
           style={{
             "--width": settings?.width,
             "--height": settings?.height,
@@ -669,26 +714,28 @@ export default function ({ data = [], meta = {}, t }) {
                 </dd>
               </dl>
             </section>
-            <Fields
-              fields={fields}
-              visibleFields={visibleFields}
-              data={data}
-              groups={fieldGroups}
-            />
+            <div className="flex v gap">
+              <Fields
+                fields={fields}
+                visibleFields={visibleFields}
+                data={data}
+                groups={fieldGroups}
+              />
+            </div>
           </header>
           <main>
             <div className="content">
-              <Table 
-                columns={columns} 
-                visibleColumns={visibleColumns} 
-                data={data.items} />
+              <Table
+                columns={columns}
+                visibleColumns={visibleColumns}
+                data={data.items}
+                groups={groups}
+                footerTitle={t("/@word/summary")}
+              />
             </div>
           </main>
           <footer>
-            <Fields
-              fields={signatures}
-              visibleFields={visibleFields}
-            />
+            <Fields fields={signatures} visibleFields={visibleFields} />
           </footer>
         </div>
       ))}
