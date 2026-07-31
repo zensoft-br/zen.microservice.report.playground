@@ -111,6 +111,13 @@ export default function ({ data = [], meta = {}, t }) {
       header: t("/@word/availabilityDate"),
       cellValue: ({ row }) => utils.formatDate(row.quote.availabilityDate),
     },
+    {
+      id: "product_comments",
+      width:"30ch",
+      header: utils.cellHeader(t("/@word/comments")),
+      cellValue: ({row}) => row.properties?.comments,
+      as: "pre",
+    },
   ];
 
   const visibleColumns = settings?.columns ?? [];
