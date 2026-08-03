@@ -258,6 +258,13 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.personSalesperson?.name,
     },
     {
+      id: "personSalesperson_fantasyName",
+      group: "sale",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/personSalesperson"), t("/@word/fantasyName")),
+      value: (row) => row.personSalesperson?.fantasyName,
+    },
+    {
       id: "salesChannel",
       group: "sale",
       label: utils.cellHeader(t("/@word/salesChannel")),
