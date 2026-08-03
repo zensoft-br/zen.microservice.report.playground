@@ -29,6 +29,7 @@
             "freightTypeTransshipment",
             "paymentMethods",
             "personSalesperson_name",
+            "personSalesperson_fantasyName",
             "personShippingTransshipment_documentNumber",
             "personShippingTransshipment_name",
             "personShippingTransshipment_phone",
