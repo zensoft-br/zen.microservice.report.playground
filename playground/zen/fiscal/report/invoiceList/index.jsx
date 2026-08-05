@@ -1153,6 +1153,30 @@ export default function ({ data = [], meta = {}, t }) {
 
   const groups = settings?.groups || [];
 
+  const sumColumns = columns
+    .map((c) => c.id)
+    .filter((id) => id.startsWith("sum_") || id.startsWith("count_") || id.endsWith("Value"));
+
+  const grouped = Object.values(
+    data.reduce((acc, row) => {
+      const key = visibleColumns
+        .filter((c) => !sumColumns.includes(c))
+        .map((c) => row[c] ?? "")
+        .join("|");
+
+      if (!acc[key]) {
+        acc[key] = { ...row };
+        return acc;
+      }
+
+      for (const col of sumColumns) {
+        acc[key][col] = (Number(acc[key][col]) || 0) + (Number(row[col]) || 0);
+      }
+
+      return acc;
+    }, {}),
+  );
+
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       <div
@@ -1411,7 +1435,12 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
+            <Table
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={grouped}
+              groups={groups}
+            />
           </div>
         </main>
       </div>
