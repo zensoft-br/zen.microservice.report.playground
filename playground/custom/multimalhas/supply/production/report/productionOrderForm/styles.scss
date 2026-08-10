@@ -7,6 +7,15 @@
   word-break: break-all;
 }
 
+.report-wrapper .report-container > header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  border-bottom: 3px solid #000;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
 .card {
   border: 1px solid black;
   border-radius: var(--border-radius);
@@ -30,7 +39,7 @@
   flex: 1 1 auto;
 }
 
-.flex.h>* {
+.flex.h > * {
   flex: 1 1 auto;
 }
 
@@ -45,6 +54,43 @@
   background-color: lightgray;
   border: 1px solid gray;
 }
+
+.report-productionOrder {
+  .parameters {
+    border-radius: 0.3rem;
+    background-color: lightgray;
+    .parameters {
+      dl {
+        border: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        dt {
+          font-weight: bold 700 !important;
+        }
+      }
+    }
+  }
+}
+
+.custom-fields > .parameters dl {
+  background-color: red;
+}
+
+//.report-productionOrder .parameters .parameters {
+//  > dl {
+//    // background-color: red !important;
+//    margin: 0;
+//    padding: 0;
+//  }
+//
+//  > dl > dt {
+//    margin: 0;
+//  }
+//
+//  > dl > dd {
+//    margin: 0;
+//  }
+//}
 
 .xxl {
   font-size: 1.6rem;

@@ -8,6 +8,15 @@
   word-break: break-all;
 }
 
+.report-wrapper .report-container > header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  border-bottom: 3px solid #000;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
 .card {
   border: 1px solid black;
   border-radius: var(--border-radius);
@@ -44,6 +53,23 @@
   padding: 0.5rem;
   background-color: lightgray;
   border: 1px solid gray;
+}
+
+.report-productionOrder .parameters {
+  border-radius: 0.3rem;
+  background-color: lightgray;
+}
+.report-productionOrder .parameters .parameters dl {
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.report-productionOrder .parameters .parameters dl dt {
+  font-weight: bold 700 !important;
+}
+
+.custom-fields > .parameters dl {
+  background-color: red;
 }
 
 .xxl {
