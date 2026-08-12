@@ -194,71 +194,74 @@ export default function ({ data = [], meta = {}, t }) {
           <section className="title">
             <h1>{t("/supply/production/productionOrder")}</h1>
           </section>
-          <section className="parameters">
-            <div className="custom-fields">
-              <Fields
-                fields={productionOrderFields}
-                visibleFields={visibleFields}
-                data={data[0]}
-                groups={fieldGroups}
-              />
-            </div>
-          </section>
         </header>
         <main>
           <div className="content">
             {data.map((obj) => (
               <div className="no-break">
                 {obj.steps?.map((step, index) => (
-                  <React.Fragment key={index}>
-                    <div class="flex h">
-                      <div class="flex v gap padding center" style={{ flex: "2" }}>
-                        <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
-                        <div class="xxl">{step.productPacking.code}</div>
-                        <div>
-                          <span className="xxl">{step.quantity}</span>&nbsp;
-                          {step.productPacking.product.unit.code}
-                        </div>
-                        {step.productions?.[0]?.productPacking.product.category5 && (
+                  <>
+                    <section className="parameters">
+                      <div className="custom-fields">
+                        <Fields
+                          fields={productionOrderFields}
+                          visibleFields={visibleFields}
+                          data={obj}
+                          groups={fieldGroups}
+                        />
+                      </div>
+                    </section>
+                    <React.Fragment key={index}>
+                      <div class="flex h">
+                        <div class="flex v gap padding center" style={{ flex: "2" }}>
+                          <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
+                          <div class="xxl">{step.productPacking.code}</div>
                           <div>
-                            Medida: {step.productions?.[0]?.productPacking.product.category5?.code}
+                            <span className="xxl">{step.quantity}</span>&nbsp;
+                            {step.productPacking.product.unit.code}
                           </div>
-                        )}
-                      </div>
+                          {step.productions?.[0]?.productPacking.product.category5 && (
+                            <div>
+                              Medida:{" "}
+                              {step.productions?.[0]?.productPacking.product.category5?.code}
+                            </div>
+                          )}
+                        </div>
 
-                      <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
-                        <table>
-                          <thead>
-                            <tr>
-                              {/* <th>Código do Produto</th> */}
-                              <th>Previsão de consumo</th>
-                              <th class="number">Quantidade</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {step.consumptions?.map((consumption, index) => (
-                              <tr key={index}>
-                                {/* <td>{consumption.productPacking.code}</td> */}
-                                <td>
-                                  {[
-                                    consumption.productPacking.product.description,
-                                    consumption.productPacking.complement,
-                                    consumption.productPacking.variant?.description,
-                                  ]
-                                    .filter(Boolean)
-                                    .join(", ")}
-                                </td>
-                                <td className="number">
-                                  <strong>{number(consumption.quantity)}</strong>&nbsp;
-                                  {consumption.productPacking.product.unit.code}
-                                </td>
+                        <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
+                          <table>
+                            <thead>
+                              <tr>
+                                {/* <th>Código do Produto</th> */}
+                                <th>Previsão de consumo</th>
+                                <th class="number">Quantidade</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                            </thead>
+                            <tbody>
+                              {step.consumptions?.map((consumption, index) => (
+                                <tr key={index}>
+                                  {/* <td>{consumption.productPacking.code}</td> */}
+                                  <td>
+                                    {[
+                                      consumption.productPacking.product.description,
+                                      consumption.productPacking.complement,
+                                      consumption.productPacking.variant?.description,
+                                    ]
+                                      .filter(Boolean)
+                                      .join(", ")}
+                                  </td>
+                                  <td className="number">
+                                    <strong>{number(consumption.quantity)}</strong>&nbsp;
+                                    {consumption.productPacking.product.unit.code}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                  </React.Fragment>
+                    </React.Fragment>
+                  </>
                 ))}
               </div>
             ))}

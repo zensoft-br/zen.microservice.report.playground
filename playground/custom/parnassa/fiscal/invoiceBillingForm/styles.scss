@@ -1,0 +1,10 @@
+.date-media {
+  border-bottom: 3px solid black;
+  padding-bottom: 1rem;
+  span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: normal;
+  }
+}

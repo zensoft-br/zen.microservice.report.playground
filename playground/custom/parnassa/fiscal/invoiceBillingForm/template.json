@@ -1,0 +1,59 @@
+{
+  "engine": "react",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": ["@file:/styles.css", "@file:styles.css"]
+  },
+  "i18n": {
+    "fallbackLocale": "fallback",
+    "resources": {
+      "fallback": {
+        "/@word/averageDate": "Data média",
+        "/@word/billingReport": "Relatório de Cobrança"
+      }
+    }
+  },
+  "meta": {
+    "dataSource": null,
+    "delegate": null,
+    "report": {
+      "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": []
+        },
+        "#settings": {
+          "fields": [
+            "person_nameCalc",
+            "person_phone",
+            "personSalesperson_nameCalc",
+            "billingTitle_date_mediaCalc"
+          ],
+          "columns": [
+            "invoiceItemList_productPacking_code",
+            "invoiceItemList_productPacking_descriptionCalc",
+            "invoiceItemList_productPacking_totalValue"
+          ],
+          "groups": [
+            {
+              "columnId": "virtual_column"
+            },
+            {
+              "columnId": "status"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "category1"
+            },
+            {
+              "columnId": "status"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
