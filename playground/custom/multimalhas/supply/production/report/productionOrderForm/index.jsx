@@ -1,6 +1,131 @@
 import React from "react";
+import * as utils from "./utils.jsx";
+import { Badge, Fields, Table } from "./utils.jsx";
 
-export default function ({ data = [] }) {
+export default function ({ data = [], meta = {}, t }) {
+  const { report = {} } = meta;
+
+  const settings =
+    utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
+
+  const visibleFields = settings?.fields ?? [];
+
+  const productionOrderFields = [
+    {
+      id: "productionOrder_code",
+      label: utils.cellHeader(t("/@word/order")),
+      value: (row) => row.code,
+    },
+    {
+      id: "productionOrder_date",
+      label: utils.cellHeader(t("/@word/date")),
+      value: (row) => utils.formatDate(row.date),
+    },
+    {
+      id: "productionOrder_availabilityDate",
+      label: utils.cellHeader(t("/@word/availabilityDate")),
+      value: (row) => utils.formatDate(row.availabilityDate),
+    },
+    {
+      id: "productionOrder_person_name",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.name,
+    },
+    {
+      id: "productionOrder_person_fantasyName",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName,
+    },
+    {
+      id: "productionOrder_person_nameCalc",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName ?? row.person.name,
+    },
+  ];
+
+  const materialFields = [
+    {
+      id: "material_code",
+      label: utils.cellHeader(t("/@word/order")),
+      value: (row) => row.code,
+    },
+    {
+      id: "material_date",
+      label: utils.cellHeader(t("/@word/date")),
+      value: (row) => utils.formatDate(row.date),
+    },
+    {
+      id: "material_availabilityDate",
+      label: utils.cellHeader(t("/@word/deliveryForecast")),
+      value: (row) => utils.formatDate(row.availabilityDate),
+    },
+    {
+      id: "material_person_name",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.name,
+    },
+    {
+      id: "material_person_fantasyName",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName,
+    },
+    {
+      id: "material_person_nameCalc",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName ?? row.person.name,
+    },
+  ];
+
+  const productionFields = [
+    {
+      id: "production_code",
+      label: utils.cellHeader(t("/@word/order")),
+      value: (row) => row.code,
+    },
+    {
+      id: "production_date",
+      label: utils.cellHeader(t("/@word/date")),
+      value: (row) => utils.formatDate(row.date),
+    },
+    {
+      id: "production_availabilityDate",
+      label: utils.cellHeader(t("/@word/deliveryForecast")),
+      value: (row) => utils.formatDate(row.availabilityDate),
+    },
+    {
+      id: "production_person_name",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.name,
+    },
+    {
+      id: "production_person_fantasyName",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName,
+    },
+    {
+      id: "production_person_nameCalc",
+      flex: 4,
+      label: utils.cellHeader(t("/@word/customer")),
+      value: (row) => row.person.fantasyName ?? row.person.name,
+    },
+  ];
+
+  const fieldGroups = [];
+
+  const visibleColumns = settings?.columns ?? [];
+
+  const groups = settings?.groups || [];
+
+  const columns = [];
+
   data.sort((a, b) => {
     const p1 = a.steps[0]?.productions[0]?.productPacking;
     const p2 = b.steps[0]?.productions[0]?.productPacking;
@@ -16,6 +141,7 @@ export default function ({ data = [] }) {
 
     return k1.localeCompare(k2);
   });
+
   const totalsByProduct = data.reduce((acc, obj) => {
     obj.steps?.forEach((step) => {
       (step.consumptions ?? [])
@@ -56,7 +182,7 @@ export default function ({ data = [] }) {
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
       {/* Impresso 1, Ordens de produção */}
       <div
-        className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
+        className={`report-productionOrder report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
           "--width": settings?.width,
           "--height": settings?.height,
@@ -65,84 +191,77 @@ export default function ({ data = [] }) {
         key={data.id}
       >
         <header>
-          <h1>Ordens de Produção</h1>
+          <section className="title">
+            <h1>{t("/supply/production/productionOrder")}</h1>
+          </section>
         </header>
         <main>
           <div className="content">
             {data.map((obj) => (
               <div className="no-break">
-                <div class="flex h full gap padding panel">
-                  <div>
-                    <strong>Cliente</strong>
-                    <br />
-                    {obj.person.name}
-                  </div>
-                  <div>
-                    <strong>Data</strong>
-                    <br />
-                    {obj.date ? date(obj.date) : "-"}
-                  </div>
-                  <div>
-                    <strong>Disponibilidade</strong>
-                    <br />
-                    {obj.availabilityDate ? date(obj.availabilityDate) : "-"}
-                  </div>
-                  <div>
-                    <strong>Pedido</strong>
-                    <br />
-                    {obj.code}
-                  </div>
-                </div>
                 {obj.steps?.map((step, index) => (
-                  <React.Fragment key={index}>
-                    <div class="flex h">
-                      <div class="flex v gap padding center" style={{ flex: "2" }}>
-                        <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
-                        <div class="xxl">{step.productPacking.code}</div>
-                        <div>
-                          <span className="xxl">{step.quantity}</span>&nbsp;
-                          {step.productPacking.product.unit.code}
-                        </div>
-                        {step.productions?.[0]?.productPacking.product.category5 && (
+                  <>
+                    <section className="parameters">
+                      <div className="custom-fields">
+                        <Fields
+                          fields={productionOrderFields}
+                          visibleFields={visibleFields}
+                          data={obj}
+                          groups={fieldGroups}
+                        />
+                      </div>
+                    </section>
+                    <React.Fragment key={index}>
+                      <div class="flex h">
+                        <div class="flex v gap padding center" style={{ flex: "2" }}>
+                          <div class="xxl">{obj.properties?.sale_id ?? obj.code}</div>
+                          <div class="xxl">{step.productPacking.code}</div>
                           <div>
-                            Medida: {step.productions?.[0]?.productPacking.product.category5?.code}
+                            <span className="xxl">{step.quantity}</span>&nbsp;
+                            {step.productPacking.product.unit.code}
                           </div>
-                        )}
-                      </div>
+                          {step.productions?.[0]?.productPacking.product.category5 && (
+                            <div>
+                              Medida:{" "}
+                              {step.productions?.[0]?.productPacking.product.category5?.code}
+                            </div>
+                          )}
+                        </div>
 
-                      <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
-                        <table>
-                          <thead>
-                            <tr>
-                              {/* <th>Código do Produto</th> */}
-                              <th>Previsão de consumo</th>
-                              <th class="number">Quantidade</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {step.consumptions?.map((consumption, index) => (
-                              <tr key={index}>
-                                {/* <td>{consumption.productPacking.code}</td> */}
-                                <td>
-                                  {[
-                                    consumption.productPacking.product.description,
-                                    consumption.productPacking.complement,
-                                    consumption.productPacking.variant?.description,
-                                  ]
-                                    .filter(Boolean)
-                                    .join(", ")}
-                                </td>
-                                <td className="number">
-                                  <strong>{number(consumption.quantity)}</strong>&nbsp;
-                                  {consumption.productPacking.product.unit.code}
-                                </td>
+                        <div class="flex v gap padding flex-1" style={{ flex: "3" }}>
+                          <table>
+                            <thead>
+                              <tr>
+                                {/* <th>Código do Produto</th> */}
+                                <th>Previsão de consumo</th>
+                                <th class="number">Quantidade</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                            </thead>
+                            <tbody>
+                              {step.consumptions?.map((consumption, index) => (
+                                <tr key={index}>
+                                  {/* <td>{consumption.productPacking.code}</td> */}
+                                  <td>
+                                    {[
+                                      consumption.productPacking.product.description,
+                                      consumption.productPacking.complement,
+                                      consumption.productPacking.variant?.description,
+                                    ]
+                                      .filter(Boolean)
+                                      .join(", ")}
+                                  </td>
+                                  <td className="number">
+                                    <strong>{number(consumption.quantity)}</strong>&nbsp;
+                                    {consumption.productPacking.product.unit.code}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                  </React.Fragment>
+                    </React.Fragment>
+                  </>
                 ))}
               </div>
             ))}
@@ -161,20 +280,16 @@ export default function ({ data = [] }) {
         key={data.id}
       >
         <header>
-          <h1>Consumo de materiais por lote de produção</h1>
-          <section className="parameters">
-            <dl>
-              <dt>Cliente</dt>
-              <dd>{data[0].person?.name}</dd>
-            </dl>
-            <dl>
-              <dt>Previsão de entrega</dt>
-              <dd>{date(data[0].availabilityDate)}</dd>
-            </dl>
-            <dl>
-              <dt>Pedido</dt>
-              <dd>{data[0].properties?.sale_id}</dd>
-            </dl>
+          <section className="title">
+            <h1>{t("/@word/materialConsumptionPerProductionBatch")}</h1>
+          </section>
+          <section className={`parameters flex v gap`}>
+            <Fields
+              fields={materialFields}
+              visibleFields={visibleFields}
+              data={data[0]}
+              groups={fieldGroups}
+            />
           </section>
         </header>
         <main>
@@ -218,7 +333,17 @@ export default function ({ data = [] }) {
         key={data.id}
       >
         <header>
-          <h1>Itens a produzir</h1>
+          <section className="title">
+            <h1>{t("/@word/materialConsumptionPerProductionBatch")}</h1>
+          </section>
+          <section className={`parameters flex v gap`}>
+            <Fields
+              fields={productionFields}
+              visibleFields={visibleFields}
+              data={data[0]}
+              groups={fieldGroups}
+            />
+          </section>
         </header>
         <div
           className="grid"

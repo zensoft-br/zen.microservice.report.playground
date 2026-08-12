@@ -198,10 +198,10 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.sale?.personSalesperson?.fantasyName ?? row.sale?.personSalesperson?.name,
     },
     {
-      id: "paymentMethods",
+      id: "sale_paymentMethods",
       group: "sale",
       label: utils.cellHeader(t("/@word/paymentMethods")),
-      value: (row) => row.properties?.paymentMethods,
+      value: (row) => row.sale?.properties?.paymentMethods,
     },
     {
       id: "person_name",
@@ -391,10 +391,17 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.sale.personShippingTransshipment?.name,
     },
     {
-      id: "sale_personShipping_nameCalc",
+      id: "sale_personShippingTransshipment_fantasyName",
       group: "shipping",
       flex: 2,
-      label: utils.cellHeader(t("/@word/personShipping"), t("/@word/name")),
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/fantasyName")),
+      value: (row) => row.sale.personShippingTransshipment?.fantasyName,
+    },
+    {
+      id: "sale_personShippingTransshipment_nameCalc",
+      group: "shipping",
+      flex: 2,
+      label: utils.cellHeader(t("/@word/personShippingTransshipment"), t("/@word/name")),
       value: (row) =>
         [
           row.sale?.personShippingTransshipment?.fantasyName,
@@ -435,10 +442,17 @@ export default function ({ data = [], meta = {}, t }) {
       group: "comments",
       label: utils.cellHeader(t("/@word/comments")),
       value: (row) => {
-        [data.properties?.comments, data.sale?.person.properties?.outgoingInvoiceComments]
+        [row.properties?.comments, row.sale?.person.properties?.outgoingInvoiceComments]
           .filter(Boolean)
           .join("\n");
       },
+      as: "pre",
+    },
+    {
+      id: "sale_comments",
+      group: "comments",
+      label: utils.cellHeader(t("/sale/sale"), t("/@word/comments")),
+      value: (row) => row?.sale?.properties?.comments,
       as: "pre",
     },
   ];

@@ -1,0 +1,152 @@
+[
+  {
+    "id": 10903,
+    "date": "2026-06-15",
+    "number": 208720,
+    "person": {
+      "id": 11398,
+      "type": "CORPORATION",
+      "name": "DUQUEBRAS COMERCIO DE PLASTICOS. TECIDOS E ACESSORIOS EIRELI",
+      "fantasyName": "MADUMAC",
+      "nameCalc": "MADUMAC",
+      "documentType": "BR_CNPJ",
+      "documentNumber": "34.913.401/0001-54",
+      "document2Type": "BR_INSCRICAO_ESTADUAL",
+      "document2Number": "11551815",
+      "zipcode": "25010-144",
+      "street": "AV NILO PEÇANHA",
+      "number": "523",
+      "complement": null,
+      "streetCalc": "AV NILO PEÇANHA, 523",
+      "district": "CENTRO",
+      "city": {
+        "id": 4618,
+        "name": "Duque de Caxias",
+        "state": {
+          "id": 1019,
+          "code": "RJ",
+          "name": "Rio de Janeiro",
+          "country": {
+            "id": 1030,
+            "codeA2": "BR",
+            "codeA3": "BRA",
+            "codeN": "076",
+            "name": "Brasil"
+          }
+        }
+      },
+      "email": "b.ene.costa@hotmail.com",
+      "phone": "2124523131"
+    },
+    "personSalesperson": {
+      "id": 1027,
+      "type": "CORPORATION",
+      "name": "JULIANA F CORREA REPRES Gerente",
+      "fantasyName": "JULIANA F CORREA REPRES Gerente",
+      "nameCalc": "JULIANA F CORREA REPRES Gerente",
+      "documentType": "BR_CNPJ",
+      "documentNumber": "23.482.634/0001-23",
+      "document2Type": null,
+      "document2Number": null,
+      "zipcode": "01227-000",
+      "street": "Avenida Angélica",
+      "number": "0",
+      "complement": null,
+      "streetCalc": "Avenida Angélica, 0",
+      "district": "Santa Cecília",
+      "city": {
+        "id": 6276,
+        "name": "São Paulo",
+        "state": {
+          "id": 1026,
+          "code": "SP",
+          "name": "São Paulo",
+          "country": {
+            "id": 1030,
+            "codeA2": "BR",
+            "codeA3": "BRA",
+            "codeN": "076",
+            "name": "Brasil"
+          }
+        }
+      },
+      "email": "juliana.parnassa@hotmail.com",
+      "phone": null
+    },
+    "totalValue": 17087.68,
+    "invoiceItemList": [
+      {
+        "productPacking": {
+          "id": 1100,
+          "product": {
+            "id": 1005,
+            "code": "10",
+            "description": "POLY BNY REVESTIDO PVC LISO",
+            "complement": "10",
+            "keyword": null,
+            "netWeightKg": 0.5237,
+            "grossWeightKg": 0.5337
+          },
+          "variant": {
+            "id": 1042,
+            "code": "827",
+            "description": "VERDE PISTACHE"
+          },
+          "code": "10.827",
+          "complement": "VERDE PISTACHE",
+          "barcode": "PRN22011",
+          "units": 1,
+          "netWeightKg": null,
+          "grossWeightKg": null
+        },
+        "quantity": 500,
+        "unitValue": 5.39998,
+        "totalValue": 2699.99
+      },
+      {
+        "productPacking": {
+          "id": 14283,
+          "product": {
+            "id": 1526,
+            "code": "1365",
+            "description": "POLY BNY REVESTIDO PVC LISO PRETO",
+            "complement": null,
+            "keyword": null,
+            "netWeightKg": 0.5237,
+            "grossWeightKg": 0.5337
+          },
+          "variant": {
+            "id": 1038,
+            "code": "310",
+            "description": "PRETO"
+          },
+          "code": "1365.310",
+          "complement": "PRETO",
+          "barcode": "BNY4765415",
+          "units": 1,
+          "netWeightKg": null,
+          "grossWeightKg": null
+        },
+        "quantity": 3016,
+        "unitValue": 5.39997347,
+        "totalValue": 16286.32
+      }
+    ],
+    "billingTitleList": [
+      {
+        "id": 45872,
+        "code": "208720/001",
+        "date": "2026-06-15",
+        "due_date": "2026-06-29",
+        "value": 949.31
+      },
+      {
+        "id": 45873,
+        "code": "208720/002",
+        "date": "2026-06-15",
+        "due_date": "2026-07-06",
+        "value": 949.32
+      }
+    ]
+  }
+]

@@ -1,6 +1,68 @@
 {
   "engine": "react",
   "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
     "styles": ["@file:/styles.css", "@file:styles.css"]
+  },
+  "i18n": {
+    "fallbackLocale": "fallback",
+    "resources": {
+      "fallback": {
+        "/@word/order": "Pedido",
+        "/@word/deliveryForecast": "Previsão de entrega",
+        "/@word/itemsToProduce": "Items a Produzir",
+        "/@word/materialConsumptionPerProductionBatch": "Consumo de materiais por lote de produção"
+      }
+    }
+  },
+  "meta": {
+    "dataSource": null,
+    "delegate": null,
+    "report": {
+      "properties": {
+        "info": {
+          "availableFields": [
+            "productionOrder_code",
+            "productionOrder_date",
+            "productionOrder_availabilityDate",
+            "productionOrder_person_name",
+            "productionOrder_person_fantasyName",
+            "productionOrder_person_nameCalc",
+            "material_code",
+            "material_date",
+            "material_availabilityDate",
+            "material_person_name",
+            "material_person_fantasyName",
+            "material_person_nameCalc",
+            "production_code",
+            "production_date",
+            "production_availabilityDate",
+            "production_person_name",
+            "production_person_fantasyName",
+            "production_person_nameCalc"
+          ],
+          "availableColumns": []
+        },
+        "#settings": {
+          "fields": [
+            "productionOrder_person_nameCalc",
+            "productionOrder_date",
+            "productionOrder_availabilityDate",
+            "productionOrder_code",
+            "material_person_nameCalc",
+            "material_availabilityDate",
+            "material_code",
+            "production_person_nameCalc",
+            "production_availabilityDate",
+            "production_code"
+          ],
+          "columns": [],
+          "groups": [],
+          "sort": []
+        }
+      }
+    }
   }
 }
