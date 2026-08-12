@@ -41,7 +41,9 @@ export default function ({ data = [], meta = {}, t }) {
 
   // data = utils.sort(data, settings?.sort || []);
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>

@@ -1,0 +1,14 @@
+{
+  "report": {
+    "title": "My report",
+    "parameters": {
+      "dateStart": "2026-01-01",
+      "dateEnd": "2026-01-31"
+    },
+    "properties": {
+      "userSettings": {
+        "parametersDesc": null
+      }
+    }
+  }
+}

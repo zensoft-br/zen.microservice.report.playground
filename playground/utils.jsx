@@ -46,6 +46,7 @@ export function formatCurrency(value, options = {}) {
     currency = options.currency ?? config.currency,
     ...rest
   } = options;
+  if (!currency) return formatNumber(value, { locale, ...rest });
   try {
     return new Intl.NumberFormat(locale, {
       style: "currency",
@@ -114,8 +115,22 @@ export function formatNumber(value, options = {}) {
     options.maximumFractionDigits = options.digits;
   }
   const { locale = options.locale ?? config.locale, ...rest } = options;
+  // return JSON.stringify(rest);
   try {
     return new Intl.NumberFormat(locale, {
+      ...rest,
+    }).format(value);
+  } catch (_) {
+    return null;
+  }
+}
+
+export function formatPercentage(value, options = {}) {
+  if (value == null) return null;
+  const { locale = options.locale ?? config.locale, ...rest } = options;
+  try {
+    return new Intl.NumberFormat(locale, {
+      style: "percent",
       ...rest,
     }).format(value);
   } catch (_) {
@@ -470,7 +485,7 @@ const Groups = ({ columns = [], visibleColumns, groups = [], data, level = 0, ac
                 if (typeof col.props.cellValue === "function") {
                   value = col.props.cellValue({ row, rowIndex, data });
                 } else if (col.props.id) {
-                  value = row[col.props.id];
+                  value = getProp(row, col.props.id);
                 }
 
                 const context = { row, rowIndex, data, value };
@@ -682,7 +697,7 @@ export const Table = ({
                     if (typeof col.props.cellValue === "function") {
                       value = col.props.cellValue({ row, rowIndex, data });
                     } else if (col.props.id) {
-                      value = row[col.props.id];
+                      value = getProp(row, col.props.id);
                     }
 
                     const context = { row, rowIndex, data, value };
@@ -723,6 +738,27 @@ export const Table = ({
     </table>
   );
 };
+
+function getProp(obj, path) {
+  if (!obj || typeof path !== "string") return undefined;
+
+  const placeholder = "___ESC_DOT___";
+  const sanitizedPath = path.replace(/\\\./g, placeholder);
+
+  const keys = sanitizedPath.split(".");
+
+  let current = obj;
+  for (let key of keys) {
+    const actualKey = key.replace(new RegExp(placeholder, "g"), ".");
+
+    if (current == null || !(actualKey in current)) {
+      return undefined;
+    }
+    current = current[actualKey];
+  }
+
+  return current;
+}
 
 export const mapBy = (arr, keyFn) => {
   return arr.reduce((red, e) => {
@@ -783,3 +819,30 @@ export const renderAggr = (value, formatFn) => {
     </div>
   ));
 };
+
+export function meta_info({ fields, columns }) {
+  return (
+    <pre>
+      {JSON.stringify(
+        {
+          info: {
+            availableFields: fields.map((field) => field.id).sort(),
+            availableColumns: columns.map((field) => field.id).sort(),
+          },
+          translations: {
+            fields: fields.reduce((red, field) => {
+              red[field.id] = field.label;
+              return red;
+            }, {}),
+            columns: columns.reduce((red, column) => {
+              red[column.id] = column.header;
+              return red;
+            }, {}),
+          },
+        },
+        null,
+        2,
+      )}
+    </pre>
+  );
+}

@@ -57,7 +57,9 @@ export default function ({ data = [], meta = {}, t }) {
     })),
   ];
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>

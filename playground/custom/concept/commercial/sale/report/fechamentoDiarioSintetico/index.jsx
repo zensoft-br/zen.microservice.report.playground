@@ -55,7 +55,9 @@ export default function ({ data = [], meta = {}, t }) {
 
   // data = utils.sort(data, settings?.sort || []);
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = [{ columnId: "group" }];
 

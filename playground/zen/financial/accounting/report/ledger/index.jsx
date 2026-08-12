@@ -10,7 +10,9 @@ export default function ({ data: rawData = [], meta = {}, t }) {
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 

@@ -257,7 +257,9 @@ export default function ({ data = [], meta = {}, t }) {
     row.venda_total_percent = round((row.venda_total / row.real_embarcado) * 100, 2);
   });
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 
