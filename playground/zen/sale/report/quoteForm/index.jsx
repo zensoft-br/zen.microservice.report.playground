@@ -113,14 +113,16 @@ export default function ({ data = [], meta = {}, t }) {
     },
     {
       id: "product_comments",
-      width:"30ch",
+      width: "30ch",
       header: utils.cellHeader(t("/@word/comments")),
-      cellValue: ({row}) => row.properties?.comments,
+      cellValue: ({ row }) => row.properties?.comments,
       as: "pre",
     },
   ];
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 

@@ -72,7 +72,9 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   data.forEach((pickingOrder) => {
     pickingOrder.items = utils.sort(

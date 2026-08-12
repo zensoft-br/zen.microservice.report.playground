@@ -9,6 +9,8 @@ export default function ({ data = [], meta = {}, t }) {
 
   const visibleFields = settings?.fields ?? [];
 
+  const fieldGroups = [];
+
   const fields = [
     {
       id: "id",
@@ -24,9 +26,9 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  const fieldGroups = [];
-
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 
@@ -114,16 +116,9 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  data = utils.sort(data, settings?.sort || []);
+  // return utils.meta_info({ fields, columns });
 
-  // return JSON.stringify(
-  //   {
-  //     availableFields: fields.map((field) => field.id).sort(),
-  //     availableColumns: columns.map((field) => field.id).sort(),
-  //   },
-  //   null,
-  //   2,
-  // );
+  data = utils.sort(data, settings?.sort || []);
 
   return (
     <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
@@ -134,7 +129,6 @@ export default function ({ data = [], meta = {}, t }) {
           "--height": settings?.height,
           "--margin": settings?.margin,
         }}
-        key={data.id}
       >
         <header>
           <section className="title">

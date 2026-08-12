@@ -59,7 +59,9 @@ export default function ({ data = [], meta = {}, t }) {
 
   data = data.filter((row) => row.quantity_today !== 0);
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 

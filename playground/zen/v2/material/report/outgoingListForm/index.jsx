@@ -337,7 +337,9 @@ export default function ({ data = [], meta = {}, t }) {
 
   // return JSON.stringify(columns.map(column => column.id));
 
-  const visibleColumns = settings?.columns ?? [];
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
 
   const groups = settings?.groups || [];
 
