@@ -1,6 +1,9 @@
 export default function ({ properties = {}, data = [], t }) {
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((obj, index) => (
         <div
           className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}

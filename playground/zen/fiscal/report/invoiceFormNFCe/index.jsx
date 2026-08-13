@@ -17,7 +17,10 @@ export default async function ({ data = [] }) {
   // const nProt = xmlDoc.getElementsByTagNameNS(ns, "nProt")[0]?.textContent;
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((item) => (
         <div key={item.id} className="report-container">
           <div className="container">
@@ -27,22 +30,23 @@ export default async function ({ data = [] }) {
             <hr />
 
             <div>
-              {item.company.image && (
-                <img className="logo"
-                  src={item.company.image?.url}
-                  alt="" />
-              )}
+              {item.company.image && <img className="logo" src={item.company.image?.url} alt="" />}
               <h3 className="text-center">{item.company.person.name}</h3>
               <p className="text-center">CNPJ: {item.company.person.documentNumber}</p>
-              <p className="text-center">Inscrição estadual: {item.company.person.document2Number}</p>
               <p className="text-center">
-                {[item.company.person?.street,
+                Inscrição estadual: {item.company.person.document2Number}
+              </p>
+              <p className="text-center">
+                {[
+                  item.company.person?.street,
                   item.company.person?.number,
                   item.company.person?.district,
                   item.company.person?.city?.name,
                   item.company.person?.city?.state?.code,
-                  item.company.person?.zipcode]
-                  .filter(Boolean).join(", ")}
+                  item.company.person?.zipcode,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
               </p>
               <p className="text-center">
                 <span>{`Número: ${item.number}`}</span>
@@ -97,8 +101,11 @@ export default async function ({ data = [] }) {
                         {[
                           item.productPacking?.product?.description,
                           item.productPacking?.complement,
-                          item.productPacking?.variant?.description ?? item.productPacking?.variant?.code]
-                          .filter(Boolean).join(", ")}
+                          item.productPacking?.variant?.description ??
+                            item.productPacking?.variant?.code,
+                        ]
+                          .filter(Boolean)
+                          .join(", ")}
                       </td>
                     </tr>
                   </React.Fragment>
@@ -128,15 +135,23 @@ export default async function ({ data = [] }) {
             {/* Chave de acesso + QR Code */}
             <div>
               <p className="text-center">{`Protocolo autorização: ${item.nfeOut?.nProt}`}</p>
-              <p className="text-center">{item.nfeOut?.dhRecbto ? `Data/hora autorização: ${datetime(new Date(item.nfeOut.dhRecbto))}` : ""}</p>
+              <p className="text-center">
+                {item.nfeOut?.dhRecbto
+                  ? `Data/hora autorização: ${datetime(new Date(item.nfeOut.dhRecbto))}`
+                  : ""}
+              </p>
               <p className="text-center">{item.nfeOut?.urlChave}</p>
-              <p className="text-center">{item.nfeOut?.chNFe?.replace(/(\d{4})(?=\d)/g, "$1 ").trim()}</p>
+              <p className="text-center">
+                {item.nfeOut?.chNFe?.replace(/(\d{4})(?=\d)/g, "$1 ").trim()}
+              </p>
               {item.nfeOut?.qrCode && (
-                <img className="text-center"
+                <img
+                  className="text-center"
                   src={`https://barcode.zensoft.com.br/?bcid=qrcode&text=${encodeURIComponent(item.nfeOut.qrCode)}&scale=4`}
                   alt="QR Code NFC-e"
                   width="100"
-                  height="100" />
+                  height="100"
+                />
               )}
             </div>
           </div>
@@ -144,7 +159,7 @@ export default async function ({ data = [] }) {
       ))}
     </div>
   );
-};
+}
 
 // function date(s) {
 //   if (s == null) return null;

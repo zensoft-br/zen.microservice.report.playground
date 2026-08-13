@@ -131,7 +131,10 @@ export default async function ({ data = [], meta = {}, t }) {
   };
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((data) => (
         <div
           className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}

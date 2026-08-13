@@ -7,1147 +7,11 @@ export default function ({ data = [], meta = {}, t }) {
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
-  const columns = [
-    { id: "flow", header: utils.cellHeader(t("/@word/flow")), width: "16ch" },
-    { id: "returned", header: utils.cellHeader(t("/@word/returned")), width: "16ch" },
-    { id: "sign", header: utils.cellHeader(t("/@word/sign")), width: "16ch" },
-    {
-      id: "invoice_id",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "invoice_status",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/status")),
-      width: "16ch",
-      cell: ({ value }) => <Badge>{value}</Badge>,
-    },
-    {
-      id: "workflow_id",
-      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "workflow_code",
-      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "workflow_description",
-      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "workflowNode_id",
-      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "workflowNode_code",
-      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "workflowNode_description",
-      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "invoice_number",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/number")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_date",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/date")),
-      width: "10ch",
-      cell: ({ value }) => utils.formatDate(value),
-    },
-    {
-      id: "invoice_day",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/day")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_month",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/month")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_year",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/year")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_issueDate",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/issueDate")),
-      width: "10ch",
-      cell: ({ value }) => utils.formatDate(value),
-    },
-    {
-      id: "invoice_freightType",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/freightType")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_tags",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/tags")),
-      width: "16ch",
-    },
-    {
-      id: "invoice_properties_volumes",
-      header: utils.cellHeader(t("/fiscal/invoice.properties.volumes")),
-      width: "16ch",
-    },
-    {
-      id: "company_id",
-      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "company_code",
-      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "company_name",
-      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "company_fantasyName",
-      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/fantasyName")),
-      width: "24ch",
-    },
-    {
-      id: "company_nameCalc",
-      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/nameCalc")),
-      width: "24ch",
-    },
-    {
-      id: "fiscalProfileOperation_id",
-      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "fiscalProfileOperation_code",
-      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "fiscalProfileOperation_description",
-      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "invoiceSeries_id",
-      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "invoiceSeries_code",
-      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "invoiceSeries_description",
-      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "person_id",
-      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "person_name",
-      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "person_fantasyName",
-      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/fantasyName")),
-      width: "24ch",
-    },
-    {
-      id: "person_nameCalc",
-      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/nameCalc")),
-      width: "24ch",
-    },
-    {
-      id: "personGroup_id",
-      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) => data.length,
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "personGroup_code",
-      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "personGroup_description",
-      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "personCategory_id_1",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category1"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "personCategory_code_1",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category1"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "personCategory_description_1",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category1"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "personCategory_id_2",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category2"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "personCategory_code_2",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category2"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "personCategory_description_2",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category2"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "personCategory_id_3",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category3"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "personCategory_code_3",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category3"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "personCategory_description_3",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category3"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "personCategory_id_4",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category4"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "personCategory_code_4",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category4"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "personCategory_description_4",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category4"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "personCategory_id_5",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category5"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "personCategory_code_5",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category5"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "personCategory_description_5",
-      header: utils.cellHeader(
-        t("/catalog/person/person"),
-        t("/catalog/person/person.category5"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "city_id",
-      header: utils.cellHeader(t("/catalog/location/city"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "city_name",
-      header: utils.cellHeader(t("/catalog/location/city"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "state_id",
-      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "state_code",
-      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "state_name",
-      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "country_id",
-      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "country_codeA2",
-      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/codeA2")),
-      width: "16ch",
-    },
-    {
-      id: "country_name",
-      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "shipping_id",
-      header: utils.cellHeader(t("/shipping"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "shipping_name",
-      header: utils.cellHeader(t("/shipping"), t("/@word/name")),
-      width: "24ch",
-    },
-    {
-      id: "shipping_fantasyName",
-      header: utils.cellHeader(t("/shipping"), t("/@word/fantasyName")),
-      width: "24ch",
-    },
-    {
-      id: "shipping_nameCalc",
-      header: utils.cellHeader(t("/shipping"), t("/@word/nameCalc")),
-      width: "24ch",
-    },
-    {
-      id: "salesperson_id",
-      header: utils.cellHeader(t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    { id: "salesperson_name", header: utils.cellHeader(t("/@word/name")), width: "24ch" },
-    {
-      id: "salesperson_fantasyName",
-      header: utils.cellHeader(t("/@word/fantasyName")),
-      width: "24ch",
-    },
-    { id: "salesperson_nameCalc", header: utils.cellHeader(t("/@word/nameCalc")), width: "24ch" },
-    {
-      id: "salesperson_properties",
-      header: utils.cellHeader(t("/@word/properties")),
-      width: "24ch",
-      cell: ({ value }) => (value != null ? JSON.stringify(value) : null),
-    },
-    {
-      id: "salespersonCategory_id_1",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category1"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "salespersonCategory_code_1",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category1"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "salespersonCategory_description_1",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category1"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "salespersonCategory_id_2",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category2"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "salespersonCategory_code_2",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category2"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "salespersonCategory_description_2",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category2"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "salespersonCategory_id_3",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category3"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "salespersonCategory_code_3",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category3"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "salespersonCategory_description_3",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category3"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "salespersonCategory_id_4",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category4"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "salespersonCategory_code_4",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category4"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "salespersonCategory_description_4",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category4"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "salespersonCategory_id_5",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category5"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "salespersonCategory_code_5",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category5"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "salespersonCategory_description_5",
-      header: utils.cellHeader(
-        t("/@word/personSalesperson"),
-        t("/catalog/person/person.category5"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    { id: "salesCommission", header: utils.cellHeader(t("/@word/salesCommission")), width: "16ch" },
-    {
-      id: "incomingList_id",
-      header: utils.cellHeader(t("/material/incomingList"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "sale_id",
-      header: utils.cellHeader(t("/sale/sale"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    { id: "sale_code", header: utils.cellHeader(t("/sale/sale"), t("/@word/code")), width: "16ch" },
-    {
-      id: "sale_date",
-      header: utils.cellHeader(t("/sale/sale"), t("/@word/date")),
-      width: "10ch",
-      cell: ({ value }) => utils.formatDate(value),
-    },
-    { id: "salesHub", header: utils.cellHeader(t("/@word/salesHub")), width: "16ch" },
-    { id: "salesChannel", header: utils.cellHeader(t("/@word/salesChannel")), width: "16ch" },
-    {
-      id: "outgoingList_id",
-      header: utils.cellHeader(t("/material/outgoingList"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "product_id",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "product_code",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "product_description",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "product_complement",
-      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/complement")),
-      width: "16ch",
-    },
-    {
-      id: "fiscalProfileProduct_id",
-      header: utils.cellHeader(t("/fiscal/fiscalProfileProduct"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "fiscalProfileProduct_description",
-      header: utils.cellHeader(t("/fiscal/fiscalProfileProduct"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "productCategory_id_1",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category1"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productCategory_code_1",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category1"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "productCategory_description_1",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category1"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "productCategory_id_2",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category2"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productCategory_code_2",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category2"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "productCategory_description_2",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category2"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "productCategory_id_3",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category3"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productCategory_code_3",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category3"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "productCategory_description_3",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category3"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "productCategory_id_4",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category4"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productCategory_code_4",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category4"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "productCategory_description_4",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category4"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "productCategory_id_5",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category5"),
-        t("/@word/id"),
-      ),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productCategory_code_5",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category5"),
-        t("/@word/code"),
-      ),
-      width: "16ch",
-    },
-    {
-      id: "productCategory_description_5",
-      header: utils.cellHeader(
-        t("/catalog/product/product"),
-        t("/catalog/product/product.category5"),
-        t("/@word/description"),
-      ),
-      width: "24ch",
-    },
-    {
-      id: "product_properties_br_NCM",
-      header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_NCM")),
-      width: "16ch",
-    },
-    {
-      id: "product_properties_br_CEST",
-      header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_CEST")),
-      width: "16ch",
-    },
-    {
-      id: "productPacking_id",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productPacking_code",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "productPacking_complement",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
-      width: "16ch",
-    },
-    {
-      id: "productPacking_units",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/units")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productVariant_id",
-      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "productVariant_code",
-      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "productVariant_description",
-      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "taxationOperation_id",
-      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "taxationOperation_code",
-      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/code")),
-      width: "16ch",
-    },
-    {
-      id: "taxationOperation_description",
-      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/description")),
-      width: "24ch",
-    },
-    {
-      id: "invoiceItem_unitValue",
-      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/unitValue")),
-      width: "16ch",
-      className: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "invoiceItem_unitValueUnits",
-      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/unitValueUnits")),
-      width: "16ch",
-      className: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "unit_id",
-      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/id")),
-      width: "8ch",
-      className: "number",
-    },
-    {
-      id: "unit_code",
-      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/code")),
-      width: "8ch",
-    },
-    {
-      id: "sum_quantity",
-      header: utils.cellHeader(t("/@word/quantity")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_quantity) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_referencedQuantity",
-      header: utils.cellHeader(t("/@word/referencedQuantity")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_referencedQuantity) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_referencedBalance",
-      header: utils.cellHeader(t("/@word/referencedBalance")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_referencedBalance) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_quantity_units",
-      header: utils.cellHeader(t("/@word/quantityUnits")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_quantity_units) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_grossProductValue",
-      header: utils.cellHeader(t("/@word/grossProductValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_grossProductValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_discountValue",
-      header: utils.cellHeader(t("/@word/discountValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_discountValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_productValue",
-      header: utils.cellHeader(t("/@word/productValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_productValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_freightValue",
-      header: utils.cellHeader(t("/@word/freightValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_freightValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_insuranceValue",
-      header: utils.cellHeader(t("/@word/insuranceValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_insuranceValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_otherValue",
-      header: utils.cellHeader(t("/@word/otherValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_otherValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_operationValue",
-      header: utils.cellHeader(t("/@word/operationValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_operationValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_insideTaxValue",
-      header: utils.cellHeader(t("/@word/insideTaxValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_insideTaxValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_outsideTaxValue",
-      header: utils.cellHeader(t("/@word/outsideTaxValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_outsideTaxValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_totalValue",
-      header: utils.cellHeader(t("/@word/totalValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_totalValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_effectiveValue",
-      header: utils.cellHeader(t("/@word/effectiveValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_effectiveValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "sum_netWeightKg",
-      header: utils.cellHeader(t("/@word/netWeightKg")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_netWeightKg) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_grossWeightKg",
-      header: utils.cellHeader(t("/@word/grossWeightKg")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_grossWeightKg) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "sum_contributionMargin",
-      header: utils.cellHeader(t("/@word/contributionMargin")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.sum_contributionMargin) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "count_invoice",
-      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/count")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.count_invoice) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "count_invoiceItem",
-      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/count")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.count_invoiceItem) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-    {
-      id: "salesCommissionBaseValue",
-      header: utils.cellHeader(t("/@word/salesCommission"), t("/@word/baseValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.salesCommissionBaseValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "salesCommissionValue",
-      header: utils.cellHeader(t("/@word/salesCommission"), t("/@word/value")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.salesCommissionValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "invoiceItem_totalValue",
-      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/totalValue")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatCurrency(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.invoiceItem_totalValue) || 0), 0),
-      footer: ({ value }) => utils.formatCurrency(value),
-    },
-    {
-      id: "invoiceItem_quantity",
-      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/quantity")),
-      width: "16ch",
-      className: "number",
-      headerClassName: "number",
-      cell: ({ value }) => utils.formatNumber(value),
-      footerValue: ({ data }) =>
-        data.reduce((red, item) => red + (Number(item.invoiceItem_quantity) || 0), 0),
-      footer: ({ value }) => utils.formatNumber(value),
-    },
-  ];
+  const visibleFields = settings?.fields ?? [];
 
-  data = utils.sort(data, settings?.sort || []);
+  const fieldGroups = [];
+
+  const fields = [];
 
   const visibleColumns = (settings?.columns ?? []).filter(
     (item) => !(settings?.removeColumns ?? []).includes(item),
@@ -1155,8 +19,1143 @@ export default function ({ data = [], meta = {}, t }) {
 
   const groups = settings?.groups || [];
 
+  const columns = [
+    { id: "flow", header: utils.cellHeader(t("/@word/flow")), width: "16ch" },
+    { id: "returned", header: utils.cellHeader(t("/@word/returned")), width: "16ch" },
+    { id: "sign", header: utils.cellHeader(t("/@word/sign")), width: "16ch" },
+    {
+      id: "invoice_id",
+      className: "id",
+      width: "8ch",
+      header: utils.cellHeader(t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "invoice_status",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/status")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "workflow_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "workflow_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "workflow_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/system/workflow/workflow"), t("/@word/description")),
+    },
+    {
+      id: "workflowNode_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "workflowNode_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "workflowNode_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/system/workflow/workflowNode"), t("/@word/description")),
+    },
+    {
+      id: "invoice_number",
+      className: "number",
+      width: "10ch",
+      header: utils.cellHeader(t("/@word/number")),
+      cell: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "invoice_date",
+      width: "12ch",
+      header: utils.cellHeader(t("/@word/date")),
+      cell: ({ value }) => utils.formatDate(value),
+    },
+    {
+      id: "invoice_day",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/day")),
+    },
+    {
+      id: "invoice_month",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/month")),
+    },
+    {
+      id: "invoice_year",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/year")),
+    },
+    {
+      id: "invoice_issueDate",
+      width: "12ch",
+      header: utils.cellHeader(t("/@word/issueDate")),
+      cell: ({ value }) => utils.formatDate(value),
+    },
+    {
+      id: "invoice_freightType",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/freightType")),
+    },
+    {
+      id: "invoice_tags",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/tags")),
+    },
+    {
+      id: "invoice_properties_volumes",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoice.properties.volumes")),
+    },
+    {
+      id: "company_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "company_code",
+      width: "10ch",
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "company_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/name")),
+    },
+    {
+      id: "company_fantasyName",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/fantasyName")),
+    },
+    {
+      id: "company_nameCalc",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/company/company"), t("/@word/nameCalc")),
+    },
+    {
+      id: "fiscalProfileOperation_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "fiscalProfileOperation_code",
+      width: "20ch",
+      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "fiscalProfileOperation_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/fiscal/fiscalProfileOperation"), t("/@word/description")),
+    },
+    {
+      id: "invoiceSeries_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "invoiceSeries_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "invoiceSeries_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/fiscal/invoiceSeries"), t("/@word/description")),
+    },
+    {
+      id: "person_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "person_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/name")),
+    },
+    {
+      id: "person_fantasyName",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/fantasyName")),
+    },
+    {
+      id: "person_nameCalc",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/person/person"), t("/@word/nameCalc")),
+    },
+    {
+      id: "personGroup_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/id")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) => data.length,
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "personGroup_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personGroup_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/person/personGroup"), t("/@word/description")),
+    },
+    {
+      id: "personCategory_id_1",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category1"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "personCategory_code_1",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category1"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personCategory_description_1",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category1"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "personCategory_id_2",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category2"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "personCategory_code_2",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category2"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personCategory_description_2",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category2"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "personCategory_id_3",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category3"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "personCategory_code_3",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category3"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personCategory_description_3",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category3"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "personCategory_id_4",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category4"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "personCategory_code_4",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category4"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personCategory_description_4",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category4"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "personCategory_id_5",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category5"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "personCategory_code_5",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category5"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "personCategory_description_5",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/person/person"),
+        t("/catalog/person/person.category5"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "city_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/location/city"), t("/@word/id")),
+    },
+    {
+      id: "city_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/location/city"), t("/@word/name")),
+    },
+    {
+      id: "state_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/id")),
+    },
+    {
+      id: "state_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "state_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/location/state"), t("/@word/name")),
+    },
+    {
+      id: "country_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/id")),
+    },
+    {
+      id: "country_codeA2",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/codeA2")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "country_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/location/country"), t("/@word/name")),
+    },
+    {
+      id: "shipping_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/shipping"), t("/@word/id")),
+    },
+    {
+      id: "shipping_name",
+      width: "24ch",
+      header: utils.cellHeader(t("/shipping"), t("/@word/name")),
+    },
+    {
+      id: "shipping_fantasyName",
+      width: "24ch",
+      header: utils.cellHeader(t("/shipping"), t("/@word/fantasyName")),
+    },
+    {
+      id: "shipping_nameCalc",
+      width: "24ch",
+      header: utils.cellHeader(t("/shipping"), t("/@word/nameCalc")),
+    },
+    {
+      id: "salesperson_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/@word/id")),
+    },
+    { id: "salesperson_name", width: "24ch", header: utils.cellHeader(t("/@word/name")) },
+    {
+      id: "salesperson_fantasyName",
+      width: "24ch",
+      header: utils.cellHeader(t("/@word/fantasyName")),
+    },
+    { id: "salesperson_nameCalc", width: "24ch", header: utils.cellHeader(t("/@word/nameCalc")) },
+    {
+      id: "salesperson_properties",
+      width: "24ch",
+      header: utils.cellHeader(t("/@word/properties")),
+      cell: ({ value }) => (value != null ? JSON.stringify(value) : null),
+    },
+    {
+      id: "salespersonCategory_id_1",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category1"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "salespersonCategory_code_1",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category1"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "salespersonCategory_description_1",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category1"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "salespersonCategory_id_2",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category2"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "salespersonCategory_code_2",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category2"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "salespersonCategory_description_2",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category2"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "salespersonCategory_id_3",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category3"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "salespersonCategory_code_3",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category3"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "salespersonCategory_description_3",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category3"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "salespersonCategory_id_4",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category4"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "salespersonCategory_code_4",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category4"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "salespersonCategory_description_4",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category4"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "salespersonCategory_id_5",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category5"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "salespersonCategory_code_5",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category5"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "salespersonCategory_description_5",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/@word/personSalesperson"),
+        t("/catalog/person/person.category5"),
+        t("/@word/description"),
+      ),
+    },
+    { id: "salesCommission", width: "16ch", header: utils.cellHeader(t("/@word/salesCommission")) },
+    {
+      id: "incomingList_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/material/incomingList"), t("/@word/id")),
+    },
+    {
+      id: "sale_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/sale/sale"), t("/@word/id")),
+    },
+    {
+      id: "sale_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/sale/sale"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "sale_date",
+      width: "10ch",
+      header: utils.cellHeader(t("/sale/sale"), t("/@word/date")),
+      cell: ({ value }) => utils.formatDate(value),
+    },
+    { id: "salesHub", width: "16ch", header: utils.cellHeader(t("/@word/salesHub")) },
+    { id: "salesChannel", width: "16ch", header: utils.cellHeader(t("/@word/salesChannel")) },
+    {
+      id: "outgoingList_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/material/outgoingList"), t("/@word/id")),
+    },
+    {
+      id: "product_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/id")),
+    },
+    {
+      id: "product_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "product_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/description")),
+    },
+    {
+      id: "product_complement",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product/product"), t("/@word/complement")),
+    },
+    {
+      id: "fiscalProfileProduct_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/fiscal/fiscalProfileProduct"), t("/@word/id")),
+    },
+    {
+      id: "fiscalProfileProduct_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/fiscal/fiscalProfileProduct"), t("/@word/description")),
+    },
+    {
+      id: "productCategory_id_1",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category1"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "productCategory_code_1",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category1"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productCategory_description_1",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category1"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "productCategory_id_2",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category2"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "productCategory_code_2",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category2"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productCategory_description_2",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category2"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "productCategory_id_3",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category3"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "productCategory_code_3",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category3"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productCategory_description_3",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category3"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "productCategory_id_4",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category4"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "productCategory_code_4",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category4"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productCategory_description_4",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category4"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "productCategory_id_5",
+      width: "8ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category5"),
+        t("/@word/id"),
+      ),
+    },
+    {
+      id: "productCategory_code_5",
+      width: "16ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category5"),
+        t("/@word/code"),
+      ),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productCategory_description_5",
+      width: "24ch",
+      header: utils.cellHeader(
+        t("/catalog/product/product"),
+        t("/catalog/product/product.category5"),
+        t("/@word/description"),
+      ),
+    },
+    {
+      id: "product_properties_br_NCM",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_NCM")),
+    },
+    {
+      id: "product_properties_br_CEST",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_CEST")),
+    },
+    {
+      id: "productPacking_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/id")),
+    },
+    {
+      id: "productPacking_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productPacking_descriptionCalc",
+      width: "30ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
+      cellValue: ({ row }) =>
+        [row.product_description, row.productPacking_complement, row.productVariant_description]
+          .filter(Boolean)
+          .join(", "),
+    },
+    {
+      id: "productPacking_complement",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
+    },
+    {
+      id: "productPacking_units",
+      className: "number",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/units")),
+    },
+    {
+      id: "productVariant_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/id")),
+    },
+    {
+      id: "productVariant_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "productVariant_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/catalog/product/productVariant"), t("/@word/description")),
+    },
+    {
+      id: "taxationOperation_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/id")),
+    },
+    {
+      id: "taxationOperation_code",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "taxationOperation_description",
+      width: "24ch",
+      header: utils.cellHeader(t("/fiscal/taxation/taxationOperation"), t("/@word/description")),
+    },
+    {
+      id: "invoiceItem_unitValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/unitValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "invoiceItem_unitValueUnits",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/unitValueUnits")),
+      cell: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "unit_id",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/id")),
+    },
+    {
+      id: "unit_code",
+      width: "8ch",
+      header: utils.cellHeader(t("/catalog/product/unit"), t("/@word/code")),
+      cell: ({ value }) => <Badge>{value}</Badge>,
+    },
+    {
+      id: "sum_quantity",
+      className: "number",
+      width: "12ch",
+      header: utils.cellHeader(t("/@word/quantity")),
+      cell: ({ row, value }) => utils.formatQuantity(value, { unit_code: row.unit_code }),
+      footerValue: ({ data }) =>
+        utils.sumBy(
+          data,
+          (item) => item.unit_code,
+          (item) => item.sum_quantity,
+        ),
+      footer: ({ value }) =>
+        utils.renderAggr(value, (quantity, unit_code) =>
+          utils.formatQuantity(quantity, { unit_code }),
+        ),
+    },
+    {
+      id: "sum_referencedQuantity",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/referencedQuantity")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_referencedQuantity) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "sum_referencedBalance",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/referencedBalance")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_referencedBalance) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "sum_quantity_units",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/quantityUnits")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_quantity_units) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "sum_grossProductValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/grossProductValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_grossProductValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_discountValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/discountValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_discountValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_productValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/productValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_productValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_freightValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/freightValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_freightValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_insuranceValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/insuranceValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_insuranceValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_otherValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/otherValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_otherValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_operationValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/operationValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_operationValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_insideTaxValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/insideTaxValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_insideTaxValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_outsideTaxValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/outsideTaxValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_outsideTaxValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_totalValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/totalValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_totalValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_effectiveValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/effectiveValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_effectiveValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "sum_netWeightKg",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/netWeightKg")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_netWeightKg) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "sum_grossWeightKg",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/grossWeightKg")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_grossWeightKg) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "sum_contributionMargin",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/contributionMargin")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.sum_contributionMargin) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "count_invoice",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoice"), t("/@word/count")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.count_invoice) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "count_invoiceItem",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/count")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.count_invoiceItem) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+    {
+      id: "salesCommissionBaseValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/salesCommission"), t("/@word/baseValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.salesCommissionBaseValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "salesCommissionValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/@word/salesCommission"), t("/@word/value")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.salesCommissionValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "invoiceItem_totalValue",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/totalValue")),
+      cell: ({ value }) => utils.formatCurrency(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.invoiceItem_totalValue) || 0), 0),
+      footer: ({ value }) => utils.formatCurrency(value),
+    },
+    {
+      id: "invoiceItem_quantity",
+      className: "number",
+      width: "16ch",
+      header: utils.cellHeader(t("/fiscal/invoiceItem"), t("/@word/quantity")),
+      cell: ({ value }) => utils.formatNumber(value),
+      footerValue: ({ data }) =>
+        data.reduce((red, item) => red + (Number(item.invoiceItem_quantity) || 0), 0),
+      footer: ({ value }) => utils.formatNumber(value),
+    },
+  ];
+
+  // return utils.meta_info({ fields, columns });
+
+  data = utils.sort(data, settings?.sort || []);
+
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       <div
         className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{
@@ -1167,7 +1166,13 @@ export default function ({ data = [], meta = {}, t }) {
         key={data.id}
       >
         <header>
-          <h1>{t("/fiscal/report/invoiceList")}</h1>
+          <section className="title">
+            <dl style={{ flex: 1 }}>
+              <dd>
+                <h1>{t("/fiscal/report/invoiceList")}</h1>
+              </dd>
+            </dl>
+          </section>
           <section className="parameters">
             {report.parameters?.DATE_START && (
               <dl>
@@ -1413,7 +1418,13 @@ export default function ({ data = [], meta = {}, t }) {
         </header>
         <main>
           <div className="content">
-            <Table columns={columns} visibleColumns={visibleColumns} data={data} groups={groups} />
+            <Table
+              columns={columns}
+              visibleColumns={visibleColumns}
+              data={data}
+              groups={groups}
+              footerTitle={t("/@word/summary")}
+            />
           </div>
         </main>
       </div>

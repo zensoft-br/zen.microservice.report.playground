@@ -4,7 +4,10 @@ export default function ({ data = [], t }) {
   data = calculateVolumeMetrics(data);
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((obj) => (
         <div
           className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}

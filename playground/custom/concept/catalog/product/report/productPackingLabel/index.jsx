@@ -11,7 +11,10 @@ export default function ({ data = [], t }) {
   }, {});
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {Object.values(data).map((arr, index) => {
         const product = arr[0].product;
         return (

@@ -62,7 +62,10 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = [{ columnId: "group" }];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       <div className="report-container a4">
         <header>
           <h1>Fechamento diário sintético</h1>

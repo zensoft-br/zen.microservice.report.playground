@@ -575,153 +575,155 @@ body {
     -webkit-column-break-inside: avoid;
   }
 
-  .badge {
-    display: inline-block;
+  &:not(.no-color) {
+    .badge {
+      display: inline-block;
 
-    color: white;
+      color: white;
 
-    margin-bottom: var(--padding-cell);
-    margin-right: var(--padding-cell);
-    border-radius: var(--border-radius);
-    padding: var(--padding-cell) calc(var(--padding-cell) * 2);
+      margin-bottom: var(--padding-cell);
+      margin-right: var(--padding-cell);
+      border-radius: var(--border-radius);
+      padding: var(--padding-cell) calc(var(--padding-cell) * 2);
 
-    &:not(.inverted) {
-      font-weight: 500;
+      &:not(.inverted) {
+        font-weight: 500;
 
-      &.c-1 {
-        background-color: #e63946;
+        &.c-1 {
+          background-color: #e63946;
+        }
+
+        &.c-2 {
+          background-color: #fb8500;
+        }
+
+        &.c-3 {
+          background-color: #2a9d8f;
+        }
+
+        &.c-4 {
+          background-color: #0077b6;
+        }
+
+        &.c-5 {
+          background-color: #8338ec;
+        }
+
+        &.c-6 {
+          background-color: #ff006e;
+        }
+
+        &.c-7 {
+          background-color: #00afb9;
+        }
+
+        &.c-8 {
+          background-color: #f4a261;
+        }
+
+        &.c-9 {
+          background-color: #3a0ca3;
+        }
+
+        &.c-10 {
+          background-color: #006d77;
+        }
+
+        &.c-11 {
+          background-color: #c11277;
+        }
+
+        &.c-12 {
+          background-color: #00b4d8;
+        }
+
+        &.c-13 {
+          background-color: #2b2d42;
+        }
+
+        &.c-14 {
+          background-color: #70e000;
+        }
+
+        &.c-15 {
+          background-color: #d00000;
+        }
+
+        &.c-16 {
+          background-color: #5a189a;
+        }
       }
 
-      &.c-2 {
-        background-color: #fb8500;
-      }
+      &.inverted {
+        color: unset;
+        // font-weight: bold;
 
-      &.c-3 {
-        background-color: #2a9d8f;
-      }
+        border-radius: unset;
+        padding: unset;
 
-      &.c-4 {
-        background-color: #0077b6;
-      }
+        &.c-1 {
+          color: #e63946;
+        }
 
-      &.c-5 {
-        background-color: #8338ec;
-      }
+        &.c-2 {
+          color: #fb8500;
+        }
 
-      &.c-6 {
-        background-color: #ff006e;
-      }
+        &.c-3 {
+          color: #2a9d8f;
+        }
 
-      &.c-7 {
-        background-color: #00afb9;
-      }
+        &.c-4 {
+          color: #0077b6;
+        }
 
-      &.c-8 {
-        background-color: #f4a261;
-      }
+        &.c-5 {
+          color: #8338ec;
+        }
 
-      &.c-9 {
-        background-color: #3a0ca3;
-      }
+        &.c-6 {
+          color: #ff006e;
+        }
 
-      &.c-10 {
-        background-color: #006d77;
-      }
+        &.c-7 {
+          color: #00afb9;
+        }
 
-      &.c-11 {
-        background-color: #c11277;
-      }
+        &.c-8 {
+          color: #f4a261;
+        }
 
-      &.c-12 {
-        background-color: #00b4d8;
-      }
+        &.c-9 {
+          color: #3a0ca3;
+        }
 
-      &.c-13 {
-        background-color: #2b2d42;
-      }
+        &.c-10 {
+          color: #006d77;
+        }
 
-      &.c-14 {
-        background-color: #70e000;
-      }
+        &.c-11 {
+          color: #c11277;
+        }
 
-      &.c-15 {
-        background-color: #d00000;
-      }
+        &.c-12 {
+          color: #00b4d8;
+        }
 
-      &.c-16 {
-        background-color: #5a189a;
-      }
-    }
+        &.c-13 {
+          color: #2b2d42;
+        }
 
-    &.inverted {
-      color: unset;
-      // font-weight: bold;
+        &.c-14 {
+          color: #70e000;
+        }
 
-      border-radius: unset;
-      padding: unset;
+        &.c-15 {
+          color: #d00000;
+        }
 
-      &.c-1 {
-        color: #e63946;
-      }
-
-      &.c-2 {
-        color: #fb8500;
-      }
-
-      &.c-3 {
-        color: #2a9d8f;
-      }
-
-      &.c-4 {
-        color: #0077b6;
-      }
-
-      &.c-5 {
-        color: #8338ec;
-      }
-
-      &.c-6 {
-        color: #ff006e;
-      }
-
-      &.c-7 {
-        color: #00afb9;
-      }
-
-      &.c-8 {
-        color: #f4a261;
-      }
-
-      &.c-9 {
-        color: #3a0ca3;
-      }
-
-      &.c-10 {
-        color: #006d77;
-      }
-
-      &.c-11 {
-        color: #c11277;
-      }
-
-      &.c-12 {
-        color: #00b4d8;
-      }
-
-      &.c-13 {
-        color: #2b2d42;
-      }
-
-      &.c-14 {
-        color: #70e000;
-      }
-
-      &.c-15 {
-        color: #d00000;
-      }
-
-      &.c-16 {
-        color: #5a189a;
+        &.c-16 {
+          color: #5a189a;
+        }
       }
     }
   }

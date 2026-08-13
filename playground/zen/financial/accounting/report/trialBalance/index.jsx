@@ -103,7 +103,10 @@ export default function ({ data = [], meta = {}, t }) {
   data = utils.sort(data, settings?.sort || []);
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       <div
         className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{

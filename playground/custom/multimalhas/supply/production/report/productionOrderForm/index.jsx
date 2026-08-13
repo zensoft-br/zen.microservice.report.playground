@@ -179,7 +179,10 @@ export default function ({ data = [], meta = {}, t }) {
   }, {});
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {/* Impresso 1, Ordens de produção */}
       <div
         className={`report-productionOrder report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}

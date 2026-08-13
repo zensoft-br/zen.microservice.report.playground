@@ -820,17 +820,17 @@ export const renderAggr = (value, formatFn) => {
   ));
 };
 
-export function meta_info({ fields, columns }) {
+export function meta_info({ fields = [], columns = [] }) {
   return (
     <pre>
       {JSON.stringify(
         {
           info: {
-            availableFields: fields.map((field) => field.id).sort(),
+            availableFields: fields?.map((field) => field.id).sort(),
             availableColumns: columns.map((field) => field.id).sort(),
           },
           translations: {
-            fields: fields.reduce((red, field) => {
+            fields: fields?.reduce((red, field) => {
               red[field.id] = field.label;
               return red;
             }, {}),

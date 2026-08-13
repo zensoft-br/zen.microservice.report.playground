@@ -49,10 +49,16 @@ export default function SaleListReport({ data = [], meta = {}, t }) {
       value: (row) => row.personDesc,
     },
     {
-      id: "salespersonDesc",
+      id: "personSalespersonDesc",
       group: "main",
-      label: utils.cellHeader(t("/@word/salesperson")),
-      value: (row) => row.salespersonDesc,
+      label: utils.cellHeader(t("/@word/personSalesperson")),
+      value: (row) => row.personSalespersonDesc,
+    },
+    {
+      id: "personSalesperson_personSalespersonDesc",
+      group: "main",
+      label: utils.cellHeader(t("/@word/personSalesperson_personSalesperson")),
+      value: (row) => row.personSalesperson_personSalespersonDesc,
     },
     {
       id: "saleProfileDesc",
@@ -886,11 +892,6 @@ export default function SaleListReport({ data = [], meta = {}, t }) {
       cell: ({ value }) => <Badge>{value}</Badge>,
     },
     {
-      id: "productPacking_complement",
-      width: "15ch",
-      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
-    },
-    {
       id: "productPacking_descriptionCalc",
       width: "30ch",
       header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
@@ -898,6 +899,11 @@ export default function SaleListReport({ data = [], meta = {}, t }) {
         [row.product_description, row.productPacking_complement, row.productVariant_description]
           .filter(Boolean)
           .join(", "),
+    },
+    {
+      id: "productPacking_complement",
+      width: "15ch",
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/complement")),
     },
     {
       id: "productPacking_units",
@@ -1335,7 +1341,10 @@ export default function SaleListReport({ data = [], meta = {}, t }) {
   data = utils.sort(data, settings?.sort || []);
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       <div
         className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
         style={{

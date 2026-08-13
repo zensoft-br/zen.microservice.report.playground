@@ -14,6 +14,12 @@ export default function ({ data = [], meta = {}, t }) {
   const settings =
     utils.deepMerge(report?.properties?.["#settings"], report?.properties?.userSettings) ?? {};
 
+  const visibleColumns = (settings?.columns ?? []).filter(
+    (item) => !(settings?.removeColumns ?? []).includes(item),
+  );
+
+  const groups = settings?.groups || [];
+
   const columns = [
     {
       id: "itemSequence",
@@ -120,14 +126,13 @@ export default function ({ data = [], meta = {}, t }) {
     },
   ];
 
-  const visibleColumns = (settings?.columns ?? []).filter(
-    (item) => !(settings?.removeColumns ?? []).includes(item),
-  );
-
-  const groups = settings?.groups || [];
+  // return utils.meta_info({ fields, columns });
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((quote) => (
         <div
           className={`report-container flex v gap ${settings?.pageSize ?? "a4"} ${settings?.orientation}`}
@@ -139,16 +144,25 @@ export default function ({ data = [], meta = {}, t }) {
           key={data.id}
         >
           <header>
-            <div className="brand">
-              <img src={quote.company?.image?.url} style={{ width: "3cm" }}></img>
-            </div>
-            <h1 className="flex h gap align-center" style={{ justifyContent: "space-between" }}>
-              {t("/sale/quote")} {quote.id}
-              <img
-                src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote.id}`}
-                style={{ width: "1.5cm" }}
-              ></img>
-            </h1>
+            <section className="title">
+              <dl style={{ flex: 0 }}>
+                <dd>
+                  <img src={quote.company?.image?.url} />
+                </dd>
+              </dl>
+              <dl style={{ flex: 1 }}>
+                <dd>
+                  <h1>
+                    {t("/sale/quote")} {quote.id}
+                  </h1>
+                </dd>
+              </dl>
+              <dl style={{ flex: 0 }}>
+                <dd>
+                  <img src={`https://barcode.zensoft.com.br?bcid=qrcode&text=${quote}`} />
+                </dd>
+              </dl>
+            </section>
             <section className="parameters">
               <dl>
                 <dt>{t("/catalog/company/company")}</dt>

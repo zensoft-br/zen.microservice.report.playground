@@ -101,7 +101,10 @@ export default function ({ data = [], meta = {}, t }) {
   const groups = settings?.groups || [];
 
   return (
-    <div className="report-wrapper" style={{ fontSize: settings?.fontSize }}>
+    <div
+      className={`report-wrapper ${settings?.className ?? ""}`}
+      style={{ fontSize: settings?.fontSize }}
+    >
       {data.map((item, index) => (
         <div className="report-container a4">
           <header>
