@@ -2,14 +2,16 @@ import * as utils from "./utils.jsx";
 
 export default function ({ data = [], meta = {}, t }) {
   const { report = {} } = meta;
-  
-  data.forEach(invoice => {
+
+  data.forEach((invoice) => {
     invoice.items?.sort((a, b) => {
       let i = Number(a.properties.sequence ?? 0) - Number(b.properties.sequence ?? 0);
       if (i !== 0) return i;
       return (a.code ?? a.productPacking.code).localeCompare(b.code ?? b.productPacking.code);
     });
-    invoice.billingTitles = invoice.billingTitles?.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    invoice.billingTitles = invoice.billingTitles?.sort(
+      (a, b) => new Date(a.dueDate) - new Date(b.dueDate),
+    );
   });
 
   return (
@@ -29,7 +31,12 @@ export default function ({ data = [], meta = {}, t }) {
                 <div className="grid band h" style={{ gridTemplateColumns: "4fr 1fr" }}>
                   <div className="band v">
                     <div className="slot" style={{ fontSize: "90%" }}>
-                      Recebemos de {item.company.person.name} os produtos e/ou serviços constantes da nota fiscal nº <span className="number">{utils.formatNumber(item.number)}</span>, emissão: <span className="date">{utils.formatDate(item.date)}</span>, valor total <span className="number">{utils.formatCurrency(item.totalValue)}</span>, destinatário {item.person.name}, endereço {address(item.person)}.
+                      Recebemos de {item.company.person.name} os produtos e/ou serviços constantes
+                      da nota fiscal nº{" "}
+                      <span className="number">{utils.formatNumber(item.number)}</span>, emissão:{" "}
+                      <span className="date">{utils.formatDate(item.date)}</span>, valor total{" "}
+                      <span className="number">{utils.formatCurrency(item.totalValue)}</span>,
+                      destinatário {item.person.name}, endereço {address(item.person)}.
                     </div>
                     <div className="band h" style={{ minHeight: "1cm" }}>
                       <div className="slot">
@@ -43,8 +50,14 @@ export default function ({ data = [], meta = {}, t }) {
                     </div>
                   </div>
                   <div className="slot flex v align-center justify-space-around text-center">
-                    <div><b>NF-e</b></div>
-                    <div>Nº <span className="number">{utils.formatNumber(item.number)}</span><br />Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
+                    <div>
+                      <b>NF-e</b>
+                    </div>
+                    <div>
+                      Nº <span className="number">{utils.formatNumber(item.number)}</span>
+                      <br />
+                      Série {item.invoiceSeries?.properties?.fiscal_br_serie}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -62,29 +75,58 @@ export default function ({ data = [], meta = {}, t }) {
                     <label>Identificação do emitente</label>
                     <strong>{item.company.person.name}</strong>
                     <div>{address(item.company.person)}</div>
-                    <div>{[item.company.person.district, item.company.person.city?.name, item.company.person.city?.state.code, item.company.person.zipcode ? `${t("/@word/zipcode")} ${item.company.person.zipcode}` : ""].filter(Boolean).join(", ")}</div>
-                    {item.company.person.phone && <div>{t("/@word/phone")} {item.company.person.phone}</div>}
-                    {item.company.person.email && <div>{t("/@word/email")} {item.company.person.email}</div>}
+                    <div>
+                      {[
+                        item.company.person.district,
+                        item.company.person.city?.name,
+                        item.company.person.city?.state.code,
+                        item.company.person.zipcode
+                          ? `${t("/@word/zipcode")} ${item.company.person.zipcode}`
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </div>
+                    {item.company.person.phone && (
+                      <div>
+                        {t("/@word/phone")} {item.company.person.phone}
+                      </div>
+                    )}
+                    {item.company.person.email && (
+                      <div>
+                        {t("/@word/email")} {item.company.person.email}
+                      </div>
+                    )}
                   </div>
-                  <div className="slot flex v align-center justify-space-around text-center" style={{ justifyContent: "space-around" }}>
+                  <div
+                    className="slot flex v align-center justify-space-around text-center"
+                    style={{ justifyContent: "space-around" }}
+                  >
                     <strong>DANFE</strong>
                     <div>Documento auxiliar de nota fiscal eletrônica</div>
                     <div>{item.flow === "IN" ? "0 - Entrada" : "1 - Saída"}</div>
-                    <div>Nº <span className="number">{utils.formatNumber(item.number)}</span><br />Série {item.invoiceSeries?.properties?.fiscal_br_serie}</div>
+                    <div>
+                      Nº <span className="number">{utils.formatNumber(item.number)}</span>
+                      <br />
+                      Série {item.invoiceSeries?.properties?.fiscal_br_serie}
+                    </div>
                   </div>
                   <div className="band v">
                     <div className="slot">
-                      {item.nfeOut && <img src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.nfeOut?.chNFe}`} />}
+                      {item.nfeOut && (
+                        <img
+                          src={`https://barcode.zensoft.com.br?bcid=code128&scaleX=2&scaleY=1&text=${item.nfeOut?.chNFe}`}
+                        />
+                      )}
                     </div>
                     <div className="slot">
                       <label>Chave de acesso</label>
-                      <div style={{ textAlign: "center" }}>
-                        {splitInBlocks(item.nfeOut?.chNFe)}
-                      </div>
+                      <div style={{ textAlign: "center" }}>{splitInBlocks(item.nfeOut?.chNFe)}</div>
                     </div>
                     <div className="slot">
                       <div style={{ textAlign: "center" }}>
-                        Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora
+                        Consulta de autenticidade no portal nacional da NF-e
+                        www.nfe.fazenda.gov.br/portal ou no site da Sefaz Autorizadora
                       </div>
                     </div>
                   </div>
@@ -96,7 +138,11 @@ export default function ({ data = [], meta = {}, t }) {
                   </div>
                   <div className="slot">
                     <label>Protocolo de autorização de uso</label>
-                    <div>{item.nfeOut ? `${item.nfeOut.nProt}, ${utils.formatDateTime(item.nfeOut.dateTime)}` : ""}</div>
+                    <div>
+                      {item.nfeOut
+                        ? `${item.nfeOut.nProt}, ${utils.formatDateTime(item.nfeOut.dateTime)}`
+                        : ""}
+                    </div>
                   </div>
                 </div>
                 <div className="band h">
@@ -136,7 +182,11 @@ export default function ({ data = [], meta = {}, t }) {
                   <div className="band h" style={{ gridTemplateColumns: "50% 17% 17% 16%" }}>
                     <div className="slot">
                       <label>Endereço</label>
-                      <div>{[item.person.street, item.person.number, item.person.complement].filter(Boolean).join(", ")}</div>
+                      <div>
+                        {[item.person.street, item.person.number, item.person.complement]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>{t("/@word/district")}</label>
@@ -193,7 +243,15 @@ export default function ({ data = [], meta = {}, t }) {
                       <div className="band h" style={{ gridTemplateColumns: "50% 17% 17% 16%" }}>
                         <div className="slot">
                           <label>Endereço</label>
-                          <div>{[item.personAddressShipping.street, item.personAddressShipping.number, item.personAddressShipping.complement].filter(Boolean).join(", ")}</div>
+                          <div>
+                            {[
+                              item.personAddressShipping.street,
+                              item.personAddressShipping.number,
+                              item.personAddressShipping.complement,
+                            ]
+                              .filter(Boolean)
+                              .join(", ")}
+                          </div>
                         </div>
                         <div className="slot">
                           <label>{t("/@word/district")}</label>
@@ -215,7 +273,7 @@ export default function ({ data = [], meta = {}, t }) {
                         </div>
                         <div className="slot">
                           <label>{t("/@word/phone")}</label>
-                          <div>{<item className="person"></item>.phone}</div>
+                          <div>{(<item className="person"></item>).phone}</div>
                         </div>
                         <div className="slot">
                           <label>Inscrição estadual</label>
@@ -230,7 +288,10 @@ export default function ({ data = [], meta = {}, t }) {
                 {item.billingTitles?.length > 0 && (
                   <>
                     <label className="header">Fatura / Duplicatas</label>
-                    <div className="grid" style={{ gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--gap)" }}>
+                    <div
+                      className="grid"
+                      style={{ gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--gap)" }}
+                    >
                       {[0, 1, 2].map((colIndex) => (
                         <div key={colIndex} className="frame">
                           <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -242,15 +303,30 @@ export default function ({ data = [], meta = {}, t }) {
                               </tr>
                             </thead>
                             <tbody>
-                              {Array.from({ length: Math.ceil(item.billingTitles?.length / 3) }).map((_, rowIndex) => {
-                                const titleIndex = rowIndex + (colIndex * Math.ceil(item.billingTitles?.length / 3));
+                              {Array.from({
+                                length: Math.ceil(item.billingTitles?.length / 3),
+                              }).map((_, rowIndex) => {
+                                const titleIndex =
+                                  rowIndex + colIndex * Math.ceil(item.billingTitles?.length / 3);
                                 const billingTitle = item.billingTitles?.[titleIndex];
 
                                 return (
                                   <tr key={rowIndex}>
                                     <td>{billingTitle?.code || <>&nbsp;</>}</td>
-                                    <td className="date">{billingTitle?.dueDate ? utils.formatDate(billingTitle.dueDate) : <>&nbsp;</>}</td>
-                                    <td className="number">{billingTitle?.value ? utils.formatCurrency(billingTitle.value) : <>&nbsp;</>}</td>
+                                    <td className="date">
+                                      {billingTitle?.dueDate ? (
+                                        utils.formatDate(billingTitle.dueDate)
+                                      ) : (
+                                        <>&nbsp;</>
+                                      )}
+                                    </td>
+                                    <td className="number">
+                                      {billingTitle?.value ? (
+                                        utils.formatCurrency(billingTitle.value)
+                                      ) : (
+                                        <>&nbsp;</>
+                                      )}
+                                    </td>
                                   </tr>
                                 );
                               })}
@@ -264,61 +340,99 @@ export default function ({ data = [], meta = {}, t }) {
 
                 {/* IMPOSTO */}
                 <label className="header">Cálculo do imposto</label>
-                <div className="frame" >
-                  <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+                <div className="frame">
+                  <div
+                    className="band h"
+                    style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
+                  >
                     <div className="slot">
                       <label>Base cálc. ICMS</label>
-                      <div className="number">{utils.formatCurrency((item.taxationSummary.ICMS?.baseValue ?? 0) + (item.taxationSummary.ICMS_SN?.baseValue ?? 0))}</div>
+                      <div className="number">
+                        {utils.formatCurrency(
+                          (item.taxationSummary.ICMS?.baseValue ?? 0) +
+                            (item.taxationSummary.ICMS_SN?.baseValue ?? 0),
+                        )}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor ICMS</label>
-                      <div className="number">{utils.formatCurrency((item.taxationSummary.ICMS?.taxValue ?? 0) + (item.taxationSummary.ICMS_SN?.taxValue ?? 0))}</div>
+                      <div className="number">
+                        {utils.formatCurrency(
+                          (item.taxationSummary.ICMS?.taxValue ?? 0) +
+                            (item.taxationSummary.ICMS_SN?.taxValue ?? 0),
+                        )}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Base cálc. ICMS ST</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.ICMS_ST?.baseValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.ICMS_ST?.baseValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor ICMS ST</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.ICMS_ST?.taxValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.ICMS_ST?.taxValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor IPI</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.IPI?.taxValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.IPI?.taxValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor II</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.II?.taxValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.II?.taxValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor dos produtos</label>
-                      <div className="number">{utils.formatCurrency(item.summary.grossProductValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.summary.grossProductValue ?? 0)}
+                      </div>
                     </div>
                   </div>
-                  <div className="band h" style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
+                  <div
+                    className="band h"
+                    style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
+                  >
                     <div className="slot">
                       <label>Valor Frete</label>
-                      <div className="number">{utils.formatCurrency(item.summary.freightValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.summary.freightValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor seguro</label>
-                      <div className="number">{utils.formatCurrency(item.summary.insuranceValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.summary.insuranceValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor desconto</label>
-                      <div className="number">{utils.formatCurrency(item.summary.discountValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.summary.discountValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Outras despesas</label>
-                      <div className="number">{utils.formatCurrency(item.summary.otherValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.summary.otherValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor PIS</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.PIS?.taxValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.PIS?.taxValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Valor COFINS</label>
-                      <div className="number">{utils.formatCurrency(item.taxationSummary.COFINS?.taxValue ?? 0)}</div>
+                      <div className="number">
+                        {utils.formatCurrency(item.taxationSummary.COFINS?.taxValue ?? 0)}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Total da nota</label>
@@ -330,14 +444,25 @@ export default function ({ data = [], meta = {}, t }) {
                 {/* TRANSPORTE */}
                 <label className="header">Transportador / Volumes transportados</label>
                 <div className="frame">
-                  <div className="band h" style={{ gridTemplateColumns: "3fr 1fr 1fr 1fr 0.5fr 1.5fr" }}>
+                  <div
+                    className="band h"
+                    style={{ gridTemplateColumns: "3fr 1fr 1fr 1fr 0.5fr 1.5fr" }}
+                  >
                     <div className="slot">
                       <label>Nome / Razão social</label>
                       <div>{item.personShipping?.name}</div>
                     </div>
                     <div className="slot">
                       <label>Frete por conta</label>
-                      <div>{{"NONE": "9 - Sem frete", "ISSUER": "0 - Emitente", "RECIPIENT": "1 - Destinatário"}[item.freightType]}</div>
+                      <div>
+                        {
+                          {
+                            NONE: "9 - Sem frete",
+                            ISSUER: "0 - Emitente",
+                            RECIPIENT: "1 - Destinatário",
+                          }[item.freightType]
+                        }
+                      </div>
                     </div>
                     <div className="slot">
                       <label>Código ANTT</label>
@@ -359,7 +484,15 @@ export default function ({ data = [], meta = {}, t }) {
                   <div className="band h" style={{ gridTemplateColumns: "4.5fr 2fr 0.5fr 2fr" }}>
                     <div className="slot">
                       <label>Endereço</label>
-                      <div>{[item.personShipping?.street, item.personShipping?.number, item.personShipping?.complement].filter(Boolean).join(", ")}</div>
+                      <div>
+                        {[
+                          item.personShipping?.street,
+                          item.personShipping?.number,
+                          item.personShipping?.complement,
+                        ]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </div>
                     </div>
                     <div className="slot">
                       <label>{t("/catalog/location/city")}</label>
@@ -374,7 +507,10 @@ export default function ({ data = [], meta = {}, t }) {
                       <div>{item.personShipping?.document2Number}</div>
                     </div>
                   </div>
-                  <div className="band h" style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }}>
+                  <div
+                    className="band h"
+                    style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }}
+                  >
                     <div className="slot">
                       <label>{t("/@word/quantity")}</label>
                       <div className="number">{utils.formatNumber(item.properties?.volumes)}</div>
@@ -425,29 +561,65 @@ export default function ({ data = [], meta = {}, t }) {
                     <tbody>
                       {item.items.map((item1, index) => (
                         <tr key={index}>
-                          <td>{[
-                            item1.code ?? item1.productPacking.code,
-                            item1.properties?.description ?? item1.properties?.descriptionCalc,
-                            item1.properties?.complement ?? item1.properties?.complementCalc,
-                          ].filter(Boolean).join(", ")}</td>
+                          <td>
+                            {[
+                              item1.code ?? item1.productPacking.code,
+                              item1.properties?.description ?? item1.properties?.descriptionCalc,
+                              item1.properties?.complement ?? item1.properties?.complementCalc,
+                            ]
+                              .filter(Boolean)
+                              .join(", ")}
+                          </td>
                           <td>{item1.productPacking.product.properties?.fiscal_br_NCM}</td>
-                          <td>{(item1.assetTag?.fiscalProfileProduct?.properties?.fiscal_br_orig ?? item1.productPacking.product.fiscalProfileProduct?.properties?.fiscal_br_orig ?? "0") +
-                          (item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.properties?.fiscal_br_CST ?? "00")}</td>
+                          <td>
+                            {(item1.assetTag?.fiscalProfileProduct?.properties?.fiscal_br_orig ??
+                              item1.productPacking.product.fiscalProfileProduct?.properties
+                                ?.fiscal_br_orig ??
+                              "0") +
+                              (item1.taxations.filter((e) => e.tax.code === "ICMS")[0]?.properties
+                                ?.fiscal_br_CST ?? "00")}
+                          </td>
                           <td>{item1.taxationOperation?.code}</td>
                           <td>{item1.productPacking.product.unit?.code}</td>
-                          <td className="number">{utils.formatNumber(item1.quantity, {
-                            minimumFractionDigits:
-                            item1.productPacking.properties?.decimalPlaces ??
-                            item1.productPacking.product.properties?.decimalPlaces ??
-                            item1.productPacking.product.productProfile?.properties?.decimalPlaces ??
-                            0,
-                          })}</td>
-                          <td className="number">{utils.formatCurrency(item1.unitValue, {minimumFractionDigits: 2, maximumFractionDigits: 8})}</td>
+                          <td className="number">
+                            {utils.formatNumber(item1.quantity, {
+                              minimumFractionDigits:
+                                item1.productPacking.properties?.decimalPlaces ??
+                                item1.productPacking.product.properties?.decimalPlaces ??
+                                item1.productPacking.product.productProfile?.properties
+                                  ?.decimalPlaces ??
+                                0,
+                            })}
+                          </td>
+                          <td className="number">
+                            {utils.formatCurrency(item1.unitValue, {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 8,
+                            })}
+                          </td>
                           <td className="number">{utils.formatCurrency(item1.productValue)}</td>
-                          <td className="number">{utils.formatCurrency(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.baseValue ?? 0)}</td>
-                          <td className="number">{utils.formatCurrency(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.taxValue ?? 0)}</td>
-                          <td className="number">{utils.formatNumber(item1.taxations.filter(e => e.tax.code === "ICMS")[0]?.taxRate ?? 0)}</td>
-                          <td className="number">{utils.formatNumber(item1.taxations.filter(e => e.tax.code === "IPI")[0]?.taxRate ?? 0)}</td>
+                          <td className="number">
+                            {utils.formatCurrency(
+                              item1.taxations.filter((e) => e.tax.code === "ICMS")[0]?.baseValue ??
+                                0,
+                            )}
+                          </td>
+                          <td className="number">
+                            {utils.formatCurrency(
+                              item1.taxations.filter((e) => e.tax.code === "ICMS")[0]?.taxValue ??
+                                0,
+                            )}
+                          </td>
+                          <td className="number">
+                            {utils.formatNumber(
+                              item1.taxations.filter((e) => e.tax.code === "ICMS")[0]?.taxRate ?? 0,
+                            )}
+                          </td>
+                          <td className="number">
+                            {utils.formatNumber(
+                              item1.taxations.filter((e) => e.tax.code === "IPI")[0]?.taxRate ?? 0,
+                            )}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -456,14 +628,18 @@ export default function ({ data = [], meta = {}, t }) {
 
                 {/* DADOS ADICIONAIS */}
                 <label className="header">Dados adicionais</label>
-                <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "var(--gap)", minHeight: "3cm" }}>
+                <div
+                  className="grid"
+                  style={{ gridTemplateColumns: "1fr 1fr", gap: "var(--gap)", minHeight: "3cm" }}
+                >
                   <div className="frame">
                     <div className="slot">
                       <label>Informações complementares</label>
-                      <pre>{[
-                        item.properties?.["#comments"],
-                        item.properties?.["comments"],
-                      ].filter(Boolean).join("\n")}</pre>
+                      <pre>
+                        {[item.properties?.["#comments"], item.properties?.["comments"]]
+                          .filter(Boolean)
+                          .join("\n")}
+                      </pre>
                     </div>
                   </div>
                   <div className="frame">
