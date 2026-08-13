@@ -200,7 +200,7 @@ export default function ({ data = [], meta = {}, t }) {
     {
       id: "sale_paymentMethods",
       group: "sale",
-      label: utils.cellHeader(t("/@word/paymentMethods")),
+      label: utils.cellHeader(t("/sale/sale"), t("/@word/paymentMethods")),
       value: (row) => row.sale?.properties?.paymentMethods,
     },
     {
