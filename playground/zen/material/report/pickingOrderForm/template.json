@@ -25,6 +25,7 @@
             "company_address",
             "company_email",
             "company_phone",
+            "sale_id",
             "sale_code",
             "sale_code_calc",
             "sale_date",
