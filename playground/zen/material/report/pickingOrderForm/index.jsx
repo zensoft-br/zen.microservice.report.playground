@@ -115,6 +115,12 @@ export default function ({ data = [], meta = {}, t }) {
       value: (row) => row.company.person.phone,
     },
     {
+      id: "sale_id",
+      group: "sale",
+      label: utils.cellHeader(t("/sale/sale"), t("/@word/id")),
+      value: (row) => row.sale.id,
+    },
+    {
       id: "sale_code",
       group: "sale",
       label: utils.cellHeader(t("/sale/sale"), t("/@word/code")),
