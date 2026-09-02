@@ -1,0 +1,41 @@
+{
+  "engine": "react",
+  "assets": {
+    "scripts": {
+      "utils.jsx": "@file:/utils.jsx"
+    },
+    "styles": ["@file:/styles.css"]
+  },
+  "meta": {
+    "dataSource": "/supply/purchase/report/purchaseCube",
+    "delegate": null,
+    "report": {
+      "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": []
+        },
+        "#settings": {
+          "fields": ["id", "status"],
+          "columns": ["id", "name", "picture", "score", "status", "quantity", "value"],
+          "groups": [
+            {
+              "columnId": "virtual_column"
+            },
+            {
+              "columnId": "status"
+            }
+          ],
+          "sort": [
+            {
+              "columnId": "category1"
+            },
+            {
+              "columnId": "status"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "report": {
+    "title": "My report",
+    "parameters": {
+      "DATE_START": "2026-08-01",
+      "DATE_END": "2026-08-30",
+      "MAX_RECORDS": 20000,
+      "SHOW_ENTITY": true,
+      "SHOW_QUANTITY": false,
+      "SHOW_STATUS": false,
+      "SHOW_WORKFLOW": false,
+      "SHOW_WORKFLOW_NODE": false,
+      "SHOW_DATE": false,
+      "SHOW_DAY": false,
+      "SHOW_MONTH": false,
+      "SHOW_YEAR": false,
+      "SHOW_AVAILABILITY_DATE": true,
+      "SHOW_FREIGHT_TYPE": false,
+      "SHOW_COMPANY": false,
+      "SHOW_FISCAL_PROFILE_OPERATION": false,
+      "SHOW_PURCHASE_PROFILE": false,
+      "SHOW_CURRENCY": true,
+      "SHOW_PERSON": true,
+      "SHOW_PERSON_GROUP": false,
+      "SHOW_PERSON_CATEGORY_1": false,
+      "SHOW_PERSON_CATEGORY_2": false,
+      "SHOW_PERSON_CATEGORY_3": false,
+      "SHOW_PERSON_CATEGORY_4": false,
+      "SHOW_PERSON_CATEGORY_5": false,
+      "SHOW_CITY": false,
+      "SHOW_STATE": false,
+      "SHOW_COUNTRY": false,
+      "SHOW_PRODUCT": false,
+      "SHOW_FISCAL_PROFILE_PRODUCT": false,
+      "SHOW_PRODUCT_CATEGORY_1": false,
+      "SHOW_PRODUCT_CATEGORY_2": false,
+      "SHOW_PRODUCT_CATEGORY_3": false,
+      "SHOW_PRODUCT_CATEGORY_4": false,
+      "SHOW_PRODUCT_CATEGORY_5": false,
+      "SHOW_PRODUCT_PACKING": false,
+      "SHOW_PRODUCT_VARIANT": false,
+      "SHOW_TAXATION_OPERATION": false,
+      "SHOW_ACCOUNT": false,
+      "SHOW_UNIT": false,
+      "SHOW_UNIT_VALUE": false,
+      "SHOW_PRODUCT_PROPERTIES_BR_NCM": false,
+      "SHOW_PRODUCT_PROPERTIES_BR_CEST": false
+    },
+    "properties": {
+      "userSettings": {
+        "columns": [
+          "id",
+          "person_nameCalc",
+          "totalValue",
+          "count_purchase",
+          "count_purchaseItem",
+          "availabilityDate",
+          "currency_code",
+          "quantity"
+        ],
+        "groups": [],
+        "sort": [
+          {
+            "columnId": "date"
+          },
+          {
+            "columnId": "id"
+          }
+        ],
+        "filters": {
+          "dateInterval": "monthCurrent",
+          "dateStart": "2026-09-01",
+          "dateEnd": "2026-09-30",
+          "productCategory1": []
+        }
+      }
+    }
+  }
+}
