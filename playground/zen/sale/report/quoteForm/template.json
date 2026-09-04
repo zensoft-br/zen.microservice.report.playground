@@ -10,6 +10,24 @@
     "dataSource": "/sale/data/quoteForm",
     "report": {
       "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": [
+            "id",
+            "availabilityDate",
+            "item_code",
+            "fiscal_br_NCM",
+            "itemSequence",
+            "productPacking_code",
+            "product_comments",
+            "product_description",
+            "proposalSequence",
+            "quantity",
+            "tax_ICMS_taxRate",
+            "totalValue",
+            "unitValue"
+          ]
+        },
         "#settings": {
           "columns": [
             "itemSequence",

@@ -40,19 +40,28 @@ export default function ({ data = [], meta = {}, t }) {
       footer: ({ value }) => utils.formatNumber(value),
     },
     {
+      id: "item_code",
+      header: t("/@word/code"),
+      width: "16ch",
+      cellValue: ({ row }) => row.code ?? row.productPacking?.code,
+    },
+    {
       id: "productPacking_code",
-      header: utils.cellHeader(t("/@word/code")),
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/code")),
       cellValue: ({ row }) => row.productPacking?.code,
     },
     {
       id: "product_description",
       width: "30ch",
-      header: utils.cellHeader(t("/@word/description")),
+      header: utils.cellHeader(t("/catalog/product/productPacking"), t("/@word/description")),
       cellValue: ({ row }) => row.productPacking?.product?.description,
     },
     {
       id: "fiscal_br_NCM",
-      header: utils.cellHeader(t("/catalog/product.properties.fiscal_br_NCM")),
+      header: utils.cellHeader(
+        t("/catalog/product/productPacking"),
+        t("/catalog/product.properties.fiscal_br_NCM"),
+      ),
       cellValue: ({ row }) => row.productPacking?.product?.properties?.fiscal_br_NCM,
     },
     {

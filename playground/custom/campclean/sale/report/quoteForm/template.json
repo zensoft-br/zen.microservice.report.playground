@@ -10,6 +10,20 @@
     "dataSource": "/sale/data/quoteForm",
     "report": {
       "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": [
+            "fiscal_br_NCM",
+            "id",
+            "item_code",
+            "productPacking_code",
+            "product_description",
+            "quantity",
+            "tax_ICMS_taxRate",
+            "totalValue",
+            "unitValue"
+          ]
+        },
         "#settings": {
           "columns": [
             "productPacking_code",

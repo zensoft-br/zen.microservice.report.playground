@@ -25,6 +25,12 @@ export default function ({ data = [], meta = {}, t }) {
       footer: ({ value }) => utils.formatNumber(value),
     },
     {
+      id: "item_code",
+      header: utils.cellHeader(t("/sale/quoteItem"), t("/@word/code")),
+      width: "16ch",
+      cellValue: ({ row }) => row.code ?? row.productPacking?.code,
+    },
+    {
       id: "productPacking_code",
       header: utils.cellHeader(t("/@word/code")),
       cellValue: ({ row }) => row.productPacking?.code,
@@ -101,6 +107,8 @@ export default function ({ data = [], meta = {}, t }) {
   const visibleColumns = (settings?.columns ?? []).filter(
     (item) => !(settings?.removeColumns ?? []).includes(item),
   );
+
+  //return utils.meta_info({ fields, columns });
 
   const groups = settings?.groups || [];
 

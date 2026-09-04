@@ -112,6 +112,8 @@ export default function ({ data = [], meta = {}, t }) {
     (item) => !(settings?.removeColumns ?? []).includes(item),
   );
 
+  // return utils.meta_info({ fields, columns });
+
   const groups = settings?.groups || [];
 
   return (

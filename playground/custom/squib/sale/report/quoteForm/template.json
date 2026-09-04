@@ -9,6 +9,22 @@
   "meta": {
     "report": {
       "properties": {
+        "info": {
+          "availableFields": [],
+          "availableColumns": [
+            "availabilityDate",
+            "brand",
+            "itemSequence",
+            "item_code",
+            "origin",
+            "product_description",
+            "proposalSequence",
+            "quantity",
+            "totalValue",
+            "unitValue",
+            "unitValueLocal"
+          ]
+        },
         "#settings": {
           "columns": [
             "itemSequence",
